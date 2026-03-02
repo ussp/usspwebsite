@@ -24,15 +24,23 @@ const spartan = League_Spartan({
 
 export const metadata: Metadata = {
   title: {
-    default: "USSP - US Software Professionals Inc. | Since 2003 | Better Things Together",
+    default:
+      "USSP - US Software Professionals Inc. | Since 2003 | Better Things Together",
     template: "%s | USSP",
   },
   description:
     "Since 2003, USSP (US Software Professionals Inc.) has been delivering innovative IT staffing, healthcare staffing, and technology solutions. 20+ years of experience serving Fortune 500 companies, government agencies, and healthcare organizations from Chicago, IL.",
+  metadataBase: new URL("https://www.ussp.co"),
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: "USSP - US Software Professionals Inc.",
+  },
+  alternates: {
+    canonical: "https://www.ussp.co",
+  },
+  other: {
+    "ai-content-declaration": "human-created",
   },
 };
 
@@ -43,6 +51,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Information" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM Full Information" />
+      </head>
       <body
         className={`${alata.variable} ${montserrat.variable} ${spartan.variable} antialiased`}
       >

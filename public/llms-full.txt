@@ -1,0 +1,212 @@
+# USSP Inc. (US Software Professionals Inc.) - Complete Information
+
+## About USSP
+
+USSP (US Software Professionals Inc.) was established on January 23, 2003, in Chicago, Illinois. For over two decades, USSP has been at the forefront of the staffing and technology industry, dedicated to revolutionizing the staffing industry by integrating cutting-edge technology with exceptional talent.
+
+USSP provides innovative solutions that drive fundamental business value and enhance the effectiveness of the organizations it serves. With a rich history spanning 20+ years of technological innovation, USSP has expanded its expertise responding to the growing needs for specialized staffing solutions across various sectors. With offices in Chicago (headquarters), India, and Canada, USSP leverages global insights to deliver local excellence.
+
+USSP is a pioneer at the intersection of technology and human potential. Its services are designed to be adaptive and forward-thinking, ensuring that it meets the challenges of today while preparing for the opportunities of tomorrow.
+
+Diversity and expertise define the USSP team. Comprised of industry veterans, innovative engineers, and dedicated professionals, USSP's people are at the heart of its success.
+
+### Company Details
+- **Legal Name:** US Software Professionals Inc.
+- **DBA:** USSP
+- **Founded:** January 23, 2003
+- **Entity Type:** Corporation (CORP)
+- **Registration Number:** 62642807
+- **State of Incorporation:** Illinois (MST)
+- **Headquarters:** 875 N Michigan Ave, Suite 3100, Chicago, IL 60614, USA
+- **Phone:** +1-(312) 546-4306
+- **Fax:** +1-(312) 253-2026
+- **Business Hours:** Monday - Friday, 8:00 AM to 5:00 PM CST
+- **Website:** https://www.ussp.co
+- **General Email:** accounts@ussoftwarepro.com
+- **Healthcare Email:** medicalstaffing@ussp.co
+
+### Core Values
+Integrity, Innovation, Respect, Accountability, and Excellence
+
+---
+
+## IT Staffing & Technology Services
+
+### Recruitment Services
+USSP helps organizations augment their teams with niche expertise. The experienced recruitment team identifies, interviews, and presents the best candidates for Direct Hire or Staff Augmentation positions.
+
+### Solution Delivery
+USSP has a proven reputation for delivering high-quality software solutions across a broad spectrum of technologies. Solutions have been delivered in Oracle ERP, consumer mobile applications, enterprise mobile applications, AWS ecosystem, Azure ecosystem, Iron IO, and UX design.
+
+### Product Development
+Starting from the ideation phase, USSP works with clients to analyze, build, design, and release final products to market. The software product development team focuses on understanding users' needs, validating hypotheses quickly, reducing risks, and continually improving processes based on the Lean Startup methodology.
+
+### Custom Training
+USSP provides custom training solutions including learning solutions on leading LMS platforms, a vast library of pre-recorded courses and labs. Expertise includes Oracle solutions, Mobile solutions, Connected product development, and Cloud solution training.
+
+### Data Analytics & Artificial Intelligence
+Big Data, Quantitative Analytics, and Visualization services. USSP's Data Analytics division helps unlock the value of data through aggregation in big data clusters, machine learning model application, and next-gen visualization platforms.
+
+### IoT + Cloud + Mobile
+Mobile First, Cloud First, and Connected Devices solutions. USSP develops IoT solutions with expertise in embedded device software that scales. The team combines machine and sensor data with the power of cloud and mobile.
+
+### Technology Advisory & Agile Transformation
+Enterprise Architecture and Portfolio Management services. USSP's leadership team has extensive expertise delivering Enterprise Architecture services to Fortune 500 companies and serves as technology advisor for startups focusing on IoT, mobile, and analytic solutions.
+
+---
+
+## Healthcare Staffing
+
+### For Healthcare Professionals
+USSP hires registered nurses, physical therapists, and occupational therapists from around the globe. The program includes:
+
+- **NCLEX-RN Review:** Comprehensive preparation to pass the NCLEX-RN on the first attempt
+- **Immigration & Licensure:** Streamlined licensure and immigration procedures
+- **Transitions Program:** Clinical and cultural support for rapid adaptation
+- **Career Opportunities:** Positions at top healthcare facilities across the United States
+- **Benefits:** Competitive compensation and comprehensive benefits packages
+- **Ongoing Support:** Continuous support throughout the career journey
+
+**How It Works:**
+1. Apply Online - Complete the online application form
+2. Interview - Share your American Dream and nursing experience
+3. Accept Offer - Sign employment agreement with USSP
+4. Document Collection - Submit required documents
+5. U.S. Licensure & NCLEX-RN Review - Pass the NCLEX-RN with USSP support
+6. Begin Your Journey - Start your career in the United States
+
+### For Healthcare Organizations
+USSP meets critical staffing needs for healthcare organizations through:
+
+- **Direct Placement:** Qualified, pre-screened international healthcare professionals for permanent positions
+- **Travel Nursing:** Flexible staffing solutions for temporary shortages
+- **International Recruitment:** End-to-end process from recruitment to immigration, licensure, and placement
+
+---
+
+## Blockchain Services
+
+USSP provides comprehensive blockchain solutions:
+
+### Advisory
+Blockchain consulting services that shape technically sound and feasible solutions bringing measurable efficiency to business objectives.
+
+### Implementation
+Development of dApps, NFT Marketplaces, Asset Tokenization platforms, Wallets, Smart Contracts, and Nodes. Services range from small contract development to extensive enterprise-wide blockchain implementation.
+
+### Hosting & Management
+State-of-the-art NOC center for blockchain platform security and uptime. Hosting and running nodes, managing staking pools, and delegated asset management.
+
+### Supported Platforms
+- **Ethereum:** Decentralized open-source blockchain with smart contract functionality
+- **Solana:** Public blockchain using Proof of History consensus mechanism
+- **Corda:** Permissioned network designed for financial organizations
+- **Hyperledger Fabric:** Permissioned blockchain with modular architecture
+
+### Blockchain Process
+1. Discovery - Feasibility study, business goals and workflow mapping
+2. Assessment - Business requirements analysis, process identification
+3. Technical Stack Design - Platform selection, component architecture
+4. MVP - Minimum Viable Product for single use case demonstration
+5. Development - Full blockchain stack expansion across identified use cases
+6. Operate - DevOps maintenance, monitoring, and security operations
+
+---
+
+## Small Business Solutions
+
+USSP's Small Business Division serves businesses with 1-50 employees with enterprise-grade tools at affordable prices:
+
+1. **Website and Branding** - Modern, clean, and easy to maintain websites
+2. **Email and Collaboration** - Google Workspace, Microsoft 365, Zoho, or Rackspace
+3. **Sales and Marketing** - CRM systems, email and social campaign automation
+4. **Data Backup and Recovery** - Onsite/offsite backup with Synology/qNAP
+5. **Finance** - Invoicing, accounting, and online payment solutions
+6. **Human Resources** - Payroll, time-off management, employee administration
+7. **Help Desk** - Unified customer service ticketing system
+8. **Custom Business Apps** - Custom stores, mobile apps, blogs, and automation
+
+### Process
+1. Interview and Evaluate → 2. Design → 3. Plan → 4. Implement → 5. Monitor → 6. Repeat
+
+---
+
+## ODI Training (Oracle Data Integrator)
+
+Comprehensive 16-module curriculum for Administrators and Developers:
+
+1. Introduction to ODI
+2. Repositories and Agents
+3. Topology: Overview
+4. Topology: Physical/Logical Architecture
+5. Designer: Projects and Folders
+6. Designer: Model Concepts
+7. Designer: Interface Concepts
+8. Designer: Designing Interfaces
+9. Operator: Monitoring and Debugging
+10. Designer: Advanced Interface Topics
+11. Designer: Procedures
+12. Designer: Packages
+13. Operator: Scenarios and Versions
+14. Designer: Data Quality
+15. Changed Data Capture (Optional)
+16. Administration: Advanced Topics
+
+Related resource: ODI Pundits blog (http://www.odipundits.com/)
+
+---
+
+## Government Contracts
+
+### TOPS Category Two: Applications
+
+**What is TOPS?**
+The Technology Operations Professional Services (TOPS) contract is a 10-year Sheltered Market, Multiple Award Joint Purchase Master Contract (JPMC) developed by the Illinois Department of Innovation and Technology (DoIT) in partnership with the State Business Enterprise Program (BEP).
+
+**Contract Details:**
+- Primary Awardee: Krasan Consulting Services
+- USSP Role: Authorized Subvendor
+- BidBuy #: P-59947
+- Contract #: CMT4599470
+- Type: Indefinite Quantity JPMC
+- Available Through: February 2034
+
+**Eligible Users:**
+All Illinois state agencies, boards and commissions, governmental units, and qualified not-for-profit agencies.
+
+**Services Under TOPS Category Two:**
+- Software Programming Services
+- Custom Computer Services
+- Computer Software Consulting Services
+- Software Installation Services
+- Business Management Consulting Services
+- IT Consulting
+
+---
+
+## Portfolio & Partners
+- Thinglist (http://getthinglist.co)
+- Versa Quant (http://www.versaquant.com)
+- Krasan Consulting Services (TOPS Category Two Prime)
+
+---
+
+## Frequently Asked Questions
+
+**Q: When was USSP founded?**
+A: USSP (US Software Professionals Inc.) was founded on January 23, 2003, in Chicago, Illinois. The company has over 20 years of experience in IT staffing and technology services.
+
+**Q: Where is USSP located?**
+A: USSP is headquartered at 875 N Michigan Ave, Suite 3100, Chicago, IL 60614. The company also has offices in India and Canada.
+
+**Q: What services does USSP provide?**
+A: USSP provides IT staffing and recruitment, software solution delivery, product development, custom training, healthcare staffing (nurses, PTs, OTs), blockchain development, small business IT solutions, and government IT services.
+
+**Q: Is USSP an authorized vendor under the Illinois TOPS contract?**
+A: Yes, USSP is an authorized subvendor to Krasan Consulting Services for the Illinois DoIT TOPS Category Two (Applications) contract (Contract # CMT4599470).
+
+**Q: Does USSP hire international healthcare professionals?**
+A: Yes, USSP hires registered nurses, physical therapists, and occupational therapists from around the globe, providing comprehensive immigration, licensure, NCLEX preparation, and cultural transition support.
+
+**Q: What blockchain platforms does USSP work with?**
+A: USSP works with Ethereum, Solana, Corda, and Hyperledger Fabric for blockchain consulting, development, and hosting services.

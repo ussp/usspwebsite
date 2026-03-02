@@ -1,0 +1,80 @@
+# USSP Inc. (US Software Professionals Inc.)
+
+> USSP is a technology and staffing company established in 2003, headquartered in Chicago, IL. With over 20 years of experience, USSP delivers IT staffing, healthcare staffing, technology consulting, and software development services to Fortune 500 companies, government agencies, and healthcare organizations.
+
+## Company Overview
+
+- **Full Name:** US Software Professionals Inc. (USSP)
+- **Founded:** January 23, 2003
+- **Headquarters:** 875 N Michigan Ave, Suite 3100, Chicago, IL 60614
+- **Phone:** +1-(312) 546-4306
+- **Fax:** +1-(312) 253-2026
+- **Website:** https://www.ussp.co
+- **Offices:** Chicago (HQ), India, Canada
+
+## Services
+
+### IT Services
+- Recruitment Services & Staff Augmentation
+- Solution Delivery (Oracle ERP, AWS, Azure, Mobile, UX)
+- Product Development (Lean Startup methodology)
+- Custom Training (Oracle, Mobile, Cloud, Connected Products)
+- Data Analytics & Artificial Intelligence
+- IoT + Cloud + Mobile Solutions
+- Technology Advisory & Agile Transformation
+- Enterprise Architecture & Portfolio Management
+
+### Healthcare Staffing
+- International nurse recruitment (RNs, PTs, OTs)
+- Immigration & licensure support
+- NCLEX-RN preparation
+- Cultural transition programs
+- Direct placement and travel nursing
+- Healthcare organization staffing solutions
+
+### Blockchain Services
+- Blockchain consulting and advisory
+- dApp development, NFT Marketplace, Smart Contracts
+- Asset tokenization and wallet development
+- Node development and staking pool management
+- Platforms: Ethereum, Solana, Corda, Hyperledger Fabric
+
+### Small Business Solutions
+- Website and branding
+- Email and collaboration (Google Workspace, Microsoft 365)
+- CRM and sales/marketing automation
+- Data backup and recovery
+- Finance and accounting software
+- Human resources management
+- Help desk and customer service
+- Custom business applications
+
+### ODI Training
+- 16-module Oracle Data Integrator curriculum
+- For administrators and developers
+- Topics: Architecture, topology, interfaces, packages, CDC, security
+
+## Government Contracts
+
+### TOPS Category Two (Applications)
+- **Contract:** Technology Operations Professional Services (TOPS)
+- **Role:** Authorized subvendor to Krasan Consulting Services (Primary Awardee)
+- **Issuing Agency:** Illinois Department of Innovation & Technology (DoIT)
+- **BidBuy #:** P-59947
+- **Contract #:** CMT4599470
+- **Type:** Indefinite Quantity JPMC (Joint Purchase Master Contract)
+- **Available Through:** February 2034
+- **Eligible Users:** All Illinois state agencies, boards, commissions, governmental units, and qualified not-for-profit agencies
+- **Services:** Software programming, custom computer services, software consulting, installation services, business management consulting, IT consulting
+
+## Core Values
+Integrity, Innovation, Respect, Accountability, and Excellence
+
+## Contact
+- **General:** accounts@ussoftwarepro.com
+- **Healthcare:** medicalstaffing@ussp.co
+- **Hours:** Mon-Fri 8:00 AM to 5:00 PM
+
+## Portfolio
+- Thinglist (http://getthinglist.co)
+- Versa Quant (http://www.versaquant.com)
