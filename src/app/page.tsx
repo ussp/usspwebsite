@@ -1,65 +1,311 @@
+import HeroSection from "@/components/HeroSection";
+import SectionHeading from "@/components/SectionHeading";
+import ContactForm from "@/components/ContactForm";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      {/* Hero with Video Background */}
+      <HeroSection
+        heading="Welcome to USSP"
+        subheading="Better Things Together!"
+        buttonText="About Us"
+        buttonHref="#about"
+        videoId="IY4ZjNNuNGI"
+      />
+
+      {/* Service Division Grid */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Link
+              href="/healthcare"
+              className="relative group h-72 rounded-lg overflow-hidden"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{
+                  backgroundImage: "url(/assets/images/healthcare-hero.jpg)",
+                }}
+              />
+              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors" />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+                <h3 className="text-2xl font-[family-name:var(--font-alata)] text-white mb-4">
+                  Healthcare Services
+                </h3>
+                <span className="px-6 py-2 border-2 border-white text-white text-sm font-[family-name:var(--font-alata)] uppercase tracking-wider hover:bg-white hover:text-near-black transition-all">
+                  Learn More
+                </span>
+              </div>
+            </Link>
+            <Link
+              href="/discover"
+              className="relative group h-72 rounded-lg overflow-hidden"
             >
-              Learning
-            </a>{" "}
-            center.
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{
+                  backgroundImage: "url(/assets/images/tech-grid.jpg)",
+                }}
+              />
+              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors" />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+                <h3 className="text-2xl font-[family-name:var(--font-alata)] text-white mb-4">
+                  Information Technology
+                </h3>
+                <span className="px-6 py-2 border-2 border-white text-white text-sm font-[family-name:var(--font-alata)] uppercase tracking-wider hover:bg-white hover:text-near-black transition-all">
+                  Learn More
+                </span>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us */}
+      <section id="about" className="py-20 bg-light-gray">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading title="About Us" />
+          <div className="space-y-6 text-dark/80 font-[family-name:var(--font-montserrat)] leading-relaxed">
+            <p>
+              At USSP, we are dedicated to revolutionizing the staffing industry
+              by integrating cutting-edge technology with exceptional talent. Our
+              goal is to provide innovative solutions that drive fundamental
+              business value and enhance the effectiveness of the organizations
+              we serve.
+            </p>
+            <p>
+              Founded in Chicago, IL, with a rich history in technological
+              innovation, we have expanded our expertise responding to the
+              growing needs for specialized staffing solutions across various
+              sectors. With additional offices in India and Canada, we leverage
+              global insights to deliver local excellence.
+            </p>
+            <p>
+              We are pioneers at the intersection of technology and human
+              potential. Our services are designed to be adaptive and
+              forward-thinking, ensuring that we meet the challenges of today
+              while preparing for the opportunities of tomorrow.
+            </p>
+            <p>
+              Diversity and expertise define our team. Comprised of industry
+              veterans, innovative engineers, and dedicated professionals, our
+              people are at the heart of our success.
+            </p>
+            <p>
+              We seek individuals who are passionate about making a difference
+              through innovation and quality.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section
+        className="relative py-32 bg-cover bg-center bg-fixed"
+        style={{
+          backgroundImage: "url(/assets/images/values-bg.jpg)",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-alata)] text-white mb-6">
+            Our Core Values
+          </h2>
+          <p className="text-xl md:text-2xl text-white/90 font-[family-name:var(--font-montserrat)] italic">
+            Integrity, Innovation, Respect, Accountability and Excellence
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Services */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading title="Our Services" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                title: "Recruitment Services",
+                icon: "/assets/icons/recruitment.svg",
+                text: "Is your team missing a niche expert? Let our experienced team help you in augmenting your team with the missing expertise. Our recruiters can help in identifying, interviewing and present best candidate for Direct hire or Staff Augmentation.",
+              },
+              {
+                title: "Solution Delivery",
+                icon: "/assets/icons/solution-delivery.svg",
+                text: "Our team has a proven reputation for delivering high quality software solutions across a broad spectrum of technologies. We put needs of the customer before us. We delivered solutions in Oracle ERP, consumer mobile applications, enterprise mobile applications, AWS ecosystem, Azure ecosystem, Iron IO, UX design.",
+              },
+              {
+                title: "Product Development",
+                icon: "/assets/icons/product-dev.svg",
+                text: "Starting as early as you have an idea for software product development solutions, we work with you to analyze, build, design, and release a final product to market based on the Lean Startup methodology.",
+              },
+              {
+                title: "Custom Training",
+                icon: "/assets/icons/custom-training.svg",
+                text: "We are as passionate about education and training as we are about development. Let our team help you put together custom training solutions. Explore our vast library of pre-recorded courses and labs.",
+              },
+            ].map((service) => (
+              <div
+                key={service.title}
+                className="text-center p-6 rounded-lg border border-dark/10 hover:shadow-lg transition-shadow"
+              >
+                <div className="w-20 h-20 mx-auto mb-4 relative">
+                  <Image
+                    src={service.icon}
+                    alt={service.title}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <h3 className="text-lg font-[family-name:var(--font-alata)] mb-3">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed">
+                  {service.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Focus Areas */}
+      <section className="py-20 bg-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading title="Our Focus" />
+
+          {/* Data Analytics + AI */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 items-center">
+            <div>
+              <h3 className="text-2xl font-[family-name:var(--font-alata)] mb-2">
+                Data Analytics + Artificial Intelligence
+              </h3>
+              <p className="text-sm text-primary font-[family-name:var(--font-montserrat)] mb-4">
+                Big Data + Quantitative Analytics + Visualization
+              </p>
+              <p className="text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed">
+                In the world of connected entities, more data means more
+                opportunity. Our Data Analytics division can help you unlock the
+                value. It starts with aggregation and compilation of data in a
+                big data cluster then we apply machine learning models on our
+                data set. We present and consume the data using next-gen
+                visualization platforms.
+              </p>
+            </div>
+            <div className="relative h-64 rounded-lg overflow-hidden">
+              <Image
+                src="/assets/images/data-analytics.jpg"
+                alt="Data Analytics"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* IoT + Cloud + Mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 items-center">
+            <div className="relative h-64 rounded-lg overflow-hidden md:order-1 order-2">
+              <Image
+                src="/assets/images/iot-cloud.jpg"
+                alt="IoT + Cloud + Mobile"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="md:order-2 order-1">
+              <h3 className="text-2xl font-[family-name:var(--font-alata)] mb-2">
+                IoT + Cloud + Mobile
+              </h3>
+              <p className="text-sm text-primary font-[family-name:var(--font-montserrat)] mb-4">
+                Mobile First + Cloud First + Connected Devices
+              </p>
+              <p className="text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed">
+                Connected things need different paradigm of thinking than the
+                yesteryear&apos;s web models. Developing IoT solutions means expertise
+                in writing software for embedded devices and software to scale
+                with them. Our Solution delivery team can help you combine
+                machine and sensor data with the power of cloud and mobile.
+              </p>
+            </div>
+          </div>
+
+          {/* Technology Advisory */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-2xl font-[family-name:var(--font-alata)] mb-2">
+                Technology Advisory + Agile Transformation
+              </h3>
+              <p className="text-sm text-primary font-[family-name:var(--font-montserrat)] mb-4">
+                Enterprise Architecture + Portfolio Management
+              </p>
+              <p className="text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed">
+                Our leadership team has an extensive expertise in delivery
+                Enterprise architecture services to Fortune 500 companies. We
+                also serve as a technology advisor for several startups focusing
+                on delivering IoT, mobile and analytic solutions.
+              </p>
+            </div>
+            <div className="relative h-64 rounded-lg overflow-hidden">
+              <Image
+                src="/assets/images/tech-advisory.jpg"
+                alt="Technology Advisory"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Work / Portfolio */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading title="Our Work" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-3xl mx-auto">
+            <a
+              href="http://getthinglist.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center p-8 rounded-lg border border-dark/10 hover:shadow-lg transition-shadow"
+            >
+              <div className="w-32 h-32 relative mb-4">
+                <Image
+                  src="/assets/logos/thinglist.svg"
+                  alt="Thinglist"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="font-[family-name:var(--font-alata)] text-lg">
+                Thinglist
+              </h3>
+            </a>
+            <a
+              href="http://www.versaquant.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center p-8 rounded-lg border border-dark/10 hover:shadow-lg transition-shadow"
+            >
+              <div className="w-32 h-32 relative mb-4">
+                <Image
+                  src="/assets/logos/versaquant.svg"
+                  alt="Versa Quant"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="font-[family-name:var(--font-alata)] text-lg">
+                Versa Quant
+              </h3>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <ContactForm />
+    </>
   );
 }
