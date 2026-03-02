@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Blockchain - USSP",
-  description: "USSP Blockchain consulting, development and hosting services.",
+  description: "USSP Blockchain consulting, development and hosting services. Backed by 20+ years of technology expertise since 2003. dApps, Smart Contracts, NFT, Asset Tokenization, and enterprise blockchain solutions.",
 };
 
 const services = [

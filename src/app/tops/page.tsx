@@ -5,11 +5,11 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title:
-    "TOPS Category Two | Illinois DoIT IT Services Contract | USSP - Subvendor to Krasan Consulting",
+    "TOPS Category Two | Illinois DoIT IT Services Contract | USSP - Subvendor to Krasan Consulting | Since 2003",
   description:
-    "USSP is an authorized subvendor to Krasan Consulting Services for the Illinois DoIT TOPS Category Two (Applications) contract. We provide software development, IT consulting, custom applications, and business management consulting services to Illinois state agencies through contract CMT4599470.",
+    "USSP (est. 2003) is an authorized subvendor to Krasan Consulting Services for the Illinois DoIT TOPS Category Two (Applications) contract. With 20+ years of IT expertise, we provide software development, IT consulting, custom applications, and business management consulting services to Illinois state agencies through contract CMT4599470.",
   keywords:
-    "TOPS Category Two, Illinois DoIT, Technology Operations Professional Services, Krasan Consulting, USSP subvendor, IT consulting Illinois, state government IT services, custom software development, CMT4599470, P-59947, Illinois state agencies",
+    "TOPS Category Two, Illinois DoIT, Technology Operations Professional Services, Krasan Consulting, USSP subvendor, IT consulting Illinois, state government IT services, custom software development, CMT4599470, P-59947, Illinois state agencies, established 2003, 20 years IT experience",
   openGraph: {
     title:
       "TOPS Category Two | USSP - Authorized Subvendor to Krasan Consulting",
@@ -54,9 +54,9 @@ const services = [
 
 const whyUssp = [
   {
-    title: "Proven Track Record",
+    title: "Proven Track Record Since 2003",
     description:
-      "Years of experience delivering high-quality technology solutions across multiple sectors including government, healthcare, and enterprise.",
+      "Over two decades of experience delivering high-quality technology solutions across multiple sectors including government, healthcare, and enterprise. Incorporated in Illinois since January 2003.",
   },
   {
     title: "Certified Expertise",
@@ -231,11 +231,13 @@ export default function TOPSPage() {
                 What is USSP&apos;s Role?
               </h3>
               <p>
-                USSP serves as an authorized subvendor to Krasan Consulting
-                Services, the Primary Awardee for TOPS Category Two. As a
-                subvendor, USSP provides qualified IT professionals and delivers
-                application development, consulting, and technology services to
-                Illinois state agencies under this contract vehicle.
+                USSP (US Software Professionals Inc.), established in 2003 and
+                incorporated in Illinois, serves as an authorized subvendor to
+                Krasan Consulting Services, the Primary Awardee for TOPS
+                Category Two. With over 20 years of IT expertise, USSP provides
+                qualified IT professionals and delivers application development,
+                consulting, and technology services to Illinois state agencies
+                under this contract vehicle.
               </p>
             </div>
             <div>
@@ -343,9 +345,10 @@ export default function TOPSPage() {
               "Technology Operations Professional Services (TOPS) Category Two contract providing application development and IT consulting services to Illinois state agencies.",
             provider: {
               "@type": "Organization",
-              name: "USSP Inc.",
+              name: "USSP Inc. (US Software Professionals Inc.)",
+              foundingDate: "2003-01-23",
               description:
-                "Authorized subvendor to Krasan Consulting Services for TOPS Category Two",
+                "Authorized subvendor to Krasan Consulting Services for TOPS Category Two. Established in 2003 with 20+ years of IT expertise.",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "875 N Michigan Ave, Suite 3100",
@@ -401,7 +404,7 @@ export default function TOPSPage() {
                 name: "Is USSP an authorized vendor under the Illinois TOPS contract?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Yes, USSP is an authorized subvendor to Krasan Consulting Services, the Primary Awardee for TOPS Category Two (Contract # CMT4599470, BidBuy # P-59947).",
+                  text: "Yes, USSP (US Software Professionals Inc.), established in 2003 with over 20 years of IT expertise, is an authorized subvendor to Krasan Consulting Services, the Primary Awardee for TOPS Category Two (Contract # CMT4599470, BidBuy # P-59947).",
                 },
               },
               {

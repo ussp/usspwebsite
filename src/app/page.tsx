@@ -70,14 +70,16 @@ export default function Home() {
           <SectionHeading title="About Us" />
           <div className="space-y-6 text-dark/80 font-[family-name:var(--font-montserrat)] leading-relaxed">
             <p>
-              At USSP, we are dedicated to revolutionizing the staffing industry
-              by integrating cutting-edge technology with exceptional talent. Our
-              goal is to provide innovative solutions that drive fundamental
-              business value and enhance the effectiveness of the organizations
-              we serve.
+              <strong>Established in 2003</strong>, USSP (US Software
+              Professionals Inc.) has been at the forefront of the staffing and
+              technology industry for over two decades. We are dedicated to
+              revolutionizing the staffing industry by integrating cutting-edge
+              technology with exceptional talent. Our goal is to provide
+              innovative solutions that drive fundamental business value and
+              enhance the effectiveness of the organizations we serve.
             </p>
             <p>
-              Founded in Chicago, IL, with a rich history in technological
+              Founded in Chicago, IL, with more than 20 years of technological
               innovation, we have expanded our expertise responding to the
               growing needs for specialized staffing solutions across various
               sectors. With additional offices in India and Canada, we leverage

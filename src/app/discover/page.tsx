@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "IT Services - USSP",
-  description: "USSP IT Services - Data Analytics, IoT, Cloud, Mobile, and Technology Advisory",
+  description: "USSP IT Services - Since 2003, delivering Data Analytics, AI, IoT, Cloud, Mobile, and Technology Advisory solutions. 20+ years of enterprise technology expertise serving Fortune 500 companies.",
 };
 
 export default function Discover() {

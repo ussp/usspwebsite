@@ -7,7 +7,7 @@ import ExpandableSection from "@/components/ExpandableSection";
 
 export const metadata: Metadata = {
   title: "Healthcare Staffing - USSP",
-  description: "Your gateway to the American Dream. We're hiring registered nurses, physical therapists and occupational therapists.",
+  description: "Since 2003, USSP has been helping healthcare professionals pursue their American Dream. We hire registered nurses, physical therapists and occupational therapists from around the globe. 20+ years of trusted staffing expertise.",
 };
 
 const programSections = [

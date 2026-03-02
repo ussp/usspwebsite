@@ -13,6 +13,9 @@ export default function Footer() {
             <p className="text-white/70 text-sm font-[family-name:var(--font-montserrat)]">
               Better Things Together
             </p>
+            <p className="text-white/50 text-xs font-[family-name:var(--font-montserrat)] mt-2">
+              Serving clients since 2003
+            </p>
           </div>
 
           {/* Services */}

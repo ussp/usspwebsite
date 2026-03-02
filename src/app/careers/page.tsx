@@ -4,7 +4,7 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Careers - USSP",
-  description: "Join USSP - We seek individuals who are passionate about making a difference through innovation and quality.",
+  description: "Join USSP (est. 2003) - Over 20 years of innovation in IT staffing, healthcare, and technology. We seek individuals who are passionate about making a difference through innovation and quality.",
 };
 
 export default function Careers() {
@@ -31,11 +31,13 @@ export default function Careers() {
           />
           <div className="space-y-6 text-dark/80 font-[family-name:var(--font-montserrat)] leading-relaxed">
             <p>
-              At USSP, we are dedicated to revolutionizing the staffing industry
-              by integrating cutting-edge technology with exceptional talent.
-              Diversity and expertise define our team. Comprised of industry
-              veterans, innovative engineers, and dedicated professionals, our
-              people are at the heart of our success.
+              Since our founding in 2003, USSP (US Software Professionals Inc.)
+              has been dedicated to revolutionizing the staffing industry by
+              integrating cutting-edge technology with exceptional talent. With
+              over two decades of experience, diversity and expertise define our
+              team. Comprised of industry veterans, innovative engineers, and
+              dedicated professionals, our people are at the heart of our
+              success.
             </p>
             <p>
               With offices in Chicago, India, and Canada, we offer global career

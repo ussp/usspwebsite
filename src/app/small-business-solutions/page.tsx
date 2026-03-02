@@ -6,7 +6,7 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Small Business Solutions - USSP",
-  description: "Great solutions at an affordable price. Access to enterprise grade tools and platform at fraction of the price.",
+  description: "Great solutions at an affordable price from USSP, trusted since 2003. Access to enterprise grade tools and platforms at a fraction of the price, backed by 20+ years of technology expertise.",
 };
 
 const services = [

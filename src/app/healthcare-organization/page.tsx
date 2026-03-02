@@ -5,7 +5,7 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Healthcare Organization - USSP",
-  description: "USSP Healthcare Organization staffing solutions. We are here to meet your most critical staffing needs.",
+  description: "USSP Healthcare Organization staffing solutions. Since 2003, we have been meeting the most critical staffing needs of healthcare organizations across the United States with 20+ years of expertise.",
 };
 
 const services = [

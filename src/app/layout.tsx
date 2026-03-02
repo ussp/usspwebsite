@@ -23,9 +23,17 @@ const spartan = League_Spartan({
 });
 
 export const metadata: Metadata = {
-  title: "USSP - Better Things Together",
+  title: {
+    default: "USSP - US Software Professionals Inc. | Since 2003 | Better Things Together",
+    template: "%s | USSP",
+  },
   description:
-    "USSP is dedicated to revolutionizing the staffing industry by integrating cutting-edge technology with exceptional talent.",
+    "Since 2003, USSP (US Software Professionals Inc.) has been delivering innovative IT staffing, healthcare staffing, and technology solutions. 20+ years of experience serving Fortune 500 companies, government agencies, and healthcare organizations from Chicago, IL.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "USSP - US Software Professionals Inc.",
+  },
 };
 
 export default function RootLayout({
@@ -38,6 +46,42 @@ export default function RootLayout({
       <body
         className={`${alata.variable} ${montserrat.variable} ${spartan.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "USSP Inc. (US Software Professionals Inc.)",
+              url: "https://www.ussp.co",
+              foundingDate: "2003-01-23",
+              description:
+                "Since 2003, USSP has been delivering innovative IT staffing, healthcare staffing, and technology solutions with over 20 years of expertise.",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "875 N Michigan Ave, Suite 3100",
+                addressLocality: "Chicago",
+                addressRegion: "IL",
+                postalCode: "60614",
+                addressCountry: "US",
+              },
+              telephone: "+1-312-546-4306",
+              faxNumber: "+1-312-253-2026",
+              sameAs: [],
+              knowsAbout: [
+                "IT Staffing",
+                "Healthcare Staffing",
+                "Software Development",
+                "Blockchain Solutions",
+                "Data Analytics",
+                "Cloud Computing",
+                "IoT Solutions",
+                "Oracle Data Integrator",
+                "Government IT Services",
+              ],
+            }),
+          }}
+        />
         <Header />
         <main>{children}</main>
         <Footer />
