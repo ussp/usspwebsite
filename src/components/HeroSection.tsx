@@ -68,7 +68,7 @@ export default function HeroSection({
         {buttonText && (
           <Link
             href={buttonHref}
-            className="inline-block px-8 py-3 border-2 border-white text-white font-[family-name:var(--font-alata)] text-sm uppercase tracking-wider hover:bg-white hover:text-near-black transition-all"
+            className="inline-block px-8 py-3 bg-primary text-white font-[family-name:var(--font-alata)] text-sm uppercase tracking-wider hover:bg-primary-dark transition-all"
           >
             {buttonText}
           </Link>

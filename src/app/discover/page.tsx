@@ -12,7 +12,7 @@ export default function Discover() {
   return (
     <>
       {/* Hero Slider */}
-      <section className="pt-16">
+      <section className="pt-20">
         <div className="relative h-[70vh] bg-near-black overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white px-4">

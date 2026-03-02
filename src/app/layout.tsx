@@ -39,6 +39,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.ussp.co",
   },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
   other: {
     "ai-content-declaration": "human-created",
   },

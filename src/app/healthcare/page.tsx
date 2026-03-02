@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Healthcare() {
   return (
-    <section className="pt-16 min-h-screen">
+    <section className="pt-20 min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 min-h-[calc(100vh-4rem)]">
         {/* Healthcare Professional */}
         <div

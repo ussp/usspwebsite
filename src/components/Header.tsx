@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const navItems = [
@@ -39,14 +40,19 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-near-black/95 backdrop-blur-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-white text-2xl font-[family-name:var(--font-alata)] font-bold tracking-wide">
-              USSP
-            </span>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/assets/logos/ussp-icon.png"
+              alt="USSP"
+              width={160}
+              height={50}
+              className="h-12 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -62,7 +68,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className="px-4 py-2 text-sm text-white/90 hover:text-white font-[family-name:var(--font-alata)] transition-colors"
+                  className="px-4 py-2 text-sm text-dark/80 hover:text-primary font-[family-name:var(--font-alata)] transition-colors"
                 >
                   {item.label}
                   {item.children && (
@@ -82,12 +88,12 @@ export default function Header() {
                   )}
                 </Link>
                 {item.children && openDropdown === item.label && (
-                  <div className="absolute top-full left-0 bg-near-black/95 backdrop-blur-sm border border-white/10 rounded-md py-2 min-w-[200px]">
+                  <div className="absolute top-full left-0 bg-white shadow-lg border border-dark/10 rounded-md py-2 min-w-[220px]">
                     {item.children.map((child) => (
                       <Link
                         key={child.label}
                         href={child.href}
-                        className="block px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10 font-[family-name:var(--font-alata)] transition-colors"
+                        className="block px-4 py-2 text-sm text-dark/70 hover:text-primary hover:bg-primary-lighter/30 font-[family-name:var(--font-alata)] transition-colors"
                       >
                         {child.label}
                       </Link>
@@ -100,7 +106,7 @@ export default function Header() {
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden text-white p-2"
+            className="md:hidden text-dark p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -132,13 +138,13 @@ export default function Header() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="md:hidden bg-near-black/95 border-t border-white/10">
+        <div className="md:hidden bg-white border-t border-dark/10">
           <div className="px-4 py-4 space-y-2">
             {navItems.map((item) => (
               <div key={item.label}>
                 <Link
                   href={item.href}
-                  className="block px-3 py-2 text-white/90 hover:text-white font-[family-name:var(--font-alata)] text-sm"
+                  className="block px-3 py-2 text-dark/80 hover:text-primary font-[family-name:var(--font-alata)] text-sm"
                   onClick={() => !item.children && setMobileOpen(false)}
                 >
                   {item.label}
@@ -149,7 +155,7 @@ export default function Header() {
                       <Link
                         key={child.label}
                         href={child.href}
-                        className="block px-3 py-2 text-white/70 hover:text-white font-[family-name:var(--font-alata)] text-sm"
+                        className="block px-3 py-2 text-dark/60 hover:text-primary font-[family-name:var(--font-alata)] text-sm"
                         onClick={() => setMobileOpen(false)}
                       >
                         {child.label}

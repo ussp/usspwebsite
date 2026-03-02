@@ -6,8 +6,10 @@
   --color-dark: #222222;
   --color-light-gray: #E8EAEC;
   --color-near-black: #1C1C1C;
-  --color-primary: #2563EB;
-  --color-primary-dark: #1D4ED8;
+  --color-primary: #7e4596;
+  --color-primary-dark: #6b3a80;
+  --color-primary-light: #976aab;
+  --color-primary-lighter: #dac4e4;
 
   /* Fonts */
   --font-heading: var(--font-alata);
