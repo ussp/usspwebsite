@@ -48,7 +48,7 @@ export default function LCAPage() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="font-bold">Company:</span> USSP Inc.
+                  <span className="font-bold">Company:</span> US Software Professionals Inc.
                 </div>
                 <div>
                   <span className="font-bold">Address:</span> 875 N Michigan
