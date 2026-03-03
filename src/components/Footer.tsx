@@ -40,8 +40,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/odi-training" className="hover:text-white transition-colors">
-                  ODI Training
+                <Link href="/ai-training" className="hover:text-white transition-colors">
+                  AI Training
                 </Link>
               </li>
             </ul>

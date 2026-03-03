@@ -131,28 +131,22 @@ USSP's Small Business Division serves businesses with 1-50 employees with enterp
 
 ---
 
-## ODI Training (Oracle Data Integrator)
+## AI & Machine Learning Training
 
-Comprehensive 16-module curriculum for Administrators and Developers:
+Comprehensive 12-module curriculum for Teams and Professionals:
 
-1. Introduction to ODI
-2. Repositories and Agents
-3. Topology: Overview
-4. Topology: Physical/Logical Architecture
-5. Designer: Projects and Folders
-6. Designer: Model Concepts
-7. Designer: Interface Concepts
-8. Designer: Designing Interfaces
-9. Operator: Monitoring and Debugging
-10. Designer: Advanced Interface Topics
-11. Designer: Procedures
-12. Designer: Packages
-13. Operator: Scenarios and Versions
-14. Designer: Data Quality
-15. Changed Data Capture (Optional)
-16. Administration: Advanced Topics
-
-Related resource: ODI Pundits blog (http://www.odipundits.com/)
+1. Foundations of AI & Machine Learning
+2. Data Engineering for AI
+3. Natural Language Processing (NLP)
+4. Large Language Models (LLMs)
+5. Generative AI Applications
+6. Computer Vision
+7. AI in the Enterprise
+8. Prompt Engineering & AI Integration
+9. MLOps & Model Deployment
+10. AI Agents & Automation
+11. AI Security & Responsible AI
+12. Capstone Project & Certification
 
 ---
 

@@ -13,7 +13,7 @@ const navItems = [
       { label: "IT Services", href: "/discover" },
       { label: "Small Business Solutions", href: "/small-business-solutions" },
       { label: "Blockchain", href: "/blockchain" },
-      { label: "ODI Training", href: "/odi-training" },
+      { label: "AI Training", href: "/ai-training" },
     ],
   },
   {

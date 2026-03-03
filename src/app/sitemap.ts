@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/odi-training`,
+      url: `${baseUrl}/ai-training`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.7,

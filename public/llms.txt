@@ -49,8 +49,8 @@
 - Help desk and customer service
 - Custom business applications
 
-### ODI Training
-- 16-module Oracle Data Integrator curriculum
+### AI Training
+- 12-module AI & Machine Learning curriculum for teams and professionals
 - For administrators and developers
 - Topics: Architecture, topology, interfaces, packages, CDC, security
 

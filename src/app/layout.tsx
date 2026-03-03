@@ -92,7 +92,7 @@ export default function RootLayout({
                 "Data Analytics",
                 "Cloud Computing",
                 "IoT Solutions",
-                "Oracle Data Integrator",
+                "AI Training",
                 "Government IT Services",
               ],
             }),
