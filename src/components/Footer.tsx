@@ -93,8 +93,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-10 pt-6 text-center text-sm text-white/50 font-[family-name:var(--font-montserrat)]">
-          &copy; {new Date().getFullYear()} US Software Professionals Inc. All rights reserved.
+        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-white/50 font-[family-name:var(--font-montserrat)]">
+          <span>&copy; {new Date().getFullYear()} US Software Professionals Inc. All rights reserved.</span>
+          <Link href="/privacy-policy" className="hover:text-white transition-colors">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>

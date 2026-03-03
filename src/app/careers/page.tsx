@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import ContactForm from "@/components/ContactForm";
+import { getActiveJobs } from "@/lib/jobs";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Careers - USSP",
   description: "Join USSP (est. 2003) - Over 20 years of innovation in IT staffing, healthcare, and technology. We seek individuals who are passionate about making a difference through innovation and quality.",
 };
 
-export default function Careers() {
+export default async function Careers() {
+  const jobs = await getActiveJobs();
+
   return (
     <>
       {/* Hero */}
@@ -56,41 +62,10 @@ export default function Careers() {
             subtitle="We are always looking for talented individuals to join our team."
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Software Engineers",
-                location: "Chicago, IL / Remote",
-                type: "Full-time",
-              },
-              {
-                title: "Healthcare Recruiters",
-                location: "Chicago, IL",
-                type: "Full-time",
-              },
-              {
-                title: "IT Consultants",
-                location: "Multiple Locations",
-                type: "Contract / Full-time",
-              },
-              {
-                title: "Blockchain Developers",
-                location: "Remote",
-                type: "Full-time",
-              },
-              {
-                title: "Data Analysts",
-                location: "Chicago, IL / Remote",
-                type: "Full-time",
-              },
-              {
-                title: "Project Managers",
-                location: "Chicago, IL",
-                type: "Full-time",
-              },
-            ].map((job) => (
+            {jobs.map((job) => (
               <div
-                key={job.title}
-                className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                key={job.slug}
+                className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col"
               >
                 <h3 className="text-lg font-[family-name:var(--font-alata)] mb-2">
                   {job.title}
@@ -98,9 +73,15 @@ export default function Careers() {
                 <p className="text-sm text-dark/60 font-[family-name:var(--font-montserrat)] mb-1">
                   {job.location}
                 </p>
-                <span className="inline-block text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-[family-name:var(--font-montserrat)]">
+                <span className="inline-block text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-[family-name:var(--font-montserrat)] mb-4 self-start">
                   {job.type}
                 </span>
+                <Link
+                  href={`/careers/apply/${job.slug}`}
+                  className="mt-auto inline-flex items-center justify-center px-5 py-2 bg-primary hover:bg-primary-dark text-white text-sm rounded-md font-[family-name:var(--font-alata)] transition-colors"
+                >
+                  Apply Now
+                </Link>
               </div>
             ))}
           </div>

@@ -67,6 +67,11 @@
 - **Eligible Users:** All Illinois state agencies, boards, commissions, governmental units, and qualified not-for-profit agencies
 - **Services:** Software programming, custom computer services, software consulting, installation services, business management consulting, IT consulting
 
+## Careers & Applications
+- USSP accepts job applications online at https://www.ussp.co/careers
+- Applicants sign in with LinkedIn and upload their resume (PDF, DOC, or DOCX)
+- Open positions: Software Engineers, Healthcare Recruiters, IT Consultants, Blockchain Developers, Data Analysts, Project Managers
+
 ## Core Values
 Integrity, Innovation, Respect, Accountability, and Excellence
 

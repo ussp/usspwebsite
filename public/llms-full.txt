@@ -178,6 +178,26 @@ All Illinois state agencies, boards and commissions, governmental units, and qua
 
 ---
 
+## Careers & Online Applications
+
+USSP accepts job applications online through its careers portal at https://www.ussp.co/careers. The application process is simple:
+
+1. Browse open positions on the careers page
+2. Click "Apply Now" on the desired position
+3. Sign in with LinkedIn to verify your identity
+4. Upload your resume (PDF, DOC, or DOCX, max 5MB)
+5. Submit your application
+
+### Current Open Positions
+- **Software Engineers** - Chicago, IL / Remote (Full-time)
+- **Healthcare Recruiters** - Chicago, IL (Full-time)
+- **IT Consultants** - Multiple Locations (Contract / Full-time)
+- **Blockchain Developers** - Remote (Full-time)
+- **Data Analysts** - Chicago, IL / Remote (Full-time)
+- **Project Managers** - Chicago, IL (Full-time)
+
+---
+
 ## Portfolio & Partners
 - VersaQuant (https://www.versaquant.com) - Intelligent investing simplified
 - SenseMyForm (https://www.sensemyform.com) - Improve your running form
@@ -204,3 +224,6 @@ A: Yes, USSP hires registered nurses, physical therapists, and occupational ther
 
 **Q: What blockchain platforms does USSP work with?**
 A: USSP works with Ethereum, Solana, Corda, and Hyperledger Fabric for blockchain consulting, development, and hosting services.
+
+**Q: How do I apply for a job at USSP?**
+A: Visit https://www.ussp.co/careers, browse open positions, click "Apply Now," sign in with LinkedIn, upload your resume, and submit your application.
