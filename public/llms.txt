@@ -70,7 +70,9 @@
 ## Careers & Applications
 - USSP accepts job applications online at https://www.ussp.co/careers
 - Applicants sign in with LinkedIn and upload their resume (PDF, DOC, or DOCX)
-- Open positions: Software Engineers, Healthcare Recruiters, IT Consultants, Blockchain Developers, Data Analysts, Project Managers
+- USSP invests in every team member through its 12-module AI & Machine Learning training program
+- Continuous workforce development: AI, cloud, enterprise architecture, and cross-industry project exposure
+- Open positions: Senior Software Engineers, Full-Stack Developers, DevOps Engineers, QA Engineers, IT Consultants, Solution Architects, Business Analysts, Project Managers, Data Analysts, AI/ML Engineers
 
 ## Core Values
 Integrity, Innovation, Respect, Accountability, and Excellence

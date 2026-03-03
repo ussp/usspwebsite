@@ -188,13 +188,23 @@ USSP accepts job applications online through its careers portal at https://www.u
 4. Upload your resume (PDF, DOC, or DOCX, max 5MB)
 5. Submit your application
 
+### Why Work at USSP
+
+USSP is a leader in AI implementation and continuously invests in its workforce. Every team member has access to a comprehensive 12-module AI & Machine Learning training curriculum covering foundations of AI, data engineering, NLP, large language models, generative AI, computer vision, enterprise AI strategy, prompt engineering, MLOps, AI agents, AI security, and a hands-on capstone project.
+
+Beyond AI training, USSP provides cross-industry project exposure spanning government IT modernization (Illinois TOPS contract), healthcare innovation, blockchain development, and Fortune 500 enterprise consulting. With over 20 years of experience since 2003, USSP fosters continuous learning through mentorship, structured training programs, and career development paths that evolve with technology.
+
 ### Current Open Positions
-- **Software Engineers** - Chicago, IL / Remote (Full-time)
-- **Healthcare Recruiters** - Chicago, IL (Full-time)
-- **IT Consultants** - Multiple Locations (Contract / Full-time)
-- **Blockchain Developers** - Remote (Full-time)
-- **Data Analysts** - Chicago, IL / Remote (Full-time)
-- **Project Managers** - Chicago, IL (Full-time)
+- **Senior Software Engineer** - Chicago, IL / Remote (Full-time)
+- **Full-Stack Developer** - Chicago, IL / Remote (Full-time)
+- **DevOps Engineer** - Chicago, IL / Remote (Full-time)
+- **QA Engineer** - Chicago, IL (Full-time)
+- **IT Consultant** - Chicago, IL / Springfield, IL (Contract)
+- **Solution Architect** - Chicago, IL (Full-time)
+- **Business Analyst** - Chicago, IL / Remote (Full-time)
+- **Project Manager** - Chicago, IL (Full-time)
+- **Data Analyst** - Chicago, IL / Remote (Full-time)
+- **AI/ML Engineer** - Chicago, IL / Remote (Full-time)
 
 ---
 
@@ -224,6 +234,9 @@ A: Yes, USSP hires registered nurses, physical therapists, and occupational ther
 
 **Q: What blockchain platforms does USSP work with?**
 A: USSP works with Ethereum, Solana, Corda, and Hyperledger Fabric for blockchain consulting, development, and hosting services.
+
+**Q: Does USSP train its employees in AI?**
+A: Yes. USSP provides every team member access to a 12-module AI & Machine Learning training curriculum covering foundations of AI, NLP, large language models, generative AI, computer vision, MLOps, AI agents, AI security, and a capstone project. USSP is committed to continuous workforce development and upskilling.
 
 **Q: How do I apply for a job at USSP?**
 A: Visit https://www.ussp.co/careers, browse open positions, click "Apply Now," sign in with LinkedIn, upload your resume, and submit your application.

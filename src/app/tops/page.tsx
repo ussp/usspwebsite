@@ -333,6 +333,26 @@ export default function TOPSPage() {
         </div>
       </section>
 
+      {/* Join Our Team */}
+      <section className="py-16 bg-near-black text-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-[family-name:var(--font-alata)] mb-4">
+            Interested in Joining Our Team?
+          </h2>
+          <p className="text-white/80 font-[family-name:var(--font-montserrat)] mb-8 max-w-2xl mx-auto">
+            USSP is always looking for skilled professionals who want to work on
+            meaningful government and enterprise projects. We invest in our
+            people with continuous AI training and career development.
+          </p>
+          <Link
+            href="/careers"
+            className="inline-block px-8 py-3 border-2 border-white text-white font-[family-name:var(--font-alata)] text-sm uppercase tracking-wider hover:bg-white hover:text-near-black transition-all"
+          >
+            Explore Careers
+          </Link>
+        </div>
+      </section>
+
       {/* JSON-LD Structured Data for SEO/AEO */}
       <script
         type="application/ld+json"

@@ -8,7 +8,10 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Careers - USSP",
-  description: "Join USSP (est. 2003) - Over 20 years of innovation in IT staffing, healthcare, and technology. We seek individuals who are passionate about making a difference through innovation and quality.",
+  description:
+    "Join USSP (est. 2003) — a leader in AI implementation with a 12-module AI training program for every team member. Over 20 years of innovation in IT staffing, healthcare, and technology. We invest in people who want to grow.",
+  keywords:
+    "USSP careers, AI jobs, machine learning training, IT staffing careers, technology jobs Chicago, workforce development, continuous learning",
 };
 
 export default async function Careers() {
@@ -23,7 +26,7 @@ export default async function Careers() {
             Careers at USSP
           </h1>
           <p className="text-xl text-white/80 font-[family-name:var(--font-montserrat)]">
-            Join our team of innovators
+            Build the future with a team that invests in your growth
           </p>
         </div>
       </section>
@@ -54,8 +57,77 @@ export default async function Careers() {
         </div>
       </section>
 
-      {/* Open Positions */}
+      {/* AI Leadership & Workforce Development */}
       <section className="py-20 bg-light-gray">
+        <div className="max-w-4xl mx-auto px-4">
+          <SectionHeading
+            title="Investing in the Future"
+            subtitle="At USSP, continuous learning is not a perk — it is how we work."
+          />
+          <div className="space-y-6 text-dark/80 font-[family-name:var(--font-montserrat)] leading-relaxed">
+            <p>
+              Artificial intelligence is reshaping every industry, and USSP is
+              leading the way. We do not just talk about AI — we train every
+              member of our team to understand it, apply it, and build with it.
+              Our{" "}
+              <Link
+                href="/ai-training"
+                className="text-primary hover:text-primary-dark underline"
+              >
+                12-module AI &amp; Machine Learning curriculum
+              </Link>{" "}
+              covers everything from the foundations of machine learning to
+              generative AI, AI agents, MLOps, and responsible AI practices.
+            </p>
+            <p>
+              Whether you are a seasoned engineer or early in your career, you
+              will have access to structured training in large language models,
+              prompt engineering, computer vision, NLP, and enterprise AI
+              strategy. Every module is designed for hands-on learning, and the
+              program culminates in a real-world capstone project.
+            </p>
+            <p>
+              This commitment to upskilling is not limited to AI. For over 20
+              years, USSP has invested in its people through custom training
+              programs, mentorship, and exposure to projects across industries —
+              from government IT modernization to healthcare innovation to
+              blockchain development. When you grow, we grow.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            {[
+              {
+                title: "AI-First Culture",
+                text: "Every team member has access to our 12-module AI & ML training program — from foundations through capstone certification.",
+              },
+              {
+                title: "Cross-Industry Exposure",
+                text: "Work on projects spanning government agencies, Fortune 500 enterprises, healthcare organizations, and emerging startups.",
+              },
+              {
+                title: "Grow With Us",
+                text: "Mentorship, continuous learning, and career development paths that evolve as technology evolves. Your growth is our investment.",
+              },
+            ].map((card) => (
+              <div
+                key={card.title}
+                className="bg-white rounded-lg p-6 shadow-sm"
+              >
+                <h3 className="text-lg font-[family-name:var(--font-alata)] mb-3">
+                  {card.title}
+                </h3>
+                <p className="text-sm text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed">
+                  {card.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Open Positions */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Open Positions"
