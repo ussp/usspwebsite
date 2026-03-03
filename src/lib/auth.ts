@@ -2,12 +2,17 @@ import NextAuth from "next-auth";
 import LinkedIn from "next-auth/providers/linkedin";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
+  debug: process.env.NODE_ENV === "development",
   providers: [
     LinkedIn({
       clientId: process.env.AUTH_LINKEDIN_ID!,
       clientSecret: process.env.AUTH_LINKEDIN_SECRET!,
     }),
   ],
+  pages: {
+    error: "/careers",
+  },
   session: { strategy: "jwt" },
   callbacks: {
     jwt({ token, profile }) {
