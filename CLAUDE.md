@@ -592,8 +592,38 @@ public/assets/logos/     ← Company and partner logos (SVG preferred)
 
 ## Deployment & Git Workflow
 
+### Hosting
+- **Platform:** Railway (auto-deploys from `main` branch)
+- **Production URL:** https://ussp-production.up.railway.app
+- **Domain:** https://www.ussp.co (when configured)
+
+### Railway Environment Variables
+
+These variables MUST be set in Railway dashboard (or via `railway variables --set`):
+
+| Variable | Purpose | Value |
+|----------|---------|-------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase REST API | `https://hjpmenorokkbszcedpjr.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public key | (from Supabase dashboard) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service key (server-side only) | (from Supabase dashboard) |
+| `AUTH_URL` | NextAuth production callback base URL | `https://ussp-production.up.railway.app` |
+| `AUTH_SECRET` | NextAuth session encryption | (generated secret) |
+| `AUTH_LINKEDIN_ID` | LinkedIn OAuth app ID | (from LinkedIn Developer Portal) |
+| `AUTH_LINKEDIN_SECRET` | LinkedIn OAuth app secret | (from LinkedIn Developer Portal) |
+
+**CRITICAL:** If `AUTH_URL` is missing, LinkedIn OAuth will redirect to `localhost` and fail with "redirect_uri does not match the registered value".
+
+### LinkedIn OAuth Setup
+
+The LinkedIn Developer Portal (https://www.linkedin.com/developers/apps/) must have these **Authorized redirect URLs**:
+
+| Environment | Redirect URL |
+|-------------|-------------|
+| Production | `https://ussp-production.up.railway.app/api/auth/callback/linkedin` |
+| Local dev | `http://localhost:3000/api/auth/callback/linkedin` |
+
 ### Branch strategy:
-- `main` - production branch, always deployable
+- `main` - production branch, always deployable, auto-deploys to Railway
 - Feature branches for significant changes
 
 ### Before every commit:
@@ -612,8 +642,8 @@ Examples:
 ```
 
 ### After pushing:
-- Verify deployment succeeded (if CI/CD is configured)
-- Spot-check changed pages in browser
+- Railway auto-deploys from `main` — check Railway dashboard for deploy status
+- Spot-check changed pages in browser at https://ussp-production.up.railway.app
 - Test on mobile viewport
 
 ---
