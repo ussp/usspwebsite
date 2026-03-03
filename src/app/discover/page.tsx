@@ -13,9 +13,13 @@ export default function Discover() {
     <>
       {/* Hero Slider */}
       <section className="pt-20">
-        <div className="relative h-[70vh] bg-near-black overflow-hidden">
+        <div
+          className="relative h-[70vh] overflow-hidden bg-cover bg-center"
+          style={{ backgroundImage: "url(/assets/images/data-analytics.jpg)" }}
+        >
+          <div className="absolute inset-0 bg-primary/60" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white px-4">
+            <div className="relative z-10 text-center text-white px-4">
               <h1 className="text-4xl md:text-6xl font-[family-name:var(--font-alata)] mb-4">
                 Analytics
               </h1>
@@ -167,44 +171,47 @@ export default function Discover() {
       </section>
 
       {/* Portfolio */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-light-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading title="Our Work" />
+          <p className="text-center text-dark/60 font-[family-name:var(--font-montserrat)] -mt-6 mb-10">
+            Some of the awesome projects which we are a part of!
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-3xl mx-auto">
             <a
-              href="http://getthinglist.co"
+              href="https://www.versaquant.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center p-8 rounded-lg border border-dark/10 hover:shadow-lg transition-shadow"
+              className="flex flex-col items-center p-8 bg-white rounded-lg border border-dark/10 hover:shadow-lg transition-shadow"
             >
-              <div className="w-32 h-32 relative mb-4">
+              <div className="w-48 h-20 relative mb-4">
                 <Image
-                  src="/assets/logos/thinglist.svg"
-                  alt="Thinglist"
+                  src="/assets/logos/versaquant.svg"
+                  alt="VersaQuant - Intelligent investing simplified"
                   fill
                   className="object-contain"
                 />
               </div>
               <h3 className="font-[family-name:var(--font-alata)] text-lg">
-                Thinglist
+                VersaQuant
               </h3>
             </a>
             <a
-              href="http://www.versaquant.com"
+              href="https://www.sensemyform.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center p-8 rounded-lg border border-dark/10 hover:shadow-lg transition-shadow"
+              className="flex flex-col items-center p-8 bg-white rounded-lg border border-dark/10 hover:shadow-lg transition-shadow"
             >
-              <div className="w-32 h-32 relative mb-4">
+              <div className="w-40 h-24 relative mb-4">
                 <Image
-                  src="/assets/logos/versaquant.svg"
-                  alt="Versa Quant"
+                  src="/assets/logos/sensemyform.png"
+                  alt="SenseMyForm - Improve your running form"
                   fill
                   className="object-contain"
                 />
               </div>
               <h3 className="font-[family-name:var(--font-alata)] text-lg">
-                Versa Quant
+                SenseMyForm
               </h3>
             </a>
           </div>

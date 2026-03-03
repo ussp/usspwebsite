@@ -1,5 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" fill="none">
-  <rect x="2" y="2" width="236" height="76" rx="12" fill="white" stroke="#7e4596" stroke-width="2"/>
-  <text x="120" y="46" text-anchor="middle" fill="#7e4596" font-size="24" font-family="Arial, sans-serif" font-weight="bold" letter-spacing="1">VersaQuant</text>
-  <path d="M22 28l10 24 10-24" stroke="#7e4596" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" fill="none">
+  <!-- VersaQuant icon -->
+  <g transform="translate(10, 5) scale(0.38)">
+    <path d="M95 10C75 10 50 30 40 55C30 80 35 120 55 145C75 170 110 180 135 165C160 150 175 120 170 90C168 75 160 60 148 50L100 95L90 85L145 35C130 20 110 10 95 10Z" fill="#1C1C1C"/>
+    <path d="M70 70L130 130" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+    <path d="M85 55L145 115" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <!-- VERSAQUANT text -->
+  <text x="90" y="52" fill="#1C1C1C" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="400" letter-spacing="6">VERSAQUANT</text>
+  <!-- Period accent in brand teal -->
+  <circle cx="388" cy="48" r="4" fill="#84e0f1"/>
 </svg>

@@ -21,7 +21,7 @@ export default function HeroSection({
   videoId,
   videoType = "youtube",
   overlay = true,
-  height = "h-screen",
+  height = "h-[75vh]",
 }: HeroSectionProps) {
   return (
     <section className={`relative ${height} flex items-center justify-center overflow-hidden`}>
@@ -31,10 +31,11 @@ export default function HeroSection({
           <iframe
             src={
               videoType === "youtube"
-                ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`
+                ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`
                 : `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1&loop=1&background=1`
             }
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full min-h-full"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300vw] h-[300vh] min-w-[100vw] min-h-[100%]"
+            style={{ border: 0 }}
             allow="autoplay; fullscreen"
             allowFullScreen
             title="Background video"
@@ -52,7 +53,7 @@ export default function HeroSection({
 
       {/* Overlay */}
       {overlay && (
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/20" />
       )}
 
       {/* Content */}
