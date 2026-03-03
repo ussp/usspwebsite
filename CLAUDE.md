@@ -11,15 +11,16 @@
 1. [Project Overview](#project-overview)
 2. [Company Facts (Source of Truth)](#company-facts-source-of-truth)
 3. [Architecture & File Map](#architecture--file-map)
-4. [Content Sync Checklist](#content-sync-checklist)
-5. [Adding a New Page](#adding-a-new-page)
-6. [Updating Existing Content](#updating-existing-content)
-7. [SEO Checklist](#seo-checklist)
-8. [AEO (AI Search) Checklist](#aeo-ai-search-checklist)
-9. [Design System Rules](#design-system-rules)
-10. [Image & Media Management](#image--media-management)
-11. [Deployment & Git Workflow](#deployment--git-workflow)
-12. [Common Mistakes to Avoid](#common-mistakes-to-avoid)
+4. [Database Management](#database-management)
+5. [Content Sync Checklist](#content-sync-checklist)
+6. [Adding a New Page](#adding-a-new-page)
+7. [Updating Existing Content](#updating-existing-content)
+8. [SEO Checklist](#seo-checklist)
+9. [AEO (AI Search) Checklist](#aeo-ai-search-checklist)
+10. [Design System Rules](#design-system-rules)
+11. [Image & Media Management](#image--media-management)
+12. [Deployment & Git Workflow](#deployment--git-workflow)
+13. [Common Mistakes to Avoid](#common-mistakes-to-avoid)
 
 ---
 
@@ -69,6 +70,14 @@
 ```
 D:/Code/ussp/
 ├── CLAUDE.md                          ← THIS FILE (maintenance guide)
+├── alembic.ini                        ← Alembic migration config
+├── migrations/                        ← Database schema migrations (Alembic)
+│   ├── env.py                         ← Migration environment (reads DATABASE_URL)
+│   ├── models.py                      ← SQLAlchemy models (schema definition ONLY)
+│   ├── script.py.mako                 ← Migration file template
+│   └── versions/                      ← Migration scripts (chronological)
+├── scripts/
+│   └── seed-jobs.ts                   ← Seed sample job positions into Supabase
 ├── public/
 │   ├── llms.txt                       ← AI search: company summary (MUST sync with site content)
 │   ├── llms-full.txt                  ← AI search: full company details (MUST sync with site content)
@@ -91,9 +100,15 @@ D:/Code/ussp/
 │   │   ├── small-business-solutions/page.tsx ← Small biz
 │   │   ├── odi-training/page.tsx      ← ODI Training
 │   │   ├── tops/page.tsx              ← TOPS contract (has own JSON-LD schemas)
-│   │   ├── careers/page.tsx           ← Careers
+│   │   ├── careers/page.tsx           ← Careers (dynamic, fetches jobs from Supabase)
 │   │   ├── lca-page/page.tsx          ← LCA compliance
 │   │   └── discover1/page.tsx         ← Redirect to /discover
+│   ├── lib/
+│   │   ├── jobs.ts                    ← Job queries (getActiveJobs, getJobBySlug)
+│   │   ├── auth.ts                    ← NextAuth LinkedIn OAuth config
+│   │   └── supabase/
+│   │       ├── server.ts              ← Supabase service client (server-side)
+│   │       └── client.ts              ← Supabase anon client (browser)
 │   └── components/
 │       ├── Header.tsx                 ← Navigation menu (navItems array)
 │       ├── Footer.tsx                 ← Footer links, address, "since 2003"
@@ -101,8 +116,128 @@ D:/Code/ussp/
 │       ├── HeroSection.tsx            ← Hero with video/image background
 │       ├── SectionHeading.tsx         ← Consistent section titles
 │       ├── ProcessTimeline.tsx        ← Numbered step timeline
-│       └── ExpandableSection.tsx      ← Accordion/collapsible
+│       ├── ExpandableSection.tsx      ← Accordion/collapsible
+│       ├── ApplicationForm.tsx        ← Job application form (LinkedIn + resume)
+│       ├── LinkedInButton.tsx         ← LinkedIn OAuth sign-in button
+│       └── FileUpload.tsx             ← Drag-drop resume upload
 ```
+
+---
+
+## Database Management
+
+### Overview
+
+- **Database:** Supabase PostgreSQL (project `hjpmenorokkbszcedpjr`, region `us-west-2`)
+- **Migrations:** Alembic (Python) — same pattern as the InstantMarketing project
+- **Application queries:** Supabase JS client (`@supabase/supabase-js`) — NOT SQLAlchemy
+- **Schema models:** SQLAlchemy models in `migrations/models.py` — used ONLY for Alembic migrations
+- **Version table:** `alembic_version_ussp` (separate from other projects sharing the same Supabase instance)
+
+### Database Tables
+
+| Table | Purpose | Key Columns |
+|-------|---------|-------------|
+| `positions` | Job listings on careers page | `id`, `title`, `slug`, `location`, `type`, `description`, `active`, `created_at` |
+| `applications` | Job applications (LinkedIn OAuth) | `id`, `full_name`, `email`, `job_title`, `job_slug`, `resume_path`, `resume_name`, `auth_provider`, `created_at` |
+
+### Connection Strings (in `.env.local`)
+
+```
+# Supabase REST API (used by Next.js app)
+NEXT_PUBLIC_SUPABASE_URL=https://hjpmenorokkbszcedpjr.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
+
+# Direct Postgres connection (used by Alembic migrations)
+DATABASE_URL=postgresql://postgres.hjpmenorokkbszcedpjr:<password>@aws-0-us-west-2.pooler.supabase.com:5432/postgres
+```
+
+### How to Make Schema Changes
+
+**NEVER modify the database schema manually in the Supabase dashboard.** Always use Alembic migrations so changes are tracked in version control.
+
+#### Step 1: Update the SQLAlchemy model
+Edit `migrations/models.py` to reflect the desired schema change (add/remove columns, tables, etc.).
+
+#### Step 2: Create a migration
+```bash
+alembic revision -m "Describe the change"
+```
+This generates a new file in `migrations/versions/`. Edit the `upgrade()` and `downgrade()` functions.
+
+#### Step 3: Apply the migration
+```bash
+alembic upgrade head
+```
+
+#### Step 4: Update the application code
+- Update the TypeScript interface in `src/lib/jobs.ts` (or the relevant query file)
+- Update the `.select()` query to include new columns
+- Update the page component to display the new data
+
+#### Step 5: Update seed script if needed
+If the change adds new columns to `positions`, update `scripts/seed-jobs.ts` with sample data.
+
+#### Step 6: Commit the migration
+```bash
+git add migrations/ src/lib/ scripts/
+git commit -m "Add [column/table] via Alembic migration"
+```
+
+### Example: Adding a Column
+
+```python
+# In migrations/versions/YYYYMMDD_HHMMSS_<rev>_<slug>.py
+def upgrade() -> None:
+    op.add_column("positions", sa.Column("salary_range", sa.String(100), nullable=True))
+
+def downgrade() -> None:
+    op.drop_column("positions", "salary_range")
+```
+
+Then update `migrations/models.py`:
+```python
+class Position(Base):
+    __tablename__ = "positions"
+    # ... existing columns ...
+    salary_range = Column(String(100))  # <-- add here
+```
+
+Then update `src/lib/jobs.ts`:
+```typescript
+export interface Job {
+  // ... existing fields ...
+  salary_range?: string;  // <-- add here
+}
+// Update .select() to include "salary_range"
+```
+
+### Useful Alembic Commands
+
+| Command | Purpose |
+|---------|---------|
+| `alembic upgrade head` | Apply all pending migrations |
+| `alembic downgrade -1` | Rollback last migration |
+| `alembic current` | Show current migration version |
+| `alembic history` | Show migration history |
+| `alembic revision -m "message"` | Create new migration file |
+
+### Seeding Data
+
+To populate sample job positions:
+```bash
+npx tsx scripts/seed-jobs.ts
+```
+
+The seed script reads `.env.local` for Supabase credentials and upserts on `slug` (idempotent — safe to run multiple times).
+
+### Key Rules
+
+1. **Always use Alembic for schema changes** — never use the Supabase dashboard SQL editor for DDL
+2. **Keep `migrations/models.py` in sync** — it must match the actual database schema
+3. **Keep TypeScript interfaces in sync** — `src/lib/jobs.ts` must match the database columns
+4. **Migration files are append-only** — never edit an existing migration that has been applied
+5. **Test locally before pushing** — run `alembic upgrade head` to verify the migration works
 
 ---
 
@@ -517,6 +652,14 @@ Examples:
 **Wrong:** Rename `healthcare-hero.jpg` to `medical-hero.jpg` without updating all pages
 **Right:** Search for the old filename across ALL files before renaming
 
+### 9. Modifying database schema without Alembic
+**Wrong:** Add a column via Supabase dashboard SQL editor
+**Right:** Create an Alembic migration, update `migrations/models.py`, run `alembic upgrade head`
+
+### 10. Forgetting to sync TypeScript interfaces with schema changes
+**Wrong:** Add a `description` column via Alembic but forget to update `src/lib/jobs.ts`
+**Right:** Update the SQLAlchemy model, Alembic migration, TypeScript interface, `.select()` query, and page component — all in the same commit
+
 ---
 
 ## Quick Reference: "I want to..."
@@ -536,3 +679,6 @@ Examples:
 | Add social media links | `layout.tsx` JSON-LD `sameAs` array, `Footer.tsx`, `llms.txt` |
 | Add a new AI crawler | `robots.txt` - add `User-agent` + `Allow: /` block |
 | Update founding year claim | NEVER - it's 2003, verify with Registration #62642807 |
+| Add a database column | `migrations/models.py` (SQLAlchemy model), new Alembic migration, `src/lib/jobs.ts` (TypeScript interface + query), `scripts/seed-jobs.ts` (if positions table) |
+| Add a new database table | `migrations/models.py` (new class), new Alembic migration, new query file in `src/lib/`, new API route in `src/app/api/` |
+| Add/update job positions | Run `npx tsx scripts/seed-jobs.ts` (upserts on slug), or edit positions in Supabase dashboard for one-off changes |
