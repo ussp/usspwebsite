@@ -35,6 +35,8 @@ const sampleJobs = [
     slug: "senior-software-engineer",
     location: "Chicago, IL / Remote",
     type: "Full-time",
+    description:
+      "Design and build scalable web applications, APIs, and enterprise software. Work with modern stacks across government and Fortune 500 projects.",
     active: true,
   },
   {
@@ -42,6 +44,8 @@ const sampleJobs = [
     slug: "full-stack-developer",
     location: "Chicago, IL / Remote",
     type: "Full-time",
+    description:
+      "Develop end-to-end features across front-end and back-end systems. React, Node.js, cloud platforms, and database design.",
     active: true,
   },
   {
@@ -49,6 +53,8 @@ const sampleJobs = [
     slug: "devops-engineer",
     location: "Chicago, IL / Remote",
     type: "Full-time",
+    description:
+      "Build and maintain CI/CD pipelines, cloud infrastructure, and deployment automation on AWS and Azure.",
     active: true,
   },
   {
@@ -56,6 +62,8 @@ const sampleJobs = [
     slug: "qa-engineer",
     location: "Chicago, IL",
     type: "Full-time",
+    description:
+      "Ensure software quality through automated and manual testing. Develop test strategies for enterprise and government applications.",
     active: true,
   },
   {
@@ -63,6 +71,8 @@ const sampleJobs = [
     slug: "it-consultant",
     location: "Chicago, IL / Springfield, IL",
     type: "Contract",
+    description:
+      "Provide technology advisory services to Illinois state agencies under the TOPS contract. Cloud strategy, modernization, and digital transformation.",
     active: true,
   },
   {
@@ -70,6 +80,8 @@ const sampleJobs = [
     slug: "solution-architect",
     location: "Chicago, IL",
     type: "Full-time",
+    description:
+      "Design enterprise-scale technical architectures and lead solution delivery for complex government and commercial engagements.",
     active: true,
   },
   {
@@ -77,6 +89,8 @@ const sampleJobs = [
     slug: "business-analyst",
     location: "Chicago, IL / Remote",
     type: "Full-time",
+    description:
+      "Translate business requirements into technical specifications. Bridge stakeholders and engineering teams on enterprise projects.",
     active: true,
   },
   {
@@ -84,6 +98,8 @@ const sampleJobs = [
     slug: "project-manager",
     location: "Chicago, IL",
     type: "Full-time",
+    description:
+      "Lead cross-functional teams using Agile methodologies. Manage timelines, budgets, and delivery for government and enterprise clients.",
     active: true,
   },
   {
@@ -91,6 +107,8 @@ const sampleJobs = [
     slug: "data-analyst",
     location: "Chicago, IL / Remote",
     type: "Full-time",
+    description:
+      "Analyze complex datasets, build dashboards, and deliver insights using SQL, Python, and modern visualization tools.",
     active: true,
   },
   {
@@ -98,6 +116,8 @@ const sampleJobs = [
     slug: "ai-ml-engineer",
     location: "Chicago, IL / Remote",
     type: "Full-time",
+    description:
+      "Build and deploy machine learning models, LLM integrations, and AI-powered solutions for enterprise clients.",
     active: true,
   },
 ];

@@ -148,6 +148,11 @@ export default async function Careers() {
                 <span className="inline-block text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-[family-name:var(--font-montserrat)] mb-4 self-start">
                   {job.type}
                 </span>
+                {job.description && (
+                  <p className="text-sm text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed mb-4">
+                    {job.description}
+                  </p>
+                )}
                 <Link
                   href={`/careers/apply/${job.slug}`}
                   className="mt-auto inline-flex items-center justify-center px-5 py-2 bg-primary hover:bg-primary-dark text-white text-sm rounded-md font-[family-name:var(--font-alata)] transition-colors"
