@@ -50,6 +50,11 @@ const services = [
     description:
       "Comprehensive IT advisory services including infrastructure assessment, cloud strategy, cybersecurity planning, and technology optimization.",
   },
+  {
+    title: "AI Transformation & Readiness",
+    description:
+      "AI readiness assessment, strategy architecture, workforce training, and AI talent staffing to help agencies adopt artificial intelligence effectively and responsibly.",
+  },
 ];
 
 const whyUssp = [
@@ -432,7 +437,15 @@ export default function TOPSPage() {
                 name: "What services does USSP provide under TOPS Category Two?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "USSP provides software programming, custom computer services, software consulting, installation services, business management consulting, and IT consulting to Illinois state agencies, boards, commissions, and governmental units.",
+                  text: "USSP provides software programming, custom computer services, software consulting, installation services, business management consulting, IT consulting, and AI transformation services to Illinois state agencies, boards, commissions, and governmental units.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can Illinois agencies use USSP for AI transformation?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. USSP offers AI transformation services — including AI readiness assessment, strategy architecture, workforce training, and AI talent staffing — available to Illinois state agencies through the TOPS Category Two contract under the Business Management Consulting and IT Consulting service categories.",
                 },
               },
             ],

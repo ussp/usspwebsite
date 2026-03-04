@@ -11,6 +11,7 @@ const navItems = [
     href: "#",
     children: [
       { label: "IT Services", href: "/discover" },
+      { label: "AI Transformation", href: "/ai-transformation" },
       { label: "Small Business Solutions", href: "/small-business-solutions" },
       { label: "Blockchain", href: "/blockchain" },
       { label: "AI Training", href: "/ai-training" },

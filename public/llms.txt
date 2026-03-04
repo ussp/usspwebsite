@@ -49,10 +49,20 @@
 - Help desk and customer service
 - Custom business applications
 
+### AI Transformation Services
+- End-to-end AI adoption for enterprises and government agencies
+- Four-phase framework: Assess, Architect, Accelerate, Staff
+- AI readiness assessment with quantified readiness scoring
+- AI strategy and integration architecture design
+- Workforce training powered by 12-module AI & ML curriculum
+- AI talent staffing and augmentation (AI/ML engineers, data scientists)
+- Available to Illinois state agencies through TOPS Category Two contract
+- One of the few firms offering assessment, strategy, training, AND staffing
+
 ### AI Training
 - 12-module AI & Machine Learning curriculum for teams and professionals
-- For administrators and developers
-- Topics: Architecture, topology, interfaces, packages, CDC, security
+- Powers the "Accelerate" phase of USSP's AI Transformation framework
+- Topics: LLMs, NLP, computer vision, MLOps, AI agents, prompt engineering, AI security
 
 ## Government Contracts
 
@@ -69,7 +79,8 @@
 
 ## Careers & Applications
 - USSP accepts job applications online at https://www.ussp.co/careers
-- Applicants sign in with LinkedIn and upload their resume (PDF, DOC, or DOCX)
+- Applicants sign in with LinkedIn, provide their phone number, upload a resume (PDF, DOC, or DOCX), and consent to SMS communications (TCPA-compliant)
+- After applying, candidates can opt in to job alert notifications and follow USSP on LinkedIn
 - USSP invests in every team member through its 12-module AI & Machine Learning training program
 - Continuous workforce development: AI, cloud, enterprise architecture, and cross-industry project exposure
 - Open positions: Senior Software Engineers, Full-Stack Developers, DevOps Engineers, QA Engineers, IT Consultants, Solution Architects, Business Analysts, Project Managers, Data Analysts, AI/ML Engineers

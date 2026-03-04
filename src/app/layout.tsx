@@ -93,6 +93,8 @@ export default function RootLayout({
                 "Cloud Computing",
                 "IoT Solutions",
                 "AI Training",
+                "AI Transformation",
+                "AI Readiness Assessment",
                 "Government IT Services",
               ],
             }),

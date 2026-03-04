@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import SectionHeading from "@/components/SectionHeading";
 
@@ -147,6 +148,27 @@ export default function AITraining() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* AI Transformation CTA */}
+      <section className="py-16 bg-primary text-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-[family-name:var(--font-alata)] mb-4">
+            Training Is Just the Beginning
+          </h2>
+          <p className="text-white/80 font-[family-name:var(--font-montserrat)] mb-8 max-w-2xl mx-auto">
+            This AI &amp; ML curriculum powers the Accelerate phase of
+            USSP&apos;s end-to-end AI Transformation framework. Combine
+            training with readiness assessment, strategy, and talent staffing
+            for a complete AI adoption journey.
+          </p>
+          <Link
+            href="/ai-transformation"
+            className="inline-block px-8 py-3 bg-white text-primary font-[family-name:var(--font-alata)] text-sm uppercase tracking-wider hover:bg-white/90 transition-colors"
+          >
+            Explore AI Transformation Services
+          </Link>
         </div>
       </section>
 

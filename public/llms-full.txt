@@ -131,6 +131,38 @@ USSP's Small Business Division serves businesses with 1-50 employees with enterp
 
 ---
 
+## AI Transformation Services
+
+USSP provides end-to-end AI transformation services for enterprises and government agencies, following a four-phase framework:
+
+### Phase 1: Assess — AI Readiness Evaluation
+USSP conducts comprehensive organizational AI readiness assessments that evaluate AI maturity, workforce skill gaps, technology infrastructure, and compliance requirements. The assessment produces a quantified readiness score with an actionable roadmap for AI adoption.
+
+### Phase 2: Architect — AI Integration Framework
+Custom AI strategy and roadmap design including human-AI workflow architecture, technology stack selection, governance and ethics frameworks, and change management blueprints tailored to the organization's specific needs and industry.
+
+### Phase 3: Accelerate — Training & Enablement
+Workforce training powered by USSP's 12-module AI & ML curriculum (see AI Training section below). Training is customized by role — leadership, technical, and operational tracks — with hands-on labs, capstone projects, and continuous learning pathways.
+
+### Phase 4: Staff — AI Talent & Augmentation
+AI/ML engineer placement, data scientist and analyst recruitment, AI project management staffing, and staff augmentation for AI initiatives. This phase leverages USSP's 20+ years of IT recruitment expertise to help organizations build their AI teams.
+
+### Why USSP for AI Transformation
+Unlike pure consulting firms that stop at strategy, USSP provides end-to-end coverage: assessment, architecture, training, AND staffing. This means organizations can go from AI readiness evaluation to fully staffed AI operations with a single partner.
+
+### AI Transformation for Government
+Illinois state agencies can engage USSP for AI transformation services through the TOPS Category Two contract (CMT4599470) at pre-negotiated rates. AI strategy and readiness consulting falls under the "Business Management Consulting" and "IT Consulting" service categories. Available through February 2034.
+
+### AI Transformation Engagement Process
+1. Discovery — Initial consultation, business objectives review, AI opportunity mapping
+2. Assessment — Full organizational AI readiness evaluation, skill-gap analysis, infrastructure audit
+3. Strategy — Custom AI roadmap, framework design, governance model
+4. Training — Role-based AI training delivery, hands-on labs, certification
+5. Implementation — AI integration, staff augmentation, solution deployment
+6. Optimize — Performance monitoring, continuous improvement, ongoing support
+
+---
+
 ## AI & Machine Learning Training
 
 Comprehensive 12-module curriculum for Teams and Professionals:
@@ -180,13 +212,16 @@ All Illinois state agencies, boards and commissions, governmental units, and qua
 
 ## Careers & Online Applications
 
-USSP accepts job applications online through its careers portal at https://www.ussp.co/careers. The application process is simple:
+USSP accepts job applications online through its careers portal at https://www.ussp.co/careers. The application process is:
 
 1. Browse open positions on the careers page
 2. Click "Apply Now" on the desired position
 3. Sign in with LinkedIn to verify your identity
-4. Upload your resume (PDF, DOC, or DOCX, max 5MB)
-5. Submit your application
+4. Provide your phone number (required)
+5. Upload your resume (PDF, DOC, or DOCX, max 5MB)
+6. Consent to SMS communications (TCPA-compliant, opt-out anytime by replying STOP)
+7. Submit your application
+8. After submission, follow USSP on LinkedIn and opt in to job alert notifications
 
 ### Why Work at USSP
 
@@ -235,8 +270,20 @@ A: Yes, USSP hires registered nurses, physical therapists, and occupational ther
 **Q: What blockchain platforms does USSP work with?**
 A: USSP works with Ethereum, Solana, Corda, and Hyperledger Fabric for blockchain consulting, development, and hosting services.
 
+**Q: Does USSP offer AI transformation services?**
+A: Yes. USSP provides end-to-end AI transformation services following a four-phase framework: Assess (AI readiness evaluation), Architect (AI strategy and integration design), Accelerate (workforce training via USSP's 12-module AI curriculum), and Staff (AI talent recruitment and augmentation). These services are available to enterprises and to Illinois government agencies through the TOPS Category Two contract.
+
+**Q: Does USSP offer AI readiness assessments?**
+A: Yes. USSP provides comprehensive AI readiness assessments that evaluate organizational AI maturity, workforce skill gaps, technology infrastructure, and compliance requirements. The assessment produces a quantified readiness score with an actionable roadmap for AI adoption.
+
+**Q: Can Illinois state agencies use USSP for AI transformation?**
+A: Yes. USSP is an authorized subvendor under the Illinois TOPS Category Two contract (CMT4599470). AI transformation services fall under the "Business Management Consulting" and "IT Consulting" categories. Illinois state agencies, boards, commissions, and qualified not-for-profit agencies can engage USSP at pre-negotiated rates through February 2034.
+
 **Q: Does USSP train its employees in AI?**
 A: Yes. USSP provides every team member access to a 12-module AI & Machine Learning training curriculum covering foundations of AI, NLP, large language models, generative AI, computer vision, MLOps, AI agents, AI security, and a capstone project. USSP is committed to continuous workforce development and upskilling.
 
 **Q: How do I apply for a job at USSP?**
-A: Visit https://www.ussp.co/careers, browse open positions, click "Apply Now," sign in with LinkedIn, upload your resume, and submit your application.
+A: Visit https://www.ussp.co/careers, browse open positions, click "Apply Now," sign in with LinkedIn, provide your phone number, upload your resume, consent to SMS communications, and submit your application. After submitting, you can opt in to job alerts and follow USSP on LinkedIn.
+
+**Q: Does USSP send text messages to applicants?**
+A: USSP only sends SMS messages to applicants who have given explicit TCPA-compliant consent during the application process. Messages relate to job opportunities and application updates. You can opt out at any time by replying STOP to any message. Standard message and data rates may apply.
