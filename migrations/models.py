@@ -14,6 +14,7 @@ from sqlalchemy import (
     Boolean,
     DateTime,
     Text,
+    ForeignKey,
     UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import UUID
@@ -45,6 +46,8 @@ class Position(Base):
     description = Column(Text)
     active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    posted_at = Column(DateTime(timezone=True))
+    closed_at = Column(DateTime(timezone=True))
 
     __table_args__ = (
         UniqueConstraint("slug", name="positions_slug_key"),
@@ -66,6 +69,7 @@ class Application(Base):
     __tablename__ = "applications"
 
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    position_id = Column(UUID(as_uuid=True), ForeignKey("positions.id"))
     full_name = Column(String(255), nullable=False)
     email = Column(String(255), nullable=False)
     job_title = Column(String(255), nullable=False)
@@ -91,3 +95,28 @@ class Application(Base):
     # Job alerts opt-in
     job_alerts_opt_in = Column(Boolean, default=False, nullable=False)
     job_alerts_timestamp = Column(DateTime(timezone=True))
+
+
+# =============================================================================
+# APPLICATION_POSITIONS TABLE (many-to-many junction)
+# =============================================================================
+
+
+class ApplicationPosition(Base):
+    """
+    Junction table linking applications to positions.
+
+    One applicant can apply for multiple positions.
+    One position can have multiple applicants.
+    """
+
+    __tablename__ = "application_positions"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    application_id = Column(UUID(as_uuid=True), ForeignKey("applications.id"), nullable=False)
+    position_id = Column(UUID(as_uuid=True), ForeignKey("positions.id"), nullable=False)
+    applied_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("application_id", "position_id", name="uq_application_position"),
+    )

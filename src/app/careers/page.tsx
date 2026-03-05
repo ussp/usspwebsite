@@ -137,7 +137,7 @@ export default async function Careers() {
             {jobs.map((job) => (
               <div
                 key={job.slug}
-                className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col"
+                className="bg-white border border-dark/10 rounded-lg p-6 hover:shadow-md transition-shadow flex flex-col"
               >
                 <h3 className="text-lg font-[family-name:var(--font-alata)] mb-2">
                   {job.title}
@@ -149,10 +149,15 @@ export default async function Careers() {
                   {job.type}
                 </span>
                 {job.description && (
-                  <p className="text-sm text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed mb-4">
-                    {job.description}
+                  <p className="text-sm text-dark/60 font-[family-name:var(--font-montserrat)] leading-relaxed mb-3 line-clamp-2">
+                    {job.description.split("\n\n")[0]}
                   </p>
                 )}
+                <p className="text-xs text-dark/40 font-[family-name:var(--font-montserrat)] mb-4">
+                  {job.posted_at
+                    ? `Posted ${new Date(job.posted_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`
+                    : "Open position"}
+                </p>
                 <Link
                   href={`/careers/apply/${job.slug}`}
                   className="mt-auto inline-flex items-center justify-center px-5 py-2 bg-primary hover:bg-primary-dark text-white text-sm rounded-md font-[family-name:var(--font-alata)] transition-colors"

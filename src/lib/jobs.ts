@@ -6,13 +6,15 @@ export interface Job {
   location: string;
   type: string;
   description: string;
+  posted_at: string;
+  closed_at: string | null;
 }
 
 export async function getActiveJobs(): Promise<Job[]> {
   const supabase = getServiceClient();
   const { data, error } = await supabase
     .from("positions")
-    .select("title, slug, location, type, description")
+    .select("title, slug, location, type, description, posted_at, closed_at")
     .eq("active", true)
     .order("created_at", { ascending: true });
 
@@ -24,7 +26,7 @@ export async function getJobBySlug(slug: string): Promise<Job | null> {
   const supabase = getServiceClient();
   const { data, error } = await supabase
     .from("positions")
-    .select("title, slug, location, type, description")
+    .select("title, slug, location, type, description, posted_at, closed_at")
     .eq("slug", slug)
     .eq("active", true)
     .single();

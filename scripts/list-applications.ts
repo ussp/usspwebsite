@@ -34,14 +34,20 @@ async function listApplications() {
     return;
   }
 
-  console.log(`Total applications: ${data.length}\n`);
+  console.log(`Total applicants: ${data.length}\n`);
 
   for (const app of data) {
-    console.log("─".repeat(50));
+    // Fetch all positions this applicant applied for
+    const { data: positions } = await supabase
+      .from("application_positions")
+      .select("position_id, applied_at, positions(title, slug)")
+      .eq("application_id", app.id)
+      .order("applied_at", { ascending: false });
+
+    console.log("─".repeat(60));
     console.log(`Name:           ${app.full_name}`);
     console.log(`Email:          ${app.email}`);
     console.log(`Phone:          ${app.phone || "Not provided"}`);
-    console.log(`Job Applied:    ${app.job_title} (${app.job_slug})`);
     console.log(`Auth Provider:  ${app.auth_provider}`);
     console.log(`LinkedIn Sub:   ${app.linkedin_sub || "N/A"}`);
     console.log(`Given Name:     ${app.given_name || "N/A"}`);
@@ -52,7 +58,17 @@ async function listApplications() {
     console.log(`Resume:         ${app.resume_path ? app.resume_name + " → " + app.resume_path : "Not uploaded"}`);
     console.log(`SMS Consent:    ${app.sms_consent ? "Yes (" + app.sms_consent_timestamp + ")" : "No"}`);
     console.log(`Job Alerts:     ${app.job_alerts_opt_in ? "Yes (" + app.job_alerts_timestamp + ")" : "No"}`);
-    console.log(`Applied At:     ${app.created_at}`);
+    console.log(`Registered:     ${app.created_at}`);
+
+    if (positions && positions.length > 0) {
+      console.log(`Positions Applied (${positions.length}):`);
+      for (const p of positions) {
+        const pos = p.positions as unknown as { title: string; slug: string } | null;
+        console.log(`  → ${pos?.title || "Unknown"} (${pos?.slug || p.position_id}) — ${p.applied_at}`);
+      }
+    } else {
+      console.log(`Positions Applied: ${app.job_title} (${app.job_slug}) [legacy]`);
+    }
   }
 }
 
