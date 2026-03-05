@@ -74,3 +74,20 @@ class Application(Base):
     resume_name = Column(String(255))
     auth_provider = Column(String(50), default="linkedin")
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    # LinkedIn OIDC profile fields
+    linkedin_sub = Column(String(255))
+    given_name = Column(String(255))
+    family_name = Column(String(255))
+    profile_picture = Column(Text)
+    locale = Column(String(20))
+    email_verified = Column(Boolean)
+
+    # Phone and TCPA SMS consent
+    phone = Column(String(30))
+    sms_consent = Column(Boolean, default=False, nullable=False)
+    sms_consent_timestamp = Column(DateTime(timezone=True))
+
+    # Job alerts opt-in
+    job_alerts_opt_in = Column(Boolean, default=False, nullable=False)
+    job_alerts_timestamp = Column(DateTime(timezone=True))

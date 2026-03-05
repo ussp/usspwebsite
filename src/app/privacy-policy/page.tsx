@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
             Privacy Policy
           </h1>
           <p className="text-white/60 font-[family-name:var(--font-montserrat)]">
-            Last updated: March 2, 2026
+            Last updated: March 3, 2026
           </p>
         </div>
       </section>
@@ -45,14 +45,16 @@ export default function PrivacyPolicy() {
             <ul className="list-disc pl-6 space-y-2">
               <li>
                 <strong>Information you provide directly:</strong> When you apply for a
-                job through our careers portal, we collect your name, email address, and
-                resume/CV file.
+                job through our careers portal, we collect your name, email address,
+                phone number, and resume/CV file. We also record your SMS consent
+                preference and the timestamp of that consent.
               </li>
               <li>
                 <strong>Information from third-party sign-in:</strong> If you choose to
-                sign in with LinkedIn, we receive your name, email address, and profile
-                picture from LinkedIn. We do not access your LinkedIn connections,
-                messages, or any other LinkedIn data.
+                sign in with LinkedIn, we receive your name, email address, profile
+                picture, locale, and email verification status from LinkedIn via OpenID
+                Connect. We do not access your LinkedIn connections, messages, or any
+                other LinkedIn data.
               </li>
               <li>
                 <strong>Automatically collected information:</strong> We may collect
@@ -69,6 +71,8 @@ export default function PrivacyPolicy() {
             <ul className="list-disc pl-6 space-y-2">
               <li>To process and evaluate your job application</li>
               <li>To communicate with you regarding your application status</li>
+              <li>To send SMS messages about job opportunities (only with your explicit consent)</li>
+              <li>To send job alert notifications when new positions are posted (only if you opt in)</li>
               <li>To pre-fill application forms when you sign in with LinkedIn</li>
               <li>To improve our website and application process</li>
               <li>To comply with legal obligations</li>
@@ -100,7 +104,24 @@ export default function PrivacyPolicy() {
 
           <div>
             <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
-              5. Data Storage and Security
+              5. SMS Communications &amp; TCPA Consent
+            </h2>
+            <p className="mb-3">
+              USSP may send SMS text messages regarding job opportunities and
+              application updates only with your explicit consent, provided during
+              the application process.
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>You may opt out at any time by replying STOP to any message or by contacting us directly.</li>
+              <li>Consent to receive SMS is not a condition of employment or application.</li>
+              <li>Message frequency varies. Standard message and data rates may apply.</li>
+              <li>We record the timestamp of your consent for compliance purposes.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
+              6. Data Storage and Security
             </h2>
             <p>
               Your application data and uploaded resumes are stored securely using
@@ -112,7 +133,7 @@ export default function PrivacyPolicy() {
 
           <div>
             <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
-              6. Data Sharing
+              7. Data Sharing
             </h2>
             <p>
               We do not sell, trade, or rent your personal information to third parties.
@@ -127,7 +148,7 @@ export default function PrivacyPolicy() {
 
           <div>
             <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
-              7. Data Retention
+              8. Data Retention
             </h2>
             <p>
               We retain your application data for up to 24 months after submission to
@@ -138,7 +159,7 @@ export default function PrivacyPolicy() {
 
           <div>
             <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
-              8. Your Rights
+              9. Your Rights
             </h2>
             <p>You have the right to:</p>
             <ul className="list-disc pl-6 space-y-2 mt-3">
@@ -146,12 +167,14 @@ export default function PrivacyPolicy() {
               <li>Request correction of inaccurate data</li>
               <li>Request deletion of your data</li>
               <li>Withdraw consent for LinkedIn sign-in at any time</li>
+              <li>Opt out of SMS communications by replying STOP or contacting us</li>
+              <li>Unsubscribe from job alert notifications at any time</li>
             </ul>
           </div>
 
           <div>
             <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
-              9. Contact Us
+              10. Contact Us
             </h2>
             <p>
               If you have questions about this Privacy Policy or wish to exercise your

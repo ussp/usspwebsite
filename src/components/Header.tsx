@@ -17,22 +17,16 @@ const navItems = [
       { label: "AI Training", href: "/ai-training" },
     ],
   },
-  {
-    label: "Healthcare",
-    href: "/healthcare",
-    children: [
-      { label: "Healthcare Staffing", href: "/healthcare-staffing" },
-      { label: "Healthcare Organization", href: "/healthcare-organization" },
-    ],
-  },
-  {
-    label: "Government",
-    href: "#",
-    children: [
-      { label: "TOPS Category Two", href: "/tops" },
-      { label: "LCA", href: "/lca-page" },
-    ],
-  },
+  // Healthcare section hidden — not actively offered right now
+  // { label: "Healthcare", href: "/healthcare", children: [
+  //   { label: "Healthcare Staffing", href: "/healthcare-staffing" },
+  //   { label: "Healthcare Organization", href: "/healthcare-organization" },
+  // ]},
+  // Government section hidden until TOPS contract is assigned
+  // { label: "Government", href: "#", children: [
+  //   { label: "TOPS Category Two", href: "/tops" },
+  //   { label: "LCA", href: "/lca-page" },
+  // ]},
   { label: "Careers", href: "/careers" },
 ];
 

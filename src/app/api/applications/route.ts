@@ -5,10 +5,17 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { fullName, email, jobTitle, jobSlug } = body;
-    if (!fullName || !email || !jobTitle || !jobSlug) {
+    const { fullName, email, jobTitle, jobSlug, phone, smsConsent } = body;
+    if (!fullName || !email || !jobTitle || !jobSlug || !phone) {
       return NextResponse.json(
         { error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    if (!smsConsent) {
+      return NextResponse.json(
+        { error: "SMS consent is required" },
         { status: 400 }
       );
     }
@@ -23,6 +30,15 @@ export async function POST(req: NextRequest) {
       resume_path: body.resumePath || null,
       resume_name: body.resumeName || null,
       auth_provider: body.authProvider || "linkedin",
+      linkedin_sub: body.linkedinSub || null,
+      given_name: body.givenName || null,
+      family_name: body.familyName || null,
+      profile_picture: body.profilePicture || null,
+      locale: body.locale || null,
+      email_verified: body.emailVerified ?? null,
+      phone,
+      sms_consent: true,
+      sms_consent_timestamp: new Date().toISOString(),
     });
 
     if (error) {

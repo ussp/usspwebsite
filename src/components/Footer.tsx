@@ -64,24 +64,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Healthcare */}
-          <div>
-            <h4 className="text-sm font-[family-name:var(--font-alata)] font-bold mb-4 uppercase tracking-wider">
-              Healthcare
-            </h4>
-            <ul className="space-y-2 text-sm text-white/70 font-[family-name:var(--font-montserrat)]">
-              <li>
-                <Link href="/healthcare-staffing" className="hover:text-white transition-colors">
-                  Healthcare Professionals
-                </Link>
-              </li>
-              <li>
-                <Link href="/healthcare-organization" className="hover:text-white transition-colors">
-                  Healthcare Organizations
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Healthcare hidden — not actively offered right now */}
 
           {/* Contact */}
           <div>
