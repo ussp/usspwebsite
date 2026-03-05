@@ -64,6 +64,12 @@
 - Powers the "Accelerate" phase of USSP's AI Transformation framework
 - Topics: LLMs, NLP, computer vision, MLOps, AI agents, prompt engineering, AI security
 
+## Certifications
+
+- **MBE** — Minority Business Enterprise (Illinois BEP Certified)
+- **WBE** — Women Business Enterprise (Illinois BEP Certified)
+- **DBE** — Disadvantaged Business Enterprise (Illinois DOT Certified)
+
 ## Government Contracts
 
 ### TOPS Category Two (Applications)

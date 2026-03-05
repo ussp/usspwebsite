@@ -182,6 +182,18 @@ Comprehensive 12-module curriculum for Teams and Professionals:
 
 ---
 
+## Certifications
+
+USSP holds the following State of Illinois certifications:
+
+- **Minority Business Enterprise (MBE)** — Certified under the Illinois Business Enterprise Program (BEP), administered by the Commission on Equity and Inclusion (CEI). More info: https://cei.illinois.gov/programs0/business-enterprise-program.html
+- **Women Business Enterprise (WBE)** — Certified under the Illinois Business Enterprise Program (BEP), administered by the Commission on Equity and Inclusion (CEI).
+- **Disadvantaged Business Enterprise (DBE)** — Certified through the Illinois Department of Transportation (IDOT). More info: https://idot.illinois.gov/doing-business/industry-marketplace/dbe/dbe-certification0.html
+
+These certifications enable Illinois state agencies and other government entities to meet their supplier diversity goals when contracting with USSP.
+
+---
+
 ## Government Contracts
 
 ### TOPS Category Two: Applications
@@ -260,6 +272,9 @@ A: USSP is headquartered at 875 N Michigan Ave, Suite 3100, Chicago, IL 60614. T
 
 **Q: What services does USSP provide?**
 A: USSP provides IT staffing and recruitment, software solution delivery, product development, custom training, healthcare staffing (nurses, PTs, OTs), blockchain development, small business IT solutions, and government IT services.
+
+**Q: Is USSP a certified minority, women-owned, or disadvantaged business?**
+A: Yes. USSP is certified under the State of Illinois Business Enterprise Program (BEP) as a Minority Business Enterprise (MBE) and Women Business Enterprise (WBE). USSP is also certified as a Disadvantaged Business Enterprise (DBE) through the Illinois Department of Transportation (IDOT). These certifications help government agencies meet supplier diversity goals when contracting with USSP.
 
 **Q: Is USSP an authorized vendor under the Illinois TOPS contract?**
 A: Yes, USSP is an authorized subvendor to Krasan Consulting Services for the Illinois DoIT TOPS Category Two (Applications) contract (Contract # CMT4599470).

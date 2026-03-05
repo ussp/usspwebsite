@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description:
     "USSP (est. 2003) is an authorized subvendor to Krasan Consulting Services for the Illinois DoIT TOPS Category Two (Applications) contract. With 20+ years of IT expertise, we provide software development, IT consulting, custom applications, and business management consulting services to Illinois state agencies through contract CMT4599470.",
   keywords:
-    "TOPS Category Two, Illinois DoIT, Technology Operations Professional Services, Krasan Consulting, USSP subvendor, IT consulting Illinois, state government IT services, custom software development, CMT4599470, P-59947, Illinois state agencies, established 2003, 20 years IT experience",
+    "TOPS Category Two, Illinois DoIT, Technology Operations Professional Services, Krasan Consulting, USSP subvendor, IT consulting Illinois, state government IT services, custom software development, CMT4599470, P-59947, Illinois state agencies, established 2003, 20 years IT experience, BEP certified, MBE, WBE, DBE, minority business enterprise, women business enterprise, disadvantaged business enterprise",
   openGraph: {
     title:
       "TOPS Category Two | USSP - Authorized Subvendor to Krasan Consulting",
@@ -64,9 +64,9 @@ const whyUssp = [
       "Over two decades of experience delivering high-quality technology solutions across multiple sectors including government, healthcare, and enterprise. Incorporated in Illinois since January 2003.",
   },
   {
-    title: "Certified Expertise",
+    title: "BEP & DBE Certified",
     description:
-      "Our team includes certified professionals in Oracle, AWS, Azure, Agile methodologies, and enterprise architecture frameworks.",
+      "USSP is a State of Illinois BEP-certified Minority Business Enterprise (MBE), Women Business Enterprise (WBE), and IDOT-certified Disadvantaged Business Enterprise (DBE).",
   },
   {
     title: "Local Presence",
@@ -310,6 +310,97 @@ export default function TOPSPage() {
         </div>
       </section>
 
+      {/* BEP Certification */}
+      <section className="py-20 bg-light-gray">
+        <div className="max-w-4xl mx-auto px-4">
+          <SectionHeading
+            title="State of Illinois BEP Certified"
+            subtitle="Minority-Owned, Women-Owned & Disadvantaged Business Enterprise"
+          />
+          <div className="bg-white rounded-lg p-8 shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed mb-4">
+                  USSP is certified under the State of Illinois{" "}
+                  <a
+                    href="https://cei.illinois.gov/programs0/business-enterprise-program.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary-dark underline"
+                  >
+                    Business Enterprise Program (BEP)
+                  </a>{" "}
+                  as a <strong>Minority Business Enterprise (MBE)</strong> and
+                  a <strong>Women Business Enterprise (WBE)</strong>. USSP is also certified as a{" "}
+                  <strong>Disadvantaged Business Enterprise (DBE)</strong> through the{" "}
+                  <a
+                    href="https://idot.illinois.gov/doing-business/industry-marketplace/dbe/dbe-certification0.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary-dark underline"
+                  >
+                    Illinois Department of Transportation
+                  </a>
+                  .
+                </p>
+                <p className="text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed">
+                  These certifications enable Illinois state agencies to meet their
+                  supplier diversity goals when contracting with USSP through the
+                  TOPS contract or other procurement vehicles.
+                </p>
+              </div>
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-4 p-4 bg-light-gray rounded-lg">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-primary font-[family-name:var(--font-alata)] font-bold text-sm">
+                      MBE
+                    </span>
+                  </div>
+                  <div>
+                    <p className="font-[family-name:var(--font-alata)] text-sm font-bold">
+                      Minority Business Enterprise
+                    </p>
+                    <p className="text-xs text-dark/50 font-[family-name:var(--font-montserrat)]">
+                      Illinois BEP Certified
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-light-gray rounded-lg">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-primary font-[family-name:var(--font-alata)] font-bold text-sm">
+                      WBE
+                    </span>
+                  </div>
+                  <div>
+                    <p className="font-[family-name:var(--font-alata)] text-sm font-bold">
+                      Women Business Enterprise
+                    </p>
+                    <p className="text-xs text-dark/50 font-[family-name:var(--font-montserrat)]">
+                      Illinois BEP Certified
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 p-4 bg-light-gray rounded-lg">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-primary font-[family-name:var(--font-alata)] font-bold text-sm">
+                      DBE
+                    </span>
+                  </div>
+                  <div>
+                    <p className="font-[family-name:var(--font-alata)] text-sm font-bold">
+                      Disadvantaged Business Enterprise
+                    </p>
+                    <p className="text-xs text-dark/50 font-[family-name:var(--font-montserrat)]">
+                      Illinois DOT Certified
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Banner */}
       <section className="py-16 bg-primary text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
@@ -438,6 +529,14 @@ export default function TOPSPage() {
                 acceptedAnswer: {
                   "@type": "Answer",
                   text: "USSP provides software programming, custom computer services, software consulting, installation services, business management consulting, IT consulting, and AI transformation services to Illinois state agencies, boards, commissions, and governmental units.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Is USSP a certified minority, women-owned, and disadvantaged business?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. USSP is certified under the State of Illinois Business Enterprise Program (BEP) as a Minority Business Enterprise (MBE) and Women Business Enterprise (WBE). USSP is also certified as a Disadvantaged Business Enterprise (DBE) through the Illinois Department of Transportation (IDOT). These certifications help Illinois state agencies meet their supplier diversity goals when contracting with USSP.",
                 },
               },
               {
