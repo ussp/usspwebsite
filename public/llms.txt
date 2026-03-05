@@ -99,6 +99,38 @@ Integrity, Innovation, Respect, Accountability, and Excellence
 - **Healthcare:** medicalstaffing@ussp.co
 - **Hours:** Mon-Fri 8:00 AM to 5:00 PM
 
-## Portfolio
+## Context-First AI Platform & Portfolio
+
+USSP's Context-First AI platform ensures AI agents always have trusted, current business context. Data carries TTL (time-to-live) and trust scores via source tagging — so agents know what's fresh, what's stale, and what to trust. Context evolves automatically as business data changes. MCP (Model Context Protocol) ready. Available as managed services for small and medium businesses, or as an enterprise framework.
+
+### Platform Capabilities
+- 34+ pre-built data connectors with source tagging
+- TTL (time-to-live) and trust scoring on every data point
+- Automatic context evolution as data changes
+- MCP (Model Context Protocol) integration for any AI agent
+- Framework-agnostic: CrewAI, LangGraph, Claude, OpenAI, custom
+- Semantic knowledge graph for full business context
+
+### Business Intelligence & Analytics
+- Unified Communications Intelligence Platform — AI-powered communications integrating calls, SMS, CRM, and POS data with campaign generation, AI coaching, and real-time dashboards
+- Executive Command Center — Unified executive dashboard with real-time KPIs, cross-functional insights, P&L forecasting, budget builder, and multi-scenario analysis
+
+### Marketing & Customer Engagement
+- Marketing Automation Suite — AI campaign management with customer segmentation, SMS automation, AI copywriting, and influencer relationship management
+- Competitive Intelligence Platform — Automated competitor monitoring for pricing, events, reviews, and market positioning
+
+### Operations & Facility Management
+- Digital Twin (3D Facility Simulator) — Real-time guest flow simulation, zone occupancy, queue prediction, and revenue-per-zone modeling
+- Staffing Optimizer — Demand-based staffing forecasts, labor cost optimization, and scheduling integration
+
+### Growth & Strategy
+- Market Analysis & Site Selection — TAM sizing by ZIP code, drive-time mapping, census demographics, and competitive density scoring
+- Acquisition Scoring Engine — Multi-site benchmarking, opportunity scoring (0-100), fair value estimation for PE firms
+
+### AI & Automation
+- Managed Data Intelligence Platform — The foundation of Context-First AI. Connect/Trust/Evolve with 34+ connectors, TTL and trust scoring, MCP integration, and semantic knowledge graph
+- AI Workflow Engine — Configurable AI agent workflows for marketing analysis, report generation, and operational insights
+
+### Partners
 - VersaQuant (https://www.versaquant.com) - Intelligent investing simplified
 - SenseMyForm (https://www.sensemyform.com) - Improve your running form

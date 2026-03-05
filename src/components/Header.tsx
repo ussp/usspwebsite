@@ -27,6 +27,7 @@ const navItems = [
   //   { label: "TOPS Category Two", href: "/tops" },
   //   { label: "LCA", href: "/lca-page" },
   // ]},
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Careers", href: "/careers" },
 ];
 

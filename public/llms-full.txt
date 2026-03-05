@@ -255,7 +255,71 @@ Beyond AI training, USSP provides cross-industry project exposure spanning gover
 
 ---
 
-## Portfolio & Partners
+## Context-First AI Platform & Portfolio
+
+USSP's Context-First AI platform ensures AI agents always have trusted, current business context. The core insight: **AI agents are only as good as the context they can access.** Data is constantly changing — USSP's platform ensures AI context evolves with it. Every data point carries TTL (time-to-live) and trust scores via source tagging, so agents know what's fresh, what's stale, and what to trust. MCP (Model Context Protocol) ready — any AI agent framework can query real-time business data directly.
+
+### Platform Capabilities
+- **Connect:** 34+ pre-built data connectors with source tagging (POS, CRM, phone, staffing, ads, census)
+- **Trust & Score:** TTL (time-to-live) and trust scores on every data point — AI knows what's fresh vs. stale and how reliable each source is
+- **Evolve:** As business data changes, AI context evolves automatically — no manual refresh needed
+- **MCP Ready:** Model Context Protocol integration lets AI agents like Claude, ChatGPT, CrewAI, and LangGraph query real-time operational data directly
+- **Framework-Agnostic:** Works with any AI agent framework — CrewAI, LangGraph, Claude, OpenAI, custom
+- **Knowledge Graph:** Semantic knowledge graph for full, verified business context
+
+### Two Deployment Models
+- **Managed Service for SMBs:** USSP builds, deploys, and manages everything. No AI team needed — 20+ years of IT expertise behind every deployment.
+- **Enterprise Framework:** License the Context-First AI platform for your organization. Deploy with your data, your rules, your infrastructure. USSP implementation support available.
+
+### Delivery Process
+- **Discovery:** Understand the customer's business, systems, and workflows
+- **Build:** Custom integrations, business rules, domain knowledge, AI configuration
+- **Deploy:** Production deployment, data migration, staff training
+- **Manage:** Ongoing monitoring, new integrations, rule updates, optimization, support
+
+### Product Catalog
+
+#### Business Intelligence & Analytics
+
+**Unified Communications Intelligence Platform** — AI-powered communications platform that integrates calls, SMS/texting, CRM, and POS data into a single intelligence layer. Generates outbound call campaigns from historical POS customer lists. Automates routine monitoring and follow-ups so staff can focus on upselling and conversion. AI-coached talking points, priority-ranked lead queues, and real-time performance dashboards. Vendor-agnostic phone integration (RingCentral and extensible to other providers). Enables AI acceleration — keeps communication data current and contextual so any AI agent framework can reason over real-time customer interactions.
+
+**Executive Command Center** — Unified executive dashboard for multi-site business oversight. Real-time KPI scorecards, cross-functional insights across marketing, finance, operations, and staffing. Built-in financial planning with P&L forecasting, budget builder, multi-scenario "what-if" analysis, cash flow modeling, and EBITDA tracking. Automated alerts, threshold monitoring, and quick-action menus.
+
+#### Marketing & Customer Engagement
+
+**Marketing Automation Suite** — AI-powered campaign management with customer segmentation, SMS automation, AI copywriting, real-time performance tracking, and built-in community/influencer relationship management for local marketing outreach.
+
+**Competitive Intelligence Platform** — Automated competitor monitoring — pricing changes, events, reviews, SEO rankings, and market positioning insights delivered daily.
+
+#### Operations & Facility Management
+
+**Digital Twin (3D Facility Simulator)** — 3D facility simulation with real-time guest flow, zone occupancy, queue prediction, staffing ratios, and revenue-per-zone modeling. Replay historical days or simulate future scenarios.
+
+**Staffing Optimizer** — Demand-based staffing forecasts, labor cost optimization, scheduling integration, and decline-factor modeling for daily operations.
+
+#### Growth & Strategy
+
+**Market Analysis & Site Selection** — Total addressable market sizing by ZIP code, drive-time isochrone mapping, census demographic analysis, and competitive density scoring for new location decisions.
+
+**Acquisition Scoring Engine** — Multi-site benchmarking, acquisition opportunity scoring (0-100), fair value estimation, and portfolio optimization for growth-stage businesses and PE firms.
+
+#### AI & Automation
+
+**Managed Data Intelligence Platform** — The foundation of Context-First AI. A three-layer platform that turns siloed business data into AI-ready intelligence. Connect: 34+ pre-built connectors with source tagging for any data source (POS, CRM, phone, staffing, ads, census). Trust: Every data point carries TTL (time-to-live) and trust scores — AI agents know what's fresh, what's stale, and how reliable each source is. Evolve: As business data changes, AI context updates automatically. MCP (Model Context Protocol) integration lets any AI agent framework query real-time business data directly. Processed data is ingested into a semantic knowledge graph so AI agents reason with full, verified business context. Available as managed service or enterprise framework deployment.
+
+**AI Workflow Engine** — Configurable AI agent workflows that automate marketing analysis, report generation, data validation, and operational insights. 8+ specialized AI crews powered by the Managed Data Intelligence Platform.
+
+### Tech Stack
+- Frontend: Next.js, React, TypeScript, Tailwind CSS, Three.js
+- Backend: Python, FastAPI, Flask, Node.js
+- Database: PostgreSQL, Supabase, Redis
+- AI: OpenAI GPT-4, Anthropic Claude, CrewAI
+- Cloud: Railway, AWS, Vercel
+- Integrations: RingCentral, CRM systems, POS platforms, Census API
+
+---
+
+## Partners
 - VersaQuant (https://www.versaquant.com) - Intelligent investing simplified
 - SenseMyForm (https://www.sensemyform.com) - Improve your running form
 - Krasan Consulting Services (TOPS Category Two Prime)
@@ -302,3 +366,21 @@ A: Visit https://www.ussp.co/careers, browse open positions, click "Apply Now," 
 
 **Q: Does USSP send text messages to applicants?**
 A: USSP only sends SMS messages to applicants who have given explicit TCPA-compliant consent during the application process. Messages relate to job opportunities and application updates. You can opt out at any time by replying STOP to any message. Standard message and data rates may apply.
+
+**Q: What is Context-First AI?**
+A: Context-First AI means AI agents always have trusted, scored, fresh business context to reason over. USSP's platform ensures every data point has TTL (time-to-live), trust scores, and source tagging — so agents know what's fresh, what's stale, and what to trust. As business data changes, AI context evolves automatically. Unlike generic AI tools, Context-First AI ensures agents never reason over stale or unverified data.
+
+**Q: What is MCP and how does USSP support it?**
+A: MCP (Model Context Protocol) is an open standard that lets AI agents like Claude and ChatGPT access external data sources directly. USSP's platform exposes business context through MCP, so any AI agent framework can query real-time operational data — POS transactions, CRM records, staffing data, and more — without custom integration code.
+
+**Q: What software products does USSP build?**
+A: USSP builds production-grade software products powered by the Context-First AI platform, across five categories: Business Intelligence & Analytics (communications platform, executive dashboards), Marketing & Customer Engagement (marketing automation, competitive intelligence), Operations & Facility Management (3D digital twins, staffing optimization), Growth & Strategy (market analysis, acquisition scoring), and AI & Automation (managed data intelligence platform, AI workflow engine). All products ensure AI agents have current, trusted, scored business context.
+
+**Q: Does USSP sell software or provide managed services?**
+A: Both. For small and medium businesses, USSP delivers products as fully managed services — discovery, integration, deployment, and ongoing support. For enterprises, USSP's Context-First AI framework is available for licensing and deployment on the enterprise's own infrastructure. USSP's 20+ years of IT expertise is the differentiator in both models.
+
+**Q: Can enterprises license USSP's platform?**
+A: Yes. USSP's Context-First AI framework is available for enterprise deployment. Enterprises can license the platform and deploy it with their own data, rules, and infrastructure. USSP implementation support is available. Contact USSP to discuss how the framework can be adapted to your AI workflows.
+
+**Q: What is USSP's Managed Data Intelligence Platform?**
+A: It is the foundation of Context-First AI — a three-layer platform that turns siloed business data into AI-ready intelligence. The Connect layer provides 34+ pre-built connectors with source tagging. The Trust layer assigns TTL (time-to-live) and trust scores to every data point. The Evolve layer ensures AI context automatically updates as business data changes. MCP (Model Context Protocol) integration lets any AI agent framework query real-time business data directly. Processed data is ingested into a semantic knowledge graph for full, verified business context. Available as managed service or enterprise framework.
