@@ -33,9 +33,15 @@ export default function ProcessTimeline({
 
         <div className="relative">
           {/* Connector line */}
-          <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-primary/20" />
+          <div className="hidden md:block absolute top-8 left-[8%] right-[8%] h-0.5 bg-primary/20" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-8">
+          <div className={`grid grid-cols-1 gap-8 ${
+            steps.length <= 4
+              ? "md:grid-cols-2 lg:grid-cols-4"
+              : steps.length === 5
+                ? "md:grid-cols-3 lg:grid-cols-5"
+                : "md:grid-cols-3 lg:grid-cols-6"
+          }`}>
             {steps.map((step) => (
               <div key={step.number} className="relative text-center">
                 <div className="w-16 h-16 mx-auto bg-primary text-white rounded-full flex items-center justify-center text-xl font-[family-name:var(--font-alata)] font-bold mb-4 relative z-10">
