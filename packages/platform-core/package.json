@@ -115,6 +115,16 @@
       "import": "./dist/queries/admin/dashboard.js",
       "default": "./src/queries/admin/dashboard.ts"
     },
+    "./queries/articles": {
+      "types": "./dist/queries/articles.d.ts",
+      "import": "./dist/queries/articles.js",
+      "default": "./src/queries/articles.ts"
+    },
+    "./queries/admin/articles": {
+      "types": "./dist/queries/admin/articles.d.ts",
+      "import": "./dist/queries/admin/articles.js",
+      "default": "./src/queries/admin/articles.ts"
+    },
     "./queries/admin/audit": {
       "types": "./dist/queries/admin/audit.d.ts",
       "import": "./dist/queries/admin/audit.js",

@@ -280,6 +280,29 @@ All Illinois state agencies, boards and commissions, governmental units, and qua
 
 ---
 
+## Insights (Case Studies & Blog)
+
+USSP publishes insights, case studies, and blog posts at https://www.ussp.co/insights. The Insights hub showcases USSP's expertise through two content types:
+
+### Case Studies
+Real-world project outcomes demonstrating USSP's impact across industries. Each case study includes the client challenge, USSP's solution approach, and measurable results. Industries covered include government IT modernization, healthcare technology, enterprise AI adoption, and staffing solutions.
+
+### Blog Posts
+Thought leadership articles covering technology trends, AI transformation best practices, IT staffing insights, and enterprise modernization strategies. Written by USSP's team of industry veterans and technology leaders with 20+ years of consulting experience.
+
+Topics include:
+- AI implementation and transformation strategies
+- IT staffing and workforce development best practices
+- Healthcare technology innovation
+- Enterprise architecture and cloud modernization
+- Edge AI and computer vision applications
+- Government technology services
+- Small business technology adoption
+
+USSP employees and readers can share articles directly to LinkedIn and X (Twitter) from each article page.
+
+---
+
 ## Careers & Online Applications
 
 USSP accepts job applications online through its careers portal at https://www.ussp.co/careers. The application process is:

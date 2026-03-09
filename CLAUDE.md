@@ -26,11 +26,12 @@
 
 ## Project Overview
 
-- **Site:** https://www.ussp.co
+- **Public Site:** https://www.ussp.co
+- **Back Office:** https://app.ussp.co (internal admin portal)
 - **Repo:** https://github.com/ussp/usspwebsite
 - **Stack:** Next.js 16 (App Router) + TypeScript + Tailwind CSS v4
-- **Structure:** `src/app/` for pages, `src/components/` for shared components
-- **Hosting:** TBD (designed for Vercel, Netlify, or any Node.js host)
+- **Structure:** Monorepo — `src/app/` (public site), `packages/backoffice/` (admin app), `packages/platform-core/` (shared backend)
+- **Hosting:** Railway (two services from same repo: `ussp` for public site, `app` for back office)
 
 ---
 
@@ -72,6 +73,7 @@ All sites share a single Supabase database with data isolated by `site_id` colum
 
 - **SITE_ID env var**: Every site must set `SITE_ID` (e.g. `ussp`, `vqlab`) — all queries auto-filter by it
 - **Shared package**: `packages/platform-core/` — queries, auth, API handlers used by all sites
+- **Back-office app**: `packages/backoffice/` — internal admin portal (Google OAuth, RBAC, positions CRUD, applications management)
 - **Site template**: `packages/site-template/` — scaffold for creating new site repos
 
 ### Critical Files That Contain Duplicated/Synced Content
@@ -96,18 +98,49 @@ D:/Code/ussp/
 │   │   │   ├── queries/applications.ts ← createOrUpdateApplication(), updateJobAlerts()
 │   │   │   ├── queries/contact.ts     ← submitContactForm()
 │   │   │   ├── queries/analytics.ts   ← trackEvent()
-│   │   │   ├── auth/config.ts         ← createAuth() factory for NextAuth
+│   │   │   ├── queries/admin/         ← BACK-OFFICE QUERY MODULES
+│   │   │   │   ├── positions.ts       ← CRUD: getAllPositions, create, update, toggle
+│   │   │   │   ├── applications.ts    ← List, status updates, assign, notes
+│   │   │   │   ├── staff.ts           ← Staff user CRUD + findByEmail
+│   │   │   │   ├── contacts.ts        ← Read-only contact submissions
+│   │   │   │   ├── dashboard.ts       ← Aggregated metrics
+│   │   │   │   └── audit.ts           ← Audit logging + retrieval
+│   │   │   ├── auth/config.ts         ← createAuth() factory for NextAuth (LinkedIn, public site)
+│   │   │   ├── auth/admin-config.ts   ← createAdminAuth() factory (Google OAuth, back office)
+│   │   │   ├── auth/rbac.ts           ← hasPermission(), requirePermission() — role-based access
 │   │   │   ├── api/applications.ts    ← API route handler (POST)
 │   │   │   ├── api/upload.ts          ← File upload handler (per-site storage path)
 │   │   │   ├── api/contact.ts         ← Contact form handler
-│   │   │   └── types/                 ← Shared TypeScript interfaces
+│   │   │   ├── types/database.ts      ← Public-facing TypeScript interfaces
+│   │   │   ├── types/admin.ts         ← Back-office interfaces (StaffUser, AdminApplication, etc.)
+│   │   │   └── types/site.ts          ← Site config interfaces
 │   │   └── package.json
+│   ├── backoffice/                    ← BACK-OFFICE APP (app.ussp.co)
+│   │   ├── package.json
+│   │   ├── next.config.ts             ← Standalone output
+│   │   ├── tsconfig.json
+│   │   ├── src/
+│   │   │   ├── app/
+│   │   │   │   ├── layout.tsx         ← Root layout, SessionProvider
+│   │   │   │   ├── globals.css        ← Admin design tokens
+│   │   │   │   ├── page.tsx           ← Dashboard (metrics overview)
+│   │   │   │   ├── login/page.tsx     ← Google OAuth sign-in
+│   │   │   │   ├── positions/         ← List, create, edit positions
+│   │   │   │   ├── applications/      ← List, detail, status, notes
+│   │   │   │   ├── contacts/          ← View contact submissions
+│   │   │   │   ├── staff/             ← Manage staff users + roles
+│   │   │   │   └── api/               ← 11 API routes (auth, CRUD, dashboard)
+│   │   │   ├── lib/auth.ts            ← createAdminAuth() wrapper
+│   │   │   ├── middleware.ts          ← Protect all routes except /login
+│   │   │   └── components/            ← AdminSidebar, AdminTopbar, DataTable, StatusBadge, MetricCard
+│   │   └── .env.local                 ← Google OAuth + Supabase credentials (gitignored)
 │   └── site-template/                 ← SCAFFOLD for new site repos
 │       ├── .env.example               ← Required env vars template
 │       ├── package.json
 │       └── src/                       ← Minimal app structure with thin API wrappers
 ├── scripts/
-│   └── seed-jobs.ts                   ← Seed sample job positions (uses SITE_ID)
+│   ├── seed-jobs.ts                   ← Seed sample job positions (uses SITE_ID)
+│   └── seed-admin.ts                  ← Seed initial admin user for back office
 ├── public/
 │   ├── llms.txt                       ← AI search: company summary (MUST sync with site content)
 │   ├── llms-full.txt                  ← AI search: full company details (MUST sync with site content)
@@ -130,6 +163,8 @@ D:/Code/ussp/
 │   │   ├── small-business-solutions/page.tsx ← Small biz
 │   │   ├── odi-training/page.tsx      ← ODI Training
 │   │   ├── tops/page.tsx              ← TOPS contract (has own JSON-LD schemas)
+│   │   ├── insights/page.tsx          ← Insights listing (case studies & blog posts, dynamic)
+│   │   ├── insights/[slug]/page.tsx  ← Article detail with JSON-LD, OpenGraph, share buttons
 │   │   ├── careers/page.tsx           ← Careers (dynamic, fetches jobs from Supabase)
 │   │   ├── lca-page/page.tsx          ← LCA compliance
 │   │   └── discover1/page.tsx         ← Redirect to /discover
@@ -149,6 +184,7 @@ D:/Code/ussp/
 │       ├── ExpandableSection.tsx      ← Accordion/collapsible
 │       ├── ApplicationForm.tsx        ← Job application form (LinkedIn + resume)
 │       ├── LinkedInButton.tsx         ← LinkedIn OAuth sign-in button
+│       ├── ShareButtons.tsx           ← LinkedIn/X share + copy link buttons
 │       └── FileUpload.tsx             ← Drag-drop resume upload
 ```
 
@@ -170,11 +206,15 @@ D:/Code/ussp/
 | Table | Purpose | Key Columns |
 |-------|---------|-------------|
 | `sites` | Site registry (multi-tenant) | `id` (PK, e.g. "ussp"), `name`, `domain`, `config` (JSONB), `active` |
-| `positions` | Job listings on careers page | `id`, `site_id` (FK), `title`, `slug`, `location`, `type`, `description`, `active`, `created_at` |
-| `applications` | Job applications (LinkedIn OAuth) | `id`, `site_id` (FK), `full_name`, `email`, `job_title`, `job_slug`, `resume_path`, `auth_provider`, `created_at` |
+| `positions` | Job listings on careers page | `id`, `site_id` (FK), `title`, `slug`, `location`, `type`, `description`, `salary_range`, `department`, `active`, `created_at`, `updated_at`, `created_by` (FK staff_users) |
+| `applications` | Job applications (LinkedIn OAuth) | `id`, `site_id` (FK), `full_name`, `email`, `job_title`, `job_slug`, `resume_path`, `auth_provider`, `status`, `status_updated_at`, `assigned_to` (FK staff_users), `created_at` |
 | `application_positions` | Many-to-many junction | `id`, `application_id` (FK), `position_id` (FK), `applied_at` |
 | `contact_submissions` | Contact form entries | `id`, `site_id` (FK), `name`, `email`, `phone`, `message`, `created_at` |
 | `analytics_events` | Lightweight analytics | `id`, `site_id` (FK), `event_type`, `page_path`, `referrer`, `metadata` (JSONB), `created_at` |
+| `staff_users` | Back-office users (Google OAuth) | `id`, `site_id` (FK), `email`, `full_name`, `role`, `avatar_url`, `google_sub`, `active`, `last_login_at` |
+| `application_notes` | Recruiter notes on applications | `id`, `site_id` (FK), `application_id` (FK), `staff_user_id` (FK), `content`, `created_at` |
+| `audit_log` | Staff action audit trail | `id`, `site_id` (FK), `staff_user_id` (FK), `action`, `entity_type`, `entity_id`, `details` (JSONB), `created_at` |
+| `articles` | Insights content (blog posts & case studies) | `id`, `site_id` (FK), `slug`, `title`, `excerpt`, `body`, `content_type`, `author`, `featured_image_url`, `tags` (JSONB), `case_study_data` (JSONB), `status`, `published_at`, `meta_title`, `meta_description`, `meta_keywords`, `created_by` (FK staff_users) |
 
 ### Connection Strings (in `.env.local`)
 
@@ -269,7 +309,12 @@ To populate sample job positions:
 npx tsx scripts/seed-jobs.ts
 ```
 
-The seed script reads `.env.local` for Supabase credentials and upserts on `slug` (idempotent — safe to run multiple times).
+To create the initial back-office admin user:
+```bash
+ADMIN_EMAIL=vinay@lagisetty.com npx tsx scripts/seed-admin.ts
+```
+
+Both seed scripts read `.env.local` for Supabase credentials and are idempotent (safe to run multiple times).
 
 ### Key Rules
 
@@ -354,6 +399,16 @@ Update ALL of these files:
 | 2 | `src/app/tops/page.tsx` | Contract details grid, FAQ section, BOTH JSON-LD schemas |
 | 3 | `public/llms.txt` | Government Contracts section |
 | 4 | `public/llms-full.txt` | Full TOPS section + FAQ answers |
+
+### When INSIGHTS content changes (articles, case studies, blog posts)
+
+| # | File | What to update |
+|---|------|---------------|
+| 1 | Backoffice CMS | Create/edit articles at `/articles` in back-office app |
+| 2 | `public/llms.txt` | Update Insights section if new content types or topics are added |
+| 3 | `public/llms-full.txt` | Update Insights section with new content descriptions |
+
+**Note:** Individual articles are managed through the backoffice CMS (database-driven). No code changes needed to publish new articles.
 
 ### When CORE VALUES change
 
@@ -645,13 +700,15 @@ public/assets/logos/     ← Company and partner logos (SVG preferred)
 ## Deployment & Git Workflow
 
 ### Hosting
-- **Platform:** Railway (auto-deploys from `main` branch)
-- **Production URL:** https://ussp-production.up.railway.app
-- **Domain:** https://www.ussp.co (when configured)
 
-### Railway Environment Variables
+Both services are deployed on Railway from the same repo (`ussp/usspwebsite`), each with a different Root Directory.
 
-These variables MUST be set in Railway dashboard (or via `railway variables --set`):
+| Service | Root Directory | Domain | Port |
+|---------|---------------|--------|------|
+| `ussp` (public site) | `/` (repo root) | `www.ussp.co` | 3000 |
+| `app` (back office) | `packages/backoffice` | `app.ussp.co` | 3000 |
+
+### Railway Environment Variables — Public Site (`ussp` service)
 
 | Variable | Purpose | Value |
 |----------|---------|-------|
@@ -661,21 +718,53 @@ These variables MUST be set in Railway dashboard (or via `railway variables --se
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase REST API | `https://hjpmenorokkbszcedpjr.supabase.co` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public key | (from Supabase dashboard) |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service key (server-side only) | (from Supabase dashboard) |
-| `AUTH_URL` | NextAuth production callback base URL | `https://ussp-production.up.railway.app` |
+| `AUTH_URL` | NextAuth production callback base URL | `https://www.ussp.co` |
 | `AUTH_SECRET` | NextAuth session encryption | (generated secret) |
 | `AUTH_LINKEDIN_ID` | LinkedIn OAuth app ID | (from LinkedIn Developer Portal) |
 | `AUTH_LINKEDIN_SECRET` | LinkedIn OAuth app secret | (from LinkedIn Developer Portal) |
 
 **CRITICAL:** If `AUTH_URL` is missing, LinkedIn OAuth will redirect to `localhost` and fail with "redirect_uri does not match the registered value".
 
-### LinkedIn OAuth Setup
+### Railway Environment Variables — Back Office (`app` service)
+
+| Variable | Purpose | Value |
+|----------|---------|-------|
+| `SITE_ID` | Multi-tenant site identifier | `ussp` |
+| `SITE_NAME` | Display name | `USSP Back Office` |
+| `SITE_DOMAIN` | Production domain | `app.ussp.co` |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase REST API | `https://hjpmenorokkbszcedpjr.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public key | (same as public site) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service key | (same as public site) |
+| `AUTH_URL` | NextAuth production callback base URL | `https://app.ussp.co` |
+| `AUTH_SECRET` | NextAuth session encryption | (different secret from public site) |
+| `GOOGLE_CLIENT_ID` | Google OAuth app ID | (from Google Cloud Console) |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth app secret | (from Google Cloud Console) |
+| `PORT` | HTTP port | `3000` |
+
+**Back-office Railway build config:**
+- Builder: Railpack (default)
+- Custom Build Command: `cd ../platform-core && npx tsc && cd ../backoffice && npm run build`
+- Custom Start Command: `npm run start`
+
+### LinkedIn OAuth Setup (Public Site)
 
 The LinkedIn Developer Portal (https://www.linkedin.com/developers/apps/) must have these **Authorized redirect URLs**:
 
 | Environment | Redirect URL |
 |-------------|-------------|
-| Production | `https://ussp-production.up.railway.app/api/auth/callback/linkedin` |
+| Production | `https://www.ussp.co/api/auth/callback/linkedin` |
 | Local dev | `http://localhost:3000/api/auth/callback/linkedin` |
+
+### Google OAuth Setup (Back Office)
+
+Google Cloud Console > APIs & Services > Credentials > OAuth 2.0 Client: **USSP Back Office**
+
+| Environment | Redirect URL |
+|-------------|-------------|
+| Production | `https://app.ussp.co/api/auth/callback/google` |
+| Local dev | `http://localhost:3001/api/auth/callback/google` |
+
+Authorized JavaScript Origins: `http://localhost:3001`, `https://app.ussp.co`
 
 ### Branch strategy:
 - `main` - production branch, always deployable, auto-deploys to Railway
@@ -683,7 +772,9 @@ The LinkedIn Developer Portal (https://www.linkedin.com/developers/apps/) must h
 
 ### Before every commit:
 ```bash
-npm run build    # MUST pass with 0 errors
+cd packages/platform-core && npx tsc    # Rebuild shared package
+cd ../.. && npm run build               # Public site must pass with 0 errors
+cd packages/backoffice && npm run build  # Back office must pass with 0 errors
 ```
 
 ### Commit message format:
@@ -697,8 +788,9 @@ Examples:
 ```
 
 ### After pushing:
-- Railway auto-deploys from `main` — check Railway dashboard for deploy status
-- Spot-check changed pages in browser at https://ussp-production.up.railway.app
+- Railway auto-deploys BOTH services from `main` — check Railway dashboard for deploy status
+- Spot-check public site at https://www.ussp.co
+- Spot-check back office at https://app.ussp.co
 - Test on mobile viewport
 
 ---
@@ -766,6 +858,10 @@ Examples:
 | Update founding year claim | NEVER - it's 2003, verify with Registration #62642807 |
 | Add a database column | `migrations/models.py` (SQLAlchemy model), new Alembic migration, `packages/platform-core/src/types/database.ts` (TypeScript interface), update query in `packages/platform-core/src/queries/`, rebuild package, `scripts/seed-jobs.ts` (if positions table) |
 | Add a new database table | `migrations/models.py` (new class, include `site_id`), new Alembic migration, new query file in `packages/platform-core/src/queries/`, new API handler in `packages/platform-core/src/api/`, rebuild package |
-| Add/update job positions | Run `npx tsx scripts/seed-jobs.ts` (upserts on `site_id,slug`), or edit positions in Supabase dashboard for one-off changes |
+| Add/update job positions | Run `npx tsx scripts/seed-jobs.ts` (upserts on `site_id,slug`), or use back office at `app.ussp.co/positions/new` |
 | Onboard a new site | See "Onboarding a New Site" in Database Management section |
 | Modify shared backend | Edit `packages/platform-core/src/`, run `cd packages/platform-core && npx tsc`, then rebuild all sites |
+| Add a back-office page | Add page in `packages/backoffice/src/app/`, add API route, use `export const dynamic = "force-dynamic"` for server pages |
+| Add a back-office staff user | Use `app.ussp.co/staff/new` or run `ADMIN_EMAIL=x npx tsx scripts/seed-admin.ts` |
+| Change RBAC permissions | Edit `packages/platform-core/src/auth/rbac.ts` ROLE_PERMISSIONS, rebuild |
+| Add back-office feature | Add query in `packages/platform-core/src/queries/admin/`, add API route in backoffice, add page, rebuild both |

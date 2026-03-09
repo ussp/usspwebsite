@@ -313,3 +313,45 @@ class AuditLog(Base):
         Index("idx_audit_log_site_created", "site_id", "created_at"),
         Index("idx_audit_log_site_entity", "site_id", "entity_type", "entity_id"),
     )
+
+
+# =============================================================================
+# ARTICLES TABLE (insights / blog / case studies)
+# =============================================================================
+
+
+class Article(Base):
+    """
+    Articles for the Insights section (blog posts and case studies).
+
+    Multi-tenant: filtered by site_id.
+    Content types: 'blog_post' or 'case_study'.
+    """
+
+    __tablename__ = "articles"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    slug = Column(String(255), nullable=False)
+    title = Column(String(255), nullable=False)
+    excerpt = Column(Text)
+    body = Column(Text, nullable=False)
+    content_type = Column(String(20), nullable=False)  # blog_post | case_study
+    author = Column(String(255))
+    featured_image_url = Column(Text)
+    tags = Column(JSONB, server_default="[]")
+    case_study_data = Column(JSONB)  # {client_name, industry, challenge, solution, result}
+    status = Column(String(20), nullable=False, server_default="draft")  # draft | published | archived
+    published_at = Column(DateTime(timezone=True))
+    meta_title = Column(String(255))
+    meta_description = Column(Text)
+    meta_keywords = Column(String(500))
+    created_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "slug", name="uq_articles_site_slug"),
+        Index("idx_articles_site_status", "site_id", "status"),
+        Index("idx_articles_site_type_published", "site_id", "content_type", "published_at"),
+    )

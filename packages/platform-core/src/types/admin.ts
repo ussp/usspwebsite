@@ -162,3 +162,68 @@ export interface AuditFilters {
   staff_user_id?: string;
   limit?: number;
 }
+
+export type ArticleContentType = "case_study" | "blog_post";
+export type ArticleStatus = "draft" | "published" | "archived";
+
+export interface AdminArticle {
+  id: string;
+  site_id: string;
+  slug: string;
+  title: string;
+  excerpt: string | null;
+  body: string;
+  content_type: ArticleContentType;
+  author: string | null;
+  featured_image_url: string | null;
+  tags: string[];
+  case_study_data: import("./database.js").CaseStudyData | null;
+  status: ArticleStatus;
+  published_at: string | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
+  created_by: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface CreateArticleInput {
+  title: string;
+  slug: string;
+  excerpt?: string;
+  body: string;
+  content_type: ArticleContentType;
+  author?: string;
+  featured_image_url?: string;
+  tags?: string[];
+  case_study_data?: import("./database.js").CaseStudyData;
+  status?: ArticleStatus;
+  published_at?: string;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+}
+
+export interface UpdateArticleInput {
+  title?: string;
+  slug?: string;
+  excerpt?: string;
+  body?: string;
+  content_type?: ArticleContentType;
+  author?: string;
+  featured_image_url?: string;
+  tags?: string[];
+  case_study_data?: import("./database.js").CaseStudyData | null;
+  status?: ArticleStatus;
+  published_at?: string | null;
+  meta_title?: string;
+  meta_description?: string;
+  meta_keywords?: string;
+}
+
+export interface ArticleFilters {
+  content_type?: ArticleContentType;
+  status?: ArticleStatus;
+  search?: string;
+}

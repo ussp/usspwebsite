@@ -11,6 +11,7 @@ const ROLE_PERMISSIONS: Record<StaffRole, string[]> = {
   sales: [
     "contacts.*",
     "applications.read",
+    "articles.*",
     "dashboard.read",
   ],
   hr_manager: [

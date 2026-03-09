@@ -7,6 +7,7 @@ export { getBrowserClient } from "./supabase/client.js";
 
 // Queries
 export { getActiveJobs, getJobBySlug } from "./queries/jobs.js";
+export { getPublishedArticles, getArticleBySlug, getArticleSlugs } from "./queries/articles.js";
 export { createOrUpdateApplication, updateJobAlerts } from "./queries/applications.js";
 export { submitContactForm } from "./queries/contact.js";
 export { trackEvent } from "./queries/analytics.js";
@@ -22,7 +23,7 @@ export { handleUploadPost } from "./api/upload.js";
 export { handleContactPost } from "./api/contact.js";
 
 // Types
-export type { Job, Application, ContactSubmission, AnalyticsEvent } from "./types/database.js";
+export type { Job, Application, ContactSubmission, AnalyticsEvent, Article, CaseStudyData } from "./types/database.js";
 export type { SiteConfig, SiteRecord } from "./types/site.js";
 export type { CreateApplicationInput } from "./queries/applications.js";
 export type { ContactFormInput } from "./queries/contact.js";
@@ -38,4 +39,10 @@ export type {
   DashboardMetrics,
   AdminPosition,
   AdminApplication,
+  AdminArticle,
+  ArticleContentType,
+  ArticleStatus,
+  CreateArticleInput,
+  UpdateArticleInput,
+  ArticleFilters,
 } from "./types/admin.js";

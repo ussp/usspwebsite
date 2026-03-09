@@ -1,8 +1,23 @@
 import type { MetadataRoute } from "next";
+import { getArticleSlugs } from "@/lib/articles";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.ussp.co";
   const lastModified = new Date();
+
+  // Fetch published article slugs for dynamic entries
+  let articleEntries: MetadataRoute.Sitemap = [];
+  try {
+    const articles = await getArticleSlugs();
+    articleEntries = articles.map((a) => ({
+      url: `${baseUrl}/insights/${a.slug}`,
+      lastModified: a.updated_at ? new Date(a.updated_at) : lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
+  } catch {
+    // If DB is unavailable during build, skip dynamic articles
+  }
 
   return [
     {
@@ -77,6 +92,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/insights`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    ...articleEntries,
     {
       url: `${baseUrl}/careers`,
       lastModified,

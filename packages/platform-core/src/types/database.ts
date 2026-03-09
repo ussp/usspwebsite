@@ -44,6 +44,32 @@ export interface ContactSubmission {
   created_at: string;
 }
 
+export interface CaseStudyData {
+  client_name?: string;
+  industry?: string;
+  challenge?: string;
+  solution?: string;
+  result?: string;
+}
+
+export interface Article {
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  body: string;
+  content_type: "case_study" | "blog_post";
+  author: string | null;
+  featured_image_url: string | null;
+  tags: string[];
+  case_study_data: CaseStudyData | null;
+  status: "draft" | "published" | "archived";
+  published_at: string | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
+  site_id: string;
+}
+
 export interface AnalyticsEvent {
   id: string;
   site_id: string;

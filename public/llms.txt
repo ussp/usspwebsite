@@ -101,6 +101,12 @@
 - Continuous workforce development: AI, cloud, enterprise architecture, and cross-industry project exposure
 - Open positions: Senior Software Engineers, Full-Stack Developers, DevOps Engineers, QA Engineers, IT Consultants, Solution Architects, Business Analysts, Project Managers, Data Analysts, AI/ML Engineers
 
+## Insights
+USSP publishes case studies and blog posts covering AI implementation, IT staffing best practices, healthcare technology, and enterprise modernization. The Insights hub features real-world project outcomes and thought leadership from 20+ years of consulting experience.
+- **Case Studies:** Real-world project outcomes across industries including government, healthcare, and enterprise
+- **Blog Posts:** Thought leadership on AI transformation, technology trends, and staffing best practices
+- **URL:** https://www.ussp.co/insights
+
 ## Core Values
 Integrity, Innovation, Respect, Accountability, and Excellence
 

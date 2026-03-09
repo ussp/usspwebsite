@@ -28,6 +28,7 @@ const navItems = [
   //   { label: "LCA", href: "/lca-page" },
   // ]},
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Insights", href: "/insights" },
   { label: "Careers", href: "/careers" },
 ];
 
