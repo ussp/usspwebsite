@@ -12,10 +12,9 @@ const navItems = [
     children: [
       { label: "IT Services", href: "/discover" },
       { label: "AI Transformation", href: "/ai-transformation" },
-      { label: "Small Business Solutions", href: "/small-business-solutions" },
-      { label: "Blockchain", href: "/blockchain" },
       { label: "AI Training", href: "/ai-training" },
       { label: "Edge AI", href: "/edge-ai" },
+      { label: "Small Business Solutions", href: "/small-business-solutions" },
     ],
   },
   // Healthcare section hidden — not actively offered right now

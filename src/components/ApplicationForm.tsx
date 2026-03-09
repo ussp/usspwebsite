@@ -13,9 +13,12 @@ interface ApplicationFormProps {
 
 export default function ApplicationForm({ job }: ApplicationFormProps) {
   const { data: session } = useSession();
+  const [applicantType, setApplicantType] = useState<"employee" | "vendor">("employee");
   const [resumePath, setResumePath] = useState("");
   const [resumeName, setResumeName] = useState("");
   const [phone, setPhone] = useState("");
+  const [expectedBillRate, setExpectedBillRate] = useState("");
+  const [availabilityDate, setAvailabilityDate] = useState("");
   const [smsConsent, setSmsConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -59,6 +62,17 @@ export default function ApplicationForm({ job }: ApplicationFormProps) {
       return;
     }
 
+    if (applicantType === "vendor") {
+      if (!expectedBillRate.trim()) {
+        setError("Please enter the expected bill rate.");
+        return;
+      }
+      if (!availabilityDate) {
+        setError("Please select a candidate availability date.");
+        return;
+      }
+    }
+
     setSubmitting(true);
 
     try {
@@ -81,6 +95,9 @@ export default function ApplicationForm({ job }: ApplicationFormProps) {
           emailVerified: session.user.linkedinEmailVerified ?? null,
           phone: phone.replace(/\D/g, ""),
           smsConsent: true,
+          applicantType,
+          expectedBillRate: applicantType === "vendor" ? expectedBillRate : null,
+          availabilityDate: applicantType === "vendor" ? availabilityDate : null,
         }),
       });
 
@@ -201,10 +218,48 @@ export default function ApplicationForm({ job }: ApplicationFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Applicant Type Toggle */}
+      <div>
+        <label className="block text-sm font-[family-name:var(--font-alata)] text-dark mb-3">
+          I&apos;m applying as:
+        </label>
+        <div className="flex rounded-lg border border-dark/20 overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setApplicantType("employee")}
+            className={`flex-1 px-4 py-2.5 text-sm font-[family-name:var(--font-alata)] transition-colors ${
+              applicantType === "employee"
+                ? "bg-primary text-white"
+                : "bg-white text-dark/60 hover:bg-dark/5"
+            }`}
+          >
+            Employee
+          </button>
+          <button
+            type="button"
+            onClick={() => setApplicantType("vendor")}
+            className={`flex-1 px-4 py-2.5 text-sm font-[family-name:var(--font-alata)] transition-colors ${
+              applicantType === "vendor"
+                ? "bg-primary text-white"
+                : "bg-white text-dark/60 hover:bg-dark/5"
+            }`}
+          >
+            Vendor
+          </button>
+        </div>
+        {applicantType === "vendor" && (
+          <p className="text-xs text-dark/50 font-[family-name:var(--font-montserrat)] mt-2">
+            Submitting a candidate on behalf of your staffing agency or consultancy.
+          </p>
+        )}
+      </div>
+
+      <hr className="border-dark/10" />
+
       {/* Step 1: LinkedIn Sign-in (required) */}
       <div>
         <label className="block text-sm font-[family-name:var(--font-alata)] text-dark mb-2">
-          Step 1: Sign in with LinkedIn
+          Step 1: {applicantType === "vendor" ? "Candidate LinkedIn Profile" : "Sign in with LinkedIn"}
         </label>
         <LinkedInButton />
       </div>
@@ -214,7 +269,7 @@ export default function ApplicationForm({ job }: ApplicationFormProps) {
       {/* Step 2: Phone Number (required, locked until signed in) */}
       <div className={!isSignedIn ? "opacity-40 pointer-events-none" : ""}>
         <label className="block text-sm font-[family-name:var(--font-alata)] text-dark mb-2">
-          Step 2: Phone Number{" "}
+          Step 2: {applicantType === "vendor" ? "Vendor Phone Number" : "Phone Number"}{" "}
           <span className="text-red-500">*</span>
         </label>
         {!isSignedIn ? (
@@ -235,12 +290,62 @@ export default function ApplicationForm({ job }: ApplicationFormProps) {
         )}
       </div>
 
+      {/* Vendor-only fields: Bill Rate + Availability Date */}
+      {applicantType === "vendor" && (
+        <>
+          <hr className="border-dark/10" />
+          <div className={!isSignedIn ? "opacity-40 pointer-events-none" : ""}>
+            <label className="block text-sm font-[family-name:var(--font-alata)] text-dark mb-2">
+              Expected Bill Rate{" "}
+              <span className="text-red-500">*</span>
+            </label>
+            {!isSignedIn ? (
+              <div className="border-2 border-dashed border-dark/20 rounded-md p-4 text-center">
+                <p className="text-sm text-dark/40 font-[family-name:var(--font-montserrat)]">
+                  Sign in with LinkedIn to continue
+                </p>
+              </div>
+            ) : (
+              <input
+                type="text"
+                value={expectedBillRate}
+                onChange={(e) => setExpectedBillRate(e.target.value)}
+                placeholder="e.g. $85/hr"
+                className="w-full px-4 py-2.5 border border-dark/20 rounded-md font-[family-name:var(--font-montserrat)] text-dark focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              />
+            )}
+          </div>
+
+          <hr className="border-dark/10" />
+          <div className={!isSignedIn ? "opacity-40 pointer-events-none" : ""}>
+            <label className="block text-sm font-[family-name:var(--font-alata)] text-dark mb-2">
+              Candidate Availability Date{" "}
+              <span className="text-red-500">*</span>
+            </label>
+            {!isSignedIn ? (
+              <div className="border-2 border-dashed border-dark/20 rounded-md p-4 text-center">
+                <p className="text-sm text-dark/40 font-[family-name:var(--font-montserrat)]">
+                  Sign in with LinkedIn to continue
+                </p>
+              </div>
+            ) : (
+              <input
+                type="date"
+                value={availabilityDate}
+                onChange={(e) => setAvailabilityDate(e.target.value)}
+                className="w-full px-4 py-2.5 border border-dark/20 rounded-md font-[family-name:var(--font-montserrat)] text-dark focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              />
+            )}
+          </div>
+        </>
+      )}
+
       <hr className="border-dark/10" />
 
       {/* Step 3: Resume Upload (optional, locked until signed in) */}
       <div className={!isSignedIn ? "opacity-40 pointer-events-none" : ""}>
         <label className="block text-sm font-[family-name:var(--font-alata)] text-dark mb-2">
-          Step 3: Upload your resume{" "}
+          Step 3: Upload {applicantType === "vendor" ? "candidate" : "your"} resume{" "}
           <span className="text-dark/40 font-[family-name:var(--font-montserrat)]">(optional)</span>
         </label>
         {!isSignedIn ? (
@@ -296,7 +401,7 @@ export default function ApplicationForm({ job }: ApplicationFormProps) {
       {/* Submit */}
       <button
         type="submit"
-        disabled={submitting || !isSignedIn || !smsConsent || !isValidPhone(phone)}
+        disabled={submitting || !isSignedIn || !smsConsent || !isValidPhone(phone) || (applicantType === "vendor" && (!expectedBillRate.trim() || !availabilityDate))}
         className="w-full px-8 py-3 bg-primary hover:bg-primary-dark disabled:bg-primary/50 disabled:cursor-not-allowed text-white rounded-md font-[family-name:var(--font-alata)] text-sm transition-colors"
       >
         {submitting ? "Submitting..." : "Submit Application"}

@@ -47,16 +47,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/small-business-solutions" className="hover:text-white transition-colors">
-                  Small Business Solutions
-                </Link>
-              </li>
-              <li>
-                <Link href="/blockchain" className="hover:text-white transition-colors">
-                  Blockchain
-                </Link>
-              </li>
-              <li>
                 <Link href="/ai-training" className="hover:text-white transition-colors">
                   AI Training
                 </Link>
@@ -64,6 +54,11 @@ export default function Footer() {
               <li>
                 <Link href="/edge-ai" className="hover:text-white transition-colors">
                   Edge AI
+                </Link>
+              </li>
+              <li>
+                <Link href="/small-business-solutions" className="hover:text-white transition-colors">
+                  Small Business Solutions
                 </Link>
               </li>
             </ul>
