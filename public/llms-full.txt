@@ -163,6 +163,64 @@ Illinois state agencies can engage USSP for AI transformation services through t
 
 ---
 
+## Edge AI & Computer Vision — VionOS.ai Platform
+
+USSP's VionOS.ai is an on-premises Edge AI platform that transforms existing camera infrastructure into an intelligent safety and operations layer. Using NVIDIA Jetson edge devices and advanced computer vision models, VionOS.ai delivers real-time person detection, zone occupancy analytics, and automated alerts — all without facial recognition, without biometric data, and without sending video to the cloud.
+
+### How It Works
+VionOS.ai runs AI computer vision models directly on NVIDIA Jetson Orin edge devices installed at the facility. Cameras feed video to these local devices, which process frames in real time. No video or data leaves the premises. Each detected person is assigned an Anonymous Person Token — a SHA-256 hashed identifier with a 4-hour time-to-live — enabling movement tracking without capturing any biometric or personally identifiable information.
+
+### Core Capabilities
+
+**Safety Monitoring:**
+- Person detection and counting
+- Staff-to-occupant ratio alerts
+- Unattended zone detection
+- Restricted area intrusion alerts
+- Dwell time anomaly detection
+
+**Operations Intelligence:**
+- Zone occupancy analytics
+- Entry/exit counting
+- Staff clustering detection
+- Queue monitoring
+- Movement pattern heatmaps
+
+**Compliance & Audit:**
+- Anonymous Person Tokens (SHA-256, 4-hour TTL)
+- Zone event logs with timestamps
+- Full audit trails
+- No biometric data storage
+
+### Privacy by Design
+VionOS.ai uses skeletal pose estimation and bounding-box tracking — never facial recognition or biometric identification. The system is designed from the ground up to comply with the Illinois Biometric Information Privacy Act (BIPA). No facial recognition, no cloud transmission, no PII captured, no biometric data collected or stored. All processing happens on local NVIDIA Jetson hardware. Audit-ready logs with timestamps, zone IDs, and anonymous token trails.
+
+### Industries Served
+- **Corrections & Juvenile Justice:** Youth safety monitoring, staff-to-youth ratio compliance, incident detection, SB1366/BIPA-compliant monitoring
+- **Healthcare Facilities:** Patient wandering alerts, fall risk zone monitoring, staff coverage optimization, visitor flow analytics
+- **Education & Campuses:** Campus occupancy monitoring, restricted zone alerts, emergency evacuation tracking, building utilization
+- **Manufacturing & Warehouses:** Safety zone compliance, PPE detection areas, forklift zone alerts, loading dock monitoring
+- **Government & Public Sector:** Secure facility monitoring, visitor flow management, queue optimization, TOPS-procurable
+- **Entertainment & Venues:** Crowd density monitoring, queue wait-time estimation, zone capacity alerts, guest flow analytics
+
+### Technical Requirements
+- NVIDIA Jetson Orin edge devices (compact, energy-efficient)
+- Existing IP camera infrastructure (RTSP streams)
+- 4-8 camera feeds per Jetson device
+- No GPU servers or data center equipment required
+
+### Engagement Process
+1. Engagement Request — Reach out or issue a Task Order via TOPS
+2. AI Readiness Assessment — Facility, camera, and requirements evaluation
+3. Pilot Deployment — On-premises pilot covering 1-2 use cases
+4. Review & Optimize — Performance tuning and stakeholder sign-off
+5. Scale & Expand — Phased rollout to additional facilities and use cases
+
+### Procurement
+Illinois state agencies can engage USSP for Edge AI deployments through the TOPS Category Two contract (CMT4599470, BidBuy P-59947). USSP is an authorized subvendor to Krasan Consulting Services. No separate RFP is needed. Available through February 2034.
+
+---
+
 ## AI & Machine Learning Training
 
 Comprehensive 12-module curriculum for Teams and Professionals:
@@ -366,6 +424,15 @@ A: Visit https://www.ussp.co/careers, browse open positions, click "Apply Now," 
 
 **Q: Does USSP send text messages to applicants?**
 A: USSP only sends SMS messages to applicants who have given explicit TCPA-compliant consent during the application process. Messages relate to job opportunities and application updates. You can opt out at any time by replying STOP to any message. Standard message and data rates may apply.
+
+**Q: What is Edge AI and how does VionOS.ai work?**
+A: Edge AI means running AI models directly on local hardware rather than sending data to the cloud. VionOS.ai is USSP's Edge AI platform that runs computer vision models on NVIDIA Jetson devices installed at the facility. Cameras feed video to these local devices, which process frames in real time to detect people, track movement, and generate alerts. No video or data leaves the premises. It uses skeletal pose estimation and bounding-box tracking — never facial recognition — and is fully BIPA compliant.
+
+**Q: Does USSP offer Edge AI or computer vision solutions?**
+A: Yes. USSP's VionOS.ai platform provides on-premises Edge AI and computer vision for facility safety. It delivers anonymous person tracking, zone occupancy monitoring, real-time safety alerts, and compliance logging — all without facial recognition, without cloud dependency, and in full compliance with Illinois BIPA. It serves corrections, healthcare, education, manufacturing, government, and entertainment facilities. Available through the TOPS Category Two contract for Illinois state agencies.
+
+**Q: How does VionOS.ai track people without facial recognition?**
+A: VionOS.ai uses skeletal pose estimation and bounding-box tracking to detect and count people without identifying who they are. Each detected person is assigned an Anonymous Person Token — a SHA-256 hashed identifier with a 4-hour time-to-live — that enables movement tracking within the facility without capturing any biometric or personally identifiable information. This approach is fully BIPA compliant.
 
 **Q: What is Context-First AI?**
 A: Context-First AI means AI agents always have trusted, scored, fresh business context to reason over. USSP's platform ensures every data point has TTL (time-to-live), trust scores, and source tagging — so agents know what's fresh, what's stale, and what to trust. As business data changes, AI context evolves automatically. Unlike generic AI tools, Context-First AI ensures agents never reason over stale or unverified data.

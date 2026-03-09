@@ -64,6 +64,16 @@
 - Powers the "Accelerate" phase of USSP's AI Transformation framework
 - Topics: LLMs, NLP, computer vision, MLOps, AI agents, prompt engineering, AI security
 
+### Edge AI & Computer Vision (VionOS.ai)
+- On-premises Edge AI platform for facility safety and operational intelligence
+- Anonymous person tracking, zone occupancy monitoring, real-time alerts
+- No facial recognition, no cloud, no PII — fully BIPA compliant
+- Runs on NVIDIA Jetson Orin edge devices with existing IP cameras (RTSP)
+- Anonymous Person Tokens (SHA-256, 4-hour TTL) for tracking without identification
+- Industries: corrections, healthcare, education, manufacturing, government, entertainment
+- Available to Illinois state agencies through TOPS Category Two (CMT4599470)
+- Core capabilities: safety monitoring, operations intelligence, compliance & audit
+
 ## Certifications
 
 - **MBE** — Minority Business Enterprise (Illinois BEP Certified)

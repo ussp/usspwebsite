@@ -100,6 +100,7 @@ export default function RootLayout({
                 "Digital Twin Simulation",
                 "Managed Data Intelligence",
                 "Government IT Services",
+                "Edge AI Safety & Facility Intelligence",
               ],
             }),
           }}

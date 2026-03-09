@@ -61,6 +61,11 @@ export default function Footer() {
                   AI Training
                 </Link>
               </li>
+              <li>
+                <Link href="/edge-ai" className="hover:text-white transition-colors">
+                  Edge AI
+                </Link>
+              </li>
             </ul>
           </div>
 

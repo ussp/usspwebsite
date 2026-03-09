@@ -15,6 +15,7 @@ const navItems = [
       { label: "Small Business Solutions", href: "/small-business-solutions" },
       { label: "Blockchain", href: "/blockchain" },
       { label: "AI Training", href: "/ai-training" },
+      { label: "Edge AI", href: "/edge-ai" },
     ],
   },
   // Healthcare section hidden — not actively offered right now
