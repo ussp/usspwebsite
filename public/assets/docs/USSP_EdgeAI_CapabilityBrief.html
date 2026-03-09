@@ -26,7 +26,7 @@
     /* Layout: full-width bands with centered content */
     .band { width: 100%; }
     .band-dark { background: #1C1C1C; color: #fff; }
-    .band-blue { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); color: #fff; }
+    .band-purple { background: linear-gradient(135deg, #7e4596 0%, #6b3a80 100%); color: #fff; }
     .band-gray { background: #F5F6F8; }
     .band-white { background: #fff; }
     .inner { max-width: 850px; margin: 0 auto; padding: 36px 48px; }
@@ -41,7 +41,8 @@
       justify-content: space-between;
       align-items: center;
     }
-    .logo { font-size: 28px; font-weight: 700; letter-spacing: 2px; color: #2563EB; }
+    .logo img { height: 48px; width: auto; }
+    .logo-text { font-size: 28px; font-weight: 700; letter-spacing: 2px; color: #7e4596; }
     .logo-sub { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
     .header-right { text-align: right; }
     .header-tag { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
@@ -59,10 +60,10 @@
       color: #1C1C1C;
       margin-bottom: 16px;
       padding-bottom: 8px;
-      border-bottom: 3px solid #2563EB;
+      border-bottom: 3px solid #7e4596;
       display: inline-block;
     }
-    .band-dark h2 { color: #fff; border-bottom-color: #2563EB; }
+    .band-dark h2 { color: #fff; border-bottom-color: #7e4596; }
     h3 { font-size: 14px; font-weight: 700; margin: 14px 0 6px; color: #1C1C1C; }
     p { font-size: 13px; margin-bottom: 10px; color: #333; line-height: 1.7; }
     ul { padding-left: 20px; margin-bottom: 12px; }
@@ -77,7 +78,7 @@
       padding: 18px;
       background: #fff;
     }
-    .card h3 { font-size: 13px; color: #2563EB; margin: 0 0 6px; font-weight: 700; }
+    .card h3 { font-size: 13px; color: #7e4596; margin: 0 0 6px; font-weight: 700; }
     .card p { font-size: 12px; margin: 0; color: #444; }
     .card ul { margin: 0; padding-left: 16px; }
     .card li { font-size: 12px; margin-bottom: 3px; color: #444; }
@@ -85,7 +86,7 @@
     /* Highlight */
     .highlight {
       background: #EFF6FF;
-      border-left: 4px solid #2563EB;
+      border-left: 4px solid #7e4596;
       padding: 14px 18px;
       margin: 16px 0;
       border-radius: 0 6px 6px 0;
@@ -107,7 +108,7 @@
       width: 30px;
       height: 30px;
       line-height: 30px;
-      background: #2563EB;
+      background: #7e4596;
       color: #fff;
       border-radius: 50%;
       font-weight: 700;
@@ -126,7 +127,7 @@
       color: rgba(255,255,255,0.7);
     }
     .footer-inner strong { color: #fff; }
-    .footer-inner a { color: #2563EB; text-decoration: none; }
+    .footer-inner a { color: #7e4596; text-decoration: none; }
     .footer-line { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); font-size: 11px; }
   </style>
 </head>
@@ -136,7 +137,7 @@
   <div class="band band-dark">
     <div class="header-inner">
       <div>
-        <div class="logo">USSP</div>
+        <div class="logo"><img src="/assets/logos/ussp-logo.png" alt="USSP"></div>
         <div class="logo-sub">US Software Professionals Inc. &bull; Since 2003</div>
       </div>
       <div class="header-right">
@@ -147,7 +148,7 @@
   </div>
 
   <!-- Hero -->
-  <div class="band band-blue">
+  <div class="band band-purple">
     <div class="hero-inner">
       <h1>VionOS.ai — Edge AI Safety &amp; Facility Intelligence Platform</h1>
       <p class="subtitle">On-premises computer vision for real-time safety monitoring, zone occupancy intelligence, and automated compliance — without facial recognition, without the cloud.</p>
