@@ -1,0 +1,188 @@
+/*
+ * USSP Capability Brief — Shared Stylesheet
+ * ==========================================
+ * Brand-central CSS for all USSP HTML capability briefs.
+ * Update colors, fonts, or layout HERE — all briefs inherit.
+ *
+ * Logo path: /assets/logos/ussp-logo.png
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+/* ── Brand Tokens ─────────────────────────────────── */
+:root {
+  --ussp-primary: #7e4596;
+  --ussp-primary-dark: #6b3a80;
+  --ussp-primary-light: #976aab;
+  --ussp-primary-lighter: #dac4e4;
+  --ussp-dark: #222222;
+  --ussp-near-black: #1C1C1C;
+  --ussp-white: #FFFFFF;
+  --ussp-light-gray: #F5F6F8;
+  --ussp-border: #E0E2E6;
+  --ussp-text: #333333;
+  --ussp-text-light: #444444;
+  --ussp-text-muted: #666666;
+  --ussp-max-width: 850px;
+}
+
+/* ── Reset & Base ─────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: var(--ussp-dark);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background: var(--ussp-white);
+}
+
+/* ── Print ────────────────────────────────────────── */
+@media print {
+  body { padding: 0; }
+  .page-break { page-break-before: always; }
+  .band { page-break-inside: avoid; }
+}
+
+/* ── Layout: full-width bands, centered content ───── */
+.band { width: 100%; }
+.band-dark { background: var(--ussp-near-black); color: var(--ussp-white); }
+.band-purple { background: linear-gradient(135deg, var(--ussp-primary) 0%, var(--ussp-primary-dark) 100%); color: var(--ussp-white); }
+.band-gray { background: var(--ussp-light-gray); }
+.band-white { background: var(--ussp-white); }
+.inner { max-width: var(--ussp-max-width); margin: 0 auto; padding: 36px 48px; }
+
+/* ── Header ───────────────────────────────────────── */
+.header-inner {
+  max-width: var(--ussp-max-width);
+  margin: 0 auto;
+  padding: 32px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo img { height: 48px; width: auto; }
+.logo-sub { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+.header-right { text-align: right; }
+.header-tag { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero-inner { max-width: var(--ussp-max-width); margin: 0 auto; padding: 48px; }
+.hero-inner h1 { font-size: 26px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+.hero-inner .subtitle { font-size: 14px; color: rgba(255,255,255,0.9); margin-bottom: 8px; line-height: 1.7; }
+.hero-inner .tagline { font-size: 12px; color: rgba(255,255,255,0.6); font-style: italic; }
+
+/* ── Typography ───────────────────────────────────── */
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ussp-near-black);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--ussp-primary);
+  display: inline-block;
+}
+.band-dark h2 { color: var(--ussp-white); }
+h3 { font-size: 14px; font-weight: 700; margin: 14px 0 6px; color: var(--ussp-near-black); }
+p { font-size: 13px; margin-bottom: 10px; color: var(--ussp-text); line-height: 1.7; }
+ul { padding-left: 20px; margin-bottom: 12px; }
+li { font-size: 13px; margin-bottom: 5px; color: var(--ussp-text); line-height: 1.6; }
+
+/* ── Cards ────────────────────────────────────────── */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+.card-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 16px 0; }
+.card {
+  border: 1px solid var(--ussp-border);
+  border-radius: 6px;
+  padding: 18px;
+  background: var(--ussp-white);
+}
+.card h3 { font-size: 13px; color: var(--ussp-primary); margin: 0 0 6px; font-weight: 700; }
+.card p { font-size: 12px; margin: 0; color: var(--ussp-text-light); }
+.card ul { margin: 0; padding-left: 16px; }
+.card li { font-size: 12px; margin-bottom: 3px; color: var(--ussp-text-light); }
+
+/* ── Highlight Box ────────────────────────────────── */
+.highlight {
+  background: #f3edf6;
+  border-left: 4px solid var(--ussp-primary);
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+}
+.highlight p { font-size: 13px; margin: 0; color: var(--ussp-near-black); }
+
+/* ── Alert Box ────────────────────────────────────── */
+.alert {
+  background: #FEF3C7;
+  border-left: 4px solid #D97706;
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+}
+.alert p { font-size: 13px; margin: 0; color: #92400E; }
+
+/* ── Table ────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+th {
+  background: var(--ussp-near-black);
+  color: var(--ussp-white);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ussp-border);
+}
+tr:nth-child(even) { background: #F9FAFB; }
+
+/* ── Steps ────────────────────────────────────────── */
+.steps { display: flex; gap: 10px; margin: 16px 0; }
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 14px 6px;
+  background: var(--ussp-white);
+  border: 1px solid var(--ussp-border);
+  border-radius: 6px;
+}
+.step-num {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  background: var(--ussp-primary);
+  color: var(--ussp-white);
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+.step h4 { font-size: 11px; font-weight: 700; margin-bottom: 3px; color: var(--ussp-near-black); }
+.step p { font-size: 10px; margin: 0; color: var(--ussp-text-muted); }
+
+/* ── Footer ───────────────────────────────────────── */
+.footer-inner {
+  max-width: var(--ussp-max-width);
+  margin: 0 auto;
+  padding: 28px 48px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+.footer-inner strong { color: var(--ussp-white); }
+.footer-inner a { color: var(--ussp-primary-light); text-decoration: none; }
+.footer-line {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.4);
+  font-size: 11px;
+}
