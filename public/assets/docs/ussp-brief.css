@@ -175,14 +175,15 @@ tr:nth-child(even) { background: #F9FAFB; }
   margin: 0 auto;
   padding: 28px 48px;
   font-size: 12px;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.9);
 }
+.footer-inner p { color: rgba(255,255,255,0.85); }
 .footer-inner strong { color: var(--ussp-white); }
-.footer-inner a { color: var(--ussp-primary-light); text-decoration: none; }
+.footer-inner a { color: var(--ussp-primary-lighter); text-decoration: underline; }
 .footer-line {
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.4);
+  border-top: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.7);
   font-size: 11px;
 }
