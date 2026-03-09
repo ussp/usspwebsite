@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Edge AI · Field Assessment Toolkit</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #F0F4FF; font-family: 'DM Sans', sans-serif; color: #1E293B; }
+::-webkit-scrollbar { height: 5px; width: 5px; }
+::-webkit-scrollbar-track { background: #E2E8F0; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+
+.header { background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 70%, #1D4ED8 100%); padding: 28px 32px; }
+.header-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:4px; color:#93C5FD; margin-bottom:8px; }
+.header-title { font-size:24px; font-weight:700; color:#FFF; margin-bottom:6px; }
+.header-sub { font-size:12px; color:#BFDBFE; line-height:1.6; max-width:680px; }
+.pill { display:inline-flex; align-items:center; gap:5px; background:rgba(255,255,255,0.12); border-radius:8px; padding:5px 12px; margin:4px 6px 0 0; }
+.pill-n { font-size:13px; font-weight:700; color:#FFF; }
+.pill-l { font-size:10px; color:#93C5FD; }
+
+/* client info bar */
+.client-bar { background:#FFF; border-bottom:2px solid #E2E8F0; padding:12px 24px; display:flex; gap:16px; flex-wrap:wrap; align-items:center; box-shadow:0 1px 4px rgba(0,0,0,0.05); }
+.client-field { display:flex; flex-direction:column; gap:2px; }
+.client-label { font-size:8px; font-weight:700; letter-spacing:2px; color:#94A3B8; }
+.client-input { border:1px solid #E2E8F0; border-radius:6px; padding:5px 10px; font-size:12px; font-family:'DM Sans',sans-serif; color:#1E293B; background:#F8FAFC; width:160px; }
+.client-input:focus { outline:none; border-color:#3B82F6; background:#FFF; }
+
+.nav { background:#FFF; border-bottom:2px solid #E2E8F0; display:flex; overflow-x:auto; padding:0 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); }
+.nav-btn { padding:13px 16px; border:none; border-bottom:3px solid transparent; background:transparent; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; color:#64748B; cursor:pointer; white-space:nowrap; transition:all 0.15s; }
+.nav-btn.active { color:#1D4ED8; border-bottom-color:#1D4ED8; background:#EFF6FF; }
+.nav-btn:hover:not(.active) { background:#F8FAFC; color:#334155; }
+
+.main { max-width:1300px; margin:0 auto; padding:24px 24px 56px; }
+.section { display:none; }
+.section.active { display:block; animation:fadeIn 0.2s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+.sec-header { margin-bottom:22px; }
+.sec-title { font-size:19px; font-weight:700; color:#0F172A; margin-bottom:3px; }
+.sec-sub { font-size:12px; color:#64748B; line-height:1.5; }
+.sec-bar { width:40px; height:4px; border-radius:2px; margin:8px 0 0; }
+
+.card { background:#FFF; border-radius:12px; border:1px solid #E2E8F0; padding:20px; box-shadow:0 1px 4px rgba(0,0,0,0.05); margin-bottom:14px; transition:box-shadow 0.2s; }
+.card:hover { box-shadow:0 3px 14px rgba(0,0,0,0.08); }
+.card-title { font-size:13px; font-weight:700; color:#0F172A; margin-bottom:4px; }
+.card-sub { font-size:11px; color:#64748B; margin-bottom:14px; line-height:1.5; }
+
+.grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+
+/* QUESTION CARD */
+.q-card { background:#FFF; border-radius:10px; border:1px solid #E2E8F0; padding:16px 18px; margin-bottom:10px; }
+.q-category { font-size:8px; font-weight:700; letter-spacing:2px; margin-bottom:6px; }
+.q-text { font-size:12px; font-weight:600; color:#1E293B; margin-bottom:8px; line-height:1.5; }
+.q-why { font-size:10px; color:#64748B; border-left:2px solid #E2E8F0; padding-left:8px; margin-bottom:10px; line-height:1.5; }
+.q-answer { width:100%; border:1px solid #E2E8F0; border-radius:6px; padding:8px 10px; font-size:11px; font-family:'DM Sans',sans-serif; color:#1E293B; background:#F8FAFC; min-height:52px; resize:vertical; }
+.q-answer:focus { outline:none; border-color:#3B82F6; background:#FFF; }
+.q-signals { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+.q-signal { font-size:9px; font-weight:600; padding:2px 8px; border-radius:4px; cursor:pointer; }
+
+/* UC CAPTURE CARD */
+.uc-capture { background:#FFF; border-radius:12px; border:2px solid #E2E8F0; padding:18px; margin-bottom:14px; position:relative; }
+.uc-capture.has-data { border-color:#BFDBFE; }
+.uc-num-badge { position:absolute; top:14px; right:14px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#FFF; }
+.uc-field-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+.uc-field { display:flex; flex-direction:column; gap:4px; }
+.uc-field-label { font-size:8px; font-weight:700; letter-spacing:1.5px; color:#94A3B8; }
+.uc-field-input { border:1px solid #E2E8F0; border-radius:6px; padding:7px 10px; font-size:11px; font-family:'DM Sans',sans-serif; color:#1E293B; background:#F8FAFC; }
+.uc-field-input:focus { outline:none; border-color:#3B82F6; background:#FFF; }
+.uc-field-select { border:1px solid #E2E8F0; border-radius:6px; padding:7px 10px; font-size:11px; font-family:'DM Sans',sans-serif; color:#1E293B; background:#F8FAFC; width:100%; }
+.uc-field-select:focus { outline:none; border-color:#3B82F6; }
+.uc-field-textarea { border:1px solid #E2E8F0; border-radius:6px; padding:7px 10px; font-size:11px; font-family:'DM Sans',sans-serif; color:#1E293B; background:#F8FAFC; width:100%; min-height:44px; resize:vertical; }
+.uc-field-textarea:focus { outline:none; border-color:#3B82F6; }
+
+/* EFFORT SELECTOR */
+.effort-btns { display:flex; gap:6px; flex-wrap:wrap; margin-top:4px; }
+.effort-btn { padding:5px 12px; border-radius:6px; border:1.5px solid #E2E8F0; background:#F8FAFC; font-size:10px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.1s; }
+.effort-btn:hover { opacity:0.8; }
+
+/* DECISION TREE */
+.dt-node { background:#FFF; border:1.5px solid #BFDBFE; border-radius:10px; padding:14px 16px; margin-bottom:6px; }
+.dt-q { font-size:12px; font-weight:700; color:#1E3A8A; margin-bottom:10px; }
+.dt-opts { display:flex; gap:8px; flex-wrap:wrap; }
+.dt-opt { padding:6px 14px; border-radius:8px; font-size:11px; font-weight:600; border:1.5px solid; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.15s; }
+.dt-opt:hover { opacity:0.75; }
+.dt-arrow { text-align:center; color:#CBD5E1; font-size:20px; margin:2px 0; }
+
+/* OBSERVATION CARD */
+.obs-card { background:#FFFBEB; border:1px solid #FDE68A; border-radius:10px; padding:14px 16px; margin-bottom:10px; }
+.obs-icon { font-size:18px; margin-bottom:6px; }
+.obs-title { font-size:11px; font-weight:700; color:#92400E; margin-bottom:4px; }
+.obs-text { font-size:10px; color:#78350F; line-height:1.6; }
+
+/* SUMMARY TABLE */
+.tbl { width:100%; border-collapse:collapse; font-size:11px; }
+.tbl th { background:#F1F5F9; font-size:9px; font-weight:700; letter-spacing:1px; color:#64748B; padding:10px 12px; text-align:left; border-bottom:2px solid #E2E8F0; white-space:nowrap; }
+.tbl td { padding:10px 12px; border-bottom:1px solid #F1F5F9; vertical-align:top; line-height:1.5; }
+.tbl tr:last-child td { border-bottom:none; }
+.tbl tr:hover td { background:#FAFBFF; }
+
+/* TAG */
+.tag { display:inline-block; font-size:9px; font-weight:700; padding:2px 8px; border-radius:20px; white-space:nowrap; }
+
+/* EFFORT DOT */
+.edot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; }
+
+/* PRINT / EXPORT BTN */
+.export-btn { background:#1D4ED8; color:#FFF; border:none; border-radius:8px; padding:9px 20px; font-size:12px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:background 0.15s; }
+.export-btn:hover { background:#1E40AF; }
+.export-btn.secondary { background:#F1F5F9; color:#475569; margin-left:8px; }
+.export-btn.secondary:hover { background:#E2E8F0; }
+
+/* CAMERA LOG */
+.cam-row { display:grid; grid-template-columns:80px 1fr 1fr 1fr 80px; gap:8px; align-items:center; padding:8px 0; border-bottom:1px solid #F1F5F9; }
+.cam-label { font-size:10px; font-weight:700; color:#94A3B8; }
+
+/* STEP BADGE */
+.step-badge { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; font-size:11px; font-weight:700; color:#FFF; flex-shrink:0; }
+
+/* ALERT BANNER */
+.tip { background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:10px 14px; font-size:11px; color:#1E40AF; line-height:1.6; margin-bottom:14px; }
+.tip strong { font-weight:700; }
+
+.footer { background:#1E3A8A; padding:13px 28px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+.footer span { font-size:9px; font-family:'DM Mono',monospace; color:#93C5FD; letter-spacing:2px; }
+
+/* Print styles */
+@media print {
+  .nav, .client-bar, .export-btn, .header { display:block !important; }
+  .section { display:block !important; }
+  body { background:#FFF; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">USSP · VIONOS.AI EDGE AI PLATFORM · FIELD ASSESSMENT TOOLKIT</div>
+  <div class="header-title">On-Site Use Case Discovery Guide</div>
+  <div class="header-sub">Walk the facility, ask the right questions, capture observations, and leave with documented use cases and a development effort estimate.</div>
+  <div style="margin-top:14px;">
+    <span class="pill"><span class="pill-n">4</span><span class="pill-l">Steps</span></span>
+    <span class="pill"><span class="pill-n">Walk-In</span><span class="pill-l">Ready</span></span>
+    <span class="pill"><span class="pill-n">Auto</span><span class="pill-l">Effort Score</span></span>
+    <span class="pill"><span class="pill-n">Print</span><span class="pill-l">Friendly</span></span>
+  </div>
+</div>
+
+<!-- CLIENT INFO BAR -->
+<div class="client-bar">
+  <div class="client-field">
+    <div class="client-label">CLIENT / AGENCY</div>
+    <input class="client-input" id="ci-client" placeholder="e.g. Illinois IDJJ" style="width:180px;"/>
+  </div>
+  <div class="client-field">
+    <div class="client-label">FACILITY NAME</div>
+    <input class="client-input" id="ci-facility" placeholder="e.g. IYC Chicago"/>
+  </div>
+  <div class="client-field">
+    <div class="client-label">ASSESSMENT DATE</div>
+    <input class="client-input" id="ci-date" type="date"/>
+  </div>
+  <div class="client-field">
+    <div class="client-label">CONDUCTED BY</div>
+    <input class="client-input" id="ci-assessor" placeholder="e.g. Vinay L."/>
+  </div>
+  <div class="client-field">
+    <div class="client-label">CLIENT CONTACT</div>
+    <input class="client-input" id="ci-contact" placeholder="Name + title"/>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+    <button class="export-btn" onclick="window.print()">🖨 Print / Save PDF</button>
+    <button class="export-btn secondary" onclick="exportSummary()">📋 Copy Summary</button>
+    <button class="export-btn secondary" onclick="exportLayoutJSON()" style="margin-left:0;background:#0F172A;color:#FFF;border:none;">⬇ Export Layout JSON</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn active" onclick="showTab('stage0',this)">📞 Stage 0 · Pre-Sales Call</button>
+  <button class="nav-btn" onclick="showTab('step1',this)">🏛 Step 1 · Facility Walk</button>
+  <button class="nav-btn" onclick="showTab('step2',this)">💬 Step 2 · Stakeholder Interview</button>
+  <button class="nav-btn" onclick="showTab('step3',this)">📷 Step 3 · Camera & Zone Audit</button>
+  <button class="nav-btn" onclick="showTab('step4',this)">📐 Step 4 · Capture Use Cases</button>
+  <button class="nav-btn" onclick="showTab('summary',this)">📊 Summary & Effort Report</button>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════ -->
+<!-- STEP 1: FACILITY WALK -->
+<!-- ══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════ -->
+<!-- STAGE 0: PRE-SALES DISCOVERY CALL   -->
+<!-- ══════════════════════════════════════ -->
+<div id="stage0" class="section active">
+  <div class="sec-header">
+    <div class="sec-title">Stage 0 · Pre-Sales Discovery Call</div>
+    <div class="sec-sub">Remote call, 30–45 min. Goal: qualify or disqualify the opportunity in one call — and book the site visit if it's real.</div>
+    <div class="sec-bar" style="background:#0891B2;"></div>
+  </div>
+
+  <div class="tip" style="background:#F0FDFA;border-color:#99F6E4;color:#0F766E;">
+    🎯 <strong>One job:</strong> By the end of this call you should know — is there a real pain, real cameras, and a real decision maker? If yes → book the site visit. If no → politely disqualify and move on.
+  </div>
+
+  <!-- PIPELINE OVERVIEW -->
+  <div class="card" style="border-top:4px solid #0891B2;margin-bottom:14px;">
+    <div class="card-title">🗺 VionOS.ai Sales Pipeline — Full Picture</div>
+    <div class="card-sub">Where Stage 0 fits in the process:</div>
+    <div style="display:flex;gap:0;margin-top:14px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;flex:1;min-width:140px;">
+        <div style="flex:1;background:#0891B2;border-radius:10px;padding:12px 14px;border:2px solid #0891B2;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.8);">STAGE 0</div>
+          <div style="font-size:13px;font-weight:700;color:#FFF;margin-top:2px;">Pre-Sales Call</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.7);margin-top:2px;">Qualify remotely</div>
+        </div>
+        <div style="color:#CBD5E1;font-size:20px;padding:0 6px;">→</div>
+      </div>
+      <div style="display:flex;align-items:center;flex:1;min-width:140px;">
+        <div style="flex:1;background:#F1F5F9;border-radius:10px;padding:12px 14px;border:2px solid #E2E8F0;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;color:#94A3B8;">STAGE 1</div>
+          <div style="font-size:13px;font-weight:700;color:#334155;margin-top:2px;">Site Assessment</div>
+          <div style="font-size:10px;color:#94A3B8;margin-top:2px;">Walk &amp; document</div>
+        </div>
+        <div style="color:#CBD5E1;font-size:20px;padding:0 6px;">→</div>
+      </div>
+      <div style="display:flex;align-items:center;flex:1;min-width:140px;">
+        <div style="flex:1;background:#F1F5F9;border-radius:10px;padding:12px 14px;border:2px solid #E2E8F0;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;color:#94A3B8;">STAGE 2</div>
+          <div style="font-size:13px;font-weight:700;color:#334155;margin-top:2px;">Proposal</div>
+          <div style="font-size:10px;color:#94A3B8;margin-top:2px;">UC matrix + cost</div>
+        </div>
+        <div style="color:#CBD5E1;font-size:20px;padding:0 6px;">→</div>
+      </div>
+      <div style="display:flex;align-items:center;flex:1;min-width:140px;">
+        <div style="flex:1;background:#F1F5F9;border-radius:10px;padding:12px 14px;border:2px solid #E2E8F0;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;color:#94A3B8;">STAGE 3</div>
+          <div style="font-size:13px;font-weight:700;color:#334155;margin-top:2px;">Pilot / POC</div>
+          <div style="font-size:10px;color:#94A3B8;margin-top:2px;">1–2 UCs live</div>
+        </div>
+        <div style="color:#CBD5E1;font-size:20px;padding:0 6px;">→</div>
+      </div>
+      <div style="display:flex;align-items:center;flex:1;min-width:140px;">
+        <div style="flex:1;background:#F1F5F9;border-radius:10px;padding:12px 14px;border:2px solid #E2E8F0;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;color:#94A3B8;">STAGE 4</div>
+          <div style="font-size:13px;font-weight:700;color:#334155;margin-top:2px;">Deployment</div>
+          <div style="font-size:10px;color:#94A3B8;margin-top:2px;">Phased rollout</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <!-- PROSPECT INFO -->
+      <div class="card" style="border-top:4px solid #0891B2;">
+        <div class="card-title">👤 Prospect Information</div>
+        <div class="card-sub">Fill in before or during the call:</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div><div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">ORGANIZATION NAME</div><input placeholder="e.g. Illinois IDJJ, City of Chicago Parks, ABC Warehouse" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div><div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">CONTACT NAME</div><input placeholder="Full name" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/></div>
+            <div><div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">TITLE / ROLE</div><input placeholder="e.g. Superintendent, Director of IT" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div><div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">INDUSTRY / FACILITY TYPE</div>
+              <select style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">
+                <option value="">Select...</option>
+                <option>🏛 Government / Public Sector</option>
+                <option>⚖️ Corrections / Juvenile Justice</option>
+                <option>🎮 Family Entertainment Center</option>
+                <option>🏭 Manufacturing / Warehouse</option>
+                <option>🏥 Healthcare / Senior Care</option>
+                <option>🏫 Education / Campus</option>
+                <option>🏬 Retail / Commercial</option>
+                <option>🏗 Construction / Field Ops</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div><div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">HOW DID THEY FIND US?</div>
+              <select style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">
+                <option value="">Select...</option>
+                <option>Referral / Word of mouth</option>
+                <option>LinkedIn outreach</option>
+                <option>Conference / event</option>
+                <option>State contract / TOPS</option>
+                <option>Website / inbound</option>
+                <option>Cold outreach by USSP</option>
+                <option>Partner / reseller</option>
+              </select>
+            </div>
+          </div>
+          <div><div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">CALL DATE & TIME</div><input type="datetime-local" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/></div>
+          <div><div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">CONDUCTED BY (USSP)</div><input placeholder="e.g. Vinay L." style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;" value="Vinay L."/></div>
+        </div>
+      </div>
+
+      <!-- QUALIFICATION SCORECARD -->
+      <div class="card" style="border-top:4px solid #059669;margin-top:14px;">
+        <div class="card-title">✅ Qualification Scorecard</div>
+        <div class="card-sub">Score as you go. 4+ green = book the site visit.</div>
+        <div id="qual-score-display" style="text-align:center;padding:14px 0 8px;">
+          <div style="font-size:36px;font-weight:700;color:#059669;" id="qual-score">0</div>
+          <div style="font-size:10px;color:#94A3B8;">/ 6 criteria met</div>
+          <div id="qual-verdict" style="margin-top:8px;font-size:12px;font-weight:700;color:#94A3B8;">Fill in the discovery questions →</div>
+        </div>
+        <div id="qual-criteria" style="display:flex;flex-direction:column;gap:6px;"></div>
+      </div>
+    </div>
+
+    <div>
+      <!-- THE 6 QUALIFICATION QUESTIONS -->
+      <div class="card" style="border-top:4px solid #7C3AED;">
+        <div class="card-title">🎙 The 6 Discovery Questions</div>
+        <div class="card-sub">Ask in order. Each answer scores one qualification criterion.</div>
+        <div id="disc-questions" style="display:flex;flex-direction:column;gap:10px;margin-top:4px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div class="grid-2" style="margin-top:14px;">
+    <div class="card" style="border-top:4px solid #D97706;">
+      <div class="card-title">📋 Call Notes & Key Quotes</div>
+      <div class="card-sub">Anything important said — exact words matter for the proposal later:</div>
+      <textarea placeholder="e.g. 'We had an incident in Q4 where a youth was unsupervised for 20 minutes — our director is pushing hard for a solution before the state audit in June...'" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:8px 10px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;min-height:100px;resize:vertical;"></textarea>
+    </div>
+
+    <div class="card" style="border-top:4px solid #DC2626;">
+      <div class="card-title">🚦 Call Outcome & Next Step</div>
+      <div class="card-sub">What happens after this call:</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;" id="outcome-btns">
+        <button onclick="setOutcome(this,'green')" style="padding:12px 14px;border-radius:8px;border:2px solid #E2E8F0;background:#F8FAFC;font-size:12px;font-weight:600;color:#334155;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;">
+          ✅ <strong>Qualified — Book site visit</strong><br/><span style="font-size:10px;color:#64748B;font-weight:400;">Strong pain + cameras + decision maker confirmed</span>
+        </button>
+        <button onclick="setOutcome(this,'yellow')" style="padding:12px 14px;border-radius:8px;border:2px solid #E2E8F0;background:#F8FAFC;font-size:12px;font-weight:600;color:#334155;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;">
+          ⏳ <strong>Nurture — Follow up in 30 days</strong><br/><span style="font-size:10px;color:#64748B;font-weight:400;">Interest but no urgency / budget not confirmed yet</span>
+        </button>
+        <button onclick="setOutcome(this,'red')" style="padding:12px 14px;border-radius:8px;border:2px solid #E2E8F0;background:#F8FAFC;font-size:12px;font-weight:600;color:#334155;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;">
+          ❌ <strong>Disqualify — Not a fit right now</strong><br/><span style="font-size:10px;color:#64748B;font-weight:400;">No cameras / no pain / wrong stakeholder / no budget path</span>
+        </button>
+      </div>
+      <div style="margin-top:12px;">
+        <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:4px;">FOLLOW-UP ACTION / DATE</div>
+        <input placeholder="e.g. Send VionOS one-pager + book site visit for March 15" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/>
+      </div>
+      <div style="margin-top:8px;">
+        <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:4px;">DISQUALIFY REASON (if applicable)</div>
+        <select style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">
+          <option value="">Select if disqualifying...</option>
+          <option>No existing camera infrastructure</option>
+          <option>No identified pain / happy with status quo</option>
+          <option>Wrong stakeholder — need to reach decision maker</option>
+          <option>No budget or procurement path</option>
+          <option>Privacy / legal constraints block deployment</option>
+          <option>Too early — revisit in 6 months</option>
+          <option>Competitor already engaged</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="step1" class="section">
+  <div class="sec-header">
+    <div class="sec-title">Step 1 · Facility Walk</div>
+    <div class="sec-sub">Before any interviews, walk every zone of the facility and log what you observe. Don't ask questions yet — just observe and note.</div>
+    <div class="sec-bar" style="background:#1D4ED8;"></div>
+  </div>
+
+  <div class="tip">💡 <strong>Walk first, talk second.</strong> What you observe before the interview is often more honest than what stakeholders tell you. Note what's actually happening vs. what they later say should be happening.</div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-title">👁 What to Look For — Zone by Zone</div>
+        <div class="card-sub">For each area of the facility, note these 5 things:</div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div class="step-badge" style="background:#1D4ED8;">1</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:#0F172A;">Camera Coverage</div>
+              <div style="font-size:10px;color:#64748B;line-height:1.5;margin-top:2px;">Are there blind spots? Are cameras angled well? Count cameras per zone. Note height and angle.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div class="step-badge" style="background:#7C3AED;">2</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:#0F172A;">Staff Behavior</div>
+              <div style="font-size:10px;color:#64748B;line-height:1.5;margin-top:2px;">Where are staff standing? Are they watching or distracted? Are any zones unmonitored?</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div class="step-badge" style="background:#DC2626;">3</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:#0F172A;">Risk Zones</div>
+              <div style="font-size:10px;color:#64748B;line-height:1.5;margin-top:2px;">High-activity or restricted areas where incidents are most likely — e.g. entry/exit points, equipment areas, corridors, service zones. Note if they have dedicated monitoring.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div class="step-badge" style="background:#059669;">4</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:#0F172A;">Bottlenecks & Flows</div>
+              <div style="font-size:10px;color:#64748B;line-height:1.5;margin-top:2px;">Where do people queue, bunch up, or move unpredictably? Entry/exit chokepoints, mealtime flows, shift change patterns.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;">
+            <div class="step-badge" style="background:#D97706;">5</div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:#0F172A;">Existing Technology</div>
+              <div style="font-size:10px;color:#64748B;line-height:1.5;margin-top:2px;">What camera brand/model? Any NVR/DVR systems visible? Any access control panels, intercom, alarm systems?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <div class="card" style="border-top:4px solid #1D4ED8;margin-bottom:14px;">
+    <div class="card-title">🏢 How Many Floors Does This Facility Have?</div>
+    <div class="card-sub">Set this first — it drives the Floor selector on every zone and camera card throughout the assessment.</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap;">
+      <div id="floor-count-btns" style="display:flex;gap:8px;"></div>
+      <span id="floor-count-label" style="font-size:11px;color:#94A3B8;">— select number of floors to update all zone &amp; camera selectors</span>
+    </div>
+  </div>
+
+  <div class="card" style="border-top:4px solid #059669;margin-bottom:14px;">
+    <div class="card-title">🔌 Edge System — Install &amp; Network <span style="font-size:10px;font-weight:400;color:#94A3B8;">(capture during walk)</span></div>
+    <div class="card-sub">While you're physically in the building, note where edge hardware can go and whether the network supports it. This directly scopes the deployment.</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:10px;">
+
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">EDGE HARDWARE INSTALL LOCATION</div>
+        <select style="border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">
+          <option value="">Location type...</option>
+          <option>Server / comms room — dedicated rack</option>
+          <option>IT closet — wall mount or shelf</option>
+          <option>Security office — desk or cabinet</option>
+          <option>Utility room — available space</option>
+          <option>No dedicated space — needs to be created</option>
+          <option>Unknown — confirm with facilities</option>
+        </select>
+        <input placeholder="Room / location name (e.g. B1 Server Room)"
+          style="border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;margin-top:4px;"/>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">POWER AT INSTALL LOCATION</div>
+        <select style="border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">
+          <option value="">Select...</option>
+          <option>✅ Dedicated 20A outlet available</option>
+          <option>✅ Standard outlet available</option>
+          <option>⚠️ Shared circuit — may need dedicated line</option>
+          <option>❌ No power nearby — electrician needed</option>
+          <option>❓ Unknown</option>
+        </select>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">NETWORK TYPE AT INSTALL LOCATION</div>
+        <select style="border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">
+          <option value="">Select...</option>
+          <option>✅ Wired LAN — Ethernet port available</option>
+          <option>⚠️ WiFi only — no wired port</option>
+          <option>⚠️ Isolated VLAN — cameras on separate network</option>
+          <option>❌ No network access at this location</option>
+          <option>❓ Unknown — check with IT</option>
+        </select>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">INTERNET / CLOUD ACCESS</div>
+        <select style="border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">
+          <option value="">Select...</option>
+          <option>✅ Full internet access</option>
+          <option>⚠️ Restricted / filtered internet</option>
+          <option>❌ Air-gapped — on-prem only, no internet</option>
+          <option>❓ Unknown</option>
+        </select>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">AVAILABLE BANDWIDTH</div>
+        <select style="border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">
+          <option value="">Select...</option>
+          <option>✅ 1 Gbps+ LAN (ideal)</option>
+          <option>✅ 100 Mbps LAN</option>
+          <option>⚠️ 10–50 Mbps — may bottleneck at 10+ cameras</option>
+          <option>❌ Below 10 Mbps — needs assessment</option>
+          <option>❓ Unknown — check with IT / ISP</option>
+        </select>
+        <div style="font-size:9px;color:#94A3B8;margin-top:3px;">~4–6 Mbps per 1080p RTSP stream</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:3px;">EXISTING CAMERA SYSTEM (NVR / VMS)</div>
+        <input placeholder="e.g. Milestone XProtect, Genetec, standalone DVR, none"
+          style="border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/>
+        <div style="font-size:9px;color:#94A3B8;margin-top:3px;">VionOS co-exists via RTSP tap — note the system</div>
+      </div>
+
+    </div>
+    <div style="margin-top:12px;">
+      <div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:4px;">INFRASTRUCTURE NOTES</div>
+      <textarea placeholder="e.g. Server room on F2 but cameras on F1 — long cable run. IT says cameras on isolated VLAN, will need switch config to allow RTSP from edge box..."
+        style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;min-height:56px;resize:vertical;"></textarea>
+    </div>
+  </div>
+
+      <div class="card">
+        <div class="card-title">📍 Zone Observation Log</div>
+        <div class="card-sub">Add a row for each zone you walk through. Zones entered here will automatically appear as checkboxes in every camera card in Step 3.</div>
+        <div id="zone-log" style="width:100%;overflow:hidden;"></div>
+        <button onclick="addZone()" style="margin-top:10px;padding:9px 14px;border:2px dashed #BFDBFE;border-radius:8px;background:#F8FAFC;font-size:12px;font-weight:700;color:#3B82F6;cursor:pointer;width:100%;font-family:'DM Sans',sans-serif;">+ Add Zone</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="border-top:4px solid #DC2626;">
+        <div class="card-title">🚩 Red Flag Observations</div>
+        <div class="card-sub">These observations almost always map to a use case. Check any you see:</div>
+        <div id="red-flags"></div>
+      </div>
+
+      <div class="card" style="border-top:4px solid #F59E0B;">
+        <div class="card-title">📷 Quick Camera Survey</div>
+        <div class="card-sub">Note the overall camera setup before the formal audit in Step 3:</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="uc-field"><div class="uc-field-label">ESTIMATED TOTAL CAMERAS</div><input class="uc-field-input" id="cam-total" placeholder="e.g. 24"/></div>
+          <div class="uc-field"><div class="uc-field-label">CAMERA BRAND / MODEL (if visible)</div><input class="uc-field-input" id="cam-brand" placeholder="e.g. Hikvision DS-2CD2T47G2"/></div>
+          <div class="uc-field"><div class="uc-field-label">NVR / DVR SYSTEM</div><input class="uc-field-input" id="cam-nvr" placeholder="e.g. Milestone, Genetec, standalone DVR"/></div>
+          <div class="uc-field"><div class="uc-field-label">NETWORK TYPE</div>
+            <select class="uc-field-select" id="cam-network">
+              <option value="">Select...</option>
+              <option>Wired LAN (best)</option>
+              <option>WiFi</option>
+              <option>Cellular / isolated</option>
+              <option>Unknown</option>
+            </select>
+          </div>
+          <div class="uc-field"><div class="uc-field-label">GENERAL NOTES</div><textarea class="uc-field-textarea" id="cam-notes" placeholder="Coverage gaps, lighting issues, any constraints noticed..."></textarea></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- STEP 2: STAKEHOLDER INTERVIEW -->
+<!-- ══════════════════════════════════════ -->
+<div id="step2" class="section">
+  <div class="sec-header">
+    <div class="sec-title">Step 2 · Stakeholder Interview</div>
+    <div class="sec-sub">Ask these structured questions to uncover pain points, compliance pressures, and what the client actually needs — vs. what they think they want.</div>
+    <div class="sec-bar" style="background:#7C3AED;"></div>
+  </div>
+
+  <div class="tip">💡 <strong>Listen for the pain, not the solution.</strong> If they say "we need AI cameras," ask why. The real answer is usually a safety event, audit failure, or staffing problem — that's your use case, not the camera.</div>
+
+  <div class="grid-2">
+    <div id="q-col-1"></div>
+    <div id="q-col-2"></div>
+  </div>
+
+  <div class="card" style="margin-top:4px;">
+    <div class="card-title">🎙 Interview Notes — Free Text</div>
+    <div class="card-sub">Anything said that doesn't fit the questions above — quotes, concerns, surprises:</div>
+    <textarea class="q-answer" id="interview-notes" style="min-height:100px;" placeholder="e.g. 'The superintendent mentioned they had an incident last month where a youth was alone in the workshop for 20 minutes before anyone noticed...'"></textarea>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- STEP 3: CAMERA & ZONE AUDIT -->
+<!-- ══════════════════════════════════════ -->
+<div id="step3" class="section">
+  <div class="sec-header">
+    <div class="sec-title">Step 3 · Camera & Zone Audit</div>
+    <div class="sec-sub">Map each camera to a zone and assess whether it can support AI inference. This determines what use cases are technically feasible and where.</div>
+    <div class="sec-bar" style="background:#059669;"></div>
+  </div>
+
+  <div class="tip">💡 <strong>Not every camera is AI-ready.</strong> Poor angle, low resolution, severe backlighting, or fisheye lens can make a camera unusable for computer vision even if it works for human monitoring. Note these — they affect scope and cost.</div>
+
+  <div class="grid-2" style="margin-bottom:14px;">
+    <div class="card">
+      <div class="card-title">📋 Camera Readiness Criteria</div>
+      <div class="card-sub">For each camera, evaluate against these 5 criteria:</div>
+      <table class="tbl">
+        <thead><tr><th>Criteria</th><th>Minimum Needed</th><th>Why It Matters</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Resolution</strong></td><td>1080p minimum</td><td>Pose estimation needs pixel detail on persons</td></tr>
+          <tr><td><strong>Frame Rate</strong></td><td>15fps minimum</td><td>Motion events need temporal continuity</td></tr>
+          <tr><td><strong>Angle</strong></td><td>No extreme fisheye</td><td>Distorted frames break detection accuracy</td></tr>
+          <tr><td><strong>Lighting</strong></td><td>Adequate; no severe backlight</td><td>Low light degrades detection; WDR camera helps</td></tr>
+          <tr><td><strong>RTSP Access</strong></td><td>RTSP stream accessible on LAN</td><td>Required to ingest into DeepStream pipeline</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">🗺 Zone Coverage Map — Key Questions</div>
+      <div class="card-sub">Ask or verify these for each critical zone:</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;color:#334155;line-height:1.7;">
+        <div>✅ How many cameras cover this zone?</div>
+        <div>✅ Are there any blind spots within the zone?</div>
+        <div>✅ What is the lighting condition at night / evening?</div>
+        <div>✅ Does camera angle allow full-body person detection?</div>
+        <div>✅ Can zone boundaries be drawn as polygon on this camera?</div>
+        <div>✅ Is RTSP stream accessible from the network room?</div>
+        <div>✅ Is there a location on-premises to install edge hardware (Jetson)?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📷 Camera-by-Camera Log</div>
+    <div class="card-sub">Fill in a card for each camera. Matches the VionOS camera configuration fields — Name, Floor, Direction, Tilt, FOV, Monitored Zones, Stream URL, Position, and AI Readiness.</div>
+    <div id="cam-log" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-top:4px;"></div>
+    <button onclick="addCamRow()" style="margin-top:14px;padding:10px 14px;border:2px dashed #BFDBFE;border-radius:10px;background:#F8FAFC;font-size:12px;font-weight:700;color:#3B82F6;cursor:pointer;width:100%;font-family:'DM Sans',sans-serif;">+ Add Camera</button>
+  </div>
+
+  <div class="card" style="border-top:4px solid #059669;">
+    <div class="card-title">🔌 Infrastructure Notes</div>
+    <div class="card-sub">Key questions about the technical environment:</div>
+    <div class="grid-2">
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="uc-field"><div class="uc-field-label">WHERE CAN EDGE HARDWARE BE INSTALLED?</div><input class="uc-field-input" id="infra-location" placeholder="Server room, comms closet, etc."/></div>
+        <div class="uc-field"><div class="uc-field-label">IS INTERNET ACCESS AVAILABLE ON-PREMISES?</div>
+          <select class="uc-field-select" id="infra-internet">
+            <option value="">Select...</option>
+            <option>Yes — full internet access</option>
+            <option>Yes — restricted / filtered</option>
+            <option>No — fully air-gapped</option>
+            <option>Unknown</option>
+          </select>
+        </div>
+        <div class="uc-field"><div class="uc-field-label">EXISTING ALERT / NOTIFICATION SYSTEMS</div><input class="uc-field-input" id="infra-alerts" placeholder="e.g. Slack, email, radio, POS terminals"/></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="uc-field"><div class="uc-field-label">ANY CLOUD RESTRICTION / POLICY?</div>
+          <select class="uc-field-select" id="infra-cloud">
+            <option value="">Select...</option>
+            <option>No cloud allowed — fully on-prem required</option>
+            <option>Cloud allowed for analytics but not video</option>
+            <option>Cloud allowed — no restrictions</option>
+            <option>Unknown — need to confirm</option>
+          </select>
+        </div>
+        <div class="uc-field"><div class="uc-field-label">PRIVACY / COMPLIANCE REQUIREMENTS MENTIONED</div><textarea class="uc-field-textarea" id="infra-privacy" placeholder="BIPA, SB1366, HIPAA, no facial recognition, etc."></textarea></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- STEP 4: CAPTURE USE CASES -->
+<!-- ══════════════════════════════════════ -->
+<div id="step4" class="section">
+  <div class="sec-header">
+    <div class="sec-title">Step 4 · Capture & Score Use Cases</div>
+    <div class="sec-sub">Based on your walk, observations, and interview — define each use case and determine its model type, data needs, and development effort.</div>
+    <div class="sec-bar" style="background:#D97706;"></div>
+  </div>
+
+  <div class="tip">💡 <strong>Use the decision tree below</strong> for each use case before filling in the effort field. Answer the 4 questions in order — your effort level drops out automatically.</div>
+
+  <div class="card" style="margin-bottom:20px;border-top:4px solid #1D4ED8;">
+    <div class="card-title">🌳 Effort Decision Tree — Run This for Every Use Case</div>
+    <div class="card-sub">Answer Q1 → Q2 → Q3 → Q4 in order. Stop as soon as you get a YES.</div>
+    <div style="max-width:700px;">
+      <div class="dt-node">
+        <div class="dt-q">Q1 · Does a standard pre-trained model already detect this exact event out of the box?</div>
+        <div class="dt-opts">
+          <div class="dt-opt" style="background:#ECFDF5;color:#059669;border-color:#6EE7B7;">✅ YES → <strong>Low effort.</strong> Configure zone polygons + thresholds only. No training needed.</div>
+          <div class="dt-opt" style="background:#FFF7ED;color:#D97706;border-color:#FCD34D;">❌ NO → Go to Q2</div>
+        </div>
+      </div>
+      <div class="dt-arrow">↓</div>
+      <div class="dt-node">
+        <div class="dt-q">Q2 · Does a standard model get you 60–80% there — just not on your specific environment or subject type?</div>
+        <div class="dt-opts">
+          <div class="dt-opt" style="background:#FFFBEB;color:#D97706;border-color:#FCD34D;">✅ YES → <strong>Medium effort.</strong> Collect 50–200 real clips. Fine-tune existing model.</div>
+          <div class="dt-opt" style="background:#FFF7ED;color:#D97706;border-color:#FCD34D;">❌ NO → Go to Q3</div>
+        </div>
+      </div>
+      <div class="dt-arrow">↓</div>
+      <div class="dt-node">
+        <div class="dt-q">Q3 · Can you generate synthetic training data that realistically mimics the real event?</div>
+        <div class="dt-opts">
+          <div class="dt-opt" style="background:#FFF7ED;color:#F97316;border-color:#FDBA74;">✅ YES → <strong>High effort — faster path.</strong> Synthetic (70%) + small real sample (30%).</div>
+          <div class="dt-opt" style="background:#FEF2F2;color:#DC2626;border-color:#FCA5A5;">❌ NO → <strong>High effort — data collection required.</strong> Must film real events.</div>
+        </div>
+      </div>
+      <div class="dt-arrow">↓</div>
+      <div class="dt-node">
+        <div class="dt-q">Q4 · Does this use case require tracking a person across time or across multiple cameras?</div>
+        <div class="dt-opts">
+          <div class="dt-opt" style="background:#FEF2F2;color:#DC2626;border-color:#FCA5A5;">✅ YES → <strong>Very high effort.</strong> Full custom re-ID + tracking pipeline. Phase 2.</div>
+          <div class="dt-opt" style="background:#ECFDF5;color:#059669;border-color:#6EE7B7;">❌ NO → Single-frame detection. Effort stays at Q1–Q3 result.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="uc-list"></div>
+  <button onclick="addUC()" style="width:100%;padding:12px;border:2px dashed #BFDBFE;border-radius:10px;background:#F8FAFC;font-size:12px;font-weight:700;color:#3B82F6;cursor:pointer;margin-top:4px;font-family:'DM Sans',sans-serif;">+ Add Use Case</button>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SUMMARY -->
+<!-- ══════════════════════════════════════ -->
+<div id="summary" class="section">
+  <div class="sec-header">
+    <div class="sec-title">Assessment Summary & Effort Report</div>
+    <div class="sec-sub">Auto-generated from your Step 4 entries. Share this with the client or use it internally to build the proposal.</div>
+    <div class="sec-bar" style="background:#DC2626;"></div>
+  </div>
+
+  <div id="summary-client-header" style="margin-bottom:18px;"></div>
+
+  <div class="card" style="margin-bottom:14px;">
+    <div class="card-title">📊 Use Case Summary Table</div>
+    <div class="card-sub">All captured use cases with effort, model type, and data needs:</div>
+    <div id="summary-table-wrap">
+      <div style="font-size:12px;color:#94A3B8;padding:20px 0;text-align:center;">Complete Step 4 to generate the summary table.</div>
+    </div>
+  </div>
+
+  <div class="grid-3" id="summary-stats"></div>
+
+  <div class="card" style="margin-top:14px;">
+    <div class="card-title">📅 Recommended Phasing</div>
+    <div class="card-sub">Auto-sequenced by effort and tier:</div>
+    <div id="summary-phases"></div>
+  </div>
+
+  <div class="card" style="margin-top:14px;border-top:4px solid #1E3A8A;">
+    <div class="card-title">📋 Assessment Notes — Final Observations</div>
+    <div class="card-sub">Key findings, risks, and recommendations to include in the report:</div>
+    <textarea class="q-answer" id="final-notes" style="min-height:120px;" placeholder="e.g. Facility has 18 cameras across 6 zones. 3 cameras are too low-resolution for pose estimation. Privacy policy prohibits facial recognition. Superintendent expressed urgency around ratio compliance monitoring ahead of state audit in Q2..."></textarea>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<div class="footer">
+  <span>USSP · VIONOS.AI EDGE AI PLATFORM · FIELD ASSESSMENT TOOLKIT · CONFIDENTIAL</span>
+  <span>US SOFTWARE PROFESSIONALS INC · VIONOS.AI</span>
+</div>
+
+<script>
+// ─── STAGE 0 · PRE-SALES DISCOVERY ──────────────────────────────────────
+
+const discQuestions = [
+  {
+    id: 'q_facility',
+    cat: 'FACILITY SIZE', catColor: '#0891B2', catBg: '#F0FDFA',
+    q: 'Tell me about your facility — how many locations, roughly how large, and what type of operation is it?',
+    why: 'Establishes deal size and complexity. Multi-site = bigger opportunity. Single small site = scope it fast.',
+    placeholder: 'e.g. One facility, 120,000 sq ft, juvenile justice center with 180 youth, 3 floors...',
+    criterion: 'Facility type & size understood',
+    signal: v => v.trim().length > 10
+  },
+  {
+    id: 'q_cameras',
+    cat: 'CAMERA INFRASTRUCTURE', catColor: '#1D4ED8', catBg: '#EFF6FF',
+    q: 'Do you have cameras installed today? If so, roughly how many, and do you know what system they run on?',
+    why: 'No cameras = hardware project first, longer timeline, bigger budget. Existing cameras = faster path to value. This is a hard technical qualifier.',
+    placeholder: 'e.g. Yes — about 32 cameras, Hikvision, running on a standalone DVR. No NVR software...',
+    criterion: 'Cameras exist on-site',
+    signal: v => v.trim().length > 5
+  },
+  {
+    id: 'q_pain',
+    cat: 'THE REAL PAIN', catColor: '#DC2626', catBg: '#FEF2F2',
+    q: "What's the specific problem you're trying to solve? Has there been an incident, audit finding, or compliance pressure that made this urgent?",
+    why: 'The most important question. A real pain = real budget. Generic interest = no urgency. Listen for: incidents, audit failures, state mandates, staffing shortfalls.',
+    placeholder: "e.g. We had a youth unsupervised in the workshop for 20 min. State audit flagged our ratio compliance. Director is pushing for a fix before June...",
+    criterion: 'Specific pain identified (not just curiosity)',
+    signal: v => v.trim().length > 15
+  },
+  {
+    id: 'q_urgency',
+    cat: 'URGENCY & TIMELINE', catColor: '#D97706', catBg: '#FFFBEB',
+    q: 'Is there a deadline driving this — an audit, a board review, a policy change, or an incident that needs to be addressed?',
+    why: 'Urgency separates active buyers from browsers. An audit date, a board meeting, or a recent incident = real timeline = real deal.',
+    placeholder: 'e.g. State inspection is in June. Our director wants something in place 60 days before that...',
+    criterion: 'Clear urgency or deadline exists',
+    signal: v => v.trim().length > 5
+  },
+  {
+    id: 'q_decision',
+    cat: 'DECISION MAKER', catColor: '#7C3AED', catBg: '#F5F3FF',
+    q: 'Who else needs to be involved in a decision like this — IT, legal, your director, procurement? And are you the right person to move this forward?',
+    why: 'If the person on the call can\'t say yes, you need to get to the person who can. Map the org before the site visit.',
+    placeholder: 'e.g. IT director needs to approve the network piece. Legal reviews any AI system. I own the operations side but our director signs off...',
+    criterion: 'Decision maker identified (on call or reachable)',
+    signal: v => v.trim().length > 10
+  },
+  {
+    id: 'q_success',
+    cat: 'SUCCESS CRITERIA', catColor: '#059669', catBg: '#ECFDF5',
+    q: 'If we deployed a system and it was working perfectly 6 months from now — what would you be showing your leadership? What does success look like?',
+    why: 'The answer tells you the output format (alert, dashboard, audit report), the KPIs, and whether their expectations are realistic. This becomes the closing criteria for the proposal.',
+    placeholder: 'e.g. I\'d show my director a dashboard with ratio compliance logs. Zero incidents going undetected. Evidence retrieval in under 2 minutes...',
+    criterion: 'Success criteria defined (closeable)',
+    signal: v => v.trim().length > 10
+  }
+];
+
+const qualCriteria = [
+  'Facility type & size understood',
+  'Cameras exist on-site',
+  'Specific pain identified (not just curiosity)',
+  'Clear urgency or deadline exists',
+  'Decision maker identified (on call or reachable)',
+  'Success criteria defined (closeable)'
+];
+
+// Render criteria checklist
+const criteriaEl = document.getElementById('qual-criteria');
+qualCriteria.forEach((c, i) => {
+  criteriaEl.innerHTML += `
+    <div id="crit-${i}" style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;background:#F8FAFC;border:1px solid #E2E8F0;">
+      <div id="crit-dot-${i}" style="width:10px;height:10px;border-radius:50%;background:#E2E8F0;flex-shrink:0;"></div>
+      <div style="font-size:10px;color:#64748B;font-weight:500;">${c}</div>
+    </div>`;
+});
+
+// Render discovery questions
+const discEl = document.getElementById('disc-questions');
+discQuestions.forEach((q, i) => {
+  const el = document.createElement('div');
+  el.style.cssText = 'background:#FFF;border-radius:10px;border:1px solid #E2E8F0;padding:14px 16px;';
+  el.innerHTML = `
+    <div style="display:inline-block;font-size:8px;font-weight:700;letter-spacing:1.5px;color:${q.catColor};background:${q.catBg};padding:2px 8px;border-radius:4px;margin-bottom:7px;">${q.cat}</div>
+    <div style="font-size:12px;font-weight:700;color:#0F172A;margin-bottom:5px;line-height:1.5;">Q${i+1}. ${q.q}</div>
+    <div style="font-size:10px;color:#64748B;border-left:2px solid #E2E8F0;padding-left:8px;margin-bottom:10px;line-height:1.6;">💡 ${q.why}</div>
+    <textarea id="${q.id}" placeholder="${q.placeholder}" oninput="updateScorecard()"
+      style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;min-height:48px;resize:vertical;"></textarea>`;
+  discEl.appendChild(el);
+});
+
+function updateScorecard() {
+  let score = 0;
+  discQuestions.forEach((q, i) => {
+    const val = document.getElementById(q.id)?.value || '';
+    const met = q.signal(val);
+    if (met) score++;
+    const dot = document.getElementById(`crit-dot-${i}`);
+    const row = document.getElementById(`crit-${i}`);
+    if (dot) dot.style.background = met ? '#059669' : '#E2E8F0';
+    if (row) row.style.background = met ? '#F0FDF4' : '#F8FAFC';
+    if (row) row.style.borderColor = met ? '#86EFAC' : '#E2E8F0';
+  });
+  const scoreEl   = document.getElementById('qual-score');
+  const verdictEl = document.getElementById('qual-verdict');
+  if (scoreEl) scoreEl.textContent = score;
+  if (scoreEl) scoreEl.style.color = score >= 5 ? '#059669' : score >= 3 ? '#D97706' : '#DC2626';
+  if (verdictEl) {
+    if (score >= 5)      { verdictEl.textContent = '✅ Book the site visit'; verdictEl.style.color = '#059669'; }
+    else if (score >= 3) { verdictEl.textContent = '⏳ Nurture — more discovery needed'; verdictEl.style.color = '#D97706'; }
+    else                 { verdictEl.textContent = '❌ Disqualify or revisit later'; verdictEl.style.color = '#DC2626'; }
+  }
+}
+
+function setOutcome(btn, color) {
+  document.querySelectorAll('#outcome-btns button').forEach(b => {
+    b.style.background = '#F8FAFC'; b.style.borderColor = '#E2E8F0'; b.style.color = '#334155';
+  });
+  const colors = { green: ['#ECFDF5','#6EE7B7','#065F46'], yellow: ['#FFFBEB','#FCD34D','#92400E'], red: ['#FEF2F2','#FCA5A5','#7F1D1D'] };
+  const [bg, border, text] = colors[color] || colors.yellow;
+  btn.style.background = bg; btn.style.borderColor = border; btn.style.color = text;
+}
+
+// ─── TAB NAVIGATION ───────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'summary') generateSummary();
+  window.scrollTo({top:80, behavior:'smooth'});
+}
+
+// ─── RED FLAGS ────────────────────────────────
+const redFlags = [
+  { text:"Saw a zone with no staff present for a period", uc:"Unattended Zone Detection" },
+  { text:"Staff grouped together in one area while other zones were empty", uc:"Staff Clustering & Idle Detection" },
+  { text:"Camera with significant blind spot in a high-risk area", uc:"Zone Coverage Gap — note for hardware scope" },
+  { text:"Persons (especially minors/youth) moving unsupervised", uc:"Unsupervised Person Detection" },
+  { text:"Entry/exit flow appeared untracked or chaotic", uc:"Entry & Exit Counting" },
+  { text:"Staff appeared to be on phone / distracted from duty", uc:"Staff Phone / Distraction Detection" },
+  { text:"Queue or congestion forming at a service point, entrance, or activity area", uc:"Queue Wait Time & Throughput" },
+  { text:"Incident log or report paperwork visible on desk (reactive documentation)", uc:"Zone Event Log & Audit Trail" },
+  { text:"Restricted area with door that can be accessed without electronic access control", uc:"Unauthorized Zone Access Detection" },
+  { text:"Facility mentioned upcoming audit, inspection, or compliance review", uc:"Compliance Documentation & Reporting" },
+];
+
+const rfEl = document.getElementById('red-flags');
+redFlags.forEach((f, i) => {
+  rfEl.innerHTML += `
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #F1F5F9;">
+      <input type="checkbox" id="rf${i}" style="margin-top:3px;cursor:pointer;" onchange="this.parentElement.style.background=this.checked?'#F0FDF4':'transparent'"/>
+      <div>
+        <label for="rf${i}" style="font-size:11px;font-weight:600;color:#334155;cursor:pointer;">${f.text}</label>
+        <div style="font-size:10px;color:#3B82F6;margin-top:2px;">→ Suggests: <strong>${f.uc}</strong></div>
+      </div>
+    </div>`;
+});
+
+// ─── FLOOR BUTTON INIT ───────────────────────
+let totalFloors = 1;
+
+(function initFloorBtns() {
+  const wrap = document.getElementById('floor-count-btns');
+  if (!wrap) return;
+  [1,2,3,4,5].forEach(n => {
+    const b = document.createElement('button');
+    b.className = 'floor-count-btn';
+    b.dataset.f = n;
+    b.textContent = n;
+    b.style.cssText = 'width:44px;height:44px;border-radius:8px;border:1.5px solid #E2E8F0;font-size:14px;font-weight:700;cursor:pointer;font-family:\'DM Sans\',sans-serif;transition:all 0.15s;background:#F8FAFC;color:#64748B;';
+    b.onclick = () => setFloorCount(n);
+    wrap.appendChild(b);
+  });
+  // activate 1 by default
+  setFloorCount(1);
+})();
+
+// ─── ZONE LOG (live-linked to camera cards) ──────────────────────────────
+
+
+// ─── FLOOR SETUP ─────────────────────────────
+function setFloorCount(n) {
+  totalFloors = n;
+  document.querySelectorAll('.floor-count-btn').forEach(b => {
+    b.style.background = parseInt(b.dataset.f) === n ? '#1D4ED8' : '#F8FAFC';
+    b.style.color      = parseInt(b.dataset.f) === n ? '#FFF'    : '#64748B';
+    b.style.borderColor= parseInt(b.dataset.f) === n ? '#1D4ED8' : '#E2E8F0';
+  });
+  // Update floor selectors in all existing zone rows — preserve value or fall back to F1
+  document.querySelectorAll('.zone-floor-select').forEach(sel => {
+    const current = sel.value;
+    sel.innerHTML = floorOptions();
+    sel.value = (current && sel.querySelector(`option[value="${current}"]`)) ? current : 'F1';
+  });
+  // Update floor toggle buttons in all camera cards
+  document.querySelectorAll('.cam-floor-group').forEach(grp => {
+    grp.innerHTML = floorButtons(grp.dataset.cardId);
+  });
+  refreshAllCameraZones();
+}
+
+function floorOptions() {
+  let opts = '';
+  for (let i = 1; i <= totalFloors; i++) opts += `<option value="F${i}">F${i}</option>`;
+  opts += '<option value="ALL">All Floors</option>';
+  return opts;
+}
+
+function floorButtons(cardId) {
+  let btns = '';
+  for (let i = 1; i <= totalFloors; i++) {
+    btns += `<button onclick="selectCamFloor(this,'${cardId}')" data-floor="F${i}"
+      style="padding:5px 10px;border-radius:6px;border:1.5px solid #E2E8F0;background:#F8FAFC;font-size:11px;font-weight:700;color:#64748B;cursor:pointer;font-family:'DM Sans',sans-serif;">F${i}</button>`;
+  }
+  return btns;
+}
+
+function selectCamFloor(btn, cardId) {
+  const grp = btn.parentElement;
+  grp.querySelectorAll('button').forEach(b => {
+    b.style.background='#F8FAFC'; b.style.color='#64748B'; b.style.borderColor='#E2E8F0';
+  });
+  btn.style.background='#F97316'; btn.style.color='#FFF'; btn.style.borderColor='#F97316';
+  // Refresh zone checklist to show only zones on this floor
+  const container = document.querySelector(`.cam-zone-list[data-card-id="${cardId}"]`);
+  if (container) {
+    const checked = new Set(
+      Array.from(container.querySelectorAll('input[type=checkbox]'))
+        .filter(cb => cb.checked).map(cb => cb.dataset.zone)
+    );
+    renderZoneChecks(container, cardId, checked, btn.dataset.floor);
+  }
+}
+
+
+let zoneCount = 0;
+
+function getZones() {
+  // Returns [{name, floor}] for all filled zone rows
+  return Array.from(document.querySelectorAll('.zone-row')).map(row => ({
+    name:  row.querySelector('.zone-name-input').value.trim(),
+    floor: row.querySelector('.zone-floor-select').value || 'F1'
+  })).filter(z => z.name);
+}
+
+function refreshAllCameraZones() {
+  document.querySelectorAll('.cam-zone-list').forEach(container => {
+    const cardId  = container.dataset.cardId;
+    const checked = new Set(
+      Array.from(container.querySelectorAll('input[type=checkbox]'))
+        .filter(cb => cb.checked).map(cb => cb.dataset.zone)
+    );
+    // Detect which floor this camera is on
+    const grp = document.querySelector(`.cam-floor-group[data-card-id="${cardId}"]`);
+    const activeFloorBtn = grp ? grp.querySelector('button[style*="F97316"]') : null;
+    const camFloor = activeFloorBtn ? activeFloorBtn.dataset.floor : null;
+    renderZoneChecks(container, cardId, checked, camFloor);
+  });
+}
+
+function renderZoneChecks(container, cardId, checkedSet, camFloor) {
+  const zones = getZones();
+
+  if (zones.length === 0) {
+    container.innerHTML = `<div style="grid-column:span 2;font-size:10px;color:#94A3B8;padding:6px 0;">
+      No zones added yet — go to <strong>Step 1 · Facility Walk</strong> and add zones first.
+    </div>`;
+    return;
+  }
+
+  // Filter by floor if camera has a floor selected
+  const filtered = camFloor ? zones.filter(z => z.floor === camFloor || z.floor === 'ALL') : zones;
+  const others   = camFloor ? zones.filter(z => z.floor !== camFloor && z.floor !== 'ALL') : [];
+
+  let html = '';
+
+  if (filtered.length === 0 && camFloor) {
+    html += `<div style="grid-column:span 2;font-size:10px;color:#94A3B8;padding:4px 0;">No zones assigned to ${camFloor} yet.</div>`;
+  }
+
+  // Zones on this floor
+  html += filtered.map(z => {
+    const isChecked = checkedSet && checkedSet.has(z.name) ? 'checked' : '';
+    return `<label style="display:flex;align-items:center;gap:6px;font-size:10px;color:#334155;padding:3px 0;cursor:pointer;">
+      <input type="checkbox" data-zone="${z.name}" ${isChecked} style="cursor:pointer;"/>
+      <span>${z.name}</span>
+      <span style="font-size:8px;font-weight:700;color:#3B82F6;background:#EFF6FF;padding:1px 5px;border-radius:4px;">${z.floor}</span>
+    </label>`;
+  }).join('');
+
+  // Other-floor zones shown dimmed with a divider
+  if (others.length > 0) {
+    html += `<div style="grid-column:span 2;font-size:8px;font-weight:700;letter-spacing:1px;color:#CBD5E1;padding:6px 0 2px;">OTHER FLOORS</div>`;
+    html += others.map(z => {
+      const isChecked = checkedSet && checkedSet.has(z.name) ? 'checked' : '';
+      return `<label style="display:flex;align-items:center;gap:6px;font-size:10px;color:#94A3B8;padding:2px 0;cursor:pointer;">
+        <input type="checkbox" data-zone="${z.name}" ${isChecked} style="cursor:pointer;"/>
+        <span>${z.name}</span>
+        <span style="font-size:8px;font-weight:700;color:#94A3B8;background:#F1F5F9;padding:1px 5px;border-radius:4px;">${z.floor}</span>
+      </label>`;
+    }).join('');
+  }
+
+  html += `<label style="display:flex;align-items:center;gap:6px;font-size:10px;color:#94A3B8;padding:3px 0;grid-column:span 2;">
+    <input type="text" placeholder="+ Custom zone" onkeydown="if(event.key==='Enter'){addCustomZoneToCard(this,'${cardId}')}"
+      style="border:none;border-bottom:1px dashed #CBD5E1;font-size:10px;font-family:'DM Sans',sans-serif;background:transparent;color:#475569;width:140px;padding:2px 0;outline:none;"/>
+  </label>`;
+
+  container.innerHTML = html;
+}
+
+function addCustomZoneToCard(input, cardId) {
+  const val = input.value.trim();
+  if (!val) return;
+  const container = document.querySelector(`.cam-zone-list[data-card-id="${cardId}"]`);
+  const newLabel = document.createElement('label');
+  newLabel.style.cssText = 'display:flex;align-items:center;gap:6px;font-size:10px;color:#334155;padding:3px 0;cursor:pointer;grid-column:span 2;';
+  newLabel.innerHTML = `<input type="checkbox" data-zone="${val}" checked style="cursor:pointer;"/> ${val}`;
+  container.insertBefore(newLabel, container.lastElementChild);
+  input.value = '';
+}
+
+function addZone() {
+  zoneCount++;
+  const zid = zoneCount;
+  const d = document.createElement('div');
+  d.id = `zone-row-${zid}`;
+  d.className = 'zone-row';
+  d.style.cssText = 'display:grid;grid-template-columns:minmax(0,2fr) 80px minmax(0,1fr) minmax(0,1fr) 28px;gap:6px;padding:10px;background:#F8FAFC;border-radius:8px;margin-bottom:8px;border:1px solid #E2E8F0;align-items:start;width:100%;box-sizing:border-box;';
+  d.innerHTML = `
+    <input class="zone-name-input" placeholder="Zone name (e.g. Main Entrance, Workshop, Yard B)"
+      oninput="refreshAllCameraZones()"
+      style="border:1px solid #E2E8F0;border-radius:6px;padding:6px 8px;font-size:11px;font-weight:600;font-family:'DM Sans',sans-serif;background:#FFF;"/>
+    <select class="zone-floor-select" onchange="refreshAllCameraZones()"
+      style="border:1px solid #E2E8F0;border-radius:6px;padding:6px 8px;font-size:11px;font-weight:700;font-family:'DM Sans',sans-serif;background:#FFF;color:#1D4ED8;min-width:70px;">
+      ${floorOptions()}
+    </select>
+    <input placeholder="# cameras in zone" style="border:1px solid #E2E8F0;border-radius:6px;padding:6px 8px;font-size:11px;font-family:'DM Sans',sans-serif;background:#FFF;"/>
+    <select style="border:1px solid #E2E8F0;border-radius:6px;padding:6px 8px;font-size:11px;font-family:'DM Sans',sans-serif;background:#FFF;">
+      <option>Risk Level</option>
+      <option>🔴 High Risk</option>
+      <option>🟡 Medium Risk</option>
+      <option>🟢 Low Risk</option>
+    </select>
+    <button onclick="removeZone(${zid})" title="Remove zone" style="border:none;background:none;color:#CBD5E1;font-size:16px;cursor:pointer;padding:2px 4px;">✕</button>
+    <textarea placeholder="Observations in this zone..." style="grid-column:span 5;border:1px solid #E2E8F0;border-radius:6px;padding:6px 8px;font-size:11px;font-family:'DM Sans',sans-serif;background:#FFF;min-height:40px;resize:vertical;width:100%;box-sizing:border-box;"></textarea>`;
+  document.getElementById('zone-log').appendChild(d);
+  // Always default to F1 so every row starts consistent
+  const sel = d.querySelector('.zone-floor-select');
+  if (sel) sel.value = 'F1';
+}
+
+function removeZone(zid) {
+  const el = document.getElementById(`zone-row-${zid}`);
+  if (el) { el.remove(); refreshAllCameraZones(); }
+}
+
+addZone(); addZone();
+
+// ─── CAMERA LOG ────────────────────────────────
+let camCount = 0;
+
+function inp(ph, w) {
+  return `<input placeholder="${ph}" style="width:${w||'100%'};border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/>`;
+}
+function sel(opts, w) {
+  return `<select style="width:${w||'100%'};border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;">${opts.map(o=>`<option>${o}</option>`).join('')}</select>`;
+}
+function lbl(text) {
+  return `<div style="font-size:8px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:4px;">${text}</div>`;
+}
+
+function addCamRow() {
+  camCount++;
+  const n = camCount;
+  const d = document.createElement('div');
+  d.id = `cam-card-${n}`;
+  d.style.cssText = 'background:#FFF;border-radius:12px;border:1px solid #BFDBFE;border-top:3px solid #3B82F6;padding:16px;position:relative;box-shadow:0 1px 4px rgba(0,0,0,0.05);';
+
+  d.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div style="width:28px;height:28px;background:#3B82F6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#FFF;">C${n}</div>
+      <button onclick="document.getElementById('cam-card-${n}').remove()" style="border:none;background:none;color:#CBD5E1;font-size:16px;cursor:pointer;padding:0;">✕</button>
+    </div>
+
+    <!-- Name + Floor -->
+    <div style="display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:10px;">
+      <div>${lbl('CAMERA NAME')}<input data-field="name" placeholder="e.g. C-Entry" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/></div>
+      <div>${lbl('FLOOR')}
+        <div class="cam-floor-group" data-card-id="${n}" style="display:flex;gap:4px;">
+          ${floorButtons(n)}
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand / Resolution -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>${lbl('BRAND / MODEL')}<input data-field="brand" placeholder="e.g. Hikvision DS-2CD2T47G2" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/></div>
+      <div>${lbl('RESOLUTION')}<select data-field="resolution" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"><option>Resolution?</option><option>4K (2160p)</option><option>1080p ✅</option><option>720p ⚠️</option><option>Below 720p ❌</option></select></div>
+    </div>
+
+    <!-- Direction / Tilt / FOV -->
+    <div style="background:#F8FAFC;border-radius:8px;padding:12px;margin-bottom:10px;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;color:#94A3B8;margin-bottom:10px;">ORIENTATION</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+        <div>
+          ${lbl('DIRECTION (DEG)')}
+          <input data-field="direction" type="number" placeholder="e.g. -111" min="-180" max="360" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#FFF;"/>
+          <div style="font-size:9px;color:#94A3B8;margin-top:3px;">0° = North, -180°/180° = South</div>
+        </div>
+        <div>
+          ${lbl('TILT (DEG)')}
+          <input data-field="tilt" type="number" placeholder="e.g. -26" min="-90" max="90" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#FFF;"/>
+          <div style="font-size:9px;color:#94A3B8;margin-top:3px;">Negative = pointing down</div>
+        </div>
+        <div>
+          ${lbl('FOV (DEG)')}
+          <input data-field="fov" type="number" placeholder="e.g. 60" min="10" max="180" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#FFF;"/>
+          <div style="font-size:9px;color:#94A3B8;margin-top:3px;">Wide=90°+, Standard=60°</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Position XY -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>${lbl('POSITION — X (floor plan coord)')}<input data-field="pos_x" placeholder="e.g. -1.3" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/></div>
+      <div>${lbl('POSITION — Y (floor plan coord)')}<input data-field="pos_y" placeholder="e.g. -2.0" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"/></div>
+    </div>
+
+    <!-- Stream URL -->
+    <div style="margin-bottom:10px;">
+      ${lbl('STREAM URL (RTSP)')}
+      <input data-field="stream_url" placeholder="rtsp://192.168.1.xx:554/stream or https://..." style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Mono',monospace;background:#F8FAFC;"/>
+    </div>
+
+    <!-- Monitored Zones — LIVE from Step 1 -->
+    <div style="margin-bottom:10px;">
+      ${lbl('MONITORED ZONES (from Step 1 · Facility Walk)')}
+      <div class="cam-zone-list" data-card-id="${n}"
+        style="display:grid;grid-template-columns:1fr 1fr;gap:0 10px;background:#F8FAFC;border-radius:8px;padding:10px;border:1px solid #E2E8F0;max-height:180px;overflow-y:auto;">
+      </div>
+      <div style="font-size:9px;color:#94A3B8;margin-top:4px;">💡 Add zones in Step 1 and they appear here automatically.</div>
+    </div>
+
+    <!-- RTSP + AI Ready -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>${lbl('RTSP ACCESSIBLE?')}<select data-field="rtsp" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"><option>RTSP?</option><option>✅ Yes — confirmed</option><option>❌ No</option><option>❓ Unknown — check with IT</option></select></div>
+      <div>${lbl('AI READY?')}<select data-field="ai_ready" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"><option>AI Ready?</option><option>✅ Yes — full body visible</option><option>⚠️ Partial — some angle issues</option><option>❌ No — blind spot / low res / fisheye</option></select></div>
+    </div>
+
+    <!-- Frame rate + lighting -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div>${lbl('FRAME RATE (FPS)')}<select data-field="fps" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"><option>FPS?</option><option>30fps ✅</option><option>25fps ✅</option><option>15fps ⚠️</option><option>Below 15fps ❌</option><option>Unknown</option></select></div>
+      <div>${lbl('LIGHTING CONDITION')}<select data-field="lighting" style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:6px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;"><option>Lighting?</option><option>✅ Good — consistent</option><option>⚠️ Variable — shadows present</option><option>⚠️ Backlit — WDR needed</option><option>❌ Poor — low light zone</option></select></div>
+    </div>
+
+    <!-- Notes -->
+    <div>${lbl('ASSESSMENT NOTES')}
+      <textarea data-field="notes" placeholder="Blind spots, mounting height, angle issues, infrastructure concerns, recommended use cases for this camera..." style="width:100%;border:1px solid #E2E8F0;border-radius:6px;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:#F8FAFC;min-height:52px;resize:vertical;"></textarea>
+    </div>`;
+
+  document.getElementById('cam-log').appendChild(d);
+
+  // Populate zone checkboxes immediately from whatever is in Step 1
+  const container = d.querySelector('.cam-zone-list');
+  renderZoneChecks(container, n, new Set());
+}
+
+function toggleFloor(btn) {
+  const siblings = btn.parentElement.querySelectorAll('button');
+  siblings.forEach(b => { b.style.background='#F8FAFC'; b.style.color='#64748B'; b.style.borderColor='#E2E8F0'; });
+  btn.style.background='#F97316'; btn.style.color='#FFF'; btn.style.borderColor='#F97316';
+}
+
+for(let i=0;i<2;i++) addCamRow();
+
+// ─── INTERVIEW QUESTIONS ──────────────────────
+const questions = [
+  {
+    cat:"SAFETY & INCIDENTS", catColor:"#DC2626", catBg:"#FEF2F2",
+    q:"Have there been any safety incidents in the past 12 months that you wished you had better visibility into?",
+    why:"The single best question to uncover real safety use cases. Listen for zone-specific events — those become your highest-priority UCs.",
+    signals:["Unsupervised person detection","Unauthorized zone access","Fall / incident detection"]
+  },
+  {
+    cat:"SAFETY & INCIDENTS", catColor:"#DC2626", catBg:"#FEF2F2",
+    q:"Which areas of the facility are hardest to monitor? Where do staff have the least visibility?",
+    why:"Blind spots and understaffed zones reveal where automated monitoring delivers the most value.",
+    signals:["Unattended zone detection","Zone occupancy monitoring"]
+  },
+  {
+    cat:"COMPLIANCE & AUDIT", catColor:"#D97706", catBg:"#FFFBEB",
+    q:"How do you currently document staff-to-occupant ratios and zone coverage? Who reviews it?",
+    why:"Manual ratio tracking is almost always a pain point. This question surfaces the compliance use cases directly.",
+    signals:["Staff-to-occupant ratio alert","Zone event log & audit trail"]
+  },
+  {
+    cat:"COMPLIANCE & AUDIT", catColor:"#D97706", catBg:"#FFFBEB",
+    q:"When an incident occurs, how long does it take to pull the video evidence? What's painful about that process?",
+    why:"Post-incident review pain = a strong case for automated event logging and searchable evidence retrieval.",
+    signals:["Post-incident evidence retrieval","Audit trail & reporting"]
+  },
+  {
+    cat:"OPERATIONS", catColor:"#059669", catBg:"#ECFDF5",
+    q:"Do you ever find staff bunched up in one area while other zones go uncovered? How often?",
+    why:"Staff clustering is common but rarely measured. This maps directly to an operations intelligence use case.",
+    signals:["Staff clustering & idle detection","Zone coverage heatmap"]
+  },
+  {
+    cat:"OPERATIONS", catColor:"#059669", catBg:"#ECFDF5",
+    q:"Are there times of day — shift changes, mealtimes, programming blocks — where coverage becomes a problem?",
+    why:"Time-based coverage gaps reveal throughput and staffing optimization use cases.",
+    signals:["Entry & exit counting","Shift-level occupancy analytics"]
+  },
+  {
+    cat:"PRIVACY & COMPLIANCE", catColor:"#7C3AED", catBg:"#F5F3FF",
+    q:"Are there any restrictions on the technology you can deploy? Privacy policies, IT security requirements, laws you need to comply with?",
+    why:"This question surfaces BIPA, SB1366, HIPAA, no-cloud mandates — all of which shape architecture, not just use cases.",
+    signals:["No facial recognition constraint","On-premises only constraint","BIPA / SB1366 compliance"]
+  },
+  {
+    cat:"PRIVACY & COMPLIANCE", catColor:"#7C3AED", catBg:"#F5F3FF",
+    q:"Who would need to approve an AI system deployment here — IT, legal, privacy officer, director?",
+    why:"Understanding the approval chain helps you scope the governance documentation use case and set timeline expectations.",
+    signals:["AI governance documentation","DoIT / agency sign-off process"]
+  },
+  {
+    cat:"VISION & PRIORITY", catColor:"#1D4ED8", catBg:"#EFF6FF",
+    q:"If you could fix ONE operational or safety problem with technology tomorrow, what would it be?",
+    why:"This surfaces the client's #1 priority — which should be your Phase 1 anchor use case.",
+    signals:["Priority use case identification"]
+  },
+  {
+    cat:"VISION & PRIORITY", catColor:"#1D4ED8", catBg:"#EFF6FF",
+    q:"What does success look like 6 months after deployment? What would you show your leadership?",
+    why:"The answer reveals the output format and KPIs — alert, dashboard, report, or audit doc. This shapes the success criteria for every UC.",
+    signals:["Output format definition","Success criteria"]
+  },
+];
+
+const col1 = document.getElementById('q-col-1');
+const col2 = document.getElementById('q-col-2');
+questions.forEach((q, i) => {
+  const el = document.createElement('div');
+  el.className = 'q-card';
+  el.innerHTML = `
+    <div class="q-category" style="color:${q.catColor};background:${q.catBg};display:inline-block;padding:2px 8px;border-radius:4px;margin-bottom:8px;">${q.cat}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-why">💡 Why ask this: ${q.why}</div>
+    <div style="font-size:9px;font-weight:700;letter-spacing:1px;color:#94A3B8;margin-bottom:6px;">SIGNALS THIS SURFACES:</div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;">
+      ${q.signals.map(s => `<span style="font-size:9px;font-weight:600;padding:2px 8px;background:${q.catBg};color:${q.catColor};border-radius:4px;">${s}</span>`).join('')}
+    </div>
+    <textarea class="q-answer" placeholder="Notes from answer..."></textarea>`;
+  (i % 2 === 0 ? col1 : col2).appendChild(el);
+});
+
+// ─── USE CASE CAPTURE ─────────────────────────
+let ucCount = 0;
+const effortColors = {
+  'Low':'#059669','Low–Med':'#D97706','Medium':'#D97706','High':'#EF4444','Very High':'#DC2626'
+};
+const effortBgs = {
+  'Low':'#ECFDF5','Low–Med':'#FFFBEB','Medium':'#FFFBEB','High':'#FEF2F2','Very High':'#FEF2F2'
+};
+
+function addUC() {
+  ucCount++;
+  const n = ucCount;
+  const colors = ['#1D4ED8','#DC2626','#7C3AED','#059669','#D97706','#F97316','#0891B2','#BE185D'];
+  const col = colors[(n-1) % colors.length];
+  const d = document.createElement('div');
+  d.id = `uc-card-${n}`;
+  d.className = 'uc-capture';
+  d.innerHTML = `
+    <div class="uc-num-badge" style="background:${col};">UC${n}</div>
+    <div style="font-size:13px;font-weight:700;color:#0F172A;margin-bottom:14px;border-bottom:1px solid #F1F5F9;padding-bottom:10px;">
+      Use Case ${n}
+      <button onclick="removeUC(${n})" style="float:right;border:none;background:none;color:#CBD5E1;font-size:14px;cursor:pointer;">✕</button>
+    </div>
+
+    <div class="uc-field-row">
+      <div class="uc-field">
+        <div class="uc-field-label">USE CASE NAME</div>
+        <input class="uc-field-input" id="uc${n}-name" placeholder="e.g. Unsupervised Minor Detection" style="font-weight:600;"/>
+      </div>
+      <div class="uc-field">
+        <div class="uc-field-label">TIER</div>
+        <select class="uc-field-select" id="uc${n}-tier">
+          <option value="">Select tier...</option>
+          <option value="critical">🚨 Critical Safety</option>
+          <option value="compliance">⚠️ Compliance / Liability</option>
+          <option value="operations">✅ Operations</option>
+          <option value="advanced">🔬 Advanced / Phase 2</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="uc-field-row">
+      <div class="uc-field">
+        <div class="uc-field-label">TRIGGER — What visual event fires this use case?</div>
+        <textarea class="uc-field-textarea" id="uc${n}-trigger" placeholder="e.g. Person with height under 5ft detected alone in restricted zone for more than 30 seconds"></textarea>
+      </div>
+      <div class="uc-field">
+        <div class="uc-field-label">SUBJECT — Who or what is being detected?</div>
+        <textarea class="uc-field-textarea" id="uc${n}-subject" placeholder="e.g. Minor (height estimation), staff (uniform classifier), zone occupancy state"></textarea>
+      </div>
+    </div>
+
+    <div class="uc-field-row">
+      <div class="uc-field">
+        <div class="uc-field-label">OUTPUT — What does the system produce when triggered?</div>
+        <textarea class="uc-field-textarea" id="uc${n}-output" placeholder="e.g. Instant alert via Slack/API + 5-second clip + log entry"></textarea>
+      </div>
+      <div class="uc-field">
+        <div class="uc-field-label">CONSTRAINT — What must it NOT do?</div>
+        <textarea class="uc-field-textarea" id="uc${n}-constraint" placeholder="e.g. No facial recognition, no PII stored, no cloud upload"></textarea>
+      </div>
+    </div>
+
+    <div class="uc-field-row">
+      <div class="uc-field">
+        <div class="uc-field-label">SUCCESS CRITERIA — How do you know it's working?</div>
+        <textarea class="uc-field-textarea" id="uc${n}-success" placeholder="e.g. >95% recall, <100ms alert latency, zero missed events in high-risk zones"></textarea>
+      </div>
+      <div class="uc-field">
+        <div class="uc-field-label">SOURCE — What observation / question surfaced this?</div>
+        <textarea class="uc-field-textarea" id="uc${n}-source" placeholder="e.g. Superintendent mentioned workshop incident in Q4 / observed empty yard during walk"></textarea>
+      </div>
+    </div>
+
+    <div style="background:#F8FAFC;border-radius:8px;padding:14px;margin-top:4px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:#64748B;margin-bottom:12px;">DEVELOPMENT DETERMINATION</div>
+      <div class="uc-field-row">
+        <div class="uc-field">
+          <div class="uc-field-label">MODEL TYPE</div>
+          <select class="uc-field-select" id="uc${n}-model">
+            <option value="">Select...</option>
+            <option>Out of the Box — config only</option>
+            <option>Fine-Tune — small real dataset</option>
+            <option>Full Custom — real data required</option>
+            <option>Full Custom — synthetic + real</option>
+            <option>Full Custom — re-ID / tracking (Phase 2)</option>
+            <option>Documentation / config only</option>
+          </select>
+        </div>
+        <div class="uc-field">
+          <div class="uc-field-label">REAL VIDEO COLLECTION NEEDED?</div>
+          <select class="uc-field-select" id="uc${n}-realvideo">
+            <option value="">Select...</option>
+            <option>❌ None needed</option>
+            <option>⚠️ Calibration only (20–50 clips)</option>
+            <option>✅ Small dataset (50–200 clips)</option>
+            <option>✅ Full dataset (200–500+ clips)</option>
+          </select>
+        </div>
+      </div>
+      <div class="uc-field-row">
+        <div class="uc-field">
+          <div class="uc-field-label">SYNTHETIC VIDEO GENERATION?</div>
+          <select class="uc-field-select" id="uc${n}-synthetic">
+            <option value="">Select...</option>
+            <option>❌ Not needed</option>
+            <option>⚠️ Helpful but optional</option>
+            <option>✅ Recommended (use with real data)</option>
+            <option>✅ Primary source (70% synthetic)</option>
+          </select>
+        </div>
+        <div class="uc-field">
+          <div class="uc-field-label">DEVELOPMENT EFFORT</div>
+          <select class="uc-field-select" id="uc${n}-effort" onchange="updateEffortBadge(${n})">
+            <option value="">Select...</option>
+            <option>Low</option>
+            <option>Low–Med</option>
+            <option>Medium</option>
+            <option>High</option>
+            <option>Very High</option>
+          </select>
+        </div>
+      </div>
+      <div class="uc-field-row">
+        <div class="uc-field">
+          <div class="uc-field-label">ESTIMATED TIMELINE</div>
+          <select class="uc-field-select" id="uc${n}-timeline">
+            <option value="">Select...</option>
+            <option>Days (config only)</option>
+            <option>1–2 weeks</option>
+            <option>3–5 weeks</option>
+            <option>6–10 weeks</option>
+            <option>Phase 2 (month 4+)</option>
+          </select>
+        </div>
+        <div class="uc-field">
+          <div class="uc-field-label">ESTIMATED COST RANGE</div>
+          <select class="uc-field-select" id="uc${n}-cost">
+            <option value="">Select...</option>
+            <option>$0 (config only)</option>
+            <option>$1K–3K</option>
+            <option>$5K–15K</option>
+            <option>$15K–40K</option>
+            <option>$40K+</option>
+          </select>
+        </div>
+      </div>
+      <div id="uc${n}-effort-badge" style="margin-top:8px;"></div>
+    </div>`;
+  document.getElementById('uc-list').appendChild(d);
+  d.classList.add('has-data');
+}
+
+function removeUC(n) {
+  const el = document.getElementById(`uc-card-${n}`);
+  if(el) el.remove();
+}
+
+function updateEffortBadge(n) {
+  const effort = document.getElementById(`uc${n}-effort`).value;
+  const badge = document.getElementById(`uc${n}-effort-badge`);
+  if(!effort) { badge.innerHTML=''; return; }
+  const col = effortColors[effort] || '#94A3B8';
+  const bg = effortBgs[effort] || '#F1F5F9';
+  badge.innerHTML = `<span style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;background:${bg};color:${col};font-size:12px;font-weight:700;"><span style="width:10px;height:10px;border-radius:50%;background:${col};display:inline-block;"></span>${effort} Effort</span>`;
+}
+
+// ─── SUMMARY GENERATOR ───────────────────────
+function generateSummary() {
+  const client = document.getElementById('ci-client').value || 'Client';
+  const facility = document.getElementById('ci-facility').value || 'Facility';
+  const date = document.getElementById('ci-date').value || 'Date TBD';
+  const assessor = document.getElementById('ci-assessor').value || 'USSP';
+
+  document.getElementById('summary-client-header').innerHTML = `
+    <div style="background:#FFF;border-radius:10px;border:1px solid #E2E8F0;padding:16px 20px;display:flex;gap:24px;flex-wrap:wrap;">
+      <div><div style="font-size:8px;font-weight:700;letter-spacing:2px;color:#94A3B8;">CLIENT</div><div style="font-size:14px;font-weight:700;color:#0F172A;">${client}</div></div>
+      <div><div style="font-size:8px;font-weight:700;letter-spacing:2px;color:#94A3B8;">FACILITY</div><div style="font-size:14px;font-weight:700;color:#0F172A;">${facility}</div></div>
+      <div><div style="font-size:8px;font-weight:700;letter-spacing:2px;color:#94A3B8;">DATE</div><div style="font-size:14px;font-weight:700;color:#0F172A;">${date}</div></div>
+      <div><div style="font-size:8px;font-weight:700;letter-spacing:2px;color:#94A3B8;">ASSESSED BY</div><div style="font-size:14px;font-weight:700;color:#0F172A;">${assessor}</div></div>
+      <div><div style="font-size:8px;font-weight:700;letter-spacing:2px;color:#94A3B8;">CAMERAS SURVEYED</div><div style="font-size:14px;font-weight:700;color:#0F172A;">${document.getElementById('cam-total').value || '—'}</div></div>
+    </div>`;
+
+  // collect UCs
+  const ucs = [];
+  for(let i=1;i<=ucCount;i++){
+    const name = document.getElementById(`uc${i}-name`);
+    if(!name) continue;
+    if(!name.value.trim()) continue;
+    ucs.push({
+      n:i,
+      name: name.value,
+      tier: document.getElementById(`uc${i}-tier`).value,
+      model: document.getElementById(`uc${i}-model`).value,
+      realvideo: document.getElementById(`uc${i}-realvideo`).value,
+      synthetic: document.getElementById(`uc${i}-synthetic`).value,
+      effort: document.getElementById(`uc${i}-effort`).value,
+      timeline: document.getElementById(`uc${i}-timeline`).value,
+      cost: document.getElementById(`uc${i}-cost`).value,
+      trigger: document.getElementById(`uc${i}-trigger`).value,
+    });
+  }
+
+  if(ucs.length === 0){
+    document.getElementById('summary-table-wrap').innerHTML = '<div style="font-size:12px;color:#94A3B8;padding:20px 0;text-align:center;">No use cases captured yet. Complete Step 4 first.</div>';
+    document.getElementById('summary-stats').innerHTML = '';
+    document.getElementById('summary-phases').innerHTML = '';
+    return;
+  }
+
+  const tierColors = {critical:'#DC2626',compliance:'#D97706',operations:'#059669',advanced:'#7C3AED'};
+  const tierBgs    = {critical:'#FEF2F2',compliance:'#FFFBEB',operations:'#ECFDF5',advanced:'#F5F3FF'};
+  const tierLabels = {critical:'🚨 Critical Safety',compliance:'⚠️ Compliance',operations:'✅ Operations',advanced:'🔬 Advanced'};
+
+  let tableHTML = `<div style="overflow-x:auto;"><table class="tbl"><thead><tr>
+    <th>UC</th><th>Name</th><th>Tier</th><th>Model Type</th>
+    <th>Real Video?</th><th>Synthetic?</th><th>Effort</th><th>Timeline</th><th>Est. Cost</th>
+  </tr></thead><tbody>`;
+
+  ucs.forEach(uc => {
+    const tc = tierColors[uc.tier]||'#64748B';
+    const tb = tierBgs[uc.tier]||'#F8FAFC';
+    const tl = tierLabels[uc.tier]||uc.tier||'—';
+    const ec = effortColors[uc.effort]||'#94A3B8';
+    const eb = effortBgs[uc.effort]||'#F8FAFC';
+    tableHTML += `<tr>
+      <td style="font-family:'DM Mono',monospace;font-weight:600;">UC${uc.n}</td>
+      <td><strong>${uc.name}</strong></td>
+      <td><span class="tag" style="background:${tb};color:${tc};">${tl}</span></td>
+      <td style="font-size:10px;">${uc.model||'—'}</td>
+      <td style="font-size:10px;">${uc.realvideo||'—'}</td>
+      <td style="font-size:10px;">${uc.synthetic||'—'}</td>
+      <td><span class="tag" style="background:${eb};color:${ec};">${uc.effort||'—'}</span></td>
+      <td style="font-size:10px;">${uc.timeline||'—'}</td>
+      <td style="font-size:10px;font-weight:600;">${uc.cost||'—'}</td>
+    </tr>`;
+  });
+  tableHTML += '</tbody></table></div>';
+  document.getElementById('summary-table-wrap').innerHTML = tableHTML;
+
+  // stats
+  const ootbCount = ucs.filter(u=>u.model.includes('Out of the Box')).length;
+  const ftCount = ucs.filter(u=>u.model.includes('Fine-Tune')).length;
+  const customCount = ucs.filter(u=>u.model.includes('Full Custom')||u.model.includes('re-ID')).length;
+  const highCount = ucs.filter(u=>u.effort==='High'||u.effort==='Very High').length;
+  document.getElementById('summary-stats').innerHTML = `
+    <div class="card" style="border-top:4px solid #059669;text-align:center;">
+      <div style="font-size:28px;font-weight:700;color:#059669;">${ootbCount}</div>
+      <div style="font-size:11px;font-weight:600;color:#64748B;margin-top:3px;">Out of the Box</div>
+      <div style="font-size:10px;color:#94A3B8;">Deploy in days, no training</div>
+    </div>
+    <div class="card" style="border-top:4px solid #D97706;text-align:center;">
+      <div style="font-size:28px;font-weight:700;color:#D97706;">${ftCount}</div>
+      <div style="font-size:11px;font-weight:600;color:#64748B;margin-top:3px;">Fine-Tune Required</div>
+      <div style="font-size:10px;color:#94A3B8;">Small dataset, weeks to deploy</div>
+    </div>
+    <div class="card" style="border-top:4px solid #DC2626;text-align:center;">
+      <div style="font-size:28px;font-weight:700;color:#DC2626;">${customCount}</div>
+      <div style="font-size:11px;font-weight:600;color:#64748B;margin-top:3px;">Full Custom Build</div>
+      <div style="font-size:10px;color:#94A3B8;">Real data + training required</div>
+    </div>
+    <div class="card" style="border-top:4px solid #EF4444;text-align:center;">
+      <div style="font-size:28px;font-weight:700;color:#EF4444;">${highCount}</div>
+      <div style="font-size:11px;font-weight:600;color:#64748B;margin-top:3px;">High+ Effort UCs</div>
+      <div style="font-size:10px;color:#94A3B8;">Need data collection planning</div>
+    </div>`;
+
+  // phasing
+  const phase1Quick = ucs.filter(u=>u.effort==='Low'||u.effort==='');
+  const phase1Med   = ucs.filter(u=>u.effort==='Low–Med'||u.effort==='Medium');
+  const phase1Hard  = ucs.filter(u=>u.effort==='High');
+  const phase2      = ucs.filter(u=>u.effort==='Very High'||u.tier==='advanced');
+
+  function phaseBlock(label, color, items) {
+    if(!items.length) return '';
+    return `<div style="border-left:3px solid ${color};padding-left:14px;margin-bottom:14px;">
+      <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;color:${color};margin-bottom:6px;">${label}</div>
+      ${items.map(u=>`<div style="font-size:11px;color:#334155;padding:4px 0;border-bottom:1px dotted #F1F5F9;">UC${u.n}: <strong>${u.name}</strong> &nbsp;·&nbsp; <span style="color:#94A3B8;">${u.model||'TBD'}</span></div>`).join('')}
+    </div>`;
+  }
+
+  document.getElementById('summary-phases').innerHTML =
+    phaseBlock('PHASE 1 · WEEKS 1–2 · QUICK WINS (LOW EFFORT)', '#059669', phase1Quick) +
+    phaseBlock('PHASE 1 · WEEKS 3–6 · MEDIUM EFFORT', '#D97706', phase1Med) +
+    phaseBlock('PHASE 1 · WEEKS 6–12 · HIGH EFFORT', '#EF4444', phase1Hard) +
+    phaseBlock('PHASE 2 · MONTH 4+ · VERY HIGH EFFORT', '#7C3AED', phase2) ||
+    '<div style="font-size:12px;color:#94A3B8;">Add effort levels to use cases to see phasing.</div>';
+}
+
+function exportLayoutJSON() {
+  const facility  = document.getElementById('ci-facility').value  || 'Unknown Facility';
+  const client    = document.getElementById('ci-client').value    || 'Unknown Client';
+  const date      = document.getElementById('ci-date').value      || new Date().toISOString().split('T')[0];
+  const assessor  = document.getElementById('ci-assessor').value  || 'USSP';
+
+  // ── ZONES ──────────────────────────────────────────────────────
+  const zones = Array.from(document.querySelectorAll('.zone-row')).map((row, idx) => {
+    const inputs   = row.querySelectorAll('input');
+    const selects  = row.querySelectorAll('select');
+    const textarea = row.querySelector('textarea');
+    return {
+      zone_id:       `Z${String(idx + 1).padStart(2, '0')}`,
+      name:          inputs[0]?.value.trim()  || '',
+      floor:         selects[0]?.value        || 'F1',
+      camera_count:  inputs[1]?.value.trim()  || '',
+      risk_level:    selects[1]?.value        || '',
+      observations:  textarea?.value.trim()   || ''
+    };
+  }).filter(z => z.name);
+
+  // ── CAMERAS ────────────────────────────────────────────────────
+  const cameras = Array.from(document.querySelectorAll('[id^="cam-card-"]')).map((card, idx) => {
+    const f = field => card.querySelector(`[data-field="${field}"]`)?.value?.trim() || '';
+
+    // active floor button
+    const activeFloorBtn = card.querySelector('.cam-floor-group button[style*="F97316"]');
+    const floor = activeFloorBtn ? activeFloorBtn.dataset.floor : 'F1';
+
+    // checked monitored zones
+    const monitoredZones = Array.from(
+      card.querySelectorAll('.cam-zone-list input[type=checkbox]:checked')
+    ).map(cb => cb.dataset.zone || cb.closest('label')?.textContent?.trim() || '').filter(Boolean);
+
+    const dirVal = parseFloat(f('direction'));
+    const tiltVal = parseFloat(f('tilt'));
+    const fovVal  = parseFloat(f('fov'));
+    const posX    = parseFloat(f('pos_x'));
+    const posY    = parseFloat(f('pos_y'));
+
+    return {
+      camera_id:        `CAM-${String(idx + 1).padStart(2, '0')}`,
+      name:             f('name'),
+      floor:            floor,
+      brand_model:      f('brand'),
+      resolution:       f('resolution'),
+      orientation: {
+        direction_deg:  isNaN(dirVal)  ? null : dirVal,
+        tilt_deg:       isNaN(tiltVal) ? null : tiltVal,
+        fov_deg:        isNaN(fovVal)  ? null : fovVal
+      },
+      position: {
+        x: isNaN(posX) ? null : posX,
+        y: isNaN(posY) ? null : posY
+      },
+      stream_url:       f('stream_url'),
+      monitored_zones:  monitoredZones,
+      rtsp_accessible:  f('rtsp'),
+      ai_ready:         f('ai_ready'),
+      frame_rate:       f('fps'),
+      lighting:         f('lighting'),
+      notes:            f('notes')
+    };
+  });
+
+  // ── ASSEMBLE ───────────────────────────────────────────────────
+  const layout = {
+    vionos_layout_version: '1.0',
+    meta: {
+      client,
+      facility,
+      assessment_date: date,
+      assessed_by:     assessor,
+      total_floors:    totalFloors,
+      exported_at:     new Date().toISOString()
+    },
+    floors: Array.from({ length: totalFloors }, (_, i) => `F${i + 1}`),
+    zones,
+    cameras,
+    summary: {
+      total_zones:   zones.length,
+      total_cameras: cameras.length,
+      ai_ready:      cameras.filter(c => c.ai_ready.startsWith('✅')).length,
+      ai_partial:    cameras.filter(c => c.ai_ready.startsWith('⚠️')).length,
+      ai_not_ready:  cameras.filter(c => c.ai_ready.startsWith('❌')).length,
+    }
+  };
+
+  const json   = JSON.stringify(layout, null, 2);
+  const blob   = new Blob([json], { type: 'application/json' });
+  const url    = URL.createObjectURL(blob);
+  const a      = document.createElement('a');
+  const fname  = `vionos_layout_${facility.replace(/\s+/g,'_').toLowerCase()}_${date}.json`;
+  a.href = url; a.download = fname; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportSummary() {
+  generateSummary();
+  const rows = [];
+  for(let i=1;i<=ucCount;i++){
+    const name = document.getElementById(`uc${i}-name`);
+    if(!name||!name.value.trim()) continue;
+    rows.push(`UC${i}: ${name.value} | ${document.getElementById(`uc${i}-tier`).value} | ${document.getElementById(`uc${i}-effort`).value} | ${document.getElementById(`uc${i}-timeline`).value}`);
+  }
+  const text = [
+    `ASSESSMENT SUMMARY`,
+    `Client: ${document.getElementById('ci-client').value}`,
+    `Facility: ${document.getElementById('ci-facility').value}`,
+    `Date: ${document.getElementById('ci-date').value}`,
+    ``,
+    `USE CASES:`,
+    ...rows
+  ].join('\n');
+  navigator.clipboard.writeText(text).then(()=>alert('Summary copied to clipboard!')).catch(()=>alert('Copy failed — please use Print instead.'));
+}
+</script>
+</body>
+</html>

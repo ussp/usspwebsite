@@ -15,6 +15,7 @@
 
 # next.js
 /.next/
+**/.next/
 /out/
 
 # production
@@ -52,4 +53,3 @@ packages/*/node_modules/
 
 # local staging / scratch files
 positions_staging/
-requirments/
