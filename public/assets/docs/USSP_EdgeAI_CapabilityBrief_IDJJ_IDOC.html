@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>USSP Edge AI Capability Brief — IDJJ &amp; IDOC</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Montserrat', Arial, sans-serif;
       color: #222222;
       line-height: 1.6;
-      max-width: 850px;
-      margin: 0 auto;
+      margin: 0;
       padding: 0;
       background: #fff;
     }
@@ -21,98 +20,87 @@
     @media print {
       body { padding: 0; }
       .page-break { page-break-before: always; }
-      section { page-break-inside: avoid; }
+      .band { page-break-inside: avoid; }
     }
 
-    .header {
-      background: #1C1C1C;
-      color: #fff;
-      padding: 40px 48px;
+    /* Layout */
+    .band { width: 100%; }
+    .band-dark { background: #1C1C1C; color: #fff; }
+    .band-blue { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); color: #fff; }
+    .band-gray { background: #F5F6F8; }
+    .band-white { background: #fff; }
+    .inner { max-width: 850px; margin: 0 auto; padding: 36px 48px; }
+
+    /* Header */
+    .header-inner {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 32px 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .header-logo { font-size: 28px; font-weight: 700; letter-spacing: 2px; }
-    .header-logo span { color: #2563EB; }
-    .header-tag { font-size: 12px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px; }
+    .logo { font-size: 28px; font-weight: 700; letter-spacing: 2px; color: #2563EB; }
+    .logo-sub { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+    .header-right { text-align: right; }
+    .header-tag { font-size: 11px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
 
-    .hero {
-      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-      color: #fff;
-      padding: 48px;
-    }
-    .hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 12px; }
-    .hero .subtitle { font-size: 15px; color: rgba(255,255,255,0.9); margin-bottom: 8px; }
-    .hero .tagline { font-size: 13px; color: rgba(255,255,255,0.7); }
+    /* Hero */
+    .hero-inner { max-width: 850px; margin: 0 auto; padding: 48px; }
+    .hero-inner h1 { font-size: 24px; font-weight: 700; margin-bottom: 16px; line-height: 1.3; }
+    .hero-inner .subtitle { font-size: 14px; color: rgba(255,255,255,0.9); margin-bottom: 8px; line-height: 1.7; }
+    .hero-inner .tagline { font-size: 12px; color: rgba(255,255,255,0.6); font-style: italic; }
 
-    .section { padding: 36px 48px; }
-    .section-alt { background: #F5F6F8; }
-    .section h2 {
-      font-size: 20px;
+    /* Typography */
+    h2 {
+      font-size: 18px;
       font-weight: 700;
       color: #1C1C1C;
       margin-bottom: 16px;
       padding-bottom: 8px;
-      border-bottom: 2px solid #2563EB;
+      border-bottom: 3px solid #2563EB;
+      display: inline-block;
     }
-    .section h3 { font-size: 15px; font-weight: 700; margin: 16px 0 8px; color: #1C1C1C; }
-    .section p { font-size: 13px; margin-bottom: 12px; color: #333; }
-    .section ul { padding-left: 20px; margin-bottom: 12px; }
-    .section li { font-size: 13px; margin-bottom: 6px; color: #333; }
+    h3 { font-size: 14px; font-weight: 700; margin: 14px 0 6px; color: #1C1C1C; }
+    p { font-size: 13px; margin-bottom: 10px; color: #333; line-height: 1.7; }
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    li { font-size: 13px; margin-bottom: 5px; color: #333; line-height: 1.6; }
 
-    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
-    .card-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 16px 0; }
+    /* Cards */
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+    .card-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 16px 0; }
     .card {
-      border: 1px solid #E8EAEC;
-      border-radius: 8px;
-      padding: 20px;
+      border: 1px solid #E0E2E6;
+      border-radius: 6px;
+      padding: 18px;
       background: #fff;
     }
-    .card h3 { font-size: 14px; color: #2563EB; margin: 0 0 8px; }
-    .card p { font-size: 12px; margin: 0; }
+    .card h3 { font-size: 13px; color: #2563EB; margin: 0 0 6px; font-weight: 700; }
+    .card p { font-size: 12px; margin: 0; color: #444; }
+    .card ul { margin: 0; padding-left: 16px; }
+    .card li { font-size: 12px; margin-bottom: 3px; color: #444; }
 
+    /* Highlight */
     .highlight {
       background: #EFF6FF;
       border-left: 4px solid #2563EB;
-      padding: 16px 20px;
+      padding: 14px 18px;
       margin: 16px 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 6px 6px 0;
     }
     .highlight p { font-size: 13px; margin: 0; color: #1C1C1C; }
 
-    .alert-box {
+    /* Alert */
+    .alert {
       background: #FEF3C7;
       border-left: 4px solid #D97706;
-      padding: 16px 20px;
+      padding: 14px 18px;
       margin: 16px 0;
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 6px 6px 0;
     }
-    .alert-box p { font-size: 13px; margin: 0; color: #92400E; }
+    .alert p { font-size: 13px; margin: 0; color: #92400E; }
 
-    .steps { display: flex; gap: 12px; margin: 16px 0; }
-    .step {
-      flex: 1;
-      text-align: center;
-      padding: 16px 8px;
-      background: #fff;
-      border: 1px solid #E8EAEC;
-      border-radius: 8px;
-    }
-    .step-num {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      line-height: 32px;
-      background: #2563EB;
-      color: #fff;
-      border-radius: 50%;
-      font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-    .step h4 { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
-    .step p { font-size: 11px; margin: 0; color: #666; }
-
+    /* Table */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -134,221 +122,321 @@
     }
     tr:nth-child(even) { background: #F9FAFB; }
 
-    .footer {
-      background: #1C1C1C;
-      color: rgba(255,255,255,0.8);
-      padding: 32px 48px;
-      font-size: 12px;
+    /* Steps */
+    .steps { display: flex; gap: 10px; margin: 16px 0; }
+    .step {
+      flex: 1;
+      text-align: center;
+      padding: 14px 6px;
+      background: #fff;
+      border: 1px solid #E0E2E6;
+      border-radius: 6px;
     }
-    .footer strong { color: #fff; }
-    .footer a { color: #2563EB; text-decoration: none; }
+    .step-num {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      background: #2563EB;
+      color: #fff;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .step h4 { font-size: 11px; font-weight: 700; margin-bottom: 3px; color: #1C1C1C; }
+    .step p { font-size: 10px; margin: 0; color: #666; }
+
+    /* Footer */
+    .footer-inner {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 28px 48px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-inner strong { color: #fff; }
+    .footer-inner a { color: #2563EB; text-decoration: none; }
+    .footer-line { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); font-size: 11px; }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <div class="header">
-    <div>
-      <div class="header-logo"><span>USSP</span></div>
-      <div class="header-tag">US Software Professionals Inc. &bull; Since 2003</div>
-    </div>
-    <div style="text-align:right">
-      <div class="header-tag">Capability Brief</div>
-      <div class="header-tag">IDJJ &amp; IDOC — Edge AI</div>
+  <div class="band band-dark">
+    <div class="header-inner">
+      <div>
+        <div class="logo">USSP</div>
+        <div class="logo-sub">US Software Professionals Inc. &bull; Since 2003</div>
+      </div>
+      <div class="header-right">
+        <div class="header-tag">Capability Brief</div>
+        <div class="header-tag">IDJJ &amp; IDOC — Edge AI</div>
+      </div>
     </div>
   </div>
 
   <!-- Hero -->
-  <div class="hero">
-    <h1>VionOS.ai — Edge AI for Youth Safety &amp; Correctional Facility Intelligence</h1>
-    <p class="subtitle">On-premises computer vision for real-time youth safety monitoring, staff ratio compliance, and incident detection — without facial recognition, without the cloud, fully BIPA compliant.</p>
-    <p class="tagline">Prepared for the Illinois Department of Juvenile Justice (IDJJ) &amp; Illinois Department of Corrections (IDOC)</p>
-  </div>
-
-  <!-- Challenge -->
-  <div class="section">
-    <h2>The Challenge</h2>
-    <p>Illinois correctional and juvenile justice facilities face mounting pressure to improve safety outcomes while respecting the civil liberties of youth and incarcerated individuals. Senate Bill 1366 and the Illinois Biometric Information Privacy Act (BIPA) create specific requirements around youth safety monitoring and biometric data protection.</p>
-    <div class="alert-box">
-      <p><strong>SB1366 Context:</strong> Illinois legislation emphasizing youth safety, staff accountability, and enhanced monitoring in juvenile justice facilities. VionOS.ai directly addresses these requirements through automated, privacy-compliant safety monitoring.</p>
+  <div class="band band-blue">
+    <div class="hero-inner">
+      <h1>VionOS.ai — Edge AI for Youth Safety &amp; Correctional Facility Intelligence</h1>
+      <p class="subtitle">On-premises computer vision for real-time youth safety monitoring, staff ratio compliance, and incident detection — without facial recognition, without the cloud, fully BIPA compliant.</p>
+      <p class="tagline">Prepared for the Illinois Department of Juvenile Justice (IDJJ) &amp; Illinois Department of Corrections (IDOC)</p>
     </div>
-    <p>Traditional approaches — manual headcounts, human-only CCTV monitoring, paper logs — are labor-intensive, error-prone, and provide no real-time alerting. Facial recognition systems create BIPA liability and civil liberties concerns. Facilities need a modern, privacy-compliant solution.</p>
   </div>
 
-  <!-- Solution -->
-  <div class="section section-alt">
-    <h2>The VionOS.ai Solution</h2>
-    <p>VionOS.ai is USSP's on-premises Edge AI platform that transforms existing camera infrastructure into an intelligent safety monitoring layer. It provides real-time person detection, zone occupancy analytics, and automated alerts — all without facial recognition, without biometrics, and without sending video to the cloud.</p>
-    <div class="highlight">
-      <p><strong>Key Principle:</strong> VionOS.ai uses skeletal pose estimation and bounding-box tracking — never facial recognition. Each detected person is assigned an Anonymous Person Token (SHA-256 hashed, 4-hour TTL) for spatial tracking without identification. Zero biometric data is ever collected or stored.</p>
+  <!-- The Challenge -->
+  <div class="band band-white">
+    <div class="inner">
+      <h2>The Challenge</h2>
+      <p>Illinois correctional and juvenile justice facilities face mounting pressure to improve safety outcomes while respecting the civil liberties of youth and incarcerated individuals. Senate Bill 1366 and the Illinois Biometric Information Privacy Act (BIPA) create specific requirements around youth safety monitoring and biometric data protection.</p>
+      <div class="alert">
+        <p><strong>SB1366 Context:</strong> Illinois legislation emphasizing youth safety, staff accountability, and enhanced monitoring in juvenile justice facilities. VionOS.ai directly addresses these requirements through automated, privacy-compliant safety monitoring that provides continuous oversight without relying on manual processes or biometric surveillance.</p>
+      </div>
+      <p>Traditional approaches — manual headcounts, human-only CCTV monitoring, paper-based logs — are labor-intensive, error-prone, and provide no real-time alerting capability. Facial recognition systems create BIPA liability and civil liberties concerns that make them unsuitable for Illinois facilities. A modern, privacy-compliant alternative is needed.</p>
+      <h3>Key Challenges in Current Operations</h3>
+      <ul>
+        <li><strong>Manual headcounts</strong> are slow, infrequent, and susceptible to human error</li>
+        <li><strong>CCTV monitoring</strong> relies on staff watching screens — incidents are often identified after the fact</li>
+        <li><strong>Staff ratio compliance</strong> is difficult to verify in real time across multiple zones</li>
+        <li><strong>Incident documentation</strong> depends on staff reporting, which may be delayed or incomplete</li>
+        <li><strong>Facial recognition</strong> creates BIPA liability and civil liberties concerns for incarcerated populations</li>
+        <li><strong>Cloud-based solutions</strong> raise security and data sovereignty concerns for correctional facilities</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- The Solution -->
+  <div class="band band-gray">
+    <div class="inner">
+      <h2>The VionOS.ai Solution</h2>
+      <p>VionOS.ai is USSP's on-premises Edge AI platform that transforms existing camera infrastructure into an intelligent safety monitoring layer. It provides real-time person detection, zone occupancy analytics, and automated alerts — all without facial recognition, without biometrics, and without sending video to the cloud.</p>
+      <div class="highlight">
+        <p><strong>Key Principle:</strong> VionOS.ai uses skeletal pose estimation and bounding-box tracking — never facial recognition. Each detected person is assigned an Anonymous Person Token (SHA-256 hashed, 4-hour TTL) for spatial tracking without identification. Zero biometric data is ever collected, stored, or transmitted.</p>
+      </div>
+      <p>The platform runs entirely on NVIDIA Jetson Orin edge devices installed at the facility. Video frames are processed locally in real time and never leave the facility network. The system generates structured event data (anonymous counts, zone occupancy, alert triggers) that feeds a real-time dashboard accessible to facility administrators and oversight personnel.</p>
     </div>
   </div>
 
   <!-- Youth Safety Use Cases -->
-  <div class="section">
-    <h2>Youth Safety &amp; Correctional Use Cases</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Staff-to-Youth Ratio Monitoring</h3>
-        <p>Real-time counting of staff and youth in each zone. Automated alerts when ratios fall below required thresholds. Continuous compliance logging.</p>
+  <div class="band band-white">
+    <div class="inner">
+      <h2>Youth Safety &amp; Correctional Use Cases</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Staff-to-Youth Ratio Monitoring</h3>
+          <p>Real-time counting of staff and youth in each zone. Automated alerts when ratios fall below required thresholds (e.g., 1:8, 1:12 depending on zone classification). Continuous compliance logging with timestamps for audit and oversight reporting.</p>
+        </div>
+        <div class="card">
+          <h3>Unattended Zone Detection</h3>
+          <p>Instant alerts when a zone containing youth has no staff presence for a configurable time threshold. Prevents unsupervised situations before they escalate. Configurable per zone, per time period, per facility policy.</p>
+        </div>
+        <div class="card">
+          <h3>Restricted Area Monitoring</h3>
+          <p>Immediate alerts when any person enters a restricted or off-limits zone. Configurable per zone, per time of day, per access level. Supports secure perimeter monitoring and contraband-prone area oversight.</p>
+        </div>
+        <div class="card">
+          <h3>Incident Pattern Detection</h3>
+          <p>Detects clustering (multiple people converging rapidly), rapid dispersal patterns, and unusual dwell time that may indicate developing incidents. Early warning system without identification — alerts staff to investigate before situations escalate.</p>
+        </div>
+        <div class="card">
+          <h3>Headcount &amp; Movement Tracking</h3>
+          <p>Continuous anonymous headcounts by zone, updated in real time. Entry/exit logs for movement between areas. Eliminates manual count errors and provides a continuous record of population distribution across the facility.</p>
+        </div>
+        <div class="card">
+          <h3>Shift Transition Verification</h3>
+          <p>Automated monitoring during high-risk shift change periods. Ensures zone coverage continuity during staff handoffs. Verifies that incoming shift achieves required staffing ratios before outgoing staff depart zones.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Unattended Zone Detection</h3>
-        <p>Alerts when a zone containing youth has no staff presence for a configurable time threshold. Prevents unsupervised situations.</p>
-      </div>
-      <div class="card">
-        <h3>Restricted Area Monitoring</h3>
-        <p>Instant alerts when any person enters a restricted or off-limits zone. Configurable per zone, per time of day.</p>
-      </div>
-      <div class="card">
-        <h3>Incident Pattern Detection</h3>
-        <p>Detects clustering, rapid dispersal, or unusual dwell time patterns that may indicate developing incidents. Early warning without identification.</p>
-      </div>
-      <div class="card">
-        <h3>Headcount &amp; Movement Tracking</h3>
-        <p>Continuous anonymous headcounts by zone. Entry/exit logs for movement between areas. Eliminates manual count errors.</p>
-      </div>
-      <div class="card">
-        <h3>Shift Transition Verification</h3>
-        <p>Automated monitoring during high-risk shift change periods. Ensures zone coverage continuity and staff handoff compliance.</p>
-      </div>
+      <h3>Additional Correctional Applications</h3>
+      <ul>
+        <li><strong>Dayroom monitoring:</strong> Occupancy tracking, clustering alerts, staff presence verification</li>
+        <li><strong>Dining hall flow:</strong> Queue monitoring, seating zone occupancy, throughput analytics</li>
+        <li><strong>Recreation yard:</strong> Perimeter zone alerts, group formation detection, headcount verification</li>
+        <li><strong>Housing unit transitions:</strong> Movement flow monitoring, bottleneck detection, count verification</li>
+        <li><strong>Visitation areas:</strong> Visitor flow management, occupancy limits, zone separation compliance</li>
+        <li><strong>Medical unit:</strong> Patient movement tracking, waiting area occupancy, staff coverage verification</li>
+      </ul>
     </div>
   </div>
 
-  <!-- Privacy & Compliance -->
-  <div class="section section-alt">
-    <h2>BIPA Compliance &amp; Privacy Architecture</h2>
-    <p>VionOS.ai was designed from the ground up to comply with the Illinois Biometric Information Privacy Act (BIPA). The system architecture ensures zero biometric data collection at every layer:</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Privacy Requirement</th>
-          <th>VionOS.ai Implementation</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>No facial recognition</td>
-          <td>Skeletal pose estimation + bounding-box tracking only</td>
-        </tr>
-        <tr>
-          <td>No biometric data collection</td>
-          <td>Anonymous Person Tokens (SHA-256 hash, 4-hour TTL)</td>
-        </tr>
-        <tr>
-          <td>No PII storage</td>
-          <td>No names, faces, or identifiers — only spatial/behavioral data</td>
-        </tr>
-        <tr>
-          <td>No cloud transmission</td>
-          <td>All processing on local NVIDIA Jetson hardware</td>
-        </tr>
-        <tr>
-          <td>No video egress</td>
-          <td>Raw video frames never leave the facility network</td>
-        </tr>
-        <tr>
-          <td>Audit trail</td>
-          <td>Timestamped event logs with zone IDs and anonymous tokens</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="highlight">
-      <p><strong>BIPA Safe Harbor:</strong> Because VionOS.ai never collects, captures, or stores biometric identifiers or biometric information as defined in 740 ILCS 14/10, the system operates outside the scope of BIPA's consent and data retention requirements.</p>
+  <!-- BIPA Compliance -->
+  <div class="band band-gray">
+    <div class="inner">
+      <h2>BIPA Compliance &amp; Privacy Architecture</h2>
+      <p>VionOS.ai was designed from the ground up to comply with the Illinois Biometric Information Privacy Act (BIPA, 740 ILCS 14). The system architecture ensures zero biometric data collection at every layer of the technology stack.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Privacy Requirement</th>
+            <th>VionOS.ai Implementation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>No facial recognition</td>
+            <td>Skeletal pose estimation + bounding-box tracking only. No face detection, encoding, or matching algorithms.</td>
+          </tr>
+          <tr>
+            <td>No biometric data collection</td>
+            <td>Anonymous Person Tokens (SHA-256 hash, 4-hour TTL). No fingerprints, voiceprints, iris scans, or facial geometry.</td>
+          </tr>
+          <tr>
+            <td>No PII storage</td>
+            <td>No names, faces, voices, or identifiers. Only anonymous spatial and behavioral event data.</td>
+          </tr>
+          <tr>
+            <td>No cloud transmission</td>
+            <td>All processing on local NVIDIA Jetson hardware within the facility network perimeter.</td>
+          </tr>
+          <tr>
+            <td>No video recording/egress</td>
+            <td>Raw video frames processed in real time and discarded. Never stored, never transmitted outside facility.</td>
+          </tr>
+          <tr>
+            <td>Audit trail</td>
+            <td>Timestamped event logs with zone IDs and anonymous tokens. Configurable retention policies.</td>
+          </tr>
+          <tr>
+            <td>Data sovereignty</td>
+            <td>All data remains on facility-controlled hardware. No third-party data processors.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="highlight">
+        <p><strong>BIPA Safe Harbor:</strong> Because VionOS.ai never collects, captures, or stores biometric identifiers or biometric information as defined in 740 ILCS 14/10, the system operates outside the scope of BIPA's consent, disclosure, and data retention requirements. No written consent from monitored individuals is required.</p>
+      </div>
     </div>
   </div>
 
   <!-- Technical Architecture -->
-  <div class="section">
-    <h2>Technical Architecture</h2>
-    <h3>Edge Hardware</h3>
-    <ul>
-      <li><strong>NVIDIA Jetson Orin</strong> — Compact, energy-efficient edge AI computers</li>
-      <li>4-8 camera feeds per device (resolution/analytics dependent)</li>
-      <li>Works with existing IP camera infrastructure (RTSP streams)</li>
-      <li>No GPU servers or data center equipment required</li>
-    </ul>
-    <h3>AI Models</h3>
-    <ul>
-      <li>Person detection and counting (YOLO-based)</li>
-      <li>Skeletal pose estimation for behavior analysis</li>
-      <li>Zone occupancy and crossing detection</li>
-      <li>Anonymous Person Token generation (SHA-256, 4hr TTL)</li>
-    </ul>
-    <h3>Dashboard &amp; Alerts</h3>
-    <ul>
-      <li>Real-time web dashboard accessible on facility network</li>
-      <li>Configurable alert thresholds per zone</li>
-      <li>Email, SMS, and on-screen alert delivery</li>
-      <li>Historical zone occupancy and event reporting</li>
-    </ul>
+  <div class="band band-white">
+    <div class="inner">
+      <h2>Technical Architecture</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Edge Hardware</h3>
+          <ul>
+            <li>NVIDIA Jetson Orin — compact, energy-efficient</li>
+            <li>4-8 camera feeds per device</li>
+            <li>Works with existing IP cameras (RTSP)</li>
+            <li>No GPU servers or data center required</li>
+            <li>Rack-mountable or standalone deployment</li>
+            <li>Hardened for institutional environments</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>AI Models</h3>
+          <ul>
+            <li>YOLO-based person detection &amp; counting</li>
+            <li>Skeletal pose estimation for behavior</li>
+            <li>Zone occupancy &amp; crossing detection</li>
+            <li>Anonymous Person Token generation</li>
+            <li>Clustering &amp; dispersal pattern analysis</li>
+            <li>Configurable per zone and use case</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Dashboard &amp; Alerts</h3>
+          <ul>
+            <li>Real-time web dashboard (facility LAN)</li>
+            <li>Configurable alert thresholds per zone</li>
+            <li>Email, SMS, and on-screen alert delivery</li>
+            <li>Historical reporting &amp; trend analysis</li>
+            <li>Role-based access (admin, supervisor, CO)</li>
+            <li>Shift handoff reports</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Security &amp; Integration</h3>
+          <ul>
+            <li>Network-isolated deployment</li>
+            <li>Encrypted data at rest and in transit</li>
+            <li>REST API for facility management systems</li>
+            <li>Webhook event notifications</li>
+            <li>Compatible with existing VMS platforms</li>
+            <li>Optional centralized multi-facility view</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Engagement Process -->
-  <div class="section section-alt">
-    <h2>Engagement Process</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h4>Task Order</h4>
-        <p>Issue via TOPS Category Two (CMT4599470)</p>
+  <div class="band band-gray">
+    <div class="inner">
+      <h2>Engagement Process</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Task Order</h4>
+          <p>Issue via TOPS Category Two (CMT4599470)</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Assessment</h4>
+          <p>Facility, camera, and requirements evaluation</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Pilot</h4>
+          <p>On-premises pilot, 1-2 priority use cases</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Review</h4>
+          <p>Performance tuning, stakeholder sign-off</p>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h4>Scale</h4>
+          <p>Phased rollout to additional facilities</p>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h4>Assessment</h4>
-        <p>Facility, camera, and requirements evaluation</p>
+      <div class="highlight">
+        <p><strong>Procurement:</strong> IDJJ and IDOC can engage USSP through the TOPS Category Two contract (CMT4599470, BidBuy P-59947). USSP is an authorized subvendor to Krasan Consulting Services, the Primary Awardee. Agencies issue a Task Order through the existing TOPS vehicle — no separate RFP is needed. The contract is available through February 2034.</p>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h4>Pilot</h4>
-        <p>On-premises pilot, 1-2 use cases</p>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <h4>Review</h4>
-        <p>Performance tuning and sign-off</p>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <h4>Scale</h4>
-        <p>Phased rollout to more facilities</p>
-      </div>
-    </div>
-    <div class="highlight">
-      <p><strong>Procurement:</strong> Illinois state agencies can engage USSP through the TOPS Category Two contract (CMT4599470, BidBuy P-59947). USSP is an authorized subvendor to Krasan Consulting Services. No separate RFP required. Available through February 2034.</p>
+      <h3>Pilot Scope</h3>
+      <p>A typical pilot deployment covers 1-2 priority use cases (e.g., staff-to-youth ratio monitoring + unattended zone detection) in a single housing unit or dayroom. The pilot validates detection accuracy, alert reliability, and operational fit before committing to facility-wide deployment.</p>
+      <h3>Scaling Path</h3>
+      <p>After pilot validation, VionOS.ai scales incrementally — additional zones within the pilot facility, then to additional IDJJ/IDOC facilities. Each expansion follows the same assess-deploy-validate cycle. Centralized multi-facility dashboards are available for statewide oversight.</p>
     </div>
   </div>
 
   <!-- Why USSP -->
-  <div class="section">
-    <h2>Why USSP</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>20+ Years IT Expertise</h3>
-        <p>Established January 2003 in Chicago, IL. Two decades delivering technology solutions to government, healthcare, and enterprise clients.</p>
-      </div>
-      <div class="card">
-        <h3>MBE / WBE / DBE Certified</h3>
-        <p>Illinois BEP-certified Minority and Women Business Enterprise. IDOT-certified Disadvantaged Business Enterprise. Meets supplier diversity goals.</p>
-      </div>
-      <div class="card">
-        <h3>TOPS Category Two</h3>
-        <p>Authorized subvendor under CMT4599470. Pre-negotiated rates. Available through February 2034. No separate procurement needed.</p>
-      </div>
-      <div class="card">
-        <h3>End-to-End Delivery</h3>
-        <p>Assessment, pilot, deployment, and ongoing support. A single partner from initial evaluation to scaled operations across multiple facilities.</p>
+  <div class="band band-white">
+    <div class="inner">
+      <h2>Why USSP</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>20+ Years IT Expertise</h3>
+          <p>Established January 23, 2003 in Chicago, IL. Two decades delivering technology solutions to government agencies, healthcare organizations, and Fortune 500 enterprises.</p>
+        </div>
+        <div class="card">
+          <h3>MBE / WBE / DBE Certified</h3>
+          <p>Illinois BEP-certified Minority Business Enterprise (MBE) and Women Business Enterprise (WBE). IDOT-certified Disadvantaged Business Enterprise (DBE). Helps agencies meet supplier diversity goals.</p>
+        </div>
+        <div class="card">
+          <h3>TOPS Category Two</h3>
+          <p>Authorized subvendor under CMT4599470 to Krasan Consulting Services. Pre-negotiated rates. Available through February 2034. No separate procurement process required.</p>
+        </div>
+        <div class="card">
+          <h3>End-to-End Delivery</h3>
+          <p>Assessment, pilot, deployment, training, and ongoing support. A single partner from initial facility evaluation to scaled statewide operations across multiple IDJJ/IDOC facilities.</p>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <div class="footer">
-    <p><strong>US Software Professionals Inc. (USSP)</strong></p>
-    <p>875 N Michigan Ave, Suite 3100, Chicago, IL 60614</p>
-    <p>Phone: +1-(312) 546-4306 &bull; Fax: +1-(312) 253-2026</p>
-    <p>Email: accounts@ussoftwarepro.com &bull; Web: <a href="https://www.ussp.co">www.ussp.co</a></p>
-    <p style="margin-top: 12px; color: rgba(255,255,255,0.5);">MBE &bull; WBE &bull; DBE Certified &bull; TOPS Category Two Authorized Subvendor &bull; Since 2003</p>
+  <div class="band band-dark">
+    <div class="footer-inner">
+      <p><strong>US Software Professionals Inc. (USSP)</strong></p>
+      <p>875 N Michigan Ave, Suite 3100, Chicago, IL 60614</p>
+      <p>Phone: +1-(312) 546-4306 &bull; Fax: +1-(312) 253-2026</p>
+      <p>Email: accounts@ussoftwarepro.com &bull; Web: <a href="https://www.ussp.co/edge-ai">www.ussp.co/edge-ai</a></p>
+      <div class="footer-line">MBE &bull; WBE &bull; DBE Certified &bull; TOPS Category Two Authorized Subvendor (CMT4599470) &bull; Est. 2003</div>
+    </div>
   </div>
 
 </body>
