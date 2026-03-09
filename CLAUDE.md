@@ -65,6 +65,15 @@
 
 ## Architecture & File Map
 
+### Multi-Tenant Architecture
+
+This repo contains both the USSP website AND the shared platform backend (`@ussp-platform/core`).
+All sites share a single Supabase database with data isolated by `site_id` column.
+
+- **SITE_ID env var**: Every site must set `SITE_ID` (e.g. `ussp`, `vqlab`) — all queries auto-filter by it
+- **Shared package**: `packages/platform-core/` — queries, auth, API handlers used by all sites
+- **Site template**: `packages/site-template/` — scaffold for creating new site repos
+
 ### Critical Files That Contain Duplicated/Synced Content
 
 ```
@@ -73,11 +82,32 @@ D:/Code/ussp/
 ├── alembic.ini                        ← Alembic migration config
 ├── migrations/                        ← Database schema migrations (Alembic)
 │   ├── env.py                         ← Migration environment (reads DATABASE_URL)
-│   ├── models.py                      ← SQLAlchemy models (schema definition ONLY)
+│   ├── models.py                      ← SQLAlchemy models (multi-tenant schema)
 │   ├── script.py.mako                 ← Migration file template
 │   └── versions/                      ← Migration scripts (chronological)
+├── packages/
+│   ├── platform-core/                 ← SHARED NPM PACKAGE (@ussp-platform/core)
+│   │   ├── src/
+│   │   │   ├── index.ts               ← Re-exports all shared modules
+│   │   │   ├── config.ts              ← getSiteId(), getSiteConfig() from SITE_ID env var
+│   │   │   ├── supabase/server.ts     ← Service client
+│   │   │   ├── supabase/client.ts     ← Browser client
+│   │   │   ├── queries/jobs.ts        ← getActiveJobs(), getJobBySlug() — auto-filtered by site_id
+│   │   │   ├── queries/applications.ts ← createOrUpdateApplication(), updateJobAlerts()
+│   │   │   ├── queries/contact.ts     ← submitContactForm()
+│   │   │   ├── queries/analytics.ts   ← trackEvent()
+│   │   │   ├── auth/config.ts         ← createAuth() factory for NextAuth
+│   │   │   ├── api/applications.ts    ← API route handler (POST)
+│   │   │   ├── api/upload.ts          ← File upload handler (per-site storage path)
+│   │   │   ├── api/contact.ts         ← Contact form handler
+│   │   │   └── types/                 ← Shared TypeScript interfaces
+│   │   └── package.json
+│   └── site-template/                 ← SCAFFOLD for new site repos
+│       ├── .env.example               ← Required env vars template
+│       ├── package.json
+│       └── src/                       ← Minimal app structure with thin API wrappers
 ├── scripts/
-│   └── seed-jobs.ts                   ← Seed sample job positions into Supabase
+│   └── seed-jobs.ts                   ← Seed sample job positions (uses SITE_ID)
 ├── public/
 │   ├── llms.txt                       ← AI search: company summary (MUST sync with site content)
 │   ├── llms-full.txt                  ← AI search: full company details (MUST sync with site content)
@@ -104,11 +134,11 @@ D:/Code/ussp/
 │   │   ├── lca-page/page.tsx          ← LCA compliance
 │   │   └── discover1/page.tsx         ← Redirect to /discover
 │   ├── lib/
-│   │   ├── jobs.ts                    ← Job queries (getActiveJobs, getJobBySlug)
-│   │   ├── auth.ts                    ← NextAuth LinkedIn OAuth config
+│   │   ├── jobs.ts                    ← Re-exports from @ussp-platform/core (auto-filtered by site_id)
+│   │   ├── auth.ts                    ← createAuth() call from shared package
 │   │   └── supabase/
-│   │       ├── server.ts              ← Supabase service client (server-side)
-│   │       └── client.ts              ← Supabase anon client (browser)
+│   │       ├── server.ts              ← Re-exports from @ussp-platform/core
+│   │       └── client.ts              ← Re-exports from @ussp-platform/core
 │   └── components/
 │       ├── Header.tsx                 ← Navigation menu (navItems array)
 │       ├── Footer.tsx                 ← Footer links, address, "since 2003"
@@ -129,8 +159,9 @@ D:/Code/ussp/
 ### Overview
 
 - **Database:** Supabase PostgreSQL (project `hjpmenorokkbszcedpjr`, region `us-west-2`)
+- **Multi-tenancy:** All tenant tables have a `site_id` column (FK to `sites.id`). Application-level filtering is primary; RLS is a safety net.
 - **Migrations:** Alembic (Python) — same pattern as the InstantMarketing project
-- **Application queries:** Supabase JS client (`@supabase/supabase-js`) — NOT SQLAlchemy
+- **Application queries:** `@ussp-platform/core` package (wraps Supabase JS client, auto-injects `site_id`)
 - **Schema models:** SQLAlchemy models in `migrations/models.py` — used ONLY for Alembic migrations
 - **Version table:** `alembic_version_ussp` (separate from other projects sharing the same Supabase instance)
 
@@ -138,12 +169,21 @@ D:/Code/ussp/
 
 | Table | Purpose | Key Columns |
 |-------|---------|-------------|
-| `positions` | Job listings on careers page | `id`, `title`, `slug`, `location`, `type`, `description`, `active`, `created_at` |
-| `applications` | Job applications (LinkedIn OAuth) | `id`, `full_name`, `email`, `job_title`, `job_slug`, `resume_path`, `resume_name`, `auth_provider`, `created_at` |
+| `sites` | Site registry (multi-tenant) | `id` (PK, e.g. "ussp"), `name`, `domain`, `config` (JSONB), `active` |
+| `positions` | Job listings on careers page | `id`, `site_id` (FK), `title`, `slug`, `location`, `type`, `description`, `active`, `created_at` |
+| `applications` | Job applications (LinkedIn OAuth) | `id`, `site_id` (FK), `full_name`, `email`, `job_title`, `job_slug`, `resume_path`, `auth_provider`, `created_at` |
+| `application_positions` | Many-to-many junction | `id`, `application_id` (FK), `position_id` (FK), `applied_at` |
+| `contact_submissions` | Contact form entries | `id`, `site_id` (FK), `name`, `email`, `phone`, `message`, `created_at` |
+| `analytics_events` | Lightweight analytics | `id`, `site_id` (FK), `event_type`, `page_path`, `referrer`, `metadata` (JSONB), `created_at` |
 
 ### Connection Strings (in `.env.local`)
 
 ```
+# Multi-tenant platform
+SITE_ID=ussp
+SITE_NAME=US Software Professionals Inc.
+SITE_DOMAIN=www.ussp.co
+
 # Supabase REST API (used by Next.js app)
 NEXT_PUBLIC_SUPABASE_URL=https://hjpmenorokkbszcedpjr.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
@@ -235,9 +275,21 @@ The seed script reads `.env.local` for Supabase credentials and upserts on `slug
 
 1. **Always use Alembic for schema changes** — never use the Supabase dashboard SQL editor for DDL
 2. **Keep `migrations/models.py` in sync** — it must match the actual database schema
-3. **Keep TypeScript interfaces in sync** — `src/lib/jobs.ts` must match the database columns
+3. **Keep TypeScript interfaces in sync** — `packages/platform-core/src/types/database.ts` must match the database columns
 4. **Migration files are append-only** — never edit an existing migration that has been applied
 5. **Test locally before pushing** — run `alembic upgrade head` to verify the migration works
+6. **Always include `site_id`** — every new tenant table MUST have a `site_id` column with FK to `sites.id`
+7. **Rebuild platform-core after changes** — run `cd packages/platform-core && npx tsc` before `npm run build`
+
+### Onboarding a New Site
+
+1. Insert into `sites` table: `INSERT INTO sites (id, name, domain) VALUES ('newsite', 'Company Name', 'www.newsite.com');`
+2. Copy `packages/site-template/` to a new repo
+3. Set `SITE_ID=newsite` in `.env.local` and hosting env vars
+4. Set Supabase credentials (shared instance)
+5. Set unique `AUTH_SECRET` and LinkedIn OAuth credentials
+6. Customize design, pages, and content (all unique per site)
+7. Deploy to Railway (or similar)
 
 ---
 
@@ -603,6 +655,9 @@ These variables MUST be set in Railway dashboard (or via `railway variables --se
 
 | Variable | Purpose | Value |
 |----------|---------|-------|
+| `SITE_ID` | Multi-tenant site identifier | `ussp` |
+| `SITE_NAME` | Display name | `US Software Professionals Inc.` |
+| `SITE_DOMAIN` | Production domain | `www.ussp.co` |
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase REST API | `https://hjpmenorokkbszcedpjr.supabase.co` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public key | (from Supabase dashboard) |
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service key (server-side only) | (from Supabase dashboard) |
@@ -709,6 +764,8 @@ Examples:
 | Add social media links | `layout.tsx` JSON-LD `sameAs` array, `Footer.tsx`, `llms.txt` |
 | Add a new AI crawler | `robots.txt` - add `User-agent` + `Allow: /` block |
 | Update founding year claim | NEVER - it's 2003, verify with Registration #62642807 |
-| Add a database column | `migrations/models.py` (SQLAlchemy model), new Alembic migration, `src/lib/jobs.ts` (TypeScript interface + query), `scripts/seed-jobs.ts` (if positions table) |
-| Add a new database table | `migrations/models.py` (new class), new Alembic migration, new query file in `src/lib/`, new API route in `src/app/api/` |
-| Add/update job positions | Run `npx tsx scripts/seed-jobs.ts` (upserts on slug), or edit positions in Supabase dashboard for one-off changes |
+| Add a database column | `migrations/models.py` (SQLAlchemy model), new Alembic migration, `packages/platform-core/src/types/database.ts` (TypeScript interface), update query in `packages/platform-core/src/queries/`, rebuild package, `scripts/seed-jobs.ts` (if positions table) |
+| Add a new database table | `migrations/models.py` (new class, include `site_id`), new Alembic migration, new query file in `packages/platform-core/src/queries/`, new API handler in `packages/platform-core/src/api/`, rebuild package |
+| Add/update job positions | Run `npx tsx scripts/seed-jobs.ts` (upserts on `site_id,slug`), or edit positions in Supabase dashboard for one-off changes |
+| Onboard a new site | See "Onboarding a New Site" in Database Management section |
+| Modify shared backend | Edit `packages/platform-core/src/`, run `cd packages/platform-core && npx tsc`, then rebuild all sites |

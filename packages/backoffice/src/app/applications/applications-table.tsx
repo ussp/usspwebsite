@@ -1,0 +1,84 @@
+"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import DataTable from "@/components/DataTable";
+import StatusBadge from "@/components/StatusBadge";
+import type { AdminApplication } from "@ussp-platform/core/types/admin";
+
+const STATUSES = [
+  "all",
+  "new",
+  "screening",
+  "interview",
+  "offer",
+  "hired",
+  "rejected",
+  "withdrawn",
+];
+
+export function ApplicationsTable({
+  applications,
+}: {
+  applications: AdminApplication[];
+}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentStatus = searchParams.get("status") || "all";
+
+  function setFilter(status: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (status === "all") {
+      params.delete("status");
+    } else {
+      params.set("status", status);
+    }
+    router.push(`/applications?${params.toString()}`);
+  }
+
+  const columns = [
+    { key: "full_name", label: "Name", sortable: true },
+    { key: "email", label: "Email", sortable: true },
+    { key: "job_title", label: "Position", sortable: true },
+    {
+      key: "status",
+      label: "Status",
+      render: (row: AdminApplication) => (
+        <StatusBadge status={row.status || "new"} />
+      ),
+    },
+    {
+      key: "created_at",
+      label: "Applied",
+      sortable: true,
+      render: (row: AdminApplication) =>
+        new Date(row.created_at).toLocaleDateString(),
+    },
+  ];
+
+  return (
+    <>
+      <div className="flex gap-2 mb-4 flex-wrap">
+        {STATUSES.map((s) => (
+          <button
+            key={s}
+            onClick={() => setFilter(s)}
+            className={`px-3 py-1.5 text-xs rounded-full capitalize transition-colors ${
+              currentStatus === s
+                ? "bg-primary text-white"
+                : "bg-white border border-light-gray text-dark/60 hover:bg-light-gray"
+            }`}
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+      <DataTable
+        columns={columns}
+        data={applications}
+        keyField="id"
+        onRowClick={(row) => router.push(`/applications/${row.id}`)}
+        emptyMessage="No applications found"
+      />
+    </>
+  );
+}

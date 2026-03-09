@@ -33,15 +33,28 @@ export default function ProcessTimeline({
 
         <div className="relative">
           {/* Connector line */}
-          <div className="hidden md:block absolute top-8 left-[8%] right-[8%] h-0.5 bg-primary/20" />
+          <div className="hidden md:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-primary/20" />
 
-          <div className={`grid grid-cols-1 gap-8 ${
-            steps.length <= 4
-              ? "md:grid-cols-2 lg:grid-cols-4"
-              : steps.length === 5
-                ? "md:grid-cols-3 lg:grid-cols-5"
-                : "md:grid-cols-3 lg:grid-cols-6"
-          }`}>
+          <div className="hidden md:flex justify-evenly">
+            {steps.map((step) => (
+              <div key={step.number} className="relative text-center max-w-[180px]">
+                <div className="w-16 h-16 mx-auto bg-primary text-white rounded-full flex items-center justify-center text-xl font-[family-name:var(--font-alata)] font-bold mb-4 relative z-10">
+                  {step.number}
+                </div>
+                <h3 className="font-[family-name:var(--font-alata)] text-sm font-bold mb-2">
+                  {step.title}
+                </h3>
+                {step.description && (
+                  <p className="text-xs text-dark/60 font-[family-name:var(--font-montserrat)]">
+                    {step.description}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile: single column */}
+          <div className="md:hidden grid grid-cols-1 gap-8">
             {steps.map((step) => (
               <div key={step.number} className="relative text-center">
                 <div className="w-16 h-16 mx-auto bg-primary text-white rounded-full flex items-center justify-center text-xl font-[family-name:var(--font-alata)] font-bold mb-4 relative z-10">

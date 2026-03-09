@@ -1,0 +1,150 @@
+{
+  "name": "@ussp-platform/core",
+  "version": "0.1.0",
+  "description": "Shared backend for the USSP multi-tenant platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./config": {
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js",
+      "default": "./src/config.ts"
+    },
+    "./supabase/server": {
+      "types": "./dist/supabase/server.d.ts",
+      "import": "./dist/supabase/server.js",
+      "default": "./src/supabase/server.ts"
+    },
+    "./supabase/client": {
+      "types": "./dist/supabase/client.d.ts",
+      "import": "./dist/supabase/client.js",
+      "default": "./src/supabase/client.ts"
+    },
+    "./queries/jobs": {
+      "types": "./dist/queries/jobs.d.ts",
+      "import": "./dist/queries/jobs.js",
+      "default": "./src/queries/jobs.ts"
+    },
+    "./queries/applications": {
+      "types": "./dist/queries/applications.d.ts",
+      "import": "./dist/queries/applications.js",
+      "default": "./src/queries/applications.ts"
+    },
+    "./queries/contact": {
+      "types": "./dist/queries/contact.d.ts",
+      "import": "./dist/queries/contact.js",
+      "default": "./src/queries/contact.ts"
+    },
+    "./queries/analytics": {
+      "types": "./dist/queries/analytics.d.ts",
+      "import": "./dist/queries/analytics.js",
+      "default": "./src/queries/analytics.ts"
+    },
+    "./auth/config": {
+      "types": "./dist/auth/config.d.ts",
+      "import": "./dist/auth/config.js",
+      "default": "./src/auth/config.ts"
+    },
+    "./api/applications": {
+      "types": "./dist/api/applications.d.ts",
+      "import": "./dist/api/applications.js",
+      "default": "./src/api/applications.ts"
+    },
+    "./api/upload": {
+      "types": "./dist/api/upload.d.ts",
+      "import": "./dist/api/upload.js",
+      "default": "./src/api/upload.ts"
+    },
+    "./api/contact": {
+      "types": "./dist/api/contact.d.ts",
+      "import": "./dist/api/contact.js",
+      "default": "./src/api/contact.ts"
+    },
+    "./types/database": {
+      "types": "./dist/types/database.d.ts",
+      "import": "./dist/types/database.js",
+      "default": "./src/types/database.ts"
+    },
+    "./types/site": {
+      "types": "./dist/types/site.d.ts",
+      "import": "./dist/types/site.js",
+      "default": "./src/types/site.ts"
+    },
+    "./types/admin": {
+      "types": "./dist/types/admin.d.ts",
+      "import": "./dist/types/admin.js",
+      "default": "./src/types/admin.ts"
+    },
+    "./auth/admin-config": {
+      "types": "./dist/auth/admin-config.d.ts",
+      "import": "./dist/auth/admin-config.js",
+      "default": "./src/auth/admin-config.ts"
+    },
+    "./auth/rbac": {
+      "types": "./dist/auth/rbac.d.ts",
+      "import": "./dist/auth/rbac.js",
+      "default": "./src/auth/rbac.ts"
+    },
+    "./queries/admin/positions": {
+      "types": "./dist/queries/admin/positions.d.ts",
+      "import": "./dist/queries/admin/positions.js",
+      "default": "./src/queries/admin/positions.ts"
+    },
+    "./queries/admin/applications": {
+      "types": "./dist/queries/admin/applications.d.ts",
+      "import": "./dist/queries/admin/applications.js",
+      "default": "./src/queries/admin/applications.ts"
+    },
+    "./queries/admin/staff": {
+      "types": "./dist/queries/admin/staff.d.ts",
+      "import": "./dist/queries/admin/staff.js",
+      "default": "./src/queries/admin/staff.ts"
+    },
+    "./queries/admin/contacts": {
+      "types": "./dist/queries/admin/contacts.d.ts",
+      "import": "./dist/queries/admin/contacts.js",
+      "default": "./src/queries/admin/contacts.ts"
+    },
+    "./queries/admin/dashboard": {
+      "types": "./dist/queries/admin/dashboard.d.ts",
+      "import": "./dist/queries/admin/dashboard.js",
+      "default": "./src/queries/admin/dashboard.ts"
+    },
+    "./queries/admin/audit": {
+      "types": "./dist/queries/admin/audit.d.ts",
+      "import": "./dist/queries/admin/audit.js",
+      "default": "./src/queries/admin/audit.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@supabase/supabase-js": "^2.98.0",
+    "next": ">=15.0.0",
+    "next-auth": ">=5.0.0-beta.25"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ussp/usspwebsite.git",
+    "directory": "packages/platform-core"
+  }
+}

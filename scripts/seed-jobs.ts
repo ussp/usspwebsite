@@ -29,10 +29,12 @@ if (!supabaseUrl || !supabaseKey) {
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+const siteId = process.env.SITE_ID || "ussp";
 const now = new Date().toISOString();
 
 const sampleJobs = [
   {
+    site_id: siteId,
     title: "Senior Software Engineer",
     slug: "senior-software-engineer",
     location: "Chicago, IL / Remote",
@@ -72,6 +74,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "Full-Stack Developer",
     slug: "full-stack-developer",
     location: "Chicago, IL / Remote",
@@ -111,6 +114,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "DevOps Engineer",
     slug: "devops-engineer",
     location: "Chicago, IL / Remote",
@@ -150,6 +154,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "QA Engineer",
     slug: "qa-engineer",
     location: "Chicago, IL",
@@ -188,6 +193,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "IT Consultant",
     slug: "it-consultant",
     location: "Chicago, IL / Springfield, IL",
@@ -226,6 +232,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "Solution Architect",
     slug: "solution-architect",
     location: "Chicago, IL",
@@ -264,6 +271,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "Business Analyst",
     slug: "business-analyst",
     location: "Chicago, IL / Remote",
@@ -303,6 +311,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "Project Manager",
     slug: "project-manager",
     location: "Chicago, IL",
@@ -341,6 +350,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "Data Analyst",
     slug: "data-analyst",
     location: "Chicago, IL / Remote",
@@ -380,6 +390,7 @@ const sampleJobs = [
 - Collaborative, innovation-driven culture since 2003`,
   },
   {
+    site_id: siteId,
     title: "AI/ML Engineer",
     slug: "ai-ml-engineer",
     location: "Chicago, IL / Remote",
@@ -420,6 +431,55 @@ const sampleJobs = [
 - Professional development budget and career growth paths
 - Collaborative, innovation-driven culture since 2003`,
   },
+  {
+    site_id: siteId,
+    title: "Azure AI & Integration Developer (Intelligent Document Processing)",
+    slug: "azure-ai-integration-developer-idp",
+    location: "Chicago, IL / Remote",
+    type: "Contract",
+    posted_at: now,
+    active: true,
+    description: `We are seeking a specialized Azure AI & Integration Developer to architect and build the core intelligent processing engine for a high-profile government document digitization and redaction initiative. You will focus on developing the backend "brain" of the operation — training and deploying Azure Document Intelligence models to extract critical metadata, designing a policy-driven automated redaction engine, and building secure, scalable APIs for front-end consumption. This is a strict 4-month engagement requiring deep expertise in cloud-native architectures, AI/ML services, and enterprise-grade security.
+
+**Intelligent Metadata Extraction & Document Understanding**
+- Design & train custom Azure Document Intelligence (formerly Form Recognizer) models to extract predefined metadata fields (case number, name, dates, document types) from scanned and decontaminated documents
+- Build and refine serverless processing pipelines using Azure Functions for document intake, OCR enhancement, and data extraction at scale
+- Implement validation routines to assess and improve extraction model accuracy, with attention to damaged or poor-quality source documents
+
+**Policy-Driven Redaction Engine Development**
+- Architect a flexible, rules-based redaction engine that programmatically identifies and obscures PII and sensitive data according to configurable compliance policies (HIPAA, GDPR, CCPA)
+- Build comprehensive audit trail logging for every redaction action — timestamps, policy applied, and legal justification
+- Automate policy annotation of redacted documents with legal basis and policy references
+
+**Secure API Development & System Integration**
+- Build and document robust RESTful APIs using .NET Core/C# to expose extracted metadata, redacted documents, and processing status
+- Configure Azure Key Vault for secrets management and implement Managed Identities for password-less service-to-service authentication
+- Integrate with Azure Blob Storage, Cosmos DB/SQL Server, and Logic Apps for workflow orchestration
+
+**Performance Tuning & Cloud Cost Management**
+- Architect for scalability using Azure App Services or containerization (AKS/ASE) to handle fluctuating document volumes
+- Monitor and tune AI model and pipeline performance for speed and cost optimization
+
+**Required Qualifications**
+- 7+ years of software development, with 3+ years focused on Azure AI and cognitive services
+- Proven hands-on experience with Azure Document Intelligence (Form Recognizer) — building and training custom models
+- Strong experience with Azure Functions, Azure Logic Apps, and Azure Blob Storage
+- Expert-level proficiency in .NET Core / C# for backend services and APIs
+- Strong RESTful API design experience
+- Proficiency with SQL Server, Entity Framework Core, or Cosmos DB
+- Experience implementing Azure Key Vault, Managed Identities, and RBAC
+- Ability to work independently and deliver high-quality code within a fast-paced timeline
+
+**Nice to Have**
+- Experience handling sensitive data (PII/PHI) in regulated environments (HIPAA, GDPR, CJIS)
+- Government project experience
+
+**What We Offer**
+- Cross-industry project exposure: government, healthcare, Fortune 500, startups
+- Competitive contract rates
+- Professional development and career growth paths
+- Collaborative, innovation-driven culture since 2003`,
+  },
 ];
 
 async function seed() {
@@ -427,7 +487,7 @@ async function seed() {
 
   const { data, error } = await supabase
     .from("positions")
-    .upsert(sampleJobs, { onConflict: "slug" })
+    .upsert(sampleJobs, { onConflict: "site_id,slug" })
     .select();
 
   if (error) {

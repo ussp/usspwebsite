@@ -43,3 +43,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# platform-core compiled output
+packages/*/dist/
+
+# nested node_modules in packages
+packages/*/node_modules/
+
+# local staging / scratch files
+positions_staging/
+requirments/

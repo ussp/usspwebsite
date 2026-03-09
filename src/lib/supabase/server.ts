@@ -1,8 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
-
-export function getServiceClient() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
+// Re-export from shared platform package
+// SITE_ID env var must be set (e.g. "ussp")
+export { getServiceClient } from "@ussp-platform/core/supabase/server";
