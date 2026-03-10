@@ -87,15 +87,44 @@ Open http://localhost:3001
 
 ## Railway Deployment
 
+### Monorepo Strategy
+
+Both the public site and back office deploy from the **same GitHub repo** as separate Railway services. Because the back office depends on `@ussp-platform/core` (a shared package via `file:../platform-core`), the full repo must be available at build time.
+
+**Do NOT use Root Directory** for services that depend on shared packages. Instead, use Custom Build/Start Commands per service. This ensures the full monorepo is available during the build.
+
 ### Service Setup
 
 1. In your Railway project, click **"+ New Service"** > select the same GitHub repo
-2. **Settings > Source > Root Directory**: `packages/backoffice`
+2. **Settings > Source**:
+   - **Root Directory**: Leave **empty** (do NOT set to `packages/backoffice`)
+   - Connect to GitHub repo and `main` branch
 3. **Settings > Build**:
-   - Builder: **Railpack** (default)
-   - Custom Build Command: `cd ../platform-core && npx tsc && cd ../backoffice && npm run build`
-   - Custom Start Command: `npm run start`
+   - Builder: **Nixpacks** (set via `railway.toml` in repo root)
+   - Custom Build Command: `cd packages/platform-core && npx tsc && cd ../backoffice && next build`
+   - Custom Start Command: `cd packages/backoffice && npm run start`
 4. **Settings > Networking**: Add custom domain `app.ussp.co`, port `3000`
+
+> **Why no Root Directory?** Railway's Root Directory strips the build context to only that subdirectory. Since the back office imports from `@ussp-platform/core` (at `packages/platform-core/`), the shared package wouldn't be available if the context is limited to `packages/backoffice/`.
+
+### Public Site Service (`ussp`)
+
+The public site service uses similar settings:
+
+| Setting | Value |
+|---------|-------|
+| Root Directory | Empty |
+| Custom Build Command | `cd packages/platform-core && npx tsc && cd ../.. && next build` |
+| Custom Start Command | `npm run start` |
+
+### Configuration Files
+
+The repo includes these Railway/Nixpacks config files:
+
+| File | Purpose |
+|------|---------|
+| `railway.toml` | Tells Railway to use Nixpacks builder for public site |
+| `nixpacks.toml` | Build phases for public site (compiles platform-core first) |
 
 ### Environment Variables
 
@@ -120,6 +149,19 @@ railway variables \
 ### DNS
 
 Point `app.ussp.co` CNAME to the Railway-provided domain.
+
+### Deploying
+
+**Auto-deploy:** Both services auto-deploy when you push to `main`.
+
+**Manual deploy via CLI:**
+```bash
+# Deploy backoffice
+railway service app && railway up
+
+# Deploy public site
+railway service ussp && railway up
+```
 
 ### Verify
 

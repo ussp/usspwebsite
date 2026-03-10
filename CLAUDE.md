@@ -701,12 +701,12 @@ public/assets/logos/     ← Company and partner logos (SVG preferred)
 
 ### Hosting
 
-Both services are deployed on Railway from the same repo (`ussp/usspwebsite`), each with a different Root Directory.
+Both services are deployed on Railway from the same repo (`ussp/usspwebsite`). **Do NOT use Root Directory** — both services need the full repo available because the back office depends on `@ussp-platform/core` (shared package at `packages/platform-core/`). Instead, use Custom Build/Start Commands per service.
 
-| Service | Root Directory | Domain | Port |
-|---------|---------------|--------|------|
-| `ussp` (public site) | `/` (repo root) | `www.ussp.co` | 3000 |
-| `app` (back office) | `packages/backoffice` | `app.ussp.co` | 3000 |
+| Service | Root Directory | Custom Build Command | Custom Start Command | Domain |
+|---------|---------------|---------------------|---------------------|--------|
+| `ussp` (public site) | Empty | `cd packages/platform-core && npx tsc && cd ../.. && next build` | `npm run start` | `www.ussp.co` |
+| `app` (back office) | Empty | `cd packages/platform-core && npx tsc && cd ../backoffice && next build` | `cd packages/backoffice && npm run start` | `app.ussp.co` |
 
 ### Railway Environment Variables — Public Site (`ussp` service)
 
@@ -742,9 +742,16 @@ Both services are deployed on Railway from the same repo (`ussp/usspwebsite`), e
 | `PORT` | HTTP port | `3000` |
 
 **Back-office Railway build config:**
-- Builder: Railpack (default)
-- Custom Build Command: `cd ../platform-core && npx tsc && cd ../backoffice && npm run build`
-- Custom Start Command: `npm run start`
+- Builder: Nixpacks
+- Root Directory: Empty (full repo needed for shared package)
+- Custom Build Command: `cd packages/platform-core && npx tsc && cd ../backoffice && next build`
+- Custom Start Command: `cd packages/backoffice && npm run start`
+
+**Manual deploy via CLI:**
+```bash
+railway service app && railway up    # Back office
+railway service ussp && railway up   # Public site
+```
 
 ### LinkedIn OAuth Setup (Public Site)
 
