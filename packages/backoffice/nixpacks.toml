@@ -1,0 +1,13 @@
+# Railpack configuration for Railway deployment (Back Office)
+
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["cd ../platform-core && npx tsc && cd ../backoffice && next build"]
+
+[start]
+cmd = "npm run start"

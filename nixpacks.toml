@@ -7,7 +7,7 @@ nixPkgs = ["nodejs_20"]
 cmds = ["npm ci"]
 
 [phases.build]
-cmds = ["npm run build"]
+cmds = ["cd packages/platform-core && npx tsc && cd ../.. && next build"]
 
 [start]
 cmd = "npm start"
