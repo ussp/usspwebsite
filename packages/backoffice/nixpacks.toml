@@ -1,9 +1,0 @@
-# Nixpacks configuration for USSP Back Office
-[phases.setup]
-nixPkgs = ["nodejs_20"]
-
-[phases.build]
-cmds = ["cd packages/backoffice && npm install", "cd packages/platform-core && npx tsc && cd ../backoffice && npm run build"]
-
-[start]
-cmd = "cd packages/backoffice && npm run start"
