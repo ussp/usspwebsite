@@ -1,13 +1,9 @@
-# Nixpacks configuration for Railway deployment (Next.js)
-
+# Nixpacks configuration for USSP public site
 [phases.setup]
 nixPkgs = ["nodejs_20"]
 
-[phases.install]
-cmds = ["npm ci"]
-
 [phases.build]
-cmds = ["cd packages/platform-core && npx tsc && cd ../.. && next build"]
+cmds = ["npm install", "cd packages/platform-core && npx tsc && cd ../.. && npm run build"]
 
 [start]
-cmd = "npm start"
+cmd = "npm run start"
