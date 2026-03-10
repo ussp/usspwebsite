@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3001",
-    "build": "next build",
+    "build": "cd ../platform-core && npx tsc && cd ../backoffice && next build",
     "start": "next start -p ${PORT:-3001}",
     "lint": "eslint"
   },
