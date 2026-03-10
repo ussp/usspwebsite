@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd packages/platform-core && npx tsc && cd ../backoffice && next build"
+
+[deploy]
+startCommand = "cd packages/backoffice && npm run start"
+healthcheckPath = "/login"
+healthcheckTimeout = 300
