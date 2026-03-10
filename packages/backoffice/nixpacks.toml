@@ -3,7 +3,7 @@
 nixPkgs = ["nodejs_20"]
 
 [phases.build]
-cmds = ["npm install", "cd ../platform-core && npx tsc && cd ../backoffice && npm run build"]
+cmds = ["cd packages/backoffice && npm install", "cd packages/platform-core && npx tsc && cd ../backoffice && npm run build"]
 
 [start]
-cmd = "npm run start"
+cmd = "cd packages/backoffice && npm run start"
