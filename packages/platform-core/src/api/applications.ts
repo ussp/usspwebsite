@@ -1,25 +1,32 @@
-import { NextRequest, NextResponse } from "next/server";
 import { createOrUpdateApplication } from "../queries/applications.js";
+import type { ApiResponse } from "./upload.js";
 
-export async function handleApplicationPost(req: NextRequest): Promise<NextResponse> {
+export async function handleApplication(body: Record<string, unknown>): Promise<ApiResponse> {
   try {
-    const body = await req.json();
+    const { fullName, email, jobTitle, jobSlug, phone, smsConsent, applicantType } = body as {
+      fullName?: string;
+      email?: string;
+      jobTitle?: string;
+      jobSlug?: string;
+      phone?: string;
+      smsConsent?: boolean;
+      applicantType?: string;
+    };
 
-    const { fullName, email, jobTitle, jobSlug, phone, smsConsent, applicantType } = body;
     if (!fullName || !email || !jobTitle || !jobSlug || !phone) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return { status: 400, body: { error: "Missing required fields" } };
     }
 
     if (!smsConsent) {
-      return NextResponse.json({ error: "SMS consent is required" }, { status: 400 });
+      return { status: 400, body: { error: "SMS consent is required" } };
     }
 
     if (applicantType === "vendor") {
       if (!body.expectedBillRate) {
-        return NextResponse.json({ error: "Expected bill rate is required for vendor submissions" }, { status: 400 });
+        return { status: 400, body: { error: "Expected bill rate is required for vendor submissions" } };
       }
       if (!body.availabilityDate) {
-        return NextResponse.json({ error: "Availability date is required for vendor submissions" }, { status: 400 });
+        return { status: 400, body: { error: "Availability date is required for vendor submissions" } };
       }
     }
 
@@ -29,26 +36,26 @@ export async function handleApplicationPost(req: NextRequest): Promise<NextRespo
       jobTitle,
       jobSlug,
       phone,
-      resumePath: body.resumePath,
-      resumeName: body.resumeName,
-      authProvider: body.authProvider,
-      linkedinSub: body.linkedinSub,
-      givenName: body.givenName,
-      familyName: body.familyName,
-      profilePicture: body.profilePicture,
-      locale: body.locale,
-      emailVerified: body.emailVerified,
-      applicantType: applicantType || "employee",
-      expectedBillRate: body.expectedBillRate || null,
-      availabilityDate: body.availabilityDate || null,
+      resumePath: body.resumePath as string | null,
+      resumeName: body.resumeName as string | null,
+      authProvider: body.authProvider as string,
+      linkedinSub: body.linkedinSub as string | null,
+      givenName: body.givenName as string | null,
+      familyName: body.familyName as string | null,
+      profilePicture: body.profilePicture as string | null,
+      locale: body.locale as string | null,
+      emailVerified: body.emailVerified as boolean | null,
+      applicantType: (applicantType as "employee" | "vendor") || "employee",
+      expectedBillRate: (body.expectedBillRate as string) || null,
+      availabilityDate: (body.availabilityDate as string) || null,
     });
 
     if (!result.success) {
-      return NextResponse.json({ error: result.error }, { status: 500 });
+      return { status: 500, body: { error: result.error } };
     }
 
-    return NextResponse.json({ success: true });
+    return { status: 200, body: { success: true } };
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return { status: 500, body: { error: "Internal server error" } };
   }
 }

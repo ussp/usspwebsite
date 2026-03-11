@@ -1,4 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "../supabase/server.js";
 import { getSiteConfig } from "../config.js";
 
@@ -9,20 +8,29 @@ const ALLOWED_TYPES = [
 ];
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
-export async function handleUploadPost(req: NextRequest): Promise<NextResponse> {
+export interface ApiResponse {
+  status: number;
+  body: Record<string, unknown>;
+}
+
+export async function handleUpload(input: {
+  fileName: string;
+  fileType: string;
+  fileSize: number;
+}): Promise<ApiResponse> {
   try {
-    const { fileName, fileType, fileSize } = await req.json();
+    const { fileName, fileType, fileSize } = input;
 
     if (!fileName || !fileType || !fileSize) {
-      return NextResponse.json({ error: "Missing file info" }, { status: 400 });
+      return { status: 400, body: { error: "Missing file info" } };
     }
 
     if (!ALLOWED_TYPES.includes(fileType)) {
-      return NextResponse.json({ error: "Only PDF, DOC, and DOCX files are allowed" }, { status: 400 });
+      return { status: 400, body: { error: "Only PDF, DOC, and DOCX files are allowed" } };
     }
 
     if (fileSize > MAX_SIZE) {
-      return NextResponse.json({ error: "File must be under 5MB" }, { status: 400 });
+      return { status: 400, body: { error: "File must be under 5MB" } };
     }
 
     const supabase = getServiceClient();
@@ -36,15 +44,20 @@ export async function handleUploadPost(req: NextRequest): Promise<NextResponse> 
       .createSignedUploadUrl(path);
 
     if (error) {
-      return NextResponse.json({ error: "Failed to generate upload URL" }, { status: 500 });
+      console.error("Upload signed URL error:", error.message);
+      return { status: 500, body: { error: "Failed to generate upload URL" } };
     }
 
-    return NextResponse.json({
-      signedUrl: data.signedUrl,
-      token: data.token,
-      path,
-    });
-  } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return {
+      status: 200,
+      body: {
+        signedUrl: data.signedUrl,
+        token: data.token,
+        path,
+      },
+    };
+  } catch (err) {
+    console.error("Upload API error:", err);
+    return { status: 500, body: { error: "Internal server error" } };
   }
 }

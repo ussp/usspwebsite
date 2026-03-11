@@ -1,28 +1,31 @@
-import { NextRequest, NextResponse } from "next/server";
 import { submitContactForm } from "../queries/contact.js";
+import type { ApiResponse } from "./upload.js";
 
-export async function handleContactPost(req: NextRequest): Promise<NextResponse> {
+export async function handleContact(body: Record<string, unknown>): Promise<ApiResponse> {
   try {
-    const body = await req.json();
+    const { name, email, message } = body as {
+      name?: string;
+      email?: string;
+      message?: string;
+    };
 
-    const { name, email, message } = body;
     if (!name || !email || !message) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return { status: 400, body: { error: "Missing required fields" } };
     }
 
     const result = await submitContactForm({
       name,
       email,
-      phone: body.phone,
+      phone: body.phone as string | undefined,
       message,
     });
 
     if (!result.success) {
-      return NextResponse.json({ error: result.error }, { status: 500 });
+      return { status: 500, body: { error: result.error } };
     }
 
-    return NextResponse.json({ success: true });
+    return { status: 200, body: { success: true } };
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return { status: 500, body: { error: "Internal server error" } };
   }
 }

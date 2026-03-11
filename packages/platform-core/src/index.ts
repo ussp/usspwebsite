@@ -18,9 +18,10 @@ export { createAdminAuth } from "./auth/admin-config.js";
 export { hasPermission, requirePermission } from "./auth/rbac.js";
 
 // API handlers
-export { handleApplicationPost } from "./api/applications.js";
-export { handleUploadPost } from "./api/upload.js";
-export { handleContactPost } from "./api/contact.js";
+export { handleApplication } from "./api/applications.js";
+export { handleUpload } from "./api/upload.js";
+export { handleContact } from "./api/contact.js";
+export type { ApiResponse } from "./api/upload.js";
 
 // Types
 export type { Job, Application, ContactSubmission, AnalyticsEvent, Article, CaseStudyData } from "./types/database.js";

@@ -1,6 +1,8 @@
-import { NextRequest } from "next/server";
-import { handleApplicationPost } from "@ussp-platform/core/api/applications";
+import { NextRequest, NextResponse } from "next/server";
+import { handleApplication } from "@ussp-platform/core/api/applications";
 
 export async function POST(req: NextRequest) {
-  return handleApplicationPost(req);
+  const body = await req.json();
+  const result = await handleApplication(body);
+  return NextResponse.json(result.body, { status: result.status });
 }

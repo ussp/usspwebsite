@@ -8,127 +8,127 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "default": "./src/index.ts"
+      "default": "./dist/index.js"
     },
     "./config": {
       "types": "./dist/config.d.ts",
       "import": "./dist/config.js",
-      "default": "./src/config.ts"
+      "default": "./dist/config.js"
     },
     "./supabase/server": {
       "types": "./dist/supabase/server.d.ts",
       "import": "./dist/supabase/server.js",
-      "default": "./src/supabase/server.ts"
+      "default": "./dist/supabase/server.js"
     },
     "./supabase/client": {
       "types": "./dist/supabase/client.d.ts",
       "import": "./dist/supabase/client.js",
-      "default": "./src/supabase/client.ts"
+      "default": "./dist/supabase/client.js"
     },
     "./queries/jobs": {
       "types": "./dist/queries/jobs.d.ts",
       "import": "./dist/queries/jobs.js",
-      "default": "./src/queries/jobs.ts"
+      "default": "./dist/queries/jobs.js"
     },
     "./queries/applications": {
       "types": "./dist/queries/applications.d.ts",
       "import": "./dist/queries/applications.js",
-      "default": "./src/queries/applications.ts"
+      "default": "./dist/queries/applications.js"
     },
     "./queries/contact": {
       "types": "./dist/queries/contact.d.ts",
       "import": "./dist/queries/contact.js",
-      "default": "./src/queries/contact.ts"
+      "default": "./dist/queries/contact.js"
     },
     "./queries/analytics": {
       "types": "./dist/queries/analytics.d.ts",
       "import": "./dist/queries/analytics.js",
-      "default": "./src/queries/analytics.ts"
+      "default": "./dist/queries/analytics.js"
     },
     "./auth/config": {
       "types": "./dist/auth/config.d.ts",
       "import": "./dist/auth/config.js",
-      "default": "./src/auth/config.ts"
+      "default": "./dist/auth/config.js"
     },
     "./api/applications": {
       "types": "./dist/api/applications.d.ts",
       "import": "./dist/api/applications.js",
-      "default": "./src/api/applications.ts"
+      "default": "./dist/api/applications.js"
     },
     "./api/upload": {
       "types": "./dist/api/upload.d.ts",
       "import": "./dist/api/upload.js",
-      "default": "./src/api/upload.ts"
+      "default": "./dist/api/upload.js"
     },
     "./api/contact": {
       "types": "./dist/api/contact.d.ts",
       "import": "./dist/api/contact.js",
-      "default": "./src/api/contact.ts"
+      "default": "./dist/api/contact.js"
     },
     "./types/database": {
       "types": "./dist/types/database.d.ts",
       "import": "./dist/types/database.js",
-      "default": "./src/types/database.ts"
+      "default": "./dist/types/database.js"
     },
     "./types/site": {
       "types": "./dist/types/site.d.ts",
       "import": "./dist/types/site.js",
-      "default": "./src/types/site.ts"
+      "default": "./dist/types/site.js"
     },
     "./types/admin": {
       "types": "./dist/types/admin.d.ts",
       "import": "./dist/types/admin.js",
-      "default": "./src/types/admin.ts"
+      "default": "./dist/types/admin.js"
     },
     "./auth/admin-config": {
       "types": "./dist/auth/admin-config.d.ts",
       "import": "./dist/auth/admin-config.js",
-      "default": "./src/auth/admin-config.ts"
+      "default": "./dist/auth/admin-config.js"
     },
     "./auth/rbac": {
       "types": "./dist/auth/rbac.d.ts",
       "import": "./dist/auth/rbac.js",
-      "default": "./src/auth/rbac.ts"
+      "default": "./dist/auth/rbac.js"
     },
     "./queries/admin/positions": {
       "types": "./dist/queries/admin/positions.d.ts",
       "import": "./dist/queries/admin/positions.js",
-      "default": "./src/queries/admin/positions.ts"
+      "default": "./dist/queries/admin/positions.js"
     },
     "./queries/admin/applications": {
       "types": "./dist/queries/admin/applications.d.ts",
       "import": "./dist/queries/admin/applications.js",
-      "default": "./src/queries/admin/applications.ts"
+      "default": "./dist/queries/admin/applications.js"
     },
     "./queries/admin/staff": {
       "types": "./dist/queries/admin/staff.d.ts",
       "import": "./dist/queries/admin/staff.js",
-      "default": "./src/queries/admin/staff.ts"
+      "default": "./dist/queries/admin/staff.js"
     },
     "./queries/admin/contacts": {
       "types": "./dist/queries/admin/contacts.d.ts",
       "import": "./dist/queries/admin/contacts.js",
-      "default": "./src/queries/admin/contacts.ts"
+      "default": "./dist/queries/admin/contacts.js"
     },
     "./queries/admin/dashboard": {
       "types": "./dist/queries/admin/dashboard.d.ts",
       "import": "./dist/queries/admin/dashboard.js",
-      "default": "./src/queries/admin/dashboard.ts"
+      "default": "./dist/queries/admin/dashboard.js"
     },
     "./queries/articles": {
       "types": "./dist/queries/articles.d.ts",
       "import": "./dist/queries/articles.js",
-      "default": "./src/queries/articles.ts"
+      "default": "./dist/queries/articles.js"
     },
     "./queries/admin/articles": {
       "types": "./dist/queries/admin/articles.d.ts",
       "import": "./dist/queries/admin/articles.js",
-      "default": "./src/queries/admin/articles.ts"
+      "default": "./dist/queries/admin/articles.js"
     },
     "./queries/admin/audit": {
       "types": "./dist/queries/admin/audit.d.ts",
       "import": "./dist/queries/admin/audit.js",
-      "default": "./src/queries/admin/audit.ts"
+      "default": "./dist/queries/admin/audit.js"
     }
   },
   "scripts": {
