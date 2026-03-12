@@ -81,7 +81,7 @@ const industries = [
   {
     title: "Government & Public Sector",
     description:
-      "Secure facility monitoring, visitor flow management, queue optimization, and TOPS-procurable deployment for Illinois state agencies.",
+      "Secure facility monitoring, visitor flow management, queue optimization, and compliance-ready deployment for government agencies.",
   },
   {
     title: "Entertainment & Venues",
@@ -155,9 +155,9 @@ const faqItems = [
       "VionOS.ai runs on NVIDIA Jetson Orin edge devices — compact, energy-efficient AI computers that can process multiple camera feeds simultaneously. The platform works with existing IP camera infrastructure (RTSP streams). No GPU servers or data center equipment is required. A single Jetson device can typically handle 4-8 camera feeds depending on resolution and analytics complexity.",
   },
   {
-    title: "How do Illinois state agencies procure this through TOPS?",
+    title: "How do government agencies engage USSP for Edge AI?",
     content:
-      "Illinois state agencies can engage USSP for Edge AI deployments through the TOPS Category Two contract (CMT4599470, BidBuy P-59947). USSP is an authorized subvendor to Krasan Consulting Services, the Primary Awardee. Agencies issue a Task Order through the existing TOPS vehicle — no separate RFP is needed. The contract is available through February 2034.",
+      "Government agencies can engage USSP directly for Edge AI deployments. Contact us to discuss your facility requirements, compliance needs, and deployment timeline. We work with agencies at all levels — federal, state, and local — to deliver privacy-first facility safety solutions.",
   },
   {
     title: "How is Edge AI different from traditional CCTV monitoring?",
@@ -170,7 +170,7 @@ const deploymentSteps = [
   {
     number: 1,
     title: "Engagement Request",
-    description: "Reach out or issue a Task Order via TOPS",
+    description: "Reach out to discuss your facility and use case",
   },
   {
     number: 2,
@@ -345,11 +345,11 @@ export default function EdgeAIPage() {
                 </svg>
               </div>
               <h3 className="font-[family-name:var(--font-alata)] text-sm font-bold mb-2">
-                TOPS Available
+                Multi-Industry
               </h3>
               <p className="text-xs text-dark/60 font-[family-name:var(--font-montserrat)]">
-                Illinois agencies can procure through TOPS Category Two
-                (CMT4599470).
+                Deployable across government, healthcare, education, and
+                commercial facilities.
               </p>
             </div>
           </div>
@@ -475,8 +475,8 @@ export default function EdgeAIPage() {
               </h3>
               <p className="text-sm text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed mb-6">
                 Overview of the VionOS.ai Edge AI platform — capabilities,
-                privacy architecture, industry applications, and procurement
-                path. For any industry or audience.
+                privacy architecture, and industry applications. For any
+                industry or audience.
               </p>
               <a
                 href="/assets/docs/USSP_EdgeAI_CapabilityBrief.html"
