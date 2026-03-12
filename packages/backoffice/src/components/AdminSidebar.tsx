@@ -10,6 +10,7 @@ const navItems = [
   { href: "/contacts", label: "Contacts", icon: "📨" },
   { href: "/articles", label: "Articles", icon: "📝" },
   { href: "/staff", label: "Staff", icon: "👥" },
+  { href: "/partnerships", label: "Partnerships", icon: "🤝" },
 ];
 
 export default function AdminSidebar() {
