@@ -5,6 +5,8 @@ const ROLE_PERMISSIONS: Record<StaffRole, string[]> = {
   recruiter: [
     "positions.*",
     "applications.*",
+    "clients.*",
+    "end_clients.*",
     "contacts.read",
     "dashboard.read",
   ],

@@ -70,6 +70,38 @@ export interface Article {
   site_id: string;
 }
 
+export interface Client {
+  id: string;
+  name: string;
+  description: string | null;
+  active: boolean;
+  site_id: string;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface ClientContact {
+  id: string;
+  site_id: string;
+  client_id: string;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  title: string | null;
+  active: boolean;
+  created_at: string;
+}
+
+export interface EndClient {
+  id: string;
+  name: string;
+  description: string | null;
+  active: boolean;
+  site_id: string;
+  created_at: string;
+  updated_at: string | null;
+}
+
 export interface AnalyticsEvent {
   id: string;
   site_id: string;

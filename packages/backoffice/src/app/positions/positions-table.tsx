@@ -15,7 +15,24 @@ export function PositionsTable({
     { key: "title", label: "Title", sortable: true },
     { key: "location", label: "Location", sortable: true },
     { key: "type", label: "Type", sortable: true },
-    { key: "department", label: "Department", sortable: true },
+    {
+      key: "work_mode",
+      label: "Work Mode",
+      sortable: true,
+      render: (row: AdminPosition) => row.work_mode || "-",
+    },
+    {
+      key: "client_name",
+      label: "Client",
+      sortable: true,
+      render: (row: AdminPosition) => row.client_name || "-",
+    },
+    {
+      key: "end_client_name",
+      label: "End Client",
+      sortable: true,
+      render: (row: AdminPosition) => row.end_client_name || "-",
+    },
     {
       key: "active",
       label: "Status",

@@ -11,10 +11,18 @@ interface Position {
   slug: string;
   location: string;
   type: string;
+  work_mode: string | null;
   department: string | null;
   salary_range: string | null;
+  client_id: string | null;
+  end_client_id: string | null;
   description: string | null;
   active: boolean;
+}
+
+interface SelectOption {
+  id: string;
+  name: string;
 }
 
 export default function EditPositionPage() {
@@ -24,12 +32,19 @@ export default function EditPositionPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [clients, setClients] = useState<SelectOption[]>([]);
+  const [endClients, setEndClients] = useState<SelectOption[]>([]);
 
   useEffect(() => {
-    fetch(`/api/positions/${params.id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setPosition(data);
+    Promise.all([
+      fetch(`/api/positions/${params.id}`).then((r) => r.json()),
+      fetch("/api/clients").then((r) => r.json()),
+      fetch("/api/end-clients").then((r) => r.json()),
+    ])
+      .then(([posData, clientsData, endClientsData]) => {
+        setPosition(posData);
+        setClients(clientsData);
+        setEndClients(endClientsData);
         setLoading(false);
       })
       .catch(() => {
@@ -52,8 +67,11 @@ export default function EditPositionPage() {
         .replace(/^-|-$/g, ""),
       location: form.get("location"),
       type: form.get("type"),
+      work_mode: form.get("work_mode") || null,
       department: form.get("department") || null,
       salary_range: form.get("salary_range") || null,
+      client_id: form.get("client_id") || null,
+      end_client_id: form.get("end_client_id") || null,
       description: form.get("description") || null,
       active: form.get("active") === "on",
     };
@@ -149,7 +167,22 @@ export default function EditPositionPage() {
               </select>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Work Mode
+              </label>
+              <select
+                name="work_mode"
+                defaultValue={position.work_mode || ""}
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="">-- Select --</option>
+                <option value="On-site">On-site</option>
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+              </select>
+            </div>
             <div>
               <label className="block text-sm font-medium mb-1">
                 Department
@@ -170,6 +203,40 @@ export default function EditPositionPage() {
                 placeholder="e.g. $80k-$120k"
                 className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Client</label>
+              <select
+                name="client_id"
+                defaultValue={position.client_id || ""}
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="">-- No Client --</option>
+                {clients.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                End Client
+              </label>
+              <select
+                name="end_client_id"
+                defaultValue={position.end_client_id || ""}
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="">-- No End Client --</option>
+                {endClients.map((ec) => (
+                  <option key={ec.id} value={ec.id}>
+                    {ec.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div>

@@ -129,6 +129,16 @@
       "types": "./dist/queries/admin/audit.d.ts",
       "import": "./dist/queries/admin/audit.js",
       "default": "./dist/queries/admin/audit.js"
+    },
+    "./queries/admin/clients": {
+      "types": "./dist/queries/admin/clients.d.ts",
+      "import": "./dist/queries/admin/clients.js",
+      "default": "./dist/queries/admin/clients.js"
+    },
+    "./queries/admin/end-clients": {
+      "types": "./dist/queries/admin/end-clients.d.ts",
+      "import": "./dist/queries/admin/end-clients.js",
+      "default": "./dist/queries/admin/end-clients.js"
     }
   },
   "scripts": {

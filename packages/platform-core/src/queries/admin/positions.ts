@@ -8,7 +8,7 @@ import type {
 } from "../../types/admin.js";
 
 const POSITION_COLUMNS =
-  "id, site_id, title, slug, location, type, description, salary_range, department, active, created_at, updated_at, posted_at, closed_at, created_by";
+  "id, site_id, title, slug, location, type, work_mode, description, salary_range, department, client_id, end_client_id, active, created_at, updated_at, posted_at, closed_at, created_by, clients(name), end_clients(name)";
 
 export async function getAllPositions(
   filters: PositionFilters = {}
@@ -32,7 +32,14 @@ export async function getAllPositions(
 
   const { data, error } = await query;
   if (error || !data) return [];
-  return data;
+  // Flatten joined names
+  return data.map((row: Record<string, unknown>) => ({
+    ...row,
+    client_name: (row.clients as { name: string } | null)?.name || null,
+    end_client_name: (row.end_clients as { name: string } | null)?.name || null,
+    clients: undefined,
+    end_clients: undefined,
+  })) as unknown as AdminPosition[];
 }
 
 export async function getPositionById(
@@ -47,7 +54,15 @@ export async function getPositionById(
     .single();
 
   if (error || !data) return null;
-  return data;
+  // Flatten joined names
+  const row = data as Record<string, unknown>;
+  return {
+    ...row,
+    client_name: (row.clients as { name: string } | null)?.name || null,
+    end_client_name: (row.end_clients as { name: string } | null)?.name || null,
+    clients: undefined,
+    end_clients: undefined,
+  } as unknown as AdminPosition;
 }
 
 export async function createPosition(
@@ -64,9 +79,12 @@ export async function createPosition(
       slug: input.slug,
       location: input.location,
       type: input.type,
+      work_mode: input.work_mode || null,
       description: input.description || null,
       salary_range: input.salary_range || null,
       department: input.department || null,
+      client_id: input.client_id || null,
+      end_client_id: input.end_client_id || null,
       active: input.active ?? true,
       posted_at: input.posted_at || new Date().toISOString(),
       created_by: staffUserId || null,
@@ -92,9 +110,12 @@ export async function updatePosition(
   if (input.slug !== undefined) updateData.slug = input.slug;
   if (input.location !== undefined) updateData.location = input.location;
   if (input.type !== undefined) updateData.type = input.type;
+  if (input.work_mode !== undefined) updateData.work_mode = input.work_mode;
   if (input.description !== undefined) updateData.description = input.description;
   if (input.salary_range !== undefined) updateData.salary_range = input.salary_range;
   if (input.department !== undefined) updateData.department = input.department;
+  if (input.client_id !== undefined) updateData.client_id = input.client_id;
+  if (input.end_client_id !== undefined) updateData.end_client_id = input.end_client_id;
   if (input.active !== undefined) updateData.active = input.active;
   if (input.posted_at !== undefined) updateData.posted_at = input.posted_at;
   if (input.closed_at !== undefined) updateData.closed_at = input.closed_at;

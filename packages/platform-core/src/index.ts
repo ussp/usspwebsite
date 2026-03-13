@@ -24,7 +24,7 @@ export { handleContact } from "./api/contact.js";
 export type { ApiResponse } from "./api/upload.js";
 
 // Types
-export type { Job, Application, ContactSubmission, AnalyticsEvent, Article, CaseStudyData } from "./types/database.js";
+export type { Job, Application, ContactSubmission, AnalyticsEvent, Article, CaseStudyData, Client, ClientContact, EndClient } from "./types/database.js";
 export type { SiteConfig, SiteRecord } from "./types/site.js";
 export type { CreateApplicationInput } from "./queries/applications.js";
 export type { ContactFormInput } from "./queries/contact.js";
@@ -46,4 +46,15 @@ export type {
   CreateArticleInput,
   UpdateArticleInput,
   ArticleFilters,
+  AdminClient,
+  AdminClientContact,
+  AdminEndClient,
+  CreateClientInput,
+  UpdateClientInput,
+  CreateClientContactInput,
+  UpdateClientContactInput,
+  ClientFilters,
+  CreateEndClientInput,
+  UpdateEndClientInput,
+  EndClientFilters,
 } from "./types/admin.js";

@@ -53,6 +53,94 @@ class Site(Base):
 
 
 # =============================================================================
+# CLIENTS TABLE (companies that submit positions to USSP)
+# =============================================================================
+
+
+class Client(Base):
+    """
+    Client companies that submit positions to USSP.
+
+    E.g., Krasan Consulting sends job requirements for their end clients.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "clients"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    name = Column(String(255), nullable=False)
+    description = Column(Text)
+    active = Column(Boolean, default=True, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "name", name="uq_clients_site_name"),
+        Index("idx_clients_site_active", "site_id", "active"),
+    )
+
+
+# =============================================================================
+# CLIENT_CONTACTS TABLE
+# =============================================================================
+
+
+class ClientContact(Base):
+    """
+    Contacts at client companies.
+
+    E.g., Dinkar, Kristen, Sandy at Krasan Consulting.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "client_contacts"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    client_id = Column(UUID(as_uuid=True), ForeignKey("clients.id"), nullable=False)
+    name = Column(String(255), nullable=False)
+    email = Column(String(255))
+    phone = Column(String(30))
+    title = Column(String(255))
+    active = Column(Boolean, default=True, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_client_contacts_site_client", "site_id", "client_id"),
+    )
+
+
+# =============================================================================
+# END_CLIENTS TABLE (where resources actually work)
+# =============================================================================
+
+
+class EndClient(Base):
+    """
+    End client organizations where placed resources work.
+
+    E.g., IDJJ (Illinois Dept of Juvenile Justice).
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "end_clients"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    name = Column(String(255), nullable=False)
+    description = Column(Text)
+    active = Column(Boolean, default=True, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "name", name="uq_end_clients_site_name"),
+        Index("idx_end_clients_site_active", "site_id", "active"),
+    )
+
+
+# =============================================================================
 # POSITIONS TABLE
 # =============================================================================
 
@@ -73,9 +161,12 @@ class Position(Base):
     slug = Column(String(255), nullable=False)
     location = Column(String(255), nullable=False)
     type = Column(String(100), nullable=False)
+    work_mode = Column(String(50))  # On-site, Remote, Hybrid
     description = Column(Text)
     salary_range = Column(String(100))
     department = Column(String(100))
+    client_id = Column(UUID(as_uuid=True), ForeignKey("clients.id"))
+    end_client_id = Column(UUID(as_uuid=True), ForeignKey("end_clients.id"))
     active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now())

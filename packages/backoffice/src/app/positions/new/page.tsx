@@ -1,14 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
+
+interface SelectOption {
+  id: string;
+  name: string;
+}
 
 export default function NewPositionPage() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [clients, setClients] = useState<SelectOption[]>([]);
+  const [endClients, setEndClients] = useState<SelectOption[]>([]);
+
+  useEffect(() => {
+    fetch("/api/clients")
+      .then((r) => r.json())
+      .then((data) => setClients(data));
+    fetch("/api/end-clients")
+      .then((r) => r.json())
+      .then((data) => setEndClients(data));
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,8 +40,11 @@ export default function NewPositionPage() {
         .replace(/^-|-$/g, ""),
       location: form.get("location"),
       type: form.get("type"),
+      work_mode: form.get("work_mode") || null,
       department: form.get("department") || null,
       salary_range: form.get("salary_range") || null,
+      client_id: form.get("client_id") || null,
+      end_client_id: form.get("end_client_id") || null,
       description: form.get("description") || null,
       active: form.get("active") === "on",
     };
@@ -94,7 +113,21 @@ export default function NewPositionPage() {
               </select>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Work Mode
+              </label>
+              <select
+                name="work_mode"
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="">-- Select --</option>
+                <option value="On-site">On-site</option>
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+              </select>
+            </div>
             <div>
               <label className="block text-sm font-medium mb-1">
                 Department
@@ -113,6 +146,38 @@ export default function NewPositionPage() {
                 placeholder="e.g. $80k-$120k"
                 className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Client</label>
+              <select
+                name="client_id"
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="">-- No Client --</option>
+                {clients.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                End Client
+              </label>
+              <select
+                name="end_client_id"
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="">-- No End Client --</option>
+                {endClients.map((ec) => (
+                  <option key={ec.id} value={ec.id}>
+                    {ec.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           <div>

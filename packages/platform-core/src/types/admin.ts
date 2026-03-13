@@ -62,15 +62,52 @@ export interface AdminPosition {
   slug: string;
   location: string;
   type: string;
+  work_mode: string | null;
   description: string | null;
   salary_range: string | null;
   department: string | null;
+  client_id: string | null;
+  end_client_id: string | null;
   active: boolean;
   created_at: string;
   updated_at: string | null;
   posted_at: string | null;
   closed_at: string | null;
   created_by: string | null;
+  client_name?: string | null;
+  end_client_name?: string | null;
+}
+
+export interface AdminClient {
+  id: string;
+  site_id: string;
+  name: string;
+  description: string | null;
+  active: boolean;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface AdminClientContact {
+  id: string;
+  site_id: string;
+  client_id: string;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  title: string | null;
+  active: boolean;
+  created_at: string;
+}
+
+export interface AdminEndClient {
+  id: string;
+  site_id: string;
+  name: string;
+  description: string | null;
+  active: boolean;
+  created_at: string;
+  updated_at: string | null;
 }
 
 export interface AdminApplication {
@@ -107,9 +144,12 @@ export interface CreatePositionInput {
   slug: string;
   location: string;
   type: string;
+  work_mode?: string;
   description?: string;
   salary_range?: string;
   department?: string;
+  client_id?: string;
+  end_client_id?: string;
   active?: boolean;
   posted_at?: string;
 }
@@ -119,12 +159,65 @@ export interface UpdatePositionInput {
   slug?: string;
   location?: string;
   type?: string;
+  work_mode?: string;
   description?: string;
   salary_range?: string;
   department?: string;
+  client_id?: string | null;
+  end_client_id?: string | null;
   active?: boolean;
   posted_at?: string;
   closed_at?: string;
+}
+
+export interface CreateClientInput {
+  name: string;
+  description?: string;
+  active?: boolean;
+}
+
+export interface UpdateClientInput {
+  name?: string;
+  description?: string;
+  active?: boolean;
+}
+
+export interface CreateClientContactInput {
+  client_id: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  title?: string;
+}
+
+export interface UpdateClientContactInput {
+  name?: string;
+  email?: string;
+  phone?: string;
+  title?: string;
+  active?: boolean;
+}
+
+export interface CreateEndClientInput {
+  name: string;
+  description?: string;
+  active?: boolean;
+}
+
+export interface UpdateEndClientInput {
+  name?: string;
+  description?: string;
+  active?: boolean;
+}
+
+export interface ClientFilters {
+  active?: boolean;
+  search?: string;
+}
+
+export interface EndClientFilters {
+  active?: boolean;
+  search?: string;
 }
 
 export interface CreateStaffUserInput {
