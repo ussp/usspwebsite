@@ -126,22 +126,30 @@ export default function SharedTeleRayMOU() {
         <li>Any Axis Communications hardware/software bundled with TeleRay deployments</li>
       </ul>
       <h3>2.2 Target Customers</h3>
-      <p>Illinois state government agencies and their facilities, including but not limited to:</p>
+      <p>Illinois state government agencies, Cook County, City of Chicago, and related public healthcare facilities, including but not limited to:</p>
+      <h3 style="margin-top:12px;margin-bottom:4px;">State Agencies</h3>
       <ul>
         <li><strong>Illinois Department of Veterans&rsquo; Affairs</strong> &mdash; state veterans homes</li>
         <li><strong>IDOC (Illinois Department of Corrections)</strong> &mdash; correctional healthcare units</li>
         <li><strong>IDJJ (Illinois Department of Juvenile Justice)</strong> &mdash; youth facility healthcare</li>
         <li><strong>IDHS (Illinois Department of Human Services)</strong> &mdash; developmental centers, mental health facilities</li>
         <li><strong>IDPH (Illinois Department of Public Health)</strong> &mdash; public health clinics</li>
-        <li>Any other Illinois state or local government entity procuring healthcare technology</li>
       </ul>
+      <h3 style="margin-top:12px;margin-bottom:4px;">Cook County &amp; City of Chicago</h3>
+      <ul>
+        <li><strong>Cook County Health (CCH)</strong> &mdash; Stroger Hospital, Provident Hospital, and affiliated community health centers</li>
+        <li><strong>City of Chicago Department of Public Health (CDPH)</strong> &mdash; public health clinics and community health centers</li>
+        <li><strong>Cook County Department of Corrections</strong> &mdash; Cermak Health Services and correctional healthcare units</li>
+        <li><strong>Cook County Forest Preserve District</strong> &mdash; any healthcare-related facilities</li>
+      </ul>
+      <p>And any other Illinois state, Cook County, or City of Chicago government entity procuring healthcare technology.</p>
     </div>
 
     <div class="m-section">
       <h2><span class="m-num">3</span>REVENUE SPLIT</h2>
       <hr class="m-divider" />
       <h3>3.1 Revenue Allocation</h3>
-      <p>For all revenue generated from Illinois state government customers sourced and closed by USSP:</p>
+      <p>For all revenue generated from Illinois state and local government customers sourced and closed by USSP:</p>
       <table>
         <thead><tr><th>Party</th><th>Share</th><th>Description</th></tr></thead>
         <tbody>
@@ -160,7 +168,7 @@ export default function SharedTeleRayMOU() {
       </ul>
       <h3>3.4 Pricing Authority</h3>
       <ul>
-        <li>USSP has sole authority to set pricing to end customers within Illinois state government</li>
+        <li>USSP has sole authority to set pricing to end customers within Illinois state and local government</li>
         <li>USSP may structure pricing as per-bed/month, project-based, or blended &mdash; the 80/20 split applies to total revenue regardless of structure</li>
       </ul>
     </div>
@@ -171,23 +179,32 @@ export default function SharedTeleRayMOU() {
       <h3>4.1 Territory Exclusivity</h3>
       <p>TeleRay grants USSP exclusive rights to sell, market, and implement TeleRay platform solutions to Illinois state and local government agencies for the term of this agreement.</p>
       <h3>4.2 Lead Routing</h3>
-      <p>If TeleRay receives any inbound inquiry from an Illinois state government agency, TeleRay shall route that opportunity to USSP within five (5) business days. USSP shall have first right to pursue and close the opportunity.</p>
+      <p>If TeleRay receives any inbound inquiry from an Illinois state or local government agency, TeleRay shall route that opportunity to USSP within five (5) business days. USSP shall have first right to pursue and close the opportunity.</p>
       <h3>4.3 Non-Compete</h3>
       <p>During the term, TeleRay shall not:</p>
       <ul>
-        <li>Appoint another reseller or channel partner for Illinois state government</li>
-        <li>Sell directly to Illinois state government agencies without USSP&rsquo;s involvement</li>
-        <li>Engage any third party to perform implementation services for Illinois state government TeleRay deployments</li>
+        <li>Appoint another reseller or channel partner for Illinois state and local government</li>
+        <li>Sell directly to Illinois state or local government agencies without USSP&rsquo;s involvement</li>
+        <li>Engage any third party to perform implementation services for Illinois state or local government TeleRay deployments</li>
       </ul>
-      <h3>4.4 Exclusivity Review</h3>
-      <p>If USSP fails to generate any revenue from Illinois state government within twelve (12) months of the effective date, TeleRay may request a good-faith renegotiation of exclusivity terms.</p>
+      <h3>4.4 Introduction Protection</h3>
+      <p>For any government agency or facility to which USSP introduces TeleRay&rsquo;s platform solutions:</p>
+      <ul>
+        <li>USSP shall retain exclusive rights to that customer relationship for four (4) years from the date of first introduction, regardless of whether this MOU is renewed or terminated</li>
+        <li>&ldquo;Introduction&rdquo; means any meeting, demonstration, proposal submission, RFI/RFP response, or formal communication between TeleRay and a government agency facilitated by USSP</li>
+        <li>USSP shall maintain a written log of all introductions, shared with TeleRay quarterly, and TeleRay shall acknowledge receipt in writing</li>
+        <li>During the four-year introduction protection period, TeleRay shall not engage any other party to sell to, implement for, or service that customer for TeleRay products</li>
+        <li>The 80/20 revenue split applies to all revenue from introduced customers throughout the four-year protection period</li>
+      </ul>
+      <h3>4.5 Exclusivity Review</h3>
+      <p>If USSP fails to generate any revenue or have an active procurement opportunity in pipeline from Illinois state or local government within twenty-four (24) months of the effective date, TeleRay may request a good-faith renegotiation of exclusivity terms. Both parties acknowledge that government procurement cycles typically require 18&ndash;36 months from initial engagement to first revenue.</p>
     </div>
 
     <div class="m-section">
       <h2><span class="m-num">5</span>USSP RESPONSIBILITIES</h2>
       <hr class="m-divider" />
       <ol>
-        <li><strong>Sales and business development</strong> &mdash; identify, qualify, propose, and close TeleRay opportunities within IL state government</li>
+        <li><strong>Sales and business development</strong> &mdash; identify, qualify, propose, and close TeleRay opportunities within IL state and local government</li>
         <li><strong>Procurement navigation</strong> &mdash; manage TOPS task order process through Krasan Consulting Services (prime contractor)</li>
         <li><strong>Implementation</strong> &mdash; deploy TeleRay platform at customer facilities including:
           <ul>
@@ -218,7 +235,7 @@ export default function SharedTeleRayMOU() {
           </ul>
         </li>
         <li><strong>Documentation</strong> &mdash; provide current technical documentation, API access, integration guides</li>
-        <li><strong>Marketing materials</strong> &mdash; authorize USSP to use TeleRay name, logo, and marketing materials in proposals to IL government</li>
+        <li><strong>Marketing materials</strong> &mdash; authorize USSP to use TeleRay name, logo, and marketing materials in proposals to IL state and local government</li>
         <li><strong>Training</strong> &mdash; provide initial product training to USSP implementation team (at TeleRay&rsquo;s expense)</li>
         <li><strong>Axis partnership</strong> &mdash; make Axis Communications hardware and integration available through USSP at partner pricing</li>
         <li><strong>Platform updates</strong> &mdash; give USSP 30-day advance notice of any platform changes, pricing changes, or feature deprecations</li>
@@ -261,8 +278,8 @@ export default function SharedTeleRayMOU() {
       <hr class="m-divider" />
       <h3>10.1 Term</h3>
       <ul>
-        <li>Initial term: Three (3) years from the effective date</li>
-        <li>Automatic renewal for successive one (1) year periods unless either party provides one hundred eighty (180) days written notice of non-renewal</li>
+        <li>Initial term: Five (5) years from the effective date, reflecting the typical 18&ndash;36 month government procurement cycle plus implementation and stabilization period</li>
+        <li>Automatic renewal for successive two (2) year periods unless either party provides one hundred eighty (180) days written notice of non-renewal</li>
       </ul>
       <h3>10.2 Termination for Cause</h3>
       <p>Either party may terminate upon sixty (60) days written notice if the other party materially breaches this agreement and fails to cure within the notice period.</p>
@@ -270,8 +287,17 @@ export default function SharedTeleRayMOU() {
       <ul>
         <li>USSP retains all existing customer contracts through their natural term &mdash; TeleRay may not terminate or reassign active customer accounts sourced by USSP</li>
         <li>The 80/20 revenue split continues for existing customers through the end of their contract term</li>
+        <li>Introduction Protection (Section 4.4) survives termination &mdash; the four-year protection period runs from the date of each introduction regardless of MOU status</li>
         <li>USSP shall return all TeleRay confidential materials</li>
         <li>TeleRay shall continue to provide platform access and support for active customer deployments</li>
+      </ul>
+      <h3>10.4 Acquisition / Change of Control</h3>
+      <p>If TeleRay is acquired, merged, or undergoes a change of control (defined as transfer of more than 50% of ownership or voting rights):</p>
+      <ul>
+        <li>All terms of this MOU, including exclusivity, revenue split, introduction protection, and equity provisions, shall be binding on the successor entity</li>
+        <li>TeleRay shall include assignment of this MOU as a condition of any acquisition or merger agreement</li>
+        <li>TeleRay shall provide USSP with sixty (60) days advance written notice of any pending change of control</li>
+        <li>If the successor entity fails to honor the terms of this MOU, USSP shall be entitled to fair compensation for the value of its government relationships, sales pipeline, and implementation work, calculated as: (a) the remaining value of all active and in-pipeline customer contracts at their projected full-term revenue, (b) any earned but unissued equity at fair market value as determined by the acquisition price, and (c) a transition fee equal to twelve (12) months of revenue based on the trailing twelve-month average, to account for USSP&rsquo;s investment in building the government sales channel</li>
       </ul>
     </div>
 
@@ -304,43 +330,84 @@ export default function SharedTeleRayMOU() {
       <h2><span class="m-num">14</span>EQUITY EARNED THROUGH VALUE CREATION</h2>
       <hr class="m-divider" />
       <h3>14.1 Principle</h3>
-      <p>USSP&rsquo;s equity stake in TeleRay shall be earned through the measurable value USSP creates for TeleRay &mdash; specifically, revenue generated from IL government customers. USSP is not writing a check for equity; USSP is building a government sales channel that TeleRay cannot access on its own.</p>
-      <h3>14.2 Revenue-Based Equity Accrual</h3>
-      <p>USSP shall earn equity in TeleRay based on cumulative revenue generated from IL government customers:</p>
+      <p>USSP&rsquo;s equity stake in TeleRay shall be earned exclusively through measurable value events &mdash; not through signing this MOU, but through delivering real, verifiable results. USSP is not writing a check for equity; USSP is building a government sales channel, delivering TeleRay&rsquo;s first government installation, and opening a market that TeleRay cannot access on its own. No equity is granted until USSP delivers.</p>
+      <p>Both parties acknowledge that TeleRay currently has approximately $2M in annual revenue, no positive EBITDA, and zero government installations. The equity valuations below reflect TeleRay&rsquo;s current stage and the transformative nature of the value USSP will create.</p>
+
+      <h3>14.2 Value-Event Equity Milestones</h3>
+      <p>USSP shall earn equity in TeleRay upon achieving the following milestones. Each milestone is independently triggered &mdash; equity is earned and irrevocable once the event occurs:</p>
       <table>
-        <thead><tr><th>Cumulative IL Govt Revenue Generated</th><th>Equity Earned</th></tr></thead>
+        <thead><tr><th>Milestone</th><th>Value Event</th><th>Equity Earned</th><th>Valuation Basis</th></tr></thead>
         <tbody>
-          <tr><td>$500,000</td><td>To be negotiated</td></tr>
-          <tr><td>$1,000,000</td><td>To be negotiated</td></tr>
-          <tr><td>$2,000,000</td><td>To be negotiated</td></tr>
-          <tr><td>$5,000,000</td><td>To be negotiated</td></tr>
+          <tr><td><strong>1 &mdash; First Contract</strong></td><td>First signed government contract (any IL state, Cook County, or City of Chicago agency)</td><td>3&ndash;5%</td><td>Pre-contract valuation (current stage)</td></tr>
+          <tr><td><strong>2 &mdash; First $500K Revenue</strong></td><td>$500,000 cumulative government revenue collected</td><td>2&ndash;3%</td><td>Valuation at time of milestone</td></tr>
+          <tr><td><strong>3 &mdash; First $1M Revenue</strong></td><td>$1,000,000 cumulative government revenue collected</td><td>2%</td><td>Valuation at time of milestone</td></tr>
+          <tr><td><strong>4 &mdash; $2M Revenue</strong></td><td>$2,000,000 cumulative government revenue collected</td><td>1&ndash;2%</td><td>Valuation at time of milestone</td></tr>
         </tbody>
       </table>
-      <p><em>Exact percentages to be negotiated based on agreed company valuation.</em></p>
-      <h3>14.3 How It Works</h3>
+      <p><em>Total potential equity: 8&ndash;12%. Exact percentages within ranges to be agreed prior to MOU execution. All equity grants are priced at the applicable valuation basis, not at a future or aspirational valuation.</em></p>
+
+      <h3>14.3 Why the First Contract Earns the Largest Grant</h3>
+      <div class="m-highlight">
+        <strong>TeleRay currently has zero government installations.</strong> The first signed government contract is a transformative event that:<br/>
+        &bull; Delivers TeleRay&rsquo;s first-ever government customer and live installation<br/>
+        &bull; Proves the platform works in a regulated government environment<br/>
+        &bull; Creates the reference customer that every future state and municipality will ask for<br/>
+        &bull; Moves TeleRay from &ldquo;commercial-only&rdquo; to &ldquo;government-proven&rdquo; &mdash; a category change that significantly increases company valuation<br/>
+        &bull; Provides the case study that opens the door to all 50 states<br/><br/>
+        <strong>For TeleRay:</strong> Zero dilution until USSP delivers an actual signed contract. No cash outlay. No risk &mdash; equity is earned only when a real government customer commits.<br/>
+        <strong>For USSP:</strong> Equity reflects the full strategic value created, not just revenue. USSP&rsquo;s TOPS access, MBE/WBE certification, government relationships, and implementation capability are what make this contract possible.
+      </div>
+
+      <h3>14.4 Valuation and Pricing</h3>
+      <ul>
+        <li>Milestone 1 (First Contract) equity shall be priced at TeleRay&rsquo;s <strong>pre-contract valuation</strong>, reflecting the company&rsquo;s current stage ($2M revenue, no EBITDA, no government installations)</li>
+        <li>Subsequent milestones shall be priced at the most recent third-party valuation event (funding round, 409A, or independent appraisal), or if none has occurred, by mutual agreement based on trailing twelve-month revenue and industry multiples</li>
+        <li>USSP&rsquo;s sweat equity shall not be priced at the same valuation offered to cash investors &mdash; USSP is taking execution risk and investing time, relationships, certifications, and reputation, which warrants a discount to cash-investment valuations</li>
+      </ul>
+
+      <h3>14.5 How It Works</h3>
       <ul>
         <li>Revenue milestones are measured on cumulative IL government revenue collected (not billed)</li>
-        <li>Equity vests upon hitting each milestone &mdash; it is not revocable once earned</li>
-        <li>USSP receives equity grant documentation (shares or options) within thirty (30) days of each milestone</li>
+        <li>Equity vests immediately upon hitting each milestone &mdash; it is not revocable once earned</li>
+        <li>USSP receives equity grant documentation (shares or membership units) within thirty (30) days of each milestone</li>
         <li>Equity is fully dilution-protected through the next funding round</li>
-        <li>If TeleRay is acquired before all milestones are reached, USSP&rsquo;s earned equity participates in the acquisition proceeds</li>
+        <li>If TeleRay is acquired before all milestones are reached, USSP&rsquo;s earned equity participates in the acquisition proceeds, and the acquiring entity must honor all remaining milestone terms per Section 10.4</li>
       </ul>
-      <div class="m-highlight">
-        <strong>Why this is fair for both sides:</strong><br/>
-        <strong>For TeleRay:</strong> Zero dilution until USSP actually delivers revenue. No cash risk &mdash; equity is earned only when real money comes in.<br/>
-        <strong>For USSP:</strong> No cash investment risk. Equity is earned through work, not speculation. Every dollar of IL government revenue is directly attributable to USSP&rsquo;s sales effort, TOPS access, and MBE/WBE certification.
-      </div>
-      <h3>14.5 Board Representation</h3>
+
+      <h3>14.6 Board Representation</h3>
       <ul>
-        <li>Board observer seat and full board seat thresholds to be agreed based on equity milestones</li>
-        <li>Regardless of equity level, TeleRay shall provide USSP with quarterly financial reports</li>
+        <li>Upon earning Milestone 1 equity: board observer seat with full access to financials and strategic discussions</li>
+        <li>Upon cumulative equity exceeding 5%: full voting board seat</li>
+        <li>Regardless of equity level, TeleRay shall provide USSP with quarterly financial reports and annual audited statements</li>
       </ul>
-      <h3>14.6 Cash Investment (Optional, Separate)</h3>
-      <p>Any direct cash investment by USSP or IGM Fund in TeleRay shall be governed by separate agreements and is not required under this MOU. Most investment capital is expected to come from IGM Fund. If USSP or IGM Fund elects to invest cash in addition to the revenue-based equity, the terms shall be negotiated separately.</p>
+
+      <h3>14.7 Cash Investment (Optional, Separate)</h3>
+      <p>Any direct cash investment by USSP or IGM Fund in TeleRay shall be governed by separate agreements and is not required under this MOU. Cash investment terms (including the discussed tranches of $500K at $20M, $500K at $25M, $500K at $30M, and $500K at $35M valuations) are independent of and in addition to the value-event equity earned under this section. If USSP or IGM Fund elects to invest cash, the terms shall be negotiated separately, and cash equity shall not reduce or offset the sweat equity earned through milestones above.</p>
     </div>
 
     <div class="m-section">
-      <h2><span class="m-num">15</span>GENERAL PROVISIONS</h2>
+      <h2><span class="m-num">15</span>GOVERNMENT MARKET EXPANSION ROYALTY</h2>
+      <hr class="m-divider" />
+      <h3>15.1 Expansion Value</h3>
+      <p>Both parties acknowledge that the first IL government contract creates strategic value beyond Illinois &mdash; it provides TeleRay with a government reference customer, case study, and proof of concept that can be leveraged to enter other state and municipal markets nationwide.</p>
+      <h3>15.2 Royalty on Reference-Based Expansion</h3>
+      <p>If TeleRay (directly or through any other partner) closes a government contract in any state or municipality outside of Illinois within five (5) years of the first IL government contract, and that opportunity references, cites, or benefits from the IL deployment as a case study, reference customer, or proof of concept:</p>
+      <ul>
+        <li>USSP shall receive a royalty of 5&ndash;10% of first-year revenue from that contract</li>
+        <li>If USSP directly introduces TeleRay to the out-of-state opportunity, the royalty increases to 15&ndash;20% of first-year revenue, or USSP has first right of refusal to serve as the implementation partner in that market</li>
+      </ul>
+      <h3>15.3 Disclosure Requirement</h3>
+      <ul>
+        <li>TeleRay shall disclose to USSP any government RFP, RFI, or sales opportunity where the IL deployment is cited or referenced</li>
+        <li>TeleRay shall provide USSP with quarterly reports of all government pipeline activity outside of Illinois</li>
+        <li>Failure to disclose shall not extinguish the royalty &mdash; if USSP later discovers an undisclosed reference-based contract, the royalty applies retroactively with interest</li>
+      </ul>
+      <h3>15.4 Survival</h3>
+      <p>This expansion royalty obligation survives termination of this MOU and any change of control of TeleRay per Section 10.4. The acquiring entity assumes the royalty obligation for the full five-year period.</p>
+    </div>
+
+    <div class="m-section">
+      <h2><span class="m-num">16</span>GENERAL PROVISIONS</h2>
       <hr class="m-divider" />
       <ul>
         <li><strong>Independent contractors:</strong> The parties are independent contractors. Nothing creates an employer-employee, partnership, or joint venture relationship.</li>
