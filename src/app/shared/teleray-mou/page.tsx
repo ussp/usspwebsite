@@ -81,8 +81,21 @@ export default function SharedTeleRayMOU() {
   .mou .m-print-btn:hover { background: #1d4ed8; }
   @media print {
     .mou .m-print-btn, .mou .confidential { display: none !important; }
-    .mou .m-header { background: #0f172a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .mou .m-section { break-inside: avoid; }
+    .mou { background: #fff !important; }
+    .mou .m-header { background: #0f172a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 32px 24px; }
+    .mou .m-body { padding: 20px 0 0; }
+    .mou .m-section { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; margin-bottom: 12px; padding: 20px 20px 14px; }
+    .mou .m-section h2 { font-size: 14px; }
+    .mou .m-section h3 { font-size: 12px; }
+    .mou .m-section p, .mou .m-section li { font-size: 12px; line-height: 1.5; }
+    .mou .m-section table { font-size: 11px; }
+    .mou .m-section th, .mou .m-section td { padding: 6px 8px; }
+    .mou .m-purpose { font-size: 12px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .mou .m-highlight { -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 11px; }
+    .mou .m-signatures { break-inside: avoid; margin-top: 16px; }
+    .mou .m-sig-block { padding: 16px; }
+    .mou .m-footer { font-size: 10px; padding: 12px; }
+    @page { margin: 0.6in 0.5in; }
   }
 </style>
 <div class="mou">
