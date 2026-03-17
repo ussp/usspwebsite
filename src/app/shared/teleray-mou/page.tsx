@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const PASSCODE = "USSP-TR-2026";
+const PASSCODE = "jayussp";
 
 export default function SharedTeleRayMOU() {
   const [input, setInput] = useState("");
