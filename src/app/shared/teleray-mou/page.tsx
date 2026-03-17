@@ -239,8 +239,8 @@ export default function SharedTeleRayMOU() {
       <hr class="m-divider" />
       <ol>
         <li><strong>Platform access</strong> &mdash; provide USSP with full access to TeleRay platform for customer deployments</li>
-        <li><strong>Demo environment</strong> &mdash; provide a fully functional demo environment for USSP sales presentations</li>
-        <li><strong>Technical support</strong> &mdash; respond to USSP escalations within:
+        <li><strong>Demo environment</strong> &mdash; provide a fully functional demo environment for sales presentations by USSP and USSP&rsquo;s authorized government partners (including prime contractors and integration partners)</li>
+        <li><strong>Technical support</strong> &mdash; respond to escalations from USSP and USSP&rsquo;s authorized government partners within:
           <ul>
             <li>Critical issues (platform down): 4 hours</li>
             <li>High priority (feature impaired): 8 hours</li>
@@ -249,7 +249,7 @@ export default function SharedTeleRayMOU() {
         </li>
         <li><strong>Documentation</strong> &mdash; provide current technical documentation, API access, integration guides</li>
         <li><strong>Marketing materials</strong> &mdash; authorize USSP to use TeleRay name, logo, and marketing materials in proposals to IL state and local government</li>
-        <li><strong>Training</strong> &mdash; provide initial product training to USSP implementation team (at TeleRay&rsquo;s expense)</li>
+        <li><strong>Training</strong> &mdash; provide initial product training to USSP implementation team and USSP&rsquo;s authorized government partners (at TeleRay&rsquo;s expense)</li>
         <li><strong>Axis partnership</strong> &mdash; make Axis Communications hardware and integration available through USSP at partner pricing</li>
         <li><strong>Platform updates</strong> &mdash; give USSP 30-day advance notice of any platform changes, pricing changes, or feature deprecations</li>
       </ol>
