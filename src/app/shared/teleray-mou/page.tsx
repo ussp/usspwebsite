@@ -103,6 +103,7 @@ export default function SharedTeleRayMOU() {
     <h1>MEMORANDUM OF UNDERSTANDING</h1>
     <p class="m-subtitle">Between US Software Professionals Inc. and TeleRay Inc.</p>
     <div class="m-meta">
+      <span><strong>Version:</strong> 1.7</span>
       <span><strong>Subject:</strong> IL Government Reseller Partnership</span>
       <span><strong>Date:</strong> March 2026</span>
       <span><strong>Status:</strong> Draft for Discussion</span>
@@ -304,6 +305,14 @@ export default function SharedTeleRayMOU() {
         <li>USSP shall return all TeleRay confidential materials</li>
         <li>TeleRay shall continue to provide platform access and support for active customer deployments</li>
       </ul>
+      <h3>10.3.1 Pipeline Compensation on Termination</h3>
+      <p>Upon termination or non-renewal for any reason, USSP shall be entitled to compensation for all Pipeline Opportunities as defined below:</p>
+      <ul>
+        <li><strong>Definition of Pipeline Opportunity:</strong> Any prospect where USSP has, prior to the date of termination notice, (a) submitted a proposal, quote, or statement of work, (b) responded to an RFP, RFI, or RFQ, (c) conducted a product demonstration, (d) held two or more formal meetings with agency decision-makers, or (e) been identified as the vendor of record in any procurement document</li>
+        <li><strong>Right to close:</strong> USSP shall have the exclusive right to continue pursuing and closing all Pipeline Opportunities for twelve (12) months following the termination effective date, under the same 80/20 revenue split and all other terms of this MOU</li>
+        <li><strong>Compensation if not permitted to close:</strong> If TeleRay prevents USSP from continuing to pursue Pipeline Opportunities, or if TeleRay (directly or through any other party) closes a Pipeline Opportunity within twenty-four (24) months of termination, USSP shall be entitled to compensation equal to the projected first-year contract value at the 80/20 revenue split, calculated using the pricing proposed to the agency at the time of termination</li>
+        <li><strong>Pipeline log:</strong> USSP shall maintain and share with TeleRay a written log of all Pipeline Opportunities, updated quarterly. TeleRay shall acknowledge receipt in writing. Failure by TeleRay to dispute the log within thirty (30) days of receipt constitutes acceptance</li>
+      </ul>
       <h3>10.4 Acquisition / Change of Control</h3>
       <p>If TeleRay is acquired, merged, or undergoes a change of control (defined as transfer of more than 50% of ownership or voting rights):</p>
       <ul>
@@ -371,11 +380,72 @@ export default function SharedTeleRayMOU() {
         <strong>For USSP:</strong> Equity reflects the full strategic value created, not just revenue. USSP&rsquo;s TOPS access, MBE/WBE certification, government relationships, and implementation capability are what make this contract possible.
       </div>
 
-      <h3>14.4 Valuation and Pricing</h3>
+      <h3>14.4 Fair Market Valuation Methodology</h3>
+      <p>Both parties acknowledge that TeleRay has communicated an aspirational valuation of $20M. However, the parties agree that all equity transactions under this MOU shall be priced using an objective, industry-standard Fair Market Valuation (&ldquo;FMV&rdquo;) methodology, not aspirational or self-reported valuations.</p>
+
+      <h3>14.4.1 Valuation Formula</h3>
+      <div class="m-highlight">
+        <strong>Fair Market Valuation = Trailing 12-Month Revenue &times; Applicable Revenue Multiple</strong><br/><br/>
+        The applicable revenue multiple shall be determined by TeleRay&rsquo;s stage using the following industry-standard SaaS healthtech benchmarks:
+      </div>
+      <table>
+        <thead><tr><th>Company Stage</th><th>Criteria</th><th>Revenue Multiple</th></tr></thead>
+        <tbody>
+          <tr><td>Pre-revenue / Seed</td><td>No meaningful ARR, pre-product-market fit</td><td>1&ndash;3x</td></tr>
+          <tr><td><strong>Early Revenue, Pre-profit</strong></td><td><strong>$1&ndash;5M ARR, negative EBITDA, limited installations, concentrated revenue</strong></td><td><strong>3&ndash;5x</strong></td></tr>
+          <tr><td>Growing, Installed</td><td>$5&ndash;15M ARR, multiple verticals, reference customers, path to profit</td><td>5&ndash;8x</td></tr>
+          <tr><td>Profitable, Scaling</td><td>$15M+ ARR, positive EBITDA, diversified revenue, government contracts</td><td>8&ndash;12x</td></tr>
+          <tr><td>Category Leader</td><td>$50M+ ARR, dominant market position, high retention, multi-market</td><td>12&ndash;20x</td></tr>
+        </tbody>
+      </table>
+
+      <h3>14.4.2 TeleRay Current-Stage Assessment</h3>
+      <p>As of the date of this MOU, TeleRay&rsquo;s metrics place it in the <strong>&ldquo;Early Revenue, Pre-profit&rdquo;</strong> category:</p>
+      <table>
+        <thead><tr><th>Metric</th><th>TeleRay Current</th><th>What $20M (10x) Would Require</th></tr></thead>
+        <tbody>
+          <tr><td>Annual Recurring Revenue</td><td>~$2M</td><td>$2M at 10x &mdash; top-decile multiple for this stage</td></tr>
+          <tr><td>EBITDA</td><td>Negative (cash burn)</td><td>Positive or near-breakeven</td></tr>
+          <tr><td>Government Installations</td><td>Zero</td><td>Multiple reference customers</td></tr>
+          <tr><td>Revenue Diversification</td><td>Concentrated in radiology</td><td>Multiple verticals (telehealth, PACS, remote)</td></tr>
+          <tr><td>Net Revenue Retention</td><td>Not disclosed</td><td>&gt;120% NRR typical for 10x</td></tr>
+          <tr><td>Competitive Moat</td><td>Moderate (crowded telehealth market)</td><td>Clear differentiation, switching costs</td></tr>
+          <tr><td>Government Market Access</td><td>None (requires USSP)</td><td>Established govt channel</td></tr>
+        </tbody>
+      </table>
+      <div class="m-highlight">
+        <strong>Fair Market Valuation at current stage:</strong><br/>
+        &bull; Conservative (3x): $2M &times; 3 = <strong>$6M</strong><br/>
+        &bull; Fair (4x): $2M &times; 4 = <strong>$8M</strong><br/>
+        &bull; Generous (5x): $2M &times; 5 = <strong>$10M</strong><br/><br/>
+        <strong>TeleRay&rsquo;s $20M ask implies a 10x multiple</strong> &mdash; a valuation typically reserved for companies with proven growth, positive EBITDA, diversified revenue, and established enterprise/government customers. TeleRay currently meets none of these criteria.<br/><br/>
+        <strong>The gap between $8&ndash;10M (current FMV) and $20M (aspirational) represents future value that USSP&rsquo;s work is expected to create.</strong> USSP should not pay for value it has not yet built.
+      </div>
+
+      <h3>14.4.3 Sweat Equity Valuation</h3>
       <ul>
-        <li>Milestone 1 (First Contract) equity shall be priced at TeleRay&rsquo;s <strong>pre-contract valuation</strong>, reflecting the company&rsquo;s current stage ($2M revenue, no EBITDA, no government installations)</li>
-        <li>Subsequent milestones shall be priced at the most recent third-party valuation event (funding round, 409A, or independent appraisal), or if none has occurred, by mutual agreement based on trailing twelve-month revenue and industry multiples</li>
-        <li>USSP&rsquo;s sweat equity shall not be priced at the same valuation offered to cash investors &mdash; USSP is taking execution risk and investing time, relationships, certifications, and reputation, which warrants a discount to cash-investment valuations</li>
+        <li><strong>Milestone 1 (First Contract):</strong> Equity shall be priced at the FMV determined by the methodology above &mdash; estimated at <strong>$8&ndash;10M</strong> (4&ndash;5x current ARR). This is the &ldquo;Baseline Valuation&rdquo; for all subsequent calculations</li>
+        <li><strong>Sweat equity discount principle:</strong> Sweat equity shall never be priced at the same valuation as cash investment. USSP is taking execution risk and investing time, government relationships, MBE/WBE/DBE certifications, TOPS contract access, and institutional reputation. Cash investors write a check and wait; USSP builds the market. This warrants a minimum <strong>forty percent (40%) discount</strong> to any cash-investor valuation</li>
+        <li><strong>Cash investment valuation (separate):</strong> If USSP or IGM Fund elects to invest cash, those terms may be negotiated from TeleRay&rsquo;s proposed $20M valuation per Section 14.8. Cash investment and sweat equity are independent &mdash; the $20M figure does not apply to value-event milestones</li>
+        <li>Subsequent milestones shall be priced at the most recent third-party valuation event (funding round, 409A, or independent appraisal), or if none has occurred, by the FMV formula above using trailing twelve-month revenue and the applicable stage multiple, subject to the cap and discount in Section 14.4.4</li>
+      </ul>
+
+      <h3>14.4.4 Valuation Dispute Resolution</h3>
+      <ul>
+        <li>If the parties cannot agree on the FMV for any equity event, either party may request an independent valuation by a mutually agreed third-party appraiser (CPA firm or valuation firm with SaaS healthtech experience)</li>
+        <li>The appraiser shall use the revenue-multiple methodology defined in Section 14.4.1, supplemented by comparable transaction analysis and discounted cash flow if appropriate</li>
+        <li>Costs of the independent valuation shall be shared equally</li>
+        <li>The independent valuation shall be binding for the specific equity event in question</li>
+        <li>Neither party may use a self-reported or aspirational valuation as a basis for equity pricing under this MOU</li>
+      </ul>
+
+      <h3>14.4.5 Valuation Lock and USSP-Created Value Discount</h3>
+      <p>Both parties acknowledge that increases in TeleRay&rsquo;s valuation resulting from IL government contracts are directly attributable to USSP&rsquo;s sales effort, government relationships, and implementation work. To prevent USSP from being penalized for the value it creates:</p>
+      <ul>
+        <li><strong>Valuation cap on subsequent milestones:</strong> The valuation used to price Milestones 2, 3, and 4 shall not exceed two times (2x) the valuation used for Milestone 1, regardless of TeleRay&rsquo;s market valuation at the time. If TeleRay&rsquo;s valuation at the time of a subsequent milestone exceeds this cap, USSP receives equity at the capped valuation</li>
+        <li><strong>USSP-created value discount:</strong> For any milestone where the valuation increase since the prior milestone is primarily attributable to IL government revenue generated by USSP, USSP shall receive equity at a <strong>forty percent (40%) discount</strong> to the applicable valuation, reflecting that USSP&rsquo;s own work drove the increase</li>
+        <li><strong>Valuation lock election:</strong> At the time of Milestone 1, USSP may elect to lock the valuation for all subsequent milestones at the Milestone 1 valuation, forgoing any adjustment. This election is irrevocable once made and must be communicated in writing within sixty (60) days of the Milestone 1 equity grant</li>
+        <li><strong>Independent valuation:</strong> If the parties cannot agree on valuation for any milestone, either party may request an independent valuation by a mutually agreed third-party appraiser, with costs shared equally</li>
       </ul>
 
       <h3>14.5 How It Works</h3>
@@ -386,15 +456,66 @@ export default function SharedTeleRayMOU() {
         <li>Equity is fully dilution-protected through the next funding round</li>
         <li>If TeleRay is acquired before all milestones are reached, USSP&rsquo;s earned equity participates in the acquisition proceeds, and the acquiring entity must honor all remaining milestone terms per Section 10.4</li>
       </ul>
+      <h3>14.5.1 Pro-Rata Acceleration on Exit</h3>
+      <p>If this MOU is terminated, not renewed, or if TeleRay undergoes a change of control (per Section 10.4) before all equity milestones have been reached, USSP shall receive <strong>pro-rata equity credit</strong> for progress toward the next unearned milestone:</p>
+      <ul>
+        <li><strong>Calculation:</strong> Pro-rata equity = (cumulative revenue toward next milestone &divide; milestone revenue target) &times; equity grant for that milestone. For example, if the next milestone is $500,000 and USSP has generated $400,000, USSP earns 80% of that milestone&rsquo;s equity grant</li>
+        <li><strong>Valuation for accelerated equity:</strong> Pro-rata equity earned under this section shall be priced at the <strong>lower of</strong> (a) the valuation applicable to the milestone being accelerated per Section 14.4, or (b) the valuation implied by the acquisition price in a change-of-control event</li>
+        <li><strong>Pipeline revenue credit:</strong> For purposes of calculating pro-rata acceleration, Pipeline Opportunities (as defined in Section 10.3.1) shall be counted at their projected first-year contract value as if collected, recognizing that USSP built the pipeline and would have closed these opportunities absent the termination or exit event</li>
+        <li><strong>Issuance:</strong> Pro-rata equity shall be issued within thirty (30) days of the termination effective date or change-of-control closing date, whichever is applicable</li>
+        <li><strong>Acquisition proceeds:</strong> In a change-of-control event, all pro-rata accelerated equity (including pipeline-credited equity) shall participate in the acquisition proceeds on the same terms as all other equity earned under this section</li>
+      </ul>
 
-      <h3>14.6 Board Representation</h3>
+      <h3>14.6 Valuation Appreciation Rights (VAR)</h3>
+      <p>In addition to equity milestones, USSP shall receive direct compensation for the enterprise value increase it creates through government market development. This is separate from and in addition to the equity earned under Section 14.2.</p>
+      <h3>14.6.1 VAR Formula</h3>
+      <div class="m-highlight">
+        <strong>VAR Payment = (Current Valuation &minus; Baseline Valuation) &times; 15%</strong><br/><br/>
+        <strong>Baseline Valuation:</strong> The sweat equity valuation established at MOU execution (per Section 14.4), locked for the life of this agreement<br/>
+        <strong>Current Valuation:</strong> Determined by the most recent third-party valuation event (funding round, 409A, acquisition offer, or independent appraisal)<br/>
+        <strong>VAR Percentage:</strong> 15% of the valuation increase
+      </div>
+      <h3>14.6.2 VAR Trigger Events</h3>
+      <p>VAR payments are calculated and owed upon any of the following events:</p>
+      <ul>
+        <li><strong>Milestone events:</strong> Each time an equity milestone (Section 14.2) is achieved, the VAR is calculated based on the valuation at that point versus baseline</li>
+        <li><strong>Funding rounds:</strong> Any equity financing round that establishes a new company valuation</li>
+        <li><strong>Change of control:</strong> Any acquisition, merger, or change of control (per Section 10.4) &mdash; VAR is calculated based on the transaction price</li>
+        <li><strong>Annual valuation:</strong> If no trigger event occurs in a given year, VAR shall be calculated annually based on a mutually agreed valuation or independent appraisal</li>
+      </ul>
+      <h3>14.6.3 VAR Payment Method</h3>
+      <ul>
+        <li>VAR may be paid in <strong>additional equity</strong> (at the current valuation) or <strong>cash</strong>, at USSP&rsquo;s election</li>
+        <li>If paid in equity, the shares or units are issued within thirty (30) days of the trigger event</li>
+        <li>If paid in cash, payment is due within sixty (60) days of the trigger event</li>
+        <li>In a change-of-control event, VAR shall be paid in cash from the transaction proceeds at closing</li>
+      </ul>
+      <h3>14.6.4 VAR Example</h3>
+      <table>
+        <thead><tr><th>Event</th><th>Valuation</th><th>Increase from Baseline</th><th>VAR (15%)</th><th>Cumulative VAR</th></tr></thead>
+        <tbody>
+          <tr><td>Baseline (MOU signing)</td><td>$8M</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td>Milestone 1 (First Contract)</td><td>$20M</td><td>$12M</td><td>$1,800,000</td><td>$1,800,000</td></tr>
+          <tr><td>Milestone 2 ($500K Revenue)</td><td>$28M</td><td>$8M</td><td>$1,200,000</td><td>$3,000,000</td></tr>
+          <tr><td>Milestone 3 ($1M Revenue)</td><td>$38M</td><td>$10M</td><td>$1,500,000</td><td>$4,500,000</td></tr>
+          <tr><td>Milestone 4 ($2M Revenue)</td><td>$50M</td><td>$12M</td><td>$1,800,000</td><td>$6,300,000</td></tr>
+        </tbody>
+      </table>
+      <h3>14.6.5 VAR Survival</h3>
+      <ul>
+        <li>VAR obligations survive termination of this MOU for five (5) years from the effective date</li>
+        <li>VAR obligations are binding on any successor entity in a change of control per Section 10.4</li>
+        <li>Accrued but unpaid VAR at the time of termination shall be paid within sixty (60) days</li>
+      </ul>
+
+      <h3>14.7 Board Representation</h3>
       <ul>
         <li>Upon earning Milestone 1 equity: board observer seat with full access to financials and strategic discussions</li>
         <li>Upon cumulative equity exceeding 5%: full voting board seat</li>
         <li>Regardless of equity level, TeleRay shall provide USSP with quarterly financial reports and annual audited statements</li>
       </ul>
 
-      <h3>14.7 Cash Investment (Optional, Separate)</h3>
+      <h3>14.8 Cash Investment (Optional, Separate)</h3>
       <p>Any direct cash investment by USSP or IGM Fund in TeleRay shall be governed by separate agreements and is not required under this MOU. Cash investment terms (including the discussed tranches of $500K at $20M, $500K at $25M, $500K at $30M, and $500K at $35M valuations) are independent of and in addition to the value-event equity earned under this section. If USSP or IGM Fund elects to invest cash, the terms shall be negotiated separately, and cash equity shall not reduce or offset the sweat equity earned through milestones above.</p>
     </div>
 
@@ -420,7 +541,46 @@ export default function SharedTeleRayMOU() {
     </div>
 
     <div class="m-section">
-      <h2><span class="m-num">16</span>GENERAL PROVISIONS</h2>
+      <h2><span class="m-num">16</span>ENFORCEMENT AND REMEDIES</h2>
+      <hr class="m-divider" />
+      <h3>16.1 Audit Rights</h3>
+      <ul>
+        <li>USSP shall have the right, upon fifteen (15) days written notice, to audit TeleRay&rsquo;s books, records, and systems to verify: (a) revenue reporting accuracy, (b) compliance with lead routing obligations, (c) compliance with exclusivity and non-compete provisions, (d) government pipeline activity outside Illinois, and (e) any other obligation under this MOU</li>
+        <li>TeleRay shall have the right, upon fifteen (15) days written notice, to audit USSP&rsquo;s revenue collection and royalty payment records</li>
+        <li>Audits may be conducted by the requesting party or a mutually agreed independent auditor, up to twice per calendar year</li>
+        <li>If an audit reveals a discrepancy of more than five percent (5%) in any reporting period, the audited party shall bear all costs of the audit and immediately cure the discrepancy with interest at 1.5% per month from the date the payment or obligation was originally due</li>
+      </ul>
+      <h3>16.2 Financial Reporting and Transparency</h3>
+      <ul>
+        <li>TeleRay shall provide USSP with quarterly financial statements (P&amp;L, balance sheet, cash flow) within thirty (30) days of each quarter end</li>
+        <li>TeleRay shall provide annual audited financial statements within ninety (90) days of fiscal year end</li>
+        <li>TeleRay shall notify USSP in writing within five (5) business days of: (a) any inbound IL government inquiry, (b) any government pipeline activity outside Illinois, (c) any change in ownership exceeding 10%, (d) any material litigation, regulatory action, or insolvency event</li>
+        <li>Failure to provide required reports within the stated timeframes shall constitute a material breach subject to the penalties in Section 16.4</li>
+      </ul>
+      <h3>16.3 Exclusivity Enforcement</h3>
+      <ul>
+        <li>If TeleRay breaches exclusivity (Section 4) by selling directly, appointing another partner, or failing to route leads within Illinois state and local government, USSP shall be entitled to: (a) all revenue from the improperly sourced contract as if USSP had closed it at the 80/20 split, plus (b) a penalty equal to fifty percent (50%) of first-year contract revenue, plus (c) the right to terminate this MOU and trigger all pipeline compensation (Section 10.3.1) and pro-rata equity acceleration (Section 14.5.1)</li>
+        <li>If TeleRay breaches Introduction Protection (Section 4.4) by engaging another party for an introduced customer, USSP shall be entitled to the same remedies as an exclusivity breach, calculated on the full four-year projected revenue from that customer</li>
+      </ul>
+      <h3>16.4 Equity Issuance Enforcement</h3>
+      <ul>
+        <li>If TeleRay fails to issue equity grant documentation within thirty (30) days of a milestone event (per Section 14.5), USSP shall provide written notice demanding issuance</li>
+        <li>If TeleRay fails to cure within fifteen (15) days of such notice, USSP shall be entitled to: (a) the equity grant at a twenty percent (20%) discount to the applicable valuation as a penalty, (b) interest on the equity value at 1.5% per month from the milestone date, and (c) the right to seek specific performance through arbitration (Section 13) on an expedited basis</li>
+        <li>Repeated failure (two or more instances) to timely issue equity shall entitle USSP to accelerate all remaining milestones and receive the full 8&ndash;12% equity immediately at the Milestone 1 valuation</li>
+      </ul>
+      <h3>16.5 Royalty and Revenue Split Enforcement</h3>
+      <ul>
+        <li>If USSP fails to remit TeleRay&rsquo;s 20% royalty within thirty (30) days of receiving customer payment, TeleRay shall provide written notice. If USSP fails to cure within fifteen (15) days, interest accrues at 1.5% per month from the original due date</li>
+        <li>If TeleRay receives revenue from an IL government customer directly (in violation of exclusivity), TeleRay shall remit USSP&rsquo;s 80% share within fifteen (15) days of collection, plus the exclusivity breach penalty per Section 16.3</li>
+      </ul>
+      <h3>16.6 Injunctive Relief</h3>
+      <p>Both parties acknowledge that breaches of exclusivity (Section 4), confidentiality (Section 9), non-solicitation (Section 11), or equity obligations (Section 14) would cause irreparable harm not adequately compensable by monetary damages. Either party may seek immediate injunctive relief from a court of competent jurisdiction in Cook County, Illinois, without the requirement to post bond, in addition to any other remedies available under this MOU or at law.</p>
+      <h3>16.7 Attorneys&rsquo; Fees</h3>
+      <p>In any dispute arising under this MOU, the prevailing party shall be entitled to recover reasonable attorneys&rsquo; fees and costs from the non-prevailing party.</p>
+    </div>
+
+    <div class="m-section">
+      <h2><span class="m-num">17</span>GENERAL PROVISIONS</h2>
       <hr class="m-divider" />
       <ul>
         <li><strong>Independent contractors:</strong> The parties are independent contractors. Nothing creates an employer-employee, partnership, or joint venture relationship.</li>
@@ -448,11 +608,216 @@ export default function SharedTeleRayMOU() {
       </div>
     </div>
 
+    <div class="m-section">
+      <h2><span class="m-num">18</span>DOCUMENT VERSION HISTORY</h2>
+      <hr class="m-divider" />
+      <p>This MOU is a living document during the draft and negotiation phase. All revisions shall be tracked below. Upon execution, the signed version becomes the controlling document and subsequent changes require a formal amendment per Section 17.</p>
+      <table>
+        <thead><tr><th>Version</th><th>Date</th><th>Author</th><th>Changes</th></tr></thead>
+        <tbody>
+          <tr><td>1.0</td><td>March 2026</td><td>USSP</td><td>Initial draft &mdash; core commercial terms, revenue split, exclusivity, equity milestones</td></tr>
+          <tr><td>1.1</td><td>March 2026</td><td>USSP</td><td>Expanded target customers to include Cook County and City of Chicago; added Introduction Protection (4.4); extended term to 5 years; added Change of Control provisions (10.4); added Government Market Expansion Royalty (Section 15)</td></tr>
+          <tr><td>1.2</td><td>March 2026</td><td>USSP</td><td>Restructured equity to value-event milestones (Section 14.2); added valuation rationale (14.3); added board representation (14.6); separated cash investment (14.7)</td></tr>
+          <tr><td>1.3</td><td>March 2026</td><td>USSP</td><td>Added Pipeline Compensation on Termination (10.3.1); added Valuation Lock and USSP-Created Value Discount (14.4.1); added Pro-Rata Acceleration on Exit (14.5.1)</td></tr>
+          <tr><td>1.4</td><td>March 2026</td><td>USSP</td><td>Added Enforcement and Remedies (Section 16) &mdash; audit rights, financial reporting, exclusivity enforcement, equity issuance enforcement, royalty enforcement, injunctive relief, attorneys&rsquo; fees. Added document versioning.</td></tr>
+          <tr><td>1.5</td><td>March 2026</td><td>USSP</td><td>Addressed TeleRay&rsquo;s $20M valuation ask &mdash; established sweat equity valuation at $8&ndash;10M (3&ndash;5x ARR) separate from cash investment valuation. Added Valuation Appreciation Rights (Section 14.6) with 15% VAR formula, trigger events, payment methods, and worked example. Renumbered subsections.</td></tr>
+          <tr><td>1.6</td><td>March 2026</td><td>USSP</td><td>Added Fair Market Valuation Methodology (Section 14.4) &mdash; industry-standard revenue multiple table, TeleRay current-stage assessment showing $20M is inflated (10x vs. fair 3&ndash;5x), FMV formula (TTM Revenue &times; Stage Multiple), sweat equity discount principle (40% minimum discount to cash valuations), valuation dispute resolution with binding independent appraisal. Renumbered subsections 14.4.1&ndash;14.4.5.</td></tr>
+          <tr><td><strong>1.7</strong></td><td><strong>March 2026</strong></td><td><strong>USSP</strong></td><td><strong>Added Appendix A &mdash; Capital Raise Facilitation ($2M Growth Fund). Milestone-gated 4-tranche structure ($500K each), USSP as placement agent (5% cash fee + 2% equity kicker + 1% advisory equity), investor tail provision (24 months), use-of-funds controls, tranche valuations tied to FMV methodology. Appendix is independently detachable with its own signature block.</strong></td></tr>
+        </tbody>
+      </table>
+      <h3>18.1 Review Schedule</h3>
+      <ul>
+        <li><strong>Pre-execution review:</strong> Both parties shall review and provide written comments on each draft version within ten (10) business days of receipt</li>
+        <li><strong>Annual review:</strong> Following execution, both parties shall conduct a formal review of this MOU annually on or near the anniversary of the effective date to assess whether amendments are needed</li>
+        <li><strong>Triggered review:</strong> Either party may request an immediate review upon: (a) a material change in business conditions, (b) a change in applicable law or regulation, (c) a dispute or near-dispute arising from ambiguous terms, or (d) completion of a major milestone (e.g., first government contract signed)</li>
+        <li><strong>Review process:</strong> Each review shall produce a written summary of proposed changes (if any), agreed upon by both parties, before any amendment is drafted</li>
+      </ul>
+    </div>
+
     <div class="m-footer">
       <p>CONFIDENTIAL &mdash; This document is for discussion purposes between US Software Professionals Inc. and TeleRay Inc. only.</p>
       <p>This is a draft MOU and does not constitute a binding legal agreement until signed by authorized representatives of both parties.</p>
+      <p style="margin-top:8px;font-size:10px;color:#64748b;">Document Version 1.7 &mdash; March 2026</p>
       <button class="m-print-btn" onclick="window.print()">Print / Save as PDF</button>
     </div>
+
+    <!-- ===== APPENDIX A — DETACHABLE ===== -->
+    <div style="border-top:3px solid #2563eb;margin-top:40px;padding-top:8px;"></div>
+    <div class="m-header" style="padding:32px 24px;">
+      <h1 style="font-size:20px;">APPENDIX A</h1>
+      <p class="m-subtitle">Capital Raise Facilitation &mdash; $2M Growth Fund</p>
+      <div class="m-meta">
+        <span><strong>Status:</strong> Optional &mdash; Detachable from Core MOU</span>
+        <span><strong>Version:</strong> 1.0</span>
+      </div>
+      <div class="confidential">CONFIDENTIAL</div>
+    </div>
+
+    <div class="m-body">
+      <div class="m-purpose">
+        This Appendix is an optional, independent addendum to the MOU between USSP and TeleRay. It may be included, excluded, or modified without affecting the validity or enforceability of the core MOU (Sections 1&ndash;18). If this Appendix conflicts with the core MOU, the core MOU shall govern.
+      </div>
+
+      <div class="m-section">
+        <h2><span class="m-num">A1</span>BACKGROUND AND PURPOSE</h2>
+        <hr class="m-divider" />
+        <p>TeleRay has requested USSP&rsquo;s assistance in raising <strong>$2,000,000 in growth capital</strong> to fund marketing expansion, platform development, and go-to-market activities necessary to support the IL government partnership and broader commercialization. USSP has agreed to facilitate this capital raise through its investor network, including but not limited to IGM Fund and other strategic investors.</p>
+        <p>Both parties acknowledge that capital raise facilitation is a separate service from the reseller/implementation partnership and the sweat equity arrangement defined in the core MOU. USSP&rsquo;s compensation for fundraising efforts is defined in this Appendix and is independent of all other compensation under the core MOU.</p>
+      </div>
+
+      <div class="m-section">
+        <h2><span class="m-num">A2</span>CAPITAL RAISE STRUCTURE</h2>
+        <hr class="m-divider" />
+        <h3>A2.1 Total Raise</h3>
+        <p>$2,000,000 in four (4) milestone-gated tranches of $500,000 each.</p>
+        <h3>A2.2 Tranche Schedule</h3>
+        <table>
+          <thead><tr><th>Tranche</th><th>Amount</th><th>Release Trigger</th><th>Intended Use</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Tranche 1</strong></td><td>$500,000</td><td>MOU execution and completion of investor documentation</td><td>Initial marketing campaign, sales collateral, demo environment buildout, government compliance preparation</td></tr>
+            <tr><td><strong>Tranche 2</strong></td><td>$500,000</td><td>First signed IL government contract (Milestone 1)</td><td>Implementation support, platform enhancements for government requirements, expanded sales team</td></tr>
+            <tr><td><strong>Tranche 3</strong></td><td>$500,000</td><td>$500K cumulative government revenue collected (Milestone 2)</td><td>Platform scaling, additional agency onboarding, marketing for expansion</td></tr>
+            <tr><td><strong>Tranche 4</strong></td><td>$500,000</td><td>$1M cumulative government revenue collected (Milestone 3)</td><td>National expansion preparation, additional product development, multi-state go-to-market</td></tr>
+          </tbody>
+        </table>
+        <h3>A2.3 Milestone Gating</h3>
+        <ul>
+          <li>Each tranche is released <strong>only upon achievement</strong> of its trigger milestone &mdash; no tranche is guaranteed</li>
+          <li>Investors commit to the full $2M but fund in tranches &mdash; standard milestone-gated venture structure</li>
+          <li>If a milestone is not achieved within twenty-four (24) months of the prior tranche release, the remaining unfunded tranches may be cancelled at the investors&rsquo; discretion</li>
+          <li>Milestone verification shall use the same definitions and measurement criteria as the core MOU (Sections 14.2 and 14.5)</li>
+        </ul>
+      </div>
+
+      <div class="m-section">
+        <h2><span class="m-num">A3</span>USSP&rsquo;S ROLE IN CAPITAL RAISE</h2>
+        <hr class="m-divider" />
+        <h3>A3.1 Scope of Facilitation</h3>
+        <p>USSP shall serve as the <strong>lead facilitator and placement agent</strong> for this capital raise. USSP&rsquo;s role includes:</p>
+        <ul>
+          <li><strong>Investor introductions:</strong> Introduce TeleRay to qualified investors from USSP&rsquo;s network, including IGM Fund, strategic healthcare investors, and government-focused venture capital</li>
+          <li><strong>Materials preparation:</strong> Assist TeleRay in preparing investor-ready materials &mdash; pitch deck, financial model, government market analysis, and growth projections</li>
+          <li><strong>Negotiation support:</strong> Participate in investor meetings and assist with term sheet negotiations</li>
+          <li><strong>Due diligence coordination:</strong> Facilitate investor due diligence process, leveraging USSP&rsquo;s knowledge of TeleRay&rsquo;s government pipeline and market opportunity</li>
+          <li><strong>Closing support:</strong> Coordinate legal documentation and closing logistics</li>
+        </ul>
+        <h3>A3.2 USSP Is Not the Investor</h3>
+        <p>USSP&rsquo;s role under this Appendix is as a <strong>fundraising facilitator</strong>, not as the source of capital. USSP may elect to invest its own capital (or through IGM Fund) per Section 14.8 of the core MOU, but any such investment is independent and voluntary. USSP has no obligation to personally fund any tranche.</p>
+      </div>
+
+      <div class="m-section">
+        <h2><span class="m-num">A4</span>USSP COMPENSATION FOR CAPITAL RAISE</h2>
+        <hr class="m-divider" />
+        <p>USSP shall be compensated for its fundraising facilitation services as follows:</p>
+        <h3>A4.1 Finder&rsquo;s / Placement Fee</h3>
+        <table>
+          <thead><tr><th>Component</th><th>Rate</th><th>Basis</th><th>Estimated Value</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Cash fee</strong></td><td>5% of capital raised</td><td>Paid from each tranche at closing</td><td>$100,000 (on full $2M)</td></tr>
+            <tr><td><strong>Equity kicker</strong></td><td>2% of capital raised, converted to equity</td><td>At the tranche valuation</td><td>Additional equity per tranche</td></tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>Cash fee is paid to USSP from the tranche proceeds at the time of each tranche closing &mdash; not from TeleRay&rsquo;s operating funds</li>
+          <li>Equity kicker is issued to USSP within thirty (30) days of each tranche closing at the same valuation offered to the tranche investors</li>
+          <li>Fees apply to all capital raised through USSP&rsquo;s introductions, even if the investor subsequently invests in later rounds without USSP&rsquo;s direct involvement (tail provision &mdash; see A4.3)</li>
+        </ul>
+        <h3>A4.2 Advisory Equity</h3>
+        <ul>
+          <li>In addition to the placement fee, USSP shall receive a one-time <strong>advisory equity grant of 1%</strong> of TeleRay for structuring and leading the capital raise</li>
+          <li>Advisory equity is priced at the Tranche 1 valuation and vests upon successful closing of Tranche 1</li>
+          <li>This advisory equity is in addition to and independent of all sweat equity, VAR, and cash investment equity under the core MOU</li>
+        </ul>
+        <h3>A4.3 Investor Tail Provision</h3>
+        <ul>
+          <li>If any investor introduced by USSP invests in TeleRay within <strong>twenty-four (24) months</strong> of the introduction &mdash; whether in this raise or any subsequent round &mdash; USSP&rsquo;s 5% cash fee and 2% equity kicker apply to that investment</li>
+          <li>USSP shall maintain a written log of all investor introductions, shared with TeleRay at the time of introduction</li>
+          <li>This tail provision survives termination of both this Appendix and the core MOU</li>
+        </ul>
+      </div>
+
+      <div class="m-section">
+        <h2><span class="m-num">A5</span>USE OF FUNDS AND REPORTING</h2>
+        <hr class="m-divider" />
+        <h3>A5.1 Approved Use of Funds</h3>
+        <p>Capital raised under this Appendix shall be used <strong>exclusively</strong> for the purposes identified in each tranche (Section A2.2). TeleRay shall not redirect tranche funds to unrelated purposes without written approval from USSP and the participating investors.</p>
+        <h3>A5.2 Financial Reporting</h3>
+        <ul>
+          <li>TeleRay shall provide USSP and participating investors with <strong>monthly use-of-funds reports</strong> showing: amount remaining per tranche, expenditures by category, variance from intended use</li>
+          <li>TeleRay shall provide quarterly financial statements (P&amp;L, balance sheet, cash flow) per Section 16.2 of the core MOU</li>
+          <li>If TeleRay depletes a tranche more than thirty percent (30%) faster than projected without proportional results, USSP and investors may request a review meeting before the next tranche is released</li>
+        </ul>
+        <h3>A5.3 Misuse of Funds</h3>
+        <p>If TeleRay materially misuses tranche funds (defined as redirecting more than 20% of a tranche to purposes outside the approved use), USSP and investors shall have the right to: (a) suspend release of subsequent tranches, (b) demand return of misused amounts, and (c) accelerate all equity and compensation provisions under both this Appendix and the core MOU.</p>
+      </div>
+
+      <div class="m-section">
+        <h2><span class="m-num">A6</span>INVESTOR TERMS AND VALUATION</h2>
+        <hr class="m-divider" />
+        <h3>A6.1 Tranche Valuations</h3>
+        <p>Each tranche shall be priced at the <strong>Fair Market Valuation</strong> determined by the methodology in Section 14.4 of the core MOU at the time of tranche closing, subject to the following:</p>
+        <table>
+          <thead><tr><th>Tranche</th><th>Valuation Basis</th><th>Estimated Range</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Tranche 1</strong></td><td>Current FMV (pre-contract)</td><td>$8&ndash;10M</td></tr>
+            <tr><td><strong>Tranche 2</strong></td><td>Post-first-contract FMV</td><td>$15&ndash;20M (government-proven)</td></tr>
+            <tr><td><strong>Tranche 3</strong></td><td>FMV at $500K govt revenue</td><td>$20&ndash;28M</td></tr>
+            <tr><td><strong>Tranche 4</strong></td><td>FMV at $1M govt revenue</td><td>$28&ndash;38M</td></tr>
+          </tbody>
+        </table>
+        <p><em>Step-up valuations reflect real value creation at each milestone &mdash; investors in later tranches pay a higher price because USSP has de-risked the business.</em></p>
+        <h3>A6.2 Investor Rights</h3>
+        <ul>
+          <li>Standard minority investor protections: pro-rata rights, information rights, anti-dilution (weighted average)</li>
+          <li>Investors receive the same quarterly reporting as USSP (per Section 16.2 of core MOU)</li>
+          <li>Specific investor terms (SAFE, convertible note, or equity purchase) to be documented in separate investment agreements</li>
+        </ul>
+        <h3>A6.3 USSP&rsquo;s Investment Right</h3>
+        <ul>
+          <li>USSP (or IGM Fund) shall have <strong>first right to participate</strong> in each tranche before outside investors</li>
+          <li>USSP may invest in any or all tranches, in any amount up to the full tranche</li>
+          <li>If USSP invests its own cash, the placement fee (A4.1) does not apply to USSP&rsquo;s own investment &mdash; only to capital raised from third-party investors</li>
+          <li>USSP&rsquo;s cash investment equity is separate from and in addition to sweat equity, VAR, and advisory equity</li>
+        </ul>
+      </div>
+
+      <div class="m-section">
+        <h2><span class="m-num">A7</span>TERM AND DETACHABILITY</h2>
+        <hr class="m-divider" />
+        <ul>
+          <li>This Appendix becomes effective only when signed by both parties, independent of the core MOU execution date</li>
+          <li>Either party may remove this Appendix from the MOU by written notice prior to the closing of Tranche 1, with no effect on the core MOU</li>
+          <li>Once Tranche 1 closes, this Appendix cannot be unilaterally removed &mdash; modification requires written agreement of both parties and any participating investors</li>
+          <li>If the core MOU is terminated, obligations under closed tranches survive (reporting, use of funds, investor tail). Unfunded tranches are cancelled unless investors elect to proceed independently</li>
+          <li>USSP&rsquo;s compensation for capital raise facilitation (Section A4) survives termination of both this Appendix and the core MOU for the duration of the investor tail period (24 months)</li>
+        </ul>
+      </div>
+
+      <div class="m-signatures">
+        <div class="m-sig-block">
+          <h3>US Software Professionals Inc.</h3>
+          <p style="font-size:12px;color:#64748b;margin-bottom:12px;">Appendix A &mdash; Capital Raise Facilitation</p>
+          <div class="m-sig-line">Name: _______________</div>
+          <div class="m-sig-line">Title: _______________</div>
+          <div class="m-sig-line">Date: _______________</div>
+          <div class="m-sig-line">Signature: _______________</div>
+        </div>
+        <div class="m-sig-block">
+          <h3>TeleRay Inc.</h3>
+          <p style="font-size:12px;color:#64748b;margin-bottom:12px;">Appendix A &mdash; Capital Raise Facilitation</p>
+          <div class="m-sig-line">Name: _______________</div>
+          <div class="m-sig-line">Title: _______________</div>
+          <div class="m-sig-line">Date: _______________</div>
+          <div class="m-sig-line">Signature: _______________</div>
+        </div>
+      </div>
+
+      <div class="m-footer">
+        <p>APPENDIX A &mdash; This appendix is an optional, detachable addendum to the USSP&ndash;TeleRay MOU.</p>
+        <p>Appendix A Version 1.0 &mdash; March 2026</p>
+      </div>
+    </div>
+    <!-- ===== END APPENDIX A ===== -->
   </div>
 </div>
 `,

@@ -17,7 +17,8 @@
 
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
-  @media (max-width: 800px) { .grid, .grid-3 { grid-template-columns: 1fr; } }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  @media (max-width: 800px) { .grid, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
 
   .card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 20px; }
   .card h2 { font-size: 14px; font-weight: 700; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
@@ -75,15 +76,24 @@
   .waterfall .wf-bar .wf-val { font-size: 11px; color: #fff; font-weight: 600; margin-bottom: 4px; }
   .waterfall .wf-bar .wf-label { font-size: 9px; color: #64748b; text-align: center; margin-top: 6px; writing-mode: vertical-rl; text-orientation: mixed; max-height: 60px; overflow: hidden; }
 
+  .checkbox-group { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .checkbox-group input[type="checkbox"] { accent-color: #2563eb; width: 16px; height: 16px; }
+  .checkbox-group label { font-size: 13px; color: #94a3b8; cursor: pointer; }
+
+  .note-box { background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.3); border-radius: 6px; padding: 10px 14px; font-size: 12px; color: #93c5fd; margin-top: 12px; }
+
   .footer { text-align: center; padding: 20px; font-size: 11px; color: #475569; }
 
   @media print {
     body { background: #fff; color: #1a1a1a; }
-    .card { background: #f8fafc; border-color: #e2e8f0; }
+    .card { background: #f8fafc; border-color: #e2e8f0; break-inside: avoid; }
     .stat { background: #f1f5f9; }
     .stat .value, .stat .value.green, .stat .value.blue, .stat .value.yellow { color: #0f172a; }
     .header { background: #0f172a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    @page { margin: 0.5in; }
+    .section-title { break-before: auto; break-after: avoid; }
+    table { break-inside: auto; }
+    tr { break-inside: avoid; }
+    @page { margin: 0.5in; size: landscape; }
   }
 </style>
 </head>
@@ -281,6 +291,147 @@
     </table>
   </div>
 
+  <!-- SECTION 3.1: Valuation Protections -->
+  <div class="section-title">3.1 Valuation Protections (MOU)</div>
+  <div class="card" style="margin-bottom:20px;">
+    <h2>Milestone Equity Pricing Protections</h2>
+    <div class="checkbox-group">
+      <input type="checkbox" id="valLockCheck" oninput="calculate()">
+      <label for="valLockCheck">Valuation Lock: Use Milestone 1 valuation for all milestones</label>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Milestone</th>
+          <th style="text-align:right;">Market Valuation</th>
+          <th style="text-align:right;">With 2x Cap</th>
+          <th style="text-align:right;">With 40% Discount</th>
+          <th style="text-align:right;">With Lock</th>
+          <th style="text-align:right;">Applied Valuation</th>
+          <th style="text-align:right;">Savings vs Market</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bold">1 — First Contract</td>
+          <td class="num" id="vpMarket1">—</td>
+          <td class="num" id="vpCap1">—</td>
+          <td class="num" id="vpDiscount1">—</td>
+          <td class="num" id="vpLock1">—</td>
+          <td class="num blue" id="vpApplied1">—</td>
+          <td class="num green" id="vpSavings1">—</td>
+        </tr>
+        <tr>
+          <td class="bold">2 — $500K Revenue</td>
+          <td class="num" id="vpMarket2">—</td>
+          <td class="num" id="vpCap2">—</td>
+          <td class="num" id="vpDiscount2">—</td>
+          <td class="num" id="vpLock2">—</td>
+          <td class="num blue" id="vpApplied2">—</td>
+          <td class="num green" id="vpSavings2">—</td>
+        </tr>
+        <tr>
+          <td class="bold">3 — $1M Revenue</td>
+          <td class="num" id="vpMarket3">—</td>
+          <td class="num" id="vpCap3">—</td>
+          <td class="num" id="vpDiscount3">—</td>
+          <td class="num" id="vpLock3">—</td>
+          <td class="num blue" id="vpApplied3">—</td>
+          <td class="num green" id="vpSavings3">—</td>
+        </tr>
+        <tr>
+          <td class="bold">4 — $2M Revenue</td>
+          <td class="num" id="vpMarket4">—</td>
+          <td class="num" id="vpCap4">—</td>
+          <td class="num" id="vpDiscount4">—</td>
+          <td class="num" id="vpLock4">—</td>
+          <td class="num blue" id="vpApplied4">—</td>
+          <td class="num green" id="vpSavings4">—</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="border-top:2px solid #334155;">
+          <td class="bold" colspan="5">Total Savings from Protections</td>
+          <td></td>
+          <td class="num bold green" id="vpTotalSavings">—</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="note-box">
+      <strong>How protections work:</strong> The 2x cap prevents milestone valuations from exceeding twice the Milestone 1 valuation.
+      The 40% discount reflects USSP-created value. The valuation lock option uses Milestone 1 valuation for all equity grants regardless of growth.
+    </div>
+  </div>
+
+  <!-- SECTION 3.2: Valuation Appreciation Rights (VAR) -->
+  <div class="section-title">3.2 Valuation Appreciation Rights (VAR)</div>
+  <div class="card" style="margin-bottom:20px;">
+    <h2>VAR = (Current Valuation - Baseline Valuation) &times; VAR %</h2>
+    <div class="slider-group">
+      <label>VAR Percentage <span id="varPctDisplay">15%</span></label>
+      <input type="range" id="varPct" min="5" max="25" step="1" value="15" oninput="calculate()">
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th style="text-align:right;">Valuation at Event</th>
+          <th style="text-align:right;">Increase from Prior</th>
+          <th style="text-align:right;">VAR Payment</th>
+          <th style="text-align:right;">Cumulative VAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bold">Milestone 1 (Baseline)</td>
+          <td class="num" id="varVal1">—</td>
+          <td class="num" id="varInc1">—</td>
+          <td class="num green" id="varPay1">—</td>
+          <td class="num bold" id="varCum1">—</td>
+        </tr>
+        <tr>
+          <td class="bold">Milestone 2</td>
+          <td class="num" id="varVal2">—</td>
+          <td class="num" id="varInc2">—</td>
+          <td class="num green" id="varPay2">—</td>
+          <td class="num bold" id="varCum2">—</td>
+        </tr>
+        <tr>
+          <td class="bold">Milestone 3</td>
+          <td class="num" id="varVal3">—</td>
+          <td class="num" id="varInc3">—</td>
+          <td class="num green" id="varPay3">—</td>
+          <td class="num bold" id="varCum3">—</td>
+        </tr>
+        <tr>
+          <td class="bold">Milestone 4</td>
+          <td class="num" id="varVal4">—</td>
+          <td class="num" id="varInc4">—</td>
+          <td class="num green" id="varPay4">—</td>
+          <td class="num bold" id="varCum4">—</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="grid-3" style="margin-top:16px;">
+      <div class="stat">
+        <div class="value green" id="varTotal">$0</div>
+        <div class="label">Total VAR Earned</div>
+      </div>
+      <div class="stat">
+        <div class="value blue" id="varBaseline">$0</div>
+        <div class="label">Baseline Valuation (M1)</div>
+      </div>
+      <div class="stat">
+        <div class="value yellow" id="varFinalVal">$0</div>
+        <div class="label">Final Milestone Valuation</div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>VAR Formula:</strong> At each milestone event, USSP earns a cash payment equal to
+      the VAR percentage of the valuation increase since the prior milestone. Baseline is the Milestone 1 (pre-contract) valuation.
+    </div>
+  </div>
+
   <hr class="divider">
 
   <!-- SECTION 4: Cash Investment -->
@@ -338,11 +489,102 @@
     </table>
   </div>
 
+  <!-- SECTION 4.1: Capital Raise Facilitation -->
+  <div class="section-title">4.1 Capital Raise Facilitation</div>
+  <div class="card" style="margin-bottom:20px;">
+    <h2>$2M Capital Raise — Milestone-Gated Tranches</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Tranche</th>
+          <th style="text-align:right;">Amount</th>
+          <th>Trigger</th>
+          <th style="text-align:right;">Valuation</th>
+          <th style="text-align:right;">Cash Fee (5%)</th>
+          <th style="text-align:right;">Equity Kicker (2%)</th>
+          <th style="text-align:right;">Kicker % of Co.</th>
+          <th>Include?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bold">Tranche 1</td>
+          <td class="num">$500,000</td>
+          <td>MOU Execution</td>
+          <td class="num blue" id="crVal1">—</td>
+          <td class="num green" id="crFee1">—</td>
+          <td class="num" id="crKicker1">—</td>
+          <td class="num blue" id="crKickerPct1">—</td>
+          <td><input type="checkbox" id="crCheck1" checked oninput="calculate()"></td>
+        </tr>
+        <tr>
+          <td class="bold">Tranche 2</td>
+          <td class="num">$500,000</td>
+          <td>First Contract</td>
+          <td class="num blue" id="crVal2">—</td>
+          <td class="num green" id="crFee2">—</td>
+          <td class="num" id="crKicker2">—</td>
+          <td class="num blue" id="crKickerPct2">—</td>
+          <td><input type="checkbox" id="crCheck2" checked oninput="calculate()"></td>
+        </tr>
+        <tr>
+          <td class="bold">Tranche 3</td>
+          <td class="num">$500,000</td>
+          <td>$500K Revenue</td>
+          <td class="num blue" id="crVal3">—</td>
+          <td class="num green" id="crFee3">—</td>
+          <td class="num" id="crKicker3">—</td>
+          <td class="num blue" id="crKickerPct3">—</td>
+          <td><input type="checkbox" id="crCheck3" checked oninput="calculate()"></td>
+        </tr>
+        <tr>
+          <td class="bold">Tranche 4</td>
+          <td class="num">$500,000</td>
+          <td>$1M Revenue</td>
+          <td class="num blue" id="crVal4">—</td>
+          <td class="num green" id="crFee4">—</td>
+          <td class="num" id="crKicker4">—</td>
+          <td class="num blue" id="crKickerPct4">—</td>
+          <td><input type="checkbox" id="crCheck4" checked oninput="calculate()"></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="border-top:2px solid #334155;">
+          <td class="bold" colspan="2">Totals</td>
+          <td></td>
+          <td></td>
+          <td class="num bold green" id="crTotalFee">—</td>
+          <td></td>
+          <td class="num bold blue" id="crTotalKickerPct">—</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="grid-3" style="margin-top:16px;">
+      <div class="stat">
+        <div class="value green" id="crTotalCashFee">$0</div>
+        <div class="label">Total Fundraise Cash Fee</div>
+      </div>
+      <div class="stat">
+        <div class="value blue" id="crTotalEquityPct">0%</div>
+        <div class="label">Total Fundraise Equity (Kicker + Advisory)</div>
+      </div>
+      <div class="stat">
+        <div class="value yellow" id="crAdvisoryPct">1.00%</div>
+        <div class="label">Advisory Equity (1% Fixed, One-Time)</div>
+      </div>
+    </div>
+    <div class="note-box">
+      <strong>Terms:</strong> 5% cash fee deducted from tranche proceeds. 2% equity kicker is in TeleRay equity valued at tranche valuation.
+      1% advisory equity is a one-time grant at Tranche 1 valuation. USSP facilitates, does not invest its own capital.
+    </div>
+  </div>
+
   <hr class="divider">
 
   <!-- SECTION 5: Combined Position & Exit Scenarios -->
   <div class="section-title">5. Total USSP Position &amp; Exit Scenarios</div>
-  <div class="grid-3" style="margin-bottom:20px;">
+  <div class="grid-4" style="margin-bottom:20px;">
     <div class="stat">
       <div class="value green" id="totalEquity">17.6%</div>
       <div class="label">Total USSP Equity (Sweat + Cash)</div>
@@ -355,48 +597,132 @@
       <div class="value yellow" id="annualRevShare">$400K/yr</div>
       <div class="label">Annual Revenue Share (80% of Govt)</div>
     </div>
+    <div class="stat">
+      <div class="value green" id="totalFundraiseEquity">0%</div>
+      <div class="label">Fundraise Equity (Kicker + Advisory)</div>
+    </div>
   </div>
 
+  <!-- Pro-Rata Acceleration Scenario -->
+  <div class="card" style="margin-bottom:20px;">
+    <h2>Pro-Rata Acceleration Scenario (Termination / Early Exit)</h2>
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;">
+      <div class="slider-group">
+        <label>Progress toward next milestone <span id="proRataProgressDisplay">80%</span></label>
+        <input type="range" id="proRataProgress" min="0" max="100" step="5" value="80" oninput="calculate()">
+      </div>
+      <div class="input-group">
+        <label>Pipeline value at termination ($)</label>
+        <input type="number" id="pipelineValue" value="200000" step="25000" oninput="calculate()">
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th style="text-align:right;">Equity %</th>
+          <th style="text-align:right;">Value at Exit</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bold">Earned Equity (completed milestones)</td>
+          <td class="num green" id="prEarnedPct">—</td>
+          <td class="num green" id="prEarnedVal">—</td>
+          <td id="prEarnedNote">—</td>
+        </tr>
+        <tr>
+          <td class="bold">Pro-Rata Equity (partial milestone)</td>
+          <td class="num blue" id="prProRataPct">—</td>
+          <td class="num blue" id="prProRataVal">—</td>
+          <td id="prProRataNote">—</td>
+        </tr>
+        <tr>
+          <td class="bold">Pipeline-Credited Equity</td>
+          <td class="num" id="prPipelinePct">—</td>
+          <td class="num" id="prPipelineVal">—</td>
+          <td id="prPipelineNote">—</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr style="border-top:2px solid #334155;">
+          <td class="bold">Total Equity at Early Exit</td>
+          <td class="num bold green" id="prTotalPct">—</td>
+          <td class="num bold green" id="prTotalVal">—</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+    <div class="note-box">
+      <strong>Pro-rata acceleration:</strong> If termination occurs mid-milestone, USSP earns a proportional share of the next milestone's equity
+      based on progress percentage. Pipeline credit adds pipeline dollar value toward reaching the milestone target threshold.
+    </div>
+  </div>
+
+  <!-- Exit Scenarios Table -->
   <div class="card" style="margin-bottom:20px;">
     <h2>Exit / Liquidity Scenarios</h2>
     <div class="slider-group">
       <label>Exit Valuation ($M) <span id="exitValDisplay">$50M</span></label>
       <input type="range" id="exitVal" min="10" max="200" step="5" value="50" oninput="calculate()">
     </div>
+    <div style="overflow-x:auto;">
     <table>
       <thead>
-        <tr><th>Scenario</th><th style="text-align:right;">Exit Valuation</th><th style="text-align:right;">USSP Equity Value</th><th style="text-align:right;">Cash Invested</th><th style="text-align:right;">Revenue Share Earned (5yr est.)</th><th style="text-align:right;">Total Return</th><th style="text-align:right;">Multiple on Cash</th></tr>
+        <tr>
+          <th>Scenario</th>
+          <th style="text-align:right;">Exit Val.</th>
+          <th style="text-align:right;">Equity Value</th>
+          <th style="text-align:right;">VAR Payout</th>
+          <th style="text-align:right;">Rev Share (est.)</th>
+          <th style="text-align:right;">Fundraise Fees</th>
+          <th style="text-align:right;">Fundraise Eq. Val</th>
+          <th style="text-align:right;">Advisory Eq. Val</th>
+          <th style="text-align:right;">Total Return</th>
+          <th style="text-align:right;">Multiple</th>
+        </tr>
       </thead>
       <tbody>
         <tr>
           <td class="bold">Conservative</td>
-          <td class="num" id="exitCon">$30M</td>
-          <td class="num green" id="exitConEquity">$5.3M</td>
-          <td class="num" id="exitConCash">$2.0M</td>
-          <td class="num" id="exitConRevShare">$2.0M</td>
-          <td class="num bold green" id="exitConTotal">$7.3M</td>
-          <td class="num bold" id="exitConMult">3.6x</td>
+          <td class="num" id="exitCon">—</td>
+          <td class="num green" id="exitConEquity">—</td>
+          <td class="num" id="exitConVAR">—</td>
+          <td class="num" id="exitConRevShare">—</td>
+          <td class="num" id="exitConFundFee">—</td>
+          <td class="num" id="exitConFundEq">—</td>
+          <td class="num" id="exitConAdvEq">—</td>
+          <td class="num bold green" id="exitConTotal">—</td>
+          <td class="num bold" id="exitConMult">—</td>
         </tr>
         <tr>
           <td class="bold">Base Case</td>
-          <td class="num" id="exitBase">$50M</td>
-          <td class="num green" id="exitBaseEquity">$8.8M</td>
-          <td class="num" id="exitBaseCash">$2.0M</td>
-          <td class="num" id="exitBaseRevShare">$3.0M</td>
-          <td class="num bold green" id="exitBaseTotal">$11.8M</td>
-          <td class="num bold" id="exitBaseMult">5.9x</td>
+          <td class="num" id="exitBase">—</td>
+          <td class="num green" id="exitBaseEquity">—</td>
+          <td class="num" id="exitBaseVAR">—</td>
+          <td class="num" id="exitBaseRevShare">—</td>
+          <td class="num" id="exitBaseFundFee">—</td>
+          <td class="num" id="exitBaseFundEq">—</td>
+          <td class="num" id="exitBaseAdvEq">—</td>
+          <td class="num bold green" id="exitBaseTotal">—</td>
+          <td class="num bold" id="exitBaseMult">—</td>
         </tr>
         <tr>
           <td class="bold">Upside</td>
-          <td class="num" id="exitUp">$100M</td>
-          <td class="num green" id="exitUpEquity">$17.6M</td>
-          <td class="num" id="exitUpCash">$2.0M</td>
-          <td class="num" id="exitUpRevShare">$5.0M</td>
-          <td class="num bold green" id="exitUpTotal">$22.6M</td>
-          <td class="num bold" id="exitUpMult">11.3x</td>
+          <td class="num" id="exitUp">—</td>
+          <td class="num green" id="exitUpEquity">—</td>
+          <td class="num" id="exitUpVAR">—</td>
+          <td class="num" id="exitUpRevShare">—</td>
+          <td class="num" id="exitUpFundFee">—</td>
+          <td class="num" id="exitUpFundEq">—</td>
+          <td class="num" id="exitUpAdvEq">—</td>
+          <td class="num bold green" id="exitUpTotal">—</td>
+          <td class="num bold" id="exitUpMult">—</td>
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 
   <!-- SECTION 6: 5-Year Revenue Projection -->
@@ -433,6 +759,18 @@
         <li id="insight5" style="margin-bottom:6px;"></li>
       </ul>
     </div>
+    <div class="card highlight">
+      <h2>Total USSP Compensation Summary</h2>
+      <ul style="font-size:13px;padding-left:16px;color:#cbd5e1;">
+        <li id="insight6" style="margin-bottom:6px;"></li>
+        <li id="insight7" style="margin-bottom:6px;"></li>
+        <li id="insight8" style="margin-bottom:6px;"></li>
+        <li id="insight9" style="margin-bottom:6px;"></li>
+        <li id="insight10" style="margin-bottom:6px;"></li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid" style="margin-top:20px;">
     <div class="card">
       <h2>Risk Factors</h2>
       <ul style="font-size:13px;padding-left:16px;color:#cbd5e1;">
@@ -442,6 +780,19 @@
         <li style="margin-bottom:6px;">Founder's <span id="riskAspVal" style="color:#f87171;font-weight:600;">$20M</span> valuation is <span id="riskPremium" style="color:#f87171;font-weight:600;">2x</span> the realistic valuation</li>
         <li style="margin-bottom:6px;">No EBITDA = continued need for funding during growth phase</li>
       </ul>
+    </div>
+    <div class="card">
+      <h2>Combined Return at Base Case Exit</h2>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0;">
+        <div class="stat">
+          <div class="value green" id="insightTotalComp">$0</div>
+          <div class="label">Total USSP Compensation</div>
+        </div>
+        <div class="stat">
+          <div class="value blue" id="insightCaptureRate">0%</div>
+          <div class="label">USSP Capture Rate (vs Value Created)</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -462,7 +813,7 @@ function fmt(n) {
 function pct(n) { return n.toFixed(2) + '%'; }
 
 function calculate() {
-  // Inputs
+  // === INPUTS ===
   const rev = +document.getElementById('currentRevenue').value;
   const revGrowth = +document.getElementById('revenueGrowth').value / 100;
   const ebitda = +document.getElementById('currentEbitda').value;
@@ -495,13 +846,31 @@ function calculate() {
   const t3c = document.getElementById('t3check').checked;
   const t4c = document.getElementById('t4check').checked;
 
-  // Slider labels
+  // Valuation protections
+  const valLock = document.getElementById('valLockCheck').checked;
+
+  // VAR
+  const varPctVal = +document.getElementById('varPct').value / 100;
+
+  // Pro-rata
+  const proRataProgress = +document.getElementById('proRataProgress').value / 100;
+  const pipelineVal = +document.getElementById('pipelineValue').value;
+
+  // Capital raise checkboxes
+  const cr1c = document.getElementById('crCheck1').checked;
+  const cr2c = document.getElementById('crCheck2').checked;
+  const cr3c = document.getElementById('crCheck3').checked;
+  const cr4c = document.getElementById('crCheck4').checked;
+
+  // === SLIDER LABELS ===
   document.getElementById('commMultipleVal').textContent = commMult + 'x';
   document.getElementById('govMultipleVal').textContent = govMult + 'x';
   document.getElementById('founderValVal').textContent = fmt(founderV);
   document.getElementById('exitValDisplay').textContent = fmt(exitV);
+  document.getElementById('varPctDisplay').textContent = (varPctVal * 100).toFixed(0) + '%';
+  document.getElementById('proRataProgressDisplay').textContent = (proRataProgress * 100).toFixed(0) + '%';
 
-  // Current realistic valuation
+  // === SECTION 1: Current realistic valuation ===
   const realisticV = rev * commMult;
   const runway = burn > 0 ? cash / burn : 999;
 
@@ -510,8 +879,8 @@ function calculate() {
   document.getElementById('runwayMonths').textContent = runway.toFixed(1) + ' mo';
   document.getElementById('runwayMonths').className = 'value ' + (runway < 6 ? 'red' : runway < 12 ? 'yellow' : 'green');
 
-  // Post-first-contract valuation
-  const commRevAfter = rev; // commercial stays same at point of first contract
+  // === SECTION 2: Post-first-contract valuation ===
+  const commRevAfter = rev;
   const govRevAfter = firstContract;
   const valAfter = commRevAfter * commMult + govRevAfter * govMult;
 
@@ -523,18 +892,95 @@ function calculate() {
 
   // Bar chart
   const totalV = commRevAfter * commMult + govRevAfter * govMult;
-  const commPct = totalV > 0 ? (commRevAfter * commMult / totalV * 100) : 50;
-  document.getElementById('barComm').style.width = commPct + '%';
-  document.getElementById('barGov').style.width = (100 - commPct) + '%';
+  const commPctBar = totalV > 0 ? (commRevAfter * commMult / totalV * 100) : 50;
+  document.getElementById('barComm').style.width = commPctBar + '%';
+  document.getElementById('barGov').style.width = (100 - commPctBar) + '%';
   document.getElementById('barCommLabel').textContent = 'Commercial: ' + fmt(commRevAfter * commMult);
   document.getElementById('barGovLabel').textContent = 'Government: ' + fmt(govRevAfter * govMult);
 
-  // Milestone valuations (estimated progression)
-  const m1ValNum = realisticV; // pre-contract
-  const m2ValNum = valAfter; // after first contract
-  const m3ValNum = valAfter * 1.3; // growth
-  const m4ValNum = valAfter * 1.6; // further growth
+  // === RAW MILESTONE VALUATIONS ===
+  const m1ValRaw = realisticV;
+  const m2ValRaw = valAfter;
+  const m3ValRaw = valAfter * 1.3;
+  const m4ValRaw = valAfter * 1.6;
 
+  // === SECTION 3.1: VALUATION PROTECTIONS ===
+  const cap2x = m1ValRaw * 2;
+
+  // Apply protections to get effective valuations
+  function applyProtections(rawVal, isM1) {
+    if (isM1) return rawVal; // M1 is always at market
+    if (valLock) return m1ValRaw; // Lock all to M1
+    const capped = Math.min(rawVal, cap2x);
+    const discounted = capped * (1 - 0.40);
+    return discounted;
+  }
+
+  const m1ValProtected = applyProtections(m1ValRaw, true);
+  const m2ValProtected = applyProtections(m2ValRaw, false);
+  const m3ValProtected = applyProtections(m3ValRaw, false);
+  const m4ValProtected = applyProtections(m4ValRaw, false);
+
+  // Capped values (for display, before discount)
+  const m2Capped = Math.min(m2ValRaw, cap2x);
+  const m3Capped = Math.min(m3ValRaw, cap2x);
+  const m4Capped = Math.min(m4ValRaw, cap2x);
+
+  // Discounted values (for display)
+  const m2Discounted = m2Capped * 0.6;
+  const m3Discounted = m3Capped * 0.6;
+  const m4Discounted = m4Capped * 0.6;
+
+  // Locked values (for display)
+  const lockVal = m1ValRaw;
+
+  // Populate valuation protections table
+  // M1 — no protections applied
+  document.getElementById('vpMarket1').textContent = fmt(m1ValRaw);
+  document.getElementById('vpCap1').textContent = '—';
+  document.getElementById('vpDiscount1').textContent = '—';
+  document.getElementById('vpLock1').textContent = fmt(lockVal);
+  document.getElementById('vpApplied1').textContent = fmt(m1ValProtected);
+  document.getElementById('vpSavings1').textContent = '$0';
+
+  // M2
+  document.getElementById('vpMarket2').textContent = fmt(m2ValRaw);
+  document.getElementById('vpCap2').textContent = fmt(m2Capped);
+  document.getElementById('vpDiscount2').textContent = fmt(m2Discounted);
+  document.getElementById('vpLock2').textContent = fmt(lockVal);
+  document.getElementById('vpApplied2').textContent = fmt(m2ValProtected);
+  const savings2 = m2ValRaw - m2ValProtected;
+  document.getElementById('vpSavings2').textContent = savings2 > 0 ? fmt(savings2) : '$0';
+
+  // M3
+  document.getElementById('vpMarket3').textContent = fmt(m3ValRaw);
+  document.getElementById('vpCap3').textContent = fmt(m3Capped);
+  document.getElementById('vpDiscount3').textContent = fmt(m3Discounted);
+  document.getElementById('vpLock3').textContent = fmt(lockVal);
+  document.getElementById('vpApplied3').textContent = fmt(m3ValProtected);
+  const savings3 = m3ValRaw - m3ValProtected;
+  document.getElementById('vpSavings3').textContent = savings3 > 0 ? fmt(savings3) : '$0';
+
+  // M4
+  document.getElementById('vpMarket4').textContent = fmt(m4ValRaw);
+  document.getElementById('vpCap4').textContent = fmt(m4Capped);
+  document.getElementById('vpDiscount4').textContent = fmt(m4Discounted);
+  document.getElementById('vpLock4').textContent = fmt(lockVal);
+  document.getElementById('vpApplied4').textContent = fmt(m4ValProtected);
+  const savings4 = m4ValRaw - m4ValProtected;
+  document.getElementById('vpSavings4').textContent = savings4 > 0 ? fmt(savings4) : '$0';
+
+  // Total savings: sum of (market - applied) * milestone pct for each, to show savings in grant value
+  const totalValSavings = savings2 + savings3 + savings4;
+  document.getElementById('vpTotalSavings').textContent = fmt(totalValSavings);
+
+  // === USE PROTECTED VALUATIONS FOR MILESTONES ===
+  const m1ValNum = m1ValProtected;
+  const m2ValNum = m2ValProtected;
+  const m3ValNum = m3ValProtected;
+  const m4ValNum = m4ValProtected;
+
+  // === SECTION 3: MILESTONE TABLE (using protected vals) ===
   document.getElementById('m1val').textContent = fmt(m1ValNum);
   document.getElementById('m2val').textContent = fmt(m2ValNum);
   document.getElementById('m3val').textContent = fmt(m3ValNum);
@@ -555,7 +1001,34 @@ function calculate() {
   document.getElementById('totalSweatPct').textContent = pct(totalSweat);
   document.getElementById('totalSweatValue').textContent = fmt(totalSweatVal);
 
-  // Cash tranches
+  // === SECTION 3.2: VALUATION APPRECIATION RIGHTS (VAR) ===
+  // Use raw milestone valuations for VAR (VAR is based on actual company valuation, not discounted grant price)
+  const varBaseline = m1ValRaw;
+  const varMilestoneVals = [m1ValRaw, m2ValRaw, m3ValRaw, m4ValRaw];
+  let varCumulative = 0;
+  const varPayments = [];
+
+  for (let i = 0; i < 4; i++) {
+    const prevVal = i === 0 ? 0 : varMilestoneVals[i - 1];
+    const increase = i === 0 ? 0 : varMilestoneVals[i] - prevVal;
+    const payment = increase > 0 ? increase * varPctVal : 0;
+    varCumulative += payment;
+    varPayments.push({ val: varMilestoneVals[i], increase: increase, payment: payment, cumulative: varCumulative });
+  }
+
+  for (let i = 0; i < 4; i++) {
+    const idx = i + 1;
+    document.getElementById('varVal' + idx).textContent = fmt(varPayments[i].val);
+    document.getElementById('varInc' + idx).textContent = i === 0 ? 'Baseline' : fmt(varPayments[i].increase);
+    document.getElementById('varPay' + idx).textContent = i === 0 ? '—' : fmt(varPayments[i].payment);
+    document.getElementById('varCum' + idx).textContent = fmt(varPayments[i].cumulative);
+  }
+
+  document.getElementById('varTotal').textContent = fmt(varCumulative);
+  document.getElementById('varBaseline').textContent = fmt(varBaseline);
+  document.getElementById('varFinalVal').textContent = fmt(m4ValRaw);
+
+  // === SECTION 4: Cash tranches ===
   const t1pct = 500000 / t1v * 100;
   const t2pct = 500000 / t2v * 100;
   const t3pct = 500000 / t3v * 100;
@@ -581,34 +1054,129 @@ function calculate() {
   document.getElementById('totalCashPct').textContent = pct(totalCashPct);
   document.getElementById('totalCashInvested').textContent = fmt(totalCashInv);
 
-  // Total position
+  // === SECTION 4.1: CAPITAL RAISE FACILITATION ===
+  const crAmount = 500000;
+  const crFeeRate = 0.05;
+  const crKickerRate = 0.02;
+  const crAdvisoryRate = 0.01; // 1% one-time
+
+  // Tranche valuations for capital raise (use raw milestone valuations)
+  const crVals = [m1ValRaw, m2ValRaw, m2ValRaw, m3ValRaw]; // T1=M1 val, T2=post-contract, T3=M2 val, T4=M3 val
+  const crChecks = [cr1c, cr2c, cr3c, cr4c];
+
+  let totalCrCashFee = 0;
+  let totalCrKickerPct = 0;
+
+  for (let i = 0; i < 4; i++) {
+    const idx = i + 1;
+    const trancheVal = crVals[i];
+    const fee = crAmount * crFeeRate;
+    const kickerDollars = crAmount * crKickerRate;
+    const kickerPct = trancheVal > 0 ? (kickerDollars / trancheVal * 100) : 0;
+
+    document.getElementById('crVal' + idx).textContent = fmt(trancheVal);
+    document.getElementById('crFee' + idx).textContent = fmt(fee);
+    document.getElementById('crKicker' + idx).textContent = fmt(kickerDollars);
+    document.getElementById('crKickerPct' + idx).textContent = pct(kickerPct);
+
+    if (crChecks[i]) {
+      totalCrCashFee += fee;
+      totalCrKickerPct += kickerPct;
+    }
+  }
+
+  // Advisory equity: 1% fixed, one-time at Tranche 1 valuation
+  const advisoryPct = cr1c ? crAdvisoryRate * 100 : 0; // only if tranche 1 is included
+  const totalFundraiseEqPct = totalCrKickerPct + advisoryPct;
+
+  document.getElementById('crTotalFee').textContent = fmt(totalCrCashFee);
+  document.getElementById('crTotalKickerPct').textContent = pct(totalCrKickerPct);
+  document.getElementById('crTotalCashFee').textContent = fmt(totalCrCashFee);
+  document.getElementById('crTotalEquityPct').textContent = pct(totalFundraiseEqPct);
+  document.getElementById('crAdvisoryPct').textContent = pct(advisoryPct);
+
+  // === SECTION 5: Total position ===
   const totalEq = totalSweat + totalCashPct;
   document.getElementById('totalEquity').textContent = pct(totalEq);
   document.getElementById('totalInvested').textContent = fmt(totalCashInv);
   document.getElementById('annualRevShare').textContent = fmt(firstContract * 0.8) + '/yr';
+  document.getElementById('totalFundraiseEquity').textContent = pct(totalFundraiseEqPct);
 
-  // Exit scenarios
+  // === PRO-RATA ACCELERATION ===
+  // Determine milestones and targets
+  const milestoneEquities = [m1, m2, m3, m4];
+  const milestoneTargets = [0, 500000, 1000000, 2000000]; // revenue targets
+  const milestoneNames = ['First Contract', '$500K Revenue', '$1M Revenue', '$2M Revenue'];
+
+  // Assume milestones 1-3 are complete (earned), milestone 4 is in progress for demo
+  // Actually, use progress slider to model: assume all milestones before the "next" one are done
+  // For simplicity, assume M1 is always earned once contract is signed, and we're working toward M2+
+  // We'll model it as: M1 earned, working toward M2 with progress slider
+  const earnedMilestones = 1; // First contract is earned (M1)
+  const earnedPct = m1; // Only M1 equity
+  const nextMilestoneIdx = 1; // Working toward M2 (index 1)
+  const nextMilestoneEquity = milestoneEquities[nextMilestoneIdx];
+  const nextMilestoneTarget = milestoneTargets[nextMilestoneIdx]; // $500K
+
+  const proRataEquity = proRataProgress * nextMilestoneEquity;
+
+  // Pipeline credit: add pipeline value to progress toward next milestone target
+  const progressRevenue = proRataProgress * nextMilestoneTarget;
+  const progressWithPipeline = progressRevenue + pipelineVal;
+  const pipelineFraction = nextMilestoneTarget > 0 ? Math.min(progressWithPipeline / nextMilestoneTarget, 1.0) : 0;
+  const pipelineCreditEquity = pipelineFraction * nextMilestoneEquity - proRataEquity;
+  const pipelineCreditFinal = Math.max(0, pipelineCreditEquity);
+
+  const totalProRataEquity = earnedPct + proRataEquity + pipelineCreditFinal;
+
+  // Use exit valuation for value calculation
+  document.getElementById('prEarnedPct').textContent = pct(earnedPct);
+  document.getElementById('prEarnedVal').textContent = fmt(exitV * earnedPct / 100);
+  document.getElementById('prEarnedNote').textContent = 'Milestone 1 completed';
+
+  document.getElementById('prProRataPct').textContent = pct(proRataEquity);
+  document.getElementById('prProRataVal').textContent = fmt(exitV * proRataEquity / 100);
+  document.getElementById('prProRataNote').textContent = (proRataProgress * 100).toFixed(0) + '% of M2 (' + pct(nextMilestoneEquity) + ')';
+
+  document.getElementById('prPipelinePct').textContent = pct(pipelineCreditFinal);
+  document.getElementById('prPipelineVal').textContent = fmt(exitV * pipelineCreditFinal / 100);
+  document.getElementById('prPipelineNote').textContent = fmt(pipelineVal) + ' pipeline toward ' + fmt(nextMilestoneTarget) + ' target';
+
+  document.getElementById('prTotalPct').textContent = pct(totalProRataEquity);
+  document.getElementById('prTotalVal').textContent = fmt(exitV * totalProRataEquity / 100);
+
+  // === EXIT SCENARIOS (enhanced) ===
   const conExit = exitV * 0.6;
   const baseExit = exitV;
   const upExit = exitV * 2;
 
   function exitRow(prefix, ev, revShareYrs) {
     const eqVal = ev * totalEq / 100;
+    const varPayout = varCumulative; // cumulative VAR earned through all milestones
     const revShare5yr = firstContract * 0.8 * revShareYrs;
-    const total = eqVal + revShare5yr;
+    const fundFee = totalCrCashFee;
+    const fundEqVal = ev * totalCrKickerPct / 100;
+    const advEqVal = ev * advisoryPct / 100;
+    const total = eqVal + varPayout + revShare5yr + fundFee + fundEqVal + advEqVal;
     const mult = totalCashInv > 0 ? total / totalCashInv : Infinity;
+
     document.getElementById(prefix).textContent = fmt(ev);
     document.getElementById(prefix + 'Equity').textContent = fmt(eqVal);
-    document.getElementById(prefix + 'Cash').textContent = fmt(totalCashInv);
+    document.getElementById(prefix + 'VAR').textContent = fmt(varPayout);
     document.getElementById(prefix + 'RevShare').textContent = fmt(revShare5yr);
+    document.getElementById(prefix + 'FundFee').textContent = fmt(fundFee);
+    document.getElementById(prefix + 'FundEq').textContent = fmt(fundEqVal);
+    document.getElementById(prefix + 'AdvEq').textContent = fmt(advEqVal);
     document.getElementById(prefix + 'Total').textContent = fmt(total);
-    document.getElementById(prefix + 'Mult').textContent = mult === Infinity ? '∞' : mult.toFixed(1) + 'x';
+    document.getElementById(prefix + 'Mult').textContent = mult === Infinity ? '\u221e' : mult.toFixed(1) + 'x';
+
+    return total; // return for insights
   }
   exitRow('exitCon', conExit, 3);
-  exitRow('exitBase', baseExit, 4);
+  const baseCaseTotal = exitRow('exitBase', baseExit, 4);
   exitRow('exitUp', upExit, 5);
 
-  // 5-year projection
+  // === SECTION 6: 5-year projection ===
   let projHtml = '';
   let cumGovRev = 0;
   let wfData = [];
@@ -618,18 +1186,12 @@ function calculate() {
     const commR = rev * Math.pow(1 + revGrowth, y);
     let govR = 0;
     if (y === 0) {
-      govR = 0; // procurement year
+      govR = 0;
     } else if (y === 1) {
-      govR = firstContract * (monthsTo <= 12 ? 1 : (24 - monthsTo) / 12);
-      if (govR < 0) govR = 0;
+      govR = monthsTo <= 12 ? firstContract : firstContract * Math.max(0, (24 - monthsTo)) / 12;
     } else {
-      const prevGov = y === 2 ? firstContract : firstContract * Math.pow(1 + govGrowth, y - 1);
-      govR = prevGov;
+      govR = firstContract * Math.pow(1 + govGrowth, y - 1);
     }
-    if (y >= 2) govR = firstContract * Math.pow(1 + govGrowth, y - 1);
-    if (y === 0) govR = 0;
-    if (y === 1 && monthsTo > 12) govR = firstContract * Math.max(0, (24 - monthsTo)) / 12;
-    if (y === 1 && monthsTo <= 12) govR = firstContract;
 
     cumGovRev += govR;
     const totalR = commR + govR;
@@ -639,7 +1201,7 @@ function calculate() {
 
     // Milestones
     let milestones = [];
-    if (y > 0 && govR > 0 && (y === 1 || (y === 1 && monthsTo <= 12))) milestones.push('First Contract');
+    if (y === 1 && govR > 0) milestones.push('First Contract');
     if (cumGovRev >= 500000 && (cumGovRev - govR) < 500000) milestones.push('$500K Rev');
     if (cumGovRev >= 1000000 && (cumGovRev - govR) < 1000000) milestones.push('$1M Rev');
     if (cumGovRev >= 2000000 && (cumGovRev - govR) < 2000000) milestones.push('$2M Rev');
@@ -652,17 +1214,17 @@ function calculate() {
     projHtml += '<td class="num">' + govPctR.toFixed(0) + '%</td>';
     projHtml += '<td class="num blue">' + fmt(estVal) + '</td>';
     projHtml += '<td class="num green">' + fmt(revShare) + '</td>';
-    projHtml += '<td>' + (milestones.length ? milestones.map(m => '<span style="background:#2563eb;color:#fff;padding:2px 6px;border-radius:3px;font-size:10px;margin-right:4px;">' + m + '</span>').join('') : '—') + '</td>';
+    projHtml += '<td>' + (milestones.length ? milestones.map(function(m) { return '<span style="background:#2563eb;color:#fff;padding:2px 6px;border-radius:3px;font-size:10px;margin-right:4px;">' + m + '</span>'; }).join('') : '\u2014') + '</td>';
     projHtml += '</tr>';
 
     wfData.push({ year: startYear + y, val: estVal, gov: govR * govMult, comm: commR * commMult });
   }
   document.getElementById('projectionBody').innerHTML = projHtml;
 
-  // Waterfall
-  const maxVal = Math.max(...wfData.map(d => d.val), 1);
+  // === WATERFALL ===
+  const maxVal = Math.max.apply(null, wfData.map(function(d) { return d.val; }).concat([1]));
   let wfHtml = '';
-  wfData.forEach(d => {
+  wfData.forEach(function(d) {
     const h = d.val / maxVal * 180;
     const govH = d.gov / maxVal * 180;
     const commH = h - govH;
@@ -681,12 +1243,31 @@ function calculate() {
   wfHtml += '</div>';
   document.getElementById('waterfall').innerHTML = wfHtml;
 
-  // Insights
-  document.getElementById('insight1').innerHTML = 'TeleRay\'s runway is <strong style="color:#f87171;">' + runway.toFixed(1) + ' months</strong> — they need USSP\'s channel more than USSP needs them';
-  document.getElementById('insight2').innerHTML = 'First govt contract adds <strong style="color:#4ade80;">' + fmt(uplift) + '</strong> in valuation (+' + upliftPct.toFixed(0) + '%) — USSP creates this value';
-  document.getElementById('insight3').innerHTML = 'Founder asks ' + fmt(founderV) + ' but realistic is ' + fmt(realisticV) + ' — negotiate sweat equity at the lower number';
-  document.getElementById('insight4').innerHTML = 'By Year 5, government could be <strong style="color:#4ade80;">' + (wfData[5] ? (wfData[5].gov / (wfData[5].val || 1) * 100).toFixed(0) : 0) + '%</strong> of company value — all attributable to USSP';
+  // === SECTION 7: INSIGHTS (updated) ===
+  // Leverage insights
+  document.getElementById('insight1').innerHTML = 'TeleRay\'s runway is <strong style="color:#f87171;">' + runway.toFixed(1) + ' months</strong> \u2014 they need USSP\'s channel more than USSP needs them';
+  document.getElementById('insight2').innerHTML = 'First govt contract adds <strong style="color:#4ade80;">' + fmt(uplift) + '</strong> in valuation (+' + upliftPct.toFixed(0) + '%) \u2014 USSP creates this value';
+  document.getElementById('insight3').innerHTML = 'Founder asks ' + fmt(founderV) + ' but realistic is ' + fmt(realisticV) + ' \u2014 negotiate sweat equity at the lower number';
+  document.getElementById('insight4').innerHTML = 'By Year 5, government could be <strong style="color:#4ade80;">' + (wfData[5] ? (wfData[5].gov / (wfData[5].val || 1) * 100).toFixed(0) : 0) + '%</strong> of company value \u2014 all attributable to USSP';
   document.getElementById('insight5').innerHTML = 'Total USSP position (' + pct(totalEq) + ') at ' + fmt(exitV) + ' exit = <strong style="color:#4ade80;">' + fmt(exitV * totalEq / 100) + '</strong> in equity alone';
+
+  // Compensation summary insights
+  const baseExitEqValue = baseExit * totalEq / 100;
+  const baseRevShare = firstContract * 0.8 * 4;
+  const baseFundEqVal = baseExit * totalCrKickerPct / 100;
+  const baseAdvEqVal = baseExit * advisoryPct / 100;
+  const totalCompensation = baseExitEqValue + varCumulative + baseRevShare + totalCrCashFee + baseFundEqVal + baseAdvEqVal;
+  const valueCreated = baseExit - realisticV; // value USSP helped create
+  const captureRate = valueCreated > 0 ? (totalCompensation / valueCreated * 100) : 0;
+
+  document.getElementById('insight6').innerHTML = 'VAR total at base case: <strong style="color:#4ade80;">' + fmt(varCumulative) + '</strong> in cash payments across milestones';
+  document.getElementById('insight7').innerHTML = 'Capital raise facilitation: <strong style="color:#4ade80;">' + fmt(totalCrCashFee) + '</strong> in fees + <strong style="color:#60a5fa;">' + pct(totalFundraiseEqPct) + '</strong> equity';
+  document.getElementById('insight8').innerHTML = 'Equity value at base exit: <strong style="color:#4ade80;">' + fmt(baseExitEqValue) + '</strong> (sweat + cash investment equity)';
+  document.getElementById('insight9').innerHTML = 'Revenue share (4yr est.): <strong style="color:#4ade80;">' + fmt(baseRevShare) + '</strong> from 80% govt revenue share';
+  document.getElementById('insight10').innerHTML = 'Combined total compensation at base case: <strong style="color:#4ade80;">' + fmt(totalCompensation) + '</strong>';
+
+  document.getElementById('insightTotalComp').textContent = fmt(totalCompensation);
+  document.getElementById('insightCaptureRate').textContent = captureRate.toFixed(1) + '%';
 
   // Risk insights
   document.getElementById('riskRunway').textContent = runway.toFixed(1) + ' months';
