@@ -9,6 +9,8 @@ const navItems = [
   { href: "/clients", label: "Clients", icon: "🏢" },
   { href: "/end-clients", label: "End Clients", icon: "🏛️" },
   { href: "/applications", label: "Applications", icon: "📋" },
+  { href: "/candidates", label: "Candidates", icon: "🙋" },
+  { href: "/assignments", label: "Assignments", icon: "🗂️" },
   { href: "/contacts", label: "Contacts", icon: "📨" },
   { href: "/articles", label: "Articles", icon: "📝" },
   { href: "/staff", label: "Staff", icon: "👥" },

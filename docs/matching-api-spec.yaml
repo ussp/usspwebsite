@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: USSP Job Matching & Candidate Screening API
-  version: 1.0.0
+  version: 1.1.0
   description: |
     API for the USSP job matching system. Provides candidate management,
     resume storage with text extraction, position requirements, match scoring
@@ -10,6 +10,22 @@ info:
 
     All endpoints require Google OAuth authentication via the back-office app.
     All data is multi-tenant, filtered by site_id.
+
+    ## Implementation Status (v1.1.0)
+    - Candidates CRUD: Implemented (API + UI)
+    - Resumes CRUD: Implemented (API)
+    - Position Requirements: Implemented (API)
+    - Match Scoring GET/POST: Implemented (API), scoring engine placeholder
+    - Match Feedback: Implemented (API)
+    - Assignments CRUD: Implemented (API + UI)
+    - Passive Candidate Scan: Placeholder (awaiting resume text extraction)
+    - Resume Text Extraction: Not yet implemented (Phase 5)
+
+    ## Back-Office UI Pages
+    - /candidates — Candidate list with type/status filters
+    - /assignments — Assignment list with expiring-soon warnings
+    - /positions/[id] — Applicant screening table (existing)
+    - /applications/[id] — Enhanced with other-apps, availability, type badges
   contact:
     name: USSP Engineering
     email: accounts@ussoftwarepro.com
@@ -29,6 +45,9 @@ tags:
     description: Match scoring engine and results
   - name: Assignments
     description: Internal employee deployment tracking
+
+security:
+  - googleOAuth: []
 
 paths:
   # ── Candidates ──────────────────────────────────────────────────
@@ -873,3 +892,16 @@ components:
         notes:
           type: string
           nullable: true
+
+  securitySchemes:
+    googleOAuth:
+      type: oauth2
+      description: Google OAuth via NextAuth.js (back-office staff only)
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            openid: OpenID Connect
+            email: Email address
+            profile: User profile
