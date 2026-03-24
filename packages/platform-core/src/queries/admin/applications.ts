@@ -29,6 +29,9 @@ export async function getApplications(
   if (filters.job_slug) {
     query = query.eq("job_slug", filters.job_slug);
   }
+  if (filters.position_id) {
+    query = query.eq("position_id", filters.position_id);
+  }
   if (filters.search) {
     query = query.or(
       `full_name.ilike.%${filters.search}%,email.ilike.%${filters.search}%`

@@ -10,10 +10,12 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const status = url.searchParams.get("status") as ApplicationStatus | null;
   const search = url.searchParams.get("search") || undefined;
+  const position_id = url.searchParams.get("position_id") || undefined;
 
   const applications = await getApplications({
     status: status || undefined,
     search,
+    position_id,
   });
   return NextResponse.json(applications);
 }

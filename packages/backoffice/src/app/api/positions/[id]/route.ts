@@ -30,8 +30,23 @@ export async function PATCH(
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const user = session.user as Record<string, unknown>;
-  const role = (user.role as StaffRole) || "viewer";
-  if (!hasPermission(role, "positions.update")) {
+  let role = user.role as StaffRole | undefined;
+
+  // Fallback: if role not in session (stale JWT), look it up from DB
+  if (!role && user.email) {
+    const { getServiceClient } = await import("@ussp-platform/core/supabase/server");
+    const { getSiteId } = await import("@ussp-platform/core/config");
+    const supabase = getServiceClient();
+    const { data: staffUser } = await supabase
+      .from("staff_users")
+      .select("role")
+      .eq("site_id", getSiteId())
+      .eq("email", user.email as string)
+      .single();
+    role = (staffUser?.role as StaffRole) || "viewer";
+  }
+
+  if (!hasPermission(role || "viewer", "positions.update")) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 

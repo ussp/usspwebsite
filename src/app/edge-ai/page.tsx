@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title:
     "Edge AI & Computer Vision Solutions | Facility Safety & Intelligence | USSP",
   description:
-    "Since 2003, USSP delivers on-premises Edge AI and computer vision solutions for facility safety — anonymous person tracking, zone occupancy monitoring, real-time alerts. Privacy-first, no facial recognition, BIPA compliant. For government, commercial, healthcare, and industrial facilities.",
+    "Since 2003, USSP delivers on-premises Edge AI and computer vision solutions for facility safety — anonymous person tracking, zone occupancy monitoring, real-time alerts, staff ratio compliance, and insurance risk reduction. Privacy-first, no facial recognition, BIPA compliant. For government, commercial, healthcare, and industrial facilities.",
   keywords:
     "Edge AI, computer vision, AI video analytics, facility safety, VionOS.ai, anonymous person tracking, on-premises AI, NVIDIA Jetson, zone occupancy, real-time alerts, BIPA compliant, privacy-first AI, facility intelligence, security analytics, AI-powered surveillance alternative, Edge AI solutions Chicago, commercial facility safety, government facility AI",
   openGraph: {
@@ -163,6 +163,53 @@ const faqItems = [
     title: "How is Edge AI different from traditional CCTV monitoring?",
     content:
       "Traditional CCTV requires humans to watch screens in real time and review footage after incidents. Edge AI automates monitoring — it detects events as they happen, generates instant alerts, and logs everything with timestamps and zone data. It provides quantitative data (occupancy counts, dwell times, movement patterns) that CCTV cannot. And because VionOS.ai uses anonymous tracking, it delivers intelligence without the civil liberties concerns of facial recognition surveillance.",
+  },
+];
+
+const businessOutcomes = [
+  {
+    title: "Safety & Incident Prevention",
+    description:
+      "Real-time detection of falls, person-down events, zone intrusions, and dangerous behavior. AI-powered alerts reach staff in seconds — reducing response time from minutes to moments.",
+    highlights: [
+      "Fall & person-down detection via pose estimation",
+      "Restricted zone intrusion alerts",
+      "Dangerous behavior recognition (aggression, horseplay)",
+      "Unattended zone detection for duty-of-care environments",
+    ],
+  },
+  {
+    title: "Operations & Staffing Efficiency",
+    description:
+      "Continuous staff-to-occupant ratio monitoring, zone occupancy analytics, and queue management — replacing clipboard headcounts with 24/7 spatial intelligence.",
+    highlights: [
+      "Staff-to-occupant ratio monitoring (configurable per zone)",
+      "Zone occupancy analytics with historical trending",
+      "Queue detection and wait-time estimation",
+      "Staff clustering detection for coverage optimization",
+    ],
+  },
+  {
+    title: "Compliance & Privacy",
+    description:
+      "Built from the ground up for BIPA compliance and regulatory audits. No facial recognition, no biometrics, no PII — with complete audit trails for oversight reviews.",
+    highlights: [
+      "BIPA compliant by design — no biometric data collected",
+      "Anonymous Person Tokens (SHA-256, 4-hour TTL)",
+      "SB1366 compliance support for juvenile facilities",
+      "Audit-ready event logs with timestamps and zone IDs",
+    ],
+  },
+  {
+    title: "Insurance & Risk Reduction",
+    description:
+      "Continuous AI monitoring creates documented proof of proactive safety enforcement — supporting insurance premium negotiations and reducing liability exposure.",
+    highlights: [
+      "Continuous compliance documentation for insurers",
+      "Real-time proof that safety rules are actively enforced",
+      "Incident audit trails for liability defense",
+      "Risk profile improvement through proactive monitoring",
+    ],
   },
 ];
 
@@ -454,6 +501,54 @@ export default function EdgeAIPage() {
         </div>
       </section>
 
+      {/* Business Outcomes */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            title="Business Outcomes"
+            subtitle="Measurable results from on-premises Edge AI — not promises, capabilities you can validate"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {businessOutcomes.map((outcome) => (
+              <div
+                key={outcome.title}
+                className="bg-light-gray rounded-lg p-8 hover:shadow-md transition-shadow"
+              >
+                <h3 className="text-lg font-[family-name:var(--font-alata)] mb-3">
+                  {outcome.title}
+                </h3>
+                <p className="text-sm text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed mb-4">
+                  {outcome.description}
+                </p>
+                <ul className="space-y-2">
+                  {outcome.highlights.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm text-dark/60 font-[family-name:var(--font-montserrat)]"
+                    >
+                      <svg
+                        className="w-4 h-4 text-primary mt-0.5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* How to Get Started */}
       <ProcessTimeline
         title="How to Get Started"
@@ -604,6 +699,10 @@ export default function EdgeAIPage() {
               "On-Premises AI Solutions",
               "Zone Occupancy Intelligence",
               "Privacy-First Video Analytics",
+              "Staff Ratio Monitoring",
+              "Insurance Risk Reduction",
+              "Incident Prevention",
+              "BIPA Compliance",
             ],
           }),
         }}

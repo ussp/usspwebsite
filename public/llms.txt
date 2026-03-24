@@ -73,6 +73,9 @@
 - Industries: corrections, healthcare, education, manufacturing, government, entertainment
 - Available to Illinois state agencies through TOPS Category Two (CMT4599470)
 - Core capabilities: safety monitoring, operations intelligence, compliance & audit
+- Business outcomes: safety & incident prevention, operations & staffing efficiency, compliance & privacy (BIPA), insurance & risk reduction
+- Staff-to-occupant ratio monitoring with configurable thresholds per zone
+- Insurance risk reduction through continuous AI monitoring and documented compliance proof
 
 ## Certifications
 

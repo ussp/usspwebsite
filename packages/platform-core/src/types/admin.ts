@@ -243,6 +243,7 @@ export interface ApplicationFilters {
   assigned_to?: string;
   search?: string;
   job_slug?: string;
+  position_id?: string;
 }
 
 export interface ContactFilters {
