@@ -20,6 +20,10 @@ interface Application {
   created_at: string;
   auth_provider: string;
   linkedin_sub: string | null;
+  applicant_type: string | null;
+  expected_bill_rate: string | null;
+  availability_date: string | null;
+  position_id: string | null;
 }
 
 interface Note {
@@ -27,6 +31,15 @@ interface Note {
   content: string;
   created_at: string;
   staff_user?: { full_name: string } | null;
+}
+
+interface OtherApplication {
+  id: string;
+  job_title: string;
+  job_slug: string;
+  status: string;
+  created_at: string;
+  resume_name: string | null;
 }
 
 const STATUSES = [
@@ -44,6 +57,7 @@ export default function ApplicationDetailPage() {
   const router = useRouter();
   const [app, setApp] = useState<Application | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
+  const [otherApps, setOtherApps] = useState<OtherApplication[]>([]);
   const [newNote, setNewNote] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -55,6 +69,21 @@ export default function ApplicationDetailPage() {
       setApp(appData);
       setNotes(notesData);
       setLoading(false);
+
+      // Fetch other applications by the same person
+      if (appData?.email) {
+        fetch(`/api/applications?search=${encodeURIComponent(appData.email)}`)
+          .then((r) => r.json())
+          .then((allApps) => {
+            if (Array.isArray(allApps)) {
+              setOtherApps(
+                allApps.filter(
+                  (a: OtherApplication) => a.id !== appData.id
+                )
+              );
+            }
+          });
+      }
     });
   }, [params.id]);
 
@@ -105,6 +134,12 @@ export default function ApplicationDetailPage() {
     );
   }
 
+  const availabilityLabel = app.availability_date
+    ? new Date(app.availability_date) <= new Date()
+      ? "Available now"
+      : `Available ${new Date(app.availability_date).toLocaleDateString()}`
+    : null;
+
   return (
     <>
       <AdminSidebar />
@@ -114,12 +149,13 @@ export default function ApplicationDetailPage() {
           onClick={() => router.back()}
           className="text-sm text-dark/50 hover:text-dark mb-4 inline-block"
         >
-          &larr; Back to applications
+          &larr; Back
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Profile */}
+          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
+            {/* Profile Card */}
             <div className="bg-white rounded-lg border border-light-gray p-6">
               <div className="flex items-start gap-4">
                 {app.profile_picture && (
@@ -136,8 +172,25 @@ export default function ApplicationDetailPage() {
                     <p className="text-dark/60 text-sm">{app.phone}</p>
                   )}
                 </div>
-                <StatusBadge status={app.status || "new"} />
+                <div className="flex items-center gap-2">
+                  {app.applicant_type && (
+                    <span
+                      className={`inline-block px-2.5 py-1 rounded-full text-xs ${
+                        app.applicant_type === "vendor"
+                          ? "bg-purple-100 text-purple-700"
+                          : "bg-blue-100 text-blue-700"
+                      }`}
+                    >
+                      {app.applicant_type === "vendor"
+                        ? "Vendor"
+                        : "Employee"}
+                    </span>
+                  )}
+                  <StatusBadge status={app.status || "new"} />
+                </div>
               </div>
+
+              {/* Details Grid */}
               <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-dark/50">Position:</span>{" "}
@@ -147,18 +200,95 @@ export default function ApplicationDetailPage() {
                   <span className="text-dark/50">Applied:</span>{" "}
                   {new Date(app.created_at).toLocaleDateString()}
                 </div>
-                {app.resume_name && (
-                  <div>
-                    <span className="text-dark/50">Resume:</span>{" "}
-                    {app.resume_name}
-                  </div>
-                )}
                 <div>
                   <span className="text-dark/50">Auth:</span>{" "}
                   {app.auth_provider}
                 </div>
+                {app.expected_bill_rate && (
+                  <div>
+                    <span className="text-dark/50">Bill Rate:</span>{" "}
+                    {app.expected_bill_rate}
+                  </div>
+                )}
+                {availabilityLabel && (
+                  <div>
+                    <span className="text-dark/50">Availability:</span>{" "}
+                    <span
+                      className={
+                        availabilityLabel === "Available now"
+                          ? "text-success font-medium"
+                          : ""
+                      }
+                    >
+                      {availabilityLabel}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
+
+            {/* Resume */}
+            <div className="bg-white rounded-lg border border-light-gray p-6">
+              <h3 className="font-semibold mb-3">Resume</h3>
+              {app.resume_name ? (
+                <div className="flex items-center gap-3 p-3 bg-light-gray/50 rounded-lg">
+                  <svg
+                    className="w-8 h-8 text-primary/60"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium">{app.resume_name}</p>
+                    <p className="text-xs text-dark/50">
+                      Submitted{" "}
+                      {new Date(app.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-sm text-dark/40">No resume uploaded</p>
+              )}
+            </div>
+
+            {/* Other Applications by Same Person */}
+            {otherApps.length > 0 && (
+              <div className="bg-white rounded-lg border border-light-gray p-6">
+                <h3 className="font-semibold mb-3">
+                  Other Applications ({otherApps.length})
+                </h3>
+                <div className="space-y-2">
+                  {otherApps.map((oa) => (
+                    <div
+                      key={oa.id}
+                      onClick={() => router.push(`/applications/${oa.id}`)}
+                      className="flex items-center justify-between p-3 bg-light-gray/50 rounded-lg cursor-pointer hover:bg-light-gray transition-colors"
+                    >
+                      <div>
+                        <p className="text-sm font-medium">{oa.job_title}</p>
+                        <p className="text-xs text-dark/50">
+                          Applied{" "}
+                          {new Date(oa.created_at).toLocaleDateString()}
+                          {oa.resume_name && (
+                            <span className="ml-2 text-primary">
+                              &bull; Resume: {oa.resume_name}
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      <StatusBadge status={oa.status || "new"} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Notes */}
             <div className="bg-white rounded-lg border border-light-gray p-6">
@@ -202,6 +332,7 @@ export default function ApplicationDetailPage() {
 
           {/* Sidebar */}
           <div className="space-y-4">
+            {/* Status */}
             <div className="bg-white rounded-lg border border-light-gray p-5">
               <h3 className="font-semibold mb-3">Update Status</h3>
               <div className="space-y-2">
@@ -218,6 +349,50 @@ export default function ApplicationDetailPage() {
                     {s}
                   </button>
                 ))}
+              </div>
+            </div>
+
+            {/* Quick Info */}
+            <div className="bg-white rounded-lg border border-light-gray p-5">
+              <h3 className="font-semibold mb-3">Quick Info</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-dark/50">Type</span>
+                  <span className="capitalize">
+                    {app.applicant_type || "employee"}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-dark/50">Total Applications</span>
+                  <span>{otherApps.length + 1}</span>
+                </div>
+                {app.expected_bill_rate && (
+                  <div className="flex justify-between">
+                    <span className="text-dark/50">Rate</span>
+                    <span>{app.expected_bill_rate}</span>
+                  </div>
+                )}
+                {availabilityLabel && (
+                  <div className="flex justify-between">
+                    <span className="text-dark/50">Availability</span>
+                    <span
+                      className={
+                        availabilityLabel === "Available now"
+                          ? "text-success font-medium"
+                          : ""
+                      }
+                    >
+                      {availabilityLabel}
+                    </span>
+                  </div>
+                )}
+                <div className="flex justify-between">
+                  <span className="text-dark/50">Resumes</span>
+                  <span>
+                    {(app.resume_name ? 1 : 0) +
+                      otherApps.filter((a) => a.resume_name).length}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

@@ -321,3 +321,227 @@ export interface ArticleFilters {
   status?: ArticleStatus;
   search?: string;
 }
+
+// ── Candidates ──────────────────────────────────────────────────────
+
+export type CandidateType = "internal_employee" | "external" | "vendor";
+export type CandidateStatus = "available" | "employed" | "on_assignment" | "not_looking" | "blacklisted";
+
+export interface AdminCandidate {
+  id: string;
+  site_id: string;
+  email: string;
+  full_name: string;
+  phone: string | null;
+  linkedin_sub: string | null;
+  profile_picture: string | null;
+  candidate_type: CandidateType;
+  current_status: CandidateStatus;
+  source: string;
+  tags: string[];
+  summary: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface CreateCandidateInput {
+  email: string;
+  full_name: string;
+  phone?: string;
+  linkedin_sub?: string;
+  profile_picture?: string;
+  candidate_type?: CandidateType;
+  current_status?: CandidateStatus;
+  source?: string;
+  tags?: string[];
+  summary?: string;
+}
+
+export interface UpdateCandidateInput {
+  full_name?: string;
+  phone?: string;
+  linkedin_sub?: string;
+  profile_picture?: string;
+  candidate_type?: CandidateType;
+  current_status?: CandidateStatus;
+  source?: string;
+  tags?: string[];
+  summary?: string;
+}
+
+export interface CandidateFilters {
+  candidate_type?: CandidateType;
+  current_status?: CandidateStatus;
+  search?: string;
+}
+
+// ── Resumes ─────────────────────────────────────────────────────────
+
+export type ExtractionStatus = "pending" | "processing" | "completed" | "failed";
+
+export interface AdminResume {
+  id: string;
+  site_id: string;
+  candidate_id: string;
+  storage_path: string;
+  file_name: string;
+  file_type: string | null;
+  position_id: string | null;
+  is_primary: boolean;
+  extracted_text: string | null;
+  extracted_skills: string[];
+  extracted_experience_years: number | null;
+  extracted_education: Array<{ degree: string; institution: string; year?: number }>;
+  extraction_status: ExtractionStatus;
+  extraction_error: string | null;
+  uploaded_at: string;
+}
+
+export interface CreateResumeInput {
+  candidate_id: string;
+  storage_path: string;
+  file_name: string;
+  file_type?: string;
+  position_id?: string;
+  is_primary?: boolean;
+}
+
+// ── Position Requirements ───────────────────────────────────────────
+
+export interface AdminPositionRequirement {
+  id: string;
+  site_id: string;
+  position_id: string;
+  required_skills: string[];
+  preferred_skills: string[];
+  min_experience_years: number | null;
+  max_experience_years: number | null;
+  education_level: string | null;
+  required_certifications: string[];
+  location_requirement: string | null;
+  work_mode: string | null;
+  salary_min: number | null;
+  salary_max: number | null;
+  industry: string | null;
+  extraction_method: string;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface UpsertPositionRequirementInput {
+  position_id: string;
+  required_skills?: string[];
+  preferred_skills?: string[];
+  min_experience_years?: number;
+  max_experience_years?: number;
+  education_level?: string;
+  required_certifications?: string[];
+  location_requirement?: string;
+  work_mode?: string;
+  salary_min?: number;
+  salary_max?: number;
+  industry?: string;
+  extraction_method?: string;
+}
+
+// ── Match Scores ────────────────────────────────────────────────────
+
+export type MatchType = "applied" | "passive_scan" | "manual_trigger";
+
+export interface AdminMatchScore {
+  id: string;
+  site_id: string;
+  candidate_id: string;
+  position_id: string;
+  resume_id: string | null;
+  overall_score: number;
+  confidence: number;
+  dimensions: import("./matching.js").DimensionResult[];
+  match_areas: string[];
+  gap_areas: string[];
+  algorithm_version: string;
+  engine_config: Record<string, unknown>;
+  is_stale: boolean;
+  match_type: MatchType;
+  scored_by: string | null;
+  feedback_score: number | null;
+  feedback_notes: string | null;
+  computed_at: string;
+  created_at: string;
+  updated_at: string | null;
+  // Joined fields
+  candidate_name?: string;
+  candidate_email?: string;
+  candidate_type?: CandidateType;
+}
+
+export interface MatchFilters {
+  match_type?: MatchType;
+  is_stale?: boolean;
+  min_score?: number;
+}
+
+export interface MatchFeedbackInput {
+  feedback_score: number;
+  feedback_notes?: string;
+}
+
+// ── Employee Assignments ────────────────────────────────────────────
+
+export type AssignmentStatus = "active" | "completed" | "terminated" | "on_hold";
+
+export interface AdminAssignment {
+  id: string;
+  site_id: string;
+  candidate_id: string;
+  position_id: string | null;
+  client_id: string | null;
+  end_client_id: string | null;
+  role_title: string;
+  start_date: string;
+  end_date: string | null;
+  bill_rate: string | null;
+  pay_rate: string | null;
+  status: AssignmentStatus;
+  notes: string | null;
+  created_at: string;
+  updated_at: string | null;
+  // Joined fields
+  candidate_name?: string;
+  client_name?: string;
+  end_client_name?: string;
+}
+
+export interface CreateAssignmentInput {
+  candidate_id: string;
+  position_id?: string;
+  client_id?: string;
+  end_client_id?: string;
+  role_title: string;
+  start_date: string;
+  end_date?: string;
+  bill_rate?: string;
+  pay_rate?: string;
+  status?: AssignmentStatus;
+  notes?: string;
+}
+
+export interface UpdateAssignmentInput {
+  position_id?: string | null;
+  client_id?: string | null;
+  end_client_id?: string | null;
+  role_title?: string;
+  start_date?: string;
+  end_date?: string | null;
+  bill_rate?: string | null;
+  pay_rate?: string | null;
+  status?: AssignmentStatus;
+  notes?: string | null;
+}
+
+export interface AssignmentFilters {
+  candidate_id?: string;
+  status?: AssignmentStatus;
+  end_client_id?: string;
+  expiring_within_days?: number;
+}

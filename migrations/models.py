@@ -15,6 +15,7 @@ that isolates data per site. Application-level filtering is primary; RLS is a sa
 from sqlalchemy import (
     Column,
     Index,
+    Integer,
     String,
     Boolean,
     DateTime,
@@ -233,6 +234,7 @@ class Application(Base):
     status = Column(String(50), server_default="new")  # new, screening, interview, offer, hired, rejected, withdrawn
     status_updated_at = Column(DateTime(timezone=True))
     assigned_to = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"))
 
     __table_args__ = (
         Index("idx_applications_site_id", "site_id"),
@@ -445,4 +447,260 @@ class Article(Base):
         UniqueConstraint("site_id", "slug", name="uq_articles_site_slug"),
         Index("idx_articles_site_status", "site_id", "status"),
         Index("idx_articles_site_type_published", "site_id", "content_type", "published_at"),
+    )
+
+
+# =============================================================================
+# CANDIDATES TABLE (unique person entity across applications)
+# =============================================================================
+
+
+class Candidate(Base):
+    """
+    Unique person entity across applications.
+
+    Represents a candidate who may have multiple applications and resumes.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "candidates"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    email = Column(String(255), nullable=False)
+    full_name = Column(String(255), nullable=False)
+    phone = Column(String(30))
+    linkedin_sub = Column(String(255))
+    profile_picture = Column(Text)
+    candidate_type = Column(String(20), nullable=False, server_default="external")  # internal_employee | external | vendor
+    current_status = Column(String(30), nullable=False, server_default="available")  # available | employed | on_assignment | not_looking | blacklisted
+    source = Column(String(50), server_default="application")  # application | referral | sourced | internal
+    tags = Column(JSONB, server_default="[]")
+    summary = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "email", name="uq_candidates_site_email"),
+        Index("idx_candidates_site_type", "site_id", "candidate_type"),
+        Index("idx_candidates_site_status", "site_id", "current_status"),
+    )
+
+
+# =============================================================================
+# RESUMES TABLE (versioned resume storage per candidate)
+# =============================================================================
+
+
+class Resume(Base):
+    """
+    Versioned resume storage per candidate.
+
+    Stores resume files and extracted data for matching.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "resumes"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    storage_path = Column(Text, nullable=False)
+    file_name = Column(String(255), nullable=False)
+    file_type = Column(String(50))
+    position_id = Column(UUID(as_uuid=True), ForeignKey("positions.id"))
+    is_primary = Column(Boolean, nullable=False, server_default="false")
+    extracted_text = Column(Text)
+    extracted_skills = Column(JSONB, server_default="[]")
+    extracted_experience_years = Column(Integer)
+    extracted_education = Column(JSONB, server_default="[]")
+    extraction_status = Column(String(20), server_default="pending")  # pending | processing | completed | failed
+    extraction_error = Column(Text)
+    uploaded_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_resumes_site_candidate", "site_id", "candidate_id"),
+        Index("idx_resumes_site_extraction_status", "site_id", "extraction_status"),
+    )
+
+
+# =============================================================================
+# CANDIDATE_SKILLS TABLE (normalized skills for matching)
+# =============================================================================
+
+
+class CandidateSkill(Base):
+    """
+    Normalized skills for matching.
+
+    Each row represents a skill associated with a candidate.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "candidate_skills"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    skill_name = Column(String(255), nullable=False)
+    proficiency_level = Column(String(20))  # beginner | intermediate | advanced | expert
+    years_experience = Column(Integer)
+    source = Column(String(20), server_default="extracted")  # extracted | self_reported | recruiter_assessed
+    last_seen_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "candidate_id", "skill_name", name="uq_candidate_skills_site_candidate_skill"),
+        Index("idx_candidate_skills_site_skill", "site_id", "skill_name"),
+    )
+
+
+# =============================================================================
+# POSITION_REQUIREMENTS TABLE (structured requirements from job description)
+# =============================================================================
+
+
+class PositionRequirement(Base):
+    """
+    Structured requirements from job description.
+
+    Extracted or manually entered requirements for matching against candidates.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "position_requirements"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    position_id = Column(UUID(as_uuid=True), ForeignKey("positions.id"), nullable=False)
+    required_skills = Column(JSONB, server_default="[]")
+    preferred_skills = Column(JSONB, server_default="[]")
+    min_experience_years = Column(Integer)
+    max_experience_years = Column(Integer)
+    education_level = Column(String(50))
+    required_certifications = Column(JSONB, server_default="[]")
+    location_requirement = Column(String(255))
+    work_mode = Column(String(50))
+    salary_min = Column(Integer)
+    salary_max = Column(Integer)
+    industry = Column(String(100))
+    extraction_method = Column(String(20), server_default="manual")  # manual | parsed | ai
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "position_id", name="uq_position_requirements_site_position"),
+    )
+
+
+# =============================================================================
+# MATCH_SCORES TABLE (persisted match results)
+# =============================================================================
+
+
+class MatchScore(Base):
+    """
+    Persisted match results between candidates and positions.
+
+    Stores computed match scores with dimensional breakdowns.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "match_scores"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    position_id = Column(UUID(as_uuid=True), ForeignKey("positions.id"), nullable=False)
+    resume_id = Column(UUID(as_uuid=True), ForeignKey("resumes.id"))
+    overall_score = Column(Integer, nullable=False)  # 0-100
+    confidence = Column(Integer, server_default="100")  # 0-100
+    dimensions = Column(JSONB, nullable=False, server_default="[]")
+    match_areas = Column(JSONB, nullable=False, server_default="[]")
+    gap_areas = Column(JSONB, nullable=False, server_default="[]")
+    algorithm_version = Column(String(50), nullable=False)
+    engine_config = Column(JSONB, server_default="{}")
+    is_stale = Column(Boolean, nullable=False, server_default="false")
+    match_type = Column(String(20), nullable=False, server_default="applied")  # applied | passive_scan | manual_trigger
+    scored_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    feedback_score = Column(Integer)  # nullable, recruiter override 0-100
+    feedback_notes = Column(Text)
+    computed_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("candidate_id", "position_id", "resume_id", name="uq_match_scores_candidate_position_resume"),
+        Index("idx_match_scores_site_position_score", "site_id", "position_id", overall_score.desc()),
+        Index("idx_match_scores_site_candidate", "site_id", "candidate_id"),
+        Index("idx_match_scores_site_stale", "site_id", "is_stale"),
+    )
+
+
+# =============================================================================
+# EMPLOYEE_ASSIGNMENTS TABLE (internal employee deployment tracking)
+# =============================================================================
+
+
+class EmployeeAssignment(Base):
+    """
+    Internal employee deployment tracking.
+
+    Tracks where employees are assigned, their rates, and assignment status.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "employee_assignments"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    position_id = Column(UUID(as_uuid=True), ForeignKey("positions.id"))
+    client_id = Column(UUID(as_uuid=True), ForeignKey("clients.id"))
+    end_client_id = Column(UUID(as_uuid=True), ForeignKey("end_clients.id"))
+    role_title = Column(String(255), nullable=False)
+    start_date = Column(DateTime(timezone=True), nullable=False)
+    end_date = Column(DateTime(timezone=True))
+    bill_rate = Column(String(50))
+    pay_rate = Column(String(50))
+    status = Column(String(20), nullable=False, server_default="active")  # active | completed | terminated | on_hold
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_employee_assignments_site_candidate", "site_id", "candidate_id"),
+        Index("idx_employee_assignments_site_status", "site_id", "status"),
+        Index("idx_employee_assignments_site_end_date", "site_id", "end_date"),
+    )
+
+
+# =============================================================================
+# MATCH_SCAN_JOBS TABLE (background scan tracking)
+# =============================================================================
+
+
+class MatchScanJob(Base):
+    """
+    Background scan tracking for job matching.
+
+    Tracks bulk matching operations against positions.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "match_scan_jobs"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    position_id = Column(UUID(as_uuid=True), ForeignKey("positions.id"), nullable=False)
+    status = Column(String(20), nullable=False, server_default="pending")  # pending | running | completed | failed
+    total_resumes = Column(Integer, nullable=False, server_default="0")
+    processed_resumes = Column(Integer, nullable=False, server_default="0")
+    algorithm_version = Column(String(50), nullable=False)
+    started_at = Column(DateTime(timezone=True))
+    completed_at = Column(DateTime(timezone=True))
+    error_message = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_match_scan_jobs_site_position_status", "site_id", "position_id", "status"),
     )

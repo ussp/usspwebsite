@@ -1,0 +1,875 @@
+openapi: 3.1.0
+info:
+  title: USSP Job Matching & Candidate Screening API
+  version: 1.0.0
+  description: |
+    API for the USSP job matching system. Provides candidate management,
+    resume storage with text extraction, position requirements, match scoring
+    with a pluggable engine, employee assignment tracking, and passive
+    candidate scanning.
+
+    All endpoints require Google OAuth authentication via the back-office app.
+    All data is multi-tenant, filtered by site_id.
+  contact:
+    name: USSP Engineering
+    email: accounts@ussoftwarepro.com
+
+servers:
+  - url: https://app.ussp.co
+    description: Production back-office
+
+tags:
+  - name: Candidates
+    description: Unique person entities across all applications
+  - name: Resumes
+    description: Versioned resume storage per candidate
+  - name: Positions
+    description: Job positions (existing, extended with requirements)
+  - name: Matching
+    description: Match scoring engine and results
+  - name: Assignments
+    description: Internal employee deployment tracking
+
+paths:
+  # ── Candidates ──────────────────────────────────────────────────
+
+  /api/candidates:
+    get:
+      tags: [Candidates]
+      summary: List candidates
+      parameters:
+        - name: candidate_type
+          in: query
+          schema:
+            type: string
+            enum: [internal_employee, external, vendor]
+        - name: current_status
+          in: query
+          schema:
+            type: string
+            enum: [available, employed, on_assignment, not_looking, blacklisted]
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Search by name or email
+      responses:
+        "200":
+          description: List of candidates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Candidate"
+    post:
+      tags: [Candidates]
+      summary: Create a candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCandidateInput"
+      responses:
+        "201":
+          description: Created candidate
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Candidate"
+
+  /api/candidates/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [Candidates]
+      summary: Get candidate by ID
+      responses:
+        "200":
+          description: Candidate detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Candidate"
+        "404":
+          description: Not found
+    patch:
+      tags: [Candidates]
+      summary: Update candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCandidateInput"
+      responses:
+        "200":
+          description: Updated
+
+  /api/candidates/{id}/resumes:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [Resumes]
+      summary: List resumes for a candidate
+      responses:
+        "200":
+          description: List of resumes (newest first)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Resume"
+    post:
+      tags: [Resumes]
+      summary: Upload a new resume for this candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateResumeInput"
+      responses:
+        "201":
+          description: Created resume record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resume"
+
+  # ── Position Requirements ───────────────────────────────────────
+
+  /api/positions/{positionId}/requirements:
+    parameters:
+      - name: positionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [Positions]
+      summary: Get structured requirements for a position
+      description: |
+        Returns the parsed/manual requirements used by the matching engine.
+        If no requirements exist yet, returns null.
+      responses:
+        "200":
+          description: Position requirements
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PositionRequirement"
+    put:
+      tags: [Positions]
+      summary: Create or update position requirements
+      description: |
+        Upsert structured requirements for a position. These are used by the
+        matching engine to score candidates. Marking scores stale is automatic
+        when requirements change.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertPositionRequirementInput"
+      responses:
+        "200":
+          description: Requirements saved
+
+  # ── Match Scoring ───────────────────────────────────────────────
+
+  /api/positions/{positionId}/matches:
+    parameters:
+      - name: positionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [Matching]
+      summary: Get match scores for a position
+      description: |
+        Returns all scored candidates for this position, sorted by
+        overall_score descending. Includes joined candidate info.
+      parameters:
+        - name: match_type
+          in: query
+          schema:
+            type: string
+            enum: [applied, passive_scan, manual_trigger]
+        - name: is_stale
+          in: query
+          schema:
+            type: boolean
+        - name: min_score
+          in: query
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 100
+      responses:
+        "200":
+          description: List of match scores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MatchScore"
+    post:
+      tags: [Matching]
+      summary: Score all applicants for a position
+      description: |
+        Triggers the matching engine to score all candidates who applied
+        for this position. Skips candidates with non-stale existing scores.
+        Requires position_requirements to be set.
+      responses:
+        "200":
+          description: Scoring results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scored:
+                    type: integer
+                    description: Number of candidates scored
+                  skipped:
+                    type: integer
+                    description: Number already scored (not stale)
+
+  /api/positions/{positionId}/matches/scan:
+    parameters:
+      - name: positionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    post:
+      tags: [Matching]
+      summary: Scan for passive candidates
+      description: |
+        Scans ALL candidates in the system (not just applicants) to find
+        potential matches for this position. Pre-filters by skill overlap,
+        then runs the full matching engine on the filtered set.
+        Results are saved with match_type = "passive_scan".
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 25
+          description: Max number of passive candidates to return
+      responses:
+        "200":
+          description: Passive candidate matches
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scanned:
+                    type: integer
+                  matches:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/MatchScore"
+
+  /api/matches/{id}/feedback:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Match score ID
+    post:
+      tags: [Matching]
+      summary: Submit recruiter feedback on a match score
+      description: |
+        Override a match score with a recruiter's assessment.
+        This data feeds into the feedback loop to improve future matching.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchFeedbackInput"
+      responses:
+        "200":
+          description: Feedback saved
+
+  # ── Assignments ─────────────────────────────────────────────────
+
+  /api/assignments:
+    get:
+      tags: [Assignments]
+      summary: List employee assignments
+      parameters:
+        - name: candidate_id
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [active, completed, terminated, on_hold]
+        - name: end_client_id
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: expiring_within_days
+          in: query
+          schema:
+            type: integer
+          description: Show only active assignments ending within N days
+      responses:
+        "200":
+          description: List of assignments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Assignment"
+    post:
+      tags: [Assignments]
+      summary: Create an assignment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAssignmentInput"
+      responses:
+        "201":
+          description: Created assignment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assignment"
+
+  /api/assignments/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      tags: [Assignments]
+      summary: Get assignment by ID
+      responses:
+        "200":
+          description: Assignment detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assignment"
+    patch:
+      tags: [Assignments]
+      summary: Update assignment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAssignmentInput"
+      responses:
+        "200":
+          description: Updated
+
+# ── Schemas ─────────────────────────────────────────────────────────
+
+components:
+  schemas:
+    Candidate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        full_name:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        linkedin_sub:
+          type: string
+          nullable: true
+        profile_picture:
+          type: string
+          nullable: true
+        candidate_type:
+          type: string
+          enum: [internal_employee, external, vendor]
+        current_status:
+          type: string
+          enum: [available, employed, on_assignment, not_looking, blacklisted]
+        source:
+          type: string
+          enum: [application, referral, sourced, internal]
+        tags:
+          type: array
+          items:
+            type: string
+        summary:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    CreateCandidateInput:
+      type: object
+      required: [email, full_name]
+      properties:
+        email:
+          type: string
+          format: email
+        full_name:
+          type: string
+        phone:
+          type: string
+        candidate_type:
+          type: string
+          enum: [internal_employee, external, vendor]
+          default: external
+        current_status:
+          type: string
+          enum: [available, employed, on_assignment, not_looking, blacklisted]
+          default: available
+        source:
+          type: string
+          default: application
+        tags:
+          type: array
+          items:
+            type: string
+        summary:
+          type: string
+
+    UpdateCandidateInput:
+      type: object
+      properties:
+        full_name:
+          type: string
+        phone:
+          type: string
+        candidate_type:
+          type: string
+          enum: [internal_employee, external, vendor]
+        current_status:
+          type: string
+          enum: [available, employed, on_assignment, not_looking, blacklisted]
+        tags:
+          type: array
+          items:
+            type: string
+        summary:
+          type: string
+
+    Resume:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        candidate_id:
+          type: string
+          format: uuid
+        storage_path:
+          type: string
+        file_name:
+          type: string
+        file_type:
+          type: string
+          nullable: true
+          example: pdf
+        position_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Which position this resume was submitted for
+        is_primary:
+          type: boolean
+        extracted_skills:
+          type: array
+          items:
+            type: string
+          description: Skills extracted from resume text
+        extracted_experience_years:
+          type: integer
+          nullable: true
+        extraction_status:
+          type: string
+          enum: [pending, processing, completed, failed]
+        uploaded_at:
+          type: string
+          format: date-time
+
+    CreateResumeInput:
+      type: object
+      required: [candidate_id, storage_path, file_name]
+      properties:
+        candidate_id:
+          type: string
+          format: uuid
+        storage_path:
+          type: string
+        file_name:
+          type: string
+        file_type:
+          type: string
+        position_id:
+          type: string
+          format: uuid
+        is_primary:
+          type: boolean
+          default: false
+
+    PositionRequirement:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+        required_skills:
+          type: array
+          items:
+            type: string
+          description: Skills the candidate must have
+        preferred_skills:
+          type: array
+          items:
+            type: string
+          description: Nice-to-have skills
+        min_experience_years:
+          type: integer
+          nullable: true
+        max_experience_years:
+          type: integer
+          nullable: true
+        education_level:
+          type: string
+          nullable: true
+          example: bachelors
+        required_certifications:
+          type: array
+          items:
+            type: string
+        location_requirement:
+          type: string
+          nullable: true
+        work_mode:
+          type: string
+          nullable: true
+          enum: [On-site, Remote, Hybrid]
+        salary_min:
+          type: integer
+          nullable: true
+        salary_max:
+          type: integer
+          nullable: true
+        industry:
+          type: string
+          nullable: true
+        extraction_method:
+          type: string
+          enum: [manual, parsed, ai]
+
+    UpsertPositionRequirementInput:
+      type: object
+      required: [position_id]
+      properties:
+        position_id:
+          type: string
+          format: uuid
+        required_skills:
+          type: array
+          items:
+            type: string
+        preferred_skills:
+          type: array
+          items:
+            type: string
+        min_experience_years:
+          type: integer
+        max_experience_years:
+          type: integer
+        education_level:
+          type: string
+        required_certifications:
+          type: array
+          items:
+            type: string
+        location_requirement:
+          type: string
+        work_mode:
+          type: string
+        salary_min:
+          type: integer
+        salary_max:
+          type: integer
+        industry:
+          type: string
+        extraction_method:
+          type: string
+
+    MatchScore:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        candidate_id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+        resume_id:
+          type: string
+          format: uuid
+          nullable: true
+        overall_score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Weighted composite score
+        confidence:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: How confident the algorithm is (lower when data is missing)
+        dimensions:
+          type: array
+          items:
+            $ref: "#/components/schemas/DimensionResult"
+        match_areas:
+          type: array
+          items:
+            type: string
+          description: Top strengths (e.g. "Strong Java skills", "5+ years exp")
+        gap_areas:
+          type: array
+          items:
+            type: string
+          description: Top gaps (e.g. "Missing AWS certification")
+        algorithm_version:
+          type: string
+          example: rule-v1
+        is_stale:
+          type: boolean
+          description: True when position or resume changed since scoring
+        match_type:
+          type: string
+          enum: [applied, passive_scan, manual_trigger]
+        feedback_score:
+          type: integer
+          nullable: true
+          description: Recruiter override score (null if not overridden)
+        feedback_notes:
+          type: string
+          nullable: true
+        computed_at:
+          type: string
+          format: date-time
+        # Joined fields
+        candidate_name:
+          type: string
+        candidate_email:
+          type: string
+        candidate_type:
+          type: string
+
+    DimensionResult:
+      type: object
+      properties:
+        dimension:
+          type: string
+          enum: [skills, experience_level, location, education, certifications, resume_recency, availability, rate_compatibility]
+        score:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: Raw dimension score
+        weight:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Weight applied to this dimension
+        weightedScore:
+          type: number
+          description: score * weight
+        matchedItems:
+          type: array
+          items:
+            type: string
+          description: What matched (e.g. specific skills)
+        missingItems:
+          type: array
+          items:
+            type: string
+          description: What the position needs but candidate lacks
+        notes:
+          type: string
+          nullable: true
+          description: Human-readable explanation
+
+    MatchFeedbackInput:
+      type: object
+      required: [feedback_score]
+      properties:
+        feedback_score:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Recruiter's assessment score
+        feedback_notes:
+          type: string
+          description: Why the score was overridden
+
+    Assignment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        candidate_id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+          nullable: true
+        client_id:
+          type: string
+          format: uuid
+          nullable: true
+        end_client_id:
+          type: string
+          format: uuid
+          nullable: true
+        role_title:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+        bill_rate:
+          type: string
+          nullable: true
+          example: "$85/hr"
+        pay_rate:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [active, completed, terminated, on_hold]
+        notes:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        # Joined fields
+        candidate_name:
+          type: string
+        client_name:
+          type: string
+        end_client_name:
+          type: string
+
+    CreateAssignmentInput:
+      type: object
+      required: [candidate_id, role_title, start_date]
+      properties:
+        candidate_id:
+          type: string
+          format: uuid
+        position_id:
+          type: string
+          format: uuid
+        client_id:
+          type: string
+          format: uuid
+        end_client_id:
+          type: string
+          format: uuid
+        role_title:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+        bill_rate:
+          type: string
+        pay_rate:
+          type: string
+        status:
+          type: string
+          enum: [active, completed, terminated, on_hold]
+          default: active
+        notes:
+          type: string
+
+    UpdateAssignmentInput:
+      type: object
+      properties:
+        role_title:
+          type: string
+        start_date:
+          type: string
+          format: date-time
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+        bill_rate:
+          type: string
+          nullable: true
+        pay_rate:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [active, completed, terminated, on_hold]
+        notes:
+          type: string
+          nullable: true
