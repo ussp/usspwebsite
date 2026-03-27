@@ -404,94 +404,91 @@ export default function EdgeAIPage() {
       </section>
 
       {/* Sense → Think → Act → Learn Loop */}
-      <section className="py-20 bg-near-black text-white overflow-hidden">
+      <section className="py-20 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="The Intelligence Loop"
             subtitle="How USSP AI transforms raw signals into continuous operational improvement"
-            light
           />
 
-          {/* Desktop: horizontal flow with clear arrows */}
+          {/* Desktop: horizontal flow */}
           <div className="hidden md:block max-w-5xl mx-auto">
-            {/* Top row: circles + arrows */}
+            {/* Circles + arrows row */}
             <div className="flex items-center justify-center gap-0 mb-10">
               {/* Sense */}
               <div className="flex flex-col items-center w-44">
-                <div className="w-24 h-24 rounded-full bg-primary/15 border-2 border-primary flex items-center justify-center text-primary">
+                <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/25">
                   <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.64 0 8.577 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.64 0-8.577-3.007-9.963-7.178z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-[family-name:var(--font-alata)] mt-4">Sense</h3>
+                <h3 className="text-xl font-[family-name:var(--font-alata)] text-dark mt-4">Sense</h3>
               </div>
 
               {/* Arrow 1 */}
               <div className="flex items-center -mx-2 mb-8">
-                <div className="w-16 h-0.5 bg-gradient-to-r from-primary/40 to-primary" />
-                <svg className="w-5 h-5 text-primary -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-16 h-0.5 bg-dark/20" />
+                <svg className="w-5 h-5 text-dark/40 -ml-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </div>
 
               {/* Think */}
               <div className="flex flex-col items-center w-44">
-                <div className="w-24 h-24 rounded-full bg-primary/15 border-2 border-primary flex items-center justify-center text-primary">
+                <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/25">
                   <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 00.659 1.591L19 14.5M14.25 3.104c.251.023.501.05.75.082M19 14.5l-2.47 2.47a2.25 2.25 0 01-1.59.659H9.06a2.25 2.25 0 01-1.591-.659L5 14.5m14 0V17a2.25 2.25 0 01-2.25 2.25H7.25A2.25 2.25 0 015 17v-2.5" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-[family-name:var(--font-alata)] mt-4">Think</h3>
+                <h3 className="text-xl font-[family-name:var(--font-alata)] text-dark mt-4">Think</h3>
               </div>
 
               {/* Arrow 2 */}
               <div className="flex items-center -mx-2 mb-8">
-                <div className="w-16 h-0.5 bg-gradient-to-r from-primary/40 to-primary" />
-                <svg className="w-5 h-5 text-primary -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-16 h-0.5 bg-dark/20" />
+                <svg className="w-5 h-5 text-dark/40 -ml-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </div>
 
               {/* Act */}
               <div className="flex flex-col items-center w-44">
-                <div className="w-24 h-24 rounded-full bg-primary/15 border-2 border-primary flex items-center justify-center text-primary">
+                <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/25">
                   <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-[family-name:var(--font-alata)] mt-4">Act</h3>
+                <h3 className="text-xl font-[family-name:var(--font-alata)] text-dark mt-4">Act</h3>
               </div>
 
               {/* Arrow 3 */}
               <div className="flex items-center -mx-2 mb-8">
-                <div className="w-16 h-0.5 bg-gradient-to-r from-primary/40 to-primary" />
-                <svg className="w-5 h-5 text-primary -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-16 h-0.5 bg-dark/20" />
+                <svg className="w-5 h-5 text-dark/40 -ml-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </div>
 
               {/* Learn */}
               <div className="flex flex-col items-center w-44">
-                <div className="w-24 h-24 rounded-full bg-primary/15 border-2 border-primary flex items-center justify-center text-primary">
+                <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/25">
                   <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M21.015 4.356v4.992" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-[family-name:var(--font-alata)] mt-4">Learn</h3>
+                <h3 className="text-xl font-[family-name:var(--font-alata)] text-dark mt-4">Learn</h3>
               </div>
             </div>
 
             {/* Return arrow: Learn → Sense */}
             <div className="flex justify-center -mt-4 mb-12">
               <div className="relative w-[85%] h-12">
-                {/* Curved return path */}
                 <svg className="w-full h-full" viewBox="0 0 800 48" fill="none" preserveAspectRatio="none">
-                  <path d="M700 4 C700 36, 400 44, 100 36 C60 34, 40 28, 40 20" stroke="#2563EB" strokeWidth="2" strokeDasharray="8 4" opacity="0.5" fill="none" />
-                  {/* Arrowhead pointing left/up toward Sense */}
-                  <polygon points="34,24 46,14 46,28" fill="#2563EB" opacity="0.5" />
+                  <path d="M700 4 C700 36, 400 44, 100 36 C60 34, 40 28, 40 20" stroke="#2563EB" strokeWidth="2.5" strokeDasharray="8 4" opacity="0.4" fill="none" />
+                  <polygon points="34,24 46,14 46,28" fill="#2563EB" opacity="0.4" />
                 </svg>
-                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-[family-name:var(--font-montserrat)] uppercase tracking-widest text-primary/60 bg-near-black px-4">
+                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-[family-name:var(--font-montserrat)] uppercase tracking-widest text-dark/40 bg-white px-4">
                   Every cycle sharpens the next
                 </span>
               </div>
@@ -499,34 +496,34 @@ export default function EdgeAIPage() {
 
             {/* Description cards */}
             <div className="grid grid-cols-4 gap-6">
-              <div className="bg-white/5 rounded-lg p-5 border border-white/10">
-                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2">Detect</p>
-                <p className="text-sm text-white/60 font-[family-name:var(--font-montserrat)] leading-relaxed">
+              <div className="bg-light-gray rounded-lg p-5">
+                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2 font-bold">Detect</p>
+                <p className="text-sm text-dark/60 font-[family-name:var(--font-montserrat)] leading-relaxed">
                   Cameras, sensors, and data streams feed raw signals into on-premises AI. No cloud. No PII. Just spatial and behavioral data at the edge.
                 </p>
               </div>
-              <div className="bg-white/5 rounded-lg p-5 border border-white/10">
-                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2">Analyze</p>
-                <p className="text-sm text-white/60 font-[family-name:var(--font-montserrat)] leading-relaxed">
+              <div className="bg-light-gray rounded-lg p-5">
+                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2 font-bold">Analyze</p>
+                <p className="text-sm text-dark/60 font-[family-name:var(--font-montserrat)] leading-relaxed">
                   Edge AI applies rules, thresholds, and pattern recognition locally. Context-aware logic turns raw data into situational understanding.
                 </p>
               </div>
-              <div className="bg-white/5 rounded-lg p-5 border border-white/10">
-                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2">Respond</p>
-                <p className="text-sm text-white/60 font-[family-name:var(--font-montserrat)] leading-relaxed">
+              <div className="bg-light-gray rounded-lg p-5">
+                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2 font-bold">Respond</p>
+                <p className="text-sm text-dark/60 font-[family-name:var(--font-montserrat)] leading-relaxed">
                   Real-time staff alerts, automated logs, display triggers, compliance flags. Seconds, not minutes. Proactive, not reactive.
                 </p>
               </div>
-              <div className="bg-white/5 rounded-lg p-5 border border-white/10">
-                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2">Improve</p>
-                <p className="text-sm text-white/60 font-[family-name:var(--font-montserrat)] leading-relaxed">
+              <div className="bg-light-gray rounded-lg p-5">
+                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2 font-bold">Improve</p>
+                <p className="text-sm text-dark/60 font-[family-name:var(--font-montserrat)] leading-relaxed">
                   Historical patterns feed back in — refining thresholds, reducing false positives, and enabling predictive intelligence over time.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Mobile: vertical flow with clear connectors */}
+          {/* Mobile: vertical flow */}
           <div className="md:hidden space-y-0">
             {[
               {
@@ -574,22 +571,22 @@ export default function EdgeAIPage() {
               <div key={stage.label}>
                 <div className="flex items-start gap-4">
                   <div className="flex flex-col items-center">
-                    <div className="w-14 h-14 rounded-full bg-primary/15 border-2 border-primary flex items-center justify-center text-primary">
+                    <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-white shadow-md shadow-primary/20">
                       {stage.icon}
                     </div>
                     {i < arr.length - 1 && (
                       <div className="flex flex-col items-center py-1">
-                        <div className="w-0.5 h-6 bg-primary/40" />
-                        <svg className="w-4 h-4 text-primary/60" fill="currentColor" viewBox="0 0 20 20">
+                        <div className="w-0.5 h-6 bg-dark/15" />
+                        <svg className="w-4 h-4 text-dark/30" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
                       </div>
                     )}
                   </div>
                   <div className="pt-2 pb-2">
-                    <h3 className="text-lg font-[family-name:var(--font-alata)]">{stage.label}</h3>
-                    <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-1">{stage.heading}</p>
-                    <p className="text-sm text-white/50 font-[family-name:var(--font-montserrat)] leading-relaxed">
+                    <h3 className="text-lg font-[family-name:var(--font-alata)] text-dark">{stage.label}</h3>
+                    <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-1 font-bold">{stage.heading}</p>
+                    <p className="text-sm text-dark/50 font-[family-name:var(--font-montserrat)] leading-relaxed">
                       {stage.description}
                     </p>
                   </div>
@@ -598,10 +595,10 @@ export default function EdgeAIPage() {
             ))}
             {/* Loop back indicator */}
             <div className="flex items-center gap-3 pt-6 pl-3">
-              <svg className="w-6 h-6 text-primary/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M21.015 4.356v4.992" />
               </svg>
-              <span className="text-xs font-[family-name:var(--font-montserrat)] uppercase tracking-widest text-primary/50">
+              <span className="text-xs font-[family-name:var(--font-montserrat)] uppercase tracking-widest text-dark/40">
                 Every cycle sharpens the next
               </span>
             </div>
