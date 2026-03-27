@@ -266,7 +266,6 @@ const SYNONYM_MAP: Record<string, string> = {
   "objective c": "objective-c",
   flutter: "flutter",
   dart: "dart",
-  "react native": "react-native",
   xamarin: "xamarin",
 
   // Blockchain

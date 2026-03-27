@@ -403,6 +403,179 @@ export default function EdgeAIPage() {
         </div>
       </section>
 
+      {/* Sense → Think → Act → Learn Loop */}
+      <section className="py-20 bg-near-black text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            title="The Intelligence Loop"
+            subtitle="How USSP AI transforms raw signals into continuous operational improvement"
+            light
+          />
+
+          {/* Loop Diagram */}
+          <div className="relative max-w-5xl mx-auto">
+            {/* Desktop: horizontal loop with arrows */}
+            <div className="hidden md:grid grid-cols-4 gap-0 items-start">
+              {[
+                {
+                  step: "01",
+                  label: "Sense",
+                  heading: "Detect",
+                  description:
+                    "Cameras, sensors, and data streams feed raw signals into on-premises AI hardware. No cloud upload. No PII captured. Just spatial and behavioral data at the edge.",
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.64 0 8.577 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.64 0-8.577-3.007-9.963-7.178z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  ),
+                },
+                {
+                  step: "02",
+                  label: "Think",
+                  heading: "Analyze",
+                  description:
+                    "Edge AI models process signals locally — applying rules, thresholds, and pattern recognition. Context-aware logic turns raw data into situational understanding.",
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 00.659 1.591L19 14.5M14.25 3.104c.251.023.501.05.75.082M19 14.5l-2.47 2.47a2.25 2.25 0 01-1.59.659H9.06a2.25 2.25 0 01-1.591-.659L5 14.5m14 0V17a2.25 2.25 0 01-2.25 2.25H7.25A2.25 2.25 0 015 17v-2.5" />
+                    </svg>
+                  ),
+                },
+                {
+                  step: "03",
+                  label: "Act",
+                  heading: "Respond",
+                  description:
+                    "The system triggers real-time responses — staff alerts, automated logs, display updates, compliance flags. Seconds, not minutes. Proactive, not reactive.",
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+                  ),
+                },
+                {
+                  step: "04",
+                  label: "Learn",
+                  heading: "Improve",
+                  description:
+                    "Every cycle feeds historical patterns back into the system — refining thresholds, reducing false positives, and enabling predictive intelligence over time.",
+                  icon: (
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M21.015 4.356v4.992" />
+                    </svg>
+                  ),
+                },
+              ].map((stage, i) => (
+                <div key={stage.label} className="relative flex flex-col items-center text-center px-4">
+                  {/* Arrow connector (between cards, not after last) */}
+                  {i < 3 && (
+                    <div className="absolute top-10 -right-3 z-10">
+                      <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M5 12h14m-4-4l4 4-4 4" />
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Step circle */}
+                  <div className="w-20 h-20 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-primary mb-4">
+                    {stage.icon}
+                  </div>
+
+                  {/* Step number + label */}
+                  <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-1">
+                    {stage.step}
+                  </p>
+                  <h3 className="text-xl font-[family-name:var(--font-alata)] mb-1">
+                    {stage.label}
+                  </h3>
+                  <p className="text-sm font-[family-name:var(--font-alata)] text-white/60 mb-3">
+                    {stage.heading}
+                  </p>
+                  <p className="text-sm text-white/50 font-[family-name:var(--font-montserrat)] leading-relaxed">
+                    {stage.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Return arrow (desktop) */}
+            <div className="hidden md:flex justify-center mt-8">
+              <div className="flex items-center gap-3 text-primary/60">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                </svg>
+                <span className="text-xs font-[family-name:var(--font-montserrat)] uppercase tracking-widest">
+                  Continuous loop — every cycle sharpens the next
+                </span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Mobile: vertical stack */}
+            <div className="md:hidden space-y-6">
+              {[
+                {
+                  step: "01",
+                  label: "Sense",
+                  heading: "Detect",
+                  description:
+                    "Cameras, sensors, and data streams feed raw signals into on-premises AI hardware. No cloud upload. No PII captured.",
+                },
+                {
+                  step: "02",
+                  label: "Think",
+                  heading: "Analyze",
+                  description:
+                    "Edge AI models process signals locally — applying rules, thresholds, and pattern recognition to build situational understanding.",
+                },
+                {
+                  step: "03",
+                  label: "Act",
+                  heading: "Respond",
+                  description:
+                    "Real-time responses — staff alerts, automated logs, display updates, compliance flags. Seconds, not minutes.",
+                },
+                {
+                  step: "04",
+                  label: "Learn",
+                  heading: "Improve",
+                  description:
+                    "Historical patterns refine thresholds, reduce false positives, and enable predictive intelligence over time.",
+                },
+              ].map((stage, i, arr) => (
+                <div key={stage.label}>
+                  <div className="flex items-start gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center text-primary text-sm font-bold">
+                        {stage.step}
+                      </div>
+                      {i < arr.length - 1 && (
+                        <div className="w-0.5 h-8 bg-primary/30 mt-2" />
+                      )}
+                    </div>
+                    <div className="pt-1">
+                      <h3 className="text-lg font-[family-name:var(--font-alata)]">
+                        {stage.label}{" "}
+                        <span className="text-white/50 text-sm">— {stage.heading}</span>
+                      </h3>
+                      <p className="text-sm text-white/50 font-[family-name:var(--font-montserrat)] leading-relaxed mt-1">
+                        {stage.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <p className="text-center text-xs text-primary/60 font-[family-name:var(--font-montserrat)] uppercase tracking-widest pt-2">
+                Continuous loop — every cycle sharpens the next
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Core Capabilities */}
       <section className="py-20 bg-light-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
