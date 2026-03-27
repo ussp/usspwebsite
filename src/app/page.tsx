@@ -21,26 +21,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Link
-              href="/healthcare"
-              className="relative group h-72 rounded-lg overflow-hidden"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{
-                  backgroundImage: "url(/assets/images/healthcare-hero.jpg)",
-                }}
-              />
-              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors" />
-              <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-                <h3 className="text-2xl font-[family-name:var(--font-alata)] text-white mb-4">
-                  Healthcare Services
-                </h3>
-                <span className="px-6 py-2 border-2 border-white text-white text-sm font-[family-name:var(--font-alata)] uppercase tracking-wider hover:bg-white hover:text-near-black transition-all">
-                  Learn More
-                </span>
-              </div>
-            </Link>
-            <Link
               href="/discover"
               className="relative group h-72 rounded-lg overflow-hidden"
             >
@@ -54,6 +34,24 @@ export default function Home() {
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
                 <h3 className="text-2xl font-[family-name:var(--font-alata)] text-white mb-4">
                   Information Technology
+                </h3>
+                <span className="px-6 py-2 border-2 border-white text-white text-sm font-[family-name:var(--font-alata)] uppercase tracking-wider hover:bg-white hover:text-near-black transition-all">
+                  Learn More
+                </span>
+              </div>
+            </Link>
+            <Link
+              href="/edge-ai"
+              className="relative group h-72 rounded-lg overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-near-black" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent group-hover:from-primary/30 transition-colors" />
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+                <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2">
+                  Powered by SmartSite
+                </p>
+                <h3 className="text-2xl font-[family-name:var(--font-alata)] text-white mb-4">
+                  Edge AI &amp; Computer Vision
                 </h3>
                 <span className="px-6 py-2 border-2 border-white text-white text-sm font-[family-name:var(--font-alata)] uppercase tracking-wider hover:bg-white hover:text-near-black transition-all">
                   Learn More
