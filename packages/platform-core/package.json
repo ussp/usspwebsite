@@ -139,6 +139,26 @@
       "types": "./dist/queries/admin/end-clients.d.ts",
       "import": "./dist/queries/admin/end-clients.js",
       "default": "./dist/queries/admin/end-clients.js"
+    },
+    "./queries/admin/assignments": {
+      "types": "./dist/queries/admin/assignments.d.ts",
+      "import": "./dist/queries/admin/assignments.js",
+      "default": "./dist/queries/admin/assignments.js"
+    },
+    "./queries/admin/candidates": {
+      "types": "./dist/queries/admin/candidates.d.ts",
+      "import": "./dist/queries/admin/candidates.js",
+      "default": "./dist/queries/admin/candidates.js"
+    },
+    "./queries/admin/matching": {
+      "types": "./dist/queries/admin/matching.d.ts",
+      "import": "./dist/queries/admin/matching.js",
+      "default": "./dist/queries/admin/matching.js"
+    },
+    "./queries/admin/resumes": {
+      "types": "./dist/queries/admin/resumes.d.ts",
+      "import": "./dist/queries/admin/resumes.js",
+      "default": "./dist/queries/admin/resumes.js"
     }
   },
   "scripts": {
