@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     "Since 2003, USSP delivers on-premises Edge AI and computer vision solutions for facility safety — anonymous person tracking, zone occupancy monitoring, real-time alerts, staff ratio compliance, and insurance risk reduction. Privacy-first, no facial recognition, BIPA compliant. For government, commercial, healthcare, and industrial facilities.",
   keywords:
-    "Edge AI, computer vision, AI video analytics, facility safety, VionOS.ai, anonymous person tracking, on-premises AI, NVIDIA Jetson, zone occupancy, real-time alerts, BIPA compliant, privacy-first AI, facility intelligence, security analytics, AI-powered surveillance alternative, Edge AI solutions Chicago, commercial facility safety, government facility AI",
+    "Edge AI, computer vision, AI video analytics, facility safety, SmartSite, anonymous person tracking, on-premises AI, NVIDIA Jetson, zone occupancy, real-time alerts, BIPA compliant, privacy-first AI, facility intelligence, security analytics, AI-powered surveillance alternative, Edge AI solutions Chicago, commercial facility safety, government facility AI",
   openGraph: {
     title:
       "Edge AI & Computer Vision Solutions | Facility Safety & Intelligence | USSP",
@@ -94,7 +94,7 @@ const privacyFeatures = [
   {
     title: "No Facial Recognition",
     description:
-      "VionOS.ai uses skeletal pose estimation and bounding-box tracking — never facial recognition or biometric identification.",
+      "SmartSite uses skeletal pose estimation and bounding-box tracking — never facial recognition or biometric identification.",
   },
   {
     title: "No Cloud Required",
@@ -127,17 +127,17 @@ const faqItems = [
   {
     title: "What is Edge AI and how does it work?",
     content:
-      "Edge AI means running artificial intelligence models directly on local hardware — at the 'edge' of the network — rather than sending data to the cloud. VionOS.ai runs computer vision models on NVIDIA Jetson devices installed at the facility. Cameras feed video to these local devices, which process frames in real time to detect people, track movement, and generate alerts. No video or data leaves the premises.",
+      "Edge AI means running artificial intelligence models directly on local hardware — at the 'edge' of the network — rather than sending data to the cloud. SmartSite runs computer vision models on NVIDIA Jetson devices installed at the facility. Cameras feed video to these local devices, which process frames in real time to detect people, track movement, and generate alerts. No video or data leaves the premises.",
   },
   {
-    title: "What is VionOS.ai?",
+    title: "What is SmartSite?",
     content:
-      "VionOS.ai is USSP's Edge AI platform for facility safety and intelligence. It provides real-time computer vision analytics — person detection, zone occupancy monitoring, staff ratio alerts, and compliance logging — all running on-premises with no facial recognition and no cloud dependency. VionOS.ai is designed for government, commercial, healthcare, education, and industrial facilities.",
+      "SmartSite is USSP's Edge AI platform for facility safety and intelligence. It provides real-time computer vision analytics — person detection, zone occupancy monitoring, staff ratio alerts, and compliance logging — all running on-premises with no facial recognition and no cloud dependency. SmartSite is designed for government, commercial, healthcare, education, and industrial facilities.",
   },
   {
     title: "How does AI video analytics work without facial recognition?",
     content:
-      "VionOS.ai uses skeletal pose estimation and bounding-box tracking to detect and count people without identifying who they are. Each detected person is assigned an Anonymous Person Token — a SHA-256 hashed identifier with a 4-hour time-to-live — that enables movement tracking within the facility without capturing any biometric or personally identifiable information. This approach is fully BIPA compliant.",
+      "SmartSite uses skeletal pose estimation and bounding-box tracking to detect and count people without identifying who they are. Each detected person is assigned an Anonymous Person Token — a SHA-256 hashed identifier with a 4-hour time-to-live — that enables movement tracking within the facility without capturing any biometric or personally identifiable information. This approach is fully BIPA compliant.",
   },
   {
     title: "What industries can use Edge AI for facility safety?",
@@ -152,7 +152,7 @@ const faqItems = [
   {
     title: "What hardware is required for on-premises AI?",
     content:
-      "VionOS.ai runs on NVIDIA Jetson Orin edge devices — compact, energy-efficient AI computers that can process multiple camera feeds simultaneously. The platform works with existing IP camera infrastructure (RTSP streams). No GPU servers or data center equipment is required. A single Jetson device can typically handle 4-8 camera feeds depending on resolution and analytics complexity.",
+      "SmartSite runs on NVIDIA Jetson Orin edge devices — compact, energy-efficient AI computers that can process multiple camera feeds simultaneously. The platform works with existing IP camera infrastructure (RTSP streams). No GPU servers or data center equipment is required. A single Jetson device can typically handle 4-8 camera feeds depending on resolution and analytics complexity.",
   },
   {
     title: "How do government agencies engage USSP for Edge AI?",
@@ -162,7 +162,7 @@ const faqItems = [
   {
     title: "How is Edge AI different from traditional CCTV monitoring?",
     content:
-      "Traditional CCTV requires humans to watch screens in real time and review footage after incidents. Edge AI automates monitoring — it detects events as they happen, generates instant alerts, and logs everything with timestamps and zone data. It provides quantitative data (occupancy counts, dwell times, movement patterns) that CCTV cannot. And because VionOS.ai uses anonymous tracking, it delivers intelligence without the civil liberties concerns of facial recognition surveillance.",
+      "Traditional CCTV requires humans to watch screens in real time and review footage after incidents. Edge AI automates monitoring — it detects events as they happen, generates instant alerts, and logs everything with timestamps and zone data. It provides quantitative data (occupancy counts, dwell times, movement patterns) that CCTV cannot. And because SmartSite uses anonymous tracking, it delivers intelligence without the civil liberties concerns of facial recognition surveillance.",
   },
 ];
 
@@ -248,7 +248,7 @@ export default function EdgeAIPage() {
       <section className="pt-28 pb-20 bg-near-black text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-primary text-sm font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-4">
-            Powered by VionOS.ai
+            Powered by SmartSite
           </p>
           <h1 className="text-3xl md:text-5xl font-[family-name:var(--font-alata)] mb-6">
             Edge AI &amp; Computer Vision for Facility Safety
@@ -289,14 +289,14 @@ export default function EdgeAIPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             title="Platform Overview"
-            subtitle="VionOS.ai — Edge AI for facility safety and operational intelligence"
+            subtitle="SmartSite — Edge AI for facility safety and operational intelligence"
           />
           <div className="max-w-3xl mx-auto mb-12">
             <p className="text-dark/80 font-[family-name:var(--font-montserrat)] leading-relaxed text-center">
-              VionOS.ai is USSP&apos;s on-premises Edge AI platform that
+              SmartSite is USSP&apos;s on-premises Edge AI platform that
               transforms existing camera infrastructure into an intelligent
               safety and operations layer. Using NVIDIA Jetson edge devices and
-              advanced computer vision models, VionOS.ai delivers real-time
+              advanced computer vision models, SmartSite delivers real-time
               person detection, zone occupancy analytics, and automated
               alerts — all without facial recognition, without biometric data,
               and without sending video to the cloud.
@@ -772,7 +772,7 @@ export default function EdgeAIPage() {
                 General Capability Brief
               </h3>
               <p className="text-sm text-dark/70 font-[family-name:var(--font-montserrat)] leading-relaxed mb-6">
-                Overview of the VionOS.ai Edge AI platform — capabilities,
+                Overview of the SmartSite Edge AI platform — capabilities,
                 privacy architecture, and industry applications. For any
                 industry or audience.
               </p>
@@ -815,7 +815,7 @@ export default function EdgeAIPage() {
         <div className="max-w-4xl mx-auto px-4">
           <SectionHeading
             title="Frequently Asked Questions"
-            subtitle="Common questions about Edge AI, VionOS.ai, and on-premises computer vision"
+            subtitle="Common questions about Edge AI, SmartSite, and on-premises computer vision"
           />
           <div className="space-y-4">
             {faqItems.map((faq) => (
@@ -837,7 +837,7 @@ export default function EdgeAIPage() {
           </h2>
           <p className="text-white/80 font-[family-name:var(--font-montserrat)] mb-8 max-w-2xl mx-auto">
             Whether you&apos;re a government agency, healthcare facility,
-            manufacturer, or campus — VionOS.ai delivers real-time safety
+            manufacturer, or campus — SmartSite delivers real-time safety
             intelligence without compromising privacy.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -872,7 +872,7 @@ export default function EdgeAIPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            name: "VionOS.ai — Edge AI Safety & Facility Intelligence Platform",
+            name: "SmartSite — Edge AI Safety & Facility Intelligence Platform",
             description:
               "On-premises Edge AI and computer vision platform for facility safety. Anonymous person tracking, zone occupancy monitoring, real-time alerts — no facial recognition, no cloud, BIPA compliant. For government, commercial, healthcare, and industrial facilities.",
             provider: {

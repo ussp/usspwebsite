@@ -64,7 +64,7 @@
 - Powers the "Accelerate" phase of USSP's AI Transformation framework
 - Topics: LLMs, NLP, computer vision, MLOps, AI agents, prompt engineering, AI security
 
-### Edge AI & Computer Vision (VionOS.ai)
+### Edge AI & Computer Vision (SmartSite)
 - On-premises Edge AI platform for facility safety and operational intelligence
 - Anonymous person tracking, zone occupancy monitoring, real-time alerts
 - No facial recognition, no cloud, no PII — fully BIPA compliant
