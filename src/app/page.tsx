@@ -27,7 +27,7 @@ export default function Home() {
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                 style={{
-                  backgroundImage: "url(/assets/images/tech-grid.jpg)",
+                  backgroundImage: "url(/assets/images/data-analytics.jpg)",
                 }}
               />
               <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors" />
@@ -44,8 +44,13 @@ export default function Home() {
               href="/edge-ai"
               className="relative group h-72 rounded-lg overflow-hidden"
             >
-              <div className="absolute inset-0 bg-near-black" />
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent group-hover:from-primary/30 transition-colors" />
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                style={{
+                  backgroundImage: "url(/assets/images/iot-cloud.jpg)",
+                }}
+              />
+              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors" />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
                 <p className="text-xs text-primary font-[family-name:var(--font-montserrat)] uppercase tracking-widest mb-2">
                   Powered by SmartSite
