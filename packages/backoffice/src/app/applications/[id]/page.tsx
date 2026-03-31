@@ -60,6 +60,8 @@ export default function ApplicationDetailPage() {
   const [otherApps, setOtherApps] = useState<OtherApplication[]>([]);
   const [newNote, setNewNote] = useState("");
   const [loading, setLoading] = useState(true);
+  const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
+  const [editNoteContent, setEditNoteContent] = useState("");
 
   useEffect(() => {
     Promise.all([
@@ -107,6 +109,36 @@ export default function ApplicationDetailPage() {
       const data = await res.json();
       setNotes((prev) => [data, ...prev]);
       setNewNote("");
+    }
+  }
+
+  async function handleEditNote(noteId: string) {
+    if (!editNoteContent.trim()) return;
+    const res = await fetch(
+      `/api/applications/${params.id}/notes/${noteId}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: editNoteContent }),
+      }
+    );
+    if (res.ok) {
+      setNotes((prev) =>
+        prev.map((n) =>
+          n.id === noteId ? { ...n, content: editNoteContent } : n
+        )
+      );
+      setEditingNoteId(null);
+    }
+  }
+
+  async function handleDeleteNote(noteId: string) {
+    const res = await fetch(
+      `/api/applications/${params.id}/notes/${noteId}`,
+      { method: "DELETE" }
+    );
+    if (res.ok) {
+      setNotes((prev) => prev.filter((n) => n.id !== noteId));
     }
   }
 
@@ -314,13 +346,57 @@ export default function ApplicationDetailPage() {
                 {notes.map((note) => (
                   <div
                     key={note.id}
-                    className="border-l-2 border-primary/20 pl-3 py-1"
+                    className="border-l-2 border-primary/20 pl-3 py-1 group"
                   >
-                    <p className="text-sm">{note.content}</p>
-                    <p className="text-xs text-dark/40 mt-1">
-                      {note.staff_user?.full_name || "Staff"} &middot;{" "}
-                      {new Date(note.created_at).toLocaleString()}
-                    </p>
+                    {editingNoteId === note.id ? (
+                      <div className="space-y-2">
+                        <textarea
+                          value={editNoteContent}
+                          onChange={(e) => setEditNoteContent(e.target.value)}
+                          rows={2}
+                          className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        />
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleEditNote(note.id)}
+                            className="px-3 py-1 bg-primary text-white text-xs rounded-lg hover:bg-primary-dark"
+                          >
+                            Save
+                          </button>
+                          <button
+                            onClick={() => setEditingNoteId(null)}
+                            className="px-3 py-1 text-xs rounded-lg border border-light-gray hover:bg-light-gray"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <p className="text-sm">{note.content}</p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <p className="text-xs text-dark/40">
+                            {note.staff_user?.full_name || "Staff"} &middot;{" "}
+                            {new Date(note.created_at).toLocaleString()}
+                          </p>
+                          <button
+                            onClick={() => {
+                              setEditingNoteId(note.id);
+                              setEditNoteContent(note.content);
+                            }}
+                            className="text-xs text-primary hover:underline opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDeleteNote(note.id)}
+                            className="text-xs text-red-500 hover:underline opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 ))}
                 {notes.length === 0 && (

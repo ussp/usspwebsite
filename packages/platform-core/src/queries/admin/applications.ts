@@ -161,3 +161,34 @@ export async function addApplicationNote(
   if (error) return { success: false, error: error.message };
   return { success: true, note: data };
 }
+
+export async function updateApplicationNote(
+  noteId: string,
+  content: string
+): Promise<{ success: boolean; error?: string }> {
+  const supabase = getServiceClient();
+
+  const { error } = await supabase
+    .from("application_notes")
+    .update({ content })
+    .eq("site_id", getSiteId())
+    .eq("id", noteId);
+
+  if (error) return { success: false, error: error.message };
+  return { success: true };
+}
+
+export async function deleteApplicationNote(
+  noteId: string
+): Promise<{ success: boolean; error?: string }> {
+  const supabase = getServiceClient();
+
+  const { error } = await supabase
+    .from("application_notes")
+    .delete()
+    .eq("site_id", getSiteId())
+    .eq("id", noteId);
+
+  if (error) return { success: false, error: error.message };
+  return { success: true };
+}
