@@ -17,7 +17,10 @@ interface Position {
   client_id: string | null;
   end_client_id: string | null;
   description: string | null;
+  bill_rate: string | null;
+  duration_hours: string | null;
   active: boolean;
+  is_hot: boolean;
 }
 
 interface SelectOption {
@@ -73,7 +76,10 @@ export default function EditPositionPage() {
       client_id: form.get("client_id") || null,
       end_client_id: form.get("end_client_id") || null,
       description: form.get("description") || null,
+      bill_rate: form.get("bill_rate") || null,
+      duration_hours: form.get("duration_hours") || null,
       active: form.get("active") === "on",
+      is_hot: form.get("is_hot") === "on",
     };
 
     const res = await fetch(`/api/positions/${params.id}`, {
@@ -207,6 +213,30 @@ export default function EditPositionPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
+              <label className="block text-sm font-medium mb-1">
+                Bill Rate (Customer)
+              </label>
+              <input
+                name="bill_rate"
+                defaultValue={position.bill_rate || ""}
+                placeholder="e.g. $75/hr"
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Duration / Hours
+              </label>
+              <input
+                name="duration_hours"
+                defaultValue={position.duration_hours || ""}
+                placeholder="e.g. 40 hrs/week, 6 months"
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
               <label className="block text-sm font-medium mb-1">Client</label>
               <select
                 name="client_id"
@@ -250,15 +280,29 @@ export default function EditPositionPage() {
               className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
           </div>
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              name="active"
-              defaultChecked={position.active}
-              className="rounded"
-            />
-            Active (visible on careers page)
-          </label>
+          <div className="flex gap-6">
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                name="active"
+                defaultChecked={position.active}
+                className="rounded"
+              />
+              Active (visible on careers page)
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                name="is_hot"
+                defaultChecked={position.is_hot}
+                className="rounded accent-orange-500"
+              />
+              <span className="inline-flex items-center gap-1">
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-orange-100 text-orange-700">HOT</span>
+                Mark as hot (pinned to top of dashboard)
+              </span>
+            </label>
+          </div>
           <div className="flex gap-3 pt-2">
             <button
               type="submit"

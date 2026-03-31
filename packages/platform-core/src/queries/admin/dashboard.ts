@@ -16,7 +16,7 @@ export async function getDashboardMetrics(
   const [positions, applications, contacts] = await Promise.all([
     supabase
       .from("positions")
-      .select("id, title, slug, location, type, work_mode, active", {
+      .select("id, title, slug, location, type, work_mode, active, is_hot, posted_at", {
         count: "exact",
       })
       .eq("site_id", site),
@@ -42,9 +42,14 @@ export async function getDashboardMetrics(
   // Count applications by status
   const statusCounts: Record<ApplicationStatus, number> = {
     new: 0,
-    screening: 0,
-    interview: 0,
-    offer: 0,
+    phone_screen: 0,
+    interview_zoom: 0,
+    interview_in_person: 0,
+    employment_verification: 0,
+    references: 0,
+    clearances: 0,
+    offer_pending: 0,
+    onboarding: 0,
     hired: 0,
     rejected: 0,
     withdrawn: 0,
@@ -75,9 +80,14 @@ export async function getDashboardMetrics(
         count: 0,
         statuses: {
           new: 0,
-          screening: 0,
-          interview: 0,
-          offer: 0,
+          phone_screen: 0,
+          interview_zoom: 0,
+          interview_in_person: 0,
+          employment_verification: 0,
+          references: 0,
+          clearances: 0,
+          offer_pending: 0,
+          onboarding: 0,
           hired: 0,
           rejected: 0,
           withdrawn: 0,
@@ -92,7 +102,7 @@ export async function getDashboardMetrics(
     }
   }
 
-  const hotPositions: DashboardPositionSummary[] = positionData
+  const hotPositionsSorted = positionData
     .map((p) => {
       const appInfo = positionAppMap.get(p.id);
       return {
@@ -103,12 +113,19 @@ export async function getDashboardMetrics(
         type: p.type,
         work_mode: p.work_mode,
         active: p.active,
+        is_hot: p.is_hot ?? false,
+        posted_at: p.posted_at as string | null,
         applicationCount: appInfo?.count || 0,
         statusBreakdown: appInfo?.statuses || {
           new: 0,
-          screening: 0,
-          interview: 0,
-          offer: 0,
+          phone_screen: 0,
+          interview_zoom: 0,
+          interview_in_person: 0,
+          employment_verification: 0,
+          references: 0,
+          clearances: 0,
+          offer_pending: 0,
+          onboarding: 0,
           hired: 0,
           rejected: 0,
           withdrawn: 0,
@@ -116,8 +133,19 @@ export async function getDashboardMetrics(
       };
     })
     .filter((p) => p.active || p.applicationCount > 0)
-    .sort((a, b) => b.applicationCount - a.applicationCount)
+    .sort((a, b) => {
+      // Hot positions first
+      if (a.is_hot !== b.is_hot) return a.is_hot ? -1 : 1;
+      // Then by newest (posted_at descending)
+      const aDate = a.posted_at ? new Date(a.posted_at).getTime() : 0;
+      const bDate = b.posted_at ? new Date(b.posted_at).getTime() : 0;
+      return bDate - aDate;
+    })
     .slice(0, 10);
+
+  const hotPositions: DashboardPositionSummary[] = hotPositionsSorted.map(
+    ({ posted_at: _, ...rest }) => rest
+  );
 
   // Recent applications (latest 10)
   const recentApplications: DashboardRecentApplication[] = [...applicationData]

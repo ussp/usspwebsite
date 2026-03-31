@@ -1,0 +1,573 @@
+"use client";
+
+import { useEffect, useState, useRef } from "react";
+import { useParams, useRouter } from "next/navigation";
+import AdminSidebar from "@/components/AdminSidebar";
+import AdminTopbar from "@/components/AdminTopbar";
+import StatusBadge from "@/components/StatusBadge";
+
+interface Candidate {
+  id: string;
+  email: string;
+  full_name: string;
+  phone: string | null;
+  profile_picture: string | null;
+  candidate_type: string;
+  current_status: string;
+  source: string;
+  tags: string[];
+  summary: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
+
+interface PiiData {
+  id?: string;
+  ssn: string | null;
+  dl_number: string | null;
+  dl_state: string | null;
+  dob: string | null;
+  visa_type: string | null;
+  visa_doc_path: string | null;
+  visa_doc_name: string | null;
+}
+
+interface CandidateApplication {
+  id: string;
+  job_title: string;
+  status: string;
+  created_at: string;
+}
+
+const TYPE_COLORS: Record<string, string> = {
+  internal_employee: "bg-blue-100 text-blue-700",
+  external: "bg-gray-100 text-gray-700",
+  vendor: "bg-purple-100 text-purple-700",
+};
+
+const TYPE_LABELS: Record<string, string> = {
+  internal_employee: "Internal",
+  external: "External",
+  vendor: "Vendor",
+};
+
+const VISA_TYPES = [
+  { value: "H1B", label: "H-1B" },
+  { value: "L1", label: "L-1" },
+  { value: "OPT", label: "OPT" },
+  { value: "CPT", label: "CPT" },
+  { value: "GC", label: "Green Card" },
+  { value: "citizen", label: "US Citizen" },
+  { value: "EAD", label: "EAD" },
+  { value: "other", label: "Other" },
+];
+
+const US_STATES = [
+  "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA",
+  "KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ",
+  "NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT",
+  "VA","WA","WV","WI","WY","DC",
+];
+
+export default function CandidateDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [candidate, setCandidate] = useState<Candidate | null>(null);
+  const [pii, setPii] = useState<PiiData>({
+    ssn: null,
+    dl_number: null,
+    dl_state: null,
+    dob: null,
+    visa_type: null,
+    visa_doc_path: null,
+    visa_doc_name: null,
+  });
+  const [applications, setApplications] = useState<CandidateApplication[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [piiAccessDenied, setPiiAccessDenied] = useState(false);
+  const [showSsn, setShowSsn] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveMessage, setSaveMessage] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  // Form state for editing
+  const [formSsn, setFormSsn] = useState("");
+  const [formDlNumber, setFormDlNumber] = useState("");
+  const [formDlState, setFormDlState] = useState("");
+  const [formDob, setFormDob] = useState("");
+  const [formVisaType, setFormVisaType] = useState("");
+
+  useEffect(() => {
+    const id = params.id;
+
+    Promise.all([
+      fetch(`/api/candidates/${id}`).then((r) => r.json()),
+      fetch(`/api/candidates/${id}/pii`).then((r) => {
+        if (r.status === 403) {
+          setPiiAccessDenied(true);
+          return null;
+        }
+        return r.json();
+      }),
+    ]).then(([candidateData, piiData]) => {
+      if (candidateData && !candidateData.error) {
+        setCandidate(candidateData);
+
+        // Fetch applications for this candidate
+        fetch(`/api/applications?search=${encodeURIComponent(candidateData.email)}`)
+          .then((r) => r.json())
+          .then((apps) => {
+            if (Array.isArray(apps)) setApplications(apps);
+          });
+      }
+      if (piiData) {
+        setPii(piiData);
+        setFormSsn(piiData.ssn || "");
+        setFormDlNumber(piiData.dl_number || "");
+        setFormDlState(piiData.dl_state || "");
+        setFormDob(piiData.dob || "");
+        setFormVisaType(piiData.visa_type || "");
+      }
+      setLoading(false);
+    });
+  }, [params.id]);
+
+  function formatSsn(value: string): string {
+    const digits = value.replace(/\D/g, "").slice(0, 9);
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 5) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+    return `${digits.slice(0, 3)}-${digits.slice(3, 5)}-${digits.slice(5)}`;
+  }
+
+  function maskSsn(ssn: string): string {
+    const digits = ssn.replace(/\D/g, "");
+    if (digits.length < 4) return "***-**-****";
+    return `***-**-${digits.slice(-4)}`;
+  }
+
+  async function handleSavePii() {
+    setSaving(true);
+    setSaveMessage(null);
+    const body: Record<string, string | null> = {};
+
+    const ssnDigits = formSsn.replace(/\D/g, "");
+    if (ssnDigits !== (pii.ssn || "")) body.ssn = ssnDigits || null;
+    if (formDlNumber !== (pii.dl_number || "")) body.dl_number = formDlNumber || null;
+    if (formDlState !== (pii.dl_state || "")) body.dl_state = formDlState || null;
+    if (formDob !== (pii.dob || "")) body.dob = formDob || null;
+    if (formVisaType !== (pii.visa_type || "")) body.visa_type = formVisaType || null;
+
+    if (Object.keys(body).length === 0) {
+      setSaving(false);
+      setSaveMessage("No changes to save");
+      setTimeout(() => setSaveMessage(null), 3000);
+      return;
+    }
+
+    const res = await fetch(`/api/candidates/${params.id}/pii`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (res.ok) {
+      // Refresh PII data
+      const updated = await fetch(`/api/candidates/${params.id}/pii`).then((r) =>
+        r.json()
+      );
+      setPii(updated);
+      setFormSsn(updated.ssn || "");
+      setFormDlNumber(updated.dl_number || "");
+      setFormDlState(updated.dl_state || "");
+      setFormDob(updated.dob || "");
+      setFormVisaType(updated.visa_type || "");
+      setSaveMessage("Saved successfully");
+    } else {
+      const err = await res.json();
+      setSaveMessage(`Error: ${err.error || "Failed to save"}`);
+    }
+    setSaving(false);
+    setTimeout(() => setSaveMessage(null), 3000);
+  }
+
+  async function handleVisaUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      // Get signed upload URL
+      const urlRes = await fetch(`/api/candidates/${params.id}/pii/upload`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileName: file.name,
+          fileType: file.type,
+          fileSize: file.size,
+        }),
+      });
+
+      if (!urlRes.ok) {
+        const err = await urlRes.json();
+        alert(err.error || "Failed to get upload URL");
+        setUploading(false);
+        return;
+      }
+
+      const { signedUrl, token, path } = await urlRes.json();
+
+      // Upload file to Supabase Storage
+      const uploadRes = await fetch(signedUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": file.type,
+          "x-upsert": "true",
+        },
+        body: file,
+      });
+
+      if (!uploadRes.ok) {
+        alert("Failed to upload file");
+        setUploading(false);
+        return;
+      }
+
+      // Save the file path to PII record
+      const saveRes = await fetch(`/api/candidates/${params.id}/pii`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          visa_doc_path: path,
+          visa_doc_name: file.name,
+        }),
+      });
+
+      if (saveRes.ok) {
+        setPii((prev) => ({ ...prev, visa_doc_path: path, visa_doc_name: file.name }));
+        setSaveMessage("Visa document uploaded");
+        setTimeout(() => setSaveMessage(null), 3000);
+      }
+    } catch {
+      alert("Upload failed");
+    }
+    setUploading(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }
+
+  if (loading) {
+    return (
+      <>
+        <AdminSidebar />
+        <AdminTopbar />
+        <main className="ml-60 mt-14 p-6">
+          <p className="text-dark/50">Loading...</p>
+        </main>
+      </>
+    );
+  }
+
+  if (!candidate) {
+    return (
+      <>
+        <AdminSidebar />
+        <AdminTopbar />
+        <main className="ml-60 mt-14 p-6">
+          <p className="text-red-600">Candidate not found</p>
+        </main>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <AdminSidebar />
+      <AdminTopbar />
+      <main className="ml-60 mt-14 p-6">
+        <button
+          onClick={() => router.back()}
+          className="text-sm text-dark/50 hover:text-dark mb-4 inline-block"
+        >
+          &larr; Back
+        </button>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Profile Card */}
+            <div className="bg-white rounded-lg border border-light-gray p-6">
+              <div className="flex items-start gap-4">
+                {candidate.profile_picture ? (
+                  <img
+                    src={candidate.profile_picture}
+                    alt=""
+                    className="w-16 h-16 rounded-full"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold">
+                    {candidate.full_name.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <div className="flex-1">
+                  <h2 className="text-xl font-bold">{candidate.full_name}</h2>
+                  <p className="text-dark/60">{candidate.email}</p>
+                  {candidate.phone && (
+                    <p className="text-dark/60 text-sm">{candidate.phone}</p>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`inline-block px-2.5 py-1 rounded-full text-xs ${
+                      TYPE_COLORS[candidate.candidate_type] || "bg-gray-100 text-gray-700"
+                    }`}
+                  >
+                    {TYPE_LABELS[candidate.candidate_type] || candidate.candidate_type}
+                  </span>
+                  <StatusBadge status={candidate.current_status} />
+                </div>
+              </div>
+              {candidate.summary && (
+                <p className="mt-3 text-sm text-dark/70">{candidate.summary}</p>
+              )}
+            </div>
+
+            {/* PII Documents Card */}
+            <div className="bg-white rounded-lg border border-light-gray p-6">
+              <div className="flex items-center gap-2 mb-5">
+                <svg className="w-5 h-5 text-dark/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <h3 className="font-semibold">Identity Documents</h3>
+                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                  Encrypted
+                </span>
+              </div>
+
+              {piiAccessDenied ? (
+                <div className="text-center py-8">
+                  <svg className="w-12 h-12 text-dark/20 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  <p className="text-sm text-dark/40">Access restricted — insufficient permissions</p>
+                </div>
+              ) : (
+                <div className="space-y-5">
+                  {/* SSN */}
+                  <div>
+                    <label className="block text-sm font-medium text-dark/70 mb-1">
+                      Social Security Number (SSN)
+                    </label>
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <input
+                          type={showSsn ? "text" : "password"}
+                          value={showSsn ? formatSsn(formSsn) : formSsn ? maskSsn(formSsn) : ""}
+                          onChange={(e) => {
+                            if (showSsn) {
+                              setFormSsn(e.target.value.replace(/\D/g, "").slice(0, 9));
+                            }
+                          }}
+                          readOnly={!showSsn}
+                          placeholder="Enter SSN"
+                          className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 font-mono"
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowSsn(!showSsn)}
+                        className="px-3 py-2 text-sm border border-light-gray rounded-lg hover:bg-light-gray transition-colors"
+                      >
+                        {showSsn ? "Hide" : "Show"}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Driver's License */}
+                  <div>
+                    <label className="block text-sm font-medium text-dark/70 mb-1">
+                      Driver&apos;s License
+                    </label>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="col-span-2">
+                        <input
+                          type="text"
+                          value={formDlNumber}
+                          onChange={(e) => setFormDlNumber(e.target.value)}
+                          placeholder="License number"
+                          className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        />
+                      </div>
+                      <select
+                        value={formDlState}
+                        onChange={(e) => setFormDlState(e.target.value)}
+                        className="px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      >
+                        <option value="">State</option>
+                        {US_STATES.map((st) => (
+                          <option key={st} value={st}>{st}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Date of Birth */}
+                  <div>
+                    <label className="block text-sm font-medium text-dark/70 mb-1">
+                      Date of Birth
+                    </label>
+                    <input
+                      type="date"
+                      value={formDob}
+                      onChange={(e) => setFormDob(e.target.value)}
+                      className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+
+                  {/* Visa / Work Authorization */}
+                  <div>
+                    <label className="block text-sm font-medium text-dark/70 mb-1">
+                      Visa / Work Authorization
+                    </label>
+                    <select
+                      value={formVisaType}
+                      onChange={(e) => setFormVisaType(e.target.value)}
+                      className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 mb-2"
+                    >
+                      <option value="">Select type...</option>
+                      {VISA_TYPES.map((v) => (
+                        <option key={v.value} value={v.value}>{v.label}</option>
+                      ))}
+                    </select>
+
+                    {/* Visa Document Upload */}
+                    <div className="mt-2">
+                      {pii.visa_doc_name ? (
+                        <div className="flex items-center gap-3 p-3 bg-light-gray/50 rounded-lg">
+                          <svg className="w-6 h-6 text-primary/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          <span className="text-sm flex-1">{pii.visa_doc_name}</span>
+                          <button
+                            type="button"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="text-xs text-primary hover:underline"
+                          >
+                            Replace
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          disabled={uploading}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-light-gray rounded-lg text-sm text-dark/50 hover:border-primary/50 hover:text-primary transition-colors"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                          </svg>
+                          {uploading ? "Uploading..." : "Upload visa document (PDF, PNG, JPG)"}
+                        </button>
+                      )}
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept=".pdf,.png,.jpg,.jpeg"
+                        onChange={handleVisaUpload}
+                        className="hidden"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Save Button */}
+                  <div className="flex items-center gap-3 pt-2">
+                    <button
+                      onClick={handleSavePii}
+                      disabled={saving}
+                      className="px-5 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50"
+                    >
+                      {saving ? "Saving..." : "Save"}
+                    </button>
+                    {saveMessage && (
+                      <span className={`text-sm ${saveMessage.startsWith("Error") ? "text-red-600" : "text-green-600"}`}>
+                        {saveMessage}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-4">
+            {/* Quick Info */}
+            <div className="bg-white rounded-lg border border-light-gray p-5">
+              <h3 className="font-semibold mb-3">Quick Info</h3>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-dark/50">Type</span>
+                  <span className="capitalize">
+                    {TYPE_LABELS[candidate.candidate_type] || candidate.candidate_type}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-dark/50">Status</span>
+                  <span className="capitalize">{candidate.current_status.replace(/_/g, " ")}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-dark/50">Source</span>
+                  <span className="capitalize">{candidate.source}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-dark/50">Added</span>
+                  <span>{new Date(candidate.created_at).toLocaleDateString()}</span>
+                </div>
+                {candidate.tags.length > 0 && (
+                  <div>
+                    <span className="text-dark/50 block mb-1">Tags</span>
+                    <div className="flex flex-wrap gap-1">
+                      {candidate.tags.map((tag) => (
+                        <span key={tag} className="text-xs bg-light-gray px-2 py-0.5 rounded-full">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Applications */}
+            <div className="bg-white rounded-lg border border-light-gray p-5">
+              <h3 className="font-semibold mb-3">
+                Applications ({applications.length})
+              </h3>
+              {applications.length > 0 ? (
+                <div className="space-y-2">
+                  {applications.map((app) => (
+                    <div
+                      key={app.id}
+                      onClick={() => router.push(`/applications/${app.id}`)}
+                      className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-light-gray transition-colors"
+                    >
+                      <div>
+                        <p className="text-sm font-medium">{app.job_title}</p>
+                        <p className="text-xs text-dark/50">
+                          {new Date(app.created_at).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <StatusBadge status={app.status || "new"} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-dark/40">No applications</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}

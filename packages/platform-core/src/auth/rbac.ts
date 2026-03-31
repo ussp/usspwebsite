@@ -5,6 +5,8 @@ const ROLE_PERMISSIONS: Record<StaffRole, string[]> = {
   recruiter: [
     "positions.*",
     "applications.*",
+    "candidates.*",
+    "document_requests.*",
     "clients.*",
     "end_clients.*",
     "contacts.read",
@@ -18,6 +20,7 @@ const ROLE_PERMISSIONS: Record<StaffRole, string[]> = {
   ],
   hr_manager: [
     "applications.*",
+    "document_requests.*",
     "staff.read",
     "dashboard.read",
   ],

@@ -169,6 +169,9 @@ class Position(Base):
     client_id = Column(UUID(as_uuid=True), ForeignKey("clients.id"))
     end_client_id = Column(UUID(as_uuid=True), ForeignKey("end_clients.id"))
     active = Column(Boolean, default=True, nullable=False)
+    is_hot = Column(Boolean, default=False, nullable=False, server_default="false")
+    bill_rate = Column(String(100))
+    duration_hours = Column(String(100))
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now())
     posted_at = Column(DateTime(timezone=True))
@@ -231,7 +234,7 @@ class Application(Base):
     availability_date = Column(DateTime(timezone=True))
 
     # Back-office management fields
-    status = Column(String(50), server_default="new")  # new, screening, interview, offer, hired, rejected, withdrawn
+    status = Column(String(50), server_default="new")  # new, phone_screen, interview_zoom, interview_in_person, employment_verification, references, clearances, offer_pending, onboarding, hired, rejected, withdrawn
     status_updated_at = Column(DateTime(timezone=True))
     assigned_to = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
     candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"))
@@ -703,4 +706,119 @@ class MatchScanJob(Base):
 
     __table_args__ = (
         Index("idx_match_scan_jobs_site_position_status", "site_id", "position_id", "status"),
+    )
+
+
+# =============================================================================
+# CANDIDATE_PII TABLE (encrypted PII document storage)
+# =============================================================================
+
+
+class CandidatePii(Base):
+    """
+    Encrypted PII document storage per candidate.
+
+    Stores sensitive identity documents (SSN, DL, DOB, visa docs)
+    with application-level AES-256-GCM encryption.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "candidate_pii"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    ssn_encrypted = Column(Text)  # AES-256-GCM encrypted SSN
+    dl_number_encrypted = Column(Text)  # AES-256-GCM encrypted driver's license number
+    dl_state = Column(String(2))  # US state code (not PII alone)
+    dob_encrypted = Column(Text)  # AES-256-GCM encrypted date of birth
+    visa_type = Column(String(20))  # H1B | L1 | OPT | CPT | GC | citizen | EAD | other
+    visa_doc_path = Column(Text)  # Supabase Storage path (bucket: candidate-documents)
+    visa_doc_name = Column(String(255))  # Original filename
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "candidate_id", name="uq_candidate_pii_site_candidate"),
+        Index("idx_candidate_pii_site_candidate", "site_id", "candidate_id"),
+    )
+
+
+# =============================================================================
+# DOCUMENT_REQUESTS TABLE (recruiter-to-candidate document requests)
+# =============================================================================
+
+
+class DocumentRequest(Base):
+    """
+    Document requests created by recruiters for candidates to fulfill.
+
+    Part of the compliance workflow: recruiter requests documents (SSN, DL, visa, references, etc.)
+    and candidate fulfills them via the self-service portal.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "document_requests"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    application_id = Column(UUID(as_uuid=True), ForeignKey("applications.id"), nullable=False)
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    request_type = Column(String(30), nullable=False)  # ssn | drivers_license | dob | visa_document | references | background_check_consent | other
+    status = Column(String(20), nullable=False, server_default="pending")  # pending | submitted | approved | rejected
+    description = Column(Text)  # Custom note from recruiter
+    due_date = Column(DateTime(timezone=True))
+    min_references = Column(Integer)  # Only for references type (e.g. 2 or 3)
+
+    # Candidate submission
+    submitted_at = Column(DateTime(timezone=True))
+    submitted_path = Column(Text)  # Supabase Storage path for uploaded file
+    submitted_file_name = Column(String(255))
+    submitted_text_encrypted = Column(Text)  # AES-256-GCM encrypted (SSN/DOB/DL text)
+    submitted_dl_state = Column(String(2))  # DL state code
+
+    # Recruiter review
+    reviewer_notes = Column(Text)
+    reviewed_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    reviewed_at = Column(DateTime(timezone=True))
+
+    created_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_document_requests_site_application", "site_id", "application_id"),
+        Index("idx_document_requests_site_candidate_status", "site_id", "candidate_id", "status"),
+    )
+
+
+# =============================================================================
+# CANDIDATE_REFERENCES TABLE (reference contacts submitted by candidates)
+# =============================================================================
+
+
+class CandidateReference(Base):
+    """
+    Reference contacts submitted by candidates in response to a document request.
+
+    Linked to a document_request of type 'references'.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "candidate_references"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    document_request_id = Column(UUID(as_uuid=True), ForeignKey("document_requests.id"), nullable=False)
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    ref_name = Column(String(255), nullable=False)
+    ref_title = Column(String(255))
+    ref_company = Column(String(255))
+    ref_phone = Column(String(30))
+    ref_email = Column(String(255))
+    relationship = Column(String(100))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_candidate_references_site_request", "site_id", "document_request_id"),
     )

@@ -9,12 +9,32 @@ import type { ApplicationStatus } from "@ussp-platform/core/types/admin";
 
 const STATUS_COLORS: Record<ApplicationStatus, string> = {
   new: "bg-blue-100 text-blue-800",
-  screening: "bg-purple-100 text-purple-800",
-  interview: "bg-yellow-100 text-yellow-800",
-  offer: "bg-green-100 text-green-800",
+  phone_screen: "bg-purple-100 text-purple-800",
+  interview_zoom: "bg-indigo-100 text-indigo-800",
+  interview_in_person: "bg-violet-100 text-violet-800",
+  employment_verification: "bg-cyan-100 text-cyan-800",
+  references: "bg-teal-100 text-teal-800",
+  clearances: "bg-sky-100 text-sky-800",
+  offer_pending: "bg-amber-100 text-amber-800",
+  onboarding: "bg-lime-100 text-lime-800",
   hired: "bg-emerald-100 text-emerald-800",
   rejected: "bg-red-100 text-red-800",
   withdrawn: "bg-gray-100 text-gray-600",
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  new: "New",
+  phone_screen: "Phone Screen",
+  interview_zoom: "Zoom Interview",
+  interview_in_person: "In-Person",
+  employment_verification: "Verification",
+  references: "References",
+  clearances: "Clearances",
+  offer_pending: "Offer Pending",
+  onboarding: "Onboarding",
+  hired: "Hired",
+  rejected: "Rejected",
+  withdrawn: "Withdrawn",
 };
 
 function StatusBadge({ status }: { status: ApplicationStatus }) {
@@ -68,9 +88,18 @@ export default async function DashboardPage() {
             subtext={`Last 7 days of ${metrics.totalContacts}`}
           />
           <MetricCard
-            label="In Interview"
-            value={metrics.applicationsByStatus.interview}
-            subtext={`${metrics.applicationsByStatus.offer} with offers`}
+            label="In Progress"
+            value={
+              metrics.applicationsByStatus.phone_screen +
+              metrics.applicationsByStatus.interview_zoom +
+              metrics.applicationsByStatus.interview_in_person +
+              metrics.applicationsByStatus.employment_verification +
+              metrics.applicationsByStatus.references +
+              metrics.applicationsByStatus.clearances +
+              metrics.applicationsByStatus.offer_pending +
+              metrics.applicationsByStatus.onboarding
+            }
+            subtext={`${metrics.applicationsByStatus.offer_pending} with offers`}
           />
         </div>
 
@@ -99,6 +128,11 @@ export default async function DashboardPage() {
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0 flex-1">
                         <p className="font-medium text-sm truncate">
+                          {pos.is_hot && (
+                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-semibold bg-orange-100 text-orange-700 mr-1.5" title="Hot Position">
+                              HOT
+                            </span>
+                          )}
                           {pos.title}
                         </p>
                         <p className="text-xs text-dark/50 mt-0.5">
@@ -201,8 +235,8 @@ export default async function DashboardPage() {
               {Object.entries(metrics.applicationsByStatus).map(
                 ([status, count]) => (
                   <div key={status} className="flex items-center gap-3">
-                    <span className="text-sm capitalize w-24 text-dark/70">
-                      {status}
+                    <span className="text-sm w-28 text-dark/70 truncate" title={STATUS_LABELS[status] || status}>
+                      {STATUS_LABELS[status] || status}
                     </span>
                     <div className="flex-1 bg-light-gray rounded-full h-2">
                       <div

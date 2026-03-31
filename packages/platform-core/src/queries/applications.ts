@@ -1,5 +1,6 @@
 import { getServiceClient } from "../supabase/server.js";
 import { getSiteId } from "../config.js";
+import { findOrCreateCandidate } from "./admin/candidates.js";
 
 export interface CreateApplicationInput {
   fullName: string;
@@ -101,6 +102,25 @@ export async function createOrUpdateApplication(input: CreateApplicationInput): 
       return { success: false, error: "Failed to save application" };
     }
     applicationId = newApp.id;
+  }
+
+  // Find or create candidate record and link to application
+  try {
+    const { candidate } = await findOrCreateCandidate({
+      email: input.email,
+      full_name: input.fullName,
+      phone: input.phone,
+      linkedin_sub: input.linkedinSub || undefined,
+      profile_picture: input.profilePicture || undefined,
+    });
+    if (candidate) {
+      await supabase
+        .from("applications")
+        .update({ candidate_id: candidate.id })
+        .eq("id", applicationId);
+    }
+  } catch {
+    // Non-fatal: candidate linking is best-effort
   }
 
   // Insert into junction table

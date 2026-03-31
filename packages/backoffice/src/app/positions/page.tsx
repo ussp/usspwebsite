@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { getAllPositions } from "@ussp-platform/core/queries/admin/positions";
+import { getAllPositionsWithCounts } from "@ussp-platform/core/queries/admin/positions";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import { PositionsTable } from "./positions-table";
@@ -9,7 +9,7 @@ import { PositionsTable } from "./positions-table";
 export const metadata = { title: "Positions" };
 
 export default async function PositionsPage() {
-  const positions = await getAllPositions();
+  const positions = await getAllPositionsWithCounts();
 
   return (
     <>

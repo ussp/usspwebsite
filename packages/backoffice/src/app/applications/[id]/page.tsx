@@ -5,6 +5,11 @@ import { useParams, useRouter } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import StatusBadge from "@/components/StatusBadge";
+import PipelineAccordion from "@/components/PipelineAccordion";
+import MatchingQualifications from "@/components/MatchingQualifications";
+import DocumentRequestsPanel from "@/components/DocumentRequestsPanel";
+import type { ApplicationStatus } from "@ussp-platform/core/types/admin";
+import { PIPELINE_STAGES } from "@ussp-platform/core/types/admin";
 
 interface Application {
   id: string;
@@ -16,7 +21,7 @@ interface Application {
   resume_path: string | null;
   resume_name: string | null;
   profile_picture: string | null;
-  status: string;
+  status: ApplicationStatus;
   created_at: string;
   auth_provider: string;
   linkedin_sub: string | null;
@@ -24,6 +29,7 @@ interface Application {
   expected_bill_rate: string | null;
   availability_date: string | null;
   position_id: string | null;
+  candidate_id: string | null;
 }
 
 interface Note {
@@ -42,15 +48,11 @@ interface OtherApplication {
   resume_name: string | null;
 }
 
-const STATUSES = [
-  "new",
-  "screening",
-  "interview",
-  "offer",
-  "hired",
-  "rejected",
-  "withdrawn",
-];
+interface StatusHistoryEntry {
+  status: string;
+  changed_at: string;
+  changed_by_name: string | null;
+}
 
 export default function ApplicationDetailPage() {
   const params = useParams();
@@ -58,6 +60,7 @@ export default function ApplicationDetailPage() {
   const [app, setApp] = useState<Application | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
   const [otherApps, setOtherApps] = useState<OtherApplication[]>([]);
+  const [statusHistory, setStatusHistory] = useState<StatusHistoryEntry[]>([]);
   const [newNote, setNewNote] = useState("");
   const [loading, setLoading] = useState(true);
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
@@ -67,9 +70,11 @@ export default function ApplicationDetailPage() {
     Promise.all([
       fetch(`/api/applications/${params.id}`).then((r) => r.json()),
       fetch(`/api/applications/${params.id}/notes`).then((r) => r.json()),
-    ]).then(([appData, notesData]) => {
+      fetch(`/api/applications/${params.id}/history`).then((r) => r.json()),
+    ]).then(([appData, notesData, historyData]) => {
       setApp(appData);
       setNotes(notesData);
+      setStatusHistory(Array.isArray(historyData) ? historyData : []);
       setLoading(false);
 
       // Fetch other applications by the same person
@@ -89,13 +94,29 @@ export default function ApplicationDetailPage() {
     });
   }, [params.id]);
 
-  async function handleStatusChange(status: string) {
+  async function handleStatusChange(status: ApplicationStatus) {
     await fetch(`/api/applications/${params.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
     });
     setApp((prev) => (prev ? { ...prev, status } : prev));
+    // Refresh history
+    const historyRes = await fetch(`/api/applications/${params.id}/history`);
+    const historyData = await historyRes.json();
+    setStatusHistory(Array.isArray(historyData) ? historyData : []);
+  }
+
+  async function handleAdvance() {
+    if (!app) return;
+    const currentIndex = PIPELINE_STAGES.indexOf(app.status);
+    if (currentIndex < 0 || currentIndex >= PIPELINE_STAGES.length - 1) return;
+    const nextStatus = PIPELINE_STAGES[currentIndex + 1];
+    await handleStatusChange(nextStatus);
+  }
+
+  async function handleDeactivate() {
+    await handleStatusChange("rejected");
   }
 
   async function handleAddNote() {
@@ -290,6 +311,12 @@ export default function ApplicationDetailPage() {
               )}
             </div>
 
+            {/* Document Requests */}
+            <DocumentRequestsPanel
+              applicationId={app.id}
+              candidateId={app.candidate_id}
+            />
+
             {/* Other Applications by Same Person */}
             {otherApps.length > 0 && (
               <div className="bg-white rounded-lg border border-light-gray p-6">
@@ -408,25 +435,18 @@ export default function ApplicationDetailPage() {
 
           {/* Sidebar */}
           <div className="space-y-4">
-            {/* Status */}
-            <div className="bg-white rounded-lg border border-light-gray p-5">
-              <h3 className="font-semibold mb-3">Update Status</h3>
-              <div className="space-y-2">
-                {STATUSES.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => handleStatusChange(s)}
-                    className={`block w-full text-left px-3 py-2 text-sm rounded-lg capitalize transition-colors ${
-                      app.status === s
-                        ? "bg-primary/10 text-primary font-medium"
-                        : "hover:bg-light-gray"
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </div>
+            {/* Pipeline Accordion */}
+            <PipelineAccordion
+              currentStatus={app.status}
+              statusHistory={statusHistory}
+              onAdvance={handleAdvance}
+              onDeactivate={handleDeactivate}
+              onManualSet={handleStatusChange}
+              isDuplicate={otherApps.length > 0}
+            />
+
+            {/* Matching Qualifications */}
+            <MatchingQualifications positionId={app.position_id} />
 
             {/* Quick Info */}
             <div className="bg-white rounded-lg border border-light-gray p-5">

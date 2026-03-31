@@ -1,42 +1,84 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import DataTable from "@/components/DataTable";
-import type { AdminPosition } from "@ussp-platform/core/types/admin";
+import type { PositionListItem } from "@ussp-platform/core/types/admin";
 
 export function PositionsTable({
   positions,
 }: {
-  positions: AdminPosition[];
+  positions: PositionListItem[];
 }) {
   const router = useRouter();
 
   const columns = [
-    { key: "title", label: "Title", sortable: true },
+    {
+      key: "title",
+      label: "Title",
+      sortable: true,
+      render: (row: PositionListItem) => (
+        <div>
+          <span>
+            {row.is_hot && (
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-orange-100 text-orange-700 mr-1.5">
+                HOT
+              </span>
+            )}
+            {row.title}
+          </span>
+          {row.active && (
+            <span className="ml-2 text-[10px] font-medium text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+              ACTIVE
+            </span>
+          )}
+          {row.new_applicant_count > 0 && (
+            <div className="mt-1">
+              <Link
+                href={`/positions/${row.id}`}
+                className="text-xs text-primary hover:underline"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Review new applicants &rarr;
+              </Link>
+            </div>
+          )}
+        </div>
+      ),
+    },
     { key: "location", label: "Location", sortable: true },
     { key: "type", label: "Type", sortable: true },
     {
       key: "work_mode",
       label: "Work Mode",
       sortable: true,
-      render: (row: AdminPosition) => row.work_mode || "-",
+      render: (row: PositionListItem) => row.work_mode || "-",
+    },
+    {
+      key: "applicant_count",
+      label: "Applicants",
+      sortable: true,
+      render: (row: PositionListItem) => (
+        <div className="flex items-center gap-2">
+          <span className="font-semibold">{row.applicant_count}</span>
+          {row.new_applicant_count > 0 && (
+            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-700">
+              {row.new_applicant_count} new
+            </span>
+          )}
+        </div>
+      ),
     },
     {
       key: "client_name",
       label: "Client",
       sortable: true,
-      render: (row: AdminPosition) => row.client_name || "-",
-    },
-    {
-      key: "end_client_name",
-      label: "End Client",
-      sortable: true,
-      render: (row: AdminPosition) => row.end_client_name || "-",
+      render: (row: PositionListItem) => row.client_name || "-",
     },
     {
       key: "active",
       label: "Status",
-      render: (row: AdminPosition) => (
+      render: (row: PositionListItem) => (
         <span
           className={`inline-block px-2.5 py-1 rounded-full text-xs ${
             row.active
@@ -52,7 +94,7 @@ export function PositionsTable({
       key: "created_at",
       label: "Created",
       sortable: true,
-      render: (row: AdminPosition) =>
+      render: (row: PositionListItem) =>
         new Date(row.created_at).toLocaleDateString(),
     },
   ];

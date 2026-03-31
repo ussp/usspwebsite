@@ -4,17 +4,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import DataTable from "@/components/DataTable";
 import StatusBadge from "@/components/StatusBadge";
 import type { AdminApplication } from "@ussp-platform/core/types/admin";
+import {
+  PIPELINE_STAGES,
+  TERMINAL_STATUSES,
+  STAGE_LABELS,
+} from "@ussp-platform/core/types/admin";
 
-const STATUSES = [
-  "all",
-  "new",
-  "screening",
-  "interview",
-  "offer",
-  "hired",
-  "rejected",
-  "withdrawn",
-];
+const STATUSES = ["all", ...PIPELINE_STAGES, ...TERMINAL_STATUSES];
 
 export function ApplicationsTable({
   applications,
@@ -62,13 +58,13 @@ export function ApplicationsTable({
           <button
             key={s}
             onClick={() => setFilter(s)}
-            className={`px-3 py-1.5 text-xs rounded-full capitalize transition-colors ${
+            className={`px-3 py-1.5 text-xs rounded-full transition-colors ${
               currentStatus === s
                 ? "bg-primary text-white"
                 : "bg-white border border-light-gray text-dark/60 hover:bg-light-gray"
             }`}
           >
-            {s}
+            {s === "all" ? "All" : (STAGE_LABELS[s as keyof typeof STAGE_LABELS] || s)}
           </button>
         ))}
       </div>

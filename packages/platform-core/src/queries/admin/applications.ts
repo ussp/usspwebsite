@@ -5,10 +5,11 @@ import type {
   ApplicationFilters,
   ApplicationNote,
   ApplicationStatus,
+  StatusHistoryEntry,
 } from "../../types/admin.js";
 
 const APPLICATION_COLUMNS =
-  "id, site_id, position_id, full_name, email, job_title, job_slug, resume_path, resume_name, auth_provider, created_at, linkedin_sub, given_name, family_name, profile_picture, locale, email_verified, phone, sms_consent, sms_consent_timestamp, job_alerts_opt_in, job_alerts_timestamp, status, status_updated_at, assigned_to";
+  "id, site_id, position_id, full_name, email, job_title, job_slug, resume_path, resume_name, auth_provider, created_at, linkedin_sub, given_name, family_name, profile_picture, locale, email_verified, phone, sms_consent, sms_consent_timestamp, job_alerts_opt_in, job_alerts_timestamp, status, status_updated_at, assigned_to, candidate_id, applicant_type, expected_bill_rate, availability_date";
 
 export async function getApplications(
   filters: ApplicationFilters = {}
@@ -191,4 +192,30 @@ export async function deleteApplicationNote(
 
   if (error) return { success: false, error: error.message };
   return { success: true };
+}
+
+export async function getApplicationStatusHistory(
+  applicationId: string
+): Promise<StatusHistoryEntry[]> {
+  const supabase = getServiceClient();
+  const { data, error } = await supabase
+    .from("audit_log")
+    .select("details, created_at, staff_users(full_name)")
+    .eq("site_id", getSiteId())
+    .eq("entity_type", "application")
+    .eq("entity_id", applicationId)
+    .eq("action", "update_status")
+    .order("created_at", { ascending: true });
+
+  if (error || !data) return [];
+
+  return data.map((entry: Record<string, unknown>) => {
+    const details = entry.details as Record<string, unknown>;
+    const staffUser = entry.staff_users as { full_name: string } | null;
+    return {
+      status: (details?.new_status as string) || "unknown",
+      changed_at: entry.created_at as string,
+      changed_by_name: staffUser?.full_name || null,
+    };
+  });
 }

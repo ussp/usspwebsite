@@ -159,6 +159,16 @@
       "types": "./dist/queries/admin/resumes.d.ts",
       "import": "./dist/queries/admin/resumes.js",
       "default": "./dist/queries/admin/resumes.js"
+    },
+    "./queries/admin/candidate-pii": {
+      "types": "./dist/queries/admin/candidate-pii.d.ts",
+      "import": "./dist/queries/admin/candidate-pii.js",
+      "default": "./dist/queries/admin/candidate-pii.js"
+    },
+    "./crypto/pii": {
+      "types": "./dist/crypto/pii.d.ts",
+      "import": "./dist/crypto/pii.js",
+      "default": "./dist/crypto/pii.js"
     }
   },
   "scripts": {

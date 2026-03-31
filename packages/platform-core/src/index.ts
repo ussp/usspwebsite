@@ -57,4 +57,10 @@ export type {
   CreateEndClientInput,
   UpdateEndClientInput,
   EndClientFilters,
+  CandidatePii,
+  UpsertCandidatePiiInput,
+  VisaType,
+  StatusHistoryEntry,
+  PositionStats,
+  PositionListItem,
 } from "./types/admin.js";
