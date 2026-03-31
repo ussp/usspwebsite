@@ -2,7 +2,7 @@
 
 import { SessionProvider } from "next-auth/react";
 
-export default function ApplyLayout({
+export default function CareersLayout({
   children,
 }: {
   children: React.ReactNode;

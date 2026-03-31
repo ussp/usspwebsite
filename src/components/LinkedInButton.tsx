@@ -32,7 +32,7 @@ export default function LinkedInButton() {
 
   return (
     <button
-      onClick={() => signIn("linkedin")}
+      onClick={() => signIn("linkedin", { callbackUrl: window.location.href })}
       className="flex items-center gap-3 w-full px-4 py-3 bg-[#0A66C2] hover:bg-[#004182] text-white rounded-md transition-colors font-[family-name:var(--font-alata)] text-sm"
     >
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

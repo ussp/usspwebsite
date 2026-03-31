@@ -12,6 +12,16 @@ import type {
   ApplicationStatus,
 } from "@ussp-platform/core/types/admin";
 
+function getPriorityBadge(appCount: number) {
+  if (appCount >= 5)
+    return { label: "Hot", className: "bg-red-100 text-red-700 border border-red-200", icon: "\uD83D\uDD25" };
+  if (appCount >= 3)
+    return { label: "High Interest", className: "bg-orange-100 text-orange-700 border border-orange-200", icon: "\u26A1" };
+  if (appCount >= 1)
+    return { label: "Active", className: "bg-blue-100 text-blue-700 border border-blue-200", icon: "\uD83D\uDCCB" };
+  return null;
+}
+
 const STATUSES: Array<"all" | ApplicationStatus> = [
   "all",
   "new",
@@ -129,7 +139,17 @@ export default function PositionDetailPage() {
             >
               &larr; Back to Positions
             </button>
-            <h2 className="text-xl font-bold">{position.title}</h2>
+            <div className="flex items-center gap-3">
+              <h2 className="text-xl font-bold">{position.title}</h2>
+              {(() => {
+                const badge = getPriorityBadge(applications.length);
+                return badge ? (
+                  <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${badge.className}`}>
+                    {badge.icon} {badge.label}
+                  </span>
+                ) : null;
+              })()}
+            </div>
             <div className="flex items-center gap-3 mt-1 text-sm text-dark/60">
               <span>{position.location}</span>
               <span>&middot;</span>
@@ -169,6 +189,16 @@ export default function PositionDetailPage() {
             Edit Position
           </button>
         </div>
+
+        {/* Job Description */}
+        {position.description && (
+          <div className="bg-white rounded-lg border border-light-gray p-6 mb-6">
+            <h3 className="text-lg font-bold mb-3">Job Description</h3>
+            <div className="text-sm text-dark/70 whitespace-pre-wrap leading-relaxed">
+              {position.description}
+            </div>
+          </div>
+        )}
 
         {/* Applicants Section */}
         <div className="bg-white rounded-lg border border-light-gray p-6">

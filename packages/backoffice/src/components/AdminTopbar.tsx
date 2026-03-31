@@ -13,8 +13,8 @@ export default function AdminTopbar() {
           <>
             <div className="text-right">
               <p className="text-sm font-medium">{session.user.name}</p>
-              <p className="text-xs text-dark/50">
-                {(session.user as Record<string, unknown>).role as string || "staff"}
+              <p className="text-xs text-dark/50 capitalize">
+                {(session.user as Record<string, unknown>).role as string || "viewer"}
               </p>
             </div>
             {session.user.image && (

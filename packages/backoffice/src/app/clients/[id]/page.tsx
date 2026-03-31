@@ -31,6 +31,9 @@ export default function EditClientPage() {
   const [loading, setLoading] = useState(true);
   const [addingContact, setAddingContact] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [editingContactId, setEditingContactId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState<Partial<Contact>>({});
+  const [savingContact, setSavingContact] = useState(false);
 
   useEffect(() => {
     Promise.all([
@@ -100,6 +103,40 @@ export default function EditClientPage() {
       setShowContactForm(false);
     }
     setAddingContact(false);
+  }
+
+  function startEditing(contact: Contact) {
+    setEditingContactId(contact.id);
+    setEditForm({
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+      title: contact.title,
+    });
+  }
+
+  async function handleSaveContact(contactId: string) {
+    setSavingContact(true);
+    const res = await fetch(
+      `/api/clients/${params.id}/contacts/${contactId}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: editForm.name,
+          email: editForm.email || null,
+          phone: editForm.phone || null,
+          title: editForm.title || null,
+        }),
+      }
+    );
+
+    if (res.ok) {
+      const updated = await res.json();
+      setContacts(contacts.map((c) => (c.id === contactId ? updated : c)));
+      setEditingContactId(null);
+    }
+    setSavingContact(false);
   }
 
   if (loading) {
@@ -278,42 +315,111 @@ export default function EditClientPage() {
                   <th className="text-left px-4 py-2 font-medium">Title</th>
                   <th className="text-left px-4 py-2 font-medium">Email</th>
                   <th className="text-left px-4 py-2 font-medium">Phone</th>
+                  <th className="text-left px-4 py-2 font-medium w-24"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-light-gray">
                 {contacts.length === 0 && (
                   <tr>
                     <td
-                      colSpan={4}
+                      colSpan={5}
                       className="px-4 py-6 text-center text-dark/50"
                     >
                       No contacts yet.
                     </td>
                   </tr>
                 )}
-                {contacts.map((contact) => (
-                  <tr key={contact.id}>
-                    <td className="px-4 py-2 font-medium">{contact.name}</td>
-                    <td className="px-4 py-2 text-dark/70">
-                      {contact.title || "-"}
-                    </td>
-                    <td className="px-4 py-2 text-dark/70">
-                      {contact.email ? (
-                        <a
-                          href={`mailto:${contact.email}`}
-                          className="text-primary hover:underline"
+                {contacts.map((contact) =>
+                  editingContactId === contact.id ? (
+                    <tr key={contact.id} className="bg-blue-50/30">
+                      <td className="px-4 py-2">
+                        <input
+                          value={editForm.name || ""}
+                          onChange={(e) =>
+                            setEditForm({ ...editForm, name: e.target.value })
+                          }
+                          className="w-full px-2 py-1 border border-light-gray rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        />
+                      </td>
+                      <td className="px-4 py-2">
+                        <input
+                          value={editForm.title || ""}
+                          onChange={(e) =>
+                            setEditForm({ ...editForm, title: e.target.value })
+                          }
+                          placeholder="Title"
+                          className="w-full px-2 py-1 border border-light-gray rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        />
+                      </td>
+                      <td className="px-4 py-2">
+                        <input
+                          value={editForm.email || ""}
+                          onChange={(e) =>
+                            setEditForm({ ...editForm, email: e.target.value })
+                          }
+                          type="email"
+                          className="w-full px-2 py-1 border border-light-gray rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        />
+                      </td>
+                      <td className="px-4 py-2">
+                        <input
+                          value={editForm.phone || ""}
+                          onChange={(e) =>
+                            setEditForm({ ...editForm, phone: e.target.value })
+                          }
+                          className="w-full px-2 py-1 border border-light-gray rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        />
+                      </td>
+                      <td className="px-4 py-2">
+                        <div className="flex gap-1">
+                          <button
+                            onClick={() => handleSaveContact(contact.id)}
+                            disabled={savingContact}
+                            className="px-2 py-1 bg-primary text-white text-xs rounded hover:bg-primary-dark disabled:opacity-50"
+                          >
+                            {savingContact ? "..." : "Save"}
+                          </button>
+                          <button
+                            onClick={() => setEditingContactId(null)}
+                            className="px-2 py-1 text-xs rounded border border-light-gray hover:bg-light-gray"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr key={contact.id} className="group">
+                      <td className="px-4 py-2 font-medium">{contact.name}</td>
+                      <td className="px-4 py-2 text-dark/70">
+                        {contact.title || "-"}
+                      </td>
+                      <td className="px-4 py-2 text-dark/70">
+                        {contact.email ? (
+                          <a
+                            href={`mailto:${contact.email}`}
+                            className="text-primary hover:underline"
+                          >
+                            {contact.email}
+                          </a>
+                        ) : (
+                          "-"
+                        )}
+                      </td>
+                      <td className="px-4 py-2 text-dark/70">
+                        {contact.phone || "-"}
+                      </td>
+                      <td className="px-4 py-2">
+                        <button
+                          onClick={() => startEditing(contact)}
+                          className="text-xs text-primary hover:underline opacity-0 group-hover:opacity-100 transition-opacity"
                         >
-                          {contact.email}
-                        </a>
-                      ) : (
-                        "-"
-                      )}
-                    </td>
-                    <td className="px-4 py-2 text-dark/70">
-                      {contact.phone || "-"}
-                    </td>
-                  </tr>
-                ))}
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                )}
               </tbody>
             </table>
           </div>

@@ -45,6 +45,29 @@ export interface AuditLogEntry {
   staff_user?: Pick<StaffUser, "full_name" | "email">;
 }
 
+export interface DashboardPositionSummary {
+  id: string;
+  title: string;
+  slug: string;
+  location: string;
+  type: string;
+  work_mode: string | null;
+  active: boolean;
+  applicationCount: number;
+  statusBreakdown: Record<ApplicationStatus, number>;
+}
+
+export interface DashboardRecentApplication {
+  id: string;
+  full_name: string;
+  email: string;
+  job_title: string;
+  job_slug: string;
+  status: ApplicationStatus;
+  created_at: string;
+  position_id: string | null;
+}
+
 export interface DashboardMetrics {
   totalPositions: number;
   activePositions: number;
@@ -53,6 +76,8 @@ export interface DashboardMetrics {
   totalContacts: number;
   recentContacts: number;
   applicationsByStatus: Record<ApplicationStatus, number>;
+  hotPositions: DashboardPositionSummary[];
+  recentApplications: DashboardRecentApplication[];
 }
 
 export interface AdminPosition {

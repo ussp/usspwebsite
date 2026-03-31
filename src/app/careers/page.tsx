@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import ContactForm from "@/components/ContactForm";
+import CareersLinkedInBanner from "@/components/CareersLinkedInBanner";
 import { getActiveJobs } from "@/lib/jobs";
 
 export const dynamic = "force-dynamic";
@@ -133,6 +134,7 @@ export default async function Careers() {
             title="Open Positions"
             subtitle="We are always looking for talented individuals to join our team."
           />
+          <CareersLinkedInBanner />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {jobs.map((job) => (
               <div
