@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
+import GuideBanner from "@/components/GuideBanner";
 
 export default function PostTrainingAssessmentPage() {
   const { id: engagementId, teamId } = useParams<{ id: string; teamId: string }>();
@@ -13,7 +14,7 @@ export default function PostTrainingAssessmentPage() {
     period_start: "",
     period_end: "",
     sprint_count: "",
-    data_source: "integration",
+    data_source: "manual",
   });
 
   async function handleSubmit(e: React.FormEvent) {
@@ -46,19 +47,52 @@ export default function PostTrainingAssessmentPage() {
     <>
       <AdminSidebar />
       <AdminTopbar />
-      <main className="ml-60 mt-14 p-6">
+      <main className="ml-60 mt-14 p-6 max-w-4xl">
         <h1 className="text-2xl font-bold mb-2">Post-Training Assessment</h1>
         <p className="text-sm text-dark/50 mb-6">
-          Set the measurement window for post-training data collection. This captures team
-          performance AFTER AI training, excluding a 2-4 week ramp-up buffer.
+          Capture team performance <strong>after</strong> AI training is complete.
+          This becomes the &ldquo;after&rdquo; snapshot compared against the baseline to measure improvement.
         </p>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6 text-sm text-amber-800">
-          <strong>Tip:</strong> Start the measurement period 2-4 weeks after training ends to
-          allow the team to internalize new tools and practices.
-        </div>
+        <GuideBanner title="Important: Ramp-up buffer" variant="warning">
+          <p>
+            Start this measurement <strong>2-4 weeks after training ends</strong>.
+            The first weeks after training are a learning curve — measuring too early captures
+            adjustment friction, not the actual improvement.
+          </p>
+          <p className="mt-2 font-medium">
+            Timeline: Training ends &rarr; 2-4 week buffer &rarr; Post-training period starts &rarr; 3-6 sprints &rarr; Period ends
+          </p>
+        </GuideBanner>
 
-        <form onSubmit={handleSubmit} className="max-w-xl bg-white rounded-lg border border-light-gray p-6">
+        <GuideBanner title="Collect the same data as baseline" variant="info">
+          <p className="mb-2">Use the <strong>exact same metrics and survey questions</strong> as the baseline for a fair comparison:</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+            <div className="bg-white/50 rounded p-3">
+              <p className="font-semibold text-xs mb-1">Objective Metrics (same as baseline)</p>
+              <ul className="text-xs space-y-1 list-disc list-inside opacity-80">
+                <li>Sprint velocity, cycle time, predictability</li>
+                <li>Throughput, bug escape rate</li>
+                <li>DORA: deploy freq, lead time, failure rate, MTTR</li>
+              </ul>
+              <p className="text-[11px] opacity-60 mt-2">Export from the same Jira/ADO/GitHub source as baseline</p>
+            </div>
+            <div className="bg-white/50 rounded p-3">
+              <p className="font-semibold text-xs mb-1">Survey (same respondents as baseline)</p>
+              <ul className="text-xs space-y-1 list-disc list-inside opacity-80">
+                <li>SPACE: 5 dimensions (1-5 scale)</li>
+                <li>DevEx: 3 dimensions + 3 tension pairs (1-5 scale)</li>
+                <li>AI Trust, Adoption, Verification Overhead</li>
+              </ul>
+              <p className="text-[11px] opacity-60 mt-2">Same team members should complete the survey again</p>
+            </div>
+          </div>
+        </GuideBanner>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-light-gray p-6">
+          <h2 className="text-sm font-semibold mb-4">Define the post-training measurement window</h2>
+
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
               <label className="block text-sm font-medium mb-1">Period Start</label>
@@ -69,6 +103,7 @@ export default function PostTrainingAssessmentPage() {
                 required
                 className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
+              <p className="text-[11px] text-dark/40 mt-1">Start of the first sprint after the ramp-up buffer</p>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">Period End</label>
@@ -79,6 +114,7 @@ export default function PostTrainingAssessmentPage() {
                 required
                 className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
+              <p className="text-[11px] text-dark/40 mt-1">End of the last sprint in the measurement window</p>
             </div>
           </div>
 
@@ -92,17 +128,18 @@ export default function PostTrainingAssessmentPage() {
               min="1"
               className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
+            <p className="text-[11px] text-dark/40 mt-1">Should match the baseline sprint count for a fair comparison</p>
           </div>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium mb-1">Data Source</label>
+            <label className="block text-sm font-medium mb-1">How was data collected?</label>
             <select
               value={form.data_source}
               onChange={(e) => setForm({ ...form, data_source: e.target.value })}
               className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
             >
-              <option value="integration">From Integration (Jira/ADO/GitHub)</option>
-              <option value="manual">Manual Entry</option>
+              <option value="manual">Manual (exported from Jira/ADO/GitHub and entered here)</option>
+              <option value="integration">API Integration (auto-pulled — requires setup)</option>
             </select>
           </div>
 
