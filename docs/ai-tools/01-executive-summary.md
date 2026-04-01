@@ -19,7 +19,7 @@ Organizations spend significant budgets on AI training but have no standardized 
 
 ## Our Philosophy: Amplify, Not Replace
 
-Unlike companies using AI to replace workers (as seen with Oracle's mass layoffs in March 2026), USSP's approach is fundamentally different:
+This tool is built on a clear principle:
 
 > **The same team delivers more. No one loses their job. Everyone becomes more effective.**
 

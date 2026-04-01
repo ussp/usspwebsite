@@ -33,9 +33,9 @@ Current challenges:
 - Training is generic — a developer and a QA engineer receive the same content despite doing fundamentally different work
 - Government agencies (USSP's TOPS contract clients) require measurable outcomes to justify technology investments
 
-### The Oracle Contrast
+### Core Principle
 
-On March 31, 2026, Oracle conducted massive AI-driven layoffs — replacing workers with AI systems. This tool represents the **opposite philosophy**: AI training doesn't eliminate jobs; it **amplifies** the existing team. The same people, equipped with the right AI tools for their specific roles, deliver measurably more value. No one loses their job. Everyone becomes more effective.
+This tool is built on the principle that AI training **amplifies** the existing team. The same people, equipped with the right AI tools for their specific roles, deliver measurably more value. The goal is productivity growth, not workforce reduction.
 
 ---
 

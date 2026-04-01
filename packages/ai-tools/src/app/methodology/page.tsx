@@ -23,12 +23,11 @@ export default async function MethodologyPage() {
 
         {/* Philosophy */}
         <section className="bg-near-black text-white rounded-lg p-6 mb-8">
-          <h2 className="text-lg font-semibold mb-2">Our Philosophy: Amplify, Not Replace</h2>
+          <h2 className="text-lg font-semibold mb-2">Core Principle: Measure Growth</h2>
           <p className="text-sm text-white/70">
-            Unlike approaches that use AI to replace workers (as seen with Oracle&apos;s 2026 layoffs),
-            we believe AI training empowers the same team to deliver measurably more.
+            This tool measures how AI training empowers the same team to deliver measurably more.
             Every role gets the right AI tools for their specific work.
-            No one loses their job. Everyone becomes more effective.
+            The goal is tracking productivity growth and capability building.
           </p>
         </section>
 
