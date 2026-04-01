@@ -37,9 +37,12 @@ export default async function MethodologyPage() {
 
           <div className="space-y-6">
             <div className="bg-white rounded-lg border border-light-gray p-5">
-              <h3 className="font-semibold text-primary mb-2">DORA Metrics</h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-primary">DORA Metrics</h3>
+                <a href="https://dora.dev/research/" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline">dora.dev/research &rarr;</a>
+              </div>
               <p className="text-xs text-dark/40 mb-2">
-                Forsgren, Humble, Kim — Accelerate (2018). Google Cloud DORA Reports (2018-2024).
+                Forsgren, Humble, Kim — <a href="https://itrevolution.com/product/accelerate/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Accelerate</a> (2018). Google Cloud DORA Reports (2018-2024).
               </p>
               <p className="text-sm text-dark/70 mb-3">
                 Four key metrics that predict software delivery performance: Deployment Frequency,
@@ -62,7 +65,10 @@ export default async function MethodologyPage() {
             </div>
 
             <div className="bg-white rounded-lg border border-light-gray p-5">
-              <h3 className="font-semibold text-primary mb-2">SPACE Framework</h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-primary">SPACE Framework</h3>
+                <a href="https://queue.acm.org/detail.cfm?id=3454124" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline">Read paper &rarr;</a>
+              </div>
               <p className="text-xs text-dark/40 mb-2">
                 Forsgren, Storey, Maddila et al. — &ldquo;The SPACE of Developer Productivity&rdquo; (ACM Queue, 2021).
               </p>
@@ -80,7 +86,10 @@ export default async function MethodologyPage() {
             </div>
 
             <div className="bg-white rounded-lg border border-light-gray p-5">
-              <h3 className="font-semibold text-primary mb-2">DevEx Framework</h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-primary">DevEx Framework</h3>
+                <a href="https://queue.acm.org/detail.cfm?id=3595878" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline">Read paper &rarr;</a>
+              </div>
               <p className="text-xs text-dark/40 mb-2">
                 Noda, Storey, Forsgren — &ldquo;DevEx: What Actually Drives Productivity&rdquo; (ACM Queue, 2023).
               </p>
@@ -95,6 +104,27 @@ export default async function MethodologyPage() {
                 ))}
               </div>
             </div>
+
+            <div className="bg-white rounded-lg border border-light-gray p-5">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-primary">DORA AI Capabilities Model</h3>
+                <a href="https://dora.dev/capabilities/" target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline">dora.dev/capabilities &rarr;</a>
+              </div>
+              <p className="text-xs text-dark/40 mb-2">
+                Google DORA Team (2025). 7 organizational capabilities that amplify AI benefits.
+              </p>
+              <p className="text-sm text-dark/70 mb-3">
+                DORA&apos;s 2025 finding: AI is an amplifier — it magnifies existing strengths and weaknesses.
+                These 7 capabilities determine whether AI adoption succeeds.
+              </p>
+              <div className="flex flex-wrap gap-2 text-xs">
+                {["AI-Accessible Data", "Clear AI Stance", "Healthy Data", "Platform Engineering", "User Focus", "Version Control", "Small Batches"].map((cap) => (
+                  <span key={cap} className="px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">
+                    {cap}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -102,14 +132,12 @@ export default async function MethodologyPage() {
         <section className="mb-8">
           <h2 className="text-lg font-semibold mb-4">Research Benchmarks</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {RESEARCH_BENCHMARKS.map((b, i) => (
-              <ResearchCitationCard
-                key={i}
-                source={b.source}
-                finding={b.finding}
-                year={b.year}
-              />
-            ))}
+            <ResearchCitationCard source="Forrester TEI (GitHub Copilot)" finding="22% developer productivity improvement" year={2023} url="https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-in-the-enterprise-with-accenture/" />
+            <ResearchCitationCard source="McKinsey" finding="20-45% productivity improvement in software engineering" year={2023} url="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai" />
+            <ResearchCitationCard source="Harvard/BCG Study" finding="25% faster, 40% higher quality" year={2023} url="https://www.hbs.edu/ris/Publication%20Files/24-013_d9b45b68-9e74-42d6-a1c6-c72fb70c7571.pdf" />
+            <ResearchCitationCard source="GitHub Copilot Study (Peng et al.)" finding="55.8% faster task completion" year={2023} url="https://arxiv.org/abs/2302.06590" />
+            <ResearchCitationCard source="DORA AI Capabilities Model" finding="7 capabilities determine AI adoption success" year={2025} url="https://dora.dev/capabilities/" />
+            <ResearchCitationCard source="DORA State of DevOps" finding="90% use AI; only 24% trust AI code significantly" year={2025} url="https://dora.dev/research/" />
           </div>
         </section>
 
@@ -135,15 +163,18 @@ export default async function MethodologyPage() {
         {/* References */}
         <section className="mb-8">
           <h2 className="text-lg font-semibold mb-4">References</h2>
-          <ol className="text-xs text-dark/60 space-y-2 list-decimal list-inside">
-            <li>Forsgren, N., Humble, J., Kim, G. (2018). <em>Accelerate: The Science of Lean Software and DevOps.</em> IT Revolution Press.</li>
-            <li>Forsgren, N., Storey, M-A., et al. (2021). &ldquo;The SPACE of Developer Productivity.&rdquo; <em>ACM Queue</em>, 19(1).</li>
-            <li>Noda, A., Storey, M-A., Forsgren, N. (2023). &ldquo;DevEx: What Actually Drives Productivity.&rdquo; <em>ACM Queue</em>, 21(2).</li>
-            <li>Peng, S., et al. (2023). &ldquo;The Impact of AI on Developer Productivity: Evidence from GitHub Copilot.&rdquo; <em>arXiv:2302.06590</em>.</li>
-            <li>Dell&apos;Acqua, F., et al. (2023). &ldquo;Navigating the Jagged Technological Frontier.&rdquo; <em>Harvard Business School Working Paper 24-013</em>.</li>
-            <li>McKinsey &amp; Company (2023). &ldquo;Unleashing Developer Productivity with Generative AI.&rdquo;</li>
-            <li>Forrester Research (2023). &ldquo;The Total Economic Impact of GitHub Copilot.&rdquo;</li>
-            <li>Google DORA Team (2024). <em>State of DevOps Report 2024.</em></li>
+          <p className="text-xs text-dark/40 mb-3">Click any link to read the original paper or report.</p>
+          <ol className="text-xs text-dark/60 space-y-3 list-decimal list-inside">
+            <li>Forsgren, N., Humble, J., Kim, G. (2018). <em>Accelerate: The Science of Lean Software and DevOps.</em> IT Revolution Press. <a href="https://itrevolution.com/product/accelerate/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">itrevolution.com</a></li>
+            <li>Forsgren, N., Storey, M-A., et al. (2021). &ldquo;The SPACE of Developer Productivity.&rdquo; <em>ACM Queue</em>, 19(1). <a href="https://queue.acm.org/detail.cfm?id=3454124" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Read paper</a></li>
+            <li>Noda, A., Storey, M-A., Forsgren, N. (2023). &ldquo;DevEx: What Actually Drives Productivity.&rdquo; <em>ACM Queue</em>, 21(2). <a href="https://queue.acm.org/detail.cfm?id=3595878" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Read paper</a></li>
+            <li>Peng, S., et al. (2023). &ldquo;The Impact of AI on Developer Productivity: Evidence from GitHub Copilot.&rdquo; <a href="https://arxiv.org/abs/2302.06590" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">arxiv.org/abs/2302.06590</a></li>
+            <li>Dell&apos;Acqua, F., et al. (2023). &ldquo;Navigating the Jagged Technological Frontier.&rdquo; <em>Harvard Business School Working Paper 24-013.</em> <a href="https://www.hbs.edu/ris/Publication%20Files/24-013_d9b45b68-9e74-42d6-a1c6-c72fb70c7571.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Read paper (PDF)</a></li>
+            <li>McKinsey &amp; Company (2023). &ldquo;Unleashing Developer Productivity with Generative AI.&rdquo; <a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">mckinsey.com</a></li>
+            <li>Forrester Research (2023). &ldquo;The Total Economic Impact of GitHub Copilot.&rdquo; <a href="https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-in-the-enterprise-with-accenture/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">github.blog</a></li>
+            <li>Google DORA Team (2024). <em>State of DevOps Report 2024.</em> <a href="https://dora.dev/research/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">dora.dev/research</a></li>
+            <li>Google DORA Team (2025). <em>State of AI-assisted Software Development.</em> <a href="https://dora.dev/research/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">dora.dev/research</a></li>
+            <li>Google DORA Team (2025). <em>DORA AI Capabilities Model.</em> <a href="https://dora.dev/capabilities/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">dora.dev/capabilities</a></li>
           </ol>
         </section>
       </main>
