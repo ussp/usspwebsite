@@ -58,14 +58,19 @@ export async function createAssessment(
   const supabase = getServiceClient();
   const site = siteId || getSiteId();
 
+  const insertData: Record<string, unknown> = {
+    ...input,
+    site_id: site,
+    data_source: input.data_source || "manual",
+  };
+  // Only set assessed_by if it's a valid UUID (staff_users FK)
+  if (assessedBy && assessedBy.length > 10) {
+    insertData.assessed_by = assessedBy;
+  }
+
   const { data, error } = await supabase
     .from("ai_assessments")
-    .insert({
-      ...input,
-      site_id: site,
-      assessed_by: assessedBy,
-      data_source: input.data_source || "manual",
-    })
+    .insert(insertData as Record<string, unknown>)
     .select(ASSESSMENT_COLUMNS)
     .single();
 

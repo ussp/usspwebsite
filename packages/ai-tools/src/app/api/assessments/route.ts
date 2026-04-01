@@ -37,9 +37,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const userId = user.id as string;
   const body = await request.json();
-  const result = await createAssessment(body, userId);
+  const userId = (user.id as string) || (user.sub as string) || null;
+  const result = await createAssessment(body, userId || "");
   if (!result.success) {
     return NextResponse.json({ error: result.error }, { status: 400 });
   }
