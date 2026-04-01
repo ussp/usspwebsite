@@ -128,6 +128,11 @@ export const METRIC_CATALOG: MetricDefinition[] = [
   { category: "readiness", name: "user_centric_focus", label: "User-Centric Focus", unit: "score_1_5", direction: "higher_better", level: "team", description: "Teams build the right things, not just faster things" },
   { category: "readiness", name: "version_control_maturity", label: "Version Control Maturity", unit: "score_1_5", direction: "higher_better", level: "team", description: "Mature version control as safety net for AI-accelerated change" },
   { category: "readiness", name: "small_batches", label: "Working in Small Batches", unit: "score_1_5", direction: "higher_better", level: "team", description: "Team delivers in small increments to manage AI-driven velocity" },
+  // AI Policy & Compliance readiness (legal/regulatory)
+  { category: "readiness", name: "ai_policy_exists", label: "AI Usage Policy Exists", unit: "score_1_5", direction: "higher_better", level: "team", description: "Organization has a written, communicated AI usage policy" },
+  { category: "readiness", name: "ai_policy_coverage", label: "AI Policy Coverage", unit: "score_1_5", direction: "higher_better", level: "team", description: "Policy covers data privacy, code ownership, approved tools, and prohibited uses" },
+  { category: "readiness", name: "regulatory_awareness", label: "Regulatory Awareness", unit: "score_1_5", direction: "higher_better", level: "team", description: "Team is aware of applicable state and federal AI regulations" },
+  { category: "readiness", name: "ai_governance", label: "AI Governance", unit: "score_1_5", direction: "higher_better", level: "team", description: "AI governance committee, responsible person, or review process exists" },
 ];
 
 // Lookup helper

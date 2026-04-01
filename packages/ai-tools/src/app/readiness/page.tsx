@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import GuideBanner from "@/components/GuideBanner";
+import StateLawSelector from "@/components/StateLawSelector";
 
 export const dynamic = "force-dynamic";
 
@@ -96,6 +97,75 @@ export default async function ReadinessPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* AI Policy Checklist */}
+        <div className="bg-white rounded-lg border border-light-gray p-5 mb-6">
+          <h2 className="text-lg font-semibold mb-2">AI Policy &amp; Governance</h2>
+          <p className="text-sm text-dark/50 mb-4">
+            Before adopting AI tools, organizations should have clear policies in place.
+            These 4 areas are scored as part of the readiness assessment.
+          </p>
+          <div className="space-y-3">
+            <div className="border border-light-gray rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">8</div>
+                <div>
+                  <h3 className="text-sm font-semibold">AI Usage Policy Exists</h3>
+                  <p className="text-xs text-dark/50 mt-1">Does the organization have a written AI usage policy that has been communicated to employees?</p>
+                  <p className="text-xs text-primary mt-2 italic">Score 1 = no policy, 5 = comprehensive policy actively enforced</p>
+                </div>
+              </div>
+            </div>
+            <div className="border border-light-gray rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">9</div>
+                <div>
+                  <h3 className="text-sm font-semibold">AI Policy Coverage</h3>
+                  <p className="text-xs text-dark/50 mt-1">Does the policy cover: data privacy and confidentiality, code ownership and IP, approved AI tools list, prohibited uses, and data handling?</p>
+                  <p className="text-xs text-primary mt-2 italic">Score 1 = no coverage, 5 = all areas comprehensively addressed</p>
+                  <p className="text-[11px] text-dark/40 mt-1">Reference: <a href="https://www.nist.gov/artificial-intelligence/executive-order-safe-secure-and-trustworthy-artificial-intelligence" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">NIST AI Risk Management Framework</a> for policy structure guidance</p>
+                </div>
+              </div>
+            </div>
+            <div className="border border-light-gray rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">10</div>
+                <div>
+                  <h3 className="text-sm font-semibold">Regulatory Awareness</h3>
+                  <p className="text-xs text-dark/50 mt-1">Is the team aware of applicable state and federal AI regulations? Do they know what they can and cannot do with AI tools?</p>
+                  <p className="text-xs text-primary mt-2 italic">Score 1 = no awareness, 5 = team trained on applicable regulations</p>
+                  <p className="text-[11px] text-dark/40 mt-1">Use the State Law Reference below to identify which laws apply</p>
+                </div>
+              </div>
+            </div>
+            <div className="border border-light-gray rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-bold">11</div>
+                <div>
+                  <h3 className="text-sm font-semibold">AI Governance</h3>
+                  <p className="text-xs text-dark/50 mt-1">Is there an AI governance committee, designated responsible person, or formal review process for AI tool adoption?</p>
+                  <p className="text-xs text-primary mt-2 italic">Score 1 = no governance, 5 = formal committee with review process</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3">
+            <p className="text-xs text-amber-800">
+              <strong>Collect the organization&apos;s AI policy document</strong> (if one exists) during the assessment.
+              If no policy exists, this is a key blocker to flag — the organization should create one before AI training begins.
+            </p>
+          </div>
+        </div>
+
+        {/* State & Regulatory Compliance */}
+        <div className="bg-white rounded-lg border border-light-gray p-5 mb-6">
+          <h2 className="text-lg font-semibold mb-2">State &amp; Federal AI Regulations</h2>
+          <p className="text-sm text-dark/50 mb-4">
+            Different states have different AI laws. Select the organization&apos;s state to see which regulations apply.
+            Each law links to the actual legal text so assessors can read the source.
+          </p>
+          <StateLawSelector />
         </div>
 
         {/* How to use */}

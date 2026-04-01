@@ -135,3 +135,7 @@ export {
   READINESS_TIER_COLORS,
   getMetricDefinition,
 } from "./types/ai-tools.js";
+
+// AI Laws & Regulations
+export type { AILaw } from "./types/ai-laws.js";
+export { AI_LAW_CATALOG, getLawsByState, getAvailableStates, getFederalLaws } from "./types/ai-laws.js";

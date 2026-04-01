@@ -185,6 +185,11 @@
       "import": "./dist/types/ai-tools.js",
       "default": "./dist/types/ai-tools.js"
     },
+    "./types/ai-laws": {
+      "types": "./dist/types/ai-laws.d.ts",
+      "import": "./dist/types/ai-laws.js",
+      "default": "./dist/types/ai-laws.js"
+    },
     "./queries/admin/ai-engagements": {
       "types": "./dist/queries/admin/ai-engagements.d.ts",
       "import": "./dist/queries/admin/ai-engagements.js",
