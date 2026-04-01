@@ -113,7 +113,7 @@ export default function EngagementDetailPage() {
                   <span>
                     Baseline: {team.baseline ? (
                       <span className="text-success font-medium">
-                        {(team.baseline as Record<string, unknown>).status === "completed" ? "Complete" : "In Progress"}
+                        {(team.baseline as unknown as Record<string, unknown>).status === "completed" ? "Complete" : "In Progress"}
                       </span>
                     ) : (
                       <span className="text-dark/30">Not started</span>
@@ -122,7 +122,7 @@ export default function EngagementDetailPage() {
                   <span>
                     Post: {team.post_training ? (
                       <span className="text-success font-medium">
-                        {(team.post_training as Record<string, unknown>).status === "completed" ? "Complete" : "In Progress"}
+                        {(team.post_training as unknown as Record<string, unknown>).status === "completed" ? "Complete" : "In Progress"}
                       </span>
                     ) : (
                       <span className="text-dark/30">Not started</span>
