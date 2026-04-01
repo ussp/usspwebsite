@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/", label: "Dashboard", desc: "", icon: "📊", section: "" },
-  { href: "/engagements", label: "Transformation Monitor", desc: "Before/after team productivity", icon: "📈", section: "Tools" },
-  { href: "/readiness", label: "Readiness Assessment", desc: "Org AI capability check", icon: "🔍", section: "Tools" },
+  { href: "/engagements", label: "Transformation Monitor", desc: "Measure team productivity growth", icon: "📈", section: "Measurement Tools" },
+  { href: "/readiness", label: "Readiness Assessment", desc: "Evaluate org AI capabilities", icon: "🔍", section: "Assessment Tools" },
   { href: "/methodology", label: "Methodology & Research", desc: "Frameworks, papers, citations", icon: "📚", section: "Reference" },
 ];
 
