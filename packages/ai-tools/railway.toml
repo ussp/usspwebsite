@@ -1,0 +1,9 @@
+[build]
+buildCommand = "cd packages/platform-core && npx tsc && cd ../ai-tools && next build"
+watchPatterns = ["packages/platform-core/src/**", "packages/ai-tools/**"]
+
+[deploy]
+startCommand = "cd packages/ai-tools && npm run start"
+healthcheckPath = "/"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3

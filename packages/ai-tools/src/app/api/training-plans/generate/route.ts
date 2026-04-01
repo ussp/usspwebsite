@@ -1,0 +1,28 @@
+import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
+import { hasPermission } from "@ussp-platform/core";
+import type { StaffRole } from "@ussp-platform/core";
+import { generateTeamTrainingPlans } from "@ussp-platform/core/queries/admin/ai-training";
+
+export async function POST(request: Request) {
+  const session = await auth();
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const user = session.user as Record<string, unknown>;
+  const role = (user.role as StaffRole) || "viewer";
+  if (!hasPermission(role, "ai_engagements.update")) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  const body = await request.json();
+  const teamId = body.team_id;
+  if (!teamId) {
+    return NextResponse.json({ error: "team_id required" }, { status: 400 });
+  }
+
+  const result = await generateTeamTrainingPlans(teamId);
+  if (!result.success) {
+    return NextResponse.json({ error: result.error }, { status: 400 });
+  }
+  return NextResponse.json(result.plans);
+}

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Transformation Monitor — Proposal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #222;
+      line-height: 1.6;
+      background: #f8f9fa;
+    }
+
+    @media print {
+      body { background: white; }
+      .no-print { display: none !important; }
+      .page-break { page-break-before: always; }
+      .container { max-width: 100%; padding: 0 20px; }
+      section { box-shadow: none !important; border: 1px solid #ddd !important; }
+      a { color: #2563EB; }
+    }
+
+    .print-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #1C1C1C;
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .print-bar h1 { font-size: 16px; font-weight: 600; }
+    .print-bar span { font-size: 12px; opacity: 0.6; }
+    .print-btn {
+      background: #2563EB;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .print-btn:hover { background: #1D4ED8; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px 60px;
+    }
+
+    .hero {
+      background: #1C1C1C;
+      color: white;
+      border-radius: 16px;
+      padding: 48px;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+    .hero .subtitle { font-size: 18px; color: #93c5fd; margin-bottom: 16px; }
+    .hero .proposal-tag {
+      display: inline-block;
+      background: rgba(37, 99, 235, 0.25);
+      border: 1px solid rgba(37, 99, 235, 0.5);
+      border-radius: 20px;
+      padding: 6px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #93c5fd;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    section {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1C1C1C;
+      border-bottom: 3px solid #2563EB;
+      padding-bottom: 8px;
+      display: inline-block;
+    }
+    section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 20px 0 8px;
+      color: #333;
+    }
+    p { margin-bottom: 12px; font-size: 15px; color: #444; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    th {
+      background: #f1f5f9;
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 13px;
+      color: #555;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    tr:hover td { background: #f8fafc; }
+
+    /* Workflow diagram */
+    .workflow-diagram {
+      position: relative;
+      margin: 24px 0;
+    }
+    .workflow-row {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0;
+    }
+    .workflow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      position: relative;
+    }
+    .step-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 40px;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      background: #2563EB;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-line {
+      width: 2px;
+      height: 100%;
+      min-height: 20px;
+      background: #e2e8f0;
+      flex-grow: 1;
+    }
+    .step-content {
+      padding-bottom: 16px;
+      flex: 1;
+    }
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #1C1C1C;
+    }
+    .step-content p {
+      font-size: 13px;
+      color: #666;
+      margin: 0;
+    }
+    .step-content .duration {
+      display: inline-block;
+      background: #eff6ff;
+      color: #2563EB;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+    .workflow-step:last-child .step-line { display: none; }
+
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .framework-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .framework-card h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #2563EB;
+      margin-bottom: 4px;
+    }
+    .framework-card .source {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .benchmark-card {
+      background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .benchmark-card .number {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2563EB;
+    }
+    .benchmark-card .label {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+    .benchmark-card .src {
+      font-size: 10px;
+      color: #999;
+      margin-top: 6px;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .role-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .role-card .emoji { font-size: 28px; margin-bottom: 6px; }
+    .role-card .role-name { font-size: 13px; font-weight: 600; }
+    .role-card .tools { font-size: 11px; color: #2563EB; margin-top: 6px; }
+
+    .metric-example {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto;
+      gap: 8px;
+      align-items: center;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border-radius: 8px;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+    .metric-example .label { font-weight: 500; }
+    .metric-example .baseline { color: #888; }
+    .metric-example .arrow { color: #ccc; }
+    .metric-example .post { font-weight: 600; }
+    .metric-example .delta {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .delta-positive { background: #dcfce7; color: #15803d; }
+
+    .ref-list {
+      font-size: 13px;
+      color: #555;
+      padding-left: 20px;
+      margin: 12px 0;
+    }
+    .ref-list li { margin-bottom: 10px; line-height: 1.5; }
+    .ref-list em { color: #333; }
+    .ref-list a {
+      color: #2563EB;
+      text-decoration: none;
+      border-bottom: 1px solid #bfdbfe;
+      transition: border-color 0.2s;
+    }
+    .ref-list a:hover { border-color: #2563EB; }
+
+    .feedback-section {
+      background: #eff6ff;
+      border: 2px dashed #2563EB;
+      border-radius: 12px;
+      padding: 24px;
+      margin: 32px 0;
+      text-align: center;
+    }
+    .feedback-section h3 { color: #2563EB; margin-bottom: 8px; }
+    .feedback-section p { font-size: 14px; color: #666; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Print bar -->
+<div class="print-bar no-print">
+  <div>
+    <h1>AI Transformation Monitor</h1>
+    <span>Proposal Document</span>
+  </div>
+  <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <h1>AI Transformation Monitor</h1>
+  <p class="subtitle">Track and measure Scrum team productivity growth through AI enablement</p>
+  <div class="proposal-tag">Proposed Tool</div>
+</div>
+
+<!-- What & Why -->
+<section>
+  <h2>What Is This Tool?</h2>
+  <p>The AI Transformation Monitor is a proposed web-based measurement tool that <strong>quantifies the impact of AI training</strong> on Scrum team productivity. It answers one critical question:</p>
+  <p style="font-size: 18px; font-weight: 600; text-align: center; color: #2563EB; margin: 20px 0;">
+    "Did AI training actually make the team more productive, and by how much?"
+  </p>
+  <p>The tool measures team performance <strong>before</strong> AI training, then measures <strong>again after</strong> training — producing a research-backed comparison report that tracks real growth.</p>
+</section>
+
+<!-- Workflow -->
+<section>
+  <h2>How It Works</h2>
+  <p>The tool follows a structured, repeatable process to ensure consistent and comparable measurements across teams.</p>
+
+  <div class="workflow-diagram">
+    <div class="workflow-step">
+      <div class="step-indicator">
+        <div class="step-number">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h4>Setup &amp; Integration</h4>
+        <p>Create an engagement for the client team. Connect to their Jira, Azure DevOps, or GitHub to enable automatic data collection. Add team members with their roles.</p>
+        <span class="duration">Week 1</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-indicator">
+        <div class="step-number">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h4>AI Readiness Assessment <span style="font-size: 11px; color: #2563EB; font-weight: 400;">(optional)</span></h4>
+        <p>Score the organization's 7 DORA AI capabilities. Identifies blockers and predicts whether training will succeed. Can be run standalone or linked to this engagement.</p>
+        <span class="duration">1-2 weeks</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-indicator">
+        <div class="step-number">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h4>Baseline Measurement</h4>
+        <p>Observe 3-6 sprints of the team's current performance. The tool automatically pulls velocity, cycle time, throughput, and DORA metrics from the connected tools. Team members complete SPACE and DevEx surveys (8 questions total).</p>
+        <span class="duration">6-12 weeks (3-6 sprints)</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-indicator">
+        <div class="step-number">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h4>Training Plan Generation</h4>
+        <p>Based on each member's role, the tool generates customized AI training recommendations. Developers get code-generation tools, QA gets test automation AI, Scrum Masters get sprint analytics AI, etc.</p>
+        <span class="duration">Automated</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-indicator">
+        <div class="step-number">5</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h4>AI Training Delivery</h4>
+        <p>Deliver role-customized AI training to the team. Each person learns the specific AI tools that match their daily work.</p>
+        <span class="duration">2-6 weeks</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-indicator">
+        <div class="step-number">6</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h4>Ramp-Up Buffer</h4>
+        <p>Allow 2-4 weeks for the team to internalize new tools and practices. Measuring during this period would capture the learning curve, not the actual improvement.</p>
+        <span class="duration">2-4 weeks</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-indicator">
+        <div class="step-number">7</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h4>Post-Training Measurement</h4>
+        <p>Same metrics collected again over 3-6 sprints. Same surveys re-administered to the same team members. Identical methodology ensures a fair comparison.</p>
+        <span class="duration">6-12 weeks (3-6 sprints)</span>
+      </div>
+    </div>
+    <div class="workflow-step">
+      <div class="step-indicator">
+        <div class="step-number">8</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h4>Transformation Report</h4>
+        <p>Comprehensive before-vs-after report with percentage improvements, research benchmarks, and (if readiness was assessed) amplifier analysis showing how organizational readiness correlated with outcomes.</p>
+        <span class="duration">Automated</span>
+      </div>
+    </div>
+  </div>
+
+  <p><strong>Total timeline:</strong> 4-8 months per engagement, depending on sprint length and training duration.</p>
+</section>
+
+<!-- What We Measure -->
+<section>
+  <h2>What Gets Measured</h2>
+  <p>Data is collected across <strong>five categories</strong> using four research-backed frameworks — mixing objective system data with perceptual survey data (as recommended by the SPACE framework authors).</p>
+
+  <div class="framework-grid">
+    <div class="framework-card">
+      <h4>DORA Metrics</h4>
+      <p class="source">Google / Accelerate (2018-2024)</p>
+      <p style="font-size: 13px;">Deployment frequency, lead time for changes, change failure rate, mean time to recovery. Pulled automatically from CI/CD and GitHub.</p>
+    </div>
+    <div class="framework-card">
+      <h4>Scrum Metrics</h4>
+      <p class="source">From Jira / Azure DevOps</p>
+      <p style="font-size: 13px;">Sprint velocity, cycle time, sprint predictability, throughput, bug escape rate. Pulled automatically from sprint data.</p>
+    </div>
+    <div class="framework-card">
+      <h4>SPACE Survey</h4>
+      <p class="source">Microsoft Research (2021)</p>
+      <p style="font-size: 13px;">Satisfaction, Performance, Activity, Communication, Efficiency. 5 questions on a 1-5 scale, per team member.</p>
+    </div>
+    <div class="framework-card">
+      <h4>DevEx Survey + AI Tensions</h4>
+      <p class="source">ACM Queue (2023) + DORA (2025)</p>
+      <p style="font-size: 13px;">Flow state, feedback loops, cognitive load, plus 3 AI tension pairs: velocity/verification, expertise paradox, workflow gap.</p>
+    </div>
+    <div class="framework-card">
+      <h4>AI Readiness</h4>
+      <p class="source">DORA AI Capabilities Model (2025)</p>
+      <p style="font-size: 13px;">7 organizational capabilities: AI-accessible data, clear AI stance, healthy data, platform engineering, user focus, version control, small batches.</p>
+    </div>
+  </div>
+
+  <h3>Example: What a Report Would Show</h3>
+
+  <div class="metric-example">
+    <span class="label">Velocity</span>
+    <span class="baseline">42 pts/sprint</span>
+    <span class="arrow">&rarr;</span>
+    <span class="post">58 pts/sprint</span>
+    <span class="delta delta-positive">+38%</span>
+  </div>
+  <div class="metric-example">
+    <span class="label">Cycle Time</span>
+    <span class="baseline">8.3 days</span>
+    <span class="arrow">&rarr;</span>
+    <span class="post">5.1 days</span>
+    <span class="delta delta-positive">-39%</span>
+  </div>
+  <div class="metric-example">
+    <span class="label">Deploy Frequency</span>
+    <span class="baseline">2/week</span>
+    <span class="arrow">&rarr;</span>
+    <span class="post">5/week</span>
+    <span class="delta delta-positive">+150%</span>
+  </div>
+  <div class="metric-example">
+    <span class="label">Satisfaction</span>
+    <span class="baseline">3.1/5</span>
+    <span class="arrow">&rarr;</span>
+    <span class="post">4.2/5</span>
+    <span class="delta delta-positive">+35%</span>
+  </div>
+</section>
+
+<!-- Role-Based Training -->
+<section class="page-break">
+  <h2>Role-Based Training Approach</h2>
+  <p>The tool analyzes each team member's role and recommends specific AI tools and training modules tailored to their daily work. Different roles benefit from different AI capabilities.</p>
+
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="emoji">&#x1F468;&#x200D;&#x1F4BB;</div>
+      <div class="role-name">Developer</div>
+      <div class="tools">Copilot, Cursor, AI Code Review</div>
+    </div>
+    <div class="role-card">
+      <div class="emoji">&#x1F9EA;</div>
+      <div class="role-name">QA / Tester</div>
+      <div class="tools">AI Test Gen, Testim, Mabl</div>
+    </div>
+    <div class="role-card">
+      <div class="emoji">&#x1F4CB;</div>
+      <div class="role-name">Scrum Master</div>
+      <div class="tools">AI Sprint Analytics, Miro AI</div>
+    </div>
+    <div class="role-card">
+      <div class="emoji">&#x1F3AF;</div>
+      <div class="role-name">Product Owner</div>
+      <div class="tools">AI Backlog, User Story AI</div>
+    </div>
+    <div class="role-card">
+      <div class="emoji">&#x2699;&#xFE0F;</div>
+      <div class="role-name">DevOps</div>
+      <div class="tools">AI IaC, Incident AI, Pipeline AI</div>
+    </div>
+    <div class="role-card">
+      <div class="emoji">&#x1F3A8;</div>
+      <div class="role-name">Designer</div>
+      <div class="tools">Figma AI, Accessibility AI</div>
+    </div>
+  </div>
+</section>
+
+<!-- AI Readiness Assessment (DORA 2025) -->
+<section>
+  <h2>AI Organizational Readiness Assessment</h2>
+  <p>Based on <a href="https://dora.dev/research/" target="_blank" rel="noopener">DORA's 2025 AI Capabilities Model</a>, this standalone module evaluates whether an organization has the <strong>7 capabilities</strong> needed for AI to succeed. It can be used independently or linked to a Transformation engagement as an optional first step.</p>
+
+  <p style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: #15803d; margin: 16px 0;">
+    <strong>DORA 2025 finding:</strong> "AI is an amplifier — it magnifies an organization's existing strengths <em>and</em> weaknesses. The greatest returns come not from the tools themselves, but from the underlying sociotechnical systems."
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Capability</th><th>What It Means</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><strong>AI-Accessible Internal Data</strong></td><td>AI is connected to internal docs, code, and knowledge — not just generic</td></tr>
+      <tr><td>2</td><td><strong>Clear AI Stance</strong></td><td>Organization has explicit, communicated policy on AI use</td></tr>
+      <tr><td>3</td><td><strong>Healthy Data Ecosystems</strong></td><td>Internal data is high-quality, accessible, and unified</td></tr>
+      <tr><td>4</td><td><strong>Platform Engineering</strong></td><td>Internal platforms provide automated, secure pathways for AI</td></tr>
+      <tr><td>5</td><td><strong>User-Centric Focus</strong></td><td>Teams build the right things, not just faster things</td></tr>
+      <tr><td>6</td><td><strong>Version Control Maturity</strong></td><td>Mature version control as safety net for AI-accelerated change</td></tr>
+      <tr><td>7</td><td><strong>Working in Small Batches</strong></td><td>Small increments to manage AI-driven velocity and risk</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Readiness Tiers</h3>
+  <table>
+    <thead>
+      <tr><th>Tier</th><th>Score</th><th>Interpretation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="color: #dc2626; font-weight: 600;">Not Ready</td><td>&lt; 2.0</td><td>Critical gaps. Address blockers before investing in AI training.</td></tr>
+      <tr><td style="color: #d97706; font-weight: 600;">Foundation Needed</td><td>2.0 - 2.9</td><td>Some capabilities present but key gaps remain. Fix before training.</td></tr>
+      <tr><td style="color: #2563EB; font-weight: 600;">Ready</td><td>3.0 - 3.9</td><td>Adequate foundations. AI training should produce measurable results.</td></tr>
+      <tr><td style="color: #16a34a; font-weight: 600;">Well Positioned</td><td>4.0 - 5.0</td><td>Strong foundations. AI will amplify existing strengths significantly.</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size: 13px; color: #666; margin-top: 12px;">This assessment can be run standalone (as a quick organizational health check) or linked to a Transformation engagement — in which case the readiness score appears in the final report as context for the improvement results.</p>
+</section>
+
+<!-- The Amplifier Model -->
+<section>
+  <h2>The Amplifier Model</h2>
+  <p>DORA's 2025 research fundamentally reframes how to think about AI impact:</p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 20px; text-align: center;">
+      <div style="font-size: 24px; font-weight: 700; color: #16a34a;">High Readiness + AI Training</div>
+      <div style="font-size: 14px; color: #666; margin-top: 8px;">= Amplified strengths, strong improvement</div>
+    </div>
+    <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px; padding: 20px; text-align: center;">
+      <div style="font-size: 24px; font-weight: 700; color: #dc2626;">Low Readiness + AI Training</div>
+      <div style="font-size: 14px; color: #666; margin-top: 8px;">= Amplified dysfunction, wasted investment</div>
+    </div>
+  </div>
+
+  <p>When a Readiness Assessment is linked to a Transformation engagement, the report includes an <strong>Amplifier Analysis</strong> — correlating the readiness score with the improvement outcome to validate (or challenge) the DORA model for this specific team.</p>
+</section>
+
+<!-- Three Tensions of AI Adoption -->
+<section>
+  <h2>Three Tensions of AI Adoption</h2>
+  <p>DORA's 2025 research (based on 1,110 engineer survey responses) identifies three core tensions that emerge when teams adopt AI. The tool tracks both poles of each tension to detect tradeoffs.</p>
+
+  <div style="display: grid; gap: 16px; margin: 16px 0;">
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px;">
+      <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">1. Velocity vs Verification</h4>
+      <p style="font-size: 13px; color: #666; margin: 0;">Time saved writing code is often re-spent auditing AI output. The "verification tax" is real — individual author velocity gains create increased reviewer cognitive load.</p>
+      <div style="display: flex; gap: 12px; margin-top: 10px;">
+        <span style="background: #dcfce7; color: #15803d; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">Measured: AI Velocity Gain</span>
+        <span style="background: #fef2f2; color: #dc2626; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">Measured: Verification Tax</span>
+      </div>
+    </div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px;">
+      <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">2. The Expertise Paradox</h4>
+      <p style="font-size: 13px; color: #666; margin: 0;">AI lowers entry barriers but risks bypassing the "productive struggle" needed for deep expertise. Can lead to teams that move fast but understand less.</p>
+      <div style="display: flex; gap: 12px; margin-top: 10px;">
+        <span style="background: #dcfce7; color: #15803d; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">Measured: Entry Barrier Reduction</span>
+        <span style="background: #fef2f2; color: #dc2626; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">Measured: Expertise Depth Risk</span>
+      </div>
+    </div>
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px;">
+      <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">3. The Workflow Gap</h4>
+      <p style="font-size: 13px; color: #666; margin: 0;">AI accelerates prototyping but the "last mile" to production often neutralizes gains. Tool sprawl creates decision-making toil.</p>
+      <div style="display: flex; gap: 12px; margin-top: 10px;">
+        <span style="background: #dcfce7; color: #15803d; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">Measured: Prototyping Speed</span>
+        <span style="background: #fef2f2; color: #dc2626; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;">Measured: Last Mile Friction</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Research Benchmarks -->
+<section>
+  <h2>Research Benchmarks</h2>
+  <p>The expected improvement range is validated by peer-reviewed studies and industry research:</p>
+
+  <div class="benchmark-grid">
+    <div class="benchmark-card">
+      <div class="number">55.8%</div>
+      <div class="label">Faster task completion</div>
+      <div class="src">GitHub Copilot Study<br>Peng et al., 2023</div>
+    </div>
+    <div class="benchmark-card">
+      <div class="number">25-40%</div>
+      <div class="label">Faster + higher quality</div>
+      <div class="src">Harvard / BCG Study<br>Dell'Acqua et al., 2023</div>
+    </div>
+    <div class="benchmark-card">
+      <div class="number">20-45%</div>
+      <div class="label">Productivity improvement</div>
+      <div class="src">McKinsey &amp; Company<br>2023</div>
+    </div>
+    <div class="benchmark-card">
+      <div class="number">22%</div>
+      <div class="label">Developer productivity gain</div>
+      <div class="src">Forrester TEI<br>GitHub Copilot, 2023</div>
+    </div>
+    <div class="benchmark-card">
+      <div class="number">90%</div>
+      <div class="label">Tech professionals using AI</div>
+      <div class="src">DORA State of DevOps<br>2025</div>
+    </div>
+    <div class="benchmark-card">
+      <div class="number">24%</div>
+      <div class="label">Trust AI-generated code significantly</div>
+      <div class="src">DORA State of DevOps<br>2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- How Scores Work -->
+<section>
+  <h2>How Scores Are Computed</h2>
+
+  <h3>Improvement Percentage</h3>
+  <p>For each metric: <code>((post - baseline) / baseline) &times; 100</code>, adjusted for direction (lower is better for cycle time, MTTR, etc.)</p>
+
+  <h3>Overall Score Weighting</h3>
+  <table>
+    <thead>
+      <tr><th>Category</th><th>Weight</th><th>Type</th><th>Rationale</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>DORA Metrics</td><td><strong>30%</strong></td><td>Objective (system data)</td><td>Delivery performance</td></tr>
+      <tr><td>Scrum Metrics</td><td><strong>30%</strong></td><td>Objective (sprint data)</td><td>Sprint performance</td></tr>
+      <tr><td>SPACE Survey</td><td><strong>25%</strong></td><td>Perceptual (survey)</td><td>Developer experience</td></tr>
+      <tr><td>DevEx Survey + AI Tensions</td><td><strong>15%</strong></td><td>Perceptual (survey)</td><td>Developer experience + AI tradeoffs</td></tr>
+      <tr><td>AI Readiness</td><td><strong>Separate</strong></td><td>Organizational assessment</td><td>Not weighted in improvement score — used as context in Amplifier Analysis</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Benchmark Context</h3>
+  <table>
+    <thead>
+      <tr><th>Range</th><th>Interpretation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>&lt; 10%</td><td>Below typical AI training impact</td></tr>
+      <tr><td>10-25%</td><td>Consistent with Forrester TEI estimates</td></tr>
+      <tr><td>25-45%</td><td>Consistent with McKinsey and Harvard/BCG findings</td></tr>
+      <tr><td>45-60%</td><td>Exceptional — approaching GitHub Copilot individual benchmark</td></tr>
+      <tr><td>&gt; 60%</td><td>Extraordinary — may include novelty effect, recommend re-measuring in 3 months</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Government -->
+<section>
+  <h2>Government &amp; Public Sector Applicability</h2>
+  <p>The tool is designed to meet the accountability and reporting requirements of government agencies and public sector organizations.</p>
+
+  <table>
+    <thead>
+      <tr><th>Requirement</th><th>How the Tool Addresses It</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Measurable outcomes</td><td>Quantitative before/after data using peer-reviewed frameworks</td></tr>
+      <tr><td>Audit-ready data</td><td>Every metric timestamped, sourced, and attributed to an assessor</td></tr>
+      <tr><td>Budget justification</td><td>Executive summary reports suitable for IG reviews and budget submissions</td></tr>
+      <tr><td>Workforce development</td><td>Measures team growth and capability building — same team, more output</td></tr>
+      <tr><td>Standardized methodology</td><td>Published, citable research frameworks — not proprietary or arbitrary</td></tr>
+      <tr><td>Cross-team benchmarking</td><td>Compare improvement across departments, teams, and agencies</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Integration -->
+<section>
+  <h2>Data Sources &amp; Integrations</h2>
+  <p>The tool would integrate with existing Scrum and DevOps tools — no manual data entry required for objective metrics.</p>
+  <table>
+    <thead>
+      <tr><th>Platform</th><th>Data Collected</th><th>Readiness</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Jira Cloud</td><td>Sprints, velocity, story points, cycle time, issues by type/assignee</td><td>Designed</td></tr>
+      <tr><td>Azure DevOps</td><td>Iterations, work items, velocity, cycle time, pipelines</td><td>Designed</td></tr>
+      <tr><td>GitHub</td><td>PRs, deployments, CI/CD runs (for DORA metrics)</td><td>Designed</td></tr>
+      <tr><td>GitLab</td><td>MRs, deployments, pipelines</td><td>Planned</td></tr>
+      <tr><td>Linear</td><td>Cycles, issues, velocity</td><td>Planned</td></tr>
+    </tbody>
+  </table>
+  <p>SPACE and DevEx surveys are the only manual input — 8 questions per team member, conducted twice (baseline and post-training).</p>
+</section>
+
+<!-- References -->
+<section class="page-break">
+  <h2>Research References</h2>
+  <p>The methodology is grounded in the following published research. Click any link to read the original paper or report.</p>
+  <ol class="ref-list">
+    <li>Forsgren, N., Humble, J., Kim, G. (2018). <em>Accelerate: The Science of Lean Software and DevOps.</em> IT Revolution Press. <a href="https://itrevolution.com/product/accelerate/" target="_blank" rel="noopener">itrevolution.com/product/accelerate</a></li>
+    <li>Forsgren, N., Storey, M-A., et al. (2021). "The SPACE of Developer Productivity." <em>ACM Queue</em>, Vol. 19, Issue 1. <a href="https://queue.acm.org/detail.cfm?id=3454124" target="_blank" rel="noopener">queue.acm.org/detail.cfm?id=3454124</a></li>
+    <li>Noda, A., Storey, M-A., Forsgren, N. (2023). "DevEx: What Actually Drives Productivity." <em>ACM Queue</em>, Vol. 21, Issue 2. <a href="https://queue.acm.org/detail.cfm?id=3595878" target="_blank" rel="noopener">queue.acm.org/detail.cfm?id=3595878</a></li>
+    <li>Peng, S., Kalliamvakou, E., Cihon, P., Demirer, M. (2023). "The Impact of AI on Developer Productivity: Evidence from GitHub Copilot." <a href="https://arxiv.org/abs/2302.06590" target="_blank" rel="noopener">arxiv.org/abs/2302.06590</a></li>
+    <li>Dell'Acqua, F., McFowland, E., Mollick, E., et al. (2023). "Navigating the Jagged Technological Frontier." <em>Harvard Business School Working Paper 24-013</em>. <a href="https://www.hbs.edu/ris/Publication%20Files/24-013_d9b45b68-9e74-42d6-a1c6-c72fb70c7571.pdf" target="_blank" rel="noopener">hbs.edu &mdash; Working Paper 24-013 (PDF)</a></li>
+    <li>McKinsey &amp; Company (2023). "Unleashing Developer Productivity with Generative AI." <a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/unleashing-developer-productivity-with-generative-ai" target="_blank" rel="noopener">mckinsey.com &mdash; Unleashing Developer Productivity</a></li>
+    <li>Forrester Research (2023). "The Total Economic Impact of GitHub Copilot." <a href="https://github.blog/news-insights/research/research-quantifying-github-copilots-impact-in-the-enterprise-with-accenture/" target="_blank" rel="noopener">github.blog &mdash; Quantifying Copilot Impact</a></li>
+    <li>Google DORA Team (2024). <em>State of DevOps Report 2024.</em> <a href="https://dora.dev/research/" target="_blank" rel="noopener">dora.dev/research</a></li>
+    <li>Google DORA Team (2025). <em>State of AI-assisted Software Development.</em> <a href="https://dora.dev/research/" target="_blank" rel="noopener">dora.dev/research</a></li>
+    <li>Google DORA Team (2025). <em>DORA AI Capabilities Model.</em> 7 capabilities that amplify AI benefits. <a href="https://dora.dev/capabilities/" target="_blank" rel="noopener">dora.dev/capabilities</a></li>
+  </ol>
+</section>
+
+<!-- Feedback -->
+<div class="feedback-section no-print">
+  <h3>Feedback Requested</h3>
+  <p>Please review this proposal and share your feedback on:</p>
+  <p style="text-align: left; max-width: 500px; margin: 12px auto;">
+    1. Are the right metrics being measured?<br>
+    2. Is the methodology sound for our use case?<br>
+    3. Would you add or remove any measurement dimensions?<br>
+    4. Is the role-based training approach appropriate?<br>
+    5. Any concerns about the integration approach?<br>
+    6. Suggestions for the report format?
+  </p>
+</div>
+
+<footer>
+  Proposal Document &mdash; April 2026 &mdash; For internal review
+</footer>
+
+</div>
+</body>
+</html>

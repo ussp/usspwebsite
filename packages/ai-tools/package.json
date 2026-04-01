@@ -1,0 +1,30 @@
+{
+  "name": "ussp-ai-tools",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3002",
+    "build": "cd ../platform-core && npx tsc && cd ../ai-tools && next build",
+    "start": "next start -p ${PORT:-3002}",
+    "lint": "eslint",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.98.0",
+    "@ussp-platform/core": "file:../platform-core",
+    "next": "16.1.6",
+    "next-auth": "^5.0.0-beta.30",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/react": "^16",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^3"
+  }
+}

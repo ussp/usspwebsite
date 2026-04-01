@@ -11,6 +11,9 @@ const ROLE_PERMISSIONS: Record<StaffRole, string[]> = {
     "end_clients.*",
     "contacts.read",
     "dashboard.read",
+    "ai_engagements.read",
+    "ai_assessments.read",
+    "ai_reports.read",
   ],
   sales: [
     "contacts.*",

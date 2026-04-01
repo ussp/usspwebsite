@@ -16,6 +16,7 @@ from sqlalchemy import (
     Column,
     Index,
     Integer,
+    Numeric,
     String,
     Boolean,
     DateTime,
@@ -821,4 +822,179 @@ class CandidateReference(Base):
 
     __table_args__ = (
         Index("idx_candidate_references_site_request", "site_id", "document_request_id"),
+    )
+
+
+# =============================================================================
+# AI TRANSFORMATION MONITORING TOOL TABLES
+# =============================================================================
+# These tables are fully independent — only FK to `sites` and `staff_users`.
+# No references to ATS tables (positions, applications, candidates, etc.).
+# This module can be spun off into its own product at any time.
+# =============================================================================
+
+
+class AIEngagement(Base):
+    """
+    AI training engagement with a client organization.
+
+    Represents a full engagement lifecycle: baseline → training → post-assessment.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "ai_engagements"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    name = Column(String(255), nullable=False)
+    client_name = Column(String(255), nullable=False)
+    engagement_lead_id = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    status = Column(String(20), nullable=False, server_default="draft")  # draft | baseline | training | post_assessment | completed | archived
+    integration_type = Column(String(20))  # jira | azure_devops | github | gitlab | linear | manual
+    integration_config = Column(JSONB)  # { baseUrl, projectKey, boardId, token_encrypted }
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "name", name="uq_ai_engagements_site_name"),
+        Index("idx_ai_engagements_site_status", "site_id", "status"),
+        Index("idx_ai_engagements_site_lead", "site_id", "engagement_lead_id"),
+    )
+
+
+class AITeam(Base):
+    """
+    Teams within an AI training engagement.
+
+    One engagement can train multiple teams. Each team gets independent
+    baseline and post-training assessments.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "ai_teams"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    engagement_id = Column(UUID(as_uuid=True), ForeignKey("ai_engagements.id"), nullable=False)
+    name = Column(String(255), nullable=False)
+    team_size = Column(Integer, nullable=False)
+    external_team_id = Column(String(255))  # Jira board ID, ADO team ID, etc.
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_ai_teams_site_engagement", "site_id", "engagement_id"),
+    )
+
+
+class AITeamMember(Base):
+    """
+    Individual team members with roles for role-based training recommendations.
+
+    Used for per-person activity analysis and customized AI training plans.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "ai_team_members"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    team_id = Column(UUID(as_uuid=True), ForeignKey("ai_teams.id"), nullable=False)
+    display_name = Column(String(255), nullable=False)  # "Dev-1" or real name
+    role = Column(String(50), nullable=False)  # developer | qa | scrum_master | product_owner | devops | designer
+    external_user_id = Column(String(255))  # Jira account ID for integration mapping
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_ai_team_members_site_team", "site_id", "team_id"),
+    )
+
+
+class AIAssessment(Base):
+    """
+    A measurement period (baseline or post-training) for a specific team.
+
+    Each team gets one baseline and one post-training assessment.
+    Metrics are pulled from integrations (Jira, Azure DevOps, GitHub)
+    and/or entered via SPACE/DevEx surveys.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "ai_assessments"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    team_id = Column(UUID(as_uuid=True), ForeignKey("ai_teams.id"), nullable=False)
+    assessment_type = Column(String(20), nullable=False)  # baseline | post_training
+    period_start = Column(DateTime(timezone=True), nullable=False)
+    period_end = Column(DateTime(timezone=True), nullable=False)
+    sprint_count = Column(Integer)
+    data_source = Column(String(20), nullable=False, server_default="manual")  # integration | manual
+    status = Column(String(20), nullable=False, server_default="draft")  # draft | collecting | completed
+    assessed_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "team_id", "assessment_type", name="uq_ai_assessments_site_team_type"),
+        Index("idx_ai_assessments_site_team", "site_id", "team_id"),
+    )
+
+
+class AIMetric(Base):
+    """
+    Unified metrics table for DORA, SPACE, DevEx, and Scrum metrics.
+
+    One row per metric per assessment (or per member for survey responses).
+    Categories: dora, space, devex, scrum.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "ai_metrics"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("ai_assessments.id"), nullable=False)
+    category = Column(String(20), nullable=False)  # dora | space | devex | scrum
+    metric_name = Column(String(50), nullable=False)  # e.g., "deployment_frequency", "velocity", "satisfaction"
+    metric_value = Column(Numeric, nullable=False)
+    metric_unit = Column(String(30), nullable=False)  # per_week | minutes | percentage | story_points | score_1_5 | count
+    member_id = Column(UUID(as_uuid=True), ForeignKey("ai_team_members.id"))  # NULL for team-level, set for individual surveys
+    raw_data = Column(JSONB)  # Source data from integration
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_ai_metrics_site_assessment_category", "site_id", "assessment_id", "category", "metric_name"),
+        Index("idx_ai_metrics_site_assessment_member", "site_id", "assessment_id", "member_id"),
+    )
+
+
+class AITrainingPlan(Base):
+    """
+    Role-based AI training recommendations generated from activity analysis.
+
+    Analyzes what each team member does (from Jira data) and recommends
+    specific AI tools and training modules customized for their role.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "ai_training_plans"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    team_id = Column(UUID(as_uuid=True), ForeignKey("ai_teams.id"), nullable=False)
+    member_id = Column(UUID(as_uuid=True), ForeignKey("ai_team_members.id"))  # NULL for team-wide recs
+    role = Column(String(50), nullable=False)  # developer | qa | scrum_master | product_owner | devops | designer
+    activity_summary = Column(JSONB)  # { issueTypes: [...], storyPoints: N, topActivities: [...] }
+    recommended_tools = Column(JSONB, nullable=False, server_default="[]")  # [{ tool, reason, expected_impact }]
+    recommended_training = Column(JSONB, nullable=False, server_default="[]")  # [{ module, description, duration_hours, priority }]
+    status = Column(String(20), nullable=False, server_default="proposed")  # proposed | approved | in_progress | completed
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_ai_training_plans_site_team", "site_id", "team_id"),
+        Index("idx_ai_training_plans_site_team_role", "site_id", "team_id", "role"),
     )

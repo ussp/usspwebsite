@@ -169,11 +169,68 @@
       "types": "./dist/crypto/pii.d.ts",
       "import": "./dist/crypto/pii.js",
       "default": "./dist/crypto/pii.js"
+    },
+    "./queries/admin/document-requests": {
+      "types": "./dist/queries/admin/document-requests.d.ts",
+      "import": "./dist/queries/admin/document-requests.js",
+      "default": "./dist/queries/admin/document-requests.js"
+    },
+    "./queries/portal": {
+      "types": "./dist/queries/portal.d.ts",
+      "import": "./dist/queries/portal.js",
+      "default": "./dist/queries/portal.js"
+    },
+    "./types/ai-tools": {
+      "types": "./dist/types/ai-tools.d.ts",
+      "import": "./dist/types/ai-tools.js",
+      "default": "./dist/types/ai-tools.js"
+    },
+    "./queries/admin/ai-engagements": {
+      "types": "./dist/queries/admin/ai-engagements.d.ts",
+      "import": "./dist/queries/admin/ai-engagements.js",
+      "default": "./dist/queries/admin/ai-engagements.js"
+    },
+    "./queries/admin/ai-assessments": {
+      "types": "./dist/queries/admin/ai-assessments.d.ts",
+      "import": "./dist/queries/admin/ai-assessments.js",
+      "default": "./dist/queries/admin/ai-assessments.js"
+    },
+    "./queries/admin/ai-reports": {
+      "types": "./dist/queries/admin/ai-reports.d.ts",
+      "import": "./dist/queries/admin/ai-reports.js",
+      "default": "./dist/queries/admin/ai-reports.js"
+    },
+    "./queries/admin/ai-training": {
+      "types": "./dist/queries/admin/ai-training.d.ts",
+      "import": "./dist/queries/admin/ai-training.js",
+      "default": "./dist/queries/admin/ai-training.js"
+    },
+    "./integrations/jira": {
+      "types": "./dist/integrations/jira.d.ts",
+      "import": "./dist/integrations/jira.js",
+      "default": "./dist/integrations/jira.js"
+    },
+    "./integrations/azure-devops": {
+      "types": "./dist/integrations/azure-devops.d.ts",
+      "import": "./dist/integrations/azure-devops.js",
+      "default": "./dist/integrations/azure-devops.js"
+    },
+    "./integrations/github-metrics": {
+      "types": "./dist/integrations/github-metrics.d.ts",
+      "import": "./dist/integrations/github-metrics.js",
+      "default": "./dist/integrations/github-metrics.js"
+    },
+    "./integrations/adapter": {
+      "types": "./dist/integrations/adapter.d.ts",
+      "import": "./dist/integrations/adapter.js",
+      "default": "./dist/integrations/adapter.js"
     }
   },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
@@ -183,7 +240,8 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.1.9"
   },
   "files": [
     "dist",
