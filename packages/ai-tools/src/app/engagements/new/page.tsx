@@ -47,7 +47,20 @@ export default function NewEngagementPage() {
       <AdminSidebar />
       <AdminTopbar />
       <main className="ml-60 mt-14 p-6">
-        <h1 className="text-2xl font-bold mb-6">New Engagement</h1>
+        <h1 className="text-2xl font-bold mb-2">New Engagement</h1>
+        <p className="text-sm text-dark/50 mb-6">
+          An engagement tracks the full AI training lifecycle for a client team: baseline measurement, training delivery, and post-training comparison.
+        </p>
+
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 max-w-xl">
+          <div className="flex gap-3">
+            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-200 text-blue-700 flex items-center justify-center text-xs font-bold">i</div>
+            <div className="text-sm text-blue-900">
+              <p className="font-semibold mb-1">What happens next?</p>
+              <p className="opacity-80">After creating the engagement, you&apos;ll add team members with their roles, connect to Jira or Azure DevOps, and start the baseline measurement.</p>
+            </div>
+          </div>
+        </div>
 
         <form onSubmit={handleSubmit} className="max-w-xl bg-white rounded-lg border border-light-gray p-6">
           <div className="mb-4">

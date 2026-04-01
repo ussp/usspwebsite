@@ -4,9 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: "📊" },
-  { href: "/engagements", label: "Engagements", icon: "🎯" },
-  { href: "/methodology", label: "Methodology", icon: "📚" },
+  { href: "/", label: "Dashboard", icon: "📊", section: "" },
+  { href: "/engagements", label: "Transformation Monitor", icon: "📈", section: "Tools" },
+  { href: "/readiness", label: "Readiness Assessment", icon: "🔍", section: "Tools" },
+  { href: "/methodology", label: "Methodology", icon: "📚", section: "Reference" },
 ];
 
 export default function AdminSidebar() {
@@ -19,24 +20,31 @@ export default function AdminSidebar() {
         <p className="text-xs text-white/50 mt-0.5">by USSP</p>
       </div>
       <nav className="flex-1 px-3 py-4 space-y-1">
-        {navItems.map((item) => {
+        {navItems.map((item, i) => {
           const isActive =
             item.href === "/"
               ? pathname === "/"
               : pathname.startsWith(item.href);
+          const showSection = item.section && (i === 0 || navItems[i - 1].section !== item.section);
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                isActive
-                  ? "bg-primary text-white"
-                  : "text-white/70 hover:bg-white/10 hover:text-white"
-              }`}
-            >
-              <span className="text-base">{item.icon}</span>
-              {item.label}
-            </Link>
+            <div key={item.href}>
+              {showSection && (
+                <p className="text-[10px] font-semibold text-white/30 uppercase tracking-wider px-3 pt-4 pb-1">
+                  {item.section}
+                </p>
+              )}
+              <Link
+                href={item.href}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  isActive
+                    ? "bg-primary text-white"
+                    : "text-white/70 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                <span className="text-base">{item.icon}</span>
+                {item.label}
+              </Link>
+            </div>
           );
         })}
       </nav>
