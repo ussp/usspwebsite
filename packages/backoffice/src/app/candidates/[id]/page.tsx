@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import StatusBadge from "@/components/StatusBadge";
+import Tooltip from "@/components/Tooltip";
 
 interface Candidate {
   id: string;
@@ -462,6 +463,11 @@ export default function CandidateDetailPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <h3 className="font-semibold">Salary Expectations</h3>
+                <Tooltip text="Used for rate matching against position salary ranges (7% weight in match scoring)" position="right">
+                  <svg className="w-4 h-4 text-dark/30 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </Tooltip>
               </div>
               <div className="grid grid-cols-3 gap-3">
                 <div>
@@ -526,6 +532,11 @@ export default function CandidateDetailPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                   </svg>
                   <h3 className="font-semibold">Certifications ({certifications.length})</h3>
+                  <Tooltip text="Professional certifications used for position matching (8% weight). Verify to confirm the candidate holds this cert." position="right">
+                    <svg className="w-4 h-4 text-dark/30 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </Tooltip>
                 </div>
                 <button
                   onClick={() => setShowAddCert(!showAddCert)}
@@ -604,18 +615,24 @@ export default function CandidateDetailPage() {
                         <div className="flex items-center gap-2">
                           <p className="text-sm font-medium">{cert.certification_name}</p>
                           {cert.verified ? (
-                            <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">
-                              Verified
-                            </span>
+                            <Tooltip text="A recruiter has confirmed this certification is valid" position="top">
+                              <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">
+                                Verified
+                              </span>
+                            </Tooltip>
                           ) : (
-                            <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">
-                              Unverified
-                            </span>
+                            <Tooltip text="This certification has not been verified by a recruiter yet" position="top">
+                              <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">
+                                Unverified
+                              </span>
+                            </Tooltip>
                           )}
                           {cert.source === "extracted" && (
-                            <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
-                              From Resume
-                            </span>
+                            <Tooltip text="Automatically extracted from the candidate's resume" position="top">
+                              <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
+                                From Resume
+                              </span>
+                            </Tooltip>
                           )}
                         </div>
                         {cert.issuing_organization && (
@@ -643,25 +660,27 @@ export default function CandidateDetailPage() {
                       </div>
                       <div className="flex items-center gap-1 ml-2">
                         {!cert.verified && (
+                          <Tooltip text="Mark this certification as verified" position="top">
+                            <button
+                              onClick={() => handleVerifyCert(cert.id)}
+                              className="p-1.5 text-green-600 hover:bg-green-50 rounded transition-colors"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                            </button>
+                          </Tooltip>
+                        )}
+                        <Tooltip text="Remove this certification" position="top">
                           <button
-                            onClick={() => handleVerifyCert(cert.id)}
-                            title="Verify"
-                            className="p-1.5 text-green-600 hover:bg-green-50 rounded transition-colors"
+                            onClick={() => handleDeleteCert(cert.id)}
+                            className="p-1.5 text-red-400 hover:bg-red-50 rounded transition-colors"
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
                           </button>
-                        )}
-                        <button
-                          onClick={() => handleDeleteCert(cert.id)}
-                          title="Remove"
-                          className="p-1.5 text-red-400 hover:bg-red-50 rounded transition-colors"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </button>
+                        </Tooltip>
                       </div>
                     </div>
                   ))}
@@ -678,9 +697,11 @@ export default function CandidateDetailPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
                 <h3 className="font-semibold">Identity Documents</h3>
-                <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                  Encrypted
-                </span>
+                <Tooltip text="All PII data is encrypted with AES-256-GCM at the application level before storage" position="right">
+                  <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full cursor-help">
+                    Encrypted
+                  </span>
+                </Tooltip>
               </div>
 
               {piiAccessDenied ? (
@@ -845,17 +866,23 @@ export default function CandidateDetailPage() {
               <h3 className="font-semibold mb-3">Quick Info</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-dark/50">Type</span>
+                  <Tooltip text="Internal = USSP employee, External = outside candidate, Vendor = subcontractor" position="left">
+                    <span className="text-dark/50 cursor-help">Type</span>
+                  </Tooltip>
                   <span className="capitalize">
                     {TYPE_LABELS[candidate.candidate_type] || candidate.candidate_type}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-dark/50">Status</span>
+                  <Tooltip text="Available = open to work, Employed = currently placed, On Assignment = active engagement" position="left">
+                    <span className="text-dark/50 cursor-help">Status</span>
+                  </Tooltip>
                   <span className="capitalize">{candidate.current_status.replace(/_/g, " ")}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-dark/50">Source</span>
+                  <Tooltip text="How this candidate entered the system (application, referral, sourced, or internal)" position="left">
+                    <span className="text-dark/50 cursor-help">Source</span>
+                  </Tooltip>
                   <span className="capitalize">{candidate.source}</span>
                 </div>
                 <div className="flex justify-between">

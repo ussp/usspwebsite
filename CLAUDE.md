@@ -86,18 +86,20 @@ D:/Code/ussp/
 │   │       ├── supabase/{server,client}.ts
 │   │       ├── queries/{jobs,applications,contact,analytics}.ts
 │   │       ├── queries/admin/{positions,applications,staff,contacts,dashboard,audit}.ts
+│   │       ├── queries/admin/{candidates,certifications,resumes,matching,candidate-pii}.ts
 │   │       ├── auth/{config,admin-config,rbac}.ts
 │   │       ├── api/{applications,upload,contact}.ts
-│   │       └── types/{database,admin,site}.ts
+│   │       └── types/{database,admin,site,matching}.ts
 │   ├── backoffice/                      ← BACK-OFFICE APP (app.ussp.co)
 │   │   └── src/app/
 │   │       ├── layout.tsx, globals.css, page.tsx (dashboard)
-│   │       ├── login/, positions/, applications/, contacts/, staff/
-│   │       └── api/                     ← 11 API routes
+│   │       ├── login/, positions/, applications/, candidates/, contacts/, staff/
+│   │       └── api/                     ← API routes (incl. applications/by-email)
 │   └── site-template/                   ← Scaffold for new site repos
 ├── scripts/
 │   ├── seed-jobs.ts                     ← Seed job positions
-│   └── seed-admin.ts                    ← Seed admin user
+│   ├── seed-admin.ts                    ← Seed admin user
+│   └── backfill-candidates.ts           ← Fix orphaned applications missing candidates
 ├── public/
 │   ├── llms.txt, llms-full.txt          ← AI search files (MUST sync with content)
 │   ├── robots.txt
@@ -225,3 +227,8 @@ className="font-[family-name:var(--font-spartan)]"      // Display
 | Add back-office staff user | `app.ussp.co/staff/new` or `ADMIN_EMAIL=x npx tsx scripts/seed-admin.ts` |
 | Change RBAC permissions | Edit `packages/platform-core/src/auth/rbac.ts`, rebuild |
 | Add back-office feature | Query in `platform-core/src/queries/admin/`, API route, page, rebuild both |
+| Add candidate certification | Back office at `app.ussp.co/candidates/[id]` — certifications card, or API `POST /api/candidates/[id]/certifications` |
+| Verify a certification | Back office candidate detail — click checkmark on cert, or API `PATCH /api/candidates/[id]/certifications/[certId]` with `{ action: "verify" }` |
+| Update candidate salary | Back office candidate detail — salary expectations card, or API `PATCH /api/candidates/[id]` with `salary_expectation_min`, `salary_expectation_max`, `salary_type` |
+| Fix orphaned applications | `npx tsx scripts/backfill-candidates.ts` — creates missing candidate records and links them |
+| Add matching dimension | Edit `packages/platform-core/src/types/matching.ts` — add to `MatchDimension`, `DEFAULT_WEIGHTS`, `CandidateMatchData`, `PositionMatchData` |
