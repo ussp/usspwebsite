@@ -48,6 +48,21 @@ interface OtherApplication {
   resume_name: string | null;
 }
 
+interface PositionInfo {
+  id: string;
+  title: string;
+  description: string | null;
+  bill_rate: string | null;
+  location: string | null;
+  type: string | null;
+  work_mode: string | null;
+  department: string | null;
+  duration_hours: string | null;
+  client_name: string | null;
+  end_client_name: string | null;
+  active: boolean;
+}
+
 interface StatusHistoryEntry {
   status: string;
   changed_at: string;
@@ -58,6 +73,7 @@ export default function ApplicationDetailPage() {
   const params = useParams();
   const router = useRouter();
   const [app, setApp] = useState<Application | null>(null);
+  const [position, setPosition] = useState<PositionInfo | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
   const [otherApps, setOtherApps] = useState<OtherApplication[]>([]);
   const [statusHistory, setStatusHistory] = useState<StatusHistoryEntry[]>([]);
@@ -76,6 +92,15 @@ export default function ApplicationDetailPage() {
       setNotes(notesData);
       setStatusHistory(Array.isArray(historyData) ? historyData : []);
       setLoading(false);
+
+      // Fetch position details (description, rate, etc.)
+      if (appData?.position_id) {
+        fetch(`/api/positions/${appData.position_id}`)
+          .then((r) => r.ok ? r.json() : null)
+          .then((posData) => {
+            if (posData) setPosition(posData);
+          });
+      }
 
       // Fetch other applications by the same person (each job = separate record)
       if (appData?.email) {
@@ -279,6 +304,78 @@ export default function ApplicationDetailPage() {
                 )}
               </div>
             </div>
+
+            {/* Position Details */}
+            {position && (
+              <div className="bg-white rounded-lg border border-light-gray p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold">Position Details</h3>
+                  {!position.active && (
+                    <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
+                      Closed
+                    </span>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+                  {position.location && (
+                    <div>
+                      <span className="text-dark/50">Location:</span>{" "}
+                      {position.location}
+                    </div>
+                  )}
+                  {position.type && (
+                    <div>
+                      <span className="text-dark/50">Type:</span>{" "}
+                      {position.type}
+                    </div>
+                  )}
+                  {position.work_mode && (
+                    <div>
+                      <span className="text-dark/50">Work Mode:</span>{" "}
+                      {position.work_mode}
+                    </div>
+                  )}
+                  {position.bill_rate && (
+                    <div>
+                      <span className="text-dark/50">Bill Rate:</span>{" "}
+                      <span className="font-medium">{position.bill_rate}</span>
+                    </div>
+                  )}
+                  {position.duration_hours && (
+                    <div>
+                      <span className="text-dark/50">Duration:</span>{" "}
+                      {position.duration_hours}
+                    </div>
+                  )}
+                  {position.department && (
+                    <div>
+                      <span className="text-dark/50">Department:</span>{" "}
+                      {position.department}
+                    </div>
+                  )}
+                  {position.client_name && (
+                    <div>
+                      <span className="text-dark/50">Client:</span>{" "}
+                      {position.client_name}
+                    </div>
+                  )}
+                  {position.end_client_name && (
+                    <div>
+                      <span className="text-dark/50">End Client:</span>{" "}
+                      {position.end_client_name}
+                    </div>
+                  )}
+                </div>
+                {position.description && (
+                  <div>
+                    <p className="text-dark/50 text-sm mb-1">Description:</p>
+                    <div className="text-sm text-dark/80 whitespace-pre-line bg-light-gray/30 rounded-lg p-3 max-h-48 overflow-y-auto">
+                      {position.description}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Resume */}
             <div className="bg-white rounded-lg border border-light-gray p-6">
