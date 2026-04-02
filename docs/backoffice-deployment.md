@@ -225,9 +225,21 @@ No cookie collision is possible.
 | `/api/articles/[id]` | GET, PATCH, DELETE | Get/update/delete article |
 | `/api/clients` | GET, POST | List/create clients |
 | `/api/end-clients` | GET, POST | List/create end clients |
-| `/api/matches` | POST | Run candidate-position matching |
+| `/api/positions/[id]/matches` | GET, POST | Get match scores (GET), run candidate matching (POST) |
+| `/api/matches/[id]/feedback` | POST | Submit recruiter feedback on a match score |
+| `/api/positions/[id]/stats` | GET | Position applicant stats and flow data |
+| `/api/positions/[id]/activity` | GET | Position audit activity feed |
+| `/api/candidates` | GET, POST | List/create candidates |
+| `/api/candidates/[id]` | GET, PATCH | Get/update candidate (type, status, location, work preference) |
+| `/api/candidates/[id]/certifications` | GET, POST | List/add certifications |
+| `/api/candidates/[id]/certifications/[certId]` | PATCH, DELETE | Update/delete certification |
+| `/api/candidates/[id]/resumes` | GET, POST | List/create resumes |
+| `/api/candidates/[id]/pii` | GET, PUT | Get/update encrypted PII data |
+| `/api/candidates/[id]/pii/upload` | POST | Get signed URL for visa document upload |
+| `/api/applications/by-email` | GET | Cross-application lookup by email |
 | `/api/dashboard` | GET | Dashboard metrics |
 | `/api/assignments` | GET, POST | List/create assignments |
+| `/api/assignments/[id]` | GET, PATCH | Get/update assignment |
 
 ### Database changes
 

@@ -14,6 +14,9 @@ After signing in, you'll see the Dashboard with:
 - **Active Positions** — how many jobs are live on the careers page
 - **New Applications** — unprocessed applications
 - **Recent Contacts** — contact form submissions in the last 7 days
+- **In Progress** — applications moving through the hiring pipeline
+- **Bench** — internal employees needing placement (red when > 0, shows assignments ending within 30 days)
+- **Hot Positions** — top positions ranked by activity, with "Find matching candidates" link on positions with 0 apps
 - **Application Pipeline** — visual breakdown by status
 
 ---
@@ -152,6 +155,109 @@ The user can now sign in with their Google account.
 
 ---
 
+## Candidate Matching
+
+The system includes an 8-dimension rule-based matching engine that scores candidates against position requirements.
+
+### Running a Match
+1. Navigate to a **Position detail page**
+2. Scroll to the **Candidate Matching** section
+3. Click **"Find Matching Candidates"** to score all candidates
+4. Results appear ranked by score with strengths/gaps highlighted
+
+You can also trigger matching from the dashboard by clicking on a hot position with 0 applications.
+
+### Match Dimensions (weighted scoring)
+| Dimension | Weight | What It Checks |
+|-----------|--------|---------------|
+| Skills | 30% | Required & preferred skills vs. resume extracted skills |
+| Experience | 20% | Years of experience vs. position min/max |
+| Location | 10% | Candidate location + work preference vs. position location/work mode |
+| Education | 10% | Degree level vs. position education requirement |
+| Certifications | 8% | Professional certs vs. required certifications |
+| Availability | 8% | Candidate status + assignment end dates |
+| Resume Recency | 7% | How recently the resume was uploaded |
+| Rate Compatibility | 7% | Salary expectations vs. position bill rate/salary range |
+
+### Filtering Results
+- **All / Internal / Bench** — filter to see only internal employees
+- **"Internal first" checkbox** — sorts internal candidates to the top
+- Click any row to expand the full dimension breakdown
+- Click **"View Candidate"** to go to the candidate profile
+
+### Work Preference Impact
+Candidate work preferences (set on the candidate profile) affect location scoring:
+- **Remote Only** candidates are penalized for on-site/hybrid positions (score: 20)
+- **Open to Travel** candidates get boosted for location mismatches (score: 60-80)
+- **Hybrid/On-site** candidates are scored normally by city/state matching
+
+---
+
+## Managing Candidates
+
+### Adding a Candidate
+1. Navigate to **Candidates** in the sidebar
+2. Click **"+ Add Candidate"**
+3. Select candidate type: **Internal Employee**, **External**, or **Vendor**
+4. Fill in name, email, phone, location, work preference, source
+5. Optionally set salary expectations
+6. Click **"Add Candidate"**
+
+### Editing Candidate Details
+On the candidate detail page, the **Quick Info sidebar** has editable dropdowns for:
+- **Type** — change between Internal Employee / External / Vendor
+- **Status** — Available (Bench) / Employed / On Assignment / Not Looking / Blacklisted
+- **Location** — free text (e.g. "Chicago, IL") — used in matching
+- **Work Preference** — Remote Only / Hybrid / On-site / Open to Travel
+- **Source** — how the candidate entered the system
+
+---
+
+## Bench Management
+
+The **Bench** page tracks internal employees who need placement. Access it from the sidebar.
+
+### On Bench Now
+Shows internal employees with status "Available" — these need immediate placement. Each row shows:
+- Name, location, work preference, salary rate, bench duration
+- **"Find Positions"** button to search for matching open positions
+
+### Coming Off Assignment
+Shows internal employees on active assignments, sorted by end date (soonest first). Urgency color coding:
+- **Red** — 14 days or less (or overdue)
+- **Amber** — 15-30 days
+- **Yellow** — 31-60 days
+- **Blue** — 60+ days
+
+Employees with assignments ending within 60 days show a **"Find Next Role"** button.
+
+### Summary Cards
+- **On Bench Now** (red) — count needing immediate placement
+- **Ending in 30 days** (amber) — assignments expiring soon
+- **On Assignment** (blue) — total internal employees currently placed
+
+---
+
+## Managing Assignments
+
+### Viewing Assignments
+Navigate to **Assignments** in the sidebar. Filter by status: Active, Completed, Terminated, On Hold. Assignments expiring within 30 days show a warning icon.
+
+### Creating an Assignment
+1. Click **"+ New Assignment"**
+2. Select the **Employee/Candidate** (filtered to internal employees)
+3. Enter the **Role Title**
+4. Optionally link to a tracked **Position**
+5. Select **Client** and **End Client**
+6. Set **Start Date** and **End Date**
+7. Enter **Bill Rate** and **Pay Rate** ($/hr)
+8. Add any **Notes**
+9. Click **"Create Assignment"**
+
+The candidate's status is automatically updated to "On Assignment" when the assignment is created.
+
+---
+
 ## Candidate Onboarding
 
 When an application reaches **Hired**, an onboarding checklist is automatically created on the candidate record. Navigate to the candidate detail page to see it in the sidebar.
@@ -169,9 +275,10 @@ Each onboarding has three steps that can be updated independently:
 
 ### Candidate Detail Page
 The candidate detail page shows:
-- **Salary Expectations** — min/max with hourly or annual type
-- **Certifications** — professional certifications with recruiter verification
-- **Identity Documents** — encrypted PII (SSN, Driver's License, DOB, Visa)
+- **Quick Info sidebar** — editable type, status, location, work preference, source
+- **Salary Expectations** — min/max with hourly or annual type (used in rate matching)
+- **Certifications** — professional certifications with recruiter verification (used in matching)
+- **Identity Documents** — encrypted PII (SSN, Driver's License, DOB, Visa/Work Authorization)
 - **Applications** — all positions the candidate applied to
 - **Onboarding** — post-hire checklist (when applicable)
 
