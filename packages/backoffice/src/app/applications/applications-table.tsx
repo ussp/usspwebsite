@@ -12,6 +12,22 @@ import {
 
 const STATUSES = ["all", ...PIPELINE_STAGES, ...TERMINAL_STATUSES];
 
+const FILTER_TOOLTIPS: Record<string, string> = {
+  all: "Show all applications regardless of status",
+  new: "Applications awaiting initial review",
+  phone_screen: "Candidates scheduled for or completed phone screening",
+  interview_zoom: "Candidates in the remote video interview stage",
+  interview_in_person: "Candidates in the on-site interview stage",
+  employment_verification: "Candidates undergoing employment history verification",
+  references: "Candidates whose references are being checked",
+  clearances: "Candidates undergoing background/security clearance",
+  offer_pending: "Offers extended — awaiting candidate acceptance",
+  onboarding: "Candidates completing paperwork and onboarding",
+  hired: "Successfully placed candidates",
+  rejected: "Declined applications",
+  withdrawn: "Applications withdrawn by the candidate",
+};
+
 export function ApplicationsTable({
   applications,
   positions,
@@ -70,6 +86,7 @@ export function ApplicationsTable({
         <select
           value={currentPosition}
           onChange={(e) => setPositionFilter(e.target.value)}
+          title="Filter applications by the job position they applied to"
           className="px-3 py-1.5 text-xs rounded-lg border border-light-gray bg-white text-dark/80"
         >
           <option value="all">All Positions</option>
@@ -85,6 +102,7 @@ export function ApplicationsTable({
           <button
             key={s}
             onClick={() => setFilter(s)}
+            title={FILTER_TOOLTIPS[s] || ""}
             className={`px-3 py-1.5 text-xs rounded-full transition-colors ${
               currentStatus === s
                 ? "bg-primary text-white"

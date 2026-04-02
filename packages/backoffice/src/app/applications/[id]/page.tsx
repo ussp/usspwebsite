@@ -253,7 +253,12 @@ export default function ApplicationDetailPage() {
                 <div className="flex items-center gap-2">
                   {app.applicant_type && (
                     <span
-                      className={`inline-block px-2.5 py-1 rounded-full text-xs ${
+                      title={
+                        app.applicant_type === "vendor"
+                          ? "Submitted by a staffing agency or vendor on behalf of the candidate"
+                          : "Candidate applied directly for this position"
+                      }
+                      className={`inline-block px-2.5 py-1 rounded-full text-xs cursor-default ${
                         app.applicant_type === "vendor"
                           ? "bg-purple-100 text-purple-700"
                           : "bg-blue-100 text-blue-700"
@@ -417,7 +422,10 @@ export default function ApplicationDetailPage() {
             {/* Other Applications by Same Person */}
             {otherApps.length > 0 && (
               <div className="bg-white rounded-lg border border-light-gray p-6">
-                <h3 className="font-semibold mb-3">
+                <h3
+                  className="font-semibold mb-3"
+                  title="Other positions this candidate has applied to — each has its own pipeline, resume, and notes"
+                >
                   Other Applications ({otherApps.length})
                 </h3>
                 <div className="space-y-2">

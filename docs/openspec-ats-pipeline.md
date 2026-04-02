@@ -159,16 +159,66 @@ Leverages the existing scoring engine (`match_scores`, `position_requirements` t
 
 ---
 
-## 5. Future Enhancements
+## 5. Per-Position Application Tracking (v1.1 — 2026-04-02)
 
-### 5.1 Planned
+### 5.1 Problem
+
+The original system created ONE application record per email (upsert-by-email). When a candidate applied to a second job, their previous application was overwritten — losing the resume, pipeline status, and notes for the first position. Recruiters couldn't track progress independently per job.
+
+### 5.2 Solution
+
+Each `(email + position)` now creates a **separate application record** with its own resume, pipeline status, notes, and audit trail.
+
+**Database changes (migration `0017`):**
+- Added unique constraint `uq_applications_site_email_position` on `(site_id, email, position_id)`
+- Added indexes: `(site_id, email)` and `(site_id, position_id)` for fast lookups
+
+**Application logic change** (`createOrUpdateApplication`):
+- Before: lookup by `email` only → single record per person
+- After: lookup by `email + position_id` → one record per person per position
+- Same person, same job → UPDATE (e.g., new resume)
+- Same person, new job → INSERT (separate record)
+
+**New API endpoint:**
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| GET | `/api/applications/by-email?email=X` | All applications by a candidate |
+
+**UI changes:**
+- **Applications list**: Added position filter dropdown to filter by specific job
+- **Application detail**: "Other Applications" section now correctly shows all jobs the person applied to, each with its own status and resume
+- **Application detail**: New "Position Details" card showing description, bill rate, location, type, work mode, duration, client, and end client
+- **Candidate detail**: Applications sidebar now shows all applications (one per job) with independent statuses
+
+### 5.3 Data Model
+
+```
+candidates (1) ──< applications (N) >── positions (1)
+   person record      one per (email+position)     job listing
+                      own resume, status, notes
+```
+
+The `candidates` table remains the unified "person" entity. The `application_positions` junction table is kept for backward compatibility but is effectively superseded — each application row now maps to exactly one position.
+
+### 5.4 Future: AI Candidate Matching
+
+With complete application history preserved per position, the system is ready for:
+- **AI job matching**: When a new position is created, match against the candidate pool using resume data, past applications, and outcomes
+- **Candidate re-engagement**: Surface candidates rejected for Role A who fit new Role B
+- **Analytics**: Rejection rates per position, time-to-hire, pipeline velocity
+
+---
+
+## 6. Future Enhancements
+
+### 6.1 Planned
 - **Email integration**: Send templated emails at each pipeline stage (invite to phone screen, schedule interview, etc.)
 - **Scorecard system**: Staff can fill out structured evaluation forms at each stage
 - **Automated scoring**: Trigger match score computation on application submit when resume extraction is wired up
 - **Bulk actions**: Select multiple applications and advance/reject in batch
 - **Kanban board view**: Drag-and-drop candidates between pipeline stages
 
-### 5.2 Considered
+### 6.2 Considered
 - **Custom pipeline templates**: Allow different pipelines per position type (e.g., healthcare vs IT)
 - **SLA tracking**: Alert when a candidate has been in a stage too long
 - **Interview scheduling**: Calendar integration for scheduling interviews from within the pipeline
@@ -176,7 +226,7 @@ Leverages the existing scoring engine (`match_scores`, `position_requirements` t
 
 ---
 
-## 6. Verification Checklist
+## 7. Verification Checklist
 
 - [x] Run Alembic migration `0014` against database
 - [x] Rebuild platform-core: `cd packages/platform-core && npx tsc`
@@ -189,7 +239,7 @@ Leverages the existing scoring engine (`match_scores`, `position_requirements` t
 
 ---
 
-## 7. API Documentation
+## 8. API Documentation
 
 ### 7.1 Application Endpoints
 
@@ -203,6 +253,15 @@ List all applications with optional filters.
 | `position_id` | `UUID` | Filter by position |
 
 **Response**: `AdminApplication[]`
+
+#### `GET /api/applications/by-email`
+Get all applications for a candidate by email address.
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `email` | `string` | **Required.** Candidate email address |
+
+**Response**: `AdminApplication[]` — one per position applied to, ordered by `created_at` descending.
 
 #### `GET /api/applications/[id]`
 Get a single application by ID.
@@ -334,7 +393,7 @@ Get dashboard metrics.
 
 ---
 
-## 8. User Flows
+## 9. User Flows
 
 ### 8.1 New Application Flow
 1. Candidate applies on public careers page via LinkedIn OAuth
@@ -369,7 +428,7 @@ Get dashboard metrics.
 
 ---
 
-## 9. Component Reference
+## 10. Component Reference
 
 ### New Components Created
 
@@ -390,7 +449,7 @@ Get dashboard metrics.
 
 ---
 
-## 10. Design Decisions & Best Practices
+## 11. Design Decisions & Best Practices
 
 ### Pipeline Design
 - **Linear stages**: The 10 progression stages are ordered, reflecting a typical staffing workflow. Applications advance one stage at a time via the "Advance" button.

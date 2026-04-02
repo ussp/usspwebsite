@@ -8,6 +8,21 @@ import {
   STAGE_LABELS,
 } from "@ussp-platform/core/types/admin";
 
+const STAGE_TOOLTIPS: Record<string, string> = {
+  new: "Application just received — awaiting initial review",
+  phone_screen: "Initial phone call to assess basic fit and availability",
+  interview_zoom: "Remote video interview with hiring team",
+  interview_in_person: "On-site or face-to-face interview",
+  employment_verification: "Verifying past employment history and credentials",
+  references: "Contacting professional references provided by candidate",
+  clearances: "Background check, security clearance, or drug screening",
+  offer_pending: "Offer has been extended — awaiting candidate response",
+  onboarding: "Offer accepted — completing paperwork and setup",
+  hired: "Candidate is fully onboarded and placed",
+  rejected: "Application was declined at this stage",
+  withdrawn: "Candidate withdrew their application",
+};
+
 interface StatusHistoryEntry {
   status: string;
   changed_at: string;
@@ -115,8 +130,11 @@ export default function PipelineAccordion({
 
       {/* Duplicate applicant banner */}
       {isDuplicate && (
-        <div className="mb-4 px-3 py-2 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
-          This is a duplicate applicant.
+        <div
+          className="mb-4 px-3 py-2 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700"
+          title="This person has applied to other positions — check 'Other Applications' below for details"
+        >
+          This candidate has applied to multiple positions.
         </div>
       )}
 
@@ -190,7 +208,8 @@ export default function PipelineAccordion({
                 {/* Stage label */}
                 <div className="flex-1 min-w-0">
                   <p
-                    className={`text-sm ${
+                    title={STAGE_TOOLTIPS[stage]}
+                    className={`text-sm cursor-default ${
                       isCurrent
                         ? "font-semibold text-dark"
                         : isCompleted || (isTerminal && wasReached)
@@ -236,6 +255,7 @@ export default function PipelineAccordion({
                       <button
                         onClick={handleAdvance}
                         disabled={advancing}
+                        title={`Move candidate to the next stage: ${STAGE_LABELS[PIPELINE_STAGES[currentIndex + 1]] || ""}`}
                         className="px-4 py-1.5 text-sm font-medium border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors disabled:opacity-50"
                       >
                         {advancing ? "Advancing..." : "Advance"}
@@ -244,6 +264,7 @@ export default function PipelineAccordion({
                     <button
                       onClick={handleDeactivate}
                       disabled={deactivating}
+                      title="Reject this application — marks it as declined"
                       className="px-4 py-1.5 text-sm font-medium border-2 border-red-400 text-red-600 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50 flex items-center gap-1.5"
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

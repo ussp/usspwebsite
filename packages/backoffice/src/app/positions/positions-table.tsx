@@ -21,14 +21,20 @@ export function PositionsTable({
         <div>
           <span>
             {row.is_hot && (
-              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-orange-100 text-orange-700 mr-1.5">
+              <span
+                title="High-priority position — urgent hiring need"
+                className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-orange-100 text-orange-700 mr-1.5"
+              >
                 HOT
               </span>
             )}
             {row.title}
           </span>
           {row.active && (
-            <span className="ml-2 text-[10px] font-medium text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+            <span
+              title="Position is open and accepting applications"
+              className="ml-2 text-[10px] font-medium text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded"
+            >
               ACTIVE
             </span>
           )}
@@ -62,7 +68,10 @@ export function PositionsTable({
         <div className="flex items-center gap-2">
           <span className="font-semibold">{row.applicant_count}</span>
           {row.new_applicant_count > 0 && (
-            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-700">
+            <span
+              title="Applications not yet reviewed (still in 'New' status)"
+              className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-blue-100 text-blue-700"
+            >
               {row.new_applicant_count} new
             </span>
           )}
@@ -80,7 +89,8 @@ export function PositionsTable({
       label: "Status",
       render: (row: PositionListItem) => (
         <span
-          className={`inline-block px-2.5 py-1 rounded-full text-xs ${
+          title={row.active ? "Open for applications" : "No longer accepting applications"}
+          className={`inline-block px-2.5 py-1 rounded-full text-xs cursor-default ${
             row.active
               ? "bg-success/10 text-success"
               : "bg-dark/10 text-dark/50"
