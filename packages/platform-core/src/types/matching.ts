@@ -71,6 +71,7 @@ export const DEFAULT_CONFIG: MatchConfig = {
 export interface CandidateMatchData {
   candidateId: string;
   skills: string[];
+  certifications: string[];
   experienceYears: number | null;
   education: Array<{ degree: string; institution: string; year?: number }>;
   location: string | null;

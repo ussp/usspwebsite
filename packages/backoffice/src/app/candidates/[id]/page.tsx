@@ -17,8 +17,26 @@ interface Candidate {
   source: string;
   tags: string[];
   summary: string | null;
+  salary_expectation_min: number | null;
+  salary_expectation_max: number | null;
+  salary_type: string | null;
   created_at: string;
   updated_at: string | null;
+}
+
+interface Certification {
+  id: string;
+  candidate_id: string;
+  certification_name: string;
+  issuing_organization: string | null;
+  issue_date: string | null;
+  expiry_date: string | null;
+  credential_id: string | null;
+  source: string;
+  verified: boolean;
+  verified_by: string | null;
+  verified_at: string | null;
+  created_at: string;
 }
 
 interface PiiData {
@@ -92,6 +110,23 @@ export default function CandidateDetailPage() {
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
 
+  // Salary state
+  const [salaryMin, setSalaryMin] = useState("");
+  const [salaryMax, setSalaryMax] = useState("");
+  const [salaryType, setSalaryType] = useState("annual");
+  const [savingSalary, setSavingSalary] = useState(false);
+  const [salaryMessage, setSalaryMessage] = useState<string | null>(null);
+
+  // Certifications state
+  const [certifications, setCertifications] = useState<Certification[]>([]);
+  const [showAddCert, setShowAddCert] = useState(false);
+  const [certName, setCertName] = useState("");
+  const [certIssuer, setCertIssuer] = useState("");
+  const [certIssueDate, setCertIssueDate] = useState("");
+  const [certExpiryDate, setCertExpiryDate] = useState("");
+  const [certCredentialId, setCertCredentialId] = useState("");
+  const [addingCert, setAddingCert] = useState(false);
+
   // Form state for editing
   const [formSsn, setFormSsn] = useState("");
   const [formDlNumber, setFormDlNumber] = useState("");
@@ -114,12 +149,22 @@ export default function CandidateDetailPage() {
     ]).then(([candidateData, piiData]) => {
       if (candidateData && !candidateData.error) {
         setCandidate(candidateData);
+        setSalaryMin(candidateData.salary_expectation_min?.toString() || "");
+        setSalaryMax(candidateData.salary_expectation_max?.toString() || "");
+        setSalaryType(candidateData.salary_type || "annual");
 
         // Fetch all applications for this candidate (each job = separate record)
         fetch(`/api/applications/by-email?email=${encodeURIComponent(candidateData.email)}`)
           .then((r) => r.json())
           .then((apps) => {
             if (Array.isArray(apps)) setApplications(apps);
+          });
+
+        // Fetch certifications
+        fetch(`/api/candidates/${id}/certifications`)
+          .then((r) => r.json())
+          .then((certs) => {
+            if (Array.isArray(certs)) setCertifications(certs);
           });
       }
       if (piiData) {
@@ -256,6 +301,84 @@ export default function CandidateDetailPage() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
+  async function handleSaveSalary() {
+    setSavingSalary(true);
+    setSalaryMessage(null);
+    const res = await fetch(`/api/candidates/${params.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        salary_expectation_min: salaryMin ? parseInt(salaryMin) : null,
+        salary_expectation_max: salaryMax ? parseInt(salaryMax) : null,
+        salary_type: salaryType,
+      }),
+    });
+    if (res.ok) {
+      setSalaryMessage("Saved");
+    } else {
+      const err = await res.json();
+      setSalaryMessage(`Error: ${err.error || "Failed to save"}`);
+    }
+    setSavingSalary(false);
+    setTimeout(() => setSalaryMessage(null), 3000);
+  }
+
+  async function handleAddCertification() {
+    if (!certName.trim()) return;
+    setAddingCert(true);
+    const res = await fetch(`/api/candidates/${params.id}/certifications`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        certification_name: certName,
+        issuing_organization: certIssuer || undefined,
+        issue_date: certIssueDate || undefined,
+        expiry_date: certExpiryDate || undefined,
+        credential_id: certCredentialId || undefined,
+        source: "recruiter_added",
+      }),
+    });
+    if (res.ok) {
+      const cert = await res.json();
+      setCertifications((prev) => [cert, ...prev]);
+      setCertName("");
+      setCertIssuer("");
+      setCertIssueDate("");
+      setCertExpiryDate("");
+      setCertCredentialId("");
+      setShowAddCert(false);
+    } else {
+      const err = await res.json();
+      alert(err.error || "Failed to add certification");
+    }
+    setAddingCert(false);
+  }
+
+  async function handleVerifyCert(certId: string) {
+    const res = await fetch(`/api/candidates/${params.id}/certifications/${certId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "verify" }),
+    });
+    if (res.ok) {
+      setCertifications((prev) =>
+        prev.map((c) =>
+          c.id === certId ? { ...c, verified: true, verified_at: new Date().toISOString() } : c
+        )
+      );
+    }
+  }
+
+  async function handleDeleteCert(certId: string) {
+    if (!confirm("Remove this certification?")) return;
+    const res = await fetch(`/api/candidates/${params.id}/certifications/${certId}`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      setCertifications((prev) => prev.filter((c) => c.id !== certId));
+    }
+  }
+
   if (loading) {
     return (
       <>
@@ -329,6 +452,222 @@ export default function CandidateDetailPage() {
               </div>
               {candidate.summary && (
                 <p className="mt-3 text-sm text-dark/70">{candidate.summary}</p>
+              )}
+            </div>
+
+            {/* Salary Expectations Card */}
+            <div className="bg-white rounded-lg border border-light-gray p-6">
+              <div className="flex items-center gap-2 mb-5">
+                <svg className="w-5 h-5 text-dark/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 className="font-semibold">Salary Expectations</h3>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-xs text-dark/50 mb-1">Min</label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-2 text-dark/40 text-sm">$</span>
+                    <input
+                      type="number"
+                      value={salaryMin}
+                      onChange={(e) => setSalaryMin(e.target.value)}
+                      placeholder="0"
+                      className="w-full pl-7 pr-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs text-dark/50 mb-1">Max</label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-2 text-dark/40 text-sm">$</span>
+                    <input
+                      type="number"
+                      value={salaryMax}
+                      onChange={(e) => setSalaryMax(e.target.value)}
+                      placeholder="0"
+                      className="w-full pl-7 pr-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs text-dark/50 mb-1">Type</label>
+                  <select
+                    value={salaryType}
+                    onChange={(e) => setSalaryType(e.target.value)}
+                    className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  >
+                    <option value="annual">Annual</option>
+                    <option value="hourly">Hourly</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 mt-4">
+                <button
+                  onClick={handleSaveSalary}
+                  disabled={savingSalary}
+                  className="px-4 py-1.5 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50"
+                >
+                  {savingSalary ? "Saving..." : "Save"}
+                </button>
+                {salaryMessage && (
+                  <span className={`text-sm ${salaryMessage.startsWith("Error") ? "text-red-600" : "text-green-600"}`}>
+                    {salaryMessage}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Certifications Card */}
+            <div className="bg-white rounded-lg border border-light-gray p-6">
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-dark/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                  <h3 className="font-semibold">Certifications ({certifications.length})</h3>
+                </div>
+                <button
+                  onClick={() => setShowAddCert(!showAddCert)}
+                  className="text-sm text-primary hover:text-primary-dark"
+                >
+                  {showAddCert ? "Cancel" : "+ Add"}
+                </button>
+              </div>
+
+              {/* Add Certification Form */}
+              {showAddCert && (
+                <div className="mb-4 p-4 bg-light-gray/30 rounded-lg space-y-3">
+                  <input
+                    type="text"
+                    value={certName}
+                    onChange={(e) => setCertName(e.target.value)}
+                    placeholder="Certification name (e.g., AWS Solutions Architect)"
+                    className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  />
+                  <input
+                    type="text"
+                    value={certIssuer}
+                    onChange={(e) => setCertIssuer(e.target.value)}
+                    placeholder="Issuing organization (e.g., Amazon Web Services)"
+                    className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  />
+                  <div className="grid grid-cols-3 gap-2">
+                    <div>
+                      <label className="block text-xs text-dark/50 mb-1">Issue Date</label>
+                      <input
+                        type="date"
+                        value={certIssueDate}
+                        onChange={(e) => setCertIssueDate(e.target.value)}
+                        className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-dark/50 mb-1">Expiry Date</label>
+                      <input
+                        type="date"
+                        value={certExpiryDate}
+                        onChange={(e) => setCertExpiryDate(e.target.value)}
+                        className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs text-dark/50 mb-1">Credential ID</label>
+                      <input
+                        type="text"
+                        value={certCredentialId}
+                        onChange={(e) => setCertCredentialId(e.target.value)}
+                        placeholder="Optional"
+                        className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleAddCertification}
+                    disabled={addingCert || !certName.trim()}
+                    className="px-4 py-1.5 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50"
+                  >
+                    {addingCert ? "Adding..." : "Add Certification"}
+                  </button>
+                </div>
+              )}
+
+              {/* Certifications List */}
+              {certifications.length > 0 ? (
+                <div className="space-y-3">
+                  {certifications.map((cert) => (
+                    <div
+                      key={cert.id}
+                      className="flex items-start justify-between p-3 bg-light-gray/30 rounded-lg"
+                    >
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="text-sm font-medium">{cert.certification_name}</p>
+                          {cert.verified ? (
+                            <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">
+                              Verified
+                            </span>
+                          ) : (
+                            <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">
+                              Unverified
+                            </span>
+                          )}
+                          {cert.source === "extracted" && (
+                            <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-full">
+                              From Resume
+                            </span>
+                          )}
+                        </div>
+                        {cert.issuing_organization && (
+                          <p className="text-xs text-dark/50 mt-0.5">{cert.issuing_organization}</p>
+                        )}
+                        <div className="flex gap-3 mt-1 text-xs text-dark/40">
+                          {cert.issue_date && (
+                            <span>Issued: {new Date(cert.issue_date).toLocaleDateString()}</span>
+                          )}
+                          {cert.expiry_date && (
+                            <span
+                              className={
+                                new Date(cert.expiry_date) < new Date()
+                                  ? "text-red-500"
+                                  : ""
+                              }
+                            >
+                              Expires: {new Date(cert.expiry_date).toLocaleDateString()}
+                            </span>
+                          )}
+                          {cert.credential_id && (
+                            <span>ID: {cert.credential_id}</span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 ml-2">
+                        {!cert.verified && (
+                          <button
+                            onClick={() => handleVerifyCert(cert.id)}
+                            title="Verify"
+                            className="p-1.5 text-green-600 hover:bg-green-50 rounded transition-colors"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleDeleteCert(cert.id)}
+                          title="Remove"
+                          className="p-1.5 text-red-400 hover:bg-red-50 rounded transition-colors"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-dark/40">No certifications added</p>
               )}
             </div>
 

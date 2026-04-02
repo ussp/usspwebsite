@@ -416,6 +416,8 @@ export interface ArticleFilters {
 export type CandidateType = "internal_employee" | "external" | "vendor";
 export type CandidateStatus = "available" | "employed" | "on_assignment" | "not_looking" | "blacklisted";
 
+export type SalaryType = "hourly" | "annual";
+
 export interface AdminCandidate {
   id: string;
   site_id: string;
@@ -429,6 +431,9 @@ export interface AdminCandidate {
   source: string;
   tags: string[];
   summary: string | null;
+  salary_expectation_min: number | null;
+  salary_expectation_max: number | null;
+  salary_type: SalaryType | null;
   created_at: string;
   updated_at: string | null;
 }
@@ -444,6 +449,9 @@ export interface CreateCandidateInput {
   source?: string;
   tags?: string[];
   summary?: string;
+  salary_expectation_min?: number;
+  salary_expectation_max?: number;
+  salary_type?: SalaryType;
 }
 
 export interface UpdateCandidateInput {
@@ -456,12 +464,57 @@ export interface UpdateCandidateInput {
   source?: string;
   tags?: string[];
   summary?: string;
+  salary_expectation_min?: number | null;
+  salary_expectation_max?: number | null;
+  salary_type?: SalaryType | null;
 }
 
 export interface CandidateFilters {
   candidate_type?: CandidateType;
   current_status?: CandidateStatus;
   search?: string;
+}
+
+// ── Candidate Certifications ────────────────────────────────────────
+
+export type CertificationSource = "extracted" | "self_reported" | "recruiter_added";
+
+export interface CandidateCertification {
+  id: string;
+  site_id: string;
+  candidate_id: string;
+  certification_name: string;
+  issuing_organization: string | null;
+  issue_date: string | null;
+  expiry_date: string | null;
+  credential_id: string | null;
+  source: CertificationSource;
+  verified: boolean;
+  verified_by: string | null;
+  verified_at: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface CreateCertificationInput {
+  candidate_id: string;
+  certification_name: string;
+  issuing_organization?: string;
+  issue_date?: string;
+  expiry_date?: string;
+  credential_id?: string;
+  source?: CertificationSource;
+}
+
+export interface UpdateCertificationInput {
+  certification_name?: string;
+  issuing_organization?: string | null;
+  issue_date?: string | null;
+  expiry_date?: string | null;
+  credential_id?: string | null;
+  verified?: boolean;
+  verified_by?: string | null;
+  verified_at?: string | null;
 }
 
 // ── Resumes ─────────────────────────────────────────────────────────

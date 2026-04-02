@@ -14,6 +14,7 @@ that isolates data per site. Application-level filtering is primary; RLS is a sa
 
 from sqlalchemy import (
     Column,
+    Date,
     Index,
     Integer,
     Numeric,
@@ -484,6 +485,9 @@ class Candidate(Base):
     source = Column(String(50), server_default="application")  # application | referral | sourced | internal
     tags = Column(JSONB, server_default="[]")
     summary = Column(Text)
+    salary_expectation_min = Column(Integer)
+    salary_expectation_max = Column(Integer)
+    salary_type = Column(String(20))  # hourly | annual
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now())
 
@@ -558,6 +562,44 @@ class CandidateSkill(Base):
     __table_args__ = (
         UniqueConstraint("site_id", "candidate_id", "skill_name", name="uq_candidate_skills_site_candidate_skill"),
         Index("idx_candidate_skills_site_skill", "site_id", "skill_name"),
+    )
+
+
+# =============================================================================
+# CANDIDATE_CERTIFICATIONS TABLE (professional certifications with verification)
+# =============================================================================
+
+
+class CandidateCertification(Base):
+    """
+    Professional certifications for a candidate.
+
+    Tracks certification name, issuer, dates, and recruiter verification status.
+    Can be sourced from resume extraction, self-reported, or recruiter-added.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "candidate_certifications"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    certification_name = Column(String(255), nullable=False)
+    issuing_organization = Column(String(255))
+    issue_date = Column(Date)
+    expiry_date = Column(Date)
+    credential_id = Column(String(255))
+    source = Column(String(20), nullable=False, server_default="recruiter_added")  # extracted | self_reported | recruiter_added
+    verified = Column(Boolean, nullable=False, server_default="false")
+    verified_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    verified_at = Column(DateTime(timezone=True))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "candidate_id", "certification_name", name="uq_candidate_certs_site_candidate_name"),
+        Index("idx_candidate_certs_site_name", "site_id", "certification_name"),
+        Index("idx_candidate_certs_site_candidate", "site_id", "candidate_id"),
     )
 
 

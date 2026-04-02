@@ -150,6 +150,11 @@
       "import": "./dist/queries/admin/candidates.js",
       "default": "./dist/queries/admin/candidates.js"
     },
+    "./queries/admin/certifications": {
+      "types": "./dist/queries/admin/certifications.d.ts",
+      "import": "./dist/queries/admin/certifications.js",
+      "default": "./dist/queries/admin/certifications.js"
+    },
     "./queries/admin/matching": {
       "types": "./dist/queries/admin/matching.d.ts",
       "import": "./dist/queries/admin/matching.js",

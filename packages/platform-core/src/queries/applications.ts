@@ -126,8 +126,8 @@ export async function createOrUpdateApplication(input: CreateApplicationInput): 
         .update({ candidate_id: candidate.id })
         .eq("id", applicationId);
     }
-  } catch {
-    // Non-fatal: candidate linking is best-effort
+  } catch (err) {
+    console.error("[applications] Failed to link candidate record:", err);
   }
 
   // Insert into junction table
