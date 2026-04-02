@@ -24,6 +24,7 @@ export default async function EndClientsPage() {
           <h2 className="text-xl font-bold">End Clients</h2>
           <Link
             href="/end-clients/new"
+            title="Add the final client organization where a candidate will be placed"
             className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark transition-colors"
           >
             + New End Client

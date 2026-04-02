@@ -22,6 +22,7 @@ export default async function ArticlesPage() {
           </h2>
           <Link
             href="/articles/new"
+            title="Write a new article or insight — will be published on the website's Insights page"
             className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark transition-colors"
           >
             + New Article

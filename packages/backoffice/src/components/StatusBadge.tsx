@@ -24,7 +24,7 @@ const STATUS_LABELS: Record<string, string> = {
   new: "New",
   phone_screen: "Phone Screen",
   interview_zoom: "Zoom Interview",
-  interview_in_person: "In-Person",
+  interview_in_person: "Client/In-Person",
   employment_verification: "Verification",
   references: "References",
   clearances: "Clearances",

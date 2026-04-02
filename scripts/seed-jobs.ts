@@ -480,6 +480,176 @@ const sampleJobs = [
 - Professional development and career growth paths
 - Collaborative, innovation-driven culture since 2003`,
   },
+  {
+    site_id: siteId,
+    title: "Senior .NET Developer",
+    slug: "senior-dotnet-developer",
+    location: "Springfield, IL (Hybrid)",
+    type: "Full-time",
+    posted_at: now,
+    active: true,
+    description: `USSP is seeking a Senior .NET Developer to contribute to the design, development, and maintenance of enterprise-scale web applications for Illinois state agencies under the TOPS contract. The ideal candidate will bring extensive hands-on experience in Angular, Entity Framework (EF Core), and .NET technologies, combined with strong collaboration and problem-solving abilities within an Agile team environment.
+
+**Responsibilities**
+- Design, develop, and implement robust front-end and back-end solutions using Angular, .NET (C#), and Entity Framework Core (EF Core)
+- Develop dynamic and interactive user interfaces leveraging Kendo UI controls and reusable components
+- Ensure system scalability, performance optimization, and maintainability through clean and modular coding practices
+- Collaborate closely with architects and analysts to translate business requirements into high-quality software solutions
+- Integrate RESTful APIs and third-party services to deliver seamless user experiences
+- Maintain and enhance existing applications by identifying performance bottlenecks, debugging issues, and implementing improvements
+- Conduct thorough code reviews and enforce best practices for maintainability, security, and compliance
+- Participate actively in Agile ceremonies (sprint planning, daily stand-ups, reviews, retrospectives)
+- Write comprehensive unit tests and participate in automated testing
+- Support CI/CD pipelines
+
+**Requirements**
+- 8+ years of professional software development experience
+- Strong proficiency in Angular (latest versions) — component-based architecture, TypeScript, RxJS, state management (NgRx)
+- .NET Framework / .NET Core Development — C#, ASP.NET Core, Web APIs, MVC frameworks
+- Entity Framework Core (EF Core) — ORM, LINQ queries, database migrations for SQL Server or other RDBMS
+- Kendo UI Framework — building interactive, high-performance web interfaces
+- Minimum 2 years in Agile/Scrum environment
+- Strong understanding of SDLC, RESTful architecture, and API-first design principles
+- Experience with Git, Azure DevOps, Jira, or similar tools
+
+**Nice to Have**
+- Experience with CI/CD pipelines, Docker, or cloud-based deployments (Azure/AWS)
+- Familiarity with unit testing frameworks (xUnit, NUnit, Jasmine, Karma) and code quality tools (SonarQube, ESLint)
+- Government IT project experience
+
+**What We Offer**
+- Comprehensive 12-module AI & Machine Learning training program
+- Cross-industry project exposure: government, healthcare, Fortune 500, startups
+- Health, dental, and vision benefits
+- Professional development budget and career growth paths
+- Collaborative, innovation-driven culture since 2003`,
+  },
+  {
+    site_id: siteId,
+    title: "Senior GIS Integration Specialist",
+    slug: "senior-gis-integration-specialist",
+    location: "Springfield, IL",
+    type: "Full-time",
+    posted_at: now,
+    active: true,
+    description: `USSP is seeking a Senior GIS Integration Specialist to design, integrate, and optimize enterprise-grade Geographic Information System (GIS) capabilities for regulated program operations and spatial data visualization. This role focuses on seamless integration between GIS platforms, core transactional systems, and master data repositories, ensuring spatial accuracy, performance, and compliance with agency standards.
+
+**Responsibilities**
+- Design and implement GIS data models that align with enterprise master data structures and regulatory program requirements
+- Define spatial data schemas, relationships, and metadata standards to support accurate mapping and analysis of regulated sites
+- Integrate GIS capabilities with existing enterprise GIS platforms and applications
+- Implement secure, API-based consumption of GIS services to support application workflows and data exchange
+- Coordinate data synchronization between GIS systems and backend databases to ensure data integrity and timeliness
+- Develop and optimize spatial visualizations to represent regulated sites, program boundaries, and geospatial attributes
+- Manage coordinate systems, projections, and spatial reference standards to ensure geospatial accuracy
+- Optimize map rendering and spatial query performance as data volume and user demand scale
+- Enforce GIS data governance standards, including validation rules, auditability, and version control
+- Support system testing, UAT, and production validation for GIS-enabled functionality
+
+**Requirements**
+- GIS data modeling and spatial data integration experience
+- Integration with enterprise GIS platforms (ESRI ArcGIS / ArcGIS Server)
+- Spatial visualization for regulated or compliance-driven programs
+- API-based GIS service consumption
+- Coordinate system management and spatial accuracy validation
+- Performance optimization for map rendering and spatial queries
+- Experience with GeoJSON, REST-based GIS services, and Spatial SQL
+
+**Nice to Have**
+- Experience supporting regulatory or compliance-driven programs
+- Familiarity with enterprise data architectures and master data management concepts
+- Experience working in Agile or hybrid delivery environments
+- Public sector or large-scale enterprise system experience
+
+**What We Offer**
+- Comprehensive 12-module AI & Machine Learning training program
+- Cross-industry project exposure: government, healthcare, Fortune 500, startups
+- Health, dental, and vision benefits
+- Professional development budget and career growth paths
+- Collaborative, innovation-driven culture since 2003`,
+  },
+  {
+    site_id: siteId,
+    title: "Microsoft Dynamics 365 Junior Solution Architect",
+    slug: "microsoft-dynamics-365-junior-solution-architect",
+    location: "Springfield, IL",
+    type: "Full-time",
+    posted_at: now,
+    active: true,
+    description: `USSP is seeking a Microsoft Dynamics 365 Junior Solution Architect to support the design, implementation, and optimization of Dynamics 365 solutions for our Product Management Transformation project. This is an excellent opportunity to gain hands-on experience in Microsoft Dynamics 365 architecture while playing an important role in projects that make a positive social impact.
+
+**Responsibilities**
+- Assist in the design and implementation of Microsoft Dynamics 365 solutions, ensuring they align with business needs and technical standards while maintaining security and scalability
+- Work with stakeholders and technical teams to gather requirements, contribute to workshops, and support customizations for modules like CRM and ERP
+- Assist in developing strategies for integrating Dynamics 365 with other systems and ensure data accuracy and smooth data flow between platforms
+- Support technical teams by providing guidance, troubleshooting issues, and collaborating with senior architects, Scrum Masters, and Program Managers
+- Contribute to creating and maintaining solution roadmaps for future Dynamics 365 implementations
+- Ensure solutions comply with industry standards such as GDPR and HIPAA
+- Collaborate with stakeholders and end-users to gather feedback and recommend improvements
+
+**Requirements**
+- 10 years of experience working with Microsoft Dynamics 365 (CRM, ERP, Finance, Operations)
+- Basic understanding of Azure and cloud-based architectures
+- Familiarity with integrating Dynamics 365 with other enterprise systems, including data migration and APIs
+- Experience working in a team environment and collaborating with development teams
+- Familiarity with Agile or Scrum methodologies
+
+**Nice to Have**
+- Exposure to PowerApps, Power BI, and Power Automate
+- Familiarity with Azure DevOps or Jira for project tracking
+- Experience in public sector environments, especially social services or child welfare
+- Microsoft Dynamics 365 certifications
+- Understanding of HIPAA compliance and security best practices
+- Knowledge of integrating Dynamics 365 with legacy systems
+
+**What We Offer**
+- Comprehensive 12-module AI & Machine Learning training program
+- Cross-industry project exposure: government, healthcare, Fortune 500, startups
+- Health, dental, and vision benefits
+- Professional development budget and career growth paths
+- Collaborative, innovation-driven culture since 2003`,
+  },
+  {
+    site_id: siteId,
+    title: "Senior Database Developer",
+    slug: "senior-database-developer",
+    location: "Springfield, IL (Hybrid)",
+    type: "Full-time",
+    posted_at: now,
+    active: true,
+    description: `USSP is seeking a Senior Database Developer to design, develop, optimize, and maintain enterprise-grade data solutions across multiple environments. This position requires deep expertise in SQL Server, SSIS/SSRS development, data integration pipelines, and performance tuning. The role requires someone who can collaborate with cross-functional teams, translate business and technical requirements into scalable data solutions, and ensure optimal performance, reliability, and security of mission-critical databases.
+
+**Responsibilities**
+- Design, develop, and maintain SQL Server databases (2012–2022), including complex stored procedures, functions, views, and triggers
+- Perform advanced SQL performance tuning through index optimization, execution plan analysis, query refactoring, and system benchmarking
+- Develop, enhance, and optimize SSIS packages for ETL workflows, data integration, and data migration
+- Create and maintain SSRS reports and dashboards, ensuring accuracy, reliability, and automation across reporting pipelines
+- Troubleshoot and resolve database and ETL issues to support high availability, stability, and minimal downtime
+- Apply data quality and governance best practices, including validation, profiling, cleansing, and integrity enforcement
+- Implement and support data security measures such as encryption, access controls, and auditing
+- Participate in Agile/Scrum ceremonies and collaborate with product owners, analysts, and developers
+- Use Jira Software for project tracking and Azure DevOps for version control, CI/CD pipelines, and work item management
+- Provide production support, incident resolution, and root-cause analysis for database and ETL-related issues
+
+**Requirements**
+- 5+ years of hands-on experience with SQL Server 2012, 2019, and 2022 in enterprise environments
+- Extensive experience with SSIS and SSRS development, deployment, and optimization
+- Strong proficiency in SQL Server performance tuning, indexing strategies, and query optimization
+- Proficiency with Jira Software for project tracking and Agile workflow management
+- Experience working in Agile/Scrum software development environments
+
+**Nice to Have**
+- Experience with Azure DevOps CI/CD pipelines
+- Knowledge of data platform modernization initiatives
+- Government IT project experience
+
+**What We Offer**
+- Comprehensive 12-module AI & Machine Learning training program
+- Cross-industry project exposure: government, healthcare, Fortune 500, startups
+- Health, dental, and vision benefits
+- Professional development budget and career growth paths
+- Collaborative, innovation-driven culture since 2003`,
+  },
 ];
 
 async function seed() {

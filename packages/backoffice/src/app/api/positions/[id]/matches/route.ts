@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { getMatchScoresForPosition } from "@ussp-platform/core/queries/admin/matching";
+import {
+  getMatchScoresForPosition,
+  scoreCandidatesForPosition,
+} from "@ussp-platform/core/queries/admin/matching";
 import { hasPermission } from "@ussp-platform/core/auth/rbac";
 import type { StaffRole, MatchType } from "@ussp-platform/core/types/admin";
 
@@ -40,12 +43,16 @@ export async function POST(
 
   const { id } = await params;
 
-  // TODO: Implement actual scoring once resume extraction is wired up.
-  // For now, return a placeholder response.
-  return NextResponse.json({
-    position_id: id,
-    scored: 0,
-    skipped: 0,
-    message: "Scoring engine ready — wire up resume extraction to enable.",
-  });
+  try {
+    const result = await scoreCandidatesForPosition(id);
+    if (result.error) {
+      return NextResponse.json(result, { status: 400 });
+    }
+    return NextResponse.json(result);
+  } catch (err) {
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Scoring failed" },
+      { status: 500 }
+    );
+  }
 }

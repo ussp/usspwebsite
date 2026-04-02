@@ -26,7 +26,7 @@ const STATUS_LABELS: Record<string, string> = {
   new: "New",
   phone_screen: "Phone Screen",
   interview_zoom: "Zoom Interview",
-  interview_in_person: "In-Person",
+  interview_in_person: "Client/In-Person",
   employment_verification: "Verification",
   references: "References",
   clearances: "Clearances",
@@ -122,7 +122,11 @@ export default async function DashboardPage() {
                 {metrics.hotPositions.map((pos) => (
                   <Link
                     key={pos.id}
-                    href={`/positions/${pos.id}`}
+                    href={
+                      pos.applicationCount === 0 && pos.active
+                        ? `/positions/${pos.id}?findCandidates=true`
+                        : `/positions/${pos.id}`
+                    }
                     className="block p-3 rounded-lg border border-light-gray hover:border-primary/30 hover:bg-blue-50/30 transition-colors"
                   >
                     <div className="flex items-start justify-between gap-2">
@@ -165,6 +169,14 @@ export default async function DashboardPage() {
                             </span>
                           ))}
                       </div>
+                    )}
+                    {pos.applicationCount === 0 && pos.active && (
+                      <span className="inline-flex items-center gap-1 mt-2 text-xs text-primary">
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                        Find matching candidates
+                      </span>
                     )}
                     {!pos.active && (
                       <span className="inline-block mt-1.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-red-50 text-red-600">

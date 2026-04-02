@@ -234,6 +234,11 @@
       "types": "./dist/integrations/adapter.d.ts",
       "import": "./dist/integrations/adapter.js",
       "default": "./dist/integrations/adapter.js"
+    },
+    "./matching": {
+      "types": "./dist/matching/index.d.ts",
+      "import": "./dist/matching/index.js",
+      "default": "./dist/matching/index.js"
     }
   },
   "scripts": {

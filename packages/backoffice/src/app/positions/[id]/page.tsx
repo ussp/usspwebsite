@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import DataTable from "@/components/DataTable";
 import StatusBadge from "@/components/StatusBadge";
 import ApplicantFlowChart from "@/components/ApplicantFlowChart";
 import ActivityFeed from "@/components/ActivityFeed";
+import CandidateMatchResults from "@/components/CandidateMatchResults";
 import type {
   AdminPosition,
   AdminApplication,
@@ -51,6 +52,8 @@ function timeAgo(dateStr: string): string {
 export default function PositionDetailPage() {
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
+  const autoMatch = searchParams.get("findCandidates") === "true";
   const [position, setPosition] = useState<AdminPosition | null>(null);
   const [applications, setApplications] = useState<AdminApplication[]>([]);
   const [stats, setStats] = useState<PositionStats | null>(null);
@@ -305,6 +308,12 @@ export default function PositionDetailPage() {
                 </table>
               </div>
             )}
+
+            {/* Candidate Matching */}
+            <CandidateMatchResults
+              positionId={params.id as string}
+              autoTrigger={autoMatch}
+            />
 
             {/* Full Applicants Table */}
             <div className="bg-white rounded-lg border border-light-gray p-5">

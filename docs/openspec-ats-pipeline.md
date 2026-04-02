@@ -37,7 +37,7 @@ The application `status` column (`String(50)`) now supports 12 values:
 | 1 | `new` | New Application | Linear |
 | 2 | `phone_screen` | Phone Screen | Linear |
 | 3 | `interview_zoom` | Zoom Interview | Linear |
-| 4 | `interview_in_person` | In-Person Interview | Linear |
+| 4 | `interview_in_person` | Client/In-Person Interview | Linear |
 | 5 | `employment_verification` | Employment Verification | Linear |
 | 6 | `references` | References | Linear |
 | 7 | `clearances` | Clearances | Linear |

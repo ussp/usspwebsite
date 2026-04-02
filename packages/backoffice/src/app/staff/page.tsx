@@ -20,6 +20,7 @@ export default async function StaffPage() {
           <h2 className="text-xl font-bold">Staff ({staff.length})</h2>
           <Link
             href="/staff/new"
+            title="Add a new staff user — they'll be able to sign in with their Google account"
             className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark transition-colors"
           >
             + Add Staff

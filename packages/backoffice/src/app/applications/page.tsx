@@ -35,6 +35,7 @@ export default async function ApplicationsPage({
           </h2>
           <Link
             href="/applications/new"
+            title="Manually create an application for a candidate who sent their resume directly (no LinkedIn required)"
             className="px-4 py-2 bg-primary hover:bg-primary-dark text-white text-sm rounded-lg transition-colors"
           >
             + New Application

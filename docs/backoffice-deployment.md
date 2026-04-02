@@ -204,6 +204,31 @@ No cookie collision is possible.
    cd ../.. && npm run build  # Public site regression check
    ```
 
+### API Routes Reference
+
+| Route | Methods | Purpose |
+|-------|---------|---------|
+| `/api/applications` | GET, POST | List applications (GET), create manual application (POST) |
+| `/api/applications/[id]` | GET, PATCH | Get/update application details and status |
+| `/api/applications/[id]/notes` | GET, POST | List/add application notes |
+| `/api/applications/[id]/notes/[noteId]` | PATCH, DELETE | Edit/delete a note |
+| `/api/applications/[id]/history` | GET | Get status change history |
+| `/api/applications/[id]/requests` | GET, POST | List/create document requests |
+| `/api/applications/[id]/requests/[reqId]` | PATCH | Update document request status |
+| `/api/positions` | GET, POST | List/create positions |
+| `/api/positions/[id]` | GET, PATCH | Get/update position |
+| `/api/candidates/[id]/pii/upload` | POST | Get signed URL for candidate document upload |
+| `/api/upload` | POST | Get signed URL for resume upload (manual applications) |
+| `/api/contacts` | GET | List contact form submissions |
+| `/api/staff` | GET, POST | List/create staff users |
+| `/api/articles` | GET, POST | List/create articles |
+| `/api/articles/[id]` | GET, PATCH, DELETE | Get/update/delete article |
+| `/api/clients` | GET, POST | List/create clients |
+| `/api/end-clients` | GET, POST | List/create end clients |
+| `/api/matches` | POST | Run candidate-position matching |
+| `/api/dashboard` | GET | Dashboard metrics |
+| `/api/assignments` | GET, POST | List/create assignments |
+
 ### Database changes
 
 1. Update `migrations/models.py`

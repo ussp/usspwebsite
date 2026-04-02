@@ -100,6 +100,30 @@ export async function verifyCertification(
   });
 }
 
+export async function getCertificationsByCandidateIds(
+  candidateIds: string[]
+): Promise<Map<string, CandidateCertification[]>> {
+  if (candidateIds.length === 0) return new Map();
+
+  const supabase = getServiceClient();
+  const { data, error } = await supabase
+    .from("candidate_certifications")
+    .select(CERT_COLUMNS)
+    .eq("site_id", getSiteId())
+    .in("candidate_id", candidateIds)
+    .order("created_at", { ascending: false });
+
+  if (error || !data) return new Map();
+
+  const map = new Map<string, CandidateCertification[]>();
+  for (const row of data) {
+    const existing = map.get(row.candidate_id) || [];
+    existing.push(row);
+    map.set(row.candidate_id, existing);
+  }
+  return map;
+}
+
 export async function bulkAddCertifications(
   candidateId: string,
   certNames: string[]

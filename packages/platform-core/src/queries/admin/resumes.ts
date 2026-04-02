@@ -103,6 +103,31 @@ export async function setPrimaryResume(
   return { success: true };
 }
 
+export async function getLatestResumesByCandidateIds(
+  candidateIds: string[]
+): Promise<Map<string, AdminResume>> {
+  if (candidateIds.length === 0) return new Map();
+
+  const supabase = getServiceClient();
+  const { data, error } = await supabase
+    .from("resumes")
+    .select(RESUME_COLUMNS)
+    .eq("site_id", getSiteId())
+    .in("candidate_id", candidateIds)
+    .order("uploaded_at", { ascending: false });
+
+  if (error || !data) return new Map();
+
+  // Pick the most recent resume per candidate
+  const map = new Map<string, AdminResume>();
+  for (const row of data) {
+    if (!map.has(row.candidate_id)) {
+      map.set(row.candidate_id, row);
+    }
+  }
+  return map;
+}
+
 export async function updateResumeExtraction(
   id: string,
   extraction: {

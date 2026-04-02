@@ -142,6 +142,34 @@ export async function updateAssignment(
   return { success: true };
 }
 
+export async function getActiveAssignmentsByCandidateIds(
+  candidateIds: string[]
+): Promise<Map<string, AdminAssignment>> {
+  if (candidateIds.length === 0) return new Map();
+
+  const supabase = getServiceClient();
+  const { data, error } = await supabase
+    .from("employee_assignments")
+    .select(
+      "id, site_id, candidate_id, position_id, client_id, end_client_id, role_title, start_date, end_date, bill_rate, pay_rate, status, notes, created_at, updated_at"
+    )
+    .eq("site_id", getSiteId())
+    .eq("status", "active")
+    .in("candidate_id", candidateIds)
+    .order("end_date", { ascending: true });
+
+  if (error || !data) return new Map();
+
+  // One active assignment per candidate (earliest end_date = soonest available)
+  const map = new Map<string, AdminAssignment>();
+  for (const row of data) {
+    if (!map.has(row.candidate_id)) {
+      map.set(row.candidate_id, row as unknown as AdminAssignment);
+    }
+  }
+  return map;
+}
+
 export async function getExpiringAssignments(
   withinDays: number = 30
 ): Promise<AdminAssignment[]> {

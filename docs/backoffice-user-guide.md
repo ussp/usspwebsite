@@ -51,25 +51,53 @@ The slug (URL-friendly name) is auto-generated from the title.
 Navigate to **Applications** in the sidebar. Filter by status using the buttons:
 - **All** — show everything
 - **New** — just submitted, needs review
-- **Screening** — resume/phone screen in progress
-- **Interview** — candidate is interviewing
-- **Offer** — offer extended
-- **Hired** — accepted and onboarded
+- **Phone Screen** — initial phone screening
+- **Zoom Interview** — remote interview scheduled
+- **Client/In-Person Interview** — client-facing or on-site interview
+- **Employment Verification** — verifying employment history
+- **References** — checking references
+- **Clearances** — background/security clearances
+- **Offer Pending** — offer extended, awaiting response
+- **Onboarding** — accepted, in onboarding process
+- **Hired** — fully onboarded
 - **Rejected** / **Withdrawn** — not moving forward
+
+You can also filter by position using the position dropdown.
+
+### Creating a Manual Application
+When a candidate sends their resume directly (email, in person, referral) instead of applying through the website:
+
+1. Navigate to **Applications** in the sidebar
+2. Click **"+ New Application"** (top-right)
+3. Fill in the candidate's information:
+   - **Full Name**, **Email**, **Phone** (all required)
+   - **Position** — select from the dropdown (grouped by Active/Closed)
+   - **Applicant Type** — Employee or Vendor
+   - For Vendors: **Expected Bill Rate** (required) and **Availability Date**
+4. Upload their resume (PDF, DOC, or DOCX, max 5MB) — drag & drop or click to browse
+5. Click **"Create Application"**
+
+The application is created with `auth_provider: manual` (no LinkedIn sign-in needed). You'll be redirected to the application detail page to continue the pipeline.
 
 ### Application Detail
 Click any application to see:
-- **Applicant profile** — name, email, phone, LinkedIn info
+- **Applicant profile** — name, email, phone, auth method (LinkedIn or Manual)
 - **Position applied for** and application date
 - **Resume** filename (if uploaded)
-- **Current status** with ability to change it
+- **Pipeline accordion** — visual progress through all 12 stages
+- **Matching qualifications** — how the candidate matches the position
+- **Document requests** — request and track documents from the candidate
+- **Other applications** — if the same person applied to multiple positions
 - **Notes** — add internal notes visible only to staff
 
-### Changing Status
-On the application detail page, click the desired status in the right sidebar. The change takes effect immediately.
+### Advancing Through the Pipeline
+On the application detail page, use the pipeline accordion in the right sidebar:
+- Click **"Advance"** to move to the next stage
+- Click any specific stage to jump directly to it
+- Click **"Deactivate"** to reject the application
 
 ### Adding Notes
-Type a note in the text field and press Enter or click "Add". Notes are timestamped with your name and visible to all staff.
+Type a note in the text field and press Enter or click "Add". Notes are timestamped with your name and visible to all staff. You can edit or delete notes by hovering over them.
 
 ---
 
@@ -108,9 +136,13 @@ The user can now sign in with their Google account.
 | View dashboard | Yes | Yes | Yes | Yes | Yes |
 | Create/edit positions | Yes | Yes | No | No | No |
 | Manage applications | Yes | Yes | No | Yes | No |
+| Create manual applications | Yes | Yes | No | Yes | No |
 | View applications | Yes | Yes | Yes | Yes | Yes |
+| Manage candidates | Yes | Yes | No | No | No |
+| Manage clients/end clients | Yes | Yes | No | No | No |
 | Manage contacts | Yes | No | Yes | No | No |
 | View contacts | Yes | Yes | Yes | No | Yes |
+| Manage articles | Yes | No | Yes | No | No |
 | Manage staff | Yes | No | No | No | No |
 | View staff | Yes | No | No | Yes | Yes |
 

@@ -22,6 +22,7 @@ export default async function PositionsPage() {
           </h2>
           <Link
             href="/positions/new"
+            title="Create a new job posting — it will appear on the careers page once activated"
             className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark transition-colors"
           >
             + New Position

@@ -24,8 +24,8 @@ const STATUS_COLORS: Record<CandidateStatus, string> = {
   blacklisted: "bg-red-100 text-red-700",
 };
 
-const STATUSES: Array<"all" | CandidateStatus> = [
-  "all", "available", "employed", "on_assignment", "not_looking",
+const STATUSES: Array<"all" | "bench" | CandidateStatus> = [
+  "all", "bench", "available", "employed", "on_assignment", "not_looking",
 ];
 
 export function CandidatesTable({ candidates }: { candidates: AdminCandidate[] }) {
@@ -45,7 +45,13 @@ export function CandidatesTable({ candidates }: { candidates: AdminCandidate[] }
 
   const filtered = currentStatus === "all"
     ? candidates
-    : candidates.filter(c => c.current_status === currentStatus);
+    : currentStatus === "bench"
+      ? candidates.filter(
+          (c) =>
+            c.candidate_type === "internal_employee" &&
+            c.current_status === "available"
+        )
+      : candidates.filter((c) => c.current_status === currentStatus);
 
   const columns = [
     { key: "full_name", label: "Name", sortable: true },
@@ -102,7 +108,7 @@ export function CandidatesTable({ candidates }: { candidates: AdminCandidate[] }
                 : "bg-white border border-light-gray text-dark/60 hover:bg-light-gray"
             }`}
           >
-            {s === "all" ? "All" : s.replace("_", " ")}
+            {s === "all" ? "All" : s === "bench" ? "Bench" : s.replace("_", " ")}
           </button>
         ))}
       </div>

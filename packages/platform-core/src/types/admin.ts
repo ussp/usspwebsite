@@ -33,7 +33,7 @@ export const STAGE_LABELS: Record<ApplicationStatus, string> = {
   new: "New Application",
   phone_screen: "Phone Screen",
   interview_zoom: "Zoom Interview",
-  interview_in_person: "In-Person Interview",
+  interview_in_person: "Client/In-Person Interview",
   employment_verification: "Employment Verification",
   references: "References",
   clearances: "Clearances",

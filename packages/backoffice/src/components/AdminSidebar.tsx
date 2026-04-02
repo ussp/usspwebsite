@@ -4,17 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: "📊" },
-  { href: "/positions", label: "Positions", icon: "💼" },
-  { href: "/clients", label: "Clients", icon: "🏢" },
-  { href: "/end-clients", label: "End Clients", icon: "🏛️" },
-  { href: "/applications", label: "Applications", icon: "📋" },
-  { href: "/candidates", label: "Candidates", icon: "🙋" },
-  { href: "/assignments", label: "Assignments", icon: "🗂️" },
-  { href: "/contacts", label: "Contacts", icon: "📨" },
-  { href: "/articles", label: "Articles", icon: "📝" },
-  { href: "/staff", label: "Staff", icon: "👥" },
-  { href: "/partnerships", label: "Partnerships", icon: "🤝" },
+  { href: "/", label: "Dashboard", icon: "📊", tooltip: "Overview of key metrics, pipeline, and recent activity" },
+  { href: "/positions", label: "Positions", icon: "💼", tooltip: "Manage job postings — create, edit, activate, or close positions" },
+  { href: "/clients", label: "Clients", icon: "🏢", tooltip: "Direct clients who contract with USSP" },
+  { href: "/end-clients", label: "End Clients", icon: "🏛️", tooltip: "Final client organizations where candidates are placed" },
+  { href: "/applications", label: "Applications", icon: "📋", tooltip: "Review and manage candidate applications — includes manual entry for walk-in resumes" },
+  { href: "/candidates", label: "Candidates", icon: "🙋", tooltip: "Candidate profiles across all applications and positions" },
+  { href: "/assignments", label: "Assignments", icon: "🗂️", tooltip: "Active placements linking candidates to positions and clients" },
+  { href: "/contacts", label: "Contacts", icon: "📨", tooltip: "Contact form submissions from the public website" },
+  { href: "/articles", label: "Articles", icon: "📝", tooltip: "Manage blog articles and insights published on the website" },
+  { href: "/staff", label: "Staff", icon: "👥", tooltip: "Manage back office users, roles, and permissions" },
+  { href: "/partnerships", label: "Partnerships", icon: "🤝", tooltip: "Partner organizations and vendor relationships" },
 ];
 
 export default function AdminSidebar() {
@@ -36,6 +36,7 @@ export default function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              title={item.tooltip}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                 isActive
                   ? "bg-primary text-white"
