@@ -1,6 +1,9 @@
 export const dynamic = "force-dynamic";
 
 import { getDashboardMetrics } from "@ussp-platform/core/queries/admin/dashboard";
+import { getCandidates } from "@ussp-platform/core/queries/admin/candidates";
+import { getAssignments } from "@ussp-platform/core/queries/admin/assignments";
+import { getMatchScoresForPosition } from "@ussp-platform/core/queries/admin/matching";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import MetricCard from "@/components/MetricCard";
@@ -59,7 +62,25 @@ function timeAgo(dateStr: string): string {
 }
 
 export default async function DashboardPage() {
-  const metrics = await getDashboardMetrics();
+  const [metrics, allCandidates, activeAssignments] = await Promise.all([
+    getDashboardMetrics(),
+    getCandidates({}),
+    getAssignments({ status: "active" }),
+  ]);
+
+  // Bench stats
+  const benchCandidates = allCandidates.filter(
+    (c) =>
+      c.candidate_type === "internal_employee" &&
+      c.current_status === "available"
+  );
+  const endingSoon = activeAssignments.filter((a) => {
+    if (!a.end_date) return false;
+    const days = Math.ceil(
+      (new Date(a.end_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+    );
+    return days <= 30 && days >= 0;
+  });
 
   return (
     <>
@@ -69,7 +90,7 @@ export default async function DashboardPage() {
         <h2 className="text-xl font-bold mb-6">Dashboard</h2>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           <MetricCard
             label="Active Positions"
             value={metrics.activePositions}
@@ -98,6 +119,19 @@ export default async function DashboardPage() {
             }
             subtext={`${metrics.applicationsByStatus.offer_pending} with offers`}
           />
+          <Link href="/bench" className="block">
+            <div className={`bg-white rounded-lg border p-5 hover:border-primary/30 transition-colors ${benchCandidates.length > 0 ? "border-red-200" : "border-light-gray"}`}>
+              <p className="text-sm text-dark/60 mb-1">Bench</p>
+              <p className={`text-3xl font-bold ${benchCandidates.length > 0 ? "text-red-600" : "text-dark"}`}>
+                {benchCandidates.length}
+              </p>
+              <p className="text-xs text-dark/40 mt-1">
+                {endingSoon.length > 0
+                  ? `${endingSoon.length} ending in 30d`
+                  : "No assignments ending soon"}
+              </p>
+            </div>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">

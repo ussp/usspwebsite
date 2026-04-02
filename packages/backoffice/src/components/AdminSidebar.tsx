@@ -10,6 +10,7 @@ const navItems = [
   { href: "/end-clients", label: "End Clients", icon: "🏛️", tooltip: "Final client organizations where candidates are placed" },
   { href: "/applications", label: "Applications", icon: "📋", tooltip: "Review and manage candidate applications — includes manual entry for walk-in resumes" },
   { href: "/candidates", label: "Candidates", icon: "🙋", tooltip: "Candidate profiles across all applications and positions" },
+  { href: "/bench", label: "Bench", icon: "🔥", tooltip: "Internal employees needing placement — on bench or assignment ending soon" },
   { href: "/assignments", label: "Assignments", icon: "🗂️", tooltip: "Active placements linking candidates to positions and clients" },
   { href: "/contacts", label: "Contacts", icon: "📨", tooltip: "Contact form submissions from the public website" },
   { href: "/articles", label: "Articles", icon: "📝", tooltip: "Manage blog articles and insights published on the website" },

@@ -75,6 +75,7 @@ export interface CandidateMatchData {
   experienceYears: number | null;
   education: Array<{ degree: string; institution: string; year?: number }>;
   location: string | null;
+  workPreference: string | null; // remote | hybrid | onsite | open_to_travel
   resumeText: string | null;
   resumeUploadedAt: string;
   candidateType: string;

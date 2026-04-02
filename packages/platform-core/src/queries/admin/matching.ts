@@ -327,6 +327,7 @@ export async function scoreCandidatesForPosition(
           year?: number;
         }>) || [],
       location: c.location || null,
+      workPreference: c.work_preference || null,
       resumeText: (resume?.extracted_text as string) ?? null,
       resumeUploadedAt: resume?.uploaded_at ?? "",
       candidateType: c.candidate_type,

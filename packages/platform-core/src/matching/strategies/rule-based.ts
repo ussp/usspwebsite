@@ -178,14 +178,39 @@ class LocationScorer implements DimensionScorer {
 
   score(candidate: CandidateMatchData, position: PositionMatchData): DimensionResult {
     const workMode = (position.workMode ?? "").toLowerCase();
+    const pref = (candidate.workPreference ?? "").toLowerCase();
 
     // Remote positions always match
     if (workMode === "remote") {
       return result(this.name, 100, ["Remote position"], [], "Remote — location irrelevant");
     }
 
+    // Candidate wants remote only but position is onsite/hybrid
+    if (pref === "remote" && workMode !== "remote") {
+      return result(
+        this.name,
+        20,
+        [],
+        ["Candidate prefers remote only"],
+        `Candidate wants remote — position is ${workMode || "on-site"}`
+      );
+    }
+
     const candidateLoc = (candidate.location ?? "").toLowerCase().trim();
     const positionLoc = (position.location ?? "").toLowerCase().trim();
+
+    // Candidate is open to travel — boost for hybrid/onsite even without location match
+    if (pref === "open_to_travel") {
+      if (!candidateLoc || !positionLoc) {
+        return result(
+          this.name,
+          80,
+          ["Open to travel"],
+          [],
+          "Candidate is open to travel — location flexible"
+        );
+      }
+    }
 
     if (!candidateLoc || !positionLoc) {
       return result(this.name, 50, [], [], "No data: location information missing");
@@ -221,6 +246,17 @@ class LocationScorer implements DimensionScorer {
         [`Same state: ${candidateParts.state.toUpperCase()}`],
         [`Different city than ${position.location}`],
         "Same state, different city"
+      );
+    }
+
+    // Open to travel gets partial credit even for different locations
+    if (pref === "open_to_travel") {
+      return result(
+        this.name,
+        60,
+        ["Open to travel"],
+        [`Different location: ${candidate.location ?? "unknown"} vs ${position.location}`],
+        "Candidate is open to travel — different location"
       );
     }
 
