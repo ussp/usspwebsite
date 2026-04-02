@@ -6,6 +6,7 @@ import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import StatusBadge from "@/components/StatusBadge";
 import Tooltip from "@/components/Tooltip";
+import OnboardingChecklist from "@/components/OnboardingChecklist";
 
 interface Candidate {
   id: string;
@@ -18,6 +19,8 @@ interface Candidate {
   source: string;
   tags: string[];
   summary: string | null;
+  location: string | null;
+  work_preference: string | null;
   salary_expectation_min: number | null;
   salary_expectation_max: number | null;
   salary_type: string | null;
@@ -56,6 +59,18 @@ interface CandidateApplication {
   job_title: string;
   status: string;
   created_at: string;
+}
+
+interface OnboardingRecord {
+  id: string;
+  candidate_id: string;
+  application_id: string;
+  status: "in_progress" | "completed";
+  i9_everify: string;
+  background_check: string;
+  orientation_training: string;
+  started_at: string;
+  completed_at: string | null;
 }
 
 const TYPE_COLORS: Record<string, string> = {
@@ -128,6 +143,9 @@ export default function CandidateDetailPage() {
   const [certCredentialId, setCertCredentialId] = useState("");
   const [addingCert, setAddingCert] = useState(false);
 
+  // Onboarding state
+  const [onboardings, setOnboardings] = useState<OnboardingRecord[]>([]);
+
   // Form state for editing
   const [formSsn, setFormSsn] = useState("");
   const [formDlNumber, setFormDlNumber] = useState("");
@@ -166,6 +184,13 @@ export default function CandidateDetailPage() {
           .then((r) => r.json())
           .then((certs) => {
             if (Array.isArray(certs)) setCertifications(certs);
+          });
+
+        // Fetch onboarding records
+        fetch(`/api/candidates/${id}/onboarding`)
+          .then((r) => r.json())
+          .then((obs) => {
+            if (Array.isArray(obs)) setOnboardings(obs);
           });
       }
       if (piiData) {
@@ -366,6 +391,32 @@ export default function CandidateDetailPage() {
         prev.map((c) =>
           c.id === certId ? { ...c, verified: true, verified_at: new Date().toISOString() } : c
         )
+      );
+    }
+  }
+
+  async function handleOnboardingStepChange(
+    onboardingId: string,
+    step: string,
+    status: string
+  ) {
+    const res = await fetch(`/api/candidates/${params.id}/onboarding/${onboardingId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ step, status }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      setOnboardings((prev) =>
+        prev.map((o) => {
+          if (o.id !== onboardingId) return o;
+          return {
+            ...o,
+            [step]: status,
+            status: data.completed ? "completed" : "in_progress",
+            completed_at: data.completed ? new Date().toISOString() : null,
+          };
+        })
       );
     }
   }
@@ -861,31 +912,144 @@ export default function CandidateDetailPage() {
 
           {/* Sidebar */}
           <div className="space-y-4">
-            {/* Quick Info */}
+            {/* Quick Info — Editable */}
             <div className="bg-white rounded-lg border border-light-gray p-5">
               <h3 className="font-semibold mb-3">Quick Info</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
+              <div className="space-y-3 text-sm">
+                <div>
                   <Tooltip text="Internal = USSP employee, External = outside candidate, Vendor = subcontractor" position="left">
-                    <span className="text-dark/50 cursor-help">Type</span>
+                    <label className="block text-dark/50 text-xs mb-1 cursor-help">Type</label>
                   </Tooltip>
-                  <span className="capitalize">
-                    {TYPE_LABELS[candidate.candidate_type] || candidate.candidate_type}
-                  </span>
+                  <select
+                    value={candidate.candidate_type}
+                    onChange={async (e) => {
+                      const newType = e.target.value;
+                      const res = await fetch(`/api/candidates/${params.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ candidate_type: newType }),
+                      });
+                      if (res.ok) {
+                        setCandidate((prev) =>
+                          prev ? { ...prev, candidate_type: newType } : prev
+                        );
+                      }
+                    }}
+                    className="w-full px-2 py-1.5 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  >
+                    <option value="internal_employee">Internal Employee</option>
+                    <option value="external">External</option>
+                    <option value="vendor">Vendor</option>
+                  </select>
                 </div>
-                <div className="flex justify-between">
-                  <Tooltip text="Available = open to work, Employed = currently placed, On Assignment = active engagement" position="left">
-                    <span className="text-dark/50 cursor-help">Status</span>
+                <div>
+                  <Tooltip text="Available = open to work / bench, Employed = currently placed, On Assignment = active engagement" position="left">
+                    <label className="block text-dark/50 text-xs mb-1 cursor-help">Status</label>
                   </Tooltip>
-                  <span className="capitalize">{candidate.current_status.replace(/_/g, " ")}</span>
+                  <select
+                    value={candidate.current_status}
+                    onChange={async (e) => {
+                      const newStatus = e.target.value;
+                      const res = await fetch(`/api/candidates/${params.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ current_status: newStatus }),
+                      });
+                      if (res.ok) {
+                        setCandidate((prev) =>
+                          prev ? { ...prev, current_status: newStatus } : prev
+                        );
+                      }
+                    }}
+                    className="w-full px-2 py-1.5 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  >
+                    <option value="available">Available (Bench)</option>
+                    <option value="employed">Employed</option>
+                    <option value="on_assignment">On Assignment</option>
+                    <option value="not_looking">Not Looking</option>
+                    <option value="blacklisted">Blacklisted</option>
+                  </select>
                 </div>
-                <div className="flex justify-between">
-                  <Tooltip text="How this candidate entered the system (application, referral, sourced, or internal)" position="left">
-                    <span className="text-dark/50 cursor-help">Source</span>
+                <div>
+                  <label className="block text-dark/50 text-xs mb-1">Location</label>
+                  <input
+                    type="text"
+                    defaultValue={candidate.location || ""}
+                    placeholder="e.g. Chicago, IL"
+                    onBlur={async (e) => {
+                      const newLoc = e.target.value.trim() || null;
+                      if (newLoc === (candidate.location || "")) return;
+                      const res = await fetch(`/api/candidates/${params.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ location: newLoc }),
+                      });
+                      if (res.ok) {
+                        setCandidate((prev) =>
+                          prev ? { ...prev, location: newLoc } : prev
+                        );
+                      }
+                    }}
+                    className="w-full px-2 py-1.5 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  />
+                </div>
+                <div>
+                  <Tooltip text="Candidate's preferred work arrangement — used for matching against position work mode" position="left">
+                    <label className="block text-dark/50 text-xs mb-1 cursor-help">Work Preference</label>
                   </Tooltip>
-                  <span className="capitalize">{candidate.source}</span>
+                  <select
+                    value={candidate.work_preference || ""}
+                    onChange={async (e) => {
+                      const val = e.target.value || null;
+                      const res = await fetch(`/api/candidates/${params.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ work_preference: val }),
+                      });
+                      if (res.ok) {
+                        setCandidate((prev) =>
+                          prev ? { ...prev, work_preference: val } : prev
+                        );
+                      }
+                    }}
+                    className="w-full px-2 py-1.5 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  >
+                    <option value="">Not specified</option>
+                    <option value="remote">Remote Only</option>
+                    <option value="hybrid">Hybrid</option>
+                    <option value="onsite">On-site</option>
+                    <option value="open_to_travel">Open to Travel</option>
+                  </select>
                 </div>
-                <div className="flex justify-between">
+                <div>
+                  <Tooltip text="How this candidate entered the system" position="left">
+                    <label className="block text-dark/50 text-xs mb-1 cursor-help">Source</label>
+                  </Tooltip>
+                  <select
+                    value={candidate.source}
+                    onChange={async (e) => {
+                      const newSource = e.target.value;
+                      const res = await fetch(`/api/candidates/${params.id}`, {
+                        method: "PATCH",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ source: newSource }),
+                      });
+                      if (res.ok) {
+                        setCandidate((prev) =>
+                          prev ? { ...prev, source: newSource } : prev
+                        );
+                      }
+                    }}
+                    className="w-full px-2 py-1.5 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  >
+                    <option value="internal">Internal</option>
+                    <option value="referral">Referral</option>
+                    <option value="application">Application</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="flex justify-between pt-1">
                   <span className="text-dark/50">Added</span>
                   <span>{new Date(candidate.created_at).toLocaleDateString()}</span>
                 </div>
@@ -931,6 +1095,36 @@ export default function CandidateDetailPage() {
                 <p className="text-sm text-dark/40">No applications</p>
               )}
             </div>
+
+            {/* Onboarding */}
+            {onboardings.length > 0 && (
+              <div className="bg-white rounded-lg border border-light-gray p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <h3 className="font-semibold">Onboarding</h3>
+                  <Tooltip text="Post-hire checklist auto-created when an application reaches Hired" position="right">
+                    <svg className="w-4 h-4 text-dark/30 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </Tooltip>
+                </div>
+                {onboardings.map((ob) => {
+                  const linkedApp = applications.find((a) => a.id === ob.application_id);
+                  return (
+                    <div key={ob.id} className="mb-4 last:mb-0">
+                      {linkedApp && (
+                        <p className="text-xs text-dark/50 mb-2">
+                          For: {linkedApp.job_title}
+                        </p>
+                      )}
+                      <OnboardingChecklist
+                        onboarding={ob}
+                        onStepChange={handleOnboardingStepChange}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </main>

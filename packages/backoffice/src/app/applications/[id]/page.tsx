@@ -6,10 +6,18 @@ import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import StatusBadge from "@/components/StatusBadge";
 import PipelineAccordion from "@/components/PipelineAccordion";
+import GateOverrideDialog from "@/components/GateOverrideDialog";
 import MatchingQualifications from "@/components/MatchingQualifications";
 import DocumentRequestsPanel from "@/components/DocumentRequestsPanel";
 import type { ApplicationStatus } from "@ussp-platform/core/types/admin";
 import { PIPELINE_STAGES } from "@ussp-platform/core/types/admin";
+
+interface GateResult {
+  passed: boolean;
+  gate: string;
+  message: string;
+  missingItems: string[];
+}
 
 interface Application {
   id: string;
@@ -81,6 +89,9 @@ export default function ApplicationDetailPage() {
   const [loading, setLoading] = useState(true);
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [editNoteContent, setEditNoteContent] = useState("");
+  const [gateWarnings, setGateWarnings] = useState<GateResult[]>([]);
+  const [showGateDialog, setShowGateDialog] = useState(false);
+  const [gateOverrideAdvancing, setGateOverrideAdvancing] = useState(false);
 
   useEffect(() => {
     Promise.all([
@@ -92,6 +103,13 @@ export default function ApplicationDetailPage() {
       setNotes(notesData);
       setStatusHistory(Array.isArray(historyData) ? historyData : []);
       setLoading(false);
+
+      // Fetch pipeline gate warnings for next stage
+      fetch(`/api/applications/${params.id}/gate-check`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.gates) setGateWarnings(data.gates);
+        });
 
       // Fetch position details (description, rate, etc.)
       if (appData?.position_id) {
@@ -119,25 +137,47 @@ export default function ApplicationDetailPage() {
     });
   }, [params.id]);
 
-  async function handleStatusChange(status: ApplicationStatus) {
-    await fetch(`/api/applications/${params.id}`, {
+  async function handleStatusChange(status: ApplicationStatus, forceOverride = false) {
+    const res = await fetch(`/api/applications/${params.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
+      body: JSON.stringify({ status, forceOverride }),
     });
+
+    const data = await res.json();
+
+    // If blocked by gates, show the override dialog
+    if (res.status === 422 && data.blocked) {
+      setGateWarnings(data.gates);
+      setShowGateDialog(true);
+      return;
+    }
+
     setApp((prev) => (prev ? { ...prev, status } : prev));
-    // Refresh history
-    const historyRes = await fetch(`/api/applications/${params.id}/history`);
+    // Refresh history and gate warnings
+    const [historyRes, gateRes] = await Promise.all([
+      fetch(`/api/applications/${params.id}/history`),
+      fetch(`/api/applications/${params.id}/gate-check`),
+    ]);
     const historyData = await historyRes.json();
+    const gateData = await gateRes.json();
     setStatusHistory(Array.isArray(historyData) ? historyData : []);
+    if (gateData.gates) setGateWarnings(gateData.gates);
   }
 
-  async function handleAdvance() {
+  async function handleAdvance(forceOverride = false) {
     if (!app) return;
     const currentIndex = PIPELINE_STAGES.indexOf(app.status);
     if (currentIndex < 0 || currentIndex >= PIPELINE_STAGES.length - 1) return;
     const nextStatus = PIPELINE_STAGES[currentIndex + 1];
-    await handleStatusChange(nextStatus);
+    await handleStatusChange(nextStatus, forceOverride);
+  }
+
+  async function handleGateOverride() {
+    setGateOverrideAdvancing(true);
+    await handleAdvance(true);
+    setShowGateDialog(false);
+    setGateOverrideAdvancing(false);
   }
 
   async function handleDeactivate() {
@@ -548,6 +588,7 @@ export default function ApplicationDetailPage() {
               onDeactivate={handleDeactivate}
               onManualSet={handleStatusChange}
               isDuplicate={otherApps.length > 0}
+              gateWarnings={gateWarnings}
             />
 
             {/* Matching Qualifications */}
@@ -599,6 +640,17 @@ export default function ApplicationDetailPage() {
           </div>
         </div>
       </main>
+
+      {/* Gate Override Dialog */}
+      {showGateDialog && (
+        <GateOverrideDialog
+          gates={gateWarnings}
+          onConfirm={handleGateOverride}
+          onCancel={() => setShowGateDialog(false)}
+          canOverride={true}
+          advancing={gateOverrideAdvancing}
+        />
+      )}
     </>
   );
 }

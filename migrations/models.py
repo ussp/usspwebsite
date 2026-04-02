@@ -485,6 +485,8 @@ class Candidate(Base):
     source = Column(String(50), server_default="application")  # application | referral | sourced | internal
     tags = Column(JSONB, server_default="[]")
     summary = Column(Text)
+    location = Column(String(255))  # e.g. "Chicago, IL"
+    work_preference = Column(String(20))  # remote | hybrid | onsite | open_to_travel
     salary_expectation_min = Column(Integer)
     salary_expectation_max = Column(Integer)
     salary_type = Column(String(20))  # hourly | annual
@@ -867,6 +869,41 @@ class CandidateReference(Base):
 
     __table_args__ = (
         Index("idx_candidate_references_site_request", "site_id", "document_request_id"),
+    )
+
+
+# =============================================================================
+# CANDIDATE_ONBOARDINGS TABLE (post-hire onboarding checklist)
+# =============================================================================
+
+
+class CandidateOnboarding(Base):
+    """
+    Post-hire onboarding checklist for a candidate.
+
+    Auto-created when an application reaches 'hired' status.
+    Tracks I-9/E-Verify, background check, and orientation/training steps.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "candidate_onboardings"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"), nullable=False)
+    application_id = Column(UUID(as_uuid=True), ForeignKey("applications.id"), nullable=False)
+    status = Column(String(20), nullable=False, server_default="in_progress")  # in_progress | completed
+    i9_everify = Column(String(20), nullable=False, server_default="not_started")  # not_started | in_progress | completed
+    background_check = Column(String(20), nullable=False, server_default="not_started")
+    orientation_training = Column(String(20), nullable=False, server_default="not_started")
+    started_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    completed_at = Column(DateTime(timezone=True))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "application_id", name="uq_candidate_onboardings_site_application"),
+        Index("idx_candidate_onboardings_site_candidate", "site_id", "candidate_id"),
     )
 
 

@@ -155,6 +155,16 @@
       "import": "./dist/queries/admin/certifications.js",
       "default": "./dist/queries/admin/certifications.js"
     },
+    "./queries/admin/onboarding": {
+      "types": "./dist/queries/admin/onboarding.d.ts",
+      "import": "./dist/queries/admin/onboarding.js",
+      "default": "./dist/queries/admin/onboarding.js"
+    },
+    "./queries/admin/pipeline-gates": {
+      "types": "./dist/queries/admin/pipeline-gates.d.ts",
+      "import": "./dist/queries/admin/pipeline-gates.js",
+      "default": "./dist/queries/admin/pipeline-gates.js"
+    },
     "./queries/admin/matching": {
       "types": "./dist/queries/admin/matching.d.ts",
       "import": "./dist/queries/admin/matching.js",

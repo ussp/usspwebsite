@@ -1,5 +1,6 @@
 import { getServiceClient } from "../../supabase/server.js";
 import { getSiteId } from "../../config.js";
+import { createOnboarding, getOnboardingByApplicationId } from "./onboarding.js";
 import type {
   AdminApplication,
   ApplicationFilters,
@@ -101,6 +102,29 @@ export async function updateApplicationStatus(
     entity_id: id,
     details: { new_status: status },
   });
+
+  // Auto-create onboarding when application reaches "hired"
+  if (status === "hired") {
+    try {
+      const app = await getApplicationById(id);
+      if (app?.candidate_id) {
+        const existing = await getOnboardingByApplicationId(id);
+        if (!existing) {
+          await createOnboarding(app.candidate_id, id);
+          await supabase.from("audit_log").insert({
+            site_id: getSiteId(),
+            staff_user_id: staffUserId,
+            action: "auto_create_onboarding",
+            entity_type: "candidate_onboarding",
+            entity_id: app.candidate_id,
+            details: { application_id: id, trigger: "hired_status" },
+          });
+        }
+      }
+    } catch (err) {
+      console.error("[applications] Failed to auto-create onboarding:", err);
+    }
+  }
 
   return { success: true };
 }

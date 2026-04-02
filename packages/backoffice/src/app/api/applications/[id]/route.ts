@@ -5,6 +5,7 @@ import {
   updateApplicationStatus,
   assignApplication,
 } from "@ussp-platform/core/queries/admin/applications";
+import { checkPipelineGates } from "@ussp-platform/core/queries/admin/pipeline-gates";
 import { hasPermission } from "@ussp-platform/core/auth/rbac";
 import type { StaffRole, ApplicationStatus } from "@ussp-platform/core/types/admin";
 
@@ -40,11 +41,24 @@ export async function PATCH(
   const staffUserId = user.staffUserId as string;
 
   if (body.status) {
-    const result = await updateApplicationStatus(
-      id,
-      body.status as ApplicationStatus,
-      staffUserId
-    );
+    const targetStatus = body.status as ApplicationStatus;
+
+    // Run pipeline gate checks (unless forceOverride is set)
+    if (!body.forceOverride) {
+      const app = await getApplicationById(id);
+      if (app) {
+        const gates = await checkPipelineGates(id, app.status, targetStatus);
+        const failedGates = gates.filter((g) => !g.passed);
+        if (failedGates.length > 0) {
+          return NextResponse.json(
+            { blocked: true, gates: failedGates },
+            { status: 422 }
+          );
+        }
+      }
+    }
+
+    const result = await updateApplicationStatus(id, targetStatus, staffUserId);
     if (!result.success) return NextResponse.json({ error: result.error }, { status: 400 });
   }
 

@@ -23,6 +23,8 @@ export default function NewCandidatePage() {
       candidate_type: form.get("candidate_type"),
       current_status: form.get("current_status"),
       source: form.get("source"),
+      location: form.get("location") || null,
+      work_preference: form.get("work_preference") || null,
       summary: form.get("summary") || null,
       salary_expectation_min: form.get("salary_min")
         ? Number(form.get("salary_min"))
@@ -168,6 +170,32 @@ export default function NewCandidatePage() {
                 <option value="employed">Employed</option>
                 <option value="on_assignment">On Assignment</option>
                 <option value="not_looking">Not Looking</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium mb-1">Location</label>
+              <input
+                name="location"
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                placeholder="e.g. Chicago, IL"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Work Preference
+              </label>
+              <select
+                name="work_preference"
+                className="w-full px-3 py-2 border border-light-gray rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              >
+                <option value="">Not specified</option>
+                <option value="remote">Remote Only</option>
+                <option value="hybrid">Hybrid</option>
+                <option value="onsite">On-site</option>
+                <option value="open_to_travel">Open to Travel</option>
               </select>
             </div>
           </div>

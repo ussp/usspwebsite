@@ -8,7 +8,7 @@ import type {
 } from "../../types/admin.js";
 
 const CANDIDATE_COLUMNS =
-  "id, site_id, email, full_name, phone, linkedin_sub, profile_picture, candidate_type, current_status, source, tags, summary, salary_expectation_min, salary_expectation_max, salary_type, created_at, updated_at";
+  "id, site_id, email, full_name, phone, linkedin_sub, profile_picture, candidate_type, current_status, source, tags, summary, location, work_preference, salary_expectation_min, salary_expectation_max, salary_type, created_at, updated_at";
 
 export async function getCandidates(
   filters: CandidateFilters = {}
@@ -85,6 +85,8 @@ export async function createCandidate(
       source: input.source || "application",
       tags: input.tags || [],
       summary: input.summary || null,
+      location: input.location || null,
+      work_preference: input.work_preference || null,
       salary_expectation_min: input.salary_expectation_min || null,
       salary_expectation_max: input.salary_expectation_max || null,
       salary_type: input.salary_type || null,
@@ -114,6 +116,8 @@ export async function updateCandidate(
   if (input.source !== undefined) updates.source = input.source;
   if (input.tags !== undefined) updates.tags = input.tags;
   if (input.summary !== undefined) updates.summary = input.summary;
+  if (input.location !== undefined) updates.location = input.location;
+  if (input.work_preference !== undefined) updates.work_preference = input.work_preference;
   if (input.salary_expectation_min !== undefined) updates.salary_expectation_min = input.salary_expectation_min;
   if (input.salary_expectation_max !== undefined) updates.salary_expectation_max = input.salary_expectation_max;
   if (input.salary_type !== undefined) updates.salary_type = input.salary_type;

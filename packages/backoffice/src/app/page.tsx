@@ -16,7 +16,6 @@ const STATUS_COLORS: Record<ApplicationStatus, string> = {
   references: "bg-teal-100 text-teal-800",
   clearances: "bg-sky-100 text-sky-800",
   offer_pending: "bg-amber-100 text-amber-800",
-  onboarding: "bg-lime-100 text-lime-800",
   hired: "bg-emerald-100 text-emerald-800",
   rejected: "bg-red-100 text-red-800",
   withdrawn: "bg-gray-100 text-gray-600",
@@ -31,7 +30,6 @@ const STATUS_LABELS: Record<string, string> = {
   references: "References",
   clearances: "Clearances",
   offer_pending: "Offer Pending",
-  onboarding: "Onboarding",
   hired: "Hired",
   rejected: "Rejected",
   withdrawn: "Withdrawn",
@@ -96,8 +94,7 @@ export default async function DashboardPage() {
               metrics.applicationsByStatus.employment_verification +
               metrics.applicationsByStatus.references +
               metrics.applicationsByStatus.clearances +
-              metrics.applicationsByStatus.offer_pending +
-              metrics.applicationsByStatus.onboarding
+              metrics.applicationsByStatus.offer_pending
             }
             subtext={`${metrics.applicationsByStatus.offer_pending} with offers`}
           />

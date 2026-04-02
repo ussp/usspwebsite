@@ -17,11 +17,17 @@ const STAGE_TOOLTIPS: Record<string, string> = {
   references: "Contacting professional references provided by candidate",
   clearances: "Background check, security clearance, or drug screening",
   offer_pending: "Offer has been extended — awaiting candidate response",
-  onboarding: "Offer accepted — completing paperwork and setup",
-  hired: "Candidate is fully onboarded and placed",
+  hired: "Offer accepted — onboarding checklist auto-created on candidate",
   rejected: "Application was declined at this stage",
   withdrawn: "Candidate withdrew their application",
 };
+
+interface GateResult {
+  passed: boolean;
+  gate: string;
+  message: string;
+  missingItems: string[];
+}
 
 interface StatusHistoryEntry {
   status: string;
@@ -32,10 +38,11 @@ interface StatusHistoryEntry {
 interface PipelineAccordionProps {
   currentStatus: ApplicationStatus;
   statusHistory: StatusHistoryEntry[];
-  onAdvance: () => Promise<void>;
+  onAdvance: (forceOverride?: boolean) => Promise<void>;
   onDeactivate: () => Promise<void>;
   onManualSet: (status: ApplicationStatus) => Promise<void>;
   isDuplicate?: boolean;
+  gateWarnings?: GateResult[];
 }
 
 function timeAgo(dateStr: string): string {
@@ -58,6 +65,7 @@ export default function PipelineAccordion({
   onDeactivate,
   onManualSet,
   isDuplicate,
+  gateWarnings,
 }: PipelineAccordionProps) {
   const [advancing, setAdvancing] = useState(false);
   const [deactivating, setDeactivating] = useState(false);
@@ -249,11 +257,28 @@ export default function PipelineAccordion({
                     </p>
                   )}
 
+                  {/* Gate warnings */}
+                  {gateWarnings && gateWarnings.filter((g) => !g.passed).length > 0 && (
+                    <div className="space-y-1.5">
+                      {gateWarnings.filter((g) => !g.passed).map((gate) => (
+                        <div
+                          key={gate.gate}
+                          className="flex items-start gap-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-700"
+                        >
+                          <svg className="w-3.5 h-3.5 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                          </svg>
+                          <span>{gate.message}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
                   {/* Action buttons */}
                   <div className="flex gap-2">
                     {!isLastStage && (
                       <button
-                        onClick={handleAdvance}
+                        onClick={() => handleAdvance()}
                         disabled={advancing}
                         title={`Move candidate to the next stage: ${STAGE_LABELS[PIPELINE_STAGES[currentIndex + 1]] || ""}`}
                         className="px-4 py-1.5 text-sm font-medium border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors disabled:opacity-50"

@@ -326,7 +326,7 @@ export async function scoreCandidatesForPosition(
           institution: string;
           year?: number;
         }>) || [],
-      location: null, // candidates don't have location field yet
+      location: c.location || null,
       resumeText: (resume?.extracted_text as string) ?? null,
       resumeUploadedAt: resume?.uploaded_at ?? "",
       candidateType: c.candidate_type,

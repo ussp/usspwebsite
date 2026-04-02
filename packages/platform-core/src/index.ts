@@ -77,6 +77,11 @@ export type {
   CreateCandidateReferenceInput,
   DOCUMENT_REQUEST_TYPE_LABELS,
   DOCUMENT_REQUEST_STATUS_LABELS,
+  OnboardingStepKey,
+  OnboardingStepStatus,
+  CandidateOnboarding,
+  PipelineGateResult,
+  ONBOARDING_STEP_LABELS,
 } from "./types/admin.js";
 
 // AI Transformation Monitoring Tool types

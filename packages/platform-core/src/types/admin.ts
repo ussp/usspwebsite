@@ -9,7 +9,6 @@ export type ApplicationStatus =
   | "references"
   | "clearances"
   | "offer_pending"
-  | "onboarding"
   | "hired"
   | "rejected"
   | "withdrawn";
@@ -23,7 +22,6 @@ export const PIPELINE_STAGES: ApplicationStatus[] = [
   "references",
   "clearances",
   "offer_pending",
-  "onboarding",
   "hired",
 ];
 
@@ -38,7 +36,6 @@ export const STAGE_LABELS: Record<ApplicationStatus, string> = {
   references: "References",
   clearances: "Clearances",
   offer_pending: "Offer Pending",
-  onboarding: "Onboarding",
   hired: "Hired",
   rejected: "Rejected",
   withdrawn: "Withdrawn",
@@ -53,11 +50,45 @@ export const STAGE_COLORS: Record<ApplicationStatus, string> = {
   references: "bg-teal-100 text-teal-800",
   clearances: "bg-sky-100 text-sky-800",
   offer_pending: "bg-amber-100 text-amber-800",
-  onboarding: "bg-lime-100 text-lime-800",
   hired: "bg-emerald-100 text-emerald-800",
   rejected: "bg-red-100 text-red-800",
   withdrawn: "bg-gray-100 text-gray-600",
 };
+
+// ── Onboarding (candidate-level, post-hire) ─────────────────────────
+
+export type OnboardingStepKey = "i9_everify" | "background_check" | "orientation_training";
+export type OnboardingStepStatus = "not_started" | "in_progress" | "completed";
+
+export const ONBOARDING_STEP_LABELS: Record<OnboardingStepKey, string> = {
+  i9_everify: "I-9 / E-Verify",
+  background_check: "Background Check",
+  orientation_training: "Orientation & Training",
+};
+
+export interface CandidateOnboarding {
+  id: string;
+  site_id: string;
+  candidate_id: string;
+  application_id: string;
+  status: "in_progress" | "completed";
+  i9_everify: OnboardingStepStatus;
+  background_check: OnboardingStepStatus;
+  orientation_training: OnboardingStepStatus;
+  started_at: string;
+  completed_at: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
+
+// ── Pipeline Gate Checks ────────────────────────────────────────────
+
+export interface PipelineGateResult {
+  passed: boolean;
+  gate: string;
+  message: string;
+  missingItems: string[];
+}
 
 export interface StaffUser {
   id: string;
@@ -418,6 +449,8 @@ export type CandidateStatus = "available" | "employed" | "on_assignment" | "not_
 
 export type SalaryType = "hourly" | "annual";
 
+export type WorkPreference = "remote" | "hybrid" | "onsite" | "open_to_travel";
+
 export interface AdminCandidate {
   id: string;
   site_id: string;
@@ -431,6 +464,8 @@ export interface AdminCandidate {
   source: string;
   tags: string[];
   summary: string | null;
+  location: string | null;
+  work_preference: WorkPreference | null;
   salary_expectation_min: number | null;
   salary_expectation_max: number | null;
   salary_type: SalaryType | null;
@@ -449,6 +484,8 @@ export interface CreateCandidateInput {
   source?: string;
   tags?: string[];
   summary?: string;
+  location?: string;
+  work_preference?: WorkPreference;
   salary_expectation_min?: number;
   salary_expectation_max?: number;
   salary_type?: SalaryType;
@@ -464,6 +501,8 @@ export interface UpdateCandidateInput {
   source?: string;
   tags?: string[];
   summary?: string;
+  location?: string | null;
+  work_preference?: WorkPreference | null;
   salary_expectation_min?: number | null;
   salary_expectation_max?: number | null;
   salary_type?: SalaryType | null;
