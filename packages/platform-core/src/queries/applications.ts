@@ -36,13 +36,20 @@ export async function createOrUpdateApplication(input: CreateApplicationInput): 
 
   const positionId = position?.id || null;
 
-  // Check if this person already has an application (by email + site)
-  const { data: existing } = await supabase
+  // Check if this person already applied for this specific position
+  let existingQuery = supabase
     .from("applications")
     .select("id")
     .eq("site_id", siteId)
-    .eq("email", input.email)
-    .single();
+    .eq("email", input.email);
+
+  if (positionId) {
+    existingQuery = existingQuery.eq("position_id", positionId);
+  } else {
+    existingQuery = existingQuery.eq("job_slug", input.jobSlug);
+  }
+
+  const { data: existing } = await existingQuery.maybeSingle();
 
   let applicationId: string;
 

@@ -115,8 +115,8 @@ export default function CandidateDetailPage() {
       if (candidateData && !candidateData.error) {
         setCandidate(candidateData);
 
-        // Fetch applications for this candidate
-        fetch(`/api/applications?search=${encodeURIComponent(candidateData.email)}`)
+        // Fetch all applications for this candidate (each job = separate record)
+        fetch(`/api/applications/by-email?email=${encodeURIComponent(candidateData.email)}`)
           .then((r) => r.json())
           .then((apps) => {
             if (Array.isArray(apps)) setApplications(apps);

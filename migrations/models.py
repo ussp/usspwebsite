@@ -241,7 +241,10 @@ class Application(Base):
     candidate_id = Column(UUID(as_uuid=True), ForeignKey("candidates.id"))
 
     __table_args__ = (
+        UniqueConstraint("site_id", "email", "position_id", name="uq_applications_site_email_position"),
         Index("idx_applications_site_id", "site_id"),
+        Index("idx_applications_site_email", "site_id", "email"),
+        Index("idx_applications_site_position", "site_id", "position_id"),
     )
 
 

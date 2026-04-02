@@ -77,9 +77,9 @@ export default function ApplicationDetailPage() {
       setStatusHistory(Array.isArray(historyData) ? historyData : []);
       setLoading(false);
 
-      // Fetch other applications by the same person
+      // Fetch other applications by the same person (each job = separate record)
       if (appData?.email) {
-        fetch(`/api/applications?search=${encodeURIComponent(appData.email)}`)
+        fetch(`/api/applications/by-email?email=${encodeURIComponent(appData.email)}`)
           .then((r) => r.json())
           .then((allApps) => {
             if (Array.isArray(allApps)) {

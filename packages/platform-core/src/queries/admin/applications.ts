@@ -44,6 +44,21 @@ export async function getApplications(
   return data;
 }
 
+export async function getApplicationsByEmail(
+  email: string
+): Promise<AdminApplication[]> {
+  const supabase = getServiceClient();
+  const { data, error } = await supabase
+    .from("applications")
+    .select(APPLICATION_COLUMNS)
+    .eq("site_id", getSiteId())
+    .eq("email", email)
+    .order("created_at", { ascending: false });
+
+  if (error || !data) return [];
+  return data;
+}
+
 export async function getApplicationById(
   id: string
 ): Promise<AdminApplication | null> {

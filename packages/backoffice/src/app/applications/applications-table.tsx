@@ -14,12 +14,15 @@ const STATUSES = ["all", ...PIPELINE_STAGES, ...TERMINAL_STATUSES];
 
 export function ApplicationsTable({
   applications,
+  positions,
 }: {
   applications: AdminApplication[];
+  positions: { id: string; title: string }[];
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentStatus = searchParams.get("status") || "all";
+  const currentPosition = searchParams.get("position_id") || "all";
 
   function setFilter(status: string) {
     const params = new URLSearchParams(searchParams.toString());
@@ -27,6 +30,16 @@ export function ApplicationsTable({
       params.delete("status");
     } else {
       params.set("status", status);
+    }
+    router.push(`/applications?${params.toString()}`);
+  }
+
+  function setPositionFilter(positionId: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (positionId === "all") {
+      params.delete("position_id");
+    } else {
+      params.set("position_id", positionId);
     }
     router.push(`/applications?${params.toString()}`);
   }
@@ -53,6 +66,20 @@ export function ApplicationsTable({
 
   return (
     <>
+      <div className="flex items-center gap-4 mb-4">
+        <select
+          value={currentPosition}
+          onChange={(e) => setPositionFilter(e.target.value)}
+          className="px-3 py-1.5 text-xs rounded-lg border border-light-gray bg-white text-dark/80"
+        >
+          <option value="all">All Positions</option>
+          {positions.map((p) => (
+            <option key={p.id} value={p.id}>
+              {p.title}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="flex gap-2 mb-4 flex-wrap">
         {STATUSES.map((s) => (
           <button
