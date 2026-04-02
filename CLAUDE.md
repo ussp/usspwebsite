@@ -232,3 +232,6 @@ className="font-[family-name:var(--font-spartan)]"      // Display
 | Update candidate salary | Back office candidate detail — salary expectations card, or API `PATCH /api/candidates/[id]` with `salary_expectation_min`, `salary_expectation_max`, `salary_type` |
 | Fix orphaned applications | `npx tsx scripts/backfill-candidates.ts` — creates missing candidate records and links them |
 | Add matching dimension | Edit `packages/platform-core/src/types/matching.ts` — add to `MatchDimension`, `DEFAULT_WEIGHTS`, `CandidateMatchData`, `PositionMatchData` |
+| View/update onboarding | Back office candidate detail page — sidebar shows onboarding checklist (I-9, Background, Orientation) |
+| Add a pipeline gate check | Edit `packages/platform-core/src/queries/admin/pipeline-gates.ts` — add check in `checkPipelineGates()` |
+| Override a gate check | Advance with `forceOverride: true` in PATCH `/api/applications/[id]` — audit logged, admin/recruiter only |

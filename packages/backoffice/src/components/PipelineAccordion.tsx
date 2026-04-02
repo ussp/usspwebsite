@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Tooltip from "./Tooltip";
 import type { ApplicationStatus } from "@ussp-platform/core/types/admin";
 import {
   PIPELINE_STAGES,
@@ -108,15 +109,23 @@ export default function PipelineAccordion({
   return (
     <div className="bg-white rounded-lg border border-light-gray p-5">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-semibold">Pipeline</h3>
+        <div className="flex items-center gap-1.5">
+          <h3 className="font-semibold">Pipeline</h3>
+          <Tooltip text="9-stage hiring workflow. Gate checks enforce document requirements at key stages." position="bottom">
+            <svg className="w-4 h-4 text-dark/30 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </Tooltip>
+        </div>
         <div className="relative">
-          <button
-            onClick={() => setShowManualMenu(!showManualMenu)}
-            className="text-dark/40 hover:text-dark/70 text-sm px-2 py-1 rounded hover:bg-light-gray transition-colors"
-            title="Manual status override"
-          >
-            &bull;&bull;&bull;
-          </button>
+          <Tooltip text="Override pipeline — jump to any stage (audit logged)" position="left">
+            <button
+              onClick={() => setShowManualMenu(!showManualMenu)}
+              className="text-dark/40 hover:text-dark/70 text-sm px-2 py-1 rounded hover:bg-light-gray transition-colors"
+            >
+              &bull;&bull;&bull;
+            </button>
+          </Tooltip>
           {showManualMenu && (
             <div className="absolute right-0 top-full mt-1 bg-white border border-light-gray rounded-lg shadow-lg z-10 w-48 py-1">
               <p className="text-[10px] text-dark/40 px-3 py-1 uppercase tracking-wide">Set status manually</p>
@@ -215,18 +224,19 @@ export default function PipelineAccordion({
 
                 {/* Stage label */}
                 <div className="flex-1 min-w-0">
-                  <p
-                    title={STAGE_TOOLTIPS[stage]}
-                    className={`text-sm cursor-default ${
-                      isCurrent
-                        ? "font-semibold text-dark"
-                        : isCompleted || (isTerminal && wasReached)
-                          ? "font-medium text-dark/70"
-                          : "text-dark/40"
-                    }`}
-                  >
-                    {STAGE_LABELS[stage]}
-                  </p>
+                  <Tooltip text={STAGE_TOOLTIPS[stage] || STAGE_LABELS[stage]} position="right">
+                    <p
+                      className={`text-sm cursor-help ${
+                        isCurrent
+                          ? "font-semibold text-dark"
+                          : isCompleted || (isTerminal && wasReached)
+                            ? "font-medium text-dark/70"
+                            : "text-dark/40"
+                      }`}
+                    >
+                      {STAGE_LABELS[stage]}
+                    </p>
+                  </Tooltip>
                 </div>
 
                 {/* Chevron for current stage */}
@@ -277,26 +287,28 @@ export default function PipelineAccordion({
                   {/* Action buttons */}
                   <div className="flex gap-2">
                     {!isLastStage && (
-                      <button
-                        onClick={() => handleAdvance()}
-                        disabled={advancing}
-                        title={`Move candidate to the next stage: ${STAGE_LABELS[PIPELINE_STAGES[currentIndex + 1]] || ""}`}
-                        className="px-4 py-1.5 text-sm font-medium border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors disabled:opacity-50"
-                      >
+                      <Tooltip text={`Move to: ${STAGE_LABELS[PIPELINE_STAGES[currentIndex + 1]] || ""}. Gate checks will verify required documents.`} position="top">
+                        <button
+                          onClick={() => handleAdvance()}
+                          disabled={advancing}
+                          className="px-4 py-1.5 text-sm font-medium border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors disabled:opacity-50"
+                        >
                         {advancing ? "Advancing..." : "Advance"}
                       </button>
+                      </Tooltip>
                     )}
-                    <button
-                      onClick={handleDeactivate}
-                      disabled={deactivating}
-                      title="Reject this application — marks it as declined"
-                      className="px-4 py-1.5 text-sm font-medium border-2 border-red-400 text-red-600 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50 flex items-center gap-1.5"
-                    >
+                    <Tooltip text="Reject this application — marks it as declined and logs the action" position="top">
+                      <button
+                        onClick={handleDeactivate}
+                        disabled={deactivating}
+                        className="px-4 py-1.5 text-sm font-medium border-2 border-red-400 text-red-600 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50 flex items-center gap-1.5"
+                      >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                       </svg>
                       {deactivating ? "..." : "Deactivate"}
                     </button>
+                    </Tooltip>
                   </div>
                 </div>
               )}

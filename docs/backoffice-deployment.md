@@ -34,7 +34,7 @@ Ensure `DATABASE_URL` is set in your environment or `.env` (for Alembic):
 alembic upgrade head
 ```
 
-This creates: `staff_users`, `application_notes`, `audit_log` tables and extends `positions`/`applications`.
+This creates all required tables including `staff_users`, `application_notes`, `audit_log`, `candidates`, `candidate_certifications`, `candidate_onboardings`, `resumes`, `match_scores`, and more. Current head revision: `0020`.
 
 ### 3. Configure environment
 

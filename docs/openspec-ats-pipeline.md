@@ -209,7 +209,112 @@ With complete application history preserved per position, the system is ready fo
 
 ---
 
-## 6. Future Enhancements
+## 6. Onboarding Separation & Pipeline Gates (v1.2 — 2026-04-02)
+
+### 6.1 Problem
+
+The pipeline mixed two workflows: hiring and onboarding. "Onboarding" was stage 9 of 10, but it represents a fundamentally different process — company-level paperwork and setup that starts after offer acceptance. Additionally, pipeline advancement had zero validation — recruiters could advance from "new" to "hired" without a resume, references, or identity documents.
+
+### 6.2 Pipeline Change
+
+Removed "onboarding" from the application pipeline. The hiring pipeline is now **9 stages**:
+
+| # | Status | Label |
+|---|--------|-------|
+| 1 | `new` | New Application |
+| 2 | `phone_screen` | Phone Screen |
+| 3 | `interview_zoom` | Zoom Interview |
+| 4 | `interview_in_person` | Client/In-Person Interview |
+| 5 | `employment_verification` | Employment Verification |
+| 6 | `references` | References |
+| 7 | `clearances` | Clearances |
+| 8 | `offer_pending` | Offer Pending |
+| 9 | `hired` | Hired |
+
+Terminal: `rejected`, `withdrawn`
+
+### 6.3 Candidate-Level Onboarding
+
+New `candidate_onboardings` table created for post-hire onboarding:
+
+| Column | Type | Notes |
+|--------|------|-------|
+| `id` | UUID | PK |
+| `candidate_id` | UUID FK | linked candidate |
+| `application_id` | UUID FK | which hire triggered it |
+| `status` | String | "in_progress" / "completed" |
+| `i9_everify` | String | "not_started" / "in_progress" / "completed" |
+| `background_check` | String | same |
+| `orientation_training` | String | same |
+| `started_at`, `completed_at` | DateTime | |
+
+**Auto-trigger**: When `updateApplicationStatus()` sets status to "hired", it automatically calls `createOnboarding()` if a candidate_id exists and no onboarding record exists yet. Audit logged as `auto_create_onboarding`.
+
+**Auto-complete**: When all three steps are set to "completed", the overall status auto-updates to "completed".
+
+### 6.4 Document Gate Checks
+
+Server-side validation in `pipeline-gates.ts` runs before every status advancement:
+
+| Gate | Trigger | Check |
+|------|---------|-------|
+| Resume required | Advancing past `new` | `application.resume_path` set OR candidate has resume in `resumes` table |
+| References required | Advancing past `references` | `document_requests` of type `references` with status `submitted` or `approved` |
+| PII before offer | Advancing to `offer_pending` | `candidate_pii` has `ssn_encrypted` AND `visa_type` |
+
+Gates are **soft blocks**: the API returns HTTP 422 with gate details. The UI shows a `GateOverrideDialog` modal. Authorized roles (admin, recruiter, hr_manager) can click "Advance Anyway" with `forceOverride: true`, which is audit-logged.
+
+### 6.5 New API Endpoints
+
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| GET | `/api/applications/[id]/gate-check` | Pre-fetch gate warnings for next stage |
+| GET | `/api/candidates/[id]/onboarding` | List onboarding records for candidate |
+| POST | `/api/candidates/[id]/onboarding` | Manually create onboarding (admin) |
+| PATCH | `/api/candidates/[id]/onboarding/[onboardingId]` | Update step status |
+
+### 6.6 New Components
+
+| Component | Purpose |
+|-----------|---------|
+| `GateOverrideDialog.tsx` | Modal showing missing requirements with "Advance Anyway" override |
+| `OnboardingChecklist.tsx` | 3-step progress checklist with status dropdowns |
+
+### 6.7 Migration
+
+**Revision `0019`**:
+- Creates `candidate_onboardings` table
+- Migrates existing `status = 'onboarding'` applications to `status = 'hired'` with onboarding records auto-created
+- Data migration is safe and idempotent
+
+### 6.8 Files Modified/Created
+
+**Platform Core**:
+| File | Changes |
+|------|---------|
+| `types/admin.ts` | Removed `onboarding` from `ApplicationStatus`; added `OnboardingStepStatus`, `CandidateOnboarding`, `PipelineGateResult` types |
+| `queries/admin/onboarding.ts` | **NEW** — CRUD for onboarding records |
+| `queries/admin/pipeline-gates.ts` | **NEW** — Gate check logic |
+| `queries/admin/applications.ts` | Auto-trigger onboarding on "hired" |
+| `queries/admin/dashboard.ts` | Removed onboarding from status counts |
+
+**Backoffice**:
+| File | Changes |
+|------|---------|
+| `components/GateOverrideDialog.tsx` | **NEW** — Override confirmation modal |
+| `components/OnboardingChecklist.tsx` | **NEW** — Step progress UI |
+| `components/PipelineAccordion.tsx` | Removed onboarding stage; added gate warning display |
+| `app/applications/[id]/page.tsx` | Gate fetch, override flow, GateOverrideDialog |
+| `app/candidates/[id]/page.tsx` | Onboarding section in sidebar |
+| `app/page.tsx` | Removed onboarding from dashboard counts/colors |
+| `api/applications/[id]/route.ts` | Gate check enforcement in PATCH |
+| `api/applications/[id]/gate-check/route.ts` | **NEW** — Gate pre-check |
+| `api/candidates/[id]/onboarding/route.ts` | **NEW** — Onboarding CRUD |
+| `api/candidates/[id]/onboarding/[onboardingId]/route.ts` | **NEW** — Step updates |
+
+---
+
+## 7. Future Enhancements
 
 ### 6.1 Planned
 - **Email integration**: Send templated emails at each pipeline stage (invite to phone screen, schedule interview, etc.)

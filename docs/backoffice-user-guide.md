@@ -58,8 +58,7 @@ Navigate to **Applications** in the sidebar. Filter by status using the buttons:
 - **References** — checking references
 - **Clearances** — background/security clearances
 - **Offer Pending** — offer extended, awaiting response
-- **Onboarding** — accepted, in onboarding process
-- **Hired** — fully onboarded
+- **Hired** — offer accepted, onboarding auto-starts
 - **Rejected** / **Withdrawn** — not moving forward
 
 You can also filter by position using the position dropdown.
@@ -84,7 +83,7 @@ Click any application to see:
 - **Applicant profile** — name, email, phone, auth method (LinkedIn or Manual)
 - **Position applied for** and application date
 - **Resume** filename (if uploaded)
-- **Pipeline accordion** — visual progress through all 12 stages
+- **Pipeline accordion** — visual progress through 9 hiring stages
 - **Matching qualifications** — how the candidate matches the position
 - **Document requests** — request and track documents from the candidate
 - **Other applications** — if the same person applied to multiple positions
@@ -95,6 +94,11 @@ On the application detail page, use the pipeline accordion in the right sidebar:
 - Click **"Advance"** to move to the next stage
 - Click any specific stage to jump directly to it
 - Click **"Deactivate"** to reject the application
+- **Gate warnings** appear when documents are missing:
+  - Resume required to advance past New Application
+  - References must be submitted before advancing past References
+  - SSN and Visa/Work Authorization required before Offer Pending
+- Click **"Advance Anyway"** to override (admin/recruiter only — override is audit-logged)
 
 ### Adding Notes
 Type a note in the text field and press Enter or click "Add". Notes are timestamped with your name and visible to all staff. You can edit or delete notes by hovering over them.
@@ -145,6 +149,31 @@ The user can now sign in with their Google account.
 | Manage articles | Yes | No | Yes | No | No |
 | Manage staff | Yes | No | No | No | No |
 | View staff | Yes | No | No | Yes | Yes |
+
+---
+
+## Candidate Onboarding
+
+When an application reaches **Hired**, an onboarding checklist is automatically created on the candidate record. Navigate to the candidate detail page to see it in the sidebar.
+
+### Onboarding Steps
+Each onboarding has three steps that can be updated independently:
+1. **I-9 / E-Verify** — employment eligibility verification
+2. **Background Check** — criminal, employment history, credential verification
+3. **Orientation & Training** — company policies, client training, compliance
+
+### Updating Onboarding
+- Change each step's status using the dropdown: Not Started → In Progress → Completed
+- When all three steps are marked **Completed**, the onboarding automatically completes
+- A progress bar shows overall completion
+
+### Candidate Detail Page
+The candidate detail page shows:
+- **Salary Expectations** — min/max with hourly or annual type
+- **Certifications** — professional certifications with recruiter verification
+- **Identity Documents** — encrypted PII (SSN, Driver's License, DOB, Visa)
+- **Applications** — all positions the candidate applied to
+- **Onboarding** — post-hire checklist (when applicable)
 
 ---
 
