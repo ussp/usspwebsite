@@ -2,8 +2,8 @@
 
 > **Client:** Department of Child and Family Services (State of Illinois)
 > **Project:** Illinois Connect (ILC) — Legacy-to-Dynamics 365 Modernization
-> **Prime Vendor:** Crescent (Krasan Consulting Services)
-> **USSP Role:** AI Strategy & Measurement (subcontractor under Crescent)
+> **Prime Vendor:** Karsan (Krasan Consulting Services)
+> **USSP Role:** AI Strategy & Measurement (subcontractor under Karsan)
 > **Engagement Start:** April 2026
 
 ---
@@ -24,7 +24,7 @@
 
 ## Engagement Summary
 
-CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (160 Crescent consultants) to achieve a **5% productivity improvement**. USSP is providing AI strategy, measurement, and training under Crescent.
+CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (160 Karsan consultants) to achieve a **5% productivity improvement**. USSP is providing AI strategy, measurement, and training under Karsan.
 
 ### Scope
 
@@ -47,13 +47,13 @@ CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (1
 | Person | Role | Organization |
 |--------|------|-------------|
 | Jim Doherty | CIO (executive sponsor, client) | DCFS / DeWitt |
-| Dinkar | Executive sponsor | Crescent |
-| Romi | Delivery Engagement Director | Crescent |
+| Dinkar | Executive sponsor | Karsan |
+| Romi | Delivery Engagement Director | Karsan |
 | Vinay | AI Lead | USSP |
-| Chase | Data Architect | Crescent |
-| John | Agile Delivery Manager | Crescent |
-| Matt | RTE (Release Train Engineer) | Crescent |
-| Robert | Agile Workforce Manager | Crescent |
+| Chase | Data Architect | Karsan |
+| John | Agile Delivery Manager | Karsan |
+| Matt | RTE (Release Train Engineer) | Karsan |
+| Robert | Agile Workforce Manager | Karsan |
 | Darren | Chief Solution Architect | State of Illinois |
 
 ---
