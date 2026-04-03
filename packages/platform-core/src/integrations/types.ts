@@ -9,6 +9,7 @@ export interface IntegrationConfig {
   type: "jira" | "azure_devops" | "github" | "gitlab" | "linear";
   baseUrl: string;
   apiToken: string;
+  email?: string;
   projectKey?: string;
   boardId?: string;
   repositoryOwner?: string;

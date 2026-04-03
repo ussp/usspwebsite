@@ -60,7 +60,15 @@ export default function EngagementDetailPage() {
               {engagement.lead_name && <> &middot; Lead: {engagement.lead_name}</>}
             </p>
           </div>
-          <StatusBadge status={engagement.status as EngagementStatus} />
+          <div className="flex items-center gap-3">
+            <Link
+              href={`/engagements/${id}/settings`}
+              className="px-3 py-1.5 text-xs rounded-lg border border-light-gray hover:bg-light-gray transition-colors"
+            >
+              Integration Settings
+            </Link>
+            <StatusBadge status={engagement.status as EngagementStatus} />
+          </div>
         </div>
 
         {/* Timeline */}
@@ -131,12 +139,18 @@ export default function EngagementDetailPage() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <Link
                     href={`/engagements/${id}/teams/${team.id}/baseline`}
                     className="px-3 py-1.5 text-xs rounded-lg border border-light-gray hover:bg-light-gray transition-colors"
                   >
                     Baseline
+                  </Link>
+                  <Link
+                    href={`/engagements/${id}/teams/${team.id}/survey?type=baseline`}
+                    className="px-3 py-1.5 text-xs rounded-lg border border-light-gray hover:bg-light-gray transition-colors"
+                  >
+                    Survey
                   </Link>
                   <Link
                     href={`/engagements/${id}/teams/${team.id}/training-plan`}

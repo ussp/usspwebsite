@@ -211,6 +211,113 @@ export default function ReportPage() {
           )}
         </div>
 
+        {/* DORA 2025 AI Tensions */}
+        {report.tensions && report.tensions.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold mb-3">AI Adoption Tensions (DORA 2025)</h2>
+            <p className="text-sm text-dark/50 mb-4">
+              DORA 2025 research identifies key tensions that emerge when teams adopt AI tools.
+              Understanding these helps calibrate expectations and target interventions.
+            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              {report.tensions.map((t) => (
+                <div key={t.tension_name} className="bg-white rounded-lg border border-light-gray p-5">
+                  <h3 className="text-sm font-semibold mb-3">{t.label}</h3>
+                  <div className="space-y-2 mb-3">
+                    {t.positive_pole && (
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-dark/60">{t.positive_pole.label}</span>
+                        <ImprovementBadge value={t.positive_pole.improvement_pct} size="sm" />
+                      </div>
+                    )}
+                    {t.negative_pole && (
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-dark/60">{t.negative_pole.label}</span>
+                        <ImprovementBadge value={t.negative_pole.improvement_pct} size="sm" />
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-xs text-dark/50 leading-relaxed">{t.net_narrative}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Amplifier Analysis (DORA 2025) */}
+        {report.amplifier_analysis && (
+          <div className="mb-6">
+            <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20 p-6">
+              <h2 className="text-lg font-semibold mb-2">AI Amplifier Effect (DORA 2025)</h2>
+              <p className="text-sm text-dark/50 mb-4">
+                DORA 2025 found that AI is an amplifier — it magnifies existing organizational strengths and weaknesses.
+                Teams with stronger foundations see greater returns from AI adoption.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="bg-white rounded-lg p-4 text-center">
+                  <p className="text-xs text-dark/40 mb-1">Readiness Score</p>
+                  <p className="text-2xl font-bold text-primary">
+                    {report.amplifier_analysis.readiness_score.toFixed(1)}<span className="text-sm font-normal text-dark/40">/5</span>
+                  </p>
+                </div>
+                <div className="bg-white rounded-lg p-4 text-center">
+                  <p className="text-xs text-dark/40 mb-1">Measured Improvement</p>
+                  <p className="text-2xl font-bold">
+                    <ImprovementBadge value={report.amplifier_analysis.improvement_score} size="lg" />
+                  </p>
+                </div>
+              </div>
+              <p className="text-sm text-dark/70 leading-relaxed">{report.amplifier_analysis.correlation_narrative}</p>
+            </div>
+          </div>
+        )}
+
+        {/* Readiness Context */}
+        {report.readiness_context && (
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold mb-3">AI Readiness Assessment</h2>
+            <div className="bg-white rounded-lg border border-light-gray p-5">
+              <div className="flex items-center gap-3 mb-4">
+                <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                  report.readiness_context.readiness_tier === "well_positioned" ? "bg-emerald-100 text-emerald-800" :
+                  report.readiness_context.readiness_tier === "ready" ? "bg-blue-100 text-blue-800" :
+                  report.readiness_context.readiness_tier === "foundation_needed" ? "bg-amber-100 text-amber-800" :
+                  "bg-red-100 text-red-800"
+                }`}>
+                  {report.readiness_context.tier_label}
+                </span>
+                <span className="text-sm text-dark/50">
+                  Score: {report.readiness_context.overall_score.toFixed(1)} / 5.0
+                </span>
+              </div>
+              <p className="text-sm text-dark/60 mb-4">{report.readiness_context.tier_description}</p>
+              {report.readiness_context.blockers.length > 0 && (
+                <div>
+                  <p className="text-xs font-medium text-red-700 mb-2">Blockers (score &lt; 2.0):</p>
+                  <div className="space-y-1">
+                    {report.readiness_context.blockers.map((b) => (
+                      <div key={b.name} className="flex items-center justify-between text-sm bg-red-50 rounded px-3 py-1.5">
+                        <span>{b.label}</span>
+                        <span className="text-red-700 font-medium">{b.score.toFixed(1)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {report.readiness_context.capabilities.map((cap) => (
+                  <div key={cap.name} className="text-center">
+                    <div className={`text-lg font-bold ${cap.score >= 3.0 ? "text-primary" : cap.score >= 2.0 ? "text-amber-600" : "text-red-600"}`}>
+                      {cap.score.toFixed(1)}
+                    </div>
+                    <div className="text-xs text-dark/50 leading-tight">{cap.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Research benchmarks */}
         <div className="mb-6">
           <h2 className="text-lg font-semibold mb-3">Research Context</h2>

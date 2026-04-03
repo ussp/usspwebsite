@@ -36,7 +36,8 @@ export default function BaselineAssessmentPage() {
       });
 
       if (res.ok) {
-        router.push(`/engagements/${engagementId}`);
+        const data = await res.json();
+        router.push(`/engagements/${engagementId}/teams/${teamId}/baseline/metrics?assessmentId=${data.id}`);
       }
     } finally {
       setSaving(false);
@@ -132,8 +133,8 @@ export default function BaselineAssessmentPage() {
 
         <GuideBanner title="After creating this assessment" variant="step">
           <p>
-            Once created, you&apos;ll enter the actual metric values through the metrics API.
-            The assessment stores the measurement window (dates + sprint count).
+            Once created, you&apos;ll be taken to the <strong>metrics entry form</strong> where you can input
+            DORA and Scrum metrics for the team and distribute the SPACE/DevEx survey to team members.
             The metric values are stored separately so you can update them as you collect data.
           </p>
         </GuideBanner>

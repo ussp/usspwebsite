@@ -240,6 +240,11 @@
       "import": "./dist/integrations/github-metrics.js",
       "default": "./dist/integrations/github-metrics.js"
     },
+    "./integrations/types": {
+      "types": "./dist/integrations/types.d.ts",
+      "import": "./dist/integrations/types.js",
+      "default": "./dist/integrations/types.js"
+    },
     "./integrations/adapter": {
       "types": "./dist/integrations/adapter.d.ts",
       "import": "./dist/integrations/adapter.js",

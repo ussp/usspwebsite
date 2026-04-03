@@ -36,7 +36,8 @@ export default function PostTrainingAssessmentPage() {
       });
 
       if (res.ok) {
-        router.push(`/engagements/${engagementId}`);
+        const data = await res.json();
+        router.push(`/engagements/${engagementId}/teams/${teamId}/post-training/metrics?assessmentId=${data.id}`);
       }
     } finally {
       setSaving(false);

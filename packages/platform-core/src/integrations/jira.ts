@@ -42,8 +42,9 @@ interface JiraIssue {
 }
 
 function getAuthHeaders(config: IntegrationConfig): Record<string, string> {
+  const email = config.email || "user@example.com";
   return {
-    Authorization: `Basic ${Buffer.from(`user@example.com:${config.apiToken}`).toString("base64")}`,
+    Authorization: `Basic ${Buffer.from(`${email}:${config.apiToken}`).toString("base64")}`,
     Accept: "application/json",
     "Content-Type": "application/json",
   };
