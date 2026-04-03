@@ -49,7 +49,7 @@ CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (1
 | Jim Doherty | CIO (executive sponsor, client) | DCFS / DeWitt |
 | Dinkar | Executive sponsor | Karsan |
 | Romi | Delivery Engagement Director | Karsan |
-| Vinay | AI Lead | USSP |
+| Vinay Lagisetty | AI Transformation Leader | Karsan (via USSP) |
 | Chase | Data Architect | Karsan |
 | John | Agile Delivery Manager | Karsan |
 | Matt | RTE (Release Train Engineer) | Karsan |

@@ -1,7 +1,7 @@
 # DCFS Illinois Connect — AI-Augmented Agile Delivery Plan
 
 > **Status:** DRAFT v2 — Due April 17, 2026
-> **Owner:** Vinay Lagisetty (USSP, AI Lead) + Romi (Karsan, Engagement Director)
+> **Owner:** Vinay Lagisetty (Karsan, AI Transformation Leader) + Romi (Karsan, Engagement Director)
 > **Audience:** Jim Doherty (CIO, DCFS/DeWitt), Dinkar (Karsan Executive Sponsor)
 > **Methodology:** GQM (Basili 1994), DORA/Accelerate (Forsgren 2018), SPACE (Microsoft Research 2021), QUS (Lucassen 2016), Six Sigma DMAIC
 
@@ -335,7 +335,7 @@ All metrics tracked in the **AI Transformation Monitor** at `tools.ussp.co`:
 
 | Person | Role | Contribution |
 |--------|------|-------------|
-| **Vinay** (USSP) | AI Lead | Plan, training, measurement, tool assessment, playbooks |
+| **Vinay** (Karsan) | AI Transformation Leader | Plan, training, measurement, tool assessment, playbooks |
 | **Romi** (Karsan) | Delivery Lead | Jim relationship, access, compliance, Springfield trip |
 | **Robert** (Karsan) | Workforce Manager | DoIT policy bridge, documentation, coordination |
 | **Matt** (Karsan) | RTE | JIRA/Confluence access, Rovo capabilities, tool config |
