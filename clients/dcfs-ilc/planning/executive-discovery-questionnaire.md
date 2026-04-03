@@ -150,6 +150,58 @@
 
 ---
 
+## Section 9: DoIT AI Policy Compliance (CRITICAL — Must Clarify Before Pilot)
+
+> *Context: The State of Illinois DoIT AI Policy (effective April 1, 2025) applies to all AI use by state agencies. Several sections have requirements that could be pilot-blocking if not already addressed. We need clarity on what DCFS has already done vs what we need to do.*
+
+**9.1** Has DCFS already produced an **AI System Assessment Report** for GitHub Copilot and/or Atlassian Rovo?
+  - If yes: can we get a copy?
+  - If no: do we need to produce one before the pilot? (Policy Section 5f requires Agency Head signoff + 30-day DoIT advance notice)
+
+**9.2** Has DCFS submitted the **30-day advance notice to DoIT** required before using these AI tools?
+  - If yes: are we covered under that submission?
+  - If no: this is a potential **30-day gate** before pilot can launch
+
+**9.3** Does DCFS consider GitHub Copilot accessing ILC source code as "**use of State data for AI purposes**"? (Policy Section 5e)
+  - If yes: has the Agency Head provided written consent?
+  - Same question for Rovo accessing Jira/Confluence project data
+
+**9.4** Has DCFS designated an employee to perform the **AI Policy functions** as required? (Policy Section 2 — required within 30 days of policy effective date)
+  - Who is that person?
+  - Should our pilot compliance flow through them?
+
+**9.5** Does DCFS already have a **protected data classification** for ILC project data?
+  - Is ILC source code considered Protected Data?
+  - Are Jira stories/Confluence docs containing child welfare workflows considered Protected Data?
+  - If yes: Section 4f requires written Agency Head authorization + 30-day DoIT notice before AI can access it
+
+**9.6** Does DCFS have an existing **AI security incident reporting process**? (Policy Section 12)
+  - If yes: should pilot participants use that process?
+  - If no: should we help establish one for the pilot?
+
+**9.7** Has DCFS already conducted or planned **bias and fairness reviews** for AI-assisted development tools? (Policy Section 11)
+  - Are bias reviews expected per sprint? Per PI? Per incident only?
+
+**9.8** Does DCFS have specific **disclosure/transparency requirements** for internal AI tool use? (Policy Section 5a-c)
+  - Do team members need written notification that AI tools are being used?
+  - Do deliverables need to be labeled as "AI-assisted"?
+
+**9.9** What is the **escalation path** for AI-related concerns during the pilot? (Policy Section 8-9)
+  - Should concerns go to the designated AI Policy employee? To Jim? To DoIT directly?
+
+**9.10** Bottom line: **What do we need to deliver to DCFS before the pilot can start?**
+  - Assessment report?
+  - DoIT notification?
+  - Agency Head written consent?
+  - Training certification?
+  - Or is this all already handled and we can proceed with our plan?
+
+---
+
+> **Why this matters:** The DoIT policy has a **30-day advance notice** requirement for several items. If those haven't been filed, the earliest the pilot can legally start is 30 days after we file. This could push the pilot past PI Planning (May 5-7) if we don't clarify NOW.
+
+---
+
 ## After the Interview: Metric Selection Matrix
 
 Based on Jim's responses, fill in:
