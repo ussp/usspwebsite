@@ -83,7 +83,13 @@ clients/dcfs-ilc/
 ├── planning/
 │   ├── rollout-plan.md          ← Due Apr 17
 │   ├── baseline-metrics.md      ← Measurement baseline definition
-│   └── pilot-team-selection.md  ← Pilot participants
+│   ├── pilot-team-selection.md  ← Pilot participants
+│   ├── executive-discovery-questionnaire.md ← Interview guide for Jim
+│   └── methodology-citations.md ← Research backing for every metric
+├── reference-docs/
+│   ├── 20250401-DoIT-AI Policy-v2- A11Y.pdf ← State of Illinois AI Policy
+│   ├── doit-ai-policy-summary.md  ← Actionable summary of policy constraints
+│   └── DCFS AI Rollout Plan.docx  ← Client-shared rollout plan document
 ├── playbooks/
 │   ├── ba-playbook.md           ← Business Analyst AI playbook
 │   ├── tester-playbook.md       ← Tester AI playbook

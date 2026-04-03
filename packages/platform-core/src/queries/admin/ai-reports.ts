@@ -115,13 +115,16 @@ export function computeCategorySummary(
 
 /**
  * Compute overall improvement as a weighted average across categories.
- * Weights: DORA 30%, Scrum 30%, SPACE 25%, DevEx 15%. Readiness excluded (separate module).
+ * Weights: DORA 20%, Scrum 20%, Quality 25%, SPACE 20%, DevEx 15%.
+ * Readiness excluded (separate module). Quality weighted highest for
+ * engagements where quality improvement is the primary goal.
  */
 export function computeOverallImprovement(categories: CategorySummary[]): number {
   const weights: Record<MetricCategory, number> = {
-    dora: 0.3,
-    scrum: 0.3,
-    space: 0.25,
+    dora: 0.2,
+    scrum: 0.2,
+    quality: 0.25,
+    space: 0.2,
     devex: 0.15,
     readiness: 0, // readiness is a precondition, not an improvement metric
   };
@@ -389,7 +392,7 @@ export async function generateTransformationReport(
     : [];
 
   // Compute category summaries (readiness excluded from improvement calc)
-  const categories: MetricCategory[] = ["dora", "scrum", "space", "devex"];
+  const categories: MetricCategory[] = ["dora", "scrum", "quality", "space", "devex"];
   const categorySummaries = categories.map((cat) =>
     computeCategorySummary(cat, baselineMetrics, postMetrics)
   );

@@ -250,6 +250,11 @@
       "import": "./dist/integrations/adapter.js",
       "default": "./dist/integrations/adapter.js"
     },
+    "./integrations/jira-quality-scanner": {
+      "types": "./dist/integrations/jira-quality-scanner.d.ts",
+      "import": "./dist/integrations/jira-quality-scanner.js",
+      "default": "./dist/integrations/jira-quality-scanner.js"
+    },
     "./matching": {
       "types": "./dist/matching/index.d.ts",
       "import": "./dist/matching/index.js",

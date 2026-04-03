@@ -25,7 +25,7 @@ export type AssessmentStatus = "draft" | "collecting" | "completed";
 
 export type DataSource = "integration" | "manual";
 
-export type MetricCategory = "dora" | "space" | "devex" | "scrum" | "readiness";
+export type MetricCategory = "dora" | "space" | "devex" | "scrum" | "quality" | "readiness";
 
 export type TrainingPlanStatus = "proposed" | "approved" | "in_progress" | "completed";
 
@@ -116,6 +116,22 @@ export const METRIC_CATALOG: MetricDefinition[] = [
   { category: "devex", name: "expertise_depth_risk", label: "Expertise Depth Risk", unit: "score_1_5", direction: "lower_better", level: "member", description: "Risk of reduced deep understanding due to AI reliance" },
   { category: "devex", name: "prototyping_speed", label: "Prototyping Speed", unit: "score_1_5", direction: "higher_better", level: "member", description: "Speed of creating prototypes and proofs of concept with AI" },
   { category: "devex", name: "last_mile_friction", label: "Last Mile to Production", unit: "score_1_5", direction: "lower_better", level: "member", description: "Friction getting AI-assisted work to production quality" },
+  // Quality metrics — story quality, test coverage, documentation, planning
+  { category: "quality", name: "story_quality_score", label: "Story Quality Score", unit: "score_1_5", direction: "higher_better", level: "team", description: "Average quality rating of user stories against defined criteria (clarity, AC completeness, testability, acceptance criteria, edge cases)" },
+  { category: "quality", name: "story_rejection_rate", label: "Story Rejection Rate", unit: "percentage", direction: "lower_better", level: "team", description: "Percentage of stories sent back for rework after review by PO/PM" },
+  { category: "quality", name: "story_review_cycle_time", label: "Story Review Cycle Time", unit: "days", direction: "lower_better", level: "team", description: "Average days from story draft to approved/ready-for-dev" },
+  { category: "quality", name: "acceptance_criteria_completeness", label: "AC Completeness", unit: "score_1_5", direction: "higher_better", level: "team", description: "Average completeness score of acceptance criteria (covers happy path, edge cases, error handling)" },
+  { category: "quality", name: "test_coverage_percentage", label: "Test Coverage", unit: "percentage", direction: "higher_better", level: "team", description: "Percentage of acceptance criteria with corresponding test cases" },
+  { category: "quality", name: "test_script_quality", label: "Test Script Quality", unit: "score_1_5", direction: "higher_better", level: "team", description: "Quality of test scripts — clear steps, expected results, data setup, edge case coverage" },
+  { category: "quality", name: "test_creation_time_hours", label: "Test Creation Time", unit: "hours", direction: "lower_better", level: "team", description: "Average hours to create test scripts per story (by story point size)" },
+  { category: "quality", name: "documentation_coverage", label: "Documentation Coverage", unit: "percentage", direction: "higher_better", level: "team", description: "Percentage of completed stories with updated Confluence documentation" },
+  { category: "quality", name: "documentation_quality", label: "Documentation Quality", unit: "score_1_5", direction: "higher_better", level: "team", description: "Quality of technical and process documentation (current, accurate, findable)" },
+  { category: "quality", name: "defect_density", label: "Defect Density", unit: "count", direction: "lower_better", level: "team", description: "Defects found per story point delivered (lower = higher quality)" },
+  { category: "quality", name: "rework_percentage", label: "Rework Percentage", unit: "percentage", direction: "lower_better", level: "team", description: "Percentage of sprint capacity spent on rework vs new development" },
+  { category: "quality", name: "first_pass_yield", label: "First Pass Yield", unit: "percentage", direction: "higher_better", level: "team", description: "Percentage of stories that pass QA on first attempt without defects" },
+  { category: "quality", name: "planning_accuracy", label: "Planning Accuracy", unit: "percentage", direction: "higher_better", level: "team", description: "How accurately stories were sized — actual effort vs estimated (closer to 100% = better)" },
+  { category: "quality", name: "requirement_clarity", label: "Requirement Clarity", unit: "score_1_5", direction: "higher_better", level: "member", description: "Team members rate how clear requirements are when they start work" },
+  { category: "quality", name: "architect_dev_alignment", label: "Architect-Dev Alignment", unit: "score_1_5", direction: "higher_better", level: "member", description: "Developers rate clarity of technical direction from architect" },
   // SPACE — AI-specific survey additions (DORA 2025)
   { category: "space", name: "ai_trust", label: "AI Trust Level", unit: "score_1_5", direction: "higher_better", level: "member", description: "Confidence in AI-generated code and suggestions" },
   { category: "space", name: "ai_adoption_rate", label: "AI Adoption Rate", unit: "percentage", direction: "higher_better", level: "member", description: "Self-reported frequency of AI tool usage in daily work" },

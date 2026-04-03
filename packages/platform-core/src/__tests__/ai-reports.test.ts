@@ -166,8 +166,9 @@ describe("computeOverallImprovement", () => {
     ];
 
     const result = computeOverallImprovement(categories);
-    // Weighted: (30*0.3 + 40*0.3 + 20*0.25 + 10*0.15) / 1.0 = 9+12+5+1.5 = 27.5
-    expect(result).toBeCloseTo(27.5, 0);
+    // Weighted: (30*0.2 + 40*0.2 + 20*0.2 + 10*0.15) / 0.75 = 6+8+4+1.5 = 19.5/0.75 = 26
+    // (quality category not present, so its 0.25 weight is excluded from total)
+    expect(result).toBeCloseTo(26, 0);
   });
 
   it("handles empty categories", () => {

@@ -23,11 +23,12 @@ import GuideBanner from "@/components/GuideBanner";
 // Helpers
 // ---------------------------------------------------------------------------
 
-const CATEGORY_ORDER: MetricCategory[] = ["dora", "scrum", "space", "devex"];
+const CATEGORY_ORDER: MetricCategory[] = ["dora", "scrum", "quality", "space", "devex"];
 
 const CATEGORY_LABELS: Record<string, string> = {
   dora: "DORA Metrics",
   scrum: "Scrum Metrics",
+  quality: "Quality Metrics",
   space: "SPACE Survey",
   devex: "Developer Experience",
 };
@@ -35,6 +36,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   dora: "DevOps Research & Assessment delivery metrics. These are objective, team-level measures pulled from your CI/CD and incident management tools.",
   scrum: "Sprint delivery metrics averaged over the measurement period. Pull these from your Scrum tool (Jira, ADO, etc.).",
+  quality: "Story quality, test coverage, documentation, and planning metrics. Measures the qualitative dimensions of delivery — not just speed, but how good the output is.",
   space: "Satisfaction, Performance, Activity, Communication, Efficiency. Each team member scores every dimension 1-5.",
   devex: "Developer Experience survey including AI-specific tension pairs from the DORA 2025 model. Each member scores 1-5.",
 };
@@ -53,6 +55,8 @@ function unitLabel(unit: string): string {
     case "count": return "";
     case "items_per_sprint": return "/ sprint";
     case "score_1_5": return "(1-5)";
+    case "hours": return "hrs";
+    case "days": return "days";
     default: return unit;
   }
 }

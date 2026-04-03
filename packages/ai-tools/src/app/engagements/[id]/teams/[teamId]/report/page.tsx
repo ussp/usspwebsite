@@ -60,6 +60,7 @@ export default function ReportPage() {
 
   const doraCat = report.categories.find((c) => c.category === "dora");
   const scrumCat = report.categories.find((c) => c.category === "scrum");
+  const qualityCat = report.categories.find((c) => c.category === "quality");
   const spaceCat = report.categories.find((c) => c.category === "space");
   const devexCat = report.categories.find((c) => c.category === "devex");
 
@@ -137,6 +138,34 @@ export default function ReportPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {scrumCat.deltas.map((d) => (
+                <BeforeAfterCard
+                  key={d.metric_name}
+                  label={d.label}
+                  baselineValue={d.baseline_value}
+                  postValue={d.post_value}
+                  improvementPct={d.improvement_pct}
+                  unit={d.unit}
+                  direction={d.direction}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Quality Metrics */}
+        {qualityCat && qualityCat.deltas.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold mb-3">
+              Quality Metrics
+              <span className="text-sm font-normal text-dark/40 ml-2">
+                Avg: <ImprovementBadge value={qualityCat.avg_improvement_pct} size="sm" />
+              </span>
+            </h2>
+            <p className="text-sm text-dark/50 mb-4">
+              Story quality, test coverage, documentation, and planning accuracy — measuring not just speed, but how good the output is.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {qualityCat.deltas.map((d) => (
                 <BeforeAfterCard
                   key={d.metric_name}
                   label={d.label}

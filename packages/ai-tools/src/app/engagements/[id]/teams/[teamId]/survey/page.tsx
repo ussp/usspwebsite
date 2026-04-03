@@ -18,7 +18,7 @@ import type {
 
 interface SurveyQuestion {
   id: string;
-  category: "space" | "devex";
+  category: "space" | "devex" | "quality";
   metric_name: string;
   label: string;
   reverseScored?: boolean;
@@ -118,7 +118,22 @@ const DEVEX_QUESTIONS: SurveyQuestion[] = [
   },
 ];
 
-const ALL_QUESTIONS = [...SPACE_QUESTIONS, ...DEVEX_QUESTIONS];
+const QUALITY_QUESTIONS: SurveyQuestion[] = [
+  {
+    id: "quality_requirement_clarity",
+    category: "quality",
+    metric_name: "requirement_clarity",
+    label: "Requirements and user stories are clear and complete when I start working on them",
+  },
+  {
+    id: "quality_architect_dev_alignment",
+    category: "quality",
+    metric_name: "architect_dev_alignment",
+    label: "Technical direction from the architect is clear and well-communicated to the team",
+  },
+];
+
+const ALL_QUESTIONS = [...SPACE_QUESTIONS, ...DEVEX_QUESTIONS, ...QUALITY_QUESTIONS];
 
 // ---------------------------------------------------------------------------
 // Page component
