@@ -1,5 +1,5 @@
 [build]
-buildCommand = "cd packages/platform-core && npx tsc && cd ../backoffice && next build"
+buildCommand = "cd packages/platform-core && npx tsc && cd ../backoffice && npm install && next build"
 watchPatterns = ["packages/platform-core/src/**", "packages/backoffice/**"]
 
 [deploy]
