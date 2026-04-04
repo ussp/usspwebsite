@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Providers from "@/components/Providers";
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: {
@@ -21,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-light-gray text-dark antialiased">
-        <Providers>{children}</Providers>
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );
