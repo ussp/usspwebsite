@@ -1,6 +1,6 @@
 [build]
-buildCommand = "cd packages/platform-core && npx tsc && cd ../backoffice && npm install && next build --no-turbopack"
-watchPatterns = ["packages/platform-core/src/**", "packages/backoffice/**"]
+buildCommand = "cd packages/platform-core && npx tsc && cd ../backoffice && npm install && next build --webpack"
+watchPatterns = ["packages/platform-core/src/**", "packages/backoffice/**", "packages/backoffice/railway.toml"]
 
 [deploy]
 startCommand = "cd packages/backoffice && npm run start"
