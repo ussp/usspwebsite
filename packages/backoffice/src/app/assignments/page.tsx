@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import { Suspense } from "react";
+import { connection } from "next/server";
 import { getAssignments } from "@ussp-platform/core/queries/admin/assignments";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
@@ -9,6 +11,7 @@ import { AssignmentsTable } from "./assignments-table";
 export const metadata = { title: "Assignments" };
 
 export default async function AssignmentsPage() {
+  await connection();
   const assignments = await getAssignments();
 
   return (
@@ -25,7 +28,9 @@ export default async function AssignmentsPage() {
             + New Assignment
           </Link>
         </div>
-        <AssignmentsTable assignments={assignments} />
+        <Suspense>
+          <AssignmentsTable assignments={assignments} />
+        </Suspense>
       </main>
     </>
   );

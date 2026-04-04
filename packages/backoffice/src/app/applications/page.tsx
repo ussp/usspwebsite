@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import { Suspense } from "react";
+import { connection } from "next/server";
 import { getApplications } from "@ussp-platform/core/queries/admin/applications";
 import { getAllPositions } from "@ussp-platform/core/queries/admin/positions";
 import AdminSidebar from "@/components/AdminSidebar";
@@ -14,6 +16,7 @@ export default async function ApplicationsPage({
 }: {
   searchParams: Promise<{ status?: string; search?: string; position_id?: string }>;
 }) {
+  await connection();
   const params = await searchParams;
   const [applications, positions] = await Promise.all([
     getApplications({
@@ -41,10 +44,12 @@ export default async function ApplicationsPage({
             + New Application
           </Link>
         </div>
-        <ApplicationsTable
-          applications={applications}
-          positions={positions.map((p) => ({ id: p.id, title: p.title }))}
-        />
+        <Suspense>
+          <ApplicationsTable
+            applications={applications}
+            positions={positions.map((p) => ({ id: p.id, title: p.title }))}
+          />
+        </Suspense>
       </main>
     </>
   );

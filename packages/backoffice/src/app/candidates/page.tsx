@@ -1,5 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import { Suspense } from "react";
+import { connection } from "next/server";
 import { getCandidates } from "@ussp-platform/core/queries/admin/candidates";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
@@ -9,6 +11,7 @@ import { CandidatesTable } from "./candidates-table";
 export const metadata = { title: "Candidates" };
 
 export default async function CandidatesPage() {
+  await connection();
   const candidates = await getCandidates();
   const benchCount = candidates.filter(
     (c) => c.candidate_type === "internal_employee" && c.current_status === "available"
@@ -35,7 +38,9 @@ export default async function CandidatesPage() {
             + Add Candidate
           </Link>
         </div>
-        <CandidatesTable candidates={candidates} />
+        <Suspense>
+          <CandidatesTable candidates={candidates} />
+        </Suspense>
       </main>
     </>
   );
