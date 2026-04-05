@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import DataTable from "@/components/DataTable";
+import PartnerRequirementsTooltip from "@/components/PartnerRequirementsTooltip";
 import type { AdminAssignment, AssignmentStatus } from "@ussp-platform/core/types/admin";
 
 const STATUS_COLORS: Record<AssignmentStatus, string> = {
@@ -54,7 +55,14 @@ export function AssignmentsTable({ assignments }: { assignments: AdminAssignment
       key: "client_name",
       label: "Client",
       sortable: true,
-      render: (row: AdminAssignment) => row.client_name || "-",
+      render: (row: AdminAssignment) => (
+        <span className="inline-flex items-center">
+          {row.client_name || "-"}
+          {row.client_name && (
+            <PartnerRequirementsTooltip clientName={row.client_name} type="invoicing" />
+          )}
+        </span>
+      ),
     },
     {
       key: "end_client_name",

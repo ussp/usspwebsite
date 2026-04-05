@@ -9,6 +9,7 @@ import PipelineAccordion from "@/components/PipelineAccordion";
 import GateOverrideDialog from "@/components/GateOverrideDialog";
 import MatchingQualifications from "@/components/MatchingQualifications";
 import DocumentRequestsPanel from "@/components/DocumentRequestsPanel";
+import PartnerRequirementsTooltip from "@/components/PartnerRequirementsTooltip";
 import type { ApplicationStatus } from "@ussp-platform/core/types/admin";
 import { PIPELINE_STAGES } from "@ussp-platform/core/types/admin";
 
@@ -399,9 +400,10 @@ export default function ApplicationDetailPage() {
                     </div>
                   )}
                   {position.client_name && (
-                    <div>
+                    <div className="flex items-center">
                       <span className="text-dark/50">Client:</span>{" "}
                       {position.client_name}
+                      <PartnerRequirementsTooltip clientName={position.client_name} type="submission" />
                     </div>
                   )}
                   {position.end_client_name && (

@@ -1,0 +1,208 @@
+// =============================================================================
+// Partner Knowledge Base — Static configuration for all USSP partners
+//
+// Partner data changes infrequently. Storing as typed config (not database)
+// keeps it version-controlled, reviewable in PRs, and easy to extend.
+// =============================================================================
+
+export interface PartnerContact {
+  name: string;
+  role: string;
+  email: string;
+  phone?: string;
+}
+
+export interface PartnerDocument {
+  name: string;
+  description: string;
+  path: string;
+}
+
+export interface Partner {
+  slug: string;
+  name: string;
+  shortName: string;
+  logo?: string;
+  status: "active" | "in_conversation" | "inactive";
+  type: "prime_vendor" | "technology" | "investment" | "reseller";
+  about: string;
+  website?: string;
+
+  // Used to match this partner to positions/assignments via client name
+  clientNames: string[];
+
+  contractProcess: string[];
+  submissionRequirements: string[];
+  onboardingRequirements: string[];
+  invoicing: {
+    emails: string[];
+    frequency: string;
+    notes: string[];
+  };
+  contacts: PartnerContact[];
+  documents: PartnerDocument[];
+
+  // Tooltip-ready summaries for inline display in recruiter workflow
+  tooltips: {
+    submission: string;
+    onboarding: string;
+    invoicing: string;
+  };
+}
+
+// =============================================================================
+// Partner Data
+// =============================================================================
+
+export const PARTNERS: Partner[] = [
+  {
+    slug: "krasan",
+    name: "Krasan Consulting Services",
+    shortName: "Krasan",
+    status: "active",
+    type: "prime_vendor",
+    about:
+      "Krasan is a Top 100 Woman-Owned Business with 25 years of experience. They develop and implement solutions that create value for government agencies, higher education, and market-leading corporations. Krasan is USSP's TOPS Prime Vendor — USSP is an authorized subvendor under TOPS Contract #CMT4599470.",
+    website: "https://krasanconsulting.com",
+    clientNames: ["Krasan", "Krasan Consulting", "Krasan Consulting Services"],
+
+    contractProcess: [
+      "Sign 'Subcontract Enrollment Contract' with Krasan (includes Subcontractor Services Agreement + Requisition Process)",
+      "Submit completed W-9 Form",
+      "Submit current BEP (Business Enterprise Program) Certification Letter",
+      "Submit Certificate of Good Standing from state of incorporation",
+      "Submit Certificate of Insurance naming Krasan Consulting Services, LLC AND the State of Illinois as additionally insured",
+      "Submit Voided Check or Bank Letter for ACH Payment Processing",
+    ],
+
+    submissionRequirements: [
+      "Submit consultant in Krasan's ATS (Oorwin)",
+      "Provide updated resume",
+      "Provide signed Right to Represent (RTR)",
+      "Provide valid identity proof (ID)",
+      "Provide employment authorization (if required)",
+    ],
+
+    onboardingRequirements: [
+      "Valid identity proof (ID)",
+      "Employment authorization (if required)",
+      "Address proof (utility bill to confirm US residency)",
+      "Signed forms (if required by client)",
+    ],
+
+    invoicing: {
+      emails: [
+        "accounts@krasanconsulting.com",
+        "finance@krasanconsulting.com",
+      ],
+      frequency: "Monthly or Biweekly (depends on client)",
+      notes: [
+        "Consultants must submit accurate timesheets in Oorwin timely",
+        "Finance department processes invoices based on Oorwin timesheet data",
+        "Send invoices to BOTH accounts@ and finance@ emails",
+      ],
+    },
+
+    contacts: [
+      {
+        name: "Pavithra Karumuri",
+        role: "CEO",
+        email: "pavithra@krasanconsulting.com",
+      },
+      {
+        name: "Tony Fremarek",
+        role: "Vice President, Business Services",
+        email: "Tony.Fremarek@krasanconsulting.com",
+      },
+      {
+        name: "Partner Management Team",
+        role: "Key POC for Partners",
+        email: "partnerops@krasanconsulting.com",
+      },
+      {
+        name: "Finance Team",
+        role: "Finance & Invoicing",
+        email: "finance@krasanconsulting.com",
+      },
+      {
+        name: "Timesheet Team",
+        role: "Timesheet Management",
+        email: "timesheets@krasanconsulting.com",
+      },
+      {
+        name: "Onboarding Team",
+        role: "Consultant Onboarding",
+        email: "onboarding@krasanconsulting.com",
+      },
+    ],
+
+    documents: [
+      {
+        name: "TOPS Partner Instructions",
+        description: "Complete partner onboarding presentation with contract process, submission requirements, invoicing, and contacts",
+        path: "/partners/krasan/presentations/Krasan- TOPs Partner Instruction .pdf",
+      },
+    ],
+
+    tooltips: {
+      submission:
+        "Krasan requires: Oorwin ATS submission, updated resume, signed RTR, valid ID, work authorization (if applicable)",
+      onboarding:
+        "Krasan onboarding: Valid ID, work authorization (if applicable), address proof (utility bill), signed forms",
+      invoicing:
+        "Invoice to: accounts@krasanconsulting.com + finance@krasanconsulting.com. Frequency: Monthly or Biweekly. Timesheets via Oorwin required.",
+    },
+  },
+  {
+    slug: "teleray",
+    name: "TeleRay",
+    shortName: "TeleRay",
+    status: "in_conversation",
+    type: "technology",
+    about:
+      "TeleRay provides medical imaging technology. USSP is exploring a reseller/investment partnership for Illinois government facilities including IDOC, IL Veterans, IDHS, IDJJ, and Cook County Health.",
+    clientNames: ["TeleRay"],
+
+    contractProcess: [
+      "MOU in discussion — see /partnerships/teleray/mou for draft terms",
+    ],
+
+    submissionRequirements: [],
+    onboardingRequirements: [],
+
+    invoicing: {
+      emails: [],
+      frequency: "TBD",
+      notes: ["Partnership terms under negotiation"],
+    },
+
+    contacts: [],
+    documents: [],
+
+    tooltips: {
+      submission: "TeleRay partnership is under negotiation — no submission process yet",
+      onboarding: "TeleRay partnership is under negotiation — no onboarding process yet",
+      invoicing: "TeleRay billing terms under negotiation",
+    },
+  },
+];
+
+// =============================================================================
+// Helpers
+// =============================================================================
+
+export function getAllPartners(): Partner[] {
+  return PARTNERS;
+}
+
+export function getPartnerBySlug(slug: string): Partner | undefined {
+  return PARTNERS.find((p) => p.slug === slug);
+}
+
+export function getPartnerByClientName(clientName: string): Partner | undefined {
+  if (!clientName) return undefined;
+  const lower = clientName.toLowerCase();
+  return PARTNERS.find((p) =>
+    p.clientNames.some((cn) => cn.toLowerCase() === lower)
+  );
+}
