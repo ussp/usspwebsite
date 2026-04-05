@@ -32,7 +32,8 @@ export async function PATCH(
 
   const { id } = await params;
   const body = await request.json();
-  const result = await updateCandidate(id, body);
+  const staffUserId = (user.staffUserId as string) || (user.id as string) || undefined;
+  const result = await updateCandidate(id, body, staffUserId);
   if (!result.success) return NextResponse.json({ error: result.error }, { status: 400 });
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, data: result.data });
 }

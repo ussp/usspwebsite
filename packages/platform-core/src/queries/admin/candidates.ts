@@ -100,8 +100,9 @@ export async function createCandidate(
 
 export async function updateCandidate(
   id: string,
-  input: UpdateCandidateInput
-): Promise<{ success: boolean; error?: string }> {
+  input: UpdateCandidateInput,
+  staffUserId?: string
+): Promise<{ success: boolean; data?: Record<string, unknown>; error?: string }> {
   const supabase = getServiceClient();
 
   const updates: Record<string, unknown> = {
@@ -122,14 +123,30 @@ export async function updateCandidate(
   if (input.salary_expectation_max !== undefined) updates.salary_expectation_max = input.salary_expectation_max;
   if (input.salary_type !== undefined) updates.salary_type = input.salary_type;
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("candidates")
     .update(updates)
     .eq("site_id", getSiteId())
-    .eq("id", id);
+    .eq("id", id)
+    .select()
+    .single();
 
   if (error) return { success: false, error: error.message };
-  return { success: true };
+
+  // Audit log — HR data changes must be tracked
+  if (staffUserId) {
+    const changedFields = Object.keys(updates).filter(k => k !== "updated_at");
+    await supabase.from("audit_log").insert({
+      site_id: getSiteId(),
+      staff_user_id: staffUserId,
+      action: "candidate.updated",
+      entity_type: "candidate",
+      entity_id: id,
+      details: { changed_fields: changedFields, updates: input },
+    });
+  }
+
+  return { success: true, data: data as Record<string, unknown> };
 }
 
 export async function findOrCreateCandidate(

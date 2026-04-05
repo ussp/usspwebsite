@@ -924,14 +924,26 @@ export default function CandidateDetailPage() {
                     value={candidate.candidate_type}
                     onChange={async (e) => {
                       const newType = e.target.value;
-                      const res = await fetch(`/api/candidates/${params.id}`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ candidate_type: newType }),
-                      });
-                      if (res.ok) {
+                      const oldType = candidate.candidate_type;
+                      setCandidate((prev) =>
+                        prev ? { ...prev, candidate_type: newType } : prev
+                      );
+                      try {
+                        const res = await fetch(`/api/candidates/${params.id}`, {
+                          method: "PATCH",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ candidate_type: newType }),
+                        });
+                        if (!res.ok) {
+                          const err = await res.json();
+                          alert(`Failed to update type: ${err.error || "Unknown error"}`);
+                          setCandidate((prev) =>
+                            prev ? { ...prev, candidate_type: oldType } : prev
+                          );
+                        }
+                      } catch {
                         setCandidate((prev) =>
-                          prev ? { ...prev, candidate_type: newType } : prev
+                          prev ? { ...prev, candidate_type: oldType } : prev
                         );
                       }
                     }}
@@ -950,14 +962,26 @@ export default function CandidateDetailPage() {
                     value={candidate.current_status}
                     onChange={async (e) => {
                       const newStatus = e.target.value;
-                      const res = await fetch(`/api/candidates/${params.id}`, {
-                        method: "PATCH",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ current_status: newStatus }),
-                      });
-                      if (res.ok) {
+                      const oldStatus = candidate.current_status;
+                      setCandidate((prev) =>
+                        prev ? { ...prev, current_status: newStatus } : prev
+                      );
+                      try {
+                        const res = await fetch(`/api/candidates/${params.id}`, {
+                          method: "PATCH",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ current_status: newStatus }),
+                        });
+                        if (!res.ok) {
+                          const err = await res.json();
+                          alert(`Failed to update status: ${err.error || "Unknown error"}`);
+                          setCandidate((prev) =>
+                            prev ? { ...prev, current_status: oldStatus } : prev
+                          );
+                        }
+                      } catch {
                         setCandidate((prev) =>
-                          prev ? { ...prev, current_status: newStatus } : prev
+                          prev ? { ...prev, current_status: oldStatus } : prev
                         );
                       }
                     }}
