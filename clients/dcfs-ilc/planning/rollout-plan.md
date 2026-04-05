@@ -1,15 +1,15 @@
 # DCFS Illinois Connect — AI-Augmented Agile Delivery Plan
 
 > **Status:** DRAFT v2 — Due April 17, 2026
-> **Owner:** Vinay Lagisetty (Karsan, AI Transformation Leader) + Romi (Karsan, Engagement Director)
-> **Audience:** Jim Doherty (CIO, DCFS/DeWitt), Dinkar (Karsan Executive Sponsor)
+> **Owner:** Vinay Lagisetty (Krasan, AI Transformation Leader) + Romi (Krasan, Engagement Director)
+> **Audience:** Jim Doherty (CIO, DCFS/DeWitt), Dinkar (Krasan Executive Sponsor)
 > **Methodology:** GQM (Basili 1994), DORA/Accelerate (Forsgren 2018), SPACE (Microsoft Research 2021), QUS (Lucassen 2016), Six Sigma DMAIC
 
 ---
 
 ## 1. Executive Summary
 
-Karsan proposes a structured AI augmentation pilot across select ILC product teams to measurably improve delivery productivity and quality. AI tools already available to the State — **GitHub Copilot** and **Atlassian Rovo** — will be applied to Business Analyst, Tester, and Developer workflows with structured training, clear guardrails, and research-backed measurement.
+Krasan proposes a structured AI augmentation pilot across select ILC product teams to measurably improve delivery productivity and quality. AI tools already available to the State — **GitHub Copilot** and **Atlassian Rovo** — will be applied to Business Analyst, Tester, and Developer workflows with structured training, clear guardrails, and research-backed measurement.
 
 **Target:** 5%+ improvement in team velocity and delivery quality over one Program Increment (PI), measured against a quantitative baseline.
 
@@ -23,12 +23,12 @@ Karsan proposes a structured AI augmentation pilot across select ILC product tea
 
 ### The Engagement
 - **Project:** Illinois Connect (ILC) — legacy child welfare system modernization to Microsoft Dynamics 365
-- **Scale:** 12 SAFe product teams, 160+ Karsan consultants, part of a single ART
+- **Scale:** 12 SAFe product teams, 160+ Krasan consultants, part of a single ART
 - **Domain:** Department of Child and Family Services — at-risk children intake through safe placement
 - **Tech stack:** Dynamics 365, Visual Studio, JIRA, Confluence, GitHub
 
 ### The Ask
-CIO Jim Doherty has asked Karsan to develop and execute an AI rollout plan to improve productivity across the ILC product teams. The target is a measurable 5% improvement, with the possibility of exceeding that.
+CIO Jim Doherty has asked Krasan to develop and execute an AI rollout plan to improve productivity across the ILC product teams. The target is a measurable 5% improvement, with the possibility of exceeding that.
 
 ### Current State
 - Teams are delivering satisfactorily — client is happy with current commitments
@@ -84,7 +84,7 @@ All AI use by State agencies must comply with the DoIT "Policy on the Acceptable
 | 1 | Confirm DoIT assessment status for Copilot/Rovo | Romi (ask Jim Apr 8) | Apr 8 | TODO |
 | 2 | Get Vinay access clearance from Jim | Romi | Apr 8 | TODO |
 | 3 | Obtain DoIT AI Policy compliance status from Jim | Robert | Apr 10 | TODO |
-| 4 | Create Karsan email/network access for Vinay | Dinkar's team | Apr 10 | TODO |
+| 4 | Create Krasan email/network access for Vinay | Dinkar's team | Apr 10 | TODO |
 | 5 | JIRA/Confluence walkthrough with Matt | Vinay + Matt | Apr 10 | TODO |
 | 6 | Architecture/dev process walkthrough with architect | Vinay + Darren | Apr 12 | TODO |
 | 7 | Understand JIRA workflow states for metric computation | Vinay + Matt | Apr 12 | TODO |
@@ -335,26 +335,26 @@ All metrics tracked in the **AI Transformation Monitor** at `tools.ussp.co`:
 
 | Person | Role | Contribution |
 |--------|------|-------------|
-| **Vinay** (Karsan) | AI Transformation Leader | Plan, training, measurement, tool assessment, playbooks |
-| **Romi** (Karsan) | Delivery Lead | Jim relationship, access, compliance, Springfield trip |
-| **Robert** (Karsan) | Workforce Manager | DoIT policy bridge, documentation, coordination |
-| **Matt** (Karsan) | RTE | JIRA/Confluence access, Rovo capabilities, tool config |
-| **John** (Karsan) | Agile Delivery Mgr | Pilot candidate identification, testing focus, Copilot experience |
-| **Chase** (Karsan) | Data Architect | Data team representation, data use cases |
+| **Vinay** (Krasan) | AI Transformation Leader | Plan, training, measurement, tool assessment, playbooks |
+| **Romi** (Krasan) | Delivery Lead | Jim relationship, access, compliance, Springfield trip |
+| **Robert** (Krasan) | Workforce Manager | DoIT policy bridge, documentation, coordination |
+| **Matt** (Krasan) | RTE | JIRA/Confluence access, Rovo capabilities, tool config |
+| **John** (Krasan) | Agile Delivery Mgr | Pilot candidate identification, testing focus, Copilot experience |
+| **Chase** (Krasan) | Data Architect | Data team representation, data use cases |
 | **Darren** (State) | Chief Solution Architect | Architecture context, dev process walkthrough |
-| **Dinkar** (Karsan) | Executive Sponsor | Strategic direction, bench resource commitment |
+| **Dinkar** (Krasan) | Executive Sponsor | Strategic direction, bench resource commitment |
 
 ---
 
 ## 13. IP & Productization
 
-This engagement produces reusable assets for Karsan/USSP:
+This engagement produces reusable assets for Krasan/USSP:
 - Role-based AI playbooks (productizable with minor variations)
 - AI Transformation measurement methodology and tool (tools.ussp.co)
 - Training curriculum for AI-augmented Scrum teams
 - Government AI compliance framework (DoIT policy mapping)
 
-Jim is aware and amenable to Karsan/USSP productizing these deliverables.
+Jim is aware and amenable to Krasan/USSP productizing these deliverables.
 
 ---
 

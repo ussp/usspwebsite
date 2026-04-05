@@ -7,7 +7,7 @@
 ## Access & Clearance
 
 - [ ] Romi gets clearance from Jim (meeting Apr 8)
-- [ ] Karsan email/network access created (Dinkar's team)
+- [ ] Krasan email/network access created (Dinkar's team)
 - [ ] JIRA access (or paired access with Matt)
 - [ ] Confluence access (or Matt shares non-sensitive docs)
 - [ ] GitHub access (if Copilot assessment needed)

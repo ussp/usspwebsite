@@ -2,8 +2,8 @@
 
 > **Client:** Department of Child and Family Services (State of Illinois)
 > **Project:** Illinois Connect (ILC) — Legacy-to-Dynamics 365 Modernization
-> **Prime Vendor:** Karsan (Krasan Consulting Services)
-> **USSP Role:** AI Strategy & Measurement (subcontractor under Karsan)
+> **Prime Vendor:** Krasan (Krasan Consulting Services)
+> **USSP Role:** AI Strategy & Measurement (subcontractor under Krasan)
 > **Engagement Start:** April 2026
 
 ---
@@ -24,7 +24,7 @@
 
 ## Engagement Summary
 
-CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (160 Karsan consultants) to achieve a **5% productivity improvement**. USSP is providing AI strategy, measurement, and training under Karsan.
+CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (160 Krasan consultants) to achieve a **5% productivity improvement**. USSP is providing AI strategy, measurement, and training under Krasan.
 
 ### Scope
 
@@ -47,13 +47,13 @@ CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (1
 | Person | Role | Organization |
 |--------|------|-------------|
 | Jim Doherty | CIO (executive sponsor, client) | DCFS / DeWitt |
-| Dinkar | Executive sponsor | Karsan |
-| Romi | Delivery Engagement Director | Karsan |
-| Vinay Lagisetty | AI Transformation Leader | Karsan (via USSP) |
-| Chase | Data Architect | Karsan |
-| John | Agile Delivery Manager | Karsan |
-| Matt | RTE (Release Train Engineer) | Karsan |
-| Robert | Agile Workforce Manager | Karsan |
+| Dinkar | Executive sponsor | Krasan |
+| Romi | Delivery Engagement Director | Krasan |
+| Vinay Lagisetty | AI Transformation Leader | Krasan (via USSP) |
+| Chase | Data Architect | Krasan |
+| John | Agile Delivery Manager | Krasan |
+| Matt | RTE (Release Train Engineer) | Krasan |
+| Robert | Agile Workforce Manager | Krasan |
 | Darren | Chief Solution Architect | State of Illinois |
 
 ---
