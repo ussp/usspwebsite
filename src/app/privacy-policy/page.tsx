@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
             Privacy Policy
           </h1>
           <p className="text-white/60 font-[family-name:var(--font-montserrat)]">
-            Last updated: March 3, 2026
+            Last updated: April 5, 2026
           </p>
         </div>
       </section>
@@ -174,7 +174,115 @@ export default function PrivacyPolicy() {
 
           <div>
             <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
-              10. Contact Us
+              10. Illinois Residents — Additional Rights
+            </h2>
+            <p className="mb-3">
+              USSP is headquartered in Chicago, Illinois. If you are an Illinois
+              resident, you are entitled to the following additional protections:
+            </p>
+
+            <h3 className="font-[family-name:var(--font-alata)] text-dark mt-4 mb-2">
+              Illinois Personal Information Protection Act (PIPA)
+            </h3>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                We implement reasonable security measures to protect your personal
+                information from unauthorized access, disclosure, or destruction.
+              </li>
+              <li>
+                In the event of a data breach involving your personal information,
+                we will notify you in the most expedient time possible and without
+                unreasonable delay, as required by 815 ILCS 530.
+              </li>
+              <li>
+                We will not collect your Social Security number, driver&apos;s
+                license number, or financial account information unless strictly
+                necessary for employment processing, and only with your explicit
+                consent.
+              </li>
+            </ul>
+
+            <h3 className="font-[family-name:var(--font-alata)] text-dark mt-4 mb-2">
+              Illinois Biometric Information Privacy Act (BIPA)
+            </h3>
+            <p>
+              USSP does <strong>not</strong> collect, capture, store, or otherwise
+              obtain biometric identifiers or biometric information (as defined by
+              740 ILCS 14) from job applicants or website visitors. This includes
+              but is not limited to fingerprints, retina or iris scans, voiceprints,
+              or scans of hand or face geometry. If our practices change in the
+              future, we will obtain your informed written consent before any
+              collection of biometric data.
+            </p>
+
+            <h3 className="font-[family-name:var(--font-alata)] text-dark mt-4 mb-2">
+              Illinois Right to Privacy in the Workplace Act
+            </h3>
+            <p>
+              We will not request or require access to your personal social media
+              accounts (including LinkedIn passwords) as a condition of your
+              application or employment. Our LinkedIn sign-in integration uses
+              industry-standard OAuth and only accesses the profile data you
+              explicitly authorize.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
+              11. California Residents — CCPA Notice
+            </h2>
+            <p className="mb-3">
+              If you are a California resident, you have additional rights under the
+              California Consumer Privacy Act (CCPA):
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>
+                <strong>Right to Know:</strong> You may request the categories and
+                specific pieces of personal information we have collected about you.
+              </li>
+              <li>
+                <strong>Right to Delete:</strong> You may request that we delete your
+                personal information, subject to certain exceptions.
+              </li>
+              <li>
+                <strong>Right to Non-Discrimination:</strong> We will not discriminate
+                against you for exercising any of your CCPA rights.
+              </li>
+              <li>
+                <strong>No Sale of Personal Information:</strong> We do not sell your
+                personal information to third parties and have not done so in the
+                preceding 12 months.
+              </li>
+            </ul>
+            <p className="mt-3">
+              To exercise your rights, contact us at{" "}
+              <a
+                href="mailto:accounts@ussoftwarepro.com"
+                className="text-primary hover:underline"
+              >
+                accounts@ussoftwarepro.com
+              </a>{" "}
+              or call +1-(312) 546-4306. We will respond within 45 days of receiving
+              a verifiable request.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
+              12. Changes to This Policy
+            </h2>
+            <p>
+              We may update this Privacy Policy from time to time. When we do, we
+              will revise the &ldquo;Last updated&rdquo; date at the top of this
+              page. We encourage you to review this page periodically. Continued use
+              of our website or application system after any changes constitutes your
+              acceptance of the updated policy.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-[family-name:var(--font-alata)] text-dark mb-3">
+              13. Contact Us
             </h2>
             <p>
               If you have questions about this Privacy Policy or wish to exercise your
