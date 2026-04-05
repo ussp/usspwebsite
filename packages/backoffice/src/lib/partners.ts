@@ -140,7 +140,7 @@ export const PARTNERS: Partner[] = [
       {
         name: "TOPS Partner Instructions",
         description: "Complete partner onboarding presentation with contract process, submission requirements, invoicing, and contacts",
-        path: "/docs/partners/krasan-tops-partner-instructions.pdf",
+        path: "/api/docs/partners/krasan-tops-partner-instructions.pdf",
       },
     ],
 
