@@ -57,13 +57,15 @@ export const STAGE_COLORS: Record<ApplicationStatus, string> = {
 
 // ── Onboarding (candidate-level, post-hire) ─────────────────────────
 
-export type OnboardingStepKey = "i9_everify" | "background_check" | "orientation_training";
+export type OnboardingStepKey = "i9_everify" | "background_check" | "orientation_training" | "identity_verification" | "address_verification";
 export type OnboardingStepStatus = "not_started" | "in_progress" | "completed";
 
 export const ONBOARDING_STEP_LABELS: Record<OnboardingStepKey, string> = {
   i9_everify: "I-9 / E-Verify",
   background_check: "Background Check",
   orientation_training: "Orientation & Training",
+  identity_verification: "Identity Verification (ID)",
+  address_verification: "Address Verification (Utility Bill)",
 };
 
 export interface CandidateOnboarding {
@@ -75,6 +77,8 @@ export interface CandidateOnboarding {
   i9_everify: OnboardingStepStatus;
   background_check: OnboardingStepStatus;
   orientation_training: OnboardingStepStatus;
+  identity_verification: OnboardingStepStatus;
+  address_verification: OnboardingStepStatus;
   started_at: string;
   completed_at: string | null;
   created_at: string;
@@ -794,9 +798,19 @@ export type DocumentRequestType =
   | "visa_document"
   | "references"
   | "background_check_consent"
+  | "right_to_represent"
+  | "identity_document"
+  | "address_proof"
+  | "employment_agreement"
+  | "nda"
+  | "tax_forms"
+  | "direct_deposit"
+  | "emergency_contact"
   | "other";
 
 export type DocumentRequestStatus = "pending" | "submitted" | "approved" | "rejected";
+
+export type DocumentRequestOwner = "recruiter" | "hr" | "finance" | "candidate";
 
 export const DOCUMENT_REQUEST_TYPE_LABELS: Record<DocumentRequestType, string> = {
   ssn: "Social Security Number",
@@ -805,7 +819,53 @@ export const DOCUMENT_REQUEST_TYPE_LABELS: Record<DocumentRequestType, string> =
   visa_document: "Work Authorization Document",
   references: "Professional References",
   background_check_consent: "Background Check Consent",
+  right_to_represent: "Right to Represent (RTR)",
+  identity_document: "Identity Document (ID)",
+  address_proof: "Address Proof (Utility Bill)",
+  employment_agreement: "Employment Agreement",
+  nda: "Non-Disclosure Agreement (NDA)",
+  tax_forms: "Tax Forms (W-4 / W-9)",
+  direct_deposit: "Direct Deposit Authorization",
+  emergency_contact: "Emergency Contact Information",
   other: "Other Document",
+};
+
+/** Who is responsible for collecting/providing each document type */
+export const DOCUMENT_REQUEST_OWNER: Record<DocumentRequestType, DocumentRequestOwner> = {
+  ssn: "candidate",
+  drivers_license: "candidate",
+  dob: "candidate",
+  visa_document: "candidate",
+  references: "recruiter",
+  background_check_consent: "hr",
+  right_to_represent: "recruiter",
+  identity_document: "recruiter",
+  address_proof: "candidate",
+  employment_agreement: "hr",
+  nda: "hr",
+  tax_forms: "hr",
+  direct_deposit: "finance",
+  emergency_contact: "hr",
+  other: "recruiter",
+};
+
+/** Tooltips explaining why each document is required */
+export const DOCUMENT_REQUEST_TOOLTIPS: Record<DocumentRequestType, string> = {
+  ssn: "Required for employment verification, tax reporting, and background checks. Collected before offer stage.",
+  drivers_license: "Government-issued ID for identity verification. Required by most partners and for I-9 compliance.",
+  dob: "Required for background check processing and employment verification.",
+  visa_document: "Work authorization proof required for non-citizens. Must be valid for the duration of the engagement.",
+  references: "Professional references required before advancing past the references stage. Minimum 2-3 typically required.",
+  background_check_consent: "Signed consent form authorizing background check. Required by HR before processing.",
+  right_to_represent: "Partner requirement (e.g., Krasan). Signed RTR confirms USSP has the right to submit the candidate. Must be obtained before submitting to the partner's ATS.",
+  identity_document: "Valid government-issued photo ID. Required by partners for consultant submission and I-9 verification.",
+  address_proof: "Utility bill or similar document confirming US residency. Required by partners (e.g., Krasan) during onboarding.",
+  employment_agreement: "Signed employment or contractor agreement between USSP and the consultant. Required by HR before start date.",
+  nda: "Non-disclosure agreement protecting client and USSP confidential information. Required before accessing client systems.",
+  tax_forms: "W-4 (employees) or W-9 (contractors) for tax withholding. Required by finance before first payment.",
+  direct_deposit: "Bank account details and signed ACH authorization for payroll. Required by finance before first payment.",
+  emergency_contact: "Emergency contact information for the consultant. Required by HR for personnel file.",
+  other: "Additional documentation as needed for specific situations.",
 };
 
 export const DOCUMENT_REQUEST_STATUS_LABELS: Record<DocumentRequestStatus, string> = {

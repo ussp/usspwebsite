@@ -1,12 +1,14 @@
 import { getServiceClient } from "../../supabase/server.js";
 import { getSiteId } from "../../config.js";
 import { createOnboarding, getOnboardingByApplicationId } from "./onboarding.js";
+import { getDocumentRequestsForApplication, createDocumentRequests } from "./document-requests.js";
 import type {
   AdminApplication,
   ApplicationFilters,
   ApplicationNote,
   ApplicationStatus,
   StatusHistoryEntry,
+  DocumentRequestType,
 } from "../../types/admin.js";
 
 const APPLICATION_COLUMNS =
@@ -75,6 +77,32 @@ export async function getApplicationById(
   return data;
 }
 
+/**
+ * Ensure a document request of a given type exists for an application.
+ * Creates one if it doesn't already exist (avoids duplicates).
+ */
+async function ensureDocumentRequest(
+  applicationId: string,
+  candidateId: string,
+  requestType: DocumentRequestType,
+  createdBy: string
+): Promise<void> {
+  const existing = await getDocumentRequestsForApplication(applicationId);
+  const alreadyExists = existing.some((r) => r.request_type === requestType);
+  if (alreadyExists) return;
+
+  await createDocumentRequests(
+    [
+      {
+        application_id: applicationId,
+        candidate_id: candidateId,
+        request_type: requestType,
+      },
+    ],
+    createdBy
+  );
+}
+
 export async function updateApplicationStatus(
   id: string,
   status: ApplicationStatus,
@@ -103,7 +131,20 @@ export async function updateApplicationStatus(
     details: { new_status: status },
   });
 
-  // Auto-create onboarding when application reaches "hired"
+  // Auto-create document requests at employment_verification stage
+  if (status === "employment_verification") {
+    try {
+      const app = await getApplicationById(id);
+      if (app?.candidate_id) {
+        await ensureDocumentRequest(id, app.candidate_id, "right_to_represent", staffUserId);
+        await ensureDocumentRequest(id, app.candidate_id, "identity_document", staffUserId);
+      }
+    } catch (err) {
+      console.error("[applications] Failed to auto-create document requests at employment_verification:", err);
+    }
+  }
+
+  // Auto-create onboarding and address_proof document request when application reaches "hired"
   if (status === "hired") {
     try {
       const app = await getApplicationById(id);
@@ -120,9 +161,10 @@ export async function updateApplicationStatus(
             details: { application_id: id, trigger: "hired_status" },
           });
         }
+        await ensureDocumentRequest(id, app.candidate_id, "address_proof", staffUserId);
       }
     } catch (err) {
-      console.error("[applications] Failed to auto-create onboarding:", err);
+      console.error("[applications] Failed to auto-create onboarding/document requests:", err);
     }
   }
 

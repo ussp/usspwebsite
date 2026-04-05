@@ -69,6 +69,8 @@ interface OnboardingRecord {
   i9_everify: string;
   background_check: string;
   orientation_training: string;
+  identity_verification: string;
+  address_verification: string;
   started_at: string;
   completed_at: string | null;
 }

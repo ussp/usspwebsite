@@ -896,6 +896,8 @@ class CandidateOnboarding(Base):
     i9_everify = Column(String(20), nullable=False, server_default="not_started")  # not_started | in_progress | completed
     background_check = Column(String(20), nullable=False, server_default="not_started")
     orientation_training = Column(String(20), nullable=False, server_default="not_started")
+    identity_verification = Column(String(20), nullable=False, server_default="not_started")  # not_started | in_progress | completed
+    address_verification = Column(String(20), nullable=False, server_default="not_started")  # not_started | in_progress | completed
     started_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     completed_at = Column(DateTime(timezone=True))
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)

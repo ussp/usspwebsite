@@ -10,11 +10,13 @@ interface OnboardingRecord {
   i9_everify: string;
   background_check: string;
   orientation_training: string;
+  identity_verification: string;
+  address_verification: string;
   started_at: string;
   completed_at: string | null;
 }
 
-type StepKey = "i9_everify" | "background_check" | "orientation_training";
+type StepKey = "i9_everify" | "background_check" | "identity_verification" | "address_verification" | "orientation_training";
 type StepStatus = "not_started" | "in_progress" | "completed";
 
 const STEPS: { key: StepKey; label: string; tooltip: string }[] = [
@@ -27,6 +29,16 @@ const STEPS: { key: StepKey; label: string; tooltip: string }[] = [
     key: "background_check",
     label: "Background Check",
     tooltip: "Criminal, employment history, and credential verification",
+  },
+  {
+    key: "identity_verification",
+    label: "Identity Verification (ID)",
+    tooltip: "Government-issued photo ID verification",
+  },
+  {
+    key: "address_verification",
+    label: "Address Verification (Utility Bill)",
+    tooltip: "Proof of address via utility bill or similar document",
   },
   {
     key: "orientation_training",

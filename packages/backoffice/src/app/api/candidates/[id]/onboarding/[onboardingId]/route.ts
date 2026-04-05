@@ -4,7 +4,7 @@ import { updateOnboardingStep } from "@ussp-platform/core/queries/admin/onboardi
 import { hasPermission } from "@ussp-platform/core/auth/rbac";
 import type { StaffRole, OnboardingStepKey, OnboardingStepStatus } from "@ussp-platform/core/types/admin";
 
-const VALID_STEPS: OnboardingStepKey[] = ["i9_everify", "background_check", "orientation_training"];
+const VALID_STEPS: OnboardingStepKey[] = ["i9_everify", "background_check", "identity_verification", "address_verification", "orientation_training"];
 const VALID_STATUSES: OnboardingStepStatus[] = ["not_started", "in_progress", "completed"];
 
 export async function PATCH(

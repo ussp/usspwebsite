@@ -3,9 +3,9 @@ import { getSiteId } from "../../config.js";
 import type { CandidateOnboarding, OnboardingStepKey, OnboardingStepStatus } from "../../types/admin.js";
 
 const ONBOARDING_COLUMNS =
-  "id, site_id, candidate_id, application_id, status, i9_everify, background_check, orientation_training, started_at, completed_at, created_at, updated_at";
+  "id, site_id, candidate_id, application_id, status, i9_everify, background_check, orientation_training, identity_verification, address_verification, started_at, completed_at, created_at, updated_at";
 
-const STEP_KEYS: OnboardingStepKey[] = ["i9_everify", "background_check", "orientation_training"];
+const STEP_KEYS: OnboardingStepKey[] = ["i9_everify", "background_check", "orientation_training", "identity_verification", "address_verification"];
 
 export async function getOnboardingsForCandidate(
   candidateId: string
@@ -48,6 +48,8 @@ export async function createOnboarding(
       site_id: getSiteId(),
       candidate_id: candidateId,
       application_id: applicationId,
+      identity_verification: "not_started",
+      address_verification: "not_started",
     })
     .select(ONBOARDING_COLUMNS)
     .single();

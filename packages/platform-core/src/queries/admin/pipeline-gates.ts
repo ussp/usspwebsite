@@ -20,6 +20,7 @@ export async function checkPipelineGates(
 
   const targetIndex = PIPELINE_STAGES.indexOf(targetStatus);
   const newIndex = PIPELINE_STAGES.indexOf("new");
+  const employmentVerificationIndex = PIPELINE_STAGES.indexOf("employment_verification");
   const referencesIndex = PIPELINE_STAGES.indexOf("references");
   const offerPendingIndex = PIPELINE_STAGES.indexOf("offer_pending");
 
@@ -76,7 +77,55 @@ export async function checkPipelineGates(
     }
   }
 
-  // ── Gate 3: PII required before offer ──────────────────────────────
+  // ── Gate 3: RTR required past employment_verification ──────────────
+  if (targetIndex > employmentVerificationIndex) {
+    const { data: rtrRequests } = await supabase
+      .from("document_requests")
+      .select("id, status")
+      .eq("site_id", siteId)
+      .eq("application_id", applicationId)
+      .eq("request_type", "right_to_represent")
+      .limit(1);
+
+    // Only enforce if a RTR request exists (partner-aware auto-creation happens elsewhere)
+    if (rtrRequests && rtrRequests.length > 0) {
+      const rtr = rtrRequests[0];
+      if (rtr.status !== "approved" && rtr.status !== "submitted") {
+        gates.push({
+          passed: false,
+          gate: "rtr_required",
+          message: "Right to Represent document must be submitted or approved before advancing past Employment Verification",
+          missingItems: ["Right to Represent (RTR)"],
+        });
+      }
+    }
+  }
+
+  // ── Gate 4: Identity document required past employment_verification ─
+  if (targetIndex > employmentVerificationIndex) {
+    const { data: idRequests } = await supabase
+      .from("document_requests")
+      .select("id, status")
+      .eq("site_id", siteId)
+      .eq("application_id", applicationId)
+      .eq("request_type", "identity_document")
+      .limit(1);
+
+    // Only enforce if an identity document request exists
+    if (idRequests && idRequests.length > 0) {
+      const idDoc = idRequests[0];
+      if (idDoc.status !== "approved" && idDoc.status !== "submitted") {
+        gates.push({
+          passed: false,
+          gate: "identity_document_required",
+          message: "Identity document must be submitted or approved before advancing past Employment Verification",
+          missingItems: ["Identity Document"],
+        });
+      }
+    }
+  }
+
+  // ── Gate 5: PII required before offer ──────────────────────────────
   if (targetIndex >= offerPendingIndex && app.candidate_id) {
     const { data: pii } = await supabase
       .from("candidate_pii")

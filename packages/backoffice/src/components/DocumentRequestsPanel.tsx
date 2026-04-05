@@ -9,7 +9,10 @@ import type {
 import {
   DOCUMENT_REQUEST_TYPE_LABELS,
   DOCUMENT_REQUEST_STATUS_LABELS,
+  DOCUMENT_REQUEST_TOOLTIPS,
+  DOCUMENT_REQUEST_OWNER,
 } from "@ussp-platform/core/types/admin";
+import Tooltip from "@/components/Tooltip";
 
 interface Props {
   applicationId: string;
@@ -17,14 +20,29 @@ interface Props {
 }
 
 const REQUEST_TYPES: DocumentRequestType[] = [
+  "right_to_represent",
+  "identity_document",
   "ssn",
   "drivers_license",
   "dob",
   "visa_document",
+  "address_proof",
   "references",
   "background_check_consent",
+  "employment_agreement",
+  "nda",
+  "tax_forms",
+  "direct_deposit",
+  "emergency_contact",
   "other",
 ];
+
+const OWNER_COLORS: Record<string, string> = {
+  recruiter: "bg-blue-50 text-blue-600",
+  hr: "bg-purple-50 text-purple-600",
+  finance: "bg-amber-50 text-amber-600",
+  candidate: "bg-gray-50 text-gray-600",
+};
 
 const STATUS_COLORS: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -185,7 +203,13 @@ export default function DocumentRequestsPanel({ applicationId, candidateId }: Pr
                   disabled={existingTypes.has(type)}
                   className="rounded"
                 />
-                {DOCUMENT_REQUEST_TYPE_LABELS[type]}
+                <span className="flex-1">{DOCUMENT_REQUEST_TYPE_LABELS[type]}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${OWNER_COLORS[DOCUMENT_REQUEST_OWNER[type]] || ""}`}>
+                  {DOCUMENT_REQUEST_OWNER[type]}
+                </span>
+                <Tooltip text={DOCUMENT_REQUEST_TOOLTIPS[type]} position="left">
+                  <span className="text-dark/30 hover:text-primary cursor-help text-xs">?</span>
+                </Tooltip>
               </label>
             ))}
           </div>
@@ -254,18 +278,25 @@ export default function DocumentRequestsPanel({ applicationId, candidateId }: Pr
                   req.status === "submitted" ? "cursor-pointer hover:bg-light-gray/50" : ""
                 } bg-light-gray/30`}
               >
-                <div>
-                  <span className="text-sm font-medium">
-                    {DOCUMENT_REQUEST_TYPE_LABELS[req.request_type as DocumentRequestType] || req.request_type}
-                  </span>
-                  {req.description && (
-                    <p className="text-xs text-dark/50 mt-0.5">{req.description}</p>
-                  )}
-                  {req.due_date && (
-                    <p className="text-xs text-dark/40">
-                      Due: {new Date(req.due_date).toLocaleDateString()}
-                    </p>
-                  )}
+                <div className="flex items-center gap-2">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium">
+                        {DOCUMENT_REQUEST_TYPE_LABELS[req.request_type as DocumentRequestType] || req.request_type}
+                      </span>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${OWNER_COLORS[DOCUMENT_REQUEST_OWNER[req.request_type as DocumentRequestType]] || ""}`}>
+                        {DOCUMENT_REQUEST_OWNER[req.request_type as DocumentRequestType] || "other"}
+                      </span>
+                    </div>
+                    {req.description && (
+                      <p className="text-xs text-dark/50 mt-0.5">{req.description}</p>
+                    )}
+                    {req.due_date && (
+                      <p className="text-xs text-dark/40">
+                        Due: {new Date(req.due_date).toLocaleDateString()}
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <span
                   className={`text-xs px-2 py-0.5 rounded-full ${
