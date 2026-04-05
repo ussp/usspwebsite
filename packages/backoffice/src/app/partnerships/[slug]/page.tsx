@@ -137,6 +137,59 @@ export default async function PartnerDetailPage({
             </p>
           </div>
 
+          {/* USSP Enrollment Documents */}
+          {partner.enrollmentDocuments.length > 0 && (
+            <div className="rounded-lg border border-light-gray bg-white p-6">
+              <h2 className="text-lg font-bold text-dark mb-1">
+                USSP Enrollment Status
+              </h2>
+              <p className="text-xs text-dark/50 mb-4">
+                Company-level documents USSP must maintain to remain an active subcontractor with {partner.shortName}.
+              </p>
+              <div className="space-y-2">
+                {partner.enrollmentDocuments.map((doc, i) => {
+                  const statusColors: Record<string, string> = {
+                    on_file: "bg-green-100 text-green-700",
+                    expired: "bg-red-100 text-red-700",
+                    pending: "bg-yellow-100 text-yellow-700",
+                    not_started: "bg-gray-100 text-gray-500",
+                  };
+                  const statusLabels: Record<string, string> = {
+                    on_file: "On File",
+                    expired: "Expired",
+                    pending: "Pending",
+                    not_started: "Not Started",
+                  };
+                  return (
+                    <div
+                      key={i}
+                      className="flex items-center justify-between p-3 rounded-lg bg-light-gray/30"
+                    >
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className={`w-2 h-2 rounded-full ${doc.status === "on_file" ? "bg-green-500" : doc.status === "expired" ? "bg-red-500" : doc.status === "pending" ? "bg-yellow-500" : "bg-gray-300"}`} />
+                          <span className="text-sm font-medium">{doc.name}</span>
+                        </div>
+                        <p className="text-xs text-dark/50 ml-4 mt-0.5">{doc.description}</p>
+                        {doc.notes && (
+                          <p className="text-xs text-amber-600 ml-4 mt-0.5">{doc.notes}</p>
+                        )}
+                        {doc.expiryDate && (
+                          <p className={`text-xs ml-4 mt-0.5 ${new Date(doc.expiryDate) < new Date() ? "text-red-600 font-medium" : "text-dark/40"}`}>
+                            Expires: {new Date(doc.expiryDate).toLocaleDateString()}
+                          </p>
+                        )}
+                      </div>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusColors[doc.status] || ""}`}>
+                        {statusLabels[doc.status] || doc.status}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Contract Process */}
           {partner.contractProcess.length > 0 && (
             <div className="rounded-lg border border-light-gray bg-white p-6">

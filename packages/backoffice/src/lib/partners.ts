@@ -18,6 +18,14 @@ export interface PartnerDocument {
   path: string;
 }
 
+export interface EnrollmentDocument {
+  name: string;
+  description: string;
+  status: "on_file" | "expired" | "pending" | "not_started";
+  expiryDate?: string; // ISO date — null if no expiry
+  notes?: string;
+}
+
 export interface Partner {
   slug: string;
   name: string;
@@ -30,6 +38,9 @@ export interface Partner {
 
   // Used to match this partner to positions/assignments via client name
   clientNames: string[];
+
+  // USSP's own enrollment documents for this partner (company-level, not per-consultant)
+  enrollmentDocuments: EnrollmentDocument[];
 
   contractProcess: string[];
   submissionRequirements: string[];
@@ -65,6 +76,42 @@ export const PARTNERS: Partner[] = [
       "Krasan is a Top 100 Woman-Owned Business with 25 years of experience. They develop and implement solutions that create value for government agencies, higher education, and market-leading corporations. Krasan is USSP's TOPS Prime Vendor — USSP is an authorized subvendor under TOPS Contract #CMT4599470.",
     website: "https://krasanconsulting.com",
     clientNames: ["Krasan", "Krasan Consulting", "Krasan Consulting Services"],
+
+    enrollmentDocuments: [
+      {
+        name: "Subcontractor Services Agreement",
+        description: "Signed subcontract enrollment contract with Krasan including requisition process",
+        status: "on_file",
+        notes: "Part of initial enrollment package",
+      },
+      {
+        name: "W-9 Form",
+        description: "IRS tax identification form for USSP",
+        status: "on_file",
+      },
+      {
+        name: "BEP Certification Letter",
+        description: "Current Business Enterprise Program certification from the State of Illinois",
+        status: "on_file",
+        notes: "Must be renewed annually — check expiry",
+      },
+      {
+        name: "Certificate of Good Standing",
+        description: "Certificate from Illinois Secretary of State confirming USSP is in good standing",
+        status: "on_file",
+      },
+      {
+        name: "Certificate of Insurance",
+        description: "Must name both Krasan Consulting Services, LLC AND the State of Illinois as additionally insured",
+        status: "on_file",
+        notes: "Verify annually that both Krasan and State of Illinois are listed",
+      },
+      {
+        name: "ACH Payment Setup",
+        description: "Voided check or bank letter for ACH payment processing",
+        status: "on_file",
+      },
+    ],
 
     contractProcess: [
       "Sign 'Subcontract Enrollment Contract' with Krasan (includes Subcontractor Services Agreement + Requisition Process)",
@@ -162,6 +209,8 @@ export const PARTNERS: Partner[] = [
     about:
       "TeleRay provides medical imaging technology. USSP is exploring a reseller/investment partnership for Illinois government facilities including IDOC, IL Veterans, IDHS, IDJJ, and Cook County Health.",
     clientNames: ["TeleRay"],
+
+    enrollmentDocuments: [],
 
     contractProcess: [
       "MOU in discussion — see /partnerships/teleray/mou for draft terms",
