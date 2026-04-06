@@ -9,6 +9,7 @@ import StatusBadge from "@/components/StatusBadge";
 import ApplicantFlowChart from "@/components/ApplicantFlowChart";
 import ActivityFeed from "@/components/ActivityFeed";
 import CandidateMatchResults from "@/components/CandidateMatchResults";
+import PositionRequirementsCard from "@/components/PositionRequirementsCard";
 import type {
   AdminPosition,
   AdminApplication,
@@ -308,6 +309,9 @@ export default function PositionDetailPage() {
                 </table>
               </div>
             )}
+
+            {/* Position Requirements for Matching */}
+            <PositionRequirementsCard positionId={params.id as string} />
 
             {/* Candidate Matching */}
             <CandidateMatchResults

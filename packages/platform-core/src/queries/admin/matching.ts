@@ -236,34 +236,26 @@ export async function scoreCandidatesForPosition(
     return { scored: 0, matched: 0, results: [], error: "Position not found" };
   }
 
-  // 2. Load position requirements
+  // 2. Load position requirements (optional — fall back to position fields)
   const requirements = await getPositionRequirements(positionId);
-  if (!requirements) {
-    return {
-      scored: 0,
-      matched: 0,
-      results: [],
-      error: "No position requirements found. Add requirements before matching.",
-    };
-  }
 
   // 3. Build PositionMatchData
   const positionData: PositionMatchData = {
     positionId: position.id,
     title: position.title,
     description: position.description,
-    location: position.location,
-    workMode: requirements.work_mode || position.work_mode,
+    location: requirements?.location_requirement || position.location,
+    workMode: requirements?.work_mode || position.work_mode,
     salaryRange:
-      requirements.salary_min != null && requirements.salary_max != null
+      requirements?.salary_min != null && requirements?.salary_max != null
         ? `${requirements.salary_min}-${requirements.salary_max}`
         : position.salary_range,
-    requiredSkills: requirements.required_skills || [],
-    preferredSkills: requirements.preferred_skills || [],
-    minExperienceYears: requirements.min_experience_years,
-    maxExperienceYears: requirements.max_experience_years,
-    educationLevel: requirements.education_level,
-    requiredCertifications: requirements.required_certifications || [],
+    requiredSkills: requirements?.required_skills || [],
+    preferredSkills: requirements?.preferred_skills || [],
+    minExperienceYears: requirements?.min_experience_years ?? null,
+    maxExperienceYears: requirements?.max_experience_years ?? null,
+    educationLevel: requirements?.education_level ?? null,
+    requiredCertifications: requirements?.required_certifications || [],
   };
 
   // 4. Load all candidates (exclude blacklisted)
