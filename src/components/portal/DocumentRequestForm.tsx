@@ -446,8 +446,58 @@ export default function DocumentRequestForm({ request, onSubmitted }: Props) {
         </div>
       )}
 
-      {/* Other */}
-      {request.request_type === "other" && (
+      {/* Right to Represent */}
+      {request.request_type === "right_to_represent" && (
+        <div className="space-y-2">
+          <label className="block text-sm font-medium">Signed Right to Represent (RTR)</label>
+          <p className="text-xs text-gray-500">Upload your signed RTR document (PDF, PNG, JPG)</p>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf,.png,.jpg,.jpeg"
+            className="text-sm"
+          />
+          <button
+            onClick={() => {
+              const file = fileInputRef.current?.files?.[0];
+              if (file) handleSubmitFile(file);
+              else setError("Please select a file");
+            }}
+            disabled={submitting}
+            className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark disabled:opacity-50"
+          >
+            {submitting ? "Uploading..." : "Upload & Submit"}
+          </button>
+        </div>
+      )}
+
+      {/* Identity Document */}
+      {request.request_type === "identity_document" && (
+        <div className="space-y-2">
+          <label className="block text-sm font-medium">Valid Identity Proof</label>
+          <p className="text-xs text-gray-500">Upload a government-issued photo ID — passport, driver&apos;s license, or state ID (PDF, PNG, JPG)</p>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf,.png,.jpg,.jpeg"
+            className="text-sm"
+          />
+          <button
+            onClick={() => {
+              const file = fileInputRef.current?.files?.[0];
+              if (file) handleSubmitFile(file);
+              else setError("Please select a file");
+            }}
+            disabled={submitting}
+            className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-primary-dark disabled:opacity-50"
+          >
+            {submitting ? "Uploading..." : "Upload & Submit"}
+          </button>
+        </div>
+      )}
+
+      {/* Fallback — other / any unhandled type */}
+      {!["ssn", "dob", "drivers_license", "visa_document", "background_check_consent", "references", "right_to_represent", "identity_document"].includes(request.request_type) && (
         <div className="space-y-2">
           <label className="block text-sm font-medium">
             {request.description || "Upload Required Document"}

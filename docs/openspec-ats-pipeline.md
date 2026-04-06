@@ -37,15 +37,16 @@ The application `status` column (`String(50)`) now supports 12 values:
 | 1 | `new` | New Application | Linear |
 | 2 | `phone_screen` | Phone Screen | Linear |
 | 3 | `interview_zoom` | Zoom Interview | Linear |
-| 4 | `interview_in_person` | Client/In-Person Interview | Linear |
-| 5 | `employment_verification` | Employment Verification | Linear |
-| 6 | `references` | References | Linear |
-| 7 | `clearances` | Clearances | Linear |
-| 8 | `offer_pending` | Offer Pending | Linear |
-| 9 | `onboarding` | Onboarding | Linear |
-| 10 | `hired` | Hired | Linear (terminal) |
-| 11 | `rejected` | Rejected | Terminal |
-| 12 | `withdrawn` | Withdrawn | Terminal |
+| 4 | `client_submission` | Client Submission | Linear |
+| 5 | `interview_in_person` | Client/In-Person Interview | Linear |
+| 6 | `employment_verification` | Employment Verification | Linear |
+| 7 | `references` | References | Linear |
+| 8 | `clearances` | Clearances | Linear |
+| 9 | `offer_pending` | Offer Pending | Linear |
+| 10 | `onboarding` | Onboarding | Linear |
+| 11 | `hired` | Hired | Linear (terminal) |
+| 12 | `rejected` | Rejected | Terminal |
+| 13 | `withdrawn` | Withdrawn | Terminal |
 
 **Migration**: Alembic revision `0014` remaps existing data:
 - `screening` -> `phone_screen`
@@ -217,19 +218,20 @@ The pipeline mixed two workflows: hiring and onboarding. "Onboarding" was stage 
 
 ### 6.2 Pipeline Change
 
-Removed "onboarding" from the application pipeline. The hiring pipeline is now **9 stages**:
+Removed "onboarding" from the application pipeline. Added "client_submission" stage. The hiring pipeline is now **10 stages**:
 
 | # | Status | Label |
 |---|--------|-------|
 | 1 | `new` | New Application |
 | 2 | `phone_screen` | Phone Screen |
 | 3 | `interview_zoom` | Zoom Interview |
-| 4 | `interview_in_person` | Client/In-Person Interview |
-| 5 | `employment_verification` | Employment Verification |
-| 6 | `references` | References |
-| 7 | `clearances` | Clearances |
-| 8 | `offer_pending` | Offer Pending |
-| 9 | `hired` | Hired |
+| 4 | `client_submission` | Client Submission |
+| 5 | `interview_in_person` | Client/In-Person Interview |
+| 6 | `employment_verification` | Employment Verification |
+| 7 | `references` | References |
+| 8 | `clearances` | Clearances |
+| 9 | `offer_pending` | Offer Pending |
+| 10 | `hired` | Hired |
 
 Terminal: `rejected`, `withdrawn`
 
@@ -259,6 +261,9 @@ Server-side validation in `pipeline-gates.ts` runs before every status advanceme
 | Gate | Trigger | Check |
 |------|---------|-------|
 | Resume required | Advancing past `new` | `application.resume_path` set OR candidate has resume in `resumes` table |
+| RTR required | Advancing past `phone_screen` | `document_requests` of type `right_to_represent` with status `submitted` or `approved` (only if request exists) |
+| Identity document required | Advancing past `phone_screen` | `document_requests` of type `identity_document` with status `submitted` or `approved` (only if request exists) |
+| Employment authorization required | Advancing past `phone_screen` | `document_requests` of type `visa_document` with status `submitted` or `approved` (only if request exists) |
 | References required | Advancing past `references` | `document_requests` of type `references` with status `submitted` or `approved` |
 | PII before offer | Advancing to `offer_pending` | `candidate_pii` has `ssn_encrypted` AND `visa_type` |
 

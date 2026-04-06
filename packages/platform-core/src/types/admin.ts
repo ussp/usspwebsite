@@ -4,6 +4,7 @@ export type ApplicationStatus =
   | "new"
   | "phone_screen"
   | "interview_zoom"
+  | "client_submission"
   | "interview_in_person"
   | "employment_verification"
   | "references"
@@ -17,6 +18,7 @@ export const PIPELINE_STAGES: ApplicationStatus[] = [
   "new",
   "phone_screen",
   "interview_zoom",
+  "client_submission",
   "interview_in_person",
   "employment_verification",
   "references",
@@ -31,6 +33,7 @@ export const STAGE_LABELS: Record<ApplicationStatus, string> = {
   new: "New Application",
   phone_screen: "Phone Screen",
   interview_zoom: "Zoom Interview",
+  client_submission: "Client Submission",
   interview_in_person: "Client/In-Person Interview",
   employment_verification: "Employment Verification",
   references: "References",
@@ -45,6 +48,7 @@ export const STAGE_COLORS: Record<ApplicationStatus, string> = {
   new: "bg-blue-100 text-blue-800",
   phone_screen: "bg-purple-100 text-purple-800",
   interview_zoom: "bg-indigo-100 text-indigo-800",
+  client_submission: "bg-orange-100 text-orange-800",
   interview_in_person: "bg-violet-100 text-violet-800",
   employment_verification: "bg-cyan-100 text-cyan-800",
   references: "bg-teal-100 text-teal-800",

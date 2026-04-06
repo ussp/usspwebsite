@@ -116,6 +116,50 @@ export async function getPortalDocumentRequests(
 }
 
 /**
+ * Get active assignments for a candidate (portal-safe: no rates).
+ */
+export async function getPortalAssignments(
+  candidateId: string
+): Promise<
+  Array<{
+    id: string;
+    role_title: string;
+    client_name: string | null;
+    end_client_name: string | null;
+    start_date: string;
+    end_date: string | null;
+    status: string;
+  }>
+> {
+  const supabase = getServiceClient();
+  const { data, error } = await supabase
+    .from("employee_assignments")
+    .select(
+      "id, role_title, start_date, end_date, status, clients(name), end_clients(name)"
+    )
+    .eq("site_id", getSiteId())
+    .eq("candidate_id", candidateId)
+    .in("status", ["active", "on_hold"])
+    .order("start_date", { ascending: false });
+
+  if (error || !data) return [];
+
+  return data.map((row: Record<string, unknown>) => {
+    const client = row.clients as Record<string, unknown> | null;
+    const endClient = row.end_clients as Record<string, unknown> | null;
+    return {
+      id: row.id as string,
+      role_title: row.role_title as string,
+      client_name: (client?.name as string) || null,
+      end_client_name: (endClient?.name as string) || null,
+      start_date: row.start_date as string,
+      end_date: (row.end_date as string) || null,
+      status: row.status as string,
+    };
+  });
+}
+
+/**
  * Submit a document for a request. Validates candidate ownership.
  * Encrypts text fields (SSN, DOB, DL) before storage.
  */

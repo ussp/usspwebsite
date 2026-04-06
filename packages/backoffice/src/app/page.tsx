@@ -14,6 +14,7 @@ const STATUS_COLORS: Record<ApplicationStatus, string> = {
   new: "bg-blue-100 text-blue-800",
   phone_screen: "bg-purple-100 text-purple-800",
   interview_zoom: "bg-indigo-100 text-indigo-800",
+  client_submission: "bg-orange-100 text-orange-800",
   interview_in_person: "bg-violet-100 text-violet-800",
   employment_verification: "bg-cyan-100 text-cyan-800",
   references: "bg-teal-100 text-teal-800",
@@ -28,6 +29,7 @@ const STATUS_LABELS: Record<string, string> = {
   new: "New",
   phone_screen: "Phone Screen",
   interview_zoom: "Zoom Interview",
+  client_submission: "Client Submission",
   interview_in_person: "Client/In-Person",
   employment_verification: "Verification",
   references: "References",
@@ -111,6 +113,7 @@ export default async function DashboardPage() {
             value={
               metrics.applicationsByStatus.phone_screen +
               metrics.applicationsByStatus.interview_zoom +
+              (metrics.applicationsByStatus.client_submission || 0) +
               metrics.applicationsByStatus.interview_in_person +
               metrics.applicationsByStatus.employment_verification +
               metrics.applicationsByStatus.references +
