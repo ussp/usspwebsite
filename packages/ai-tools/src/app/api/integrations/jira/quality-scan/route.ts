@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const config: IntegrationConfig = { baseUrl, email, projectKey, boardId, apiToken };
+  const config: IntegrationConfig = { type: "jira", baseUrl, email, projectKey, boardId, apiToken };
   const { data, error } = await scanJiraQuality(config, sprintCount || 3);
 
   if (error) {
