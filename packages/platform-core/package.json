@@ -255,6 +255,16 @@
       "import": "./dist/integrations/jira-quality-scanner.js",
       "default": "./dist/integrations/jira-quality-scanner.js"
     },
+    "./queries/admin/ai-contacts": {
+      "types": "./dist/queries/admin/ai-contacts.d.ts",
+      "import": "./dist/queries/admin/ai-contacts.js",
+      "default": "./dist/queries/admin/ai-contacts.js"
+    },
+    "./queries/admin/ai-documents": {
+      "types": "./dist/queries/admin/ai-documents.d.ts",
+      "import": "./dist/queries/admin/ai-documents.js",
+      "default": "./dist/queries/admin/ai-documents.js"
+    },
     "./matching": {
       "types": "./dist/matching/index.d.ts",
       "import": "./dist/matching/index.js",
