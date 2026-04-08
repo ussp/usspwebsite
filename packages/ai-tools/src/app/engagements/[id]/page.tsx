@@ -62,6 +62,19 @@ export default function EngagementDetailPage() {
           </div>
           <div className="flex items-center gap-3">
             <Link
+              href={`/engagements/${id}/presentation`}
+              target="_blank"
+              className="px-3 py-1.5 text-xs rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors"
+            >
+              CIO Presentation
+            </Link>
+            <Link
+              href={`/engagements/${id}/questionnaire`}
+              className="px-3 py-1.5 text-xs rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors"
+            >
+              Discovery Questionnaire
+            </Link>
+            <Link
               href={`/engagements/${id}/settings`}
               className="px-3 py-1.5 text-xs rounded-lg border border-light-gray hover:bg-light-gray transition-colors"
             >
