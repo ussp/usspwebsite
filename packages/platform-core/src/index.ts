@@ -130,6 +130,10 @@ export type {
   ReadinessAssessmentResult,
   AmplifierAnalysis,
   TensionAnalysis,
+  ContactCategory,
+  AIEngagementContact,
+  DocumentCategory,
+  AIEngagementDocument,
 } from "./types/ai-tools.js";
 export {
   ENGAGEMENT_STATUS_LABELS,
@@ -144,6 +148,8 @@ export {
   READINESS_TIER_LABELS,
   READINESS_TIER_COLORS,
   getMetricDefinition,
+  CONTACT_CATEGORY_LABELS,
+  DOCUMENT_CATEGORY_LABELS,
 } from "./types/ai-tools.js";
 
 // AI Laws & Regulations

@@ -563,3 +563,60 @@ export const TRAINING_CATALOG: TrainingModule[] = [
   { module: "AI Design Workflows", description: "Using AI for prototyping, wireframing, and design system generation", duration_hours: 3, target_roles: ["designer"], tools: ["Figma AI", "Midjourney", "ChatGPT"] },
   { module: "AI-Assisted Accessibility Compliance", description: "Using AI to audit and improve accessibility (Section 508, WCAG)", duration_hours: 2, target_roles: ["designer", "developer"], tools: ["axe AI", "ChatGPT"] },
 ];
+
+// -----------------------------------------------------------------------------
+// Engagement Contacts (Org Directory)
+// -----------------------------------------------------------------------------
+
+export type ContactCategory = "executive" | "state" | "leadership" | "working_team";
+
+export interface AIEngagementContact {
+  id: string;
+  site_id: string;
+  engagement_id: string;
+  display_name: string;
+  full_name: string | null;
+  email: string | null;
+  title: string;
+  organization: string | null;
+  category: ContactCategory;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export const CONTACT_CATEGORY_LABELS: Record<ContactCategory, string> = {
+  executive: "Executive Sponsors",
+  state: "State / Client",
+  leadership: "Engagement Leadership",
+  working_team: "Working Team",
+};
+
+// -----------------------------------------------------------------------------
+// Engagement Documents
+// -----------------------------------------------------------------------------
+
+export type DocumentCategory = "general" | "policy" | "framework" | "meeting_notes" | "playbook" | "reference";
+
+export interface AIEngagementDocument {
+  id: string;
+  site_id: string;
+  engagement_id: string;
+  file_name: string;
+  file_type: string | null;
+  file_size: number | null;
+  storage_path: string;
+  category: DocumentCategory;
+  description: string | null;
+  uploaded_by: string | null;
+  created_at: string;
+}
+
+export const DOCUMENT_CATEGORY_LABELS: Record<DocumentCategory, string> = {
+  general: "General",
+  policy: "Policy & Governance",
+  framework: "Framework",
+  meeting_notes: "Meeting Notes",
+  playbook: "Playbook",
+  reference: "Reference",
+};

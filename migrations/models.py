@@ -1082,3 +1082,59 @@ class AITrainingPlan(Base):
         Index("idx_ai_training_plans_site_team", "site_id", "team_id"),
         Index("idx_ai_training_plans_site_team_role", "site_id", "team_id", "role"),
     )
+
+
+class AIEngagementContact(Base):
+    """
+    Org directory contacts for an AI transformation engagement.
+
+    Tracks stakeholders, sponsors, working team members across vendors.
+    Not limited to Scrum team members — includes executives, PMs, architects, etc.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "ai_engagement_contacts"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    engagement_id = Column(UUID(as_uuid=True), ForeignKey("ai_engagements.id"), nullable=False)
+    display_name = Column(String(255), nullable=False)
+    full_name = Column(String(255))
+    email = Column(String(255))
+    title = Column(String(255), nullable=False)
+    organization = Column(String(255))
+    category = Column(String(30), nullable=False, server_default="working_team")  # executive | state | leadership | working_team
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_ai_engagement_contacts_site_eng", "site_id", "engagement_id"),
+    )
+
+
+class AIEngagementDocument(Base):
+    """
+    Document metadata for files uploaded to an engagement.
+
+    Actual files stored in Supabase storage; this table tracks metadata.
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "ai_engagement_documents"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    engagement_id = Column(UUID(as_uuid=True), ForeignKey("ai_engagements.id"), nullable=False)
+    file_name = Column(String(500), nullable=False)
+    file_type = Column(String(100))
+    file_size = Column(Integer)
+    storage_path = Column(String(1000), nullable=False)
+    category = Column(String(50), server_default="general")  # general | policy | framework | meeting_notes | playbook | reference
+    description = Column(Text)
+    uploaded_by = Column(String(255))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_ai_engagement_documents_site_eng", "site_id", "engagement_id"),
+    )

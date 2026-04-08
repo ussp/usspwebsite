@@ -75,6 +75,18 @@ export default function EngagementDetailPage() {
               Discovery Questionnaire
             </Link>
             <Link
+              href={`/engagements/${id}/team-directory`}
+              className="px-3 py-1.5 text-xs rounded-lg border border-light-gray hover:bg-light-gray transition-colors"
+            >
+              Team Directory
+            </Link>
+            <Link
+              href={`/engagements/${id}/documents`}
+              className="px-3 py-1.5 text-xs rounded-lg border border-light-gray hover:bg-light-gray transition-colors"
+            >
+              Documents
+            </Link>
+            <Link
               href={`/engagements/${id}/settings`}
               className="px-3 py-1.5 text-xs rounded-lg border border-light-gray hover:bg-light-gray transition-colors"
             >
