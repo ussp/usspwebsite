@@ -5,9 +5,13 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/", label: "Dashboard", desc: "", icon: "📊", section: "" },
-  { href: "/engagements", label: "Transformation Monitor", desc: "Measure team productivity growth", icon: "📈", section: "Measurement Tools" },
-  { href: "/readiness", label: "Readiness Assessment", desc: "Evaluate org AI capabilities", icon: "🔍", section: "Assessment Tools" },
+  // ── AI Transformation Lifecycle ──
+  { href: "/readiness", label: "Readiness Assessment", desc: "Step 1 — Evaluate org AI capabilities", icon: "🔍", section: "1 · Assess" },
+  { href: "/engagements", label: "Transformation Monitor", desc: "Step 2 — Measure before & after training", icon: "📈", section: "2 · Transform" },
+  { href: "/governance", label: "GRC & Compliance", desc: "Step 3 — Policy, risk & audit tracking", icon: "🛡️", section: "3 · Govern" },
+  // ── Reference ──
   { href: "/methodology", label: "Methodology & Research", desc: "Frameworks, papers, citations", icon: "📚", section: "Reference" },
+  { href: "/tools", label: "Free Public Tools", desc: "DORA, velocity, ROI calculators", icon: "🧮", section: "Reference" },
 ];
 
 export default function AdminSidebar() {
@@ -17,7 +21,7 @@ export default function AdminSidebar() {
     <aside className="fixed left-0 top-0 z-30 h-screen w-60 bg-near-black text-white flex flex-col">
       <div className="px-6 py-5 border-b border-white/10">
         <h1 className="text-lg font-bold tracking-tight">AI Transformation</h1>
-        <p className="text-xs text-white/50 mt-0.5">Monitoring Tools</p>
+        <p className="text-xs text-white/50 mt-0.5">Assess · Transform · Govern</p>
       </div>
       <nav className="flex-1 px-3 py-4 space-y-0.5">
         {navItems.map((item, i) => {

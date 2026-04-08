@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDJJ AI Transformation — Executive Presentation (DRAFT)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0f172a;
+    --dark: #1e293b;
+    --blue: #2563eb;
+    --blue-light: #3b82f6;
+    --blue-glow: rgba(37, 99, 235, 0.15);
+    --teal: #0d9488;
+    --white: #ffffff;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-400: #94a3b8;
+    --gray-600: #475569;
+    --red: #dc2626;
+    --red-bg: rgba(220, 38, 38, 0.08);
+    --red-border: rgba(220, 38, 38, 0.25);
+    --amber: #d97706;
+    --green: #16a34a;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--gray-100);
+    color: var(--dark);
+  }
+
+  /* ── Slide Container ── */
+  .slide {
+    width: 1280px;
+    min-height: 720px;
+    margin: 40px auto;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+    page-break-after: always;
+    position: relative;
+  }
+
+  /* ── Title Slide ── */
+  .slide-title {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 50%, var(--blue) 100%);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 100px;
+  }
+  .slide-title .draft-badge {
+    background: var(--red);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 20px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+  }
+  .slide-title h1 {
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .slide-title h2 {
+    font-size: 26px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 50px;
+  }
+  .slide-title .meta {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+  }
+  .slide-title .meta strong {
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ── Standard Slide ── */
+  .slide-header {
+    background: var(--navy);
+    padding: 30px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .slide-header h2 {
+    color: var(--white);
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .slide-header .slide-num {
+    color: var(--gray-400);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .slide-body {
+    padding: 50px 60px;
+  }
+
+  /* ── Open Question (RED) ── */
+  .open-question {
+    background: var(--red-bg);
+    border: 1.5px solid var(--red-border);
+    border-left: 4px solid var(--red);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    color: var(--red);
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .open-question::before {
+    content: "?";
+    background: var(--red);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .tbd {
+    color: var(--red);
+    font-weight: 600;
+    background: var(--red-bg);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  /* ── Cards / Grids ── */
+  .card-grid {
+    display: grid;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 28px;
+    border: 1px solid var(--gray-200);
+  }
+  .card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .card p, .card li {
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+  .card ul { padding-left: 18px; }
+  .card ul li { margin-bottom: 4px; }
+
+  .card-blue {
+    background: var(--blue-glow);
+    border-color: rgba(37,99,235,0.2);
+  }
+  .card-blue h3 { color: var(--blue); }
+
+  .card .icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  /* ── Stats ── */
+  .stat-row {
+    display: flex;
+    gap: 30px;
+    margin: 25px 0;
+  }
+  .stat {
+    text-align: center;
+    flex: 1;
+  }
+  .stat .num {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1;
+  }
+  .stat .label {
+    font-size: 14px;
+    color: var(--gray-600);
+    margin-top: 8px;
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    display: flex;
+    gap: 0;
+    margin: 30px 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 40px;
+    right: 40px;
+    height: 3px;
+    background: var(--gray-200);
+    z-index: 0;
+  }
+  .timeline-item {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-item .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin: 18px auto 16px;
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 3px var(--blue);
+  }
+  .timeline-item .dot.red {
+    background: var(--red);
+    box-shadow: 0 0 0 3px var(--red);
+  }
+  .timeline-item .phase-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .timeline-item .phase-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-top: 6px;
+  }
+  .timeline-item .phase-date {
+    font-size: 12px;
+    color: var(--gray-400);
+    margin-top: 4px;
+  }
+
+  /* ── Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-600);
+  }
+  tr:nth-child(even) { background: var(--gray-100); }
+
+  /* ── Text ── */
+  .subtitle {
+    font-size: 16px;
+    color: var(--gray-600);
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .big-quote {
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--navy);
+    border-left: 4px solid var(--blue);
+    padding: 20px 30px;
+    margin: 30px 0;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* ── Guardrail blocks ── */
+  .guardrail {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    background: var(--gray-100);
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 15px;
+    color: var(--navy);
+  }
+  .guardrail .icon { font-size: 22px; margin-bottom: 0; }
+  .guardrail.no { border-left: 4px solid var(--red); }
+  .guardrail.yes { border-left: 4px solid var(--green); }
+
+  /* ── Footer ── */
+  .slide-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 14px 60px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--gray-400);
+    border-top: 1px solid var(--gray-200);
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: white; }
+    .slide {
+      margin: 0;
+      box-shadow: none;
+      border-radius: 0;
+      page-break-inside: avoid;
+    }
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--gray-600);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+  .legend-dot.red { background: var(--red); }
+  .legend-dot.blue { background: var(--blue); }
+  .legend-dot.green { background: var(--green); }
+
+  .pillars {
+    display: flex;
+    gap: 2px;
+    margin: 30px 0 20px;
+  }
+  .pillar {
+    flex: 1;
+    text-align: center;
+    padding: 30px 15px;
+    color: white;
+    border-radius: 8px;
+  }
+  .pillar h3 { font-size: 18px; margin-bottom: 8px; }
+  .pillar p { font-size: 13px; opacity: 0.85; }
+  .pillar:nth-child(1) { background: #1e40af; }
+  .pillar:nth-child(2) { background: #2563eb; }
+  .pillar:nth-child(3) { background: #3b82f6; }
+  .pillar:nth-child(4) { background: #0d9488; }
+  .pillar:nth-child(5) { background: #0f766e; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ SLIDE 1: TITLE ═══════════════════ -->
+<div class="slide slide-title">
+  <div class="draft-badge">DRAFT — For Discussion</div>
+  <h1>AI-Augmented Delivery<br>Transformation</h1>
+  <h2>Illinois Department of Juvenile Justice (IDJJ)</h2>
+  <div class="meta">
+    <strong>Presented by:</strong> Vinay Lagisetty, Krasan — AI Transformation Leader<br>
+    <strong>Date:</strong> <span class="tbd">TBD</span><br>
+    <strong>Audience:</strong> <span class="tbd">CIO Name — TBD</span>, IDJJ Executive Leadership
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 2: AGENDA ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Agenda</h2>
+    <span class="slide-num">2</span>
+  </div>
+  <div class="slide-body">
+    <div class="card-grid cols-2">
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>1. The Opportunity</h3>
+        <p>Why AI augmentation, why now, and what we've seen work at scale in State of Illinois engagements</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔬</div>
+        <h3>2. Our Approach</h3>
+        <p>Research-backed methodology: Govern → Baseline → Train → Pilot → Measure → Playbook → Scale</p>
+      </div>
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>3. Measurement Framework</h3>
+        <p>How we prove ROI with DORA, SPACE, and industry-standard metrics — not guesswork</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛡️</div>
+        <h3>4. Governance & Compliance</h3>
+        <p>Full alignment with State of Illinois DoIT AI Policy — built-in from day one</p>
+      </div>
+      <div class="card">
+        <div class="icon">🗓️</div>
+        <h3>5. Proposed Timeline</h3>
+        <p>Phased rollout — pilot with select teams, measure results, then scale across the organization</p>
+      </div>
+      <div class="card">
+        <div class="icon">❓</div>
+        <h3>6. Discussion & Next Steps</h3>
+        <p>Open questions, priority alignment, and what we need from IDJJ to get started</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 3: THE OPPORTUNITY ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>The Opportunity</h2>
+    <span class="slide-num">3</span>
+  </div>
+  <div class="slide-body">
+    <div class="section-label">The Landscape</div>
+    <p class="subtitle">AI-augmented software delivery is no longer experimental — it's measurable, governable, and proven to work within State of Illinois constraints.</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num">20-45%</div>
+        <div class="label">Developer productivity improvement<br><em>McKinsey, 2023</em></div>
+      </div>
+      <div class="stat">
+        <div class="num">55%</div>
+        <div class="label">Faster task completion with AI<br><em>GitHub Research, 2023</em></div>
+      </div>
+      <div class="stat">
+        <div class="num">62%</div>
+        <div class="label">Median productivity gain (CMMI)<br><em>Carnegie Mellon SEI</em></div>
+      </div>
+    </div>
+
+    <div class="big-quote">
+      "AI amplifies the existing team — same people, better tools, more output. No workforce reduction. No autonomous code generation."
+    </div>
+
+    <div class="open-question">What is IDJJ's current technology modernization project? (Equivalent to DCFS Illinois Connect)</div>
+    <div class="open-question">What is the current team structure and scale at IDJJ? (# of teams, consultants, vendors)</div>
+    <div class="open-question">What is the primary tech stack? (Dynamics 365, .NET, other?)</div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 4: PHILOSOPHY ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Our Philosophy: Amplify, Not Replace</h2>
+    <span class="slide-num">4</span>
+  </div>
+  <div class="slide-body">
+    <div class="card-grid cols-2" style="margin-bottom: 30px;">
+      <div class="card card-blue">
+        <h3>✅ What We Do</h3>
+        <ul>
+          <li>Give every role the right AI tools with structured training</li>
+          <li>Measure before and after with research-backed metrics</li>
+          <li>Produce role-based playbooks that persist beyond the pilot</li>
+          <li>Operate within full DoIT AI Policy compliance</li>
+          <li>Human reviews and approves all AI-assisted output</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color: var(--red-border); background: var(--red-bg);">
+        <h3 style="color: var(--red);">❌ What We Don't Do</h3>
+        <ul>
+          <li>No autonomous code generation</li>
+          <li>No AI-generated production code commits</li>
+          <li>No sensitive data in AI prompts</li>
+          <li>No unapproved tools — only state-vetted AI</li>
+          <li>No workforce reduction — same team, amplified</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-label">Lesson Learned</div>
+    <div class="guardrail no">
+      <span class="icon">⚠️</span>
+      <span><strong>CMS/Medicare Precedent (Oct 2025):</strong> Federal pulled AI tools mid-sprint, causing disruption. Our approach: understand boundaries early, comply fully, never overextend.</span>
+    </div>
+
+    <div class="open-question">Does IDJJ have specific constraints or concerns beyond the DoIT policy?</div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 5: APPROACH ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Approach: 7-Phase Model</h2>
+    <span class="slide-num">5</span>
+  </div>
+  <div class="slide-body">
+    <div class="pillars">
+      <div class="pillar">
+        <h3>Govern</h3>
+        <p>DoIT compliance, access, clearances</p>
+      </div>
+      <div class="pillar">
+        <h3>Baseline</h3>
+        <p>Quantitative metrics before AI</p>
+      </div>
+      <div class="pillar">
+        <h3>Train</h3>
+        <p>Role-specific AI training</p>
+      </div>
+      <div class="pillar">
+        <h3>Pilot</h3>
+        <p>Select teams, controlled experiment</p>
+      </div>
+      <div class="pillar">
+        <h3>Measure</h3>
+        <p>Continuous data collection</p>
+      </div>
+    </div>
+    <div class="pillars" style="margin-top: 2px;">
+      <div class="pillar" style="background: #7c3aed;">
+        <h3>Playbook</h3>
+        <p>Role-based best practices</p>
+      </div>
+      <div class="pillar" style="background: #9333ea;">
+        <h3>Scale</h3>
+        <p>Organization-wide rollout</p>
+      </div>
+      <div class="pillar" style="background: transparent; border: 2px dashed var(--gray-200);">
+        <h3 style="color: var(--navy);">&nbsp;</h3>
+        <p>&nbsp;</p>
+      </div>
+      <div class="pillar" style="background: transparent; border: 2px dashed var(--gray-200);">
+        <h3 style="color: var(--navy);">&nbsp;</h3>
+        <p>&nbsp;</p>
+      </div>
+      <div class="pillar" style="background: transparent; border: 2px dashed var(--gray-200);">
+        <h3 style="color: var(--navy);">&nbsp;</h3>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+
+    <div class="card-grid cols-2" style="margin-top: 30px;">
+      <div class="card">
+        <h3>Pilot Structure</h3>
+        <ul>
+          <li><strong>Duration:</strong> 1 full PI (~3 months)</li>
+          <li><strong>Pilot teams</strong> receive AI training + tools</li>
+          <li><strong>Control teams</strong> continue as-is</li>
+          <li>Weekly check-ins, continuous measurement</li>
+          <li>Before/after comparison at end of PI</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Deliverables</h3>
+        <ul>
+          <li>Rollout plan with DoIT compliance</li>
+          <li>Baseline metrics report</li>
+          <li>Role-specific training materials</li>
+          <li>Pilot results (before vs after)</li>
+          <li>Role-based playbooks (BA, Tester, Dev)</li>
+          <li>Executive recommendation for scale</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 6: TARGET ROLES ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Target Roles & AI Use Cases</h2>
+    <span class="slide-num">6</span>
+  </div>
+  <div class="slide-body">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot blue"></div> Confirmed use cases (state-approved tools)</div>
+      <div class="legend-item"><div class="legend-dot red"></div> Needs IDJJ confirmation</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>AI Tool</th>
+          <th>Use Case</th>
+          <th>Expected Benefit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Business Analyst</strong></td>
+          <td>Atlassian Rovo</td>
+          <td>User story quality assessment & refinement</td>
+          <td>Faster authoring, fewer review cycles</td>
+        </tr>
+        <tr>
+          <td><strong>Business Analyst</strong></td>
+          <td>Rovo + Confluence</td>
+          <td>Acceptance criteria generation (Gherkin)</td>
+          <td>Better testability, clearer requirements</td>
+        </tr>
+        <tr>
+          <td><strong>Tester</strong></td>
+          <td>Rovo / Copilot</td>
+          <td>Test script generation from AC</td>
+          <td>Faster test creation, better coverage</td>
+        </tr>
+        <tr>
+          <td><strong>Developer</strong></td>
+          <td>GitHub Copilot</td>
+          <td>Code explanation, docs, refactoring suggestions</td>
+          <td>10-20% time savings per story</td>
+        </tr>
+        <tr>
+          <td><strong>Developer</strong></td>
+          <td>GitHub Copilot</td>
+          <td>Unit test scenario suggestions</td>
+          <td>Better coverage, fewer defect escapes</td>
+        </tr>
+        <tr style="background: var(--red-bg);">
+          <td><strong>Data</strong></td>
+          <td class="tbd">TBD</td>
+          <td class="tbd">TBD — needs discovery</td>
+          <td class="tbd">TBD</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="open-question">What AI tools does IDJJ currently have access to? (GitHub Copilot? Atlassian Rovo? Others?)</div>
+    <div class="open-question">Does IDJJ use JIRA / Confluence? What is the project management toolchain?</div>
+    <div class="open-question">Are there role-specific pain points the CIO wants to address first?</div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 7: MEASUREMENT FRAMEWORK ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Measurement Framework</h2>
+    <span class="slide-num">7</span>
+  </div>
+  <div class="slide-body">
+    <div class="section-label">Research-Backed — Not Guesswork</div>
+    <p class="subtitle">Every metric traces to peer-reviewed research or international standards. We use the same methodologies as Google, Microsoft Research, Carnegie Mellon SEI, and ISO.</p>
+
+    <div class="card-grid cols-3">
+      <div class="card card-blue">
+        <h3>DORA / Accelerate</h3>
+        <p><strong>Google DevOps Research</strong><br>
+        23,000+ respondents, 7+ years<br><br>
+        Velocity, cycle time, throughput, failure rate</p>
+      </div>
+      <div class="card card-blue">
+        <h3>SPACE Framework</h3>
+        <p><strong>Microsoft Research / ACM</strong><br>
+        5 dimensions of productivity<br><br>
+        Satisfaction, Performance, Activity, Communication, Efficiency</p>
+      </div>
+      <div class="card card-blue">
+        <h3>QUS Framework</h3>
+        <p><strong>Utrecht University</strong><br>
+        13 criteria, validated on 1,023 stories<br><br>
+        Story quality scoring — syntactic, semantic, pragmatic</p>
+      </div>
+    </div>
+
+    <div class="card-grid cols-3" style="margin-top: 10px;">
+      <div class="card">
+        <h3>Six Sigma DMAIC</h3>
+        <p>Before/after measurement methodology — Define, Measure, Analyze, Improve, Control</p>
+      </div>
+      <div class="card">
+        <h3>ISO/IEC 25010:2023</h3>
+        <p>International standard — 8 quality characteristics, 31 sub-characteristics</p>
+      </div>
+      <div class="card">
+        <h3>GQM Paradigm</h3>
+        <p>Goal-Question-Metric — every metric traces to a business goal (NASA/UMD)</p>
+      </div>
+    </div>
+
+    <div class="open-question">What metrics does IDJJ currently track? (velocity, burndown, cycle time, bug counts?)</div>
+    <div class="open-question">What does the CIO consider a "successful" pilot? What's the target improvement %?</div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 8: PROPOSED METRICS ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Proposed Metrics (Starter Set)</h2>
+    <span class="slide-num">8</span>
+  </div>
+  <div class="slide-body">
+    <div class="subtitle">Recommended 8-12 metrics max to avoid measurement burden. Final selection based on CIO priorities.</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Metric</th>
+          <th>Source</th>
+          <th>Research Backing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="3"><strong>Velocity & Delivery</strong></td>
+          <td>Sprint velocity (story points/sprint)</td>
+          <td>JIRA (automated)</td>
+          <td>DORA — throughput</td>
+        </tr>
+        <tr>
+          <td>Cycle time (In Progress → Done)</td>
+          <td>JIRA (automated)</td>
+          <td>DORA — lead time</td>
+        </tr>
+        <tr>
+          <td>Sprint predictability (committed vs delivered)</td>
+          <td>JIRA (automated)</td>
+          <td>SPACE — performance</td>
+        </tr>
+        <tr>
+          <td rowspan="4"><strong>Quality</strong></td>
+          <td>Story quality score (13-criteria checklist)</td>
+          <td>JIRA scanner</td>
+          <td>QUS framework</td>
+        </tr>
+        <tr>
+          <td>Story rejection rate</td>
+          <td>JIRA transitions</td>
+          <td>Six Sigma — rework</td>
+        </tr>
+        <tr>
+          <td>First pass yield (% passing QA first try)</td>
+          <td>JIRA transitions</td>
+          <td>Six Sigma — FPY</td>
+        </tr>
+        <tr>
+          <td>Test coverage (% stories with test cases)</td>
+          <td>JIRA links</td>
+          <td>ISO 25010 — testability</td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>Efficiency</strong></td>
+          <td>Story review cycle time</td>
+          <td>JIRA (automated)</td>
+          <td>DORA — lead time</td>
+        </tr>
+        <tr>
+          <td>Test creation time</td>
+          <td>Manual tracking</td>
+          <td>SPACE — efficiency</td>
+        </tr>
+        <tr>
+          <td rowspan="2"><strong>Team Health</strong></td>
+          <td>SPACE survey (5 dimensions)</td>
+          <td>Survey tool</td>
+          <td>Forsgren 2021 (ACM)</td>
+        </tr>
+        <tr>
+          <td>Requirement clarity</td>
+          <td>Survey (1-5)</td>
+          <td>SPACE — communication</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="open-question">Which metrics matter most to the CIO? Velocity? Quality? Team satisfaction?</div>
+    <div class="open-question">Can we access IDJJ's project management tool via API for automated metric collection?</div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 9: DoIT COMPLIANCE ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Governance: DoIT AI Policy Compliance</h2>
+    <span class="slide-num">9</span>
+  </div>
+  <div class="slide-body">
+    <div class="section-label">State of Illinois DoIT AI Policy (Effective April 1, 2025)</div>
+    <p class="subtitle">Our approach is designed for full compliance from day one. All state agencies must follow this policy.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Requirement</th>
+          <th>DoIT Section</th>
+          <th>How We Comply</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Human in the loop</td>
+          <td>§4d, §6</td>
+          <td>AI suggests, human decides — mandatory review</td>
+          <td style="color: var(--green); font-weight: 600;">✓ Built-in</td>
+        </tr>
+        <tr>
+          <td>No protected data in AI</td>
+          <td>§4f</td>
+          <td>No case data in prompts; code & stories only</td>
+          <td style="color: var(--green); font-weight: 600;">✓ Built-in</td>
+        </tr>
+        <tr>
+          <td>Transparency / disclosure</td>
+          <td>§5a-c</td>
+          <td>Written disclosure; AI-assisted deliverables labeled</td>
+          <td style="color: var(--green); font-weight: 600;">✓ Built-in</td>
+        </tr>
+        <tr>
+          <td>Bias mitigation</td>
+          <td>§11</td>
+          <td>Per-sprint bias spot checks; documented reviews</td>
+          <td style="color: var(--green); font-weight: 600;">✓ Built-in</td>
+        </tr>
+        <tr>
+          <td>Continuous monitoring</td>
+          <td>§7</td>
+          <td>Measurement tool provides audit trail</td>
+          <td style="color: var(--green); font-weight: 600;">✓ Built-in</td>
+        </tr>
+        <tr style="background: var(--red-bg);">
+          <td>AI System Assessment Report</td>
+          <td>§5f</td>
+          <td>Agency Head signoff + 30-day DoIT notice</td>
+          <td class="tbd">Needs clarification</td>
+        </tr>
+        <tr style="background: var(--red-bg);">
+          <td>State data consent</td>
+          <td>§5e</td>
+          <td>Written Agency Head consent if code = state data</td>
+          <td class="tbd">Needs clarification</td>
+        </tr>
+        <tr style="background: var(--red-bg);">
+          <td>30-day advance notice</td>
+          <td>§5f</td>
+          <td>Must be filed before pilot launch</td>
+          <td class="tbd">Needs clarification</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="open-question">Has IDJJ already filed the DoIT AI System Assessment for any AI tools?</div>
+    <div class="open-question">Has the 30-day advance notice been submitted? (If not, this gates the pilot start date.)</div>
+    <div class="open-question">Does IDJJ have a designated AI Policy employee per §2?</div>
+    <div class="open-question">Does IDJJ consider source code "State data for AI purposes" under §5e?</div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 10: PROPOSED TIMELINE ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Proposed Timeline</h2>
+    <span class="slide-num">10</span>
+  </div>
+  <div class="slide-body">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="phase-label">Phase 0</div>
+        <div class="dot"></div>
+        <div class="phase-title">Governance<br>& Access</div>
+        <div class="phase-date" style="color: var(--red);">TBD — Week 1-2</div>
+      </div>
+      <div class="timeline-item">
+        <div class="phase-label">Phase 1</div>
+        <div class="dot"></div>
+        <div class="phase-title">Discovery<br>& Baseline</div>
+        <div class="phase-date" style="color: var(--red);">TBD — Week 2-4</div>
+      </div>
+      <div class="timeline-item">
+        <div class="phase-label">Phase 2</div>
+        <div class="dot"></div>
+        <div class="phase-title">Training</div>
+        <div class="phase-date" style="color: var(--red);">TBD — Week 4-5</div>
+      </div>
+      <div class="timeline-item">
+        <div class="phase-label">Phase 3</div>
+        <div class="dot"></div>
+        <div class="phase-title">Pilot<br>Execution</div>
+        <div class="phase-date" style="color: var(--red);">TBD — 1 full PI</div>
+      </div>
+      <div class="timeline-item">
+        <div class="phase-label">Phase 4</div>
+        <div class="dot"></div>
+        <div class="phase-title">Results &<br>Playbooks</div>
+        <div class="phase-date" style="color: var(--red);">TBD — End of PI</div>
+      </div>
+    </div>
+
+    <div class="card-grid cols-2" style="margin-top: 40px;">
+      <div class="card">
+        <h3>Phase 0-1: Foundation (Weeks 1-4)</h3>
+        <ul>
+          <li>Confirm DoIT compliance status</li>
+          <li>Obtain access & clearances</li>
+          <li>Executive discovery interview (metrics alignment)</li>
+          <li>Collect baseline data — last 3 sprints</li>
+          <li>Select pilot teams and participants</li>
+          <li>Distribute baseline survey</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Phase 2-3: Execute (Weeks 5 – End of PI)</h3>
+        <ul>
+          <li>Role-specific training (BA, Tester, Dev)</li>
+          <li>DoIT-compliant AI usage guardrails</li>
+          <li>Pilot teams operate with AI tools</li>
+          <li>Control teams continue as-is</li>
+          <li>Weekly check-ins, adjustments</li>
+          <li>Continuous measurement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="open-question">When is the next PI Planning? (Drives pilot start date.)</div>
+    <div class="open-question">What is the sprint cadence? (2-week? 3-week?)</div>
+    <div class="open-question">When would the CIO like to see first results?</div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 11: WHAT WE NEED ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>What We Need from IDJJ</h2>
+    <span class="slide-num">11</span>
+  </div>
+  <div class="slide-body">
+    <div class="section-label">To Get Started</div>
+
+    <div class="card-grid cols-2">
+      <div class="card" style="border-left: 4px solid var(--red);">
+        <h3 style="color: var(--red);">🔴 Must Have (Blockers)</h3>
+        <ul>
+          <li>CIO alignment on goals and success criteria</li>
+          <li>DoIT AI compliance status — has assessment been filed?</li>
+          <li>Confirmation of available AI tools (Copilot, Rovo, other?)</li>
+          <li>Access for Krasan AI Transformation team (clearance, credentials)</li>
+          <li>Project management tool access (JIRA API or equivalent)</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--amber);">
+        <h3 style="color: var(--amber);">🟡 Need Soon (Week 1-2)</h3>
+        <ul>
+          <li>Executive discovery session with CIO (30-45 min)</li>
+          <li>Identify pilot team candidates</li>
+          <li>Architecture walkthrough (tech stack, dev process)</li>
+          <li>Current JIRA workflow states and configuration</li>
+          <li>Existing metrics/reporting (if any)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <div class="section-label">Summary of All Open Questions</div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Open Question</th>
+            <th>Who Can Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: var(--red-bg);">
+            <td>1</td>
+            <td>What is IDJJ's current technology project / modernization initiative?</td>
+            <td class="tbd">CIO</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>2</td>
+            <td>Team structure: # of teams, consultants, vendors, roles?</td>
+            <td class="tbd">CIO / PM</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>3</td>
+            <td>Tech stack and project management tools?</td>
+            <td class="tbd">CIO / Architect</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>4</td>
+            <td>What AI tools are currently available / approved?</td>
+            <td class="tbd">CIO</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>5</td>
+            <td>DoIT AI Assessment filed? 30-day notice submitted?</td>
+            <td class="tbd">CIO</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>6</td>
+            <td>Success criteria: target improvement %, key priorities?</td>
+            <td class="tbd">CIO</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>7</td>
+            <td>When is the next PI Planning?</td>
+            <td class="tbd">RTE / PM</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>8</td>
+            <td>Source code = "State data" for AI policy purposes?</td>
+            <td class="tbd">CIO / Legal</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>9</td>
+            <td>Designated AI Policy employee at IDJJ?</td>
+            <td class="tbd">CIO</td>
+          </tr>
+          <tr style="background: var(--red-bg);">
+            <td>10</td>
+            <td>Any constraints or concerns beyond DoIT policy?</td>
+            <td class="tbd">CIO</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 12: TOOLING LIFECYCLE ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Our Tooling: Assess → Transform → Govern</h2>
+    <span class="slide-num">12</span>
+  </div>
+  <div class="slide-body">
+    <div class="section-label">AI Transformation Platform — tools.ussp.co</div>
+    <p class="subtitle">Purpose-built for measuring AI training impact. Three tools covering the full lifecycle — already deployed and operational.</p>
+
+    <!-- Lifecycle visual -->
+    <div class="pillars" style="margin-bottom: 30px;">
+      <div class="pillar" style="background: #7c3aed;">
+        <h3>1. Assess</h3>
+        <p>Readiness Assessment<br><em style="font-size: 11px;">tools.ussp.co/readiness</em></p>
+      </div>
+      <div class="pillar" style="background: #2563eb;">
+        <h3>2. Transform</h3>
+        <p>Transformation Monitor<br><em style="font-size: 11px;">tools.ussp.co/engagements</em></p>
+      </div>
+      <div class="pillar" style="background: #0d9488;">
+        <h3>3. Govern</h3>
+        <p>GRC & Compliance<br><em style="font-size: 11px;">tools.ussp.co/governance</em></p>
+      </div>
+    </div>
+
+    <div class="card-grid cols-3">
+      <div class="card" style="border-top: 4px solid #7c3aed;">
+        <h3>Readiness Assessment</h3>
+        <ul>
+          <li>DORA 2025 AI Capabilities Model</li>
+          <li>7 capabilities scored 1-5</li>
+          <li>Readiness tier classification</li>
+          <li>Blocker identification</li>
+          <li>State law regulatory reference</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top: 4px solid #2563eb;">
+        <h3>Transformation Monitor</h3>
+        <ul>
+          <li>37 metrics across 5 categories</li>
+          <li>Before/after comparison</li>
+          <li>JIRA integration (automated)</li>
+          <li>SPACE/DevEx surveys</li>
+          <li>Executive reports & radar charts</li>
+          <li>Training plan generation</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top: 4px solid #0d9488;">
+        <h3>GRC & Compliance</h3>
+        <ul>
+          <li>DoIT AI Policy checklist</li>
+          <li>Risk register tracking</li>
+          <li>Data governance controls</li>
+          <li>Human oversight verification</li>
+          <li>Audit trail & monitoring</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; padding: 16px 25px; background: var(--gray-100); border-radius: 8px; border: 1px solid var(--gray-200);">
+      <strong>Free Public Tools</strong> — available now at tools.ussp.co/tools:<br>
+      <span style="color: var(--gray-600); font-size: 14px;">DORA Calculator · Sprint Velocity Calculator · Cycle Time Calculator · Change Failure Rate Calculator · AI ROI Calculator</span>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 13: EXPECTED RESULTS GRID ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Expected Results</h2>
+    <span class="slide-num">13</span>
+  </div>
+  <div class="slide-body">
+    <div class="section-label">What Success Looks Like — Based on Industry Research</div>
+    <p class="subtitle">Conservative targets grounded in published research. Actual results depend on team maturity and adoption.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Before (Baseline)</th>
+          <th>Target (After AI)</th>
+          <th>Improvement</th>
+          <th>Research Benchmark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sprint Velocity</strong></td>
+          <td style="text-align: center; color: var(--red);">TBD — baseline</td>
+          <td style="text-align: center;">+5-15%</td>
+          <td style="text-align: center; color: var(--green); font-weight: 600;">5-15%</td>
+          <td style="font-size: 12px;">DORA: high performers 2x throughput</td>
+        </tr>
+        <tr>
+          <td><strong>Story Quality Score</strong></td>
+          <td style="text-align: center; color: var(--red);">TBD — baseline</td>
+          <td style="text-align: center;">+20-30%</td>
+          <td style="text-align: center; color: var(--green); font-weight: 600;">20-30%</td>
+          <td style="font-size: 12px;">QUS: AI-assisted stories score higher on 13 criteria</td>
+        </tr>
+        <tr>
+          <td><strong>Story Review Cycle Time</strong></td>
+          <td style="text-align: center; color: var(--red);">TBD — baseline</td>
+          <td style="text-align: center;">-10-25%</td>
+          <td style="text-align: center; color: var(--green); font-weight: 600;">10-25%</td>
+          <td style="font-size: 12px;">Fewer review rounds = faster approval</td>
+        </tr>
+        <tr>
+          <td><strong>Test Creation Time</strong></td>
+          <td style="text-align: center; color: var(--red);">TBD — baseline</td>
+          <td style="text-align: center;">-15-30%</td>
+          <td style="text-align: center; color: var(--green); font-weight: 600;">15-30%</td>
+          <td style="font-size: 12px;">GitHub: 55% faster task completion</td>
+        </tr>
+        <tr>
+          <td><strong>First Pass Yield</strong></td>
+          <td style="text-align: center; color: var(--red);">TBD — baseline</td>
+          <td style="text-align: center;">+5-10%</td>
+          <td style="text-align: center; color: var(--green); font-weight: 600;">5-10%</td>
+          <td style="font-size: 12px;">Six Sigma: better input quality → fewer defects</td>
+        </tr>
+        <tr>
+          <td><strong>Developer Productivity</strong></td>
+          <td style="text-align: center; color: var(--red);">TBD — baseline</td>
+          <td style="text-align: center;">+10-20%</td>
+          <td style="text-align: center; color: var(--green); font-weight: 600;">10-20%</td>
+          <td style="font-size: 12px;">McKinsey: 20-45% with AI tools</td>
+        </tr>
+        <tr>
+          <td><strong>Team Satisfaction (SPACE)</strong></td>
+          <td style="text-align: center; color: var(--red);">TBD — baseline</td>
+          <td style="text-align: center;">No decrease</td>
+          <td style="text-align: center; color: var(--blue); font-weight: 600;">Maintain/↑</td>
+          <td style="font-size: 12px;">SPACE: satisfaction must not decrease</td>
+        </tr>
+        <tr>
+          <td><strong>Playbooks Produced</strong></td>
+          <td style="text-align: center;">0</td>
+          <td style="text-align: center;">4</td>
+          <td style="text-align: center; color: var(--green); font-weight: 600;">4 delivered</td>
+          <td style="font-size: 12px;">BA, Tester, Developer, Data</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="open-question">What is the CIO's target improvement %? (CIO feedback needed to refine these targets)</div>
+    <div class="open-question">Baseline data needed from last 3 sprints to populate the "Before" column</div>
+
+    <div style="margin-top: 20px; padding: 14px 20px; background: var(--gray-100); border-radius: 8px; font-size: 13px; color: var(--gray-600);">
+      <strong>Note:</strong> These are conservative targets. Industry benchmarks show significantly higher gains (McKinsey: 20-45%, CMMI: 62% median).
+      We set modest targets to ensure credibility and overdelivery.
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ SLIDE 14: NEXT STEPS ═══════════════════ -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>Proposed Next Steps</h2>
+    <span class="slide-num">14</span>
+  </div>
+  <div class="slide-body">
+    <div class="card-grid cols-2">
+      <div class="card" style="border-left: 4px solid var(--blue);">
+        <h3>Immediate (This Week)</h3>
+        <ul>
+          <li>CIO confirms interest and aligns on goals</li>
+          <li>Identify internal point of contact for the engagement</li>
+          <li>Confirm DoIT AI compliance status</li>
+          <li>Share available AI tool inventory</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--teal);">
+        <h3>Week 2-3</h3>
+        <ul>
+          <li>Executive discovery session (30-45 min) — align on metrics</li>
+          <li>Grant team access (clearance, credentials, tool access)</li>
+          <li>Architecture / dev process walkthrough</li>
+          <li>Pilot team identification</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="big-quote" style="margin-top: 40px;">
+      Same team. Better tools. Measurable results.<br>
+      Full DoIT compliance. No risk — only upside.
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <div style="font-size: 20px; font-weight: 700; color: var(--navy);">Vinay Lagisetty</div>
+      <div style="font-size: 16px; color: var(--gray-600);">AI Transformation Leader, Krasan</div>
+      <div style="font-size: 14px; color: var(--gray-400); margin-top: 8px;">
+        <span class="tbd">Contact details TBD for client-facing version</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Krasan Consulting Services — Confidential Draft</span>
+    <span>IDJJ AI Transformation</span>
+  </div>
+</div>
+
+</body>
+</html>

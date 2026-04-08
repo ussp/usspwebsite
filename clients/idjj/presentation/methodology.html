@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Transformation — Research Methodology</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0f172a;
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --teal: #0d9488;
+    --teal-light: #ccfbf1;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-400: #94a3b8;
+    --gray-600: #475569;
+  }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--gray-50);
+    color: var(--navy);
+    line-height: 1.7;
+  }
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 30px;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 60%, var(--blue) 100%);
+    color: white;
+    padding: 60px 50px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 40px; font-weight: 800; margin-bottom: 12px; }
+  .hero p { font-size: 18px; color: rgba(255,255,255,0.7); max-width: 650px; margin: 0 auto; }
+
+  /* Framework card */
+  .fw-card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-radius: 14px;
+    padding: 35px;
+    margin-bottom: 24px;
+    transition: box-shadow 0.2s;
+  }
+  .fw-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .fw-card .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-teal { background: var(--teal-light); color: var(--teal); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+
+  .fw-card h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .fw-card .source {
+    font-size: 14px;
+    color: var(--gray-400);
+    margin-bottom: 16px;
+  }
+  .fw-card .desc {
+    font-size: 15px;
+    color: var(--gray-600);
+    margin-bottom: 20px;
+  }
+
+  /* Metrics table */
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .metrics-table th {
+    background: var(--gray-100);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .metrics-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-600);
+  }
+  .metrics-table tr:last-child td { border-bottom: none; }
+
+  /* Citation */
+  .citation {
+    background: var(--gray-100);
+    border-left: 3px solid var(--gray-400);
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--gray-600);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+  }
+
+  /* Grid layout */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 20px 0; }
+
+  .mini-card {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  .mini-card .big-num {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1;
+  }
+  .mini-card .label {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-top: 8px;
+  }
+
+  /* Mapping section */
+  .mapping-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .mapping-table th {
+    background: var(--navy);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .mapping-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-600);
+  }
+  .mapping-table tr:nth-child(even) { background: var(--gray-50); }
+
+  /* Key finding */
+  .key-finding {
+    background: var(--blue-light);
+    border: 1px solid rgba(37,99,235,0.15);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--navy);
+  }
+  .key-finding strong { color: var(--blue); }
+
+  /* Section divider */
+  .section-divider {
+    text-align: center;
+    margin: 50px 0 30px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+
+  /* Lifecycle visual */
+  .lifecycle {
+    display: flex;
+    gap: 4px;
+    margin: 30px 0;
+  }
+  .lifecycle-step {
+    flex: 1;
+    text-align: center;
+    padding: 24px 12px;
+    border-radius: 10px;
+    color: white;
+  }
+  .lifecycle-step h3 { font-size: 16px; margin-bottom: 6px; }
+  .lifecycle-step p { font-size: 12px; opacity: 0.8; }
+  .lifecycle-step:nth-child(1) { background: #7c3aed; }
+  .lifecycle-step:nth-child(2) { background: #2563eb; }
+  .lifecycle-step:nth-child(3) { background: #0d9488; }
+  .lifecycle-step:nth-child(4) { background: #0284c7; }
+  .lifecycle-step:nth-child(5) { background: #059669; }
+  .lifecycle-step:nth-child(6) { background: #d97706; }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 20px 0; }
+    .fw-card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <h1>Research Methodology</h1>
+    <p>Every metric we track is backed by peer-reviewed research or international standards. This is the same methodology used by Google, Microsoft Research, Carnegie Mellon SEI, and ISO.</p>
+  </div>
+
+  <!-- ── LIFECYCLE ── -->
+  <div class="lifecycle">
+    <div class="lifecycle-step">
+      <h3>Define</h3>
+      <p>GQM goals</p>
+    </div>
+    <div class="lifecycle-step">
+      <h3>Measure</h3>
+      <p>Baseline</p>
+    </div>
+    <div class="lifecycle-step">
+      <h3>Analyze</h3>
+      <p>Gaps & blockers</p>
+    </div>
+    <div class="lifecycle-step">
+      <h3>Improve</h3>
+      <p>AI training</p>
+    </div>
+    <div class="lifecycle-step">
+      <h3>Control</h3>
+      <p>Sustain gains</p>
+    </div>
+    <div class="lifecycle-step">
+      <h3>Scale</h3>
+      <p>Org-wide</p>
+    </div>
+  </div>
+  <p style="text-align: center; font-size: 13px; color: var(--gray-400); margin-bottom: 40px;">
+    Six Sigma DMAIC + Scale — the backbone of our before/after measurement approach
+  </p>
+
+  <!-- ══════ GQM ══════ -->
+  <div class="fw-card">
+    <span class="tag tag-purple">Measurement Design</span>
+    <h2>Goal-Question-Metric (GQM) Paradigm</h2>
+    <div class="source">Basili, Caldiera & Rombach — University of Maryland / NASA, 1994</div>
+    <div class="desc">
+      The canonical methodology for designing software measurement programs. Every metric must trace back to a business goal through an explicit question. We don't measure for measurement's sake.
+    </div>
+    <div class="grid-3">
+      <div class="mini-card">
+        <div class="big-num" style="color: var(--purple);">Goal</div>
+        <div class="label">Improve team productivity and quality by 5%+ via AI</div>
+      </div>
+      <div class="mini-card">
+        <div class="big-num" style="color: var(--purple);">Question</div>
+        <div class="label">What metrics characterize that improvement?</div>
+      </div>
+      <div class="mini-card">
+        <div class="big-num" style="color: var(--purple);">Metric</div>
+        <div class="label">Specific measurements selected per engagement</div>
+      </div>
+    </div>
+    <div class="citation">
+      Basili, V. R., Caldiera, G., & Rombach, H. D. (1994). The Goal Question Metric Approach. In <em>Encyclopedia of Software Engineering</em> (pp. 528-532). Wiley.
+    </div>
+  </div>
+
+  <!-- ══════ DORA ══════ -->
+  <div class="fw-card">
+    <span class="tag tag-blue">Delivery Performance</span>
+    <h2>DORA / Accelerate</h2>
+    <div class="source">Forsgren, Humble & Kim — Google DevOps Research & Assessment, 2018</div>
+    <div class="desc">
+      Four key metrics validated across 23,000+ respondents, 2,000+ organizations over 7+ years.
+      The definitive research linking engineering practices to organizational performance.
+    </div>
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Dimension</th>
+          <th>Direction</th>
+          <th>What It Measures</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Deployment Frequency</strong></td>
+          <td>Throughput</td>
+          <td>Higher = better</td>
+          <td>How often the team releases to production</td>
+        </tr>
+        <tr>
+          <td><strong>Change Lead Time</strong></td>
+          <td>Throughput</td>
+          <td>Lower = better</td>
+          <td>Time from code commit to running in production</td>
+        </tr>
+        <tr>
+          <td><strong>Change Failure Rate</strong></td>
+          <td>Stability</td>
+          <td>Lower = better</td>
+          <td>% of deployments causing failures/rollbacks</td>
+        </tr>
+        <tr>
+          <td><strong>Mean Time to Recovery</strong></td>
+          <td>Stability</td>
+          <td>Lower = better</td>
+          <td>Time to restore service after an incident</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="key-finding">
+      <strong>Key finding:</strong> Speed and stability are correlated, not conflicting. High performers excel at both. Teams that deploy more frequently also have lower failure rates.
+    </div>
+    <div class="citation">
+      Forsgren, N., Humble, J., & Kim, G. (2018). <em>Accelerate: The Science of Lean Software and DevOps.</em> IT Revolution Press.
+    </div>
+  </div>
+
+  <!-- ══════ SPACE ══════ -->
+  <div class="fw-card">
+    <span class="tag tag-teal">Team Productivity</span>
+    <h2>SPACE Framework</h2>
+    <div class="source">Forsgren, Storey et al. — Microsoft Research / ACM, 2021</div>
+    <div class="desc">
+      Five dimensions of developer productivity. No single metric is sufficient — always measure at least 3 dimensions spanning at least 2 SPACE categories to prevent gaming.
+    </div>
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>What It Captures</th>
+          <th>Example Metrics</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>S</strong>atisfaction</td>
+          <td>How fulfilled the team feels</td>
+          <td>Job satisfaction survey, tool satisfaction</td>
+        </tr>
+        <tr>
+          <td><strong>P</strong>erformance</td>
+          <td>Outcomes and impact of work</td>
+          <td>Sprint predictability, quality scores</td>
+        </tr>
+        <tr>
+          <td><strong>A</strong>ctivity</td>
+          <td>Count of actions (use carefully)</td>
+          <td>PRs, commits, stories completed</td>
+        </tr>
+        <tr>
+          <td><strong>C</strong>ommunication</td>
+          <td>How information flows</td>
+          <td>Requirement clarity, review turnaround</td>
+        </tr>
+        <tr>
+          <td><strong>E</strong>fficiency</td>
+          <td>Minimal waste and delays</td>
+          <td>Cycle time, flow state time, context switches</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="key-finding">
+      <strong>Rule:</strong> Always measure at least 3 dimensions spanning at least 2 SPACE categories. This prevents gaming and gives a holistic view of team health.
+    </div>
+    <div class="citation">
+      Forsgren, N., Storey, M.-A., et al. (2021). The SPACE of Developer Productivity. <em>ACM Queue</em>, 19(1), 20-48.
+    </div>
+  </div>
+
+  <!-- ══════ QUS ══════ -->
+  <div class="fw-card">
+    <span class="tag tag-purple">Story Quality</span>
+    <h2>Quality User Story (QUS) Framework</h2>
+    <div class="source">Lucassen et al. — Utrecht University, 2016</div>
+    <div class="desc">
+      13 criteria across 3 dimensions for evaluating user story quality. Validated on 1,023 stories from 18 companies. Companion tool AQUSA automates quality defect detection using NLP.
+    </div>
+    <div class="grid-3">
+      <div class="mini-card">
+        <div class="big-num" style="font-size: 20px; color: var(--purple);">Syntactic</div>
+        <div class="label">Well-formed, Atomic, Minimal</div>
+      </div>
+      <div class="mini-card">
+        <div class="big-num" style="font-size: 20px; color: var(--purple);">Semantic</div>
+        <div class="label">Conceptually Sound, Problem-oriented, Unambiguous, Conflict-free</div>
+      </div>
+      <div class="mini-card">
+        <div class="big-num" style="font-size: 20px; color: var(--purple);">Pragmatic</div>
+        <div class="label">Full Sentence, Estimatable, Unique, Uniform, Independent, Complete</div>
+      </div>
+    </div>
+    <div class="citation">
+      Lucassen, G., Dalpiaz, F., et al. (2016). Improving agile requirements: the Quality User Story framework and tool. <em>Requirements Engineering</em>, 21(3), 383-403.
+    </div>
+  </div>
+
+  <!-- ══════ SIX SIGMA ══════ -->
+  <div class="fw-card">
+    <span class="tag tag-teal">Before/After Measurement</span>
+    <h2>Six Sigma DMAIC</h2>
+    <div class="source">Harry & Schroeder, 2000</div>
+    <div class="desc">
+      The standard before/after measurement methodology. Define, Measure, Analyze, Improve, Control — explicitly designed for proving process improvements with statistical rigor.
+    </div>
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Definition</th>
+          <th>How We Apply It</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>First Pass Yield</strong></td>
+          <td>Stories passing QA on first attempt / total</td>
+          <td>Story quality improvement measurement</td>
+        </tr>
+        <tr>
+          <td><strong>Rework Rate</strong></td>
+          <td>Items requiring rework / total delivered</td>
+          <td>Waste measurement — AI should reduce this</td>
+        </tr>
+        <tr>
+          <td><strong>Cost of Poor Quality</strong></td>
+          <td>Hours on rework × blended rate</td>
+          <td>Budget impact calculation for executives</td>
+        </tr>
+        <tr>
+          <td><strong>DPMO</strong></td>
+          <td>Defects per million opportunities</td>
+          <td>Process capability benchmark</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="citation">
+      Harry, M. J., & Schroeder, R. (2000). <em>Six Sigma: The Breakthrough Management Strategy.</em> Currency/Doubleday.
+    </div>
+  </div>
+
+  <!-- ══════ ISO 25010 ══════ -->
+  <div class="fw-card">
+    <span class="tag tag-blue">International Standard</span>
+    <h2>ISO/IEC 25010:2023 — SQuaRE</h2>
+    <div class="source">International Organization for Standardization, 2023</div>
+    <div class="desc">
+      The international standard defining 8 quality characteristics and 31 sub-characteristics for software product quality. Gold standard for government engagements.
+    </div>
+    <div class="grid-2">
+      <div>
+        <table class="metrics-table">
+          <thead><tr><th>Characteristic</th><th>Relevance</th></tr></thead>
+          <tbody>
+            <tr><td>Functional Suitability</td><td>Completeness, Correctness</td></tr>
+            <tr><td>Reliability</td><td>Maturity, Fault tolerance</td></tr>
+            <tr><td>Maintainability</td><td>Modularity, Testability</td></tr>
+            <tr><td>Security</td><td>Confidentiality, Integrity</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="key-finding">
+          <strong>Measurement formulas (ISO 25023):</strong><br>
+          Functional Correctness = 1 − (Incorrect results / Total results)<br>
+          Modifiability = 1 − (Modifications causing degradation / Total modifications)
+        </div>
+      </div>
+    </div>
+    <div class="citation">
+      ISO/IEC. (2023). <em>ISO/IEC 25010:2023 Systems and software engineering — SQuaRE — Product quality model.</em>
+    </div>
+  </div>
+
+  <!-- ══════ CMMI & BENCHMARKS ══════ -->
+  <div class="section-divider">Industry Benchmarks</div>
+
+  <div class="fw-card">
+    <span class="tag tag-teal">Benchmarks</span>
+    <h2>CMMI Performance Results</h2>
+    <div class="source">Carnegie Mellon SEI, 2006 — 60 organizations</div>
+    <div class="desc">Median results across 60 organizations implementing structured process improvement:</div>
+    <div class="grid-2" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+      <div class="mini-card">
+        <div class="big-num" style="color: var(--teal);">62%</div>
+        <div class="label">Productivity</div>
+      </div>
+      <div class="mini-card">
+        <div class="big-num" style="color: var(--teal);">50%</div>
+        <div class="label">Quality</div>
+      </div>
+      <div class="mini-card">
+        <div class="big-num" style="color: var(--teal);">37%</div>
+        <div class="label">Schedule</div>
+      </div>
+      <div class="mini-card">
+        <div class="big-num" style="color: var(--teal);">20%</div>
+        <div class="label">Cost</div>
+      </div>
+    </div>
+    <div class="citation">
+      Gibson, D. L., Goldenson, D. R., & Kost, K. (2006). Performance Results of CMMI-Based Process Improvement. <em>Technical Report CMU/SEI-2006-TR-004.</em>
+    </div>
+  </div>
+
+  <div class="fw-card">
+    <span class="tag tag-blue">Industry Research</span>
+    <h2>McKinsey Developer Productivity (2023)</h2>
+    <div class="source">McKinsey & Company</div>
+    <div class="desc">
+      Recommends a layered dashboard: DORA (system) + SPACE (team/individual) + opportunity metrics (business alignment).
+    </div>
+    <div class="key-finding">
+      Reports <strong>20-45% productivity improvement</strong> from developer experience investments. Our measurement tool implements exactly this layered approach.
+    </div>
+    <div class="citation">
+      Amin, K., et al. (2023). Yes, you can measure software developer productivity. <em>McKinsey & Company.</em>
+    </div>
+  </div>
+
+  <div class="fw-card">
+    <span class="tag tag-blue">Industry Research</span>
+    <h2>Capers Jones — Defect Removal Efficiency</h2>
+    <div class="source">Applied Software Measurement, 3rd ed., 2008</div>
+    <div class="desc">
+      DRE = Defects found before release / Total defects (including 90-day post-release). U.S. average: ~85%. Best-in-class: >99%.
+    </div>
+    <div class="key-finding">
+      <strong>Key insight:</strong> Testing alone is <50% efficient at finding defects. Combined inspections + static analysis + testing: >95%. AI-assisted reviews can close this gap.
+    </div>
+    <div class="citation">
+      Jones, C. (2008). <em>Applied Software Measurement: Global Analysis of Productivity and Quality.</em> 3rd ed. McGraw-Hill.
+    </div>
+  </div>
+
+  <!-- ══════ METRIC MAPPING ══════ -->
+  <div class="section-divider">How Our Metrics Map to Research</div>
+
+  <div class="fw-card">
+    <table class="mapping-table">
+      <thead>
+        <tr>
+          <th>Our Metric</th>
+          <th>Research Backing</th>
+          <th>Framework</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Sprint velocity</td><td>Throughput, Activity</td><td>DORA, SPACE</td></tr>
+        <tr><td>Cycle time</td><td>Lead time for changes</td><td>DORA, Lean</td></tr>
+        <tr><td>Story quality score</td><td>13-criteria quality model</td><td>QUS (Lucassen 2016)</td></tr>
+        <tr><td>Story rejection rate</td><td>Rework rate, Functional correctness</td><td>Six Sigma, ISO 25023</td></tr>
+        <tr><td>Test coverage</td><td>Testability sub-characteristic</td><td>ISO 25010, NIST</td></tr>
+        <tr><td>First pass yield</td><td>First Pass Yield (FPY)</td><td>Six Sigma</td></tr>
+        <tr><td>Defect density</td><td>Defect Removal Efficiency</td><td>Capers Jones, CMMI</td></tr>
+        <tr><td>Documentation coverage</td><td>Analysability (Maintainability)</td><td>ISO 25010</td></tr>
+        <tr><td>Planning accuracy</td><td>Schedule variance, Performance</td><td>CMMI, SPACE</td></tr>
+        <tr><td>Requirement clarity</td><td>Semantic dimension, Communication</td><td>QUS, SPACE</td></tr>
+        <tr><td>SPACE survey</td><td>5-dimension team health</td><td>Forsgren 2021 (ACM)</td></tr>
+        <tr><td>DevEx survey</td><td>Developer Experience model</td><td>Noda et al. 2023 (ACM)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align: center; padding: 30px 0; font-size: 12px; color: var(--gray-400); line-height: 1.8;">
+    Every metric in our framework traces to published, peer-reviewed research or international standards.<br>
+    This is not an ad-hoc measurement approach — it's grounded in the same methodologies<br>
+    used by Google, Microsoft Research, Carnegie Mellon SEI, and ISO.<br><br>
+    <strong>Krasan Consulting Services</strong> — AI Transformation Practice
+  </div>
+
+</div>
+</body>
+</html>

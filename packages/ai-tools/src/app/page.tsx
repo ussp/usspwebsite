@@ -40,27 +40,51 @@ export default async function DashboardPage() {
           </p>
         </div>
 
-        {/* ============ TOOL SELECTION ============ */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Link href="/engagements" className="block bg-white rounded-lg border-2 border-light-gray hover:border-primary p-6 transition-colors group">
-            <div className="text-3xl mb-3">📈</div>
-            <h2 className="text-lg font-semibold group-hover:text-primary transition-colors">AI Transformation Monitor</h2>
+        {/* ============ AI TRANSFORMATION LIFECYCLE ============ */}
+        <div className="mb-4">
+          <p className="text-xs font-semibold text-dark/40 uppercase tracking-wider">AI Transformation Lifecycle</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          <Link href="/readiness" className="block bg-white rounded-lg border-2 border-light-gray hover:border-primary p-6 transition-colors group relative">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">1</span>
+              <span className="text-xs font-semibold text-primary uppercase tracking-wide">Assess</span>
+            </div>
+            <div className="text-2xl mb-2">🔍</div>
+            <h2 className="text-lg font-semibold group-hover:text-primary transition-colors">Readiness Assessment</h2>
+            <p className="text-sm text-dark/50 mt-2">
+              Evaluate whether an organization has the <strong>7 capabilities</strong> needed for AI to succeed
+              (DORA 2025 AI Capabilities Model).
+            </p>
+            <p className="text-xs text-primary font-medium mt-3">Assess readiness &rarr;</p>
+          </Link>
+          <Link href="/engagements" className="block bg-white rounded-lg border-2 border-light-gray hover:border-primary p-6 transition-colors group relative">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">2</span>
+              <span className="text-xs font-semibold text-primary uppercase tracking-wide">Transform</span>
+            </div>
+            <div className="text-2xl mb-2">📈</div>
+            <h2 className="text-lg font-semibold group-hover:text-primary transition-colors">Transformation Monitor</h2>
             <p className="text-sm text-dark/50 mt-2">
               Measure Scrum team productivity <strong>before and after</strong> AI training.
-              Tracks DORA, Scrum, SPACE, and DevEx metrics across sprints to quantify improvement.
+              Tracks DORA, Scrum, SPACE, and DevEx metrics to quantify improvement.
             </p>
             <p className="text-xs text-primary font-medium mt-3">
               {metrics.total_engagements > 0 ? `${metrics.active_engagements} active engagement${metrics.active_engagements !== 1 ? "s" : ""}` : "Get started"} &rarr;
             </p>
           </Link>
-          <Link href="/readiness" className="block bg-white rounded-lg border-2 border-light-gray hover:border-primary p-6 transition-colors group">
-            <div className="text-3xl mb-3">🔍</div>
-            <h2 className="text-lg font-semibold group-hover:text-primary transition-colors">AI Readiness Assessment</h2>
+          <Link href="/governance" className="block bg-white rounded-lg border-2 border-light-gray hover:border-primary p-6 transition-colors group relative">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">3</span>
+              <span className="text-xs font-semibold text-primary uppercase tracking-wide">Govern</span>
+            </div>
+            <div className="text-2xl mb-2">🛡️</div>
+            <h2 className="text-lg font-semibold group-hover:text-primary transition-colors">GRC & Compliance</h2>
             <p className="text-sm text-dark/50 mt-2">
-              Evaluate whether an organization has the <strong>7 capabilities</strong> needed for AI to succeed
-              (DORA 2025 AI Capabilities Model). Identifies blockers before you invest in training.
+              Policy compliance, risk tracking, and audit trail. Covers DoIT AI Policy,
+              NIST AI RMF, and state-specific regulatory requirements.
             </p>
-            <p className="text-xs text-primary font-medium mt-3">Assess readiness &rarr;</p>
+            <p className="text-xs text-primary font-medium mt-3">View compliance &rarr;</p>
           </Link>
         </div>
 
