@@ -143,6 +143,53 @@ npx vitest --watch          # Watch mode
 - Return `{ success, data?, error? }` from mutations
 - Use `export const dynamic = "force-dynamic"` on all server component pages
 
+## Multi-Tenant Architecture
+
+### Tenant Data Isolation
+
+All database queries are automatically scoped by `site_id`. The `getSiteId()` helper reads the `SITE_ID` environment variable and every query in `platform-core` filters on it. This means each tenant deployment sees only its own engagements, assessments, users, and reports — no cross-tenant data leakage is possible at the query layer.
+
+### Auth Provider Abstraction
+
+The `createAdminAuth()` function in `packages/ai-tools/src/lib/auth.ts` abstracts over Google and Microsoft auth providers. It reads `AUTH_PROVIDER` at startup and configures the appropriate NextAuth provider. To add a new provider:
+
+1. Add a new case in `createAdminAuth()` for the provider
+2. Define the required env vars (client ID, secret, tenant/issuer)
+3. Map the provider's profile to the standard `{ email, name, image }` shape
+
+### Tool Entitlements System
+
+Entitlements control which tools each tenant can access. The relevant files are:
+
+| File | Purpose |
+|------|---------|
+| `packages/platform-core/src/types/tenant.ts` | `ToolEntitlement` type, tool registry with `toolKey` identifiers |
+| `packages/platform-core/src/queries/admin/tenants.ts` | CRUD for tenants and entitlements (owner admin only) |
+
+Each tool is registered with a `toolKey` (e.g., `ai_transformation`, `quality_scan`, `discovery`). Entitlements are stored per-tenant and toggled on/off by an owner admin.
+
+### Client-Side Hooks
+
+| Hook | Location | Purpose |
+|------|----------|---------|
+| `useEntitlements()` | `packages/ai-tools/src/hooks/useEntitlements.ts` | Fetches enabled tools for the current session; returns `{ tools, isLoading, isEnabled(toolKey) }` |
+| `useTenant()` | `packages/ai-tools/src/hooks/useTenant.ts` | Fetches current tenant branding (name, logo, theme); used by layout and sidebar |
+
+### Admin API Routes
+
+Tenant management endpoints live at `/api/admin/tenants/*`. These are restricted to owner-admin users (superadmin role on the owner site). See the [API Reference](12-api-reference.md) for full endpoint documentation.
+
+### Sidebar Filtering
+
+The sidebar navigation filters visible tools based on entitlements. Each nav item has a `toolKey` property — if the tenant does not have that tool enabled, the nav item is hidden. This happens client-side via the `useEntitlements` hook.
+
+### Adding a New Tool to the Entitlement Registry
+
+1. Add a new `toolKey` constant to the tool registry in `packages/platform-core/src/types/tenant.ts`
+2. Add the corresponding sidebar nav item in `packages/ai-tools/src/components/Sidebar.tsx` with the `toolKey` property
+3. Create the tool's pages/routes under `packages/ai-tools/src/app/`
+4. Grant the tool to existing tenants via the admin UI or the `PUT /api/admin/tenants/:siteId/entitlements` endpoint
+
 ---
 
 [Next: API Reference →](12-api-reference.md)

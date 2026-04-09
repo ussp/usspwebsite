@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@auth/core": "^0.41.0",
     "@supabase/supabase-js": "^2.98.0",
     "@ussp-platform/core": "file:packages/platform-core",
     "cheerio": "^1.2.0",

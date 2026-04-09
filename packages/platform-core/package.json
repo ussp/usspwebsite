@@ -269,6 +269,16 @@
       "types": "./dist/matching/index.d.ts",
       "import": "./dist/matching/index.js",
       "default": "./dist/matching/index.js"
+    },
+    "./types/tenant": {
+      "types": "./dist/types/tenant.d.ts",
+      "import": "./dist/types/tenant.js",
+      "default": "./dist/types/tenant.js"
+    },
+    "./queries/admin/tenants": {
+      "types": "./dist/queries/admin/tenants.d.ts",
+      "import": "./dist/queries/admin/tenants.js",
+      "default": "./dist/queries/admin/tenants.js"
     }
   },
   "scripts": {

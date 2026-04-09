@@ -89,12 +89,25 @@ D:/Code/ussp/
 │   │       ├── queries/admin/{candidates,certifications,resumes,matching,candidate-pii}.ts
 │   │       ├── auth/{config,admin-config,rbac}.ts
 │   │       ├── api/{applications,upload,contact}.ts
-│   │       └── types/{database,admin,site,matching}.ts
+│   │       ├── types/{database,admin,site,matching,tenant}.ts
+│   │       └── queries/admin/{tenants,tenant-entitlements}.ts
 │   ├── backoffice/                      ← BACK-OFFICE APP (app.ussp.co)
 │   │   └── src/app/
 │   │       ├── layout.tsx, globals.css, page.tsx (dashboard)
 │   │       ├── login/, positions/, applications/, candidates/, contacts/, staff/
 │   │       └── api/                     ← API routes (incl. applications/by-email)
+│   ├── ai-tools/                        ← AI TRANSFORMATION TOOLS (tools.ussp.co)
+│   │   └── src/
+│   │       ├── app/
+│   │       │   ├── layout.tsx, globals.css, page.tsx
+│   │       │   ├── login/page.tsx       ← Multi-provider login (Google/Microsoft)
+│   │       │   └── admin/tenants/       ← Tenant management (owner-only)
+│   │       ├── components/
+│   │       │   ├── Sidebar.tsx          ← Entitlement-filtered nav
+│   │       │   └── TenantBranding.tsx   ← White-label branding
+│   │       └── hooks/
+│   │           ├── useEntitlements.ts   ← Tool access gating
+│   │           └── useTenant.ts         ← Tenant branding context
 │   └── site-template/                   ← Scaffold for new site repos
 ├── scripts/
 │   ├── seed-jobs.ts                     ← Seed job positions
@@ -199,6 +212,8 @@ className="font-[family-name:var(--font-spartan)]"      // Display
 8. **Breaking image references** — Search for old filename across ALL files before renaming
 9. **Modifying DB schema without Alembic** — Never use Supabase dashboard SQL editor for DDL
 10. **Forgetting to sync TypeScript interfaces** — Update SQLAlchemy model, Alembic migration, TS interface, `.select()` query, and page component together
+11. **Forgetting to register tenant in DB** — Railway service alone won't work; tenant must exist in `tenants` table
+12. **Using wrong AUTH_PROVIDER** — Must match between Railway env var and `tenants` table `auth_provider` column
 
 ---
 
@@ -235,3 +250,9 @@ className="font-[family-name:var(--font-spartan)]"      // Display
 | View/update onboarding | Back office candidate detail page — sidebar shows onboarding checklist (I-9, Background, Orientation) |
 | Add a pipeline gate check | Edit `packages/platform-core/src/queries/admin/pipeline-gates.ts` — add check in `checkPipelineGates()` |
 | Override a gate check | Advance with `forceOverride: true` in PATCH `/api/applications/[id]` — audit logged, admin/recruiter only |
+| Onboard a new tenant (AI tools) | See `docs/ai-tools/14-tenant-onboarding.md` — admin UI + Railway service + DNS + OAuth |
+| Enable/disable tools for a tenant | `tools.ussp.co/admin/tenants/[siteId]` — toggle entitlements |
+| Add users to a tenant | `tools.ussp.co/admin/tenants/[siteId]` — Users card → + Add User |
+| Suspend/reactivate a tenant | `tools.ussp.co/admin/tenants/[siteId]` — Suspend/Reactivate button |
+| Add new tool to entitlements registry | `platform-core/src/types/tenant.ts` (TOOL_KEYS + labels), sidebar navItems toolKey, TOOL_REGISTRY in tenant detail page |
+| Change tenant branding | `tenants` table via admin UI or direct DB update |

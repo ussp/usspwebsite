@@ -1138,3 +1138,68 @@ class AIEngagementDocument(Base):
     __table_args__ = (
         Index("idx_ai_engagement_documents_site_eng", "site_id", "engagement_id"),
     )
+
+
+# =============================================================================
+# TENANTS TABLE (tenant registry for multi-tenant tools platform)
+# =============================================================================
+
+
+class Tenant(Base):
+    """
+    Tenant registry for the AI Transformation Tools platform.
+
+    Each tenant gets a separate deployment (Railway service) with its own
+    SITE_ID, auth provider, and domain. Data isolation is via site_id filtering.
+    USSP is the owner tenant (is_owner=True) and can manage all other tenants.
+    """
+
+    __tablename__ = "tenants"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), unique=True, nullable=False)
+    name = Column(String(255), nullable=False)
+    short_name = Column(String(50), nullable=False)
+    domain = Column(String(255))
+    auth_provider = Column(String(50), nullable=False, server_default="google")
+    logo_url = Column(String(500))
+    favicon_url = Column(String(500))
+    primary_color = Column(String(7), server_default="#2563EB")
+    tagline = Column(String(255))
+    auto_provision = Column(Boolean, nullable=False, server_default="false")
+    default_role = Column(String(50), nullable=False, server_default="viewer")
+    allowed_domain = Column(String(255))
+    is_owner = Column(Boolean, nullable=False, server_default="false")
+    active = Column(Boolean, nullable=False, server_default="true")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+# =============================================================================
+# TENANT_TOOL_ENTITLEMENTS TABLE (per-tenant feature gating)
+# =============================================================================
+
+
+class TenantToolEntitlement(Base):
+    """
+    Controls which tools/features each tenant can access in the AI Tools platform.
+
+    Owner tenants (USSP) always have full access. Non-owner tenants only see
+    tools that have been explicitly enabled by a USSP admin.
+    """
+
+    __tablename__ = "tenant_tool_entitlements"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("tenants.site_id"), nullable=False)
+    tool_key = Column(String(100), nullable=False)
+    enabled = Column(Boolean, nullable=False, server_default="false")
+    enabled_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    enabled_at = Column(DateTime(timezone=True))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "tool_key", name="uq_tenant_tool_site_key"),
+        Index("idx_tenant_tool_site", "site_id"),
+    )

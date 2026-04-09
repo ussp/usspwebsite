@@ -179,6 +179,105 @@ Requires both baseline and post-training assessments to be present.
 }
 ```
 
+## Tenant Management (Owner Admin Only)
+
+These endpoints are restricted to superadmin users on the owner site.
+
+### `GET /api/admin/tenants`
+List all tenants with user counts and entitlement stats.
+
+**Response**: `Tenant[]` with `user_count` and `enabled_tools_count` fields.
+
+### `POST /api/admin/tenants`
+Create a new tenant.
+
+| Body Field | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `site_id` | string | Yes | Unique tenant identifier (e.g., `acme`) |
+| `name` | string | Yes | Display name |
+| `domain` | string | No | Allowed email domain |
+| `auth_provider` | string | No | `google` or `microsoft` (default: `google`) |
+
+**Response**: `Tenant` (201)
+
+### `GET /api/admin/tenants/:siteId`
+Get tenant details including configuration and stats.
+
+**Response**: `TenantDetail`
+
+### `PATCH /api/admin/tenants/:siteId`
+Update tenant configuration (name, domain, auth provider, active status).
+
+### `GET /api/admin/tenants/:siteId/entitlements`
+Get tool entitlements for a tenant.
+
+**Response**: `ToolEntitlement[]` — each with `toolKey`, `enabled`, `enabled_at`.
+
+### `PUT /api/admin/tenants/:siteId/entitlements`
+Bulk update tool entitlements.
+
+```json
+{
+  "entitlements": [
+    { "toolKey": "ai_transformation", "enabled": true },
+    { "toolKey": "quality_scan", "enabled": false }
+  ]
+}
+```
+
+### `GET /api/admin/tenants/:siteId/users`
+List users for a tenant.
+
+**Response**: `StaffUser[]`
+
+### `POST /api/admin/tenants/:siteId/users`
+Add a user to a tenant.
+
+| Body Field | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `email` | string | Yes | User email |
+| `name` | string | Yes | Display name |
+| `role` | string | No | Role (default: `viewer`) |
+
+**Response**: `StaffUser` (201)
+
+### `PATCH /api/admin/tenants/:siteId/users/:userId`
+Update a tenant user (role, active status).
+
+### `DELETE /api/admin/tenants/:siteId/users/:userId`
+Remove a user from a tenant.
+
+---
+
+## Current Tenant
+
+These endpoints return information scoped to the current session's tenant.
+
+### `GET /api/entitlements`
+Get enabled tools for the current session.
+
+**Response**:
+```json
+{
+  "tools": ["ai_transformation", "quality_scan"],
+  "site_id": "acme"
+}
+```
+
+### `GET /api/tenant`
+Get current tenant branding info.
+
+**Response**:
+```json
+{
+  "site_id": "acme",
+  "name": "Acme Corporation",
+  "auth_provider": "microsoft",
+  "logo_url": null,
+  "theme": null
+}
+```
+
 ---
 
 [Next: Troubleshooting & FAQ →](13-troubleshooting-faq.md)

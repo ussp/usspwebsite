@@ -152,6 +152,18 @@ export {
   DOCUMENT_CATEGORY_LABELS,
 } from "./types/ai-tools.js";
 
+// Tenant types
+export type {
+  AuthProvider,
+  Tenant,
+  CreateTenantInput,
+  UpdateTenantInput,
+  TenantToolEntitlement,
+  UpdateToolEntitlementInput,
+  ToolKey,
+} from "./types/tenant.js";
+export { TOOL_KEYS, TOOL_KEY_LABELS, TOOL_KEY_SECTIONS } from "./types/tenant.js";
+
 // AI Laws & Regulations
 export type { AILaw } from "./types/ai-laws.js";
 export { AI_LAW_CATALOG, getLawsByState, getAvailableStates, getFederalLaws } from "./types/ai-laws.js";

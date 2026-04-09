@@ -23,6 +23,7 @@ Welcome to the documentation for USSP's AI Transformation Monitoring Tool (`tool
 | 11 | [Developer Guide](11-developer-guide.md) | Engineers | Architecture, database, APIs, local setup, testing |
 | 12 | [API Reference](12-api-reference.md) | Engineers | Complete API endpoint documentation |
 | 13 | [Troubleshooting & FAQ](13-troubleshooting-faq.md) | All Users | Common issues and frequently asked questions |
+| 14 | [Tenant Onboarding Guide](14-tenant-onboarding.md) | Engineers, DevOps | Multi-tenant deployment, auth providers, tool entitlements |
 
 ---
 

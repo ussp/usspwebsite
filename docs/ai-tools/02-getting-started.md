@@ -58,6 +58,39 @@ Step 8: Share Results           → Export for client stakeholders
 | **Recruiter** | Read-only access to engagements, assessments, and reports |
 | **Viewer** | Read-only access to everything |
 
+## Multi-Tenant Environment Variables
+
+For multi-tenant deployments, the following environment variables configure tenant-specific behavior:
+
+### Auth Provider
+
+| Variable | Values | Description |
+|----------|--------|-------------|
+| `AUTH_PROVIDER` | `google` / `microsoft` | Server-side auth provider selection |
+| `NEXT_PUBLIC_AUTH_PROVIDER` | `google` / `microsoft` | Client-side auth provider (must match `AUTH_PROVIDER`) |
+| `NEXT_PUBLIC_SITE_NAME` | string | Display name for the tenant (shown in UI branding) |
+
+### Auto-Provisioning
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `AUTO_PROVISION` | `false` | Automatically create staff_users on first sign-in |
+| `DEFAULT_ROLE` | `viewer` | Role assigned to auto-provisioned users |
+| `ALLOWED_DOMAIN` | — | Restrict sign-in to a specific email domain (e.g., `acme.com`) |
+
+### Microsoft Entra ID (when AUTH_PROVIDER=microsoft)
+
+| Variable | Description |
+|----------|-------------|
+| `AUTH_MICROSOFT_ID` | Microsoft Entra application (client) ID |
+| `AUTH_MICROSOFT_SECRET` | Microsoft Entra client secret |
+| `AUTH_MICROSOFT_TENANT` | Azure AD tenant ID (use `common` for multi-tenant) |
+| `AUTH_TRUST_HOST` | Set to `true` for custom domains behind reverse proxies |
+
+Google OAuth uses the standard `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` variables already documented above.
+
+> For the full multi-tenant deployment walkthrough, see the [Tenant Onboarding Guide](14-tenant-onboarding.md).
+
 ---
 
 [Next: User Guide: Engagements →](03-user-guide-engagements.md)
