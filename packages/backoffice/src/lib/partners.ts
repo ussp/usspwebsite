@@ -31,8 +31,8 @@ export interface Partner {
   name: string;
   shortName: string;
   logo?: string;
-  status: "active" | "in_conversation" | "inactive";
-  type: "prime_vendor" | "technology" | "investment" | "reseller";
+  status: "active" | "in_conversation" | "potential" | "inactive";
+  type: "prime_vendor" | "technology" | "investment" | "reseller" | "advisory";
   about: string;
   website?: string;
 
@@ -232,6 +232,88 @@ export const PARTNERS: Partner[] = [
       submission: "TeleRay partnership is under negotiation — no submission process yet",
       onboarding: "TeleRay partnership is under negotiation — no onboarding process yet",
       invoicing: "TeleRay billing terms under negotiation",
+    },
+  },
+  {
+    slug: "per4m-ai",
+    name: "Per4m.AI",
+    shortName: "Per4m.AI",
+    status: "potential",
+    type: "advisory",
+    about:
+      "Per4m.AI is a Chicago-based hybrid technology and services firm focused on AI Transformation (AX). They help enterprises close the AI Execution Gap through organizational assessment (SYNTHESIZE), strategic architecture (ARCHITECT), and workforce readiness (ACCELERATE). Founded by Josh Paolini, former Adobe Practice Leader and Northwestern University faculty. Potential advisory/methodology partner for USSP's AI transformation engagements.",
+    website: "https://www.per4mai.com",
+    clientNames: ["Per4m.AI", "Per4m", "Per4mAI"],
+
+    enrollmentDocuments: [],
+
+    contractProcess: [
+      "Partnership structure under discussion — advisory/methodology license preferred over subcontractor",
+    ],
+
+    submissionRequirements: [],
+    onboardingRequirements: [],
+
+    invoicing: {
+      emails: [],
+      frequency: "TBD",
+      notes: ["Partnership terms not yet established"],
+    },
+
+    contacts: [
+      {
+        name: "Josh Paolini",
+        role: "Founder & CEO",
+        email: "josh@per4mai.com",
+      },
+    ],
+    documents: [],
+
+    tooltips: {
+      submission: "Per4m.AI partnership is potential — no submission process yet",
+      onboarding: "Per4m.AI partnership is potential — no onboarding process yet",
+      invoicing: "Per4m.AI billing terms not yet established",
+    },
+  },
+  {
+    slug: "lightkube",
+    name: "LightKube Inc.",
+    shortName: "LightKube",
+    status: "potential",
+    type: "technology",
+    about:
+      "LightKube is a New York-based enterprise technology services firm specializing in Cloud, Cybersecurity, AI, Data, Managed Services, and Technology Transformation. Founded by Nikhil Kumar (CISSP, Master Certified IT Architect, 2 US patents in identity/auth). Nikhil reported to Vinay for 10 years at CA Technologies — trusted relationship, will work with USSP when needed.",
+    website: "https://www.lightkube.com",
+    clientNames: ["LightKube", "LightKube Inc"],
+
+    enrollmentDocuments: [],
+
+    contractProcess: [
+      "No formal process needed — Nikhil works with USSP on demand. Structure (sub, advisory, or staff aug) determined per engagement.",
+    ],
+
+    submissionRequirements: [],
+    onboardingRequirements: [],
+
+    invoicing: {
+      emails: [],
+      frequency: "TBD",
+      notes: ["Partnership terms not yet established — determined per engagement"],
+    },
+
+    contacts: [
+      {
+        name: "Nikhil Kumar",
+        role: "Founder & CEO",
+        email: "",
+      },
+    ],
+    documents: [],
+
+    tooltips: {
+      submission: "LightKube partnership is potential — no submission process yet",
+      onboarding: "LightKube partnership is potential — no onboarding process yet",
+      invoicing: "LightKube billing terms determined per engagement",
     },
   },
 ];

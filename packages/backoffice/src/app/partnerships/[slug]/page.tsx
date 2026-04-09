@@ -11,6 +11,7 @@ const typeBadgeColors: Record<Partner["type"], string> = {
   technology: "bg-purple-100 text-purple-700",
   investment: "bg-green-100 text-green-700",
   reseller: "bg-amber-100 text-amber-700",
+  advisory: "bg-cyan-100 text-cyan-700",
 };
 
 const typeLabels: Record<Partner["type"], string> = {
@@ -18,17 +19,20 @@ const typeLabels: Record<Partner["type"], string> = {
   technology: "Technology",
   investment: "Investment",
   reseller: "Reseller",
+  advisory: "Advisory",
 };
 
 const statusBadgeColors: Record<Partner["status"], string> = {
   active: "bg-green-100 text-green-700",
   in_conversation: "bg-amber-100 text-amber-700",
+  potential: "bg-blue-100 text-blue-600",
   inactive: "bg-gray-100 text-gray-500",
 };
 
 const statusLabels: Record<Partner["status"], string> = {
   active: "Active",
   in_conversation: "In Conversation",
+  potential: "Potential",
   inactive: "Inactive",
 };
 
