@@ -18,6 +18,18 @@ partners/
 │   ├── reference-docs/        ← Internal analysis, product info, strategy docs
 │   ├── shared/                ← Docs shared WITH TeleRay (external-facing)
 │   └── tools/                 ← Interactive tools (valuation calculator, etc.)
+│
+├── per4m-ai/                  ← Per4m.AI (AI transformation / workforce readiness partner)
+│   ├── agreements/            ← Partnership agreements, MOUs, NDAs
+│   ├── presentations/         ← Pitch decks, capability statements
+│   ├── reference-docs/        ← Product info, platform docs, strategy analysis
+│   └── shared/                ← Docs shared WITH Per4m.AI (external-facing)
+│
+├── lightkube/                 ← LightKube Inc. (cloud / cybersecurity / AI partner)
+│   ├── agreements/            ← Partnership agreements, MOUs, NDAs
+│   ├── presentations/         ← Pitch decks, capability statements
+│   ├── reference-docs/        ← Company info, service docs, strategy analysis
+│   └── shared/                ← Docs shared WITH LightKube (external-facing)
 ```
 
 ## Current Partners
@@ -26,6 +38,8 @@ partners/
 |---------|-----------|-------------|--------|
 | **Krasan** | Krasan Consulting Services | TOPS Prime Vendor — USSP is authorized subvendor | Active |
 | **TeleRay** | TeleRay Inc. | Technology / IL Gov Reseller Partner | In Conversation |
+| **Per4m.AI** | Per4m.AI | AI Transformation (AX) & Workforce Readiness | Potential |
+| **LightKube** | LightKube Inc. | Cloud, Cybersecurity, AI Governance, Managed Services — Nikhil reported to Vinay at CA Tech (10 yrs) | Potential — will work with USSP |
 
 ## Folder Conventions
 
