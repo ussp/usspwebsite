@@ -93,11 +93,53 @@ Per4m.AI helps enterprises close the **AI Execution Gap** — the disconnect bet
 - All client communication goes through USSP/Krasan — Per4m.AI behind the scenes
 - More complex: requires sub agreements, possibly state vendor registration
 
+### 2026-04-10 — Partner Call with Josh
+
+**Service Model (detailed):**
+
+**Stage 1 — Assessment & Report:**
+- Send out surveys to all team members (quantitative + qualitative)
+- Capture all information via their platform
+- Create a dashboard for leadership/CEO
+- Generate an assessment report: "these are the areas to work on, these are the improvements captured"
+- Able to measure projected performance improvement from the assessment data
+
+**Stage 2 — Training:**
+- Create a training plan for each role based on assessment findings
+- Flexible delivery options:
+  - Recorded training sessions
+  - AI-generated voice-based avatar videos
+  - Train-the-trainer (they train us to deliver)
+  - They deliver directly
+  - Generate training materials/files
+- Training is role-specific and tailored to gaps identified in Stage 1
+
+**Stage 3 — Execution & Monitoring:**
+- Post-training, they continuously monitor rollout
+- Provide continuous improvement feedback
+- All powered by their proprietary platform
+
+**Platform:**
+- The platform does the assessments, dashboards, monitoring — everything
+- Customers do NOT get access to the platform — it's their internal tool
+- They use it to deliver the service, but it stays behind their wall
+
+**Pricing:**
+- No fixed pricing — they price based on the value they generate
+- Value-based pricing model (not per-seat or flat fee)
+
+**Partnership/Commission:**
+- Up to 20% commission/kickback for referral partners
+- Percentage depends on engagement length and scope
+- Vinay asked about becoming a partner and commission structure
+
 ## Open Questions
 
-- [ ] What is their pricing model? (per-seat, per-engagement, platform license?)
+- [x] What is their pricing model? → Value-based pricing, no fixed rates
 - [ ] **Will Josh work under USSP/Krasan structure?** (deal-breaker if not)
-- [ ] What does their proprietary assessment platform look like in detail?
+- [x] What does their proprietary assessment platform look like in detail? → Internal platform for surveys, dashboards, monitoring — customers don't get access
 - [ ] Do they have existing government sector clients?
 - [ ] How would a joint offering be structured with USSP as prime/intermediary?
 - [ ] Could Per4m.AI's SYNTHESIZE assessment complement the DCFS engagement?
+- [ ] Get specific commission/partnership terms in writing
+- [ ] Clarify: is the 20% on revenue or margin?
