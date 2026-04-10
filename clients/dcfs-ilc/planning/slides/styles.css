@@ -569,6 +569,14 @@
       margin: 0;
       page-break-after: always;
       border: 1px solid #eee;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
     }
-    .open-items-section { box-shadow: none; }
+    .slide.title-slide, .slide.section-divider {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    .open-items-section { box-shadow: none; display: none; }
     .slide-nav, .key-hint { display: none !important; }

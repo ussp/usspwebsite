@@ -24,7 +24,7 @@
 
 ## Engagement Summary
 
-CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (160 Krasan consultants) to achieve a **5% productivity improvement**. USSP is providing AI strategy, measurement, and training under Krasan.
+CIO Jim Daugherty has requested an AI rollout plan across 12 SAFe product teams (160 Krasan consultants) to achieve a **5% productivity improvement**. USSP is providing AI strategy, measurement, and training under Krasan.
 
 ### Scope
 
@@ -46,7 +46,7 @@ CIO Jim Doherty has requested an AI rollout plan across 12 SAFe product teams (1
 
 | Person | Role | Organization |
 |--------|------|-------------|
-| Jim Doherty | CIO (executive sponsor, client) | DCFS / DeWitt |
+| Jim Daugherty | CIO (executive sponsor, client) | DCFS / DeWitt |
 | Dinkar | Executive sponsor | Krasan |
 | Romi | Delivery Engagement Director | Krasan |
 | Vinay Lagisetty | AI Transformation Leader | Krasan (via USSP) |

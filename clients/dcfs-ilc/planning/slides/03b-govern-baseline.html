@@ -1,11 +1,13 @@
 <div class="slide">
-  <h2>Where We Are &mdash; Govern &amp; Baseline</h2>
+  <h2>Where We Are &mdash; Govern, Baseline &amp; Design</h2>
 
   <div class="phase-flow">
     <div class="phase-box active">Govern</div>
     <div class="phase-arrow">&rarr;</div>
     <div class="phase-box active">Baseline</div>
     <div class="phase-arrow">&rarr;</div>
+    <div class="phase-box active">Design</div>
+    <div class="phase-arrow" style="opacity:0.3">&rarr;</div>
     <div class="phase-box" style="opacity:0.4">Train</div>
     <div class="phase-arrow" style="opacity:0.3">&rarr;</div>
     <div class="phase-box" style="opacity:0.4">Pilot</div>
@@ -17,7 +19,7 @@
     <div class="phase-box" style="opacity:0.4">Scale</div>
   </div>
 
-  <div class="two-col">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
     <div>
       <h3>Govern</h3>
       <ul>
@@ -25,23 +27,33 @@
         <li>Define data guardrails (no case data, no PII in any AI tool)</li>
         <li>Confirm approved tools &amp; licensing status</li>
         <li>Align on constraints: no autonomous code, SDLC only</li>
-        <li>Identify regulatory considerations (IL Rule 431, CANTS, CCWIS)</li>
       </ul>
-      <div class="callout target" style="margin-top:8px">
+      <div class="callout target" style="margin-top:8px;font-size:11px">
         <strong>Deliverable:</strong> AI Usage Playbook &amp; Compliance Map
       </div>
     </div>
     <div>
       <h3>Baseline</h3>
       <ul>
-        <li>Select use cases &amp; matching KPIs (up to 8)</li>
         <li>Capture current metrics from JIRA (last 3 sprints)</li>
         <li>Establish baseline per team &mdash; before AI is introduced</li>
-        <li>Identify pilot teams (2-3) and control group</li>
+        <li>Identify 2 pilot teams and control group</li>
         <li>Distribute team health survey</li>
       </ul>
-      <div class="callout target" style="margin-top:8px">
+      <div class="callout target" style="margin-top:8px;font-size:11px">
         <strong>Deliverable:</strong> Baseline Metrics Report
+      </div>
+    </div>
+    <div>
+      <h3>Design / Develop</h3>
+      <ul>
+        <li>Map current state &rarr; AI-augmented state for each SDLC process</li>
+        <li>Define AI-augmented SDLC processes per role</li>
+        <li>Select tools &amp; methods for each process</li>
+        <li>Build training materials from process designs</li>
+      </ul>
+      <div class="callout target" style="margin-top:8px;font-size:11px">
+        <strong>Deliverable:</strong> Process Design Docs, Role-Based Playbooks &amp; Training Plan
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 
 > **Status:** DRAFT v2 — Due April 17, 2026
 > **Owner:** Vinay Lagisetty (Krasan, AI Transformation Leader) + Romi (Krasan, Engagement Director)
-> **Audience:** Jim Doherty (CIO, DCFS/DeWitt), Dinkar (Krasan Executive Sponsor)
+> **Audience:** Jim Daugherty (CIO, DCFS/DeWitt), Dinkar (Krasan Executive Sponsor)
 > **Methodology:** GQM (Basili 1994), DORA/Accelerate (Forsgren 2018), SPACE (Microsoft Research 2021), QUS (Lucassen 2016), Six Sigma DMAIC
 
 ---
@@ -28,7 +28,7 @@ Krasan proposes a structured AI augmentation pilot across select ILC product tea
 - **Tech stack:** Dynamics 365, Visual Studio, JIRA, Confluence, GitHub
 
 ### The Ask
-CIO Jim Doherty has asked Krasan to develop and execute an AI rollout plan to improve productivity across the ILC product teams. The target is a measurable 5% improvement, with the possibility of exceeding that.
+CIO Jim Daugherty has asked Krasan to develop and execute an AI rollout plan to improve productivity across the ILC product teams. The target is a measurable 5% improvement, with the possibility of exceeding that.
 
 ### Current State
 - Teams are delivering satisfactorily — client is happy with current commitments
