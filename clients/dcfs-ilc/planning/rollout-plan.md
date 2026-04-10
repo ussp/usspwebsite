@@ -1,6 +1,7 @@
 # DCFS Illinois Connect — AI-Augmented Agile Delivery Plan
 
-> **Status:** DRAFT v2 — Due April 17, 2026
+> **Status:** DRAFT v3 — Due April 17, 2026
+> **Framework Guide:** See [guide/README.md](guide/README.md) for the complete 13-chapter framework reference
 > **Owner:** Vinay Lagisetty (Krasan, AI Transformation Leader) + Romi (Krasan, Engagement Director)
 > **Audience:** Jim Daugherty (CIO, DCFS/DeWitt), Dinkar (Krasan Executive Sponsor)
 > **Methodology:** GQM (Basili 1994), DORA/Accelerate (Forsgren 2018), SPACE (Microsoft Research 2021), QUS (Lucassen 2016), Six Sigma DMAIC
@@ -91,49 +92,67 @@ All AI use by State agencies must comply with the DoIT "Policy on the Acceptable
 | 8 | Confirm Copilot deployment status and timeline | Romi + Jim | Apr 8 | TODO |
 | 9 | Review and finalize this rollout plan | All | **Apr 17** | IN PROGRESS |
 
-### Phase 1: Discovery & Baseline (Apr 17–30)
+### Phase 1: Baseline & Design (Apr 17–30)
+
+> See [Ch 4: Readiness Assessment](guide/04-readiness-assessment.md), [Ch 5: Baseline](guide/05-baseline-measurement.md), [Ch 6: Process Design](guide/06-process-design.md)
 
 | # | Task | Owner | Due |
 |---|------|-------|-----|
 | 10 | Executive discovery interview with Jim (metrics + governance) | Vinay + Romi | Before Springfield trip |
 | 11 | Run Jira Quality Scanner to auto-compute baseline metrics | Vinay + Matt | Apr 21 |
 | 12 | Collect baseline velocity data — last 3 sprints, all 12 teams | Vinay + Matt | Apr 23 |
-| 13 | Distribute baseline SPACE/DevEx survey to pilot team members | Vinay | Apr 25 |
-| 14 | Select pilot teams and participants | Romi + John + Chase | Apr 25 |
-| 15 | Finalize metrics set based on Jim's priorities | Vinay | Apr 28 |
-| 16 | Produce baseline metrics report | Vinay | Apr 30 |
+| 13 | Distribute AI Readiness Assessment to all 12 teams | Vinay | Apr 21 |
+| 14 | Analyze readiness results — skills gaps, resistance areas, infrastructure | Vinay | Apr 25 |
+| 15 | Distribute baseline SPACE/DevEx survey to pilot team candidates | Vinay | Apr 25 |
+| 16 | Select pilot teams based on readiness + baseline data | Romi + John + Chase | Apr 25 |
+| 17 | Map current → AI-augmented state for SDLC processes per role | Vinay | Apr 28 |
+| 18 | Finalize metrics set based on Jim's priorities | Vinay | Apr 28 |
+| 19 | Produce baseline metrics report | Vinay | Apr 30 |
 
-### Phase 2: Training (Late April / Early May)
+### Phase 2: Train (Late April / Early May)
+
+> See [Ch 7: Training Delivery](guide/07-training-delivery.md) for full 6-track plan
 
 | # | Task | Owner | Due |
 |---|------|-------|-----|
-| 17 | Develop role-specific training materials | Vinay | End of Apr |
-| 18 | Conduct training: BA track — story quality, AC generation, Rovo usage | Vinay | Week before PI Planning |
-| 19 | Conduct training: Tester track — test generation from AC, Rovo/Copilot | Vinay | Week before PI Planning |
-| 20 | Conduct training: Developer track — code explanation, docs, refactoring | Vinay | Week before PI Planning |
-| 21 | Training module: DoIT AI Policy compliance, responsible use, bias awareness | Vinay + Robert | Week before PI Planning |
-| 22 | Springfield trip — present plan to Jim | Romi + Vinay | Before May 5 |
+| 20 | Build training materials — prompt libraries, examples, cheat sheets | Vinay | End of Apr |
+| 21 | Deliver Foundation track (1.5h) — DoIT compliance, guardrails, success criteria | Vinay + Robert | Week before PI Planning |
+| 22 | Deliver BA track (3h) — story quality, AC generation with Rovo | Vinay | Week before PI Planning |
+| 23 | Deliver Tester track (3h) — test generation from AC, Rovo/Copilot | Vinay | Week before PI Planning |
+| 24 | Deliver Developer track (3h) — code explanation, docs, refactoring with Copilot | Vinay | Week before PI Planning |
+| 25 | Deliver Scrum Master track (2h) — sprint insights, metrics, coaching adoption | Vinay | Week before PI Planning |
+| 26 | Deliver Leadership Briefing (1h) — what AI does/doesn't, dashboard demo | Vinay + Romi | Week before PI Planning |
+| 27 | Draft role-based playbooks from process designs + training materials | Vinay | End of Apr |
+| 28 | Springfield trip — present plan to Jim | Romi + Vinay | Before May 5 |
 
-### Phase 3: Pilot Execution (May 5 – July, 1 full PI)
+### Phase 3: Pilot & Measure (May 5 – July, 1 full PI)
+
+> See [Ch 8: Pilot Execution](guide/08-pilot-execution.md), [Ch 9: Measurement](guide/09-measurement-reporting.md)
 
 | # | Task | Owner | Cadence |
 |---|------|-------|---------|
-| 23 | PI Planning — introduce AI pilot to ART | Romi + Vinay | May 5–7 |
-| 24 | AI-augmented teams operate with trained tools and practices | Pilot teams | Daily |
-| 25 | Non-AI teams continue as-is (control group) | Control teams | Daily |
-| 26 | Weekly check-ins: what's working, what's not, adjustments | Vinay + Romi | Weekly |
-| 27 | Continuous metrics collection via JIRA + tools.ussp.co | Vinay | Ongoing |
-| 28 | Per-sprint bias and quality spot checks | Pilot team leads | Per sprint |
-| 29 | Document adoption challenges and best practices | All | Ongoing |
+| 29 | PI Planning — introduce AI pilot to ART | Romi + Vinay | May 5–7 |
+| 30 | Configure tools.ussp.co — engagement, teams, baseline data loaded | Vinay | May 5 |
+| 31 | Share read-only dashboard URL with Jim | Vinay + Romi | May 5 |
+| 32 | AI-augmented teams operate with trained tools and practices | Pilot teams | Daily |
+| 33 | Non-AI teams continue as-is (control group) | Control teams | Daily |
+| 34 | Weekly check-ins: what's working, what's not, adjustments | Vinay + Romi | Weekly |
+| 35 | Continuous metrics collection via JIRA + tools.ussp.co | Vinay | Ongoing |
+| 36 | Per-sprint bias and quality spot checks | Pilot team leads | Per sprint |
+| 37 | Mid-pilot pulse survey (end of sprint 3) | Vinay | Mid-PI |
+| 38 | Document adoption challenges and best practices | All | Ongoing |
 
-### Phase 4: Results & Playbooks (End of Pilot PI)
+### Phase 4: Playbook & Scale (End of Pilot PI)
+
+> See [Ch 10: Playbooks](guide/10-playbooks.md), [Ch 11: Scale](guide/11-scale-rollout.md)
 
 | # | Task | Owner | Due |
 |---|------|-------|-----|
-| 30 | Compile measurement results: AI teams vs baseline vs control | Vinay | End of PI |
-| 31 | Produce Pilot Results Report with before/after comparison | Vinay | End of PI |
-| 32 | Produce role-based playbooks (BA, Tester, Developer, Data) | Vinay | End of PI |
-| 33 | Executive summary and recommendation for Jim | Vinay + Romi | End of PI |
+| 39 | Post-pilot SPACE/DevEx resurvey | Vinay | End of PI |
+| 40 | Compile measurement results: AI teams vs baseline vs control | Vinay | End of PI |
+| 41 | Produce Pilot Results Report with before/after comparison | Vinay | End of PI |
+| 42 | Finalize role-based playbooks (BA, Tester, Developer, Scrum Master) | Vinay | End of PI |
+| 43 | Executive results dashboard + 1-page brief for Jim | Vinay + Romi | End of PI |
 | 34 | Go/no-go recommendation for full ART rollout | Romi + Dinkar | End of PI |
 
 ---

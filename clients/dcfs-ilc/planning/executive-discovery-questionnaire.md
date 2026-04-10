@@ -26,6 +26,8 @@ What # DCFS ILC — Executive Discovery Questionnaire
   - [ ] The quality of what's delivered improves (fewer defects, better docs)
   - [ ] Teams are happier and more efficient in their daily work (satisfaction)
 
+**1.5** What concerns you most about AI adoption across the teams?
+
 ---
 
 ## Section 2: Story & Requirements Quality
@@ -135,6 +137,8 @@ What # DCFS ILC — Executive Discovery Questionnaire
   - [ ] Dashboard I can check anytime
   - [ ] Periodic report/deck
   - [ ] Both
+
+**7.4** Would a real-time dashboard showing pilot progress be useful to you, or do you prefer periodic reports? What 3-4 numbers would you want to see at a glance?
 
 ---
 

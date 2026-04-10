@@ -26,14 +26,14 @@
 - [x] 4.10 Chapter 13: Deployment
 
 ## 5. Appendices
-- [ ] 5.1 Appendix A: KPI Catalog
-- [ ] 5.2 Appendix B: DoIT Policy Map
-- [ ] 5.3 Appendix C: Research Citations
-- [ ] 5.4 Appendix D: Templates
+- [x] 5.1 Appendix A: KPI Catalog
+- [x] 5.2 Appendix B: DoIT Policy Map
+- [x] 5.3 Appendix C: Research Citations
+- [x] 5.4 Appendix D: Templates
 
 ## 6. Update Existing Documents
-- [ ] 6.1 Update rollout-plan.md to v3
-- [ ] 6.2 Update executive-discovery-questionnaire.md
+- [x] 6.1 Update rollout-plan.md to v3
+- [x] 6.2 Update executive-discovery-questionnaire.md
 - [ ] 6.3 Update presentation slides (post-Jim meeting)
 
 ## 7. Testing & Validation
