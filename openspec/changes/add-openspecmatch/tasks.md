@@ -26,7 +26,7 @@
 ## 3. Extractors
 - [x] 3.1 Define Extractor interface
 - [x] 3.2 Build PositionExtractor (position DB record → DemandSpec)
-- [ ] 3.3 Build ResumeExtractor (resume text → CapabilitySpec via LLM)
+- [x] 3.3 Build LLMResumeExtractor (resume text → CapabilitySpec via LLM) — built, needs API key to use
 - [x] 3.4 Build rule-based ResumeExtractor fallback (no LLM, regex/pattern-based)
 - [x] 3.5 Create resume test fixtures (3 sample resumes: senior dev, junior dev, nurse)
 - [x] 3.6 Create position test fixtures (2 sample positions with requirements)
@@ -93,3 +93,13 @@
 - [ ] 10.2 Compare recruiter feedback on old vs new scores
 - [ ] 10.3 Disable old matching engine
 - [ ] 10.4 Remove deprecated `matching/` directory from platform-core
+
+## 11. LLM-Powered Extraction Pipeline (Future)
+- [ ] 11.1 Add LLM extraction as part of resume upload pipeline (on upload → extract with Claude/GPT → store)
+- [ ] 11.2 Build resume upload webhook/trigger that calls LLMResumeExtractor
+- [ ] 11.3 Store LLM-extracted CapabilitySpec alongside raw text in resumes table
+- [ ] 11.4 Use pre-extracted CapabilitySpec in matching (skip re-extraction, faster scoring)
+- [ ] 11.5 Add cost tracking for LLM extraction calls (per-resume API cost)
+- [ ] 11.6 Build LLM fallback taxonomy resolver with caching (unknown skills → LLM classifies → cache)
+- [ ] 11.7 Compare rule-based vs LLM extraction quality on 50+ real resumes
+- [ ] 11.8 Switch scoring to use LLM-extracted specs when available, rule-based as fallback
