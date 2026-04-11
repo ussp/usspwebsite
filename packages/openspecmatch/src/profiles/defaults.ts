@@ -1,0 +1,101 @@
+import type { ScoringProfile } from "./types.js";
+
+export const SOFTWARE_ENGINEER_PROFILE: ScoringProfile = {
+  id: "software-engineer",
+  name: "Software Engineer",
+  domain: "resume",
+  description: "Default profile for software engineering positions. Weights technical skills highest, doesn't gate on mandatory items.",
+  version: "1.0.0",
+  categoryWeights: {
+    technical_skill: 35,
+    certification: 8,
+    education: 10,
+    domain_knowledge: 15,
+    tool_proficiency: 15,
+    soft_skill: 7,
+    financial: 0,
+    compliance: 0,
+    infrastructure: 5,
+    manpower: 0,
+    past_performance: 0,
+    geographic: 5,
+  },
+  criticalityMultipliers: {
+    mandatory: 2.0,
+    important: 1.5,
+    preferred: 1.0,
+    optional: 0.5,
+  },
+  levelCurve: {
+    "-2": 0.30,
+    "-1": 0.70,
+    "0": 1.00,
+    "1": 1.00,
+    "2": 0.95,
+  },
+  mandatoryIsGate: false,
+  evidenceWeight: 0.3,
+  recencyHalfLifeMonths: 36,
+  gapThreshold: 50,
+  taxonomyMatchScores: {
+    exact: 1.0,
+    parent: 0.70,
+    child: 0.80,
+    sibling: 0.50,
+    related: 0.30,
+    none: 0.0,
+  },
+};
+
+export const HEALTHCARE_CLINICAL_PROFILE: ScoringProfile = {
+  id: "healthcare-clinical",
+  name: "Healthcare Clinical",
+  domain: "resume",
+  description: "Profile for healthcare clinical positions. Certifications are highest weight with mandatory gate (missing license = disqualified).",
+  version: "1.0.0",
+  categoryWeights: {
+    technical_skill: 10,
+    certification: 35,
+    education: 15,
+    domain_knowledge: 20,
+    tool_proficiency: 5,
+    soft_skill: 10,
+    financial: 0,
+    compliance: 0,
+    infrastructure: 0,
+    manpower: 0,
+    past_performance: 0,
+    geographic: 5,
+  },
+  criticalityMultipliers: {
+    mandatory: 3.0,
+    important: 2.0,
+    preferred: 1.0,
+    optional: 0.5,
+  },
+  levelCurve: {
+    "-2": 0.10,
+    "-1": 0.50,
+    "0": 1.00,
+    "1": 1.00,
+    "2": 1.00,
+  },
+  mandatoryIsGate: true,
+  evidenceWeight: 0.6,
+  recencyHalfLifeMonths: 24,
+  gapThreshold: 50,
+  taxonomyMatchScores: {
+    exact: 1.0,
+    parent: 0.60,
+    child: 0.70,
+    sibling: 0.30,
+    related: 0.15,
+    none: 0.0,
+  },
+};
+
+/** All built-in profiles */
+export const DEFAULT_PROFILES: ScoringProfile[] = [
+  SOFTWARE_ENGINEER_PROFILE,
+  HEALTHCARE_CLINICAL_PROFILE,
+];

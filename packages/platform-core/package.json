@@ -288,6 +288,9 @@
     "test:watch": "vitest",
     "prepublishOnly": "npm run build"
   },
+  "dependencies": {
+    "@openspecmatch/engine": "file:../openspecmatch"
+  },
   "peerDependencies": {
     "@supabase/supabase-js": "^2.98.0",
     "next": ">=15.0.0",
