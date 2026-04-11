@@ -7,10 +7,8 @@ import type {
   AdminPositionRequirement,
   UpsertPositionRequirementInput,
 } from "../../types/admin.js";
-import type { CandidateMatchData, PositionMatchData, MatchResult } from "../../matching/types.js";
-import { MatchingEngine } from "../../matching/engine.js";
-import { ruleBasedScorers } from "../../matching/strategies/rule-based.js";
-import { DEFAULT_CONFIG } from "../../matching/types.js";
+import type { CandidateMatchData, PositionMatchData, MatchResult } from "../../types/matching.js";
+import { DEFAULT_CONFIG } from "../../types/matching.js";
 import { scoreBatchWithOpenSpecMatch } from "../../matching-v2/adapter.js";
 import { getPositionById } from "./positions.js";
 import { getCandidates } from "./candidates.js";
@@ -335,38 +333,12 @@ export async function scoreCandidatesForPosition(
     };
   });
 
-  // 7. Run both matching engines (parallel comparison)
-  //    - OpenSpecMatch (v2): primary engine, used for scoring
-  //    - Rule-based (v1): legacy engine, logged for comparison during transition
-  const v2Results = scoreBatchWithOpenSpecMatch(
+  // 7. Run OpenSpecMatch scoring engine
+  const rawResults = scoreBatchWithOpenSpecMatch(
     candidateDataArray,
     positionData,
     "manual_trigger"
   );
-
-  // Also run legacy engine for parallel comparison logging
-  const legacyEngine = new MatchingEngine(ruleBasedScorers);
-  const v1Results = legacyEngine.scoreBatch(
-    candidateDataArray,
-    positionData,
-    "manual_trigger"
-  );
-
-  // Log comparison for monitoring (can be reviewed in server logs)
-  for (let i = 0; i < candidateDataArray.length; i++) {
-    const v1 = v1Results[i];
-    const v2 = v2Results[i];
-    const diff = v2.overallScore - v1.overallScore;
-    if (Math.abs(diff) > 20) {
-      console.log(
-        `[matching-comparison] candidate=${v1.candidateId} position=${positionData.positionId} ` +
-        `v1=${v1.overallScore} v2=${v2.overallScore} diff=${diff > 0 ? "+" : ""}${diff}`
-      );
-    }
-  }
-
-  // Use OpenSpecMatch (v2) results as the primary output
-  const rawResults = v2Results;
 
   // 8. Fill in resume IDs and filter by minimum score
   const minScore = DEFAULT_CONFIG.thresholds.minimumOverallScore;

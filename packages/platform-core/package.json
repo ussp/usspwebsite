@@ -266,9 +266,9 @@
       "default": "./dist/queries/admin/ai-documents.js"
     },
     "./matching": {
-      "types": "./dist/matching/index.d.ts",
-      "import": "./dist/matching/index.js",
-      "default": "./dist/matching/index.js"
+      "types": "./dist/matching-v2/adapter.d.ts",
+      "import": "./dist/matching-v2/adapter.js",
+      "default": "./dist/matching-v2/adapter.js"
     },
     "./types/tenant": {
       "types": "./dist/types/tenant.d.ts",

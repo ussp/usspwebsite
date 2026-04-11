@@ -18,7 +18,7 @@ import type {
   MatchResult,
   DimensionResult,
   MatchDimension,
-} from "../matching/types.js";
+} from "../types/matching.js";
 
 // Singleton engine — initialized once, reused across requests
 let _engine: OpenSpecMatchEngine | null = null;
