@@ -248,3 +248,56 @@ How confident the system is in the score. Low confidence means the resume didn't
 5. **Use the right profile.** Healthcare positions should use the healthcare-clinical profile (licenses are hard gates). Tech positions use the software-engineer profile.
 
 6. **Compliance matters.** If the position requires HIPAA, FedRAMP, or a security clearance, add it — candidates without it will be appropriately penalized.
+
+7. **Add missing skills to the taxonomy.** If a position requires a skill that doesn't match (score shows 0), check the Taxonomy page in the backoffice and add it as a custom node.
+
+---
+
+## Managing the Taxonomy
+
+The skills taxonomy is a **living system** that evolves with your business. It starts with 650+ built-in nodes and grows as your team encounters new skills.
+
+### Where to find it
+
+Go to **app.ussp.co/taxonomy** in the backoffice. You'll see:
+- **Summary cards** — base nodes, custom nodes you've added, unresolved skills
+- **Unresolved skills** — terms from recent matching that couldn't be classified. These are your action items.
+- **Custom nodes** — skills your team has added, with usage counts
+
+### When to add a node
+
+When you see a skill scoring 0 that should be scoring higher, it means the taxonomy doesn't know about it. Examples:
+- A new framework or tool (e.g., "Bun", "Deno", "Remix")
+- An industry-specific certification (e.g., "LEED AP", "Series 7")
+- A niche domain (e.g., "digital twin", "precision agriculture")
+
+### How to add a node
+
+1. Click **+ Add Node** on the Taxonomy page
+2. Fill in:
+   - **Skill/Term Name** — the human-readable name (e.g., "Terraform CDK")
+   - **Tree** — which category: Technology, Certifications, Education, Domain Knowledge, or Soft Skills
+   - **Parent Path** — where it sits in the hierarchy (e.g., `devops.terraform` makes it a child of Terraform)
+   - **Aliases** — alternative names separated by commas (e.g., "cdktf, cdk for terraform")
+3. Click **Add Node** — it's immediately available for matching
+
+### How nodes get promoted to the base package
+
+Custom nodes live in the database. Periodically, an admin runs the promote script to graduate mature nodes (used 3+ times) into the base TypeScript package:
+
+```
+npx tsx scripts/promote-taxonomy.ts --dry-run   # Preview
+npx tsx scripts/promote-taxonomy.ts              # Promote
+```
+
+Promoted nodes become permanent — they ship with every deployment and are available to all tenants.
+
+### What the trees cover
+
+| Tree | What's In It | Node Count |
+|------|-------------|------------|
+| **Technology** | Languages, frameworks, cloud, databases, DevOps, AI/ML, testing, enterprise platforms, PM tools, GIS, BA skills | 300+ |
+| **Certifications** | AWS (8), Azure (7), GCP (3), Security (5), PM (5), Healthcare (7), Data (4) | 60+ |
+| **Education** | Degree levels, fields of study | 20+ |
+| **Domain Knowledge** | Federal (17 agencies), state (10 depts), local, commercial, nonprofit, education, healthcare sectors + industry verticals + compliance frameworks + procurement | 200+ |
+| **Soft Skills** | Leadership, communication, problem solving, collaboration | 15+ |

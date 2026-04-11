@@ -9,31 +9,34 @@
 
 ## 2. Taxonomy
 - [x] 2.1 Define TaxonomyNode interface and TaxonomyTree structure
-- [x] 2.2 Build technology tree (languages, frameworks, cloud, data, security — 150+ nodes)
+- [x] 2.2 Build technology tree (languages, frameworks, cloud, data, security, enterprise, PM tools, GIS, BA skills — 300+ nodes)
 - [x] 2.3 Build certifications tree (individual + organizational — 60+ nodes)
 - [x] 2.4 Build education tree (degrees, fields, levels — 20+ nodes)
-- [x] 2.5 Build domain-knowledge tree (industry verticals — 30+ nodes)
-- [ ] 2.6 Build infrastructure tree (DC, networking, storage — 200+ nodes)
-- [ ] 2.7 Build compliance tree (regulatory, procurement — 100+ nodes)
-- [ ] 2.8 Build financial tree (turnover, bonds, capacity — 50+ nodes)
-- [ ] 2.9 Build manpower tree (team composition, roles — 50+ nodes)
+- [x] 2.5 Build domain-knowledge tree (sectors, industry verticals, compliance, procurement — 200+ nodes)
+- [x] 2.6 Build soft skills tree (leadership, communication, collaboration — 15+ nodes)
+- [ ] 2.7 Build infrastructure tree (DC, networking, storage — for Phase 2 RFP matching)
+- [ ] 2.8 Build financial tree (turnover, bonds, capacity — for Phase 2 RFP matching)
+- [ ] 2.9 Build manpower tree (team composition, roles — for Phase 2 RFP matching)
 - [x] 2.10 Implement static alias resolver (normalizeSkill equivalent)
 - [x] 2.11 Implement taxonomy relationship calculator (exact/parent/child/sibling/related)
-- [ ] 2.12 Implement LLM fallback resolver with caching
-- [ ] 2.13 Write unit tests for resolver (alias lookup, relationship detection, LLM fallback)
-- [ ] 2.14 Write unit tests for each taxonomy tree (node count, alias coverage, no orphans)
+- [x] 2.12 Build DB-backed custom taxonomy extensions (taxonomy_nodes table)
+- [x] 2.13 Build unresolved skills tracking (unresolved_skills table)
+- [ ] 2.14 Write unit tests for resolver (alias lookup, relationship detection)
+- [ ] 2.15 Write unit tests for each taxonomy tree (node count, alias coverage, no orphans)
+- [x] 2.16 Audit taxonomy against real USSP data — achieved 100% resolution (91/91 position skills, 176/176 resume items)
 
 ## 3. Extractors
-- [x] 3.1 Define Extractor interface
-- [x] 3.2 Build PositionExtractor (position DB record → DemandSpec)
-- [x] 3.3 Build LLMResumeExtractor (resume text → CapabilitySpec via LLM) — built, needs API key to use
-- [x] 3.4 Build rule-based ResumeExtractor fallback (no LLM, regex/pattern-based)
-- [x] 3.5 Create resume test fixtures (3 sample resumes: senior dev, junior dev, nurse)
-- [x] 3.6 Create position test fixtures (2 sample positions with requirements)
-- [ ] 3.7 Create expected output fixtures (what extraction should produce for each fixture)
-- [ ] 3.8 Write unit tests for PositionExtractor
-- [ ] 3.9 Write unit tests for ResumeExtractor (LLM-mocked)
-- [ ] 3.10 Write unit tests for rule-based fallback extractor
+- [x] 3.1 Define Extractor interface (sync + async)
+- [x] 3.2 Build PositionExtractor (position DB record → DemandSpec) — includes sector, compliance, clearance, domain knowledge
+- [x] 3.3 Build LLMResumeExtractor (resume text → CapabilitySpec via LLM) — Anthropic + OpenAI adapters
+- [x] 3.4 Build rule-based ResumeExtractor (no LLM, regex/pattern-based) — skills, certs, education, domain knowledge, soft skills
+- [x] 3.5 Build PDF/DOCX text extraction (pdf-parse for PDFs, XML parsing for DOCX)
+- [x] 3.6 Wire resume text extraction on application upload (non-blocking, stores to resumes table)
+- [x] 3.7 Create resume test fixtures (3 synthetic + 10 real USSP resumes)
+- [x] 3.8 Create position test fixtures (4 synthetic + 17 real USSP positions with requirements)
+- [ ] 3.9 Create expected output fixtures (what extraction should produce for each fixture)
+- [ ] 3.10 Write unit tests for PositionExtractor
+- [ ] 3.11 Write unit tests for ResumeExtractor (LLM-mocked)
 
 ## 4. Scoring Engine
 - [x] 4.1 Build Comparator (compare one DemandItem vs one CapabilityItem)
@@ -45,9 +48,11 @@
 - [x] 4.7 Implement recency decay scoring
 - [x] 4.8 Implement taxonomy match scoring
 - [x] 4.9 Implement confidence calculation
-- [ ] 4.10 Write unit tests for Comparator (exact match, level diff, sibling, no match, evidence)
-- [ ] 4.11 Write unit tests for Scorer (mandatory gate, category weights, criticality multipliers)
-- [ ] 4.12 Write unit tests for confidence calculation
+- [x] 4.10 Implement location matching (20+ metro areas, state abbreviations, remote/hybrid/onsite compatibility)
+- [x] 4.11 Implement sector matching (federal/state/local/commercial/nonprofit/education/healthcare)
+- [ ] 4.12 Write unit tests for Comparator (exact match, level diff, sibling, no match, evidence)
+- [ ] 4.13 Write unit tests for Scorer (mandatory gate, category weights, criticality multipliers)
+- [ ] 4.14 Write unit tests for location matcher
 
 ## 5. Scoring Profiles
 - [x] 5.1 Create software-engineer profile
@@ -58,48 +63,67 @@
 
 ## 6. Public API
 - [x] 6.1 Create OpenSpecMatchEngine class (main entry point)
-- [x] 6.2 Wire up extract.resume(), extract.position() methods
-- [x] 6.3 Wire up match() and matchBatch() methods
+- [x] 6.2 Wire up extractResume(), extractResumeAsync(), extractPosition() methods
+- [x] 6.3 Wire up match(), matchBatch(), matchResume(), matchResumes(), matchResumeAsync(), matchResumesAsync()
 - [x] 6.4 Wire up taxonomy and profile registries
-- [ ] 6.5 Implement 3-tier mode (full/standard/minimal) — standard mode works, full/minimal pending
+- [ ] 6.5 Implement minimal mode (basic string matching fallback)
 - [x] 6.6 Export public types from index.ts
-- [x] 6.7 Write integration tests (resume → extract → match → result)
+- [x] 6.7 Write integration tests (resume → extract → match → result) — 15 integration tests
 
 ## 7. Integration with USSP ATS
 - [x] 7.1 Add `@openspecmatch/engine` as file: dependency in platform-core
-- [x] 7.2 Create adapter in platform-core (converts USSP data → OpenSpecMatch specs)
-- [x] 7.3 Update matching.ts query to use OpenSpecMatch engine
-- [x] 7.4 Run both engines in parallel (log both, display new)
-- [ ] 7.5 Write integration tests for adapter layer
+- [x] 7.2 Create adapter in platform-core (converts USSP data → OpenSpecMatch specs → MatchResult)
+- [x] 7.3 Update matching.ts query to use OpenSpecMatch as primary engine
+- [x] 7.4 Run both engines in parallel (log score differences > 20 for monitoring)
+- [x] 7.5 Seed position requirements for 17 active positions
+- [x] 7.6 Extract and store resume text for 6 candidates from Supabase storage
+- [x] 7.7 Test against real USSP data — correct rankings across 4 position types
+- [ ] 7.8 Write integration tests for adapter layer
 
-## 8. Fixture-Based Regression Tests
-- [ ] 8.1 Create 7+ fixture pairs (resume + position + expected match result)
-- [ ] 8.2 Build test runner that validates scores are within expected ranges
-- [ ] 8.3 Ensure all fixture tests pass
+## 8. Living Taxonomy System
+- [x] 8.1 Create taxonomy_nodes DB table (migration 0024)
+- [x] 8.2 Create unresolved_skills DB table (migration 0024)
+- [x] 8.3 Build taxonomy CRUD queries in platform-core
+- [x] 8.4 Build backoffice taxonomy admin page (app.ussp.co/taxonomy)
+- [x] 8.5 Build API routes (GET/POST /api/taxonomy, GET/PATCH/DELETE /api/taxonomy/[id])
+- [x] 8.6 Build promote script (scripts/promote-taxonomy.ts) — exports mature custom nodes to base package
+- [x] 8.7 Add taxonomy link to admin sidebar
 
-## 9. Documentation
-- [ ] 9.1 Write user guide: Chapter 1 (Overview)
-- [x] 9.2 Write user guide: Chapter 2 (For Recruiters) — docs/matching-algorithm.md
-- [ ] 9.3 Write user guide: Chapter 3 (Scoring Profiles)
-- [ ] 9.4 Write user guide: Chapter 4 (Taxonomy Management)
-- [ ] 9.5 Write user guide: Chapter 5 (For Developers)
-- [ ] 9.6 Write user guide: Chapter 6 (Troubleshooting)
-- [ ] 9.7 Write API reference
-- [ ] 9.8 Write README.md for the package
-- [x] 9.9 Create example project: resume-matching — examples/match-resume.ts, examples/compare-extractors.ts
+## 9. Fixture-Based Regression Tests
+- [ ] 9.1 Create 7+ fixture pairs (resume + position + expected match result)
+- [ ] 9.2 Build test runner that validates scores are within expected ranges
+- [ ] 9.3 Ensure all fixture tests pass
 
-## 10. Cutover
-- [ ] 10.1 Monitor parallel run for 2 weeks
-- [ ] 10.2 Compare recruiter feedback on old vs new scores
-- [ ] 10.3 Disable old matching engine
-- [ ] 10.4 Remove deprecated `matching/` directory from platform-core
+## 10. Documentation
+- [ ] 10.1 Write user guide: Chapter 1 (Overview)
+- [x] 10.2 Write user guide: Chapter 2 (For Recruiters) — docs/matching-algorithm.md
+- [ ] 10.3 Write user guide: Chapter 3 (Scoring Profiles)
+- [ ] 10.4 Write user guide: Chapter 4 (Taxonomy Management)
+- [ ] 10.5 Write user guide: Chapter 5 (For Developers)
+- [ ] 10.6 Write API reference
+- [ ] 10.7 Write README.md for the package
+- [x] 10.8 Create example scripts — examples/match-resume.ts, examples/compare-extractors.ts
 
-## 11. LLM-Powered Extraction Pipeline (Future)
-- [ ] 11.1 Add LLM extraction as part of resume upload pipeline (on upload → extract with Claude/GPT → store)
-- [ ] 11.2 Build resume upload webhook/trigger that calls LLMResumeExtractor
-- [ ] 11.3 Store LLM-extracted CapabilitySpec alongside raw text in resumes table
-- [ ] 11.4 Use pre-extracted CapabilitySpec in matching (skip re-extraction, faster scoring)
-- [ ] 11.5 Add cost tracking for LLM extraction calls (per-resume API cost)
-- [ ] 11.6 Build LLM fallback taxonomy resolver with caching (unknown skills → LLM classifies → cache)
-- [ ] 11.7 Compare rule-based vs LLM extraction quality on 50+ real resumes
-- [ ] 11.8 Switch scoring to use LLM-extracted specs when available, rule-based as fallback
+## 11. Cutover
+- [ ] 11.1 Monitor parallel run for 2 weeks
+- [ ] 11.2 Compare recruiter feedback on old vs new scores
+- [ ] 11.3 Disable old matching engine
+- [ ] 11.4 Remove deprecated `matching/` directory from platform-core
+
+## 12. LLM-Powered Extraction Pipeline (Future)
+- [ ] 12.1 Add LLM extraction as part of resume upload pipeline (on upload → extract with Claude/GPT → store)
+- [ ] 12.2 Build resume upload webhook/trigger that calls LLMResumeExtractor
+- [ ] 12.3 Store LLM-extracted CapabilitySpec alongside raw text in resumes table
+- [ ] 12.4 Use pre-extracted CapabilitySpec in matching (skip re-extraction, faster scoring)
+- [ ] 12.5 Add cost tracking for LLM extraction calls (per-resume API cost)
+- [ ] 12.6 Build LLM fallback taxonomy resolver with caching (unknown skills → LLM classifies → cache)
+- [ ] 12.7 Compare rule-based vs LLM extraction quality on 50+ real resumes
+- [ ] 12.8 Switch scoring to use LLM-extracted specs when available, rule-based as fallback
+
+## 13. Phase 2: RFP Matching (Future)
+- [ ] 13.1 Build RFP extractor (PDF → DemandSpec with financial, compliance, manpower items)
+- [ ] 13.2 Build Company extractor (company profile → CapabilitySpec)
+- [ ] 13.3 Build Combinator (multi-entity matching: USSP + partners vs RFP requirements)
+- [ ] 13.4 Build infrastructure, financial, manpower taxonomy trees
+- [ ] 13.5 Create RFP scoring profile
+- [ ] 13.6 Build bid/no-bid recommendation engine
