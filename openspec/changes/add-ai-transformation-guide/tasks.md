@@ -37,13 +37,13 @@
 - [ ] 6.3 Update presentation slides (post-Jim meeting)
 
 ## 7. Testing & Validation
-- [ ] 7.1 Cross-reference terminology consistency
-- [ ] 7.2 Verify KPIs match catalog
-- [ ] 7.3 Verify training tracks map to SDLC processes
-- [ ] 7.4 Verify assessment covers Per4m.AI parity
-- [ ] 7.5 OpenSpec validation passes
+- [x] 7.1 Cross-reference terminology consistency — no "use cases" or "changing process" found
+- [x] 7.2 Verify KPIs match catalog — 22 KPIs confirmed in appendix
+- [x] 7.3 Verify training tracks map to SDLC processes — 6 tracks confirmed
+- [x] 7.4 Verify assessment covers Per4m.AI parity — quantitative + qualitative, 4 dimensions
+- [x] 7.5 OpenSpec validation passes
 
 ## 8. Publishing
-- [ ] 8.1 Complete table of contents with cross-links
-- [ ] 8.2 Commit and push
-- [ ] 8.3 Make accessible to users
+- [x] 8.1 Complete table of contents with cross-links
+- [x] 8.2 Commit and push
+- [x] 8.3 Make accessible — Docsify sites for both books (npx serve)
