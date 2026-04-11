@@ -279,6 +279,11 @@
       "types": "./dist/queries/admin/tenants.d.ts",
       "import": "./dist/queries/admin/tenants.js",
       "default": "./dist/queries/admin/tenants.js"
+    },
+    "./queries/admin/taxonomy": {
+      "types": "./dist/queries/admin/taxonomy.d.ts",
+      "import": "./dist/queries/admin/taxonomy.js",
+      "default": "./dist/queries/admin/taxonomy.js"
     }
   },
   "scripts": {

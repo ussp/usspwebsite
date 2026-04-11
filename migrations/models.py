@@ -1203,3 +1203,87 @@ class TenantToolEntitlement(Base):
         UniqueConstraint("site_id", "tool_key", name="uq_tenant_tool_site_key"),
         Index("idx_tenant_tool_site", "site_id"),
     )
+
+
+# =============================================================================
+# TAXONOMY NODES (custom skill/capability taxonomy extensions)
+# =============================================================================
+
+
+class TaxonomyNode(Base):
+    """
+    Custom taxonomy node added by recruiters or admins.
+
+    Extends the base taxonomy shipped with @openspecmatch/engine.
+    Custom nodes are merged with the base taxonomy at matching time.
+    Mature custom nodes can be promoted to the base package via admin script.
+
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "taxonomy_nodes"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+
+    # Tree and position in the hierarchy
+    tree = Column(String(50), nullable=False)  # e.g. "technology", "certifications", "domain-knowledge"
+    node_id = Column(String(100), nullable=False)  # kebab-case identifier e.g. "power-bi"
+    path = Column(String(500), nullable=False)  # Full dot-path e.g. "data.analytics.power-bi"
+    label = Column(String(255), nullable=False)  # Human-readable e.g. "Power BI"
+    parent_path = Column(String(500))  # Parent's full path (null for root nodes)
+
+    # Discovery helpers
+    aliases = Column(JSONB, server_default="[]")  # Alternative names ["powerbi", "microsoft power bi"]
+    related_paths = Column(JSONB, server_default="[]")  # Related node paths for sibling/related matching
+
+    # Metadata
+    description = Column(Text)  # Optional description of what this skill/cert/tool is
+    source = Column(String(50), server_default="recruiter")  # "recruiter" | "admin" | "auto" | "promoted"
+    usage_count = Column(Integer, server_default="0")  # How many times this node has been used in matching
+    promoted = Column(Boolean, server_default="false")  # True = exported to base package
+    promoted_at = Column(DateTime(timezone=True))
+
+    # Audit
+    created_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "tree", "path", name="uq_taxonomy_node_site_tree_path"),
+        Index("idx_taxonomy_node_site", "site_id"),
+        Index("idx_taxonomy_node_tree", "site_id", "tree"),
+    )
+
+
+# =============================================================================
+# UNRESOLVED SKILLS (skills from matches that didn't resolve in taxonomy)
+# =============================================================================
+
+
+class UnresolvedSkill(Base):
+    """
+    Tracks skills/terms encountered during matching that couldn't be resolved
+    in the taxonomy. Recruiters review these and add taxonomy nodes for them.
+
+    Multi-tenant: filtered by site_id.
+    """
+
+    __tablename__ = "unresolved_skills"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    raw_text = Column(String(500), nullable=False)  # The original text that couldn't be resolved
+    source = Column(String(50), nullable=False)  # "position_requirement" | "resume_extraction"
+    source_id = Column(String(255))  # Position ID or candidate ID where this was found
+    occurrence_count = Column(Integer, server_default="1")  # How many times seen
+    resolved = Column(Boolean, server_default="false")  # True = a taxonomy node was created for this
+    resolved_node_path = Column(String(500))  # Path of the taxonomy node that resolved it
+    first_seen_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    last_seen_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("site_id", "raw_text", name="uq_unresolved_skill_site_text"),
+        Index("idx_unresolved_skill_site", "site_id"),
+        Index("idx_unresolved_skill_unresolved", "site_id", "resolved"),
+    )

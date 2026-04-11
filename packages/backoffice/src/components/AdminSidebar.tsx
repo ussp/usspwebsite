@@ -16,6 +16,7 @@ const navItems = [
   { href: "/articles", label: "Articles", icon: "📝", tooltip: "Manage blog articles and insights published on the website" },
   { href: "/staff", label: "Staff", icon: "👥", tooltip: "Manage back office users, roles, and permissions" },
   { href: "/partnerships", label: "Partnerships", icon: "🤝", tooltip: "Partner organizations and vendor relationships" },
+  { href: "/taxonomy", label: "Taxonomy", icon: "🧬", tooltip: "Manage skills taxonomy for candidate matching — add custom skills, review unresolved terms" },
 ];
 
 export default function AdminSidebar() {
