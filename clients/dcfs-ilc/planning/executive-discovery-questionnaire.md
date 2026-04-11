@@ -1,4 +1,4 @@
-What # DCFS ILC — Executive Discovery Questionnaire
+# DCFS ILC — Executive Discovery Questionnaire
 
 > **Purpose:** Interview guide for CIO Jim Daugherty to identify which quality and productivity dimensions matter most to DCFS. The answers determine which metrics we track during the AI pilot.
 > **When:** Before or during the Springfield trip (before PI Planning May 5-7)
