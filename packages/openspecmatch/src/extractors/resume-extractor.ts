@@ -284,19 +284,24 @@ export class ResumeExtractor implements CapabilityExtractor<ResumeInput> {
   private extractSoftSkills(textLower: string): CapabilityItem[] {
     const items: CapabilityItem[] = [];
     const patterns: { pattern: RegExp; skill: string; level: ProficiencyLevel }[] = [
-      { pattern: /\b(led|leading|lead)\s+(a\s+)?team/i, skill: "Leadership", level: "advanced" },
+      { pattern: /\b(led|leading|lead)\s+(a\s+)?team/i, skill: "Team Leadership", level: "advanced" },
       { pattern: /\bmentor(ed|ing)\b/i, skill: "Mentoring", level: "advanced" },
-      { pattern: /\bcollaborat(ed|ing|ion)\b/i, skill: "Collaboration", level: "intermediate" },
-      { pattern: /\bcommunicat(ed|ing|ion)\b.*\b(stakeholder|client|cross-functional)/i, skill: "Stakeholder Communication", level: "advanced" },
+      { pattern: /\bcollaborat(ed|ing|ion)\b/i, skill: "Teamwork", level: "intermediate" },
+      { pattern: /\bcommunicat(ed|ing|ion)\b.*\b(stakeholder|client|cross-functional)/i, skill: "Client Communication", level: "advanced" },
       { pattern: /\bpresent(ed|ing|ation)\b/i, skill: "Presentation Skills", level: "intermediate" },
       { pattern: /\bproject\s+manag(ed|ing|ement)/i, skill: "Project Management", level: "intermediate" },
       { pattern: /\bagile\b.*\b(scrum|sprint|kanban)/i, skill: "Agile Methodology", level: "intermediate" },
-      { pattern: /\bproblem[\s-]solv(ed|ing)\b/i, skill: "Problem Solving", level: "intermediate" },
+      { pattern: /\bproblem[\s-]solv(ed|ing)\b/i, skill: "Analytical Thinking", level: "intermediate" },
     ];
 
     for (const { pattern, skill, level } of patterns) {
       if (pattern.test(textLower)) {
-        items.push(this.makeCapItem(skill, "soft_skill", null, level));
+        // Resolve through taxonomy
+        const resolved = this.resolver.resolve(skill);
+        const taxonomyRef: TaxonomyRef | null = resolved.node
+          ? { tree: resolved.tree!, path: resolved.node.path, label: resolved.node.label }
+          : null;
+        items.push(this.makeCapItem(skill, "soft_skill", taxonomyRef, level));
       }
     }
 

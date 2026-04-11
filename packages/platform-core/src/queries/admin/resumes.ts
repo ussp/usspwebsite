@@ -2,6 +2,20 @@ import { getServiceClient } from "../../supabase/server.js";
 import { getSiteId } from "../../config.js";
 import type { AdminResume, CreateResumeInput } from "../../types/admin.js";
 
+// pdf-parse loaded lazily on first use
+let _pdfParse: ((buffer: Buffer) => Promise<{ text: string }>) | null | undefined = undefined;
+
+async function getPdfParse(): Promise<((buffer: Buffer) => Promise<{ text: string }>) | null> {
+  if (_pdfParse !== undefined) return _pdfParse;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    _pdfParse = require("pdf-parse") as (buffer: Buffer) => Promise<{ text: string }>;
+  } catch {
+    _pdfParse = null;
+  }
+  return _pdfParse;
+}
+
 const RESUME_COLUMNS =
   "id, site_id, candidate_id, storage_path, file_name, file_type, position_id, is_primary, extracted_text, extracted_skills, extracted_experience_years, extracted_education, extraction_status, extraction_error, uploaded_at";
 
@@ -148,4 +162,90 @@ export async function updateResumeExtraction(
 
   if (error) return { success: false, error: error.message };
   return { success: true };
+}
+
+// ── Resume Text Extraction on Upload ──────────────────────────────
+
+/**
+ * Download a resume from storage, extract text, and store in the resumes table.
+ * Called automatically when a new application is submitted with a resume.
+ * This is a non-blocking operation — failures are logged but don't affect the application.
+ */
+export async function extractAndStoreResume(input: {
+  candidateId: string;
+  storagePath: string;
+  fileName: string;
+}): Promise<{ success: boolean; resumeId?: string; error?: string }> {
+  const supabase = getServiceClient();
+  const siteId = getSiteId();
+
+  try {
+    // 1. Download the file from storage
+    const { data: fileData, error: downloadErr } = await supabase.storage
+      .from("resumes")
+      .download(input.storagePath);
+
+    if (downloadErr || !fileData) {
+      console.error(`[resume-extraction] Download failed for ${input.storagePath}:`, downloadErr?.message);
+      return { success: false, error: downloadErr?.message || "Download failed" };
+    }
+
+    const buffer = Buffer.from(await fileData.arrayBuffer());
+    const ext = input.fileName.toLowerCase().split(".").pop() || "";
+
+    // 2. Extract text based on file type
+    let text = "";
+    const pdfParser = await getPdfParse();
+    if (ext === "pdf" && pdfParser) {
+      const result = await pdfParser(buffer);
+      text = result.text || "";
+    } else if (ext === "docx") {
+      // DOCX: extract text from XML <w:t> tags
+      const str = buffer.toString("utf-8");
+      const parts: string[] = [];
+      const pattern = /<w:t[^>]*>([\s\S]*?)<\/w:t>/g;
+      let m;
+      while ((m = pattern.exec(str)) !== null) parts.push(m[1]);
+      text = parts.join(" ").replace(/\s+/g, " ").trim();
+    } else if (ext === "pdf" && !pdfParser) {
+      console.warn("[resume-extraction] pdf-parse not installed — skipping PDF extraction");
+      return { success: false, error: "pdf-parse not installed" };
+    }
+
+    if (text.length < 30) {
+      console.warn(`[resume-extraction] Too little text extracted (${text.length} chars) from ${input.fileName}`);
+      return { success: false, error: "Insufficient text extracted" };
+    }
+
+    // 3. Create resume record with extracted text
+    const { data: resume, error: insertErr } = await supabase
+      .from("resumes")
+      .insert({
+        site_id: siteId,
+        candidate_id: input.candidateId,
+        storage_path: input.storagePath,
+        file_name: input.fileName,
+        file_type: ext,
+        is_primary: true,
+        extracted_text: text,
+        extracted_skills: [],
+        extracted_experience_years: null,
+        extracted_education: [],
+        extraction_status: "completed",
+        uploaded_at: new Date().toISOString(),
+      })
+      .select("id")
+      .single();
+
+    if (insertErr) {
+      console.error(`[resume-extraction] Insert failed for ${input.candidateId}:`, insertErr.message);
+      return { success: false, error: insertErr.message };
+    }
+
+    console.log(`[resume-extraction] ✓ ${input.fileName} → ${text.length} chars stored (resume ${resume.id})`);
+    return { success: true, resumeId: resume.id };
+  } catch (err: any) {
+    console.error(`[resume-extraction] Error for ${input.fileName}:`, err.message);
+    return { success: false, error: err.message };
+  }
 }

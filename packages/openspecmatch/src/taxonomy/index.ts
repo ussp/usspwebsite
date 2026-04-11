@@ -13,12 +13,14 @@ export { technologyTree } from "./trees/technology.js";
 export { certificationsTree } from "./trees/certifications.js";
 export { educationTree } from "./trees/education.js";
 export { domainKnowledgeTree } from "./trees/domain-knowledge.js";
+export { softSkillsTree } from "./trees/soft-skills.js";
 
 import { TaxonomyResolver } from "./resolver.js";
 import { technologyTree } from "./trees/technology.js";
 import { certificationsTree } from "./trees/certifications.js";
 import { educationTree } from "./trees/education.js";
 import { domainKnowledgeTree } from "./trees/domain-knowledge.js";
+import { softSkillsTree } from "./trees/soft-skills.js";
 
 /**
  * Create a resolver pre-loaded with all built-in taxonomy trees.
@@ -29,5 +31,6 @@ export function createDefaultResolver(): TaxonomyResolver {
   resolver.registerTree(certificationsTree);
   resolver.registerTree(educationTree);
   resolver.registerTree(domainKnowledgeTree);
+  resolver.registerTree(softSkillsTree);
   return resolver;
 }

@@ -165,32 +165,32 @@ export const domainKnowledgeTree = buildTree("domain-knowledge", "Domain Knowled
       {
         id: "logistics",
         label: "Logistics & Supply Chain",
-        aliases: ["logistics", "supply chain", "freight", "shipping", "warehouse", "3pl", "distribution"],
+        aliases: ["logistics company", "supply chain management", "freight management", "shipping company", "3pl", "distribution center"],
       },
       {
         id: "media",
         label: "Media & Entertainment",
-        aliases: ["media", "entertainment", "publishing", "broadcasting", "streaming", "gaming", "adtech"],
+        aliases: ["media company", "entertainment industry", "publishing house", "broadcasting company", "streaming service", "gaming company", "adtech company"],
       },
       {
         id: "real-estate",
         label: "Real Estate / PropTech",
-        aliases: ["real estate", "proptech", "property management", "commercial real estate", "reit"],
+        aliases: ["real estate company", "proptech", "property management company", "commercial real estate", "reit"],
       },
       {
         id: "agriculture",
         label: "Agriculture / AgTech",
-        aliases: ["agriculture", "agtech", "farming", "crop", "livestock", "agribusiness"],
+        aliases: ["agriculture industry", "agtech", "farming industry", "agribusiness"],
       },
       {
         id: "legal",
         label: "Legal / LegalTech",
-        aliases: ["legal", "legaltech", "law firm", "legal services", "litigation", "compliance"],
+        aliases: ["law firm", "legaltech", "legal services firm", "legal department", "litigation support"],
       },
       {
         id: "construction",
         label: "Construction / AEC",
-        aliases: ["construction", "aec", "architecture", "engineering firm", "building", "infrastructure project"],
+        aliases: ["construction company", "construction industry", "aec firm", "general contractor", "construction management"],
       },
     ],
   },

@@ -1,6 +1,7 @@
 import { getServiceClient } from "../supabase/server.js";
 import { getSiteId } from "../config.js";
 import { findOrCreateCandidate } from "./admin/candidates.js";
+import { extractAndStoreResume } from "./admin/resumes.js";
 
 export interface CreateApplicationInput {
   fullName: string;
@@ -112,6 +113,7 @@ export async function createOrUpdateApplication(input: CreateApplicationInput): 
   }
 
   // Find or create candidate record and link to application
+  let candidateId: string | null = null;
   try {
     const { candidate } = await findOrCreateCandidate({
       email: input.email,
@@ -121,6 +123,7 @@ export async function createOrUpdateApplication(input: CreateApplicationInput): 
       profile_picture: input.profilePicture || undefined,
     });
     if (candidate) {
+      candidateId = candidate.id;
       await supabase
         .from("applications")
         .update({ candidate_id: candidate.id })
@@ -128,6 +131,17 @@ export async function createOrUpdateApplication(input: CreateApplicationInput): 
     }
   } catch (err) {
     console.error("[applications] Failed to link candidate record:", err);
+  }
+
+  // Extract resume text in background (non-blocking)
+  if (input.resumePath && candidateId) {
+    extractAndStoreResume({
+      candidateId,
+      storagePath: input.resumePath,
+      fileName: input.resumeName || input.resumePath,
+    }).catch((err) => {
+      console.error("[applications] Resume extraction failed (non-blocking):", err);
+    });
   }
 
   // Insert into junction table
