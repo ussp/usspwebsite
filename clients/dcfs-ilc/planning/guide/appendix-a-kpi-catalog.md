@@ -1,3 +1,8 @@
+---
+title: "KPI Catalog"
+description: "Full 22-KPI reference with formulas and selection guidance"
+---
+
 # Appendix A: Full KPI Catalog
 
 > **Framework includes 22 KPIs across 5 categories. Up to 8 will be selected for each engagement based on executive priorities and data availability. Not all KPIs apply to every engagement -- configuration-first platforms like Dynamics 365 may not use code-centric metrics.**

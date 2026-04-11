@@ -1,3 +1,8 @@
+---
+title: "Process Design"
+description: "Mapping current → AI-augmented state for each SDLC process"
+---
+
 # Chapter 6: Process Design
 
 ## Purpose

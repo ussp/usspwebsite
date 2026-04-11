@@ -1,3 +1,8 @@
+---
+title: "Research Citations"
+description: "DORA, SPACE, QUS, ISO, Six Sigma methodology references"
+---
+
 # Appendix C: Research Citations & Theoretical Foundations
 
 ## Overview

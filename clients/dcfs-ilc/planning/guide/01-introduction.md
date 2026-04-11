@@ -1,3 +1,8 @@
+---
+title: "Introduction"
+description: "Why AI transformation, philosophy, and the 8-phase framework"
+---
+
 # Chapter 1: Introduction
 
 ## The Opportunity

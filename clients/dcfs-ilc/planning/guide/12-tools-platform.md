@@ -1,3 +1,8 @@
+---
+title: "Tools Platform"
+description: "tools.ussp.co user guide, dashboard configuration, and tooltips"
+---
+
 # Chapter 12: Tools Platform
 
 ## Purpose

@@ -1,3 +1,8 @@
+---
+title: "Templates"
+description: "Survey templates, report templates, and cheat sheets"
+---
+
 # Appendix D: Templates Collection
 
 ## Overview

@@ -1,3 +1,8 @@
+---
+title: "Scale & Rollout"
+description: "ART-wide expansion from pilot to all 12 teams"
+---
+
 # Chapter 11: Scale & Rollout
 
 ## Purpose

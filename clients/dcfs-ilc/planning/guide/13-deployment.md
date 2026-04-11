@@ -1,3 +1,8 @@
+---
+title: "Deployment Guide"
+description: "How to set up the framework for a new engagement"
+---
+
 # Chapter 13: Deployment
 
 ## Purpose

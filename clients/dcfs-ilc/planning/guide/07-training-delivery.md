@@ -1,3 +1,8 @@
+---
+title: "Training Delivery"
+description: "6 role-based training tracks with content, delivery methods, and materials"
+---
+
 # Chapter 7: Training Delivery Plan
 
 ## Purpose

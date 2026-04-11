@@ -1,3 +1,8 @@
+---
+title: "Pilot Execution"
+description: "Team selection, control group design, and weekly cadence"
+---
+
 # Chapter 8: Pilot Execution
 
 ## Purpose

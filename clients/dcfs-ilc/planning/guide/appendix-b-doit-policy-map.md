@@ -1,3 +1,8 @@
+---
+title: "DoIT Policy Map"
+description: "Section-by-section compliance checklist"
+---
+
 # Appendix B: DoIT AI Policy Compliance Map
 
 ## Overview

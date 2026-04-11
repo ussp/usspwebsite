@@ -1,3 +1,8 @@
+---
+title: "Readiness Assessment"
+description: "23-question survey instrument for AI readiness across all teams"
+---
+
 # Chapter 4: AI Readiness Assessment
 
 ## Purpose

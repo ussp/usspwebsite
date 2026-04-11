@@ -1,3 +1,8 @@
+---
+title: "Measurement & Reporting"
+description: "KPIs, before/after comparison, and leadership dashboard"
+---
+
 # Chapter 9: Measurement, Reporting & Leadership Dashboard
 
 > **Purpose:** Define what we measure, how we collect the data, how we compare pilot vs. control, and how Jim sees results without attending weekly standups.

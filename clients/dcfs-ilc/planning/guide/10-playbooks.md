@@ -1,3 +1,8 @@
+---
+title: "Playbooks"
+description: "Role-based playbooks for BA, Tester, Developer, and Scrum Master"
+---
+
 # Chapter 10: Playbooks
 
 ## Purpose

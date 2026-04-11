@@ -1,3 +1,8 @@
+---
+title: "AI Transformation Framework"
+description: "Complete guide for Krasan's AI-Augmented Agile Delivery framework"
+---
+
 # AI-Augmented Agile Delivery — Framework Guide
 
 > **Krasan Consulting Services**

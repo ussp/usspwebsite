@@ -1,3 +1,8 @@
+---
+title: "Executive Discovery"
+description: "Org contact, context gathering, and executive interview process"
+---
+
 # Chapter 2: Executive Discovery
 
 ## Purpose

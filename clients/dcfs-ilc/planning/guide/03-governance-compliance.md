@@ -1,3 +1,8 @@
+---
+title: "Governance & Compliance"
+description: "DoIT AI Policy alignment, guardrails, and regulatory mapping"
+---
+
 # Chapter 3: Governance & Compliance
 
 ## Purpose
