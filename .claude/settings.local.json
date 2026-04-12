@@ -6,7 +6,10 @@
       "Bash(cd D:/Code/ussp && npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack 2>&1)",
       "Bash(rm:*)",
       "Bash(cd D:/Code/ussp && git remote add origin https://github.com/ussp/usspwebsite.git 2>&1 || git remote set-url origin https://github.com/ussp/usspwebsite.git 2>&1)",
-      "Bash(tail:*)"
+      "Bash(tail:*)",
+      "mcp__claude_ai_Gmail__search_threads",
+      "mcp__claude_ai_Gmail__get_thread",
+      "mcp__claude_ai_Gmail__create_draft"
     ]
   }
 }
