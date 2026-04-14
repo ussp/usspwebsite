@@ -49,13 +49,22 @@ These tools are purchased by the State. Deployment status needs confirmation.
 - **Compliance:** SOC 2, ISO 27001 reporting available on Enterprise tier
 - **Default if no model selected:** Claude Sonnet 4.6 is used automatically
 
+### Approval Status (from Jim, April 13)
+
+| Vendor | Model | Approved by State? | Notes |
+|--------|-------|--------------------|-------|
+| **OpenAI** | GPT-5.4, GPT-4.1 | **Yes — approved** | Default model in Copilot |
+| **Google** | Gemini 3.1 Pro, 3 Flash, 2.5 Pro | **Needs verification** — Jim to check | Jim believes it may be approved but needs to confirm |
+| **Anthropic** | Claude Sonnet 4.6, Opus 4 | **Not confirmed** | Zero data retention = strongest privacy, worth pursuing |
+
 ### Implications for DCFS
 
-1. **Google Gemini IS available** through GitHub Copilot — no separate procurement needed
-2. **Claude IS available** — zero data retention is the strongest privacy guarantee
-3. **Enterprise admin controls** which models developers can use — governance team can set policy
-4. **One tool, multiple models** — simplifies procurement (just GitHub Copilot Enterprise, not separate AI vendor contracts)
-5. **Question for Dave:** Which GitHub Copilot tier does the State have? (Free/Pro = not appropriate. Business/Enterprise = good.)
+1. **OpenAI is approved** — we can use GPT models in Copilot immediately (once Copilot is deployed)
+2. **Google needs Jim's confirmation** — he said he'll check
+3. **Claude worth pursuing** — zero data retention is the strongest privacy guarantee for government
+4. **Enterprise admin controls** which models developers can use — governance team can set policy
+5. **One tool, multiple models** — simplifies procurement (just GitHub Copilot Enterprise, not separate AI vendor contracts)
+6. **Question for Dave:** Which GitHub Copilot tier does the State have? (Free/Pro = not appropriate. Business/Enterprise = good.)
 
 ---
 
