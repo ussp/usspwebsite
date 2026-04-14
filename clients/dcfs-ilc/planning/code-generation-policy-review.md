@@ -101,11 +101,30 @@ Each step requires:
 
 9. **Audit Trail:** Does the state require an audit trail of which code was AI-assisted vs human-written? If so, how do we track this?
 
+### For Dave — Continuous Monitoring & Tooling
+
+10. **Continuous Monitoring Tools:** DoIT Section 7 and NIST MEASURE 3 both require continuous AI oversight. Can we use JIRA dashboards and Power BI for pilot metrics tracking? Are there other state-approved monitoring tools available?
+
+11. **Monitoring Tool Options within State Environment:**
+
+| Option | What It Does | Likely Available? | Approval Needed? |
+|--------|-------------|-------------------|-----------------|
+| JIRA dashboards | Native reporting — velocity, cycle time, quality | Yes (already in use) | No |
+| Power BI | Dashboards from JIRA data for leadership visibility | Likely (standard state tool) | Verify |
+| Azure Monitor / App Insights | Built into Azure — track AI tool usage | Likely (Dynamics 365 is Microsoft) | Verify |
+| Azure DevOps dashboards | If used alongside JIRA | Possible | Verify |
+| Excel / SharePoint | Manual tracking, state-approved | Yes | No |
+| tools.ussp.co (Krasan platform) | AI Transformation Monitor — assessments, reports, dashboards | External tool — needs state approval + DoIT 30-day notice | Yes |
+
+**Recommendation:** Start with JIRA dashboards + Power BI (already approved, no procurement). Position tools.ussp.co as an optional enhancement through the governance team approval process later.
+
+12. **External Tool Approval:** If we want to use tools.ussp.co for monitoring, does it require DoIT 30-day notice under Section 5f? Or is it treated differently since it's a vendor reporting tool, not an AI system being deployed to state employees?
+
 ### For Gartner (External Validation — Jim's Request)
 
-10. **Industry Practice:** What are other state/government agencies doing with AI code generation? What guardrails have they established?
+13. **Industry Practice:** What are other state/government agencies doing with AI code generation? What guardrails have they established?
 
-11. **Risk Framework:** What does Gartner recommend as the governance framework for AI-assisted code generation in government settings?
+14. **Risk Framework:** What does Gartner recommend as the governance framework for AI-assisted code generation in government settings?
 
 ---
 
@@ -116,8 +135,10 @@ Each step requires:
 **Immediate actions:**
 1. Send Questions 1-3 to Dave/Jim for resolution
 2. Send Questions 4-6 to Jeffrey for the Dynamics working session
-3. Include code generation in the governance proposal (Task #4)
-4. Update the framework to include Steps 1-6 in the pilot plan
+3. Send Questions 10-12 to Dave for monitoring tool clarification
+4. Include code generation in the governance proposal (Task #4)
+5. Update the framework to include Steps 1-6 in the pilot plan
+6. Default to JIRA + Power BI for monitoring until external tools are approved
 
 ---
 
