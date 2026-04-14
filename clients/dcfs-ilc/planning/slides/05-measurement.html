@@ -1,77 +1,70 @@
 <div class="slide">
   <h2>How We Measure Success</h2>
-  <p>We start with the <strong>process</strong>, identify what AI improves, then select the <strong>KPI</strong> that proves it. <em style="color:#888;">(Examples below &mdash; final selection based on your priorities)</em></p>
+  <p>We measure <strong>tangible outputs</strong>, not story points. Start with the SDLC process, identify what AI improves, then select the metric that proves it.</p>
 
   <table>
-    <tr><th>Process</th><th>Role</th><th>What AI Does</th><th>Expected Outcome</th><th>KPI</th></tr>
+    <tr><th>Process</th><th>Role</th><th>What AI Does</th><th>Tangible Output</th><th>Metric</th></tr>
     <tr>
       <td><strong>Story Writing</strong></td>
-      <td>BA</td>
-      <td>Validates story quality, flags gaps before review</td>
-      <td>Fewer rework cycles, faster approval</td>
+      <td>BA-Tech</td>
+      <td>Validates quality, flags gaps</td>
+      <td>Stories drafted, rework reduced</td>
       <td>Rejection rate, review cycle time</td>
-    </tr>
-    <tr>
-      <td><strong>Acceptance Criteria</strong></td>
-      <td>BA / PO</td>
-      <td>Drafts Gherkin/BDD criteria from story</td>
-      <td>Clearer requirements, better testability</td>
-      <td>Test coverage %, first pass yield</td>
     </tr>
     <tr>
       <td><strong>Test Script Creation</strong></td>
       <td>Tester</td>
       <td>Generates test framework from AC</td>
-      <td>Faster test creation, more scenarios</td>
-      <td>Test creation time, defect escape rate</td>
-    </tr>
-    <tr>
-      <td><strong>Code Comprehension</strong></td>
-      <td>Developer</td>
-      <td>Explains plugin logic, identifies issues</td>
-      <td>Faster onboarding, faster debugging</td>
-      <td>Cycle time per story</td>
-    </tr>
-    <tr>
-      <td><strong>Code Review</strong></td>
-      <td>Developer</td>
-      <td>AI reviews code for issues, security scans, suggests improvements</td>
-      <td>Better code quality, faster review feedback</td>
-      <td>Defect density, review turnaround time</td>
+      <td>Test scripts generated</td>
+      <td>Test creation time, scripts per sprint</td>
     </tr>
     <tr>
       <td><strong>Documentation</strong></td>
       <td>All</td>
       <td>Generates docs from code/config</td>
-      <td>Reduced doc backlog, knowledge transfer</td>
-      <td>Documentation coverage</td>
+      <td>Documentation lines generated</td>
+      <td>Doc coverage, lines per sprint</td>
     </tr>
     <tr>
-      <td><strong>Refinement</strong></td>
-      <td>Scrum Lead</td>
-      <td>Identifies missing edge cases before sprint</td>
-      <td>Fewer mid-sprint surprises</td>
-      <td>Rework rate, requirement clarity</td>
+      <td><strong>Code Generation</strong></td>
+      <td>Developer</td>
+      <td>Suggests code, developer reviews &amp; accepts</td>
+      <td>Lines of code generated &amp; accepted</td>
+      <td>LOC accepted, acceptance rate</td>
+    </tr>
+    <tr>
+      <td><strong>Configuration</strong></td>
+      <td>Config Team</td>
+      <td>Suggests Dynamics config patterns</td>
+      <td>Configuration lines generated</td>
+      <td>Config lines, rework rate</td>
+    </tr>
+    <tr>
+      <td><strong>Code Review</strong></td>
+      <td>Developer</td>
+      <td>AI pre-reviews for issues</td>
+      <td>Issues caught before peer review</td>
+      <td>Defect density, review time</td>
     </tr>
   </table>
 
   <div class="metric-row">
     <div class="metric-card">
-      <div class="number">22</div>
-      <div class="label">KPIs in Framework</div>
+      <div class="number">10-15%</div>
+      <div class="label">Target Improvement</div>
     </div>
     <div class="metric-card">
-      <div class="number">&le;8</div>
-      <div class="label">Selected for Pilot</div>
+      <div class="number">13</div>
+      <div class="label">Weeks (1 PI)</div>
     </div>
     <div class="metric-card">
-      <div class="number">1 PI</div>
-      <div class="label">Pilot Duration</div>
+      <div class="number">LOC</div>
+      <div class="label">Primary Metric</div>
     </div>
   </div>
 
   <div class="callout info">
-    <strong>Next step:</strong> We need to understand your current SDLC processes and bottlenecks to select the right SDLC processes &mdash; the KPIs follow from that. Full KPI catalog in appendix.
+    <strong>Key shift (Apr 13):</strong> Jim directed measurement based on tangible outputs (lines of code, docs, config) &mdash; not story points. Full KPI catalog in appendix.
   </div>
   <!--FOOTER-->
 </div>

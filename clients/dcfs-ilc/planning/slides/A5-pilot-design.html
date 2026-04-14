@@ -1,24 +1,23 @@
 <div class="slide">
-  <h2>Appendix: Pilot Design</h2>
+  <h2>Appendix: Pilot Design &mdash; Updated</h2>
 
   <div class="two-col">
     <div>
-      <h3>Team Selection Criteria</h3>
-      <ul>
-        <li>Technically mature team with strong leadership</li>
-        <li>Strong BAs who can evaluate AI output quality</li>
-        <li>Cooperative PO / BA / Dev relationship</li>
-        <li>Representative workload (not most complex)</li>
-      </ul>
-
-      <h3>Pilot Composition (per team)</h3>
+      <h3>Team Composition (per Scrum team)</h3>
       <table>
-        <tr><th>Role</th><th>Count</th><th>AI Focus</th></tr>
-        <tr><td>BA</td><td>1</td><td>Story quality, AC generation</td></tr>
-        <tr><td>Tester</td><td>1</td><td>Test generation from AC</td></tr>
-        <tr><td>Developer</td><td>1-2</td><td>Code explanation, docs</td></tr>
-        <tr><td>Scrum Lead</td><td>1</td><td>Oversight, reporting</td></tr>
+        <tr><th>Role</th><th>Vendor</th><th>In Pilot?</th></tr>
+        <tr><td>Product Owner (PO)</td><td>State / ISI</td><td><span class="tag amber">Later</span></td></tr>
+        <tr><td>BA - Functional</td><td>CSG</td><td><span class="tag amber">Later</span></td></tr>
+        <tr><td>BA - Technical</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
+        <tr><td>Configuration Team</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
+        <tr><td>Development Team</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
+        <tr><td>Testers</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
+        <tr><td>Scrum Master/Lead</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
       </table>
+
+      <div class="callout info" style="margin-top:12px;font-size:11px">
+        <strong>Strategy:</strong> Start with Krasan roles only. Identify issues first. Include other vendor roles (PMO, BA-Functional) after &mdash; Jim approved this expansion.
+      </div>
     </div>
     <div>
       <h3>Pilot vs Control</h3>
@@ -34,12 +33,18 @@
             <div style="font-size:12px;color:#666">Control Teams<br>(Business as Usual)</div>
           </div>
         </div>
-        <div style="font-size:12px;color:#666">Same PI &bull; Same conditions &bull; Measurable difference</div>
+        <div style="font-size:12px;color:#666">Sprints 3 &amp; 4 &bull; 15% capacity for AI &bull; 13-week PI</div>
       </div>
 
-      <h3>Candidate Identification</h3>
-      <p>John (Agile Delivery Manager) has identified strong candidates. Final selection pending team lead input.</p>
-      <p><span class="tag red">Pending</span> Pilot team names not yet finalized</p>
+      <h3 style="margin-top:12px">Stair-Stepped Code Generation</h3>
+      <table>
+        <tr><th>Step</th><th>What</th><th>Sprint</th></tr>
+        <tr><td>1</td><td>User story quality (Rovo)</td><td>1-2</td></tr>
+        <tr><td>2</td><td>Docs + code comprehension (Copilot)</td><td>2-3</td></tr>
+        <tr><td>3</td><td>Test script generation</td><td>3</td></tr>
+        <tr><td>4</td><td>Config suggestions (Dynamics)</td><td>3-4</td></tr>
+        <tr><td>5</td><td>Plugin/custom code (Copilot)</td><td>4+</td></tr>
+      </table>
     </div>
   </div>
   <!--FOOTER-->

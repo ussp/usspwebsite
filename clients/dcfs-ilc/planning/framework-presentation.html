@@ -604,7 +604,7 @@
     Prepared for: Jim Daugherty, CIO &mdash; DCFS / DeWitt<br>
     Presented by: Vinay Lagisetty &amp; Emil "Romi" Kovacs<br>
     Krasan Consulting Services<br>
-    April 13, 2026
+    V04142026
   </div>
   <div class="confidential">Confidential &mdash; Krasan Internal + DCFS Leadership</div>
 </div>
@@ -619,10 +619,11 @@
     <tr><td>3</td><td>Where We Are &mdash; Govern, Baseline &amp; Design</td></tr>
     <tr><td>4</td><td>Train, Pilot &amp; Measure</td></tr>
     <tr><td>5</td><td>Playbook &amp; Scale</td></tr>
-    <tr><td>6</td><td><strong>Over to You &mdash; Questions &amp; Feedback</strong></td></tr>
+    <tr><td>6</td><td>PI 20 Pilot Timeline</td></tr>
+    <tr><td>7</td><td><strong>Discussion &amp; Next Steps</strong></td></tr>
   </table>
   <div class="callout info" style="margin-top:16px;">
-    <strong>Supporting detail</strong> &mdash; Capability map, measurement, timeline, and asks are in the appendix for reference.
+    <strong>Supporting detail</strong> &mdash; Capability map, measurement, guardrails, governance, and pilot design are in the appendix.
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
   <div class="slide-number">2</div>
@@ -644,7 +645,7 @@
   </ul>
 
   <div class="callout target">
-    <strong>Objective:</strong> Apply AI to SAFe delivery processes &mdash; pilot with select teams, measure the impact, scale what works.
+    <strong>Target:</strong> 10-15% productivity improvement within 13 weeks (1 PI) &mdash; measured by tangible outputs, not story points.
   </div>
 
   <h3>Our Approach</h3>
@@ -661,15 +662,15 @@
       <h4>Measure, Don't Guess</h4>
       <ul>
         <li>Baseline first, then compare</li>
-        <li>Select up to 8 KPIs that matter</li>
+        <li>Tangible outputs: LOC, docs, config</li>
         <li>Before/after with control group</li>
       </ul>
     </div>
     <div class="capability-card">
       <h4>Pilot, Then Scale</h4>
       <ul>
-        <li>Start with 2 teams</li>
-        <li>Select targeted SDLC processes</li>
+        <li>Start with 2 teams (Krasan roles)</li>
+        <li>Stair-stepped AI adoption</li>
         <li>Scale what works</li>
       </ul>
     </div>
@@ -703,13 +704,13 @@
 
   <table>
     <tr><th>Phase</th><th>What Happens <em style="font-weight:400;color:#888;">(illustrative)</em></th><th>Deliverable</th></tr>
-    <tr><td><strong>Govern</strong></td><td>Align with DoIT AI Policy, define guardrails, confirm tool access</td><td>AI Usage Playbook, Compliance Map</td></tr>
-    <tr><td><strong>Baseline</strong></td><td>Capture current velocity, quality, and cycle time from JIRA (last 3 sprints)</td><td>Baseline Metrics Report</td></tr>
-    <tr><td><strong>Design</strong></td><td>Map current state &rarr; AI-augmented state for SDLC processes; define tools and methods per role</td><td>Process Design Docs, Role-Based Playbooks, Training Plan</td></tr>
-    <tr><td><strong>Train</strong></td><td>Role-specific training: responsible AI use, prompt engineering, approved SDLC processes</td><td>Training Materials (per role)</td></tr>
-    <tr><td><strong>Pilot</strong></td><td>2 teams use AI tools for 1 full PI; remaining teams are control group</td><td>Weekly Check-in Reports</td></tr>
-    <tr><td><strong>Measure</strong></td><td>Continuous metrics collection; compare pilot vs baseline vs control</td><td>Pilot Results Report</td></tr>
-    <tr><td><strong>Playbook</strong></td><td>Codify what worked into role-based playbooks (BA, Tester, Dev, Scrum Master) &mdash; living documents, updated continuously</td><td><em style="color:#888;">Ongoing</em></td></tr>
+    <tr><td><strong>Govern</strong></td><td>Align with DoIT AI Policy &amp; NIST AI RMF, define guardrails, confirm tool access, Gartner validation</td><td>Governance Proposal, Compliance Map</td></tr>
+    <tr><td><strong>Baseline</strong></td><td>Capture current metrics from JIRA (last 3 sprints), readiness assessment</td><td>Baseline Metrics Report</td></tr>
+    <tr><td><strong>Design</strong></td><td>Map current state &rarr; AI-augmented state for SDLC processes; stair-stepped code generation plan</td><td>Process Design Docs, Role-Based Playbooks, Training Plan</td></tr>
+    <tr><td><strong>Train</strong></td><td>Role-specific training: responsible AI use, prompt engineering, code generation guardrails</td><td>Training Completion Report</td></tr>
+    <tr><td><strong>Pilot</strong></td><td>2 teams (Krasan roles) for Sprints 3 &amp; 4; remaining teams are control group</td><td>Weekly Check-in Reports</td></tr>
+    <tr><td><strong>Measure</strong></td><td>Tangible outputs: lines of code, documentation, configuration generated &mdash; pilot vs control</td><td>Pilot Results Report</td></tr>
+    <tr><td><strong>Playbook</strong></td><td>Codify what worked into role-based playbooks &mdash; living documents, updated continuously</td><td><em style="color:#888;">Ongoing</em></td></tr>
     <tr><td><strong>Scale</strong></td><td>Roll out to all 12 teams based on proven results</td><td>ART-Wide Rollout Plan</td></tr>
   </table>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
@@ -742,22 +743,23 @@
     <div>
       <h3>Govern</h3>
       <ul>
-        <li>Review DoIT AI Policy &mdash; all 12 sections mapped</li>
-        <li>Define data guardrails (no case data, no PII in any AI tool)</li>
-        <li>Confirm approved tools &amp; licensing status</li>
-        <li>Align on constraints: no autonomous code, SDLC only</li>
+        <li>DoIT AI Policy &mdash; all 12 sections mapped</li>
+        <li>NIST AI RMF governance framework</li>
+        <li>Establish governance team (DCFS-led)</li>
+        <li>Gartner validation (Jim's request)</li>
+        <li>Code generation policy &mdash; reviewed, compliant with human-in-the-loop</li>
       </ul>
       <div class="callout target" style="margin-top:8px;font-size:11px">
-        <strong>Deliverable:</strong> AI Usage Playbook &amp; Compliance Map
+        <strong>Deliverable:</strong> Governance Proposal &amp; Compliance Map
       </div>
     </div>
     <div>
       <h3>Baseline</h3>
       <ul>
         <li>Capture current metrics from JIRA (last 3 sprints)</li>
-        <li>Establish baseline per team &mdash; before AI is introduced</li>
-        <li>Identify 2 pilot teams and control group</li>
-        <li>Distribute team health survey</li>
+        <li>Readiness assessment &mdash; all 12 teams</li>
+        <li>Identify 2 pilot teams (Krasan roles only)</li>
+        <li>Team health survey (SPACE/DevEx)</li>
       </ul>
       <div class="callout target" style="margin-top:8px;font-size:11px">
         <strong>Deliverable:</strong> Baseline Metrics Report
@@ -766,19 +768,19 @@
     <div>
       <h3>Design / Develop</h3>
       <ul>
-        <li>Map current state &rarr; AI-augmented state for each SDLC process</li>
-        <li>Define AI-augmented SDLC processes per role</li>
-        <li>Select tools &amp; methods for each process</li>
+        <li>Map current state &rarr; AI-augmented state per role</li>
+        <li>Stair-stepped code generation plan (stories &rarr; docs &rarr; tests &rarr; code)</li>
+        <li>Dynamics configuration exploration (Kashif/Shyam)</li>
         <li>Build training materials from process designs</li>
       </ul>
       <div class="callout target" style="margin-top:8px;font-size:11px">
-        <strong>Deliverable:</strong> Process Design Docs, Role-Based Playbooks &amp; Training Plan
+        <strong>Deliverable:</strong> Process Design Docs, Playbooks &amp; Training Plan
       </div>
     </div>
   </div>
 
   <div class="callout info">
-    <strong>This is where your input is critical</strong> &mdash; which processes matter most, what data is available, and which teams are right for the pilot.
+    <strong>Point of contact:</strong> Dave (interim AI lead during Jim's absence). Copy Jim on key updates.
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
   <div class="slide-number">5</div>
@@ -813,13 +815,14 @@
       <ul>
         <li>DoIT AI Policy compliance</li>
         <li>Data guardrails &amp; boundaries</li>
-        <li>What success looks like &amp; how we measure it</li>
+        <li>Code generation guardrails (human-in-the-loop)</li>
       </ul>
-      <p><strong>Role-specific:</strong></p>
+      <p><strong>Role-specific (Krasan roles):</strong></p>
       <ul>
-        <li>BAs &mdash; story quality, AC generation</li>
+        <li>BA-Technical &mdash; use case quality, AC generation</li>
+        <li>Configuration &mdash; Dynamics config augmentation</li>
+        <li>Developers &mdash; code generation, review, docs</li>
         <li>Testers &mdash; test script generation</li>
-        <li>Devs &mdash; code review, documentation</li>
         <li>Scrum Masters &mdash; sprint insights, metrics</li>
       </ul>
       <div class="callout target" style="font-size:11px">
@@ -829,10 +832,11 @@
     <div>
       <h3>Pilot</h3>
       <ul>
-        <li>2 teams with AI tools &amp; training</li>
+        <li>2 teams &mdash; <strong>Krasan roles only</strong> initially</li>
         <li>Remaining teams as control group</li>
-        <li><strong>Learn and iterate</strong> &mdash; weekly check-ins to adjust what's working</li>
-        <li>Not a "set and forget" &mdash; continuous learning cycle</li>
+        <li><strong>Sprints 3 &amp; 4</strong> of PI 20 (15% capacity for AI)</li>
+        <li>Stair-stepped: stories &rarr; docs &rarr; tests &rarr; code</li>
+        <li>Weekly check-ins to iterate</li>
       </ul>
       <div class="callout target" style="font-size:11px">
         <strong>Deliverable:</strong> Weekly Check-in Reports
@@ -841,14 +845,15 @@
     <div>
       <h3>Measure</h3>
       <ul>
-        <li><strong>Pre &amp; post</strong> comparison against baseline</li>
-        <li>Pilot teams vs control teams</li>
-        <li>Up to 8 KPIs tied to specific SDLC processes</li>
+        <li><strong>Tangible outputs</strong> &mdash; not story points</li>
+        <li>Lines of code generated &amp; accepted</li>
+        <li>Documentation lines generated</li>
+        <li>Configuration lines generated</li>
+        <li>Cycle time, quality, rework reduction</li>
         <li>Team health survey (before &amp; after)</li>
-        <li>Lessons learned &amp; improvements for next phase</li>
       </ul>
       <div class="callout target" style="font-size:11px">
-        <strong>Deliverable:</strong> Pilot Results Report, Lessons Learned &amp; Scale Recommendation
+        <strong>Target:</strong> 10-15% improvement in 13 weeks
       </div>
     </div>
   </div>
@@ -918,32 +923,146 @@
   <div class="slide-number">7</div>
 </div>
 
-<!-- ── SLIDE 8: 08-summary.html ── -->
+<!-- ── SLIDE 8: 09-gantt-timeline.html ── -->
+<div class="slide">
+  <h2>Timeline &mdash; PI 20 Pilot Plan</h2>
+  <p>Anchored to PI 20 Planning on May 5. Govern &amp; Design phases run in parallel before PI starts.</p>
+
+  <!-- Gantt Chart -->
+  <div style="margin-top:12px;font-size:11px;">
+
+    <!-- Header Row -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:2px;">
+      <div style="font-weight:700;padding:4px 8px;background:var(--krasan-accent);color:white;border-radius:4px 0 0 0;">Phase</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">Apr 14</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">Apr 21</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">Apr 28</div>
+      <div style="text-align:center;padding:4px 2px;background:var(--krasan-highlight);color:white;font-weight:700;">May 5</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">May 12</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">May 19</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">May 26</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">Jun 2</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">Jun 9</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">Jun 16</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;">Jun 23</div>
+      <div style="text-align:center;padding:4px 2px;background:#eee;font-weight:600;border-radius:0 4px 0 0;">Jun 30</div>
+    </div>
+
+    <!-- PI Marker -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:4px;">
+      <div style="padding:3px 8px;font-size:10px;color:#999;">PI Cadence</div>
+      <div style="grid-column:2/5;text-align:center;padding:3px;background:#f9f9f9;font-size:10px;color:#999;border-bottom:2px dashed #ccc;">Pre-PI</div>
+      <div style="text-align:center;padding:3px;background:#fff3cd;font-size:10px;font-weight:700;border-bottom:2px solid var(--krasan-highlight);">PI Plan</div>
+      <div style="grid-column:6/8;text-align:center;padding:3px;background:#f9f9f9;font-size:10px;color:#666;border-bottom:2px solid var(--blue);">Sprint 1-2</div>
+      <div style="grid-column:8/10;text-align:center;padding:3px;background:#e8f5e9;font-size:10px;color:#333;font-weight:700;border-bottom:2px solid var(--green);">Sprint 3-4 (Pilot)</div>
+      <div style="grid-column:10/13;text-align:center;padding:3px;background:#f9f9f9;font-size:10px;color:#666;border-bottom:2px solid var(--blue);">Sprint 5</div>
+    </div>
+
+    <!-- Govern -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:3px;">
+      <div style="padding:6px 8px;font-weight:700;font-size:12px;">Govern</div>
+      <div style="grid-column:2/5;background:var(--krasan-accent);border-radius:4px;padding:4px 8px;color:white;font-size:10px;">DoIT policy, guardrails, tool access</div>
+      <div style="grid-column:5/13;"></div>
+    </div>
+
+    <!-- Baseline -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:3px;">
+      <div style="padding:6px 8px;font-weight:700;font-size:12px;">Baseline</div>
+      <div style="grid-column:2/5;background:var(--blue);border-radius:4px;padding:4px 8px;color:white;font-size:10px;">JIRA metrics, readiness assessment</div>
+      <div style="grid-column:5/13;"></div>
+    </div>
+
+    <!-- Design -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:3px;">
+      <div style="padding:6px 8px;font-weight:700;font-size:12px;">Design</div>
+      <div></div>
+      <div style="grid-column:3/6;background:#8e44ad;border-radius:4px;padding:4px 8px;color:white;font-size:10px;">Process mapping, playbook drafts, training materials</div>
+      <div style="grid-column:6/13;"></div>
+    </div>
+
+    <!-- Train -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:3px;">
+      <div style="padding:6px 8px;font-weight:700;font-size:12px;">Train</div>
+      <div style="grid-column:2/5;"></div>
+      <div style="grid-column:5/7;background:var(--amber);border-radius:4px;padding:4px 8px;color:white;font-size:10px;">6 tracks (Krasan roles)</div>
+      <div style="grid-column:7/13;"></div>
+    </div>
+
+    <!-- Pilot -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:3px;">
+      <div style="padding:6px 8px;font-weight:700;font-size:12px;">Pilot</div>
+      <div style="grid-column:2/8;"></div>
+      <div style="grid-column:8/10;background:var(--green);border-radius:4px;padding:4px 8px;color:white;font-size:10px;font-weight:700;">2 teams &mdash; Sprint 3 &amp; 4</div>
+      <div style="grid-column:10/13;"></div>
+    </div>
+
+    <!-- Measure -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:3px;">
+      <div style="padding:6px 8px;font-weight:700;font-size:12px;">Measure</div>
+      <div style="grid-column:2/8;"></div>
+      <div style="grid-column:8/12;background:var(--krasan-highlight);border-radius:4px;padding:4px 8px;color:white;font-size:10px;">Continuous metrics + before/after comparison</div>
+      <div style="grid-column:12/13;"></div>
+    </div>
+
+    <!-- Playbook -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:3px;">
+      <div style="padding:6px 8px;font-weight:700;font-size:12px;">Playbook</div>
+      <div style="grid-column:2/6;"></div>
+      <div style="grid-column:6/13;background:linear-gradient(90deg, #ddd 0%, #27ae60 100%);border-radius:4px;padding:4px 8px;font-size:10px;color:#333;">Living docs &mdash; drafted in Design, refined through Pilot, finalized end of PI</div>
+    </div>
+
+    <!-- Scale -->
+    <div style="display:grid;grid-template-columns:140px repeat(12,1fr);gap:1px;margin-bottom:3px;">
+      <div style="padding:6px 8px;font-weight:700;font-size:12px;">Scale</div>
+      <div style="grid-column:2/12;"></div>
+      <div style="grid-column:12/14;background:#95a5a6;border-radius:4px;padding:4px 8px;color:white;font-size:10px;">Next PI &rarr;</div>
+    </div>
+
+  </div>
+
+  <!-- Key milestones -->
+  <div style="display:flex;gap:16px;margin-top:10px;font-size:11px;">
+    <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;background:var(--krasan-highlight);border-radius:2px;"></div> <strong>May 5:</strong> PI 20 Planning</div>
+    <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;background:var(--green);border-radius:2px;"></div> <strong>Sprint 3-4:</strong> Pilot execution (2 teams, Krasan roles only)</div>
+    <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;background:var(--amber);border-radius:2px;"></div> <strong>15%</strong> capacity for AI adoption in pilot sprints</div>
+  </div>
+
+  <div class="callout info" style="margin-top:8px;font-size:11px;">
+    <strong>Pilot scope:</strong> Krasan roles only (BA-Technical, Configuration, Development, Testing, Scrum Master). PO and BA-Functional (other vendors) join after initial issues are resolved.
+  </div>
+  <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
+  <div class="slide-number">8</div>
+</div>
+
+<!-- ── SLIDE 9: 08-summary.html ── -->
 <div class="slide title-slide" style="text-align:left;padding:50px 60px;align-items:flex-start;background:linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;">
   <a href="https://krasanconsulting.com/" target="_blank" style="background:white;padding:8px 16px;border-radius:6px;margin-bottom:16px;display:inline-block;text-decoration:none;">
     <img src="../assets/krasan-logo.png" alt="Krasan" style="height:28px;display:block;">
   </a>
   <h1 style="font-size:30px;margin-bottom:24px">Discussion &amp; Next Steps</h1>
   <div style="font-size:16px;line-height:2.4;font-weight:300">
-    <strong style="color:var(--krasan-highlight)">What we showed:</strong> Our intent &mdash; a framework we're building for ILC<br>
-    <strong style="color:var(--krasan-highlight)">What we need:</strong> Your expectations, priorities, and feedback<br>
+    <strong style="color:var(--krasan-highlight)">Target:</strong> 10-15% productivity improvement in 13 weeks<br>
+    <strong style="color:var(--krasan-highlight)">Scope:</strong> 2 pilot teams (Krasan roles), Sprints 3 &amp; 4 of PI 20<br>
+    <strong style="color:var(--krasan-highlight)">Measure:</strong> Tangible outputs &mdash; LOC, documentation, configuration generated<br>
+    <strong style="color:var(--krasan-highlight)">Approach:</strong> Stair-stepped &mdash; stories &rarr; docs &rarr; tests &rarr; code generation<br>
+    <strong style="color:var(--krasan-highlight)">Contact:</strong> Dave (interim AI lead) &mdash; copy Jim on key updates<br>
   </div>
-  <div style="margin-top:24px;font-size:15px;line-height:2.2;font-weight:300;border-left:3px solid var(--krasan-highlight);padding-left:16px;">
-    What does success look like to you?<br>
-    What AI tools do we have access to right now?<br>
-    What should we focus on first?<br>
-    What concerns do you have?
+  <div style="margin-top:20px;font-size:14px;line-height:2.0;font-weight:300;border-left:3px solid var(--krasan-highlight);padding-left:16px;">
+    Governance proposal to Dave<br>
+    Dynamics working session (Kashif/Shyam via Jeffrey)<br>
+    Rollout timeline with 13-week waterfall<br>
+    Gartner consultation for external validation
   </div>
   <div class="confidential">Confidential &mdash; Krasan Consulting Services</div>
 </div>
 
-<!-- ── SLIDE 9: A0-appendix-divider.html ── -->
+<!-- ── SLIDE 10: A0-appendix-divider.html ── -->
 <div class="slide section-divider" style="background:#0f3460 !important;">
   <h2>Appendix</h2>
   <div class="section-sub">Supporting detail &mdash; reference materials for discussion</div>
 </div>
 
-<!-- ── SLIDE 10: 04-capability-map.html ── -->
+<!-- ── SLIDE 11: 04-capability-map.html ── -->
 <div class="slide">
   <h2>DCFS Capability Map &mdash; People, Process, Tools</h2>
   <p>We mapped the ILC delivery capabilities to identify exactly where AI adds value.</p>
@@ -963,90 +1082,83 @@
     <strong>Tech Stack:</strong> Dynamics 365 + Dataverse | Power Apps/Automate/Pages | .NET (C#), JavaScript, PCF | Azure Logic Apps, Functions, API Mgmt | IBM FileNet, Adobe Sign | Azure DevOps (CI/CD) | Informatica, ADF, SQL Server | Eggplant, Postman | JIRA + Zephyr, Confluence, Power BI
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">10</div>
+  <div class="slide-number">11</div>
 </div>
 
-<!-- ── SLIDE 11: 05-measurement.html ── -->
+<!-- ── SLIDE 12: 05-measurement.html ── -->
 <div class="slide">
   <h2>How We Measure Success</h2>
-  <p>We start with the <strong>process</strong>, identify what AI improves, then select the <strong>KPI</strong> that proves it. <em style="color:#888;">(Examples below &mdash; final selection based on your priorities)</em></p>
+  <p>We measure <strong>tangible outputs</strong>, not story points. Start with the SDLC process, identify what AI improves, then select the metric that proves it.</p>
 
   <table>
-    <tr><th>Process</th><th>Role</th><th>What AI Does</th><th>Expected Outcome</th><th>KPI</th></tr>
+    <tr><th>Process</th><th>Role</th><th>What AI Does</th><th>Tangible Output</th><th>Metric</th></tr>
     <tr>
       <td><strong>Story Writing</strong></td>
-      <td>BA</td>
-      <td>Validates story quality, flags gaps before review</td>
-      <td>Fewer rework cycles, faster approval</td>
+      <td>BA-Tech</td>
+      <td>Validates quality, flags gaps</td>
+      <td>Stories drafted, rework reduced</td>
       <td>Rejection rate, review cycle time</td>
-    </tr>
-    <tr>
-      <td><strong>Acceptance Criteria</strong></td>
-      <td>BA / PO</td>
-      <td>Drafts Gherkin/BDD criteria from story</td>
-      <td>Clearer requirements, better testability</td>
-      <td>Test coverage %, first pass yield</td>
     </tr>
     <tr>
       <td><strong>Test Script Creation</strong></td>
       <td>Tester</td>
       <td>Generates test framework from AC</td>
-      <td>Faster test creation, more scenarios</td>
-      <td>Test creation time, defect escape rate</td>
-    </tr>
-    <tr>
-      <td><strong>Code Comprehension</strong></td>
-      <td>Developer</td>
-      <td>Explains plugin logic, identifies issues</td>
-      <td>Faster onboarding, faster debugging</td>
-      <td>Cycle time per story</td>
-    </tr>
-    <tr>
-      <td><strong>Code Review</strong></td>
-      <td>Developer</td>
-      <td>AI reviews code for issues, security scans, suggests improvements</td>
-      <td>Better code quality, faster review feedback</td>
-      <td>Defect density, review turnaround time</td>
+      <td>Test scripts generated</td>
+      <td>Test creation time, scripts per sprint</td>
     </tr>
     <tr>
       <td><strong>Documentation</strong></td>
       <td>All</td>
       <td>Generates docs from code/config</td>
-      <td>Reduced doc backlog, knowledge transfer</td>
-      <td>Documentation coverage</td>
+      <td>Documentation lines generated</td>
+      <td>Doc coverage, lines per sprint</td>
     </tr>
     <tr>
-      <td><strong>Refinement</strong></td>
-      <td>Scrum Lead</td>
-      <td>Identifies missing edge cases before sprint</td>
-      <td>Fewer mid-sprint surprises</td>
-      <td>Rework rate, requirement clarity</td>
+      <td><strong>Code Generation</strong></td>
+      <td>Developer</td>
+      <td>Suggests code, developer reviews &amp; accepts</td>
+      <td>Lines of code generated &amp; accepted</td>
+      <td>LOC accepted, acceptance rate</td>
+    </tr>
+    <tr>
+      <td><strong>Configuration</strong></td>
+      <td>Config Team</td>
+      <td>Suggests Dynamics config patterns</td>
+      <td>Configuration lines generated</td>
+      <td>Config lines, rework rate</td>
+    </tr>
+    <tr>
+      <td><strong>Code Review</strong></td>
+      <td>Developer</td>
+      <td>AI pre-reviews for issues</td>
+      <td>Issues caught before peer review</td>
+      <td>Defect density, review time</td>
     </tr>
   </table>
 
   <div class="metric-row">
     <div class="metric-card">
-      <div class="number">22</div>
-      <div class="label">KPIs in Framework</div>
+      <div class="number">10-15%</div>
+      <div class="label">Target Improvement</div>
     </div>
     <div class="metric-card">
-      <div class="number">&le;8</div>
-      <div class="label">Selected for Pilot</div>
+      <div class="number">13</div>
+      <div class="label">Weeks (1 PI)</div>
     </div>
     <div class="metric-card">
-      <div class="number">1 PI</div>
-      <div class="label">Pilot Duration</div>
+      <div class="number">LOC</div>
+      <div class="label">Primary Metric</div>
     </div>
   </div>
 
   <div class="callout info">
-    <strong>Next step:</strong> We need to understand your current SDLC processes and bottlenecks to select the right SDLC processes &mdash; the KPIs follow from that. Full KPI catalog in appendix.
+    <strong>Key shift (Apr 13):</strong> Jim directed measurement based on tangible outputs (lines of code, docs, config) &mdash; not story points. Full KPI catalog in appendix.
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">11</div>
+  <div class="slide-number">12</div>
 </div>
 
-<!-- ── SLIDE 12: 06-timeline.html ── -->
+<!-- ── SLIDE 13: 06-timeline.html ── -->
 <div class="slide">
   <h2>Timeline &amp; Major Milestones</h2>
   <p>Anchored to PI cadence &mdash; specific dates to be confirmed.</p>
@@ -1126,10 +1238,10 @@
     <strong>Key deliverables:</strong> Baseline report (pre-PI) &bull; Pilot results &amp; lessons learned (end of pilot PI) &bull; Role-based playbooks &bull; Scale recommendation
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">12</div>
+  <div class="slide-number">13</div>
 </div>
 
-<!-- ── SLIDE 13: 07-asks.html ── -->
+<!-- ── SLIDE 14: 07-asks.html ── -->
 <div class="slide">
   <h2>What We Need From You</h2>
 
@@ -1173,10 +1285,10 @@
     </tr>
   </table>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">13</div>
+  <div class="slide-number">14</div>
 </div>
 
-<!-- ── SLIDE 14: A1-use-cases.html ── -->
+<!-- ── SLIDE 15: A1-use-cases.html ── -->
 <div class="slide">
   <h2>Appendix: AI-Augmented SDLC Processes by Role</h2>
 
@@ -1226,10 +1338,10 @@
     </div>
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">14</div>
+  <div class="slide-number">15</div>
 </div>
 
-<!-- ── SLIDE 15: A2-processes.html ── -->
+<!-- ── SLIDE 16: A2-processes.html ── -->
 <div class="slide">
   <h2>Appendix: Processes We're Improving</h2>
 
@@ -1246,10 +1358,10 @@
     <strong>Key Insight from Early Testing (John):</strong> AI amplifies quality &mdash; good input produces better output; bad input produces worse output. That's why we <strong>train first, then deploy</strong>.
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">15</div>
+  <div class="slide-number">16</div>
 </div>
 
-<!-- ── SLIDE 16: A3-governance.html ── -->
+<!-- ── SLIDE 17: A3-governance.html ── -->
 <div class="slide">
   <h2>Appendix: Governance &amp; DoIT AI Policy Compliance</h2>
   <p>We've reviewed all 12 sections of the State of Illinois DoIT AI Policy (effective April 1, 2025).</p>
@@ -1271,52 +1383,52 @@
     <strong>Critical Path:</strong> If the DoIT 30-day assessment notice has NOT been filed for Copilot/Rovo, the earliest legal pilot start is <strong>30 days after filing</strong>. This could push the pilot past PI Planning (May 5-7).
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">16</div>
-</div>
-
-<!-- ── SLIDE 17: A4-guardrails.html ── -->
-<div class="slide">
-  <h2>Appendix: Your Guardrails &mdash; Acknowledged &amp; Built In</h2>
-
-  <table>
-    <tr><th>Directive</th><th>How We've Built It In</th></tr>
-    <tr><td><strong>No autonomous code generation</strong></td><td>Copilot for suggestions only &mdash; developers implement all code. Documented in every playbook.</td></tr>
-    <tr><td><strong>AI for SDLC only, not business processes</strong></td><td>All targeted processes are delivery processes (story writing, testing, coding, docs). Zero business process automation.</td></tr>
-    <tr><td><strong>No child information shared</strong></td><td>"No PII" rule in every playbook. Training module. Per-sprint spot checks.</td></tr>
-    <tr><td><strong>No security documentation</strong></td><td>Security plans excluded from all AI tool contexts. Team is trained on boundaries.</td></tr>
-    <tr><td><strong>Background check / onboarding for Vinay</strong></td><td>Robert coordinating clearances. Vinay participating within information boundaries until complete.</td></tr>
-    <tr><td><strong>Only state-approved tools</strong></td><td>Framework uses only Copilot + Rovo + Confluence AI. No additional tools without state approval.</td></tr>
-  </table>
-
-  <div class="callout target">
-    <strong>Bottom line:</strong> Krasan is demonstrating discipline and intentionality. We start small, stay within boundaries, measure everything, and prove value before scaling.
-  </div>
-  <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
   <div class="slide-number">17</div>
 </div>
 
-<!-- ── SLIDE 18: A5-pilot-design.html ── -->
+<!-- ── SLIDE 18: A4-guardrails.html ── -->
 <div class="slide">
-  <h2>Appendix: Pilot Design</h2>
+  <h2>Appendix: Guardrails &mdash; Updated Post-Jim Meeting</h2>
+
+  <table>
+    <tr><th>Directive</th><th>How We've Built It In</th></tr>
+    <tr><td><strong>Human-in-the-loop for all AI output</strong></td><td>All AI suggestions (code, docs, config) reviewed by human before use. Code review process satisfies DoIT Section 4d &amp; 5d.</td></tr>
+    <tr><td><strong>AI code generation &mdash; stair-stepped</strong></td><td>Step 1: stories/docs. Step 2: test scripts. Step 3: config suggestions. Step 4: plugin/custom code. Each step requires training + review process.</td></tr>
+    <tr><td><strong>AI for SDLC only, not business processes</strong></td><td>All targeted processes are delivery processes (story writing, testing, coding, docs, configuration). Zero business process automation.</td></tr>
+    <tr><td><strong>No child information shared</strong></td><td>"No PII" rule in every playbook. Training module. Per-sprint spot checks.</td></tr>
+    <tr><td><strong>No security documentation</strong></td><td>Security plans excluded from all AI tool contexts. Team is trained on boundaries.</td></tr>
+    <tr><td><strong>Only state-approved tools</strong></td><td>Copilot + Rovo + Confluence AI. Additional tools require governance team approval + DoIT 30-day notice.</td></tr>
+    <tr><td><strong>Governance team oversight</strong></td><td>DCFS-led governance team (Jim as sponsor). Krasan presents, DCFS decides. NIST AI RMF aligned.</td></tr>
+  </table>
+
+  <div class="callout target">
+    <strong>Key change from Apr 13:</strong> Code generation is no longer excluded. Jim confirmed the original constraint was "accidental." DoIT policy supports code generation with human-in-the-loop. Stair-stepped approach approved.
+  </div>
+  <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
+  <div class="slide-number">18</div>
+</div>
+
+<!-- ── SLIDE 19: A5-pilot-design.html ── -->
+<div class="slide">
+  <h2>Appendix: Pilot Design &mdash; Updated</h2>
 
   <div class="two-col">
     <div>
-      <h3>Team Selection Criteria</h3>
-      <ul>
-        <li>Technically mature team with strong leadership</li>
-        <li>Strong BAs who can evaluate AI output quality</li>
-        <li>Cooperative PO / BA / Dev relationship</li>
-        <li>Representative workload (not most complex)</li>
-      </ul>
-
-      <h3>Pilot Composition (per team)</h3>
+      <h3>Team Composition (per Scrum team)</h3>
       <table>
-        <tr><th>Role</th><th>Count</th><th>AI Focus</th></tr>
-        <tr><td>BA</td><td>1</td><td>Story quality, AC generation</td></tr>
-        <tr><td>Tester</td><td>1</td><td>Test generation from AC</td></tr>
-        <tr><td>Developer</td><td>1-2</td><td>Code explanation, docs</td></tr>
-        <tr><td>Scrum Lead</td><td>1</td><td>Oversight, reporting</td></tr>
+        <tr><th>Role</th><th>Vendor</th><th>In Pilot?</th></tr>
+        <tr><td>Product Owner (PO)</td><td>State / ISI</td><td><span class="tag amber">Later</span></td></tr>
+        <tr><td>BA - Functional</td><td>CSG</td><td><span class="tag amber">Later</span></td></tr>
+        <tr><td>BA - Technical</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
+        <tr><td>Configuration Team</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
+        <tr><td>Development Team</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
+        <tr><td>Testers</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
+        <tr><td>Scrum Master/Lead</td><td>Krasan</td><td><span class="tag green">Yes</span></td></tr>
       </table>
+
+      <div class="callout info" style="margin-top:12px;font-size:11px">
+        <strong>Strategy:</strong> Start with Krasan roles only. Identify issues first. Include other vendor roles (PMO, BA-Functional) after &mdash; Jim approved this expansion.
+      </div>
     </div>
     <div>
       <h3>Pilot vs Control</h3>
@@ -1332,19 +1444,25 @@
             <div style="font-size:12px;color:#666">Control Teams<br>(Business as Usual)</div>
           </div>
         </div>
-        <div style="font-size:12px;color:#666">Same PI &bull; Same conditions &bull; Measurable difference</div>
+        <div style="font-size:12px;color:#666">Sprints 3 &amp; 4 &bull; 15% capacity for AI &bull; 13-week PI</div>
       </div>
 
-      <h3>Candidate Identification</h3>
-      <p>John (Agile Delivery Manager) has identified strong candidates. Final selection pending team lead input.</p>
-      <p><span class="tag red">Pending</span> Pilot team names not yet finalized</p>
+      <h3 style="margin-top:12px">Stair-Stepped Code Generation</h3>
+      <table>
+        <tr><th>Step</th><th>What</th><th>Sprint</th></tr>
+        <tr><td>1</td><td>User story quality (Rovo)</td><td>1-2</td></tr>
+        <tr><td>2</td><td>Docs + code comprehension (Copilot)</td><td>2-3</td></tr>
+        <tr><td>3</td><td>Test script generation</td><td>3</td></tr>
+        <tr><td>4</td><td>Config suggestions (Dynamics)</td><td>3-4</td></tr>
+        <tr><td>5</td><td>Plugin/custom code (Copilot)</td><td>4+</td></tr>
+      </table>
     </div>
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">18</div>
+  <div class="slide-number">19</div>
 </div>
 
-<!-- ── SLIDE 19: A6-deliverables.html ── -->
+<!-- ── SLIDE 20: A6-deliverables.html ── -->
 <div class="slide">
   <h2>Appendix: Deliverables</h2>
 
@@ -1362,10 +1480,10 @@
     <tr><td>10</td><td>Executive Recommendation for ART-Wide Rollout</td><td>End of Pilot PI</td><td><span class="tag blue">Future</span></td></tr>
   </table>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">19</div>
+  <div class="slide-number">20</div>
 </div>
 
-<!-- ── SLIDE 20: A7-risks.html ── -->
+<!-- ── SLIDE 21: A7-risks.html ── -->
 <div class="slide">
   <h2>Appendix: Risk Register</h2>
 
@@ -1379,10 +1497,10 @@
     <tr><td>Team resistance to AI tools</td><td><span class="tag amber">Medium</span></td><td><span class="tag amber">Medium</span></td><td>Voluntary pilot; strong participants; show value first</td></tr>
   </table>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">20</div>
+  <div class="slide-number">21</div>
 </div>
 
-<!-- ── SLIDE 21: A8-team.html ── -->
+<!-- ── SLIDE 22: A8-team.html ── -->
 <div class="slide">
   <h2>Appendix: Working Team</h2>
 
@@ -1403,10 +1521,10 @@
     <strong>Krasan's Investment:</strong> This team is already mobilized and working. Krasan is proactively investing in AI transformation &mdash; not waiting for DCFS to define the approach.
   </div>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">21</div>
+  <div class="slide-number">22</div>
 </div>
 
-<!-- ── SLIDE 22: A9-kpi-catalog.html ── -->
+<!-- ── SLIDE 23: A9-kpi-catalog.html ── -->
 <div class="slide">
   <h2>Appendix: Full KPI Catalog (22 KPIs)</h2>
   <p>Framework includes 22 KPIs across 5 categories. Up to 8 will be selected based on targeted SDLC processes and data availability.</p>
@@ -1438,7 +1556,7 @@
     <tr><td>22</td><td></td><td>Feature lead time</td><td>End-to-end time from feature definition to delivery</td><td>JIRA</td></tr>
   </table>
   <div class="slide-footer"><a href="https://krasanconsulting.com/" target="_blank"><img src="../assets/krasan-logo.png" alt="Krasan"></a> Krasan Consulting Services</div>
-  <div class="slide-number">22</div>
+  <div class="slide-number">23</div>
 </div>
 
 
@@ -1716,7 +1834,7 @@
 <!-- ── Slide Navigation Controls ── -->
 <div class="slide-nav">
   <button id="btn-prev" onclick="navigateSlide(-1)" title="Previous (Left Arrow)">&#8592;</button>
-  <div class="slide-counter" id="slide-counter">1 / 22</div>
+  <div class="slide-counter" id="slide-counter">1 / 23</div>
   <button id="btn-next" onclick="navigateSlide(1)" title="Next (Right Arrow)">&#8594;</button>
   <button class="mode-toggle" id="btn-mode" onclick="toggleMode()" title="Toggle presentation mode (F5)">Present</button>
   <button class="mode-toggle" onclick="printSlides()" title="Print / Save as PDF">Print</button>
