@@ -1,22 +1,27 @@
 # DCFS Illinois Connect — AI-Augmented Agile Delivery Plan
 
-> **Status:** DRAFT v3 — Due April 17, 2026
+> **Version:** V04142026 (DRAFT v4)
+> **Status:** Updated post-Jim meeting April 13, 2026
 > **Framework Guide:** See [guide/README.md](guide/README.md) for the complete 13-chapter framework reference
-> **Owner:** Vinay Lagisetty (Krasan, AI Transformation Leader) + Romi (Krasan, Engagement Director)
-> **Audience:** Jim Daugherty (CIO, DCFS/DeWitt), Dinkar (Krasan Executive Sponsor)
-> **Methodology:** GQM (Basili 1994), DORA/Accelerate (Forsgren 2018), SPACE (Microsoft Research 2021), QUS (Lucassen 2016), Six Sigma DMAIC
+> **Owner:** Vinay Lagisetty (AI Transformation Leader, Krasan) + Romi (Engagement Director, Krasan)
+> **Audience:** Dave (Interim AI Lead), Jim Daugherty (CIO, DCFS/DoIT), Dinkar (Krasan Executive Sponsor)
+> **Methodology:** GQM (Basili 1994), DORA/Accelerate (Forsgren 2018), SPACE (Microsoft Research 2021), QUS (Lucassen 2016), Six Sigma DMAIC, NIST AI RMF 1.0
 
 ---
 
 ## 1. Executive Summary
 
-Krasan proposes a structured AI augmentation pilot across select ILC product teams to measurably improve delivery productivity and quality. AI tools already available to the State — **GitHub Copilot** and **Atlassian Rovo** — will be applied to Business Analyst, Tester, and Developer workflows with structured training, clear guardrails, and research-backed measurement.
+Krasan proposes a structured AI augmentation pilot across select ILC product teams to measurably improve delivery productivity and quality. AI tools available to the State — **GitHub Copilot** (multi-model: OpenAI, Google Gemini, Anthropic Claude), **Atlassian Rovo**, and **Dynamics 365 Power Platform AI** — will be applied to BA-Technical, Configuration, Developer, Tester, and Scrum Master workflows with structured training, clear guardrails, and research-backed measurement.
 
-**Target:** 5%+ improvement in team velocity and delivery quality over one Program Increment (PI), measured against a quantitative baseline.
+**Target:** 10-15% productivity improvement within 13 weeks (1 PI), measured by tangible outputs (lines of code, documentation, configuration generated) — not story points.
 
-**Approach:** Govern → Baseline → Train → Pilot → Measure → Playbook → Scale
+**Approach:** Govern → Baseline → Design → Train → Pilot → Measure → Playbook → Scale
 
-**Philosophy:** AI amplifies the existing team — same people, better tools, more output. No workforce reduction. No autonomous code generation.
+**Philosophy:** AI amplifies the existing team — same people, better tools, more output. No workforce reduction. AI-assisted code generation with human-in-the-loop review (stair-stepped introduction).
+
+**Governance:** DCFS-led governance team (NIST AI RMF + DoIT AI Policy aligned). Krasan executes and reports. See [governance proposal](governance-proposal-v04142026.md).
+
+**Interim Contact:** Dave (designated by Jim during his absence).
 
 ---
 
@@ -29,7 +34,7 @@ Krasan proposes a structured AI augmentation pilot across select ILC product tea
 - **Tech stack:** Dynamics 365, Visual Studio, JIRA, Confluence, GitHub
 
 ### The Ask
-CIO Jim Daugherty has asked Krasan to develop and execute an AI rollout plan to improve productivity across the ILC product teams. The target is a measurable 5% improvement, with the possibility of exceeding that.
+CIO Jim Daugherty has asked Krasan to develop and execute an AI rollout plan to improve productivity across the ILC product teams. The target is **10-15% improvement within 13 weeks**, measured by tangible outputs. Jim confirmed (April 13) that AI code generation should be included via a stair-stepped approach, and designated Dave as interim AI lead during his absence.
 
 ### Current State
 - Teams are delivering satisfactorily — client is happy with current commitments
@@ -298,18 +303,21 @@ All metrics tracked in the **AI Transformation Monitor** at `tools.ussp.co`:
 
 ---
 
-## 9. Success Criteria
+## 9. Success Criteria (Updated April 13 — Jim's Targets)
 
 | Criterion | Target | How Measured |
 |-----------|--------|-------------|
-| Velocity improvement (pilot teams vs baseline) | >= 5% | JIRA sprint velocity comparison |
-| Story quality score improvement | Measurable increase | QUS-based scoring before/after |
-| Story review cycle time reduction | >= 10% | JIRA transition timestamps |
-| Test creation time reduction | >= 15% | Manual time tracking |
-| First pass yield improvement | Measurable increase | JIRA transitions (stories rejected in QA) |
+| **Tangible output improvement** | **10-15%** | Lines of code, documentation, configuration generated (pilot vs baseline) |
+| Cycle time reduction | >= 10% | JIRA transition timestamps |
+| Quality maintained or improved | No increase in defect density | JIRA defect tracking |
+| Story rejection rate reduction | Measurable decrease | JIRA transitions |
+| First pass yield improvement | Measurable increase | JIRA transitions |
 | Team satisfaction (SPACE survey) | No decrease (ideally increase) | Survey scores |
-| Playbooks produced | 1 per role | BA, Tester, Developer, Data playbooks |
+| Playbooks produced | 1 per role | BA-Tech, Config, Developer, Tester, Scrum Master |
 | DoIT policy compliance | 100% | Documented compliance on all 12 sections |
+| Code generation adoption | Stair-stepped through 5 levels | Governance team approves each step |
+
+See [measurement-methodology-v04142026.md](measurement-methodology-v04142026.md) for full methodology.
 
 ---
 
