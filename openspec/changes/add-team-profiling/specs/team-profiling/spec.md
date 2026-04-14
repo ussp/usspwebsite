@@ -69,4 +69,44 @@ The system SHALL provide a team profile detail page within the engagement view t
 
 #### Scenario: View complete team profile
 - **WHEN** user clicks on a team within an engagement
-- **THEN** the team profile page displays all sections in a single, scrollable view with section navigation
+- **THEN** the team profile page displays all sections in a tabbed view with section navigation
+
+### Requirement: Assessment Integration
+The system SHALL automatically populate team profile data from the assessment module — readiness scores from the readiness assessment, baseline metrics from JIRA baseline, and training assignments from team composition.
+
+#### Scenario: Readiness assessment populates team profile
+- **WHEN** the readiness assessment for a team is completed
+- **THEN** the team profile's readiness section automatically updates with sub-scores (Skills, Process, Attitude, Infrastructure) and overall readiness tier
+
+#### Scenario: Baseline assessment populates team profile
+- **WHEN** the JIRA baseline data pull is completed for a team
+- **THEN** the team profile's baseline section automatically displays the last 3 sprints of metrics
+
+#### Scenario: Training plan auto-generated from composition
+- **WHEN** user clicks "Generate Training Plan" on the team profile
+- **THEN** the system assigns training tracks based on member roles (Foundation for all pilot members, role-specific tracks by role) and creates training status records
+
+#### Scenario: Pilot readiness gate
+- **WHEN** the engagement lead checks if a team is ready to enter the pilot
+- **THEN** the system validates: all pilot members have completed their assigned training tracks, readiness score is above threshold, baseline metrics are captured
+
+### Requirement: Contextual Tooltips
+The system SHALL provide contextual tooltips on all team profile fields explaining the purpose, expected values, and guidance for each input.
+
+#### Scenario: User hovers over a field label
+- **WHEN** user hovers over or focuses on a team profile field label
+- **THEN** a tooltip appears with a brief explanation of the field's purpose and expected values
+
+### Requirement: Audit Logging
+The system SHALL log all team profile create, update, and delete operations to the audit trail with user, timestamp, and change details.
+
+#### Scenario: Team profile modified
+- **WHEN** any team profile data is created, updated, or deleted
+- **THEN** an audit log entry records the user, timestamp, field changed, old value, and new value
+
+### Requirement: Documentation
+The system's team profiling feature SHALL be documented in the user guide (usage), admin guide (API/schema), and framework guide (deployment), with tooltips providing inline help for all fields.
+
+#### Scenario: New user learns team profiling
+- **WHEN** a new user accesses the team profiling feature
+- **THEN** they can reference the user guide for step-by-step instructions, tooltips for inline help, and the admin guide for technical details
