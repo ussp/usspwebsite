@@ -215,7 +215,7 @@
 // ── Data Store ──
 const STORAGE_KEY = 'dcfs-ilc-project-planner';
 const PROJECT_START = new Date('2026-04-14');
-const WEEKS_TO_SHOW = 16;
+const WEEKS_TO_SHOW = 21;
 
 let data = loadData();
 
@@ -244,64 +244,83 @@ function getDefaultData() {
       { id: 't15', wbs: '2.5', name: 'Select 2 pilot teams (Krasan roles only)', phase: 'baseline', start: '2026-04-28', end: '2026-05-02', status: 'not-started', owner: 'Romi/John', notes: 'Based on readiness scores + baseline data.', depends: '2.4' },
       { id: 't16', wbs: '2.6', name: 'Baseline metrics report', phase: 'baseline', start: '2026-04-30', end: '2026-05-04', status: 'not-started', owner: 'Vinay', notes: '', depends: '2.2' },
 
-      // ── PHASE 3: DESIGN ──
-      { id: 'P3', wbs: '3', name: 'DESIGN', phase: 'design', isPhase: true, start: '2026-04-16', end: '2026-05-04', status: 'in-progress', owner: 'Vinay', notes: 'Map current → AI-augmented state, define tools & methods per role.' },
+      // ── PHASE 3: DESIGN (role-by-role) ──
+      { id: 'P3', wbs: '3', name: 'DESIGN', phase: 'design', isPhase: true, start: '2026-04-14', end: '2026-05-30', status: 'in-progress', owner: 'Vinay', notes: 'Per-role: document workflow → analyze → experiment → design → write docs → build materials. Two sets: Set 1 (BA-Tech + Dev) in Sprint 1, Set 2 (Config + Tester + SM) in Sprint 3.' },
       { id: 't17', wbs: '3.1', name: 'Dynamics working session (Kashif/Shyam)', phase: 'design', start: '2026-04-16', end: '2026-04-22', status: 'not-started', owner: 'Jeffrey', notes: 'Explore config generation capabilities.' },
       { id: 't18', wbs: '3.2', name: 'Dynamics POC environment setup', phase: 'design', start: '2026-04-18', end: '2026-05-02', status: 'not-started', owner: 'Dinkar', notes: 'Demo environment outside State.', depends: '3.1' },
-      { id: 't19', wbs: '3.3', name: 'Map SDLC processes — current → AI-augmented per role', phase: 'design', start: '2026-04-21', end: '2026-05-02', status: 'not-started', owner: 'Vinay', notes: 'BA-Tech, Config, Dev, Tester, SM.' },
+      { id: 't19', wbs: '3.3', name: 'Measurement methodology — tangible outputs', phase: 'design', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: 'LOC, documentation lines, config lines. Not story points.' },
       { id: 't20', wbs: '3.4', name: 'Stair-stepped code generation plan', phase: 'design', start: '2026-04-21', end: '2026-04-30', status: 'not-started', owner: 'Vinay', notes: 'Step 1: stories → 2: docs → 3: tests → 4: config → 5: code.' },
-      { id: 't21', wbs: '3.5', name: 'Measurement methodology — tangible outputs', phase: 'design', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: 'LOC, documentation lines, config lines. Not story points.' },
-      { id: 't22', wbs: '3.6', name: 'Draft role-based playbooks', phase: 'design', start: '2026-04-28', end: '2026-05-04', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.3' },
-      { id: 't23', wbs: '3.7', name: 'Build training plan from process designs', phase: 'design', start: '2026-04-28', end: '2026-05-04', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.3' },
+      // ── Set 1: BA-Technical (Sprint 1) ──
+      { id: 't21', wbs: '3.5', name: '[BA-Tech] Document current workflow — interview, observe', phase: 'design', start: '2026-05-05', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: 'Interview BA-Technical team members. Document how stories/ACs are written today.' },
+      { id: 't22', wbs: '3.6', name: '[BA-Tech] Analyze SDLC processes for AI augmentation', phase: 'design', start: '2026-05-09', end: '2026-05-12', status: 'not-started', owner: 'Vinay', notes: 'Which BA processes benefit from Rovo?', depends: '3.5' },
+      { id: 't23', wbs: '3.7', name: '[BA-Tech] Experiment with AI tools on real work', phase: 'design', start: '2026-05-12', end: '2026-05-14', status: 'not-started', owner: 'Vinay', notes: 'Try Rovo on actual ILC stories. Test prompts. Note what works.', depends: '3.6' },
+      { id: 't24', wbs: '3.8', name: '[BA-Tech] Design AI-augmented workflow', phase: 'design', start: '2026-05-14', end: '2026-05-16', status: 'not-started', owner: 'Vinay', notes: 'Current state → AI-augmented state per process.', depends: '3.7' },
+      { id: 't25', wbs: '3.9', name: '[BA-Tech] Write process docs + playbook draft', phase: 'design', start: '2026-05-14', end: '2026-05-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.8' },
+      { id: 't26', wbs: '3.10', name: '[BA-Tech] Build training materials — prompts, examples, cheat sheet', phase: 'design', start: '2026-05-14', end: '2026-05-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.8' },
+      // ── Set 1: Developer (Sprint 1, parallel with BA-Tech) ──
+      { id: 't27', wbs: '3.11', name: '[Dev] Document current workflow — interview, observe', phase: 'design', start: '2026-05-05', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: 'Interview developers. Document code review, docs, plugin work.' },
+      { id: 't28', wbs: '3.12', name: '[Dev] Analyze SDLC processes for AI augmentation', phase: 'design', start: '2026-05-09', end: '2026-05-12', status: 'not-started', owner: 'Vinay', notes: 'Which dev processes benefit from Copilot?', depends: '3.11' },
+      { id: 't29', wbs: '3.13', name: '[Dev] Experiment with AI tools on real work', phase: 'design', start: '2026-05-12', end: '2026-05-14', status: 'not-started', owner: 'Vinay', notes: 'Try Copilot on actual ILC code. Test prompts.', depends: '3.12' },
+      { id: 't30', wbs: '3.14', name: '[Dev] Design AI-augmented workflow', phase: 'design', start: '2026-05-14', end: '2026-05-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.13' },
+      { id: 't31', wbs: '3.15', name: '[Dev] Write process docs + playbook draft', phase: 'design', start: '2026-05-14', end: '2026-05-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.14' },
+      { id: 't32', wbs: '3.16', name: '[Dev] Build training materials — prompts, examples, cheat sheet', phase: 'design', start: '2026-05-14', end: '2026-05-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.14' },
+      // ── Set 2: Config + Tester + SM (Sprint 3, after Set 1 is trained) ──
+      { id: 't33', wbs: '3.17', name: '[Config] Document + Analyze + Experiment + Design + Docs + Materials', phase: 'design', start: '2026-06-02', end: '2026-06-13', status: 'not-started', owner: 'Vinay', notes: 'Full cycle for Configuration role. Benefits from BA-Tech/Dev lessons.', depends: '4.4' },
+      { id: 't34', wbs: '3.18', name: '[Tester] Document + Analyze + Experiment + Design + Docs + Materials', phase: 'design', start: '2026-06-02', end: '2026-06-13', status: 'not-started', owner: 'Vinay', notes: 'Full cycle for Tester role.', depends: '4.4' },
+      { id: 't35', wbs: '3.19', name: '[SM] Document + Analyze + Experiment + Design + Docs + Materials', phase: 'design', start: '2026-06-02', end: '2026-06-13', status: 'not-started', owner: 'Vinay', notes: 'Full cycle for Scrum Master role.', depends: '4.4' },
 
-      // ── PHASE 4: TRAIN ──
-      { id: 'P4', wbs: '4', name: 'TRAIN', phase: 'train', isPhase: true, start: '2026-04-28', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: 'Role-specific training: 6 tracks.' },
-      { id: 't24', wbs: '4.1', name: 'Build training materials — prompts, examples, cheat sheets', phase: 'train', start: '2026-04-28', end: '2026-05-02', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.7' },
-      { id: 't25', wbs: '4.2', name: 'Foundation track (1.5h) — all pilot participants', phase: 'train', start: '2026-05-02', end: '2026-05-05', status: 'not-started', owner: 'Vinay', notes: '', depends: '4.1' },
-      { id: 't26', wbs: '4.3', name: 'BA-Technical track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '', depends: '4.2' },
-      { id: 't27', wbs: '4.4', name: 'Configuration track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '', depends: '4.2' },
-      { id: 't28', wbs: '4.5', name: 'Developer track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '', depends: '4.2' },
-      { id: 't29', wbs: '4.6', name: 'Tester track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '', depends: '4.2' },
-      { id: 't30', wbs: '4.7', name: 'Scrum Master track (2h)', phase: 'train', start: '2026-05-07', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: '', depends: '4.2' },
-      { id: 't31', wbs: '4.8', name: 'Leadership Briefing (1h) — Dave, POs', phase: 'train', start: '2026-05-07', end: '2026-05-09', status: 'not-started', owner: 'Vinay/Romi', notes: '' },
+      // ── PHASE 4: TRAIN (role-by-role) ──
+      { id: 'P4', wbs: '4', name: 'TRAIN', phase: 'train', isPhase: true, start: '2026-05-05', end: '2026-06-27', status: 'not-started', owner: 'Vinay', notes: 'Set 1 trained in Sprint 2. Set 2 trained in Sprint 4. Foundation track for all.' },
+      { id: 't36', wbs: '4.1', name: 'Foundation track (1.5h) — all pilot participants', phase: 'train', start: '2026-05-05', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: 'DoIT compliance, guardrails, what success looks like. Before any role training.' },
+      { id: 't37', wbs: '4.2', name: 'Leadership Briefing (1h) — Pilot Gov Lead, POs', phase: 'train', start: '2026-05-07', end: '2026-05-09', status: 'not-started', owner: 'Vinay/Romi', notes: '' },
+      // ── Set 1 Training (Sprint 2) ──
+      { id: 't38', wbs: '4.3', name: '[BA-Tech] Deliver training (3h)', phase: 'train', start: '2026-05-19', end: '2026-05-21', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.10' },
+      { id: 't39', wbs: '4.4', name: '[Dev] Deliver training (3h)', phase: 'train', start: '2026-05-19', end: '2026-05-21', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.16' },
+      // ── Set 2 Training (Sprint 4) ──
+      { id: 't40', wbs: '4.5', name: '[Config] Deliver training (3h)', phase: 'train', start: '2026-06-16', end: '2026-06-18', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.17' },
+      { id: 't41', wbs: '4.6', name: '[Tester] Deliver training (3h)', phase: 'train', start: '2026-06-16', end: '2026-06-18', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.18' },
+      { id: 't42', wbs: '4.7', name: '[SM] Deliver training (2h)', phase: 'train', start: '2026-06-16', end: '2026-06-18', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.19' },
 
-      // ── PHASE 5: PILOT ──
-      { id: 'P5', wbs: '5', name: 'PILOT', phase: 'pilot', isPhase: true, start: '2026-05-05', end: '2026-06-27', status: 'not-started', owner: 'Vinay', notes: '2 teams, Sprints 3 & 4, 15% capacity, Krasan roles only.' },
-      { id: 't32', wbs: '5.1', name: 'PI 20 Planning — introduce AI pilot to ART', phase: 'pilot', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Romi/Vinay', notes: '', depends: '4.2' },
-      { id: 't33', wbs: '5.2', name: 'Configure tools.ussp.co / dashboards', phase: 'pilot', start: '2026-05-05', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: 'Or JIRA + Power BI if tools.ussp.co not approved.' },
-      { id: 't34', wbs: '5.3', name: 'Sprint 1-2 — ramp up, training reinforcement', phase: 'pilot', start: '2026-05-12', end: '2026-05-30', status: 'not-started', owner: 'Pilot Teams', notes: 'Office hours, prompt coaching, early adoption.' },
-      { id: 't35', wbs: '5.4', name: 'Sprint 3 — AI-augmented delivery (2 teams)', phase: 'pilot', start: '2026-06-02', end: '2026-06-13', status: 'not-started', owner: 'Pilot Teams', notes: 'Full pilot execution begins.', depends: '5.3' },
-      { id: 't36', wbs: '5.5', name: 'Sprint 4 — AI-augmented delivery (2 teams)', phase: 'pilot', start: '2026-06-16', end: '2026-06-27', status: 'not-started', owner: 'Pilot Teams', notes: '', depends: '5.4' },
-      { id: 't37', wbs: '5.6', name: 'Weekly check-ins (throughout pilot)', phase: 'pilot', start: '2026-05-12', end: '2026-06-27', status: 'not-started', owner: 'Vinay', notes: '' },
+      // ── PHASE 5: PILOT (sprint-by-sprint) ──
+      { id: 'P5', wbs: '5', name: 'PILOT', phase: 'pilot', isPhase: true, start: '2026-05-05', end: '2026-07-11', status: 'not-started', owner: 'Vinay', notes: '2 teams, Krasan roles. Set 1 uses AI from Sprint 2. Set 2 joins Sprint 4. 15% capacity.' },
+      { id: 't43', wbs: '5.1', name: 'PI 20 Planning — introduce AI pilot to ART', phase: 'pilot', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Romi/Vinay', notes: '' },
+      { id: 't44', wbs: '5.2', name: 'Configure dashboards (JIRA + Power BI)', phase: 'pilot', start: '2026-05-05', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't45', wbs: '5.3', name: 'Sprint 1 — Design Set 1 roles (BA-Tech + Dev)', phase: 'pilot', start: '2026-05-12', end: '2026-05-23', status: 'not-started', owner: 'Vinay', notes: 'Design phase for first 2 roles. No AI use by teams yet.' },
+      { id: 't46', wbs: '5.4', name: 'Sprint 2 — Train Set 1 + BA-Tech/Dev start using AI', phase: 'pilot', start: '2026-05-26', end: '2026-06-06', status: 'not-started', owner: 'Pilot Teams', notes: 'BA-Tech and Dev trained and start using AI tools.', depends: '4.4' },
+      { id: 't47', wbs: '5.5', name: 'Sprint 3 — Set 1 using AI + Design Set 2 (Config/Tester/SM)', phase: 'pilot', start: '2026-06-09', end: '2026-06-20', status: 'not-started', owner: 'Pilot Teams', notes: 'BA-Tech/Dev give feedback. Config/Tester/SM design starts.', depends: '5.4' },
+      { id: 't48', wbs: '5.6', name: 'Sprint 4 — Train Set 2 + All roles using AI', phase: 'pilot', start: '2026-06-23', end: '2026-07-04', status: 'not-started', owner: 'Pilot Teams', notes: 'Config/Tester/SM trained. All 5 roles now using AI.', depends: '4.7' },
+      { id: 't49', wbs: '5.7', name: 'Sprint 5 — Full team AI + Feedback + Refinement', phase: 'pilot', start: '2026-07-07', end: '2026-07-18', status: 'not-started', owner: 'Pilot Teams', notes: 'All roles using AI. Collect feedback. Refine playbooks.', depends: '5.6' },
+      { id: 't50', wbs: '5.8', name: 'Sprint 6 — Final sprint + Results collection', phase: 'pilot', start: '2026-07-20', end: '2026-07-31', status: 'not-started', owner: 'Pilot Teams', notes: 'Final sprint of PI. All metrics collected. Post-pilot surveys.', depends: '5.7' },
+      { id: 't51', wbs: '5.9', name: 'Weekly check-ins (throughout pilot)', phase: 'pilot', start: '2026-05-12', end: '2026-07-31', status: 'not-started', owner: 'Vinay', notes: '' },
 
       // ── PHASE 6: MEASURE ──
-      { id: 'P6', wbs: '6', name: 'MEASURE', phase: 'measure', isPhase: true, start: '2026-06-02', end: '2026-07-11', status: 'not-started', owner: 'Vinay', notes: 'Continuous metrics, before/after comparison, tangible outputs.' },
-      { id: 't38', wbs: '6.1', name: 'Continuous JIRA metrics collection', phase: 'measure', start: '2026-06-02', end: '2026-06-27', status: 'not-started', owner: 'Vinay', notes: 'Automated pull during pilot sprints.' },
-      { id: 't39', wbs: '6.2', name: 'Mid-pilot pulse survey (end of Sprint 3)', phase: 'measure', start: '2026-06-13', end: '2026-06-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '5.4' },
-      { id: 't40', wbs: '6.3', name: 'Post-pilot SPACE/DevEx resurvey', phase: 'measure', start: '2026-06-27', end: '2026-07-02', status: 'not-started', owner: 'Vinay', notes: '', depends: '5.5' },
-      { id: 't41', wbs: '6.4', name: 'Compile results — pilot vs baseline vs control', phase: 'measure', start: '2026-07-02', end: '2026-07-07', status: 'not-started', owner: 'Vinay', notes: '', depends: '6.3' },
-      { id: 't42', wbs: '6.5', name: 'Pilot Results Report', phase: 'measure', start: '2026-07-07', end: '2026-07-11', status: 'not-started', owner: 'Vinay', notes: '', depends: '6.4' },
-      { id: 't43', wbs: '6.6', name: 'Executive brief (1-page for Jim)', phase: 'measure', start: '2026-07-07', end: '2026-07-11', status: 'not-started', owner: 'Vinay/Romi', notes: '', depends: '6.4' },
+      { id: 'P6', wbs: '6', name: 'MEASURE', phase: 'measure', isPhase: true, start: '2026-06-09', end: '2026-08-08', status: 'not-started', owner: 'Vinay', notes: 'Continuous metrics, before/after comparison, tangible outputs.' },
+      { id: 't52', wbs: '6.1', name: 'Continuous JIRA metrics collection', phase: 'measure', start: '2026-06-09', end: '2026-07-31', status: 'not-started', owner: 'Vinay', notes: 'Automated pull during pilot sprints.' },
+      { id: 't53', wbs: '6.2', name: 'Mid-pilot pulse survey (end of Sprint 3)', phase: 'measure', start: '2026-06-20', end: '2026-06-23', status: 'not-started', owner: 'Vinay', notes: '', depends: '5.5' },
+      { id: 't54', wbs: '6.3', name: 'Post-pilot SPACE/DevEx resurvey', phase: 'measure', start: '2026-07-31', end: '2026-08-04', status: 'not-started', owner: 'Vinay', notes: '', depends: '5.8' },
+      { id: 't55', wbs: '6.4', name: 'Compile results — pilot vs baseline vs control', phase: 'measure', start: '2026-08-04', end: '2026-08-07', status: 'not-started', owner: 'Vinay', notes: '', depends: '6.3' },
+      { id: 't56', wbs: '6.5', name: 'Pilot Results Report', phase: 'measure', start: '2026-08-07', end: '2026-08-11', status: 'not-started', owner: 'Vinay', notes: '', depends: '6.4' },
+      { id: 't57', wbs: '6.6', name: 'Executive brief (1-page for Jim)', phase: 'measure', start: '2026-08-07', end: '2026-08-11', status: 'not-started', owner: 'Vinay/Romi', notes: '', depends: '6.4' },
 
       // ── PHASE 7: PLAYBOOK ──
-      { id: 'P7', wbs: '7', name: 'PLAYBOOK', phase: 'playbook', isPhase: true, start: '2026-07-07', end: '2026-07-18', status: 'not-started', owner: 'Vinay', notes: 'Finalize role-based playbooks with pilot lessons learned.' },
-      { id: 't44', wbs: '7.1', name: 'Collect lessons learned from pilot teams', phase: 'playbook', start: '2026-07-07', end: '2026-07-11', status: 'not-started', owner: 'Vinay', notes: '', depends: '5.5' },
-      { id: 't45', wbs: '7.2', name: 'Finalize BA-Technical playbook', phase: 'playbook', start: '2026-07-11', end: '2026-07-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
-      { id: 't46', wbs: '7.3', name: 'Finalize Configuration playbook', phase: 'playbook', start: '2026-07-11', end: '2026-07-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
-      { id: 't47', wbs: '7.4', name: 'Finalize Developer playbook', phase: 'playbook', start: '2026-07-11', end: '2026-07-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
-      { id: 't48', wbs: '7.5', name: 'Finalize Tester playbook', phase: 'playbook', start: '2026-07-11', end: '2026-07-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
-      { id: 't49', wbs: '7.6', name: 'Finalize Scrum Master playbook', phase: 'playbook', start: '2026-07-11', end: '2026-07-16', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
+      { id: 'P7', wbs: '7', name: 'PLAYBOOK', phase: 'playbook', isPhase: true, start: '2026-08-04', end: '2026-08-18', status: 'not-started', owner: 'Vinay', notes: 'Finalize role-based playbooks with pilot lessons learned.' },
+      { id: 't58', wbs: '7.1', name: 'Collect lessons learned from pilot teams', phase: 'playbook', start: '2026-08-04', end: '2026-08-08', status: 'not-started', owner: 'Vinay', notes: '', depends: '5.8' },
+      { id: 't59', wbs: '7.2', name: 'Finalize BA-Technical playbook', phase: 'playbook', start: '2026-08-08', end: '2026-08-13', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
+      { id: 't60', wbs: '7.3', name: 'Finalize Developer playbook', phase: 'playbook', start: '2026-08-08', end: '2026-08-13', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
+      { id: 't61', wbs: '7.4', name: 'Finalize Configuration playbook', phase: 'playbook', start: '2026-08-08', end: '2026-08-13', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
+      { id: 't62', wbs: '7.5', name: 'Finalize Tester playbook', phase: 'playbook', start: '2026-08-08', end: '2026-08-13', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
+      { id: 't63', wbs: '7.6', name: 'Finalize Scrum Master playbook', phase: 'playbook', start: '2026-08-08', end: '2026-08-13', status: 'not-started', owner: 'Vinay', notes: '', depends: '7.1' },
 
       // ── PHASE 8: SCALE ──
-      { id: 'P8', wbs: '8', name: 'SCALE', phase: 'scale', isPhase: true, start: '2026-07-14', end: '2026-08-01', status: 'not-started', owner: 'Vinay/Romi', notes: 'Roll out to all 12 teams based on proven results.' },
-      { id: 't50', wbs: '8.1', name: 'Go/no-go decision with governance team', phase: 'scale', start: '2026-07-14', end: '2026-07-18', status: 'not-started', owner: 'Dave/Jim', notes: '', depends: '6.5' },
-      { id: 't51', wbs: '8.2', name: 'Scale plan — phased rollout (Wave 2: 3-4 teams)', phase: 'scale', start: '2026-07-18', end: '2026-07-25', status: 'not-started', owner: 'Vinay/Romi', notes: '', depends: '8.1' },
-      { id: 't52', wbs: '8.3', name: 'AI Champions identified from pilot teams', phase: 'scale', start: '2026-07-18', end: '2026-07-23', status: 'not-started', owner: 'John', notes: 'Pilot participants coach new teams.', depends: '8.1' },
-      { id: 't53', wbs: '8.4', name: 'Training for Wave 2 teams', phase: 'scale', start: '2026-07-25', end: '2026-08-01', status: 'not-started', owner: 'Vinay', notes: 'Streamlined training using finalized playbooks.', depends: '8.2' },
-      { id: 't54', wbs: '8.5', name: 'ART-wide rollout plan for remaining teams', phase: 'scale', start: '2026-07-25', end: '2026-08-01', status: 'not-started', owner: 'Vinay/Romi', notes: '', depends: '8.2' },
+      { id: 'P8', wbs: '8', name: 'SCALE', phase: 'scale', isPhase: true, start: '2026-08-11', end: '2026-08-29', status: 'not-started', owner: 'Vinay/Romi', notes: 'Roll out to all 12 teams based on proven results.' },
+      { id: 't64', wbs: '8.1', name: 'Go/no-go decision with full governance team', phase: 'scale', start: '2026-08-11', end: '2026-08-15', status: 'not-started', owner: 'Full Gov Team', notes: '', depends: '6.5' },
+      { id: 't65', wbs: '8.2', name: 'Scale plan — phased rollout (Wave 2: 3-4 teams)', phase: 'scale', start: '2026-08-15', end: '2026-08-22', status: 'not-started', owner: 'Vinay/Romi', notes: '', depends: '8.1' },
+      { id: 't66', wbs: '8.3', name: 'AI Champions identified from pilot teams', phase: 'scale', start: '2026-08-15', end: '2026-08-20', status: 'not-started', owner: 'Delivery Mgr', notes: 'Pilot participants coach new teams.', depends: '8.1' },
+      { id: 't67', wbs: '8.4', name: 'Training for Wave 2 teams', phase: 'scale', start: '2026-08-22', end: '2026-08-29', status: 'not-started', owner: 'Vinay', notes: 'Streamlined using finalized playbooks.', depends: '8.2' },
+      { id: 't68', wbs: '8.5', name: 'ART-wide rollout plan for remaining teams', phase: 'scale', start: '2026-08-22', end: '2026-08-29', status: 'not-started', owner: 'Vinay/Romi', notes: '', depends: '8.2' },
 
       // ── WORKSTREAM 9: GOVERNANCE (parallel) ──
-      { id: 'P9', wbs: '9', name: 'GOVERNANCE WORKSTREAM', phase: 'govern', isPhase: true, start: '2026-04-14', end: '2026-08-01', status: 'in-progress', owner: 'CIO', notes: 'Parallel workstream — runs alongside delivery phases 1-8.' },
+      { id: 'P9', wbs: '9', name: 'GOVERNANCE WORKSTREAM', phase: 'govern', isPhase: true, start: '2026-04-14', end: '2026-08-29', status: 'in-progress', owner: 'CIO', notes: 'Parallel workstream — runs alongside delivery phases 1-8.' },
       { id: 't55', wbs: '9.1', name: 'CIO designates Pilot Governance Lead (DCFS)', phase: 'govern', start: '2026-04-14', end: '2026-04-21', status: 'not-started', owner: 'CIO', notes: 'Blocker: pilot cannot proceed without DCFS governance lead.' },
       { id: 't56', wbs: '9.2', name: 'Pilot governance kickoff — charter, scope, cadence', phase: 'govern', start: '2026-04-21', end: '2026-04-25', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '9.1' },
       { id: 't57', wbs: '9.3', name: 'Approve AI Usage Playbook (pilot version)', phase: 'govern', start: '2026-04-25', end: '2026-04-30', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '9.2' },
@@ -311,11 +330,11 @@ function getDefaultData() {
       { id: 't61', wbs: '9.7', name: 'Approve stair-step 2-3 (comprehension, tests)', phase: 'govern', start: '2026-05-19', end: '2026-05-23', status: 'not-started', owner: 'Pilot Gov Lead', notes: 'Based on Step 1 results.', depends: '9.5' },
       { id: 't62', wbs: '9.8', name: 'Approve stair-step 4-5 (config, code generation)', phase: 'govern', start: '2026-06-02', end: '2026-06-06', status: 'not-started', owner: 'Pilot Gov Lead', notes: 'Based on Step 2-3 results. Requires governance approval per step.', depends: '9.7' },
       { id: 't63', wbs: '9.9', name: 'Review mid-pilot pulse survey results', phase: 'govern', start: '2026-06-16', end: '2026-06-20', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '6.2' },
-      { id: 't64', wbs: '9.10', name: 'Pilot governance presents results to CIO', phase: 'govern', start: '2026-07-07', end: '2026-07-11', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '6.5' },
-      { id: 't65', wbs: '9.11', name: 'CIO establishes Full AI Governance Team', phase: 'govern', start: '2026-07-11', end: '2026-07-18', status: 'not-started', owner: 'CIO', notes: 'CIO decides timing. Identifies members for full governance.', depends: '9.10' },
-      { id: 't66', wbs: '9.12', name: 'Full governance team reviews & approves playbooks', phase: 'govern', start: '2026-07-14', end: '2026-07-21', status: 'not-started', owner: 'Full Gov Team', notes: 'Playbooks are drafts until full team approves.', depends: '9.11' },
-      { id: 't67', wbs: '9.13', name: 'Full governance team approves scale plan', phase: 'govern', start: '2026-07-18', end: '2026-07-25', status: 'not-started', owner: 'Full Gov Team', notes: 'Go/no-go for ART-wide rollout.', depends: '9.12' },
-      { id: 't68', wbs: '9.14', name: 'Transition to monthly governance cadence', phase: 'govern', start: '2026-07-25', end: '2026-08-01', status: 'not-started', owner: 'Full Gov Team', notes: 'Full governance team takes over ongoing oversight.', depends: '9.13' },
+      { id: 't78', wbs: '9.10', name: 'Pilot governance presents results to CIO', phase: 'govern', start: '2026-08-04', end: '2026-08-08', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '6.5' },
+      { id: 't79', wbs: '9.11', name: 'CIO establishes Full AI Governance Team', phase: 'govern', start: '2026-08-08', end: '2026-08-15', status: 'not-started', owner: 'CIO', notes: 'CIO decides timing. Identifies members.', depends: '9.10' },
+      { id: 't80', wbs: '9.12', name: 'Full governance team reviews & approves playbooks', phase: 'govern', start: '2026-08-11', end: '2026-08-18', status: 'not-started', owner: 'Full Gov Team', notes: 'Playbooks are drafts until full team approves.', depends: '9.11' },
+      { id: 't81', wbs: '9.13', name: 'Full governance team approves scale plan', phase: 'govern', start: '2026-08-15', end: '2026-08-22', status: 'not-started', owner: 'Full Gov Team', notes: 'Go/no-go for ART-wide rollout.', depends: '9.12' },
+      { id: 't82', wbs: '9.14', name: 'Transition to monthly governance cadence', phase: 'govern', start: '2026-08-22', end: '2026-08-29', status: 'not-started', owner: 'Full Gov Team', notes: 'Full governance team takes over ongoing oversight.', depends: '9.13' },
     ],
     risks: [
       { id: 'R01', desc: 'Sensitive child welfare data in AI prompts (PII exposure)', likelihood: 'Low', impact: 'Critical', mitigation: 'No PII rule in every playbook. Training module. Per-sprint spot checks.', owner: 'Vinay', status: 'open' },
