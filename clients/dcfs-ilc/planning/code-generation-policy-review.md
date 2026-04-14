@@ -126,11 +126,11 @@ Each step requires:
 
 | Capability | What It Does | Relevance to ILC | Availability in GCC |
 |-----------|-------------|-------------------|-------------------|
-| **Copilot for Dynamics 365** | Conversational AI embedded in D365 apps — summaries, case routing, record management | Direct — caseworker productivity, case management | Available in GCC (must be manually enabled) |
+| ~~Copilot for Dynamics 365~~ | ~~Conversational AI — summaries, case routing, record mgmt~~ | ~~Caseworker productivity~~ | ~~Available in GCC~~ | **Out of scope** — business process, not SDLC delivery |
 | **Power Automate Copilot** | Draft entire workflows from plain English | High — care workflows, intake processes, case transitions | Available |
 | **Dataverse AI-assisted data mapping** | Automates legacy data import and transformation rules | High — SACWIS/CYCIS/MARS data migration | Available (2025 Wave 2) |
 | **Power Apps model-driven Copilot** | Natural language interaction with app data, UI scaffolding | Medium — case management dashboards | GA April 15, 2026 |
-| **AI Builder Document Processing** | Extract data from case files, assessments, court docs (90%+ accuracy) | High — child welfare document processing | Available |
+| ~~AI Builder Document Processing~~ | ~~Extract data from case files, assessments, court docs~~ | ~~Document processing~~ | ~~Available~~ | **Out of scope** — business process, not SDLC delivery |
 | **Copilot-assisted expression editing** | Generate/fix Power Automate expressions without manual code | Medium — workflow configuration | Available (2025 Wave 1) |
 | **Dataverse prompt columns** | Auto-populate fields (case summaries, risk assessments) | Medium-High — case processing | Available |
 | **Process Mining** | AI-powered root cause analysis of workflow bottlenecks | Medium — identify config gaps | Available |

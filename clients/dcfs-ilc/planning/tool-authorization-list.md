@@ -33,11 +33,11 @@ These may already be available as part of the Dynamics 365 / Power Platform lice
 
 | Tool | What It Does | Roles | Available in GCC? | Additional License? | Status |
 |------|-------------|-------|-------------------|-------------------|--------|
-| **Copilot for Dynamics 365** | Conversational AI in D365 — summaries, case routing, record mgmt | Configuration, All | Yes (must be manually enabled) | M365 Copilot $30/user/mo | **Needs evaluation** |
+| ~~Copilot for Dynamics 365~~ | ~~Conversational AI — summaries, case routing~~ | ~~Business users~~ | ~~Yes~~ | ~~M365 Copilot $30/user/mo~~ | **Out of scope** — business process, not SDLC |
 | **Power Automate Copilot** | Draft workflows from natural language | Configuration | Yes | Included in Power Platform | **Needs evaluation** |
 | **Dataverse AI Data Mapping** | Automate legacy data import/transformation rules | Data Team, Configuration | Yes (2025 Wave 2) | Included | **Needs evaluation** |
 | **Power Apps Model-Driven Copilot** | Natural language interaction with app data | Configuration | GA April 15, 2026 | M365 Copilot $30/user/mo | **Needs evaluation** |
-| **AI Builder Document Processing** | Extract data from case files, assessments, court docs (90%+ accuracy) | Data Team | Yes | AI Builder credits or add-on | **Needs evaluation** |
+| ~~AI Builder Document Processing~~ | ~~Extract data from case files, court docs~~ | ~~Business users~~ | ~~Yes~~ | ~~AI Builder credits~~ | **Out of scope** — business process, not SDLC |
 | **Copilot-Assisted Expression Editing** | Generate/fix Power Automate expressions | Configuration | Yes (2025 Wave 1) | Included in Power Platform | **Needs evaluation** |
 | **Dataverse Prompt Columns** | Auto-populate fields (summaries, risk assessments) | Configuration | Yes | Included | **Needs evaluation** |
 | **Process Mining** | AI-powered workflow bottleneck analysis | SM, Configuration | Yes | Power Automate Process Mining license | **Needs evaluation** |
