@@ -44,6 +44,9 @@
   .gantt-table .wbs-id { font-weight: 600; color: var(--accent); width: 60px; }
   .gantt-table .task-name { min-width: 200px; }
   .gantt-table .task-name.phase { font-weight: 700; background: #f0f4ff; }
+  .collapse-btn { background: none; border: none; cursor: pointer; font-size: 12px; color: var(--accent); padding: 0 4px; }
+  .gantt-table tr.collapsed-child { display: none; }
+  .dep-tag { font-size: 9px; background: #e3f2fd; color: var(--blue); padding: 1px 5px; border-radius: 8px; margin-left: 4px; white-space: nowrap; }
   .gantt-table input[type="text"], .gantt-table input[type="date"], .gantt-table select { width: 100%; padding: 3px 5px; border: 1px solid transparent; border-radius: 3px; font-size: 12px; background: transparent; }
   .gantt-table input:focus, .gantt-table select:focus { border-color: var(--accent); background: white; outline: none; }
   .gantt-table textarea { width: 100%; padding: 3px 5px; border: 1px solid transparent; border-radius: 3px; font-size: 11px; resize: vertical; min-height: 20px; background: transparent; }
@@ -222,9 +225,9 @@ function getDefaultData() {
       { id: 't1', wbs: '1.1', name: 'DoIT AI Policy review — all 12 sections mapped', phase: 'govern', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: '' },
       { id: 't2', wbs: '1.2', name: 'NIST AI RMF governance framework', phase: 'govern', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: '' },
       { id: 't3', wbs: '1.3', name: 'Governance proposal to Dave', phase: 'govern', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: '' },
-      { id: 't4', wbs: '1.4', name: 'Resolve Section 5e — State data interpretation', phase: 'govern', start: '2026-04-14', end: '2026-04-25', status: 'blocked', owner: 'Dave', notes: 'Blocker: Does Copilot on ILC code = "State data for AI"? Needs legal interpretation.' },
-      { id: 't5', wbs: '1.5', name: 'Resolve Section 5f — DoIT 30-day notice status', phase: 'govern', start: '2026-04-14', end: '2026-04-25', status: 'blocked', owner: 'Dave', notes: 'Blocker: Has assessment been filed? 30-day gate if not.' },
-      { id: 't6', wbs: '1.6', name: 'Confirm Copilot deployment status & tier', phase: 'govern', start: '2026-04-14', end: '2026-04-21', status: 'blocked', owner: 'Dave', notes: 'Need to confirm: licenses exist? Business/Enterprise tier?' },
+      { id: 't4', wbs: '1.4', name: 'Resolve Section 5e — State data interpretation', phase: 'govern', start: '2026-04-14', end: '2026-04-25', status: 'blocked', owner: 'Dave', notes: 'Blocker: Does Copilot on ILC code = "State data for AI"? Needs legal interpretation.', depends: '' },
+      { id: 't5', wbs: '1.5', name: 'Resolve Section 5f — DoIT 30-day notice status', phase: 'govern', start: '2026-04-14', end: '2026-04-25', status: 'blocked', owner: 'Dave', notes: 'Blocker: Has assessment been filed? 30-day gate if not.', depends: '' },
+      { id: 't6', wbs: '1.6', name: 'Confirm Copilot deployment status & tier', phase: 'govern', start: '2026-04-14', end: '2026-04-21', status: 'blocked', owner: 'Dave', notes: 'Need to confirm: licenses exist? Business/Enterprise tier?', depends: '' },
       { id: 't7', wbs: '1.7', name: 'Gartner consultation (Jim request)', phase: 'govern', start: '2026-04-21', end: '2026-05-02', status: 'not-started', owner: 'Dave/Jim', notes: 'Jim suggested external validation from Gartner.' },
       { id: 't8', wbs: '1.8', name: 'Establish governance team (DCFS-led)', phase: 'govern', start: '2026-04-14', end: '2026-04-25', status: 'in-progress', owner: 'Dave', notes: 'DCFS governs, Krasan executes. Need Dave to identify team members.' },
 
@@ -232,7 +235,7 @@ function getDefaultData() {
       { id: 't9', wbs: '2.1', name: 'AI Readiness Assessment — all 12 teams', phase: 'baseline', start: '2026-04-21', end: '2026-04-28', status: 'not-started', owner: 'Vinay', notes: '' },
       { id: 't10', wbs: '2.2', name: 'JIRA baseline data pull (last 3 sprints)', phase: 'baseline', start: '2026-04-21', end: '2026-04-25', status: 'not-started', owner: 'Vinay/Matt', notes: 'Need JIRA access from Matt.' },
       { id: 't11', wbs: '2.3', name: 'SPACE/DevEx baseline survey (pilot teams)', phase: 'baseline', start: '2026-04-25', end: '2026-04-30', status: 'not-started', owner: 'Vinay', notes: '' },
-      { id: 't12', wbs: '2.4', name: 'Select 2 pilot teams (Krasan roles only)', phase: 'baseline', start: '2026-04-25', end: '2026-04-30', status: 'not-started', owner: 'Romi/John', notes: '' },
+      { id: 't12', wbs: '2.4', name: 'Select 2 pilot teams (Krasan roles only)', phase: 'baseline', start: '2026-04-25', end: '2026-04-30', status: 'not-started', owner: 'Romi/John', notes: '', depends: '2.1' },
       { id: 't13', wbs: '2.5', name: 'Dynamics working session (Kashif/Shyam)', phase: 'design', start: '2026-04-16', end: '2026-04-22', status: 'not-started', owner: 'Jeffrey', notes: 'Jeffrey to arrange intro. Explore config generation capabilities.' },
       { id: 't14', wbs: '2.6', name: 'Dynamics POC environment setup', phase: 'design', start: '2026-04-18', end: '2026-05-02', status: 'not-started', owner: 'Dinkar', notes: 'Investigate demo environment outside State for experimentation.' },
       { id: 't15', wbs: '2.7', name: 'Map SDLC processes — current → AI-augmented per role', phase: 'design', start: '2026-04-21', end: '2026-05-02', status: 'not-started', owner: 'Vinay', notes: '' },
@@ -241,8 +244,8 @@ function getDefaultData() {
       { id: 't18', wbs: '2.10', name: 'Measurement methodology — tangible outputs (LOC, docs, config)', phase: 'design', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: '' },
 
       { id: 'P3', wbs: '3', name: 'TRAIN', phase: 'train', isPhase: true, start: '2026-04-28', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: '' },
-      { id: 't19', wbs: '3.1', name: 'Build training materials — prompts, examples, cheat sheets', phase: 'train', start: '2026-04-28', end: '2026-05-02', status: 'not-started', owner: 'Vinay', notes: '' },
-      { id: 't20', wbs: '3.2', name: 'Foundation track (1.5h) — all pilot participants', phase: 'train', start: '2026-05-02', end: '2026-05-05', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't19', wbs: '3.1', name: 'Build training materials — prompts, examples, cheat sheets', phase: 'train', start: '2026-04-28', end: '2026-05-02', status: 'not-started', owner: 'Vinay', notes: '', depends: '2.7' },
+      { id: 't20', wbs: '3.2', name: 'Foundation track (1.5h) — all pilot participants', phase: 'train', start: '2026-05-02', end: '2026-05-05', status: 'not-started', owner: 'Vinay', notes: '', depends: '3.1' },
       { id: 't21', wbs: '3.3', name: 'BA-Technical track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '' },
       { id: 't22', wbs: '3.4', name: 'Configuration track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '' },
       { id: 't23', wbs: '3.5', name: 'Developer track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '' },
@@ -254,7 +257,7 @@ function getDefaultData() {
       { id: 't27', wbs: '4.1', name: 'PI Planning — introduce AI pilot to ART', phase: 'pilot', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Romi/Vinay', notes: '' },
 
       { id: 'P5', wbs: '5', name: 'PILOT (Sprints 3 & 4)', phase: 'pilot', isPhase: true, start: '2026-06-02', end: '2026-06-27', status: 'not-started', owner: 'Vinay', notes: '15% capacity for AI adoption. Krasan roles only.' },
-      { id: 't28', wbs: '5.1', name: 'Sprint 3 — AI-augmented delivery (2 teams)', phase: 'pilot', start: '2026-06-02', end: '2026-06-13', status: 'not-started', owner: 'Pilot Teams', notes: '' },
+      { id: 't28', wbs: '5.1', name: 'Sprint 3 — AI-augmented delivery (2 teams)', phase: 'pilot', start: '2026-06-02', end: '2026-06-13', status: 'not-started', owner: 'Pilot Teams', notes: '', depends: '3.8' },
       { id: 't29', wbs: '5.2', name: 'Sprint 4 — AI-augmented delivery (2 teams)', phase: 'pilot', start: '2026-06-16', end: '2026-06-27', status: 'not-started', owner: 'Pilot Teams', notes: '' },
       { id: 't30', wbs: '5.3', name: 'Weekly check-ins', phase: 'pilot', start: '2026-06-02', end: '2026-06-27', status: 'not-started', owner: 'Vinay', notes: '' },
       { id: 't31', wbs: '5.4', name: 'Mid-pilot pulse survey (end of Sprint 3)', phase: 'measure', start: '2026-06-13', end: '2026-06-16', status: 'not-started', owner: 'Vinay', notes: '' },
@@ -339,6 +342,20 @@ function daysBetween(d1, d2) {
   return Math.round((new Date(d2) - new Date(d1)) / (1000*60*60*24));
 }
 
+// Track collapsed phases
+if (!data.collapsedPhases) data.collapsedPhases = {};
+
+function toggleCollapse(phaseId) {
+  data.collapsedPhases[phaseId] = !data.collapsedPhases[phaseId];
+  saveData();
+  renderGantt();
+}
+
+function getTaskOptions(excludeId) {
+  return data.tasks.filter(t => t.id !== excludeId && !t.isPhase)
+    .map(t => `<option value="${t.wbs}">${t.wbs}</option>`).join('');
+}
+
 function renderGantt() {
   const weeks = getWeekDates();
   const totalDays = WEEKS_TO_SHOW * 7;
@@ -351,6 +368,7 @@ function renderGantt() {
     <th style="width:220px">Task</th>
     <th style="width:90px">Start</th>
     <th style="width:90px">End</th>
+    <th style="width:70px">Depends</th>
     <th style="width:80px">Owner</th>
     <th style="width:80px">Status</th>
     <th style="min-width:${WEEKS_TO_SHOW * 40}px">
@@ -364,21 +382,42 @@ function renderGantt() {
   body.innerHTML = '';
   const filteredTasks = filter === 'all' ? data.tasks : data.tasks.filter(t => t.phase === filter || t.isPhase);
 
+  let currentPhaseId = null;
+
   filteredTasks.forEach((task, idx) => {
+    // Track which phase we're in
+    if (task.isPhase) currentPhaseId = task.id;
+    const isChild = !task.isPhase;
+    const isCollapsed = isChild && currentPhaseId && data.collapsedPhases[currentPhaseId];
+
     const tr = document.createElement('tr');
+    if (isCollapsed) tr.classList.add('collapsed-child');
+
     const startDay = Math.max(0, daysBetween(PROJECT_START, task.start));
     const duration = Math.max(1, daysBetween(task.start, task.end));
     const barLeft = (startDay / totalDays) * 100;
     const barWidth = (duration / totalDays) * 100;
     const barClass = task.phase || 'default';
 
+    // Collapse button for phases
+    const collapseBtn = task.isPhase
+      ? `<button class="collapse-btn" onclick="event.stopPropagation();toggleCollapse('${task.id}')" title="Collapse/Expand">${data.collapsedPhases[task.id] ? '▶' : '▼'}</button>`
+      : '';
+
+    // Dependencies display
+    const depDisplay = task.depends
+      ? `<span class="dep-tag">${task.depends}</span>`
+      : '';
+
     tr.innerHTML = `
       <td class="wbs-id">${task.wbs}</td>
       <td class="task-name ${task.isPhase ? 'phase' : ''}" style="cursor:pointer" onclick="openNotes('${task.id}')">
-        <input type="text" value="${task.name}" onchange="updateTask('${task.id}','name',this.value)" style="${task.isPhase ? 'font-weight:700' : ''}">
+        ${collapseBtn}
+        <input type="text" value="${task.name}" onchange="updateTask('${task.id}','name',this.value)" style="${task.isPhase ? 'font-weight:700' : ''}; ${task.isPhase ? 'width:calc(100% - 24px);display:inline' : 'width:100%'}">
       </td>
       <td><input type="date" value="${task.start}" onchange="updateTask('${task.id}','start',this.value)"></td>
       <td><input type="date" value="${task.end}" onchange="updateTask('${task.id}','end',this.value)"></td>
+      <td>${task.isPhase ? '' : `<input type="text" value="${task.depends||''}" onchange="updateTask('${task.id}','depends',this.value)" placeholder="e.g. 1.4" style="width:50px;font-size:11px" title="Enter WBS # of dependency">`}${depDisplay}</td>
       <td><input type="text" value="${task.owner}" onchange="updateTask('${task.id}','owner',this.value)" style="width:70px"></td>
       <td>
         <select onchange="updateTask('${task.id}','status',this.value)">
@@ -389,7 +428,7 @@ function renderGantt() {
         </select>
       </td>
       <td class="gantt-bar-cell" style="min-width:${WEEKS_TO_SHOW * 40}px; position:relative;">
-        <div class="gantt-bar ${barClass}" style="left:${barLeft}%;width:${barWidth}%;" title="${task.name}: ${task.start} → ${task.end}"></div>
+        <div class="gantt-bar ${barClass}" style="left:${barLeft}%;width:${barWidth}%;" title="${task.name}: ${task.start} → ${task.end}${task.depends ? ' (depends on ' + task.depends + ')' : ''}"></div>
       </td>
       <td><button class="btn-delete" onclick="deleteTask('${task.id}')" title="Remove">&times;</button></td>
     `;
