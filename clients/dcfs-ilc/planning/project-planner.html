@@ -119,6 +119,7 @@
   </div>
   <div class="actions">
     <span class="save-indicator" id="save-indicator">Auto-saved</span>
+    <button onclick="resetData()" style="background:var(--highlight)">Reset to Default</button>
     <button onclick="exportJSON()">Export JSON</button>
     <button onclick="importJSON()">Import JSON</button>
     <button onclick="window.print()">Print</button>
@@ -298,6 +299,23 @@ function getDefaultData() {
       { id: 't52', wbs: '8.3', name: 'AI Champions identified from pilot teams', phase: 'scale', start: '2026-07-18', end: '2026-07-23', status: 'not-started', owner: 'John', notes: 'Pilot participants coach new teams.', depends: '8.1' },
       { id: 't53', wbs: '8.4', name: 'Training for Wave 2 teams', phase: 'scale', start: '2026-07-25', end: '2026-08-01', status: 'not-started', owner: 'Vinay', notes: 'Streamlined training using finalized playbooks.', depends: '8.2' },
       { id: 't54', wbs: '8.5', name: 'ART-wide rollout plan for remaining teams', phase: 'scale', start: '2026-07-25', end: '2026-08-01', status: 'not-started', owner: 'Vinay/Romi', notes: '', depends: '8.2' },
+
+      // ── WORKSTREAM 9: GOVERNANCE (parallel) ──
+      { id: 'P9', wbs: '9', name: 'GOVERNANCE WORKSTREAM', phase: 'govern', isPhase: true, start: '2026-04-14', end: '2026-08-01', status: 'in-progress', owner: 'CIO', notes: 'Parallel workstream — runs alongside delivery phases 1-8.' },
+      { id: 't55', wbs: '9.1', name: 'CIO designates Pilot Governance Lead (DCFS)', phase: 'govern', start: '2026-04-14', end: '2026-04-21', status: 'not-started', owner: 'CIO', notes: 'Blocker: pilot cannot proceed without DCFS governance lead.' },
+      { id: 't56', wbs: '9.2', name: 'Pilot governance kickoff — charter, scope, cadence', phase: 'govern', start: '2026-04-21', end: '2026-04-25', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '9.1' },
+      { id: 't57', wbs: '9.3', name: 'Approve AI Usage Playbook (pilot version)', phase: 'govern', start: '2026-04-25', end: '2026-04-30', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '9.2' },
+      { id: 't58', wbs: '9.4', name: 'Approve pilot team selection', phase: 'govern', start: '2026-04-28', end: '2026-05-02', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '2.5' },
+      { id: 't59', wbs: '9.5', name: 'Approve stair-step 1 (stories/docs)', phase: 'govern', start: '2026-05-02', end: '2026-05-05', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '9.3' },
+      { id: 't60', wbs: '9.6', name: 'Weekly governance meetings (during pilot)', phase: 'govern', start: '2026-05-12', end: '2026-06-27', status: 'not-started', owner: 'Pilot Gov Lead', notes: '45 min weekly — review metrics, incidents, guardrails.' },
+      { id: 't61', wbs: '9.7', name: 'Approve stair-step 2-3 (comprehension, tests)', phase: 'govern', start: '2026-05-19', end: '2026-05-23', status: 'not-started', owner: 'Pilot Gov Lead', notes: 'Based on Step 1 results.', depends: '9.5' },
+      { id: 't62', wbs: '9.8', name: 'Approve stair-step 4-5 (config, code generation)', phase: 'govern', start: '2026-06-02', end: '2026-06-06', status: 'not-started', owner: 'Pilot Gov Lead', notes: 'Based on Step 2-3 results. Requires governance approval per step.', depends: '9.7' },
+      { id: 't63', wbs: '9.9', name: 'Review mid-pilot pulse survey results', phase: 'govern', start: '2026-06-16', end: '2026-06-20', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '6.2' },
+      { id: 't64', wbs: '9.10', name: 'Pilot governance presents results to CIO', phase: 'govern', start: '2026-07-07', end: '2026-07-11', status: 'not-started', owner: 'Pilot Gov Lead', notes: '', depends: '6.5' },
+      { id: 't65', wbs: '9.11', name: 'CIO establishes Full AI Governance Team', phase: 'govern', start: '2026-07-11', end: '2026-07-18', status: 'not-started', owner: 'CIO', notes: 'CIO decides timing. Identifies members for full governance.', depends: '9.10' },
+      { id: 't66', wbs: '9.12', name: 'Full governance team reviews & approves playbooks', phase: 'govern', start: '2026-07-14', end: '2026-07-21', status: 'not-started', owner: 'Full Gov Team', notes: 'Playbooks are drafts until full team approves.', depends: '9.11' },
+      { id: 't67', wbs: '9.13', name: 'Full governance team approves scale plan', phase: 'govern', start: '2026-07-18', end: '2026-07-25', status: 'not-started', owner: 'Full Gov Team', notes: 'Go/no-go for ART-wide rollout.', depends: '9.12' },
+      { id: 't68', wbs: '9.14', name: 'Transition to monthly governance cadence', phase: 'govern', start: '2026-07-25', end: '2026-08-01', status: 'not-started', owner: 'Full Gov Team', notes: 'Full governance team takes over ongoing oversight.', depends: '9.13' },
     ],
     risks: [
       { id: 'R01', desc: 'Sensitive child welfare data in AI prompts (PII exposure)', likelihood: 'Low', impact: 'Critical', mitigation: 'No PII rule in every playbook. Training module. Per-sprint spot checks.', owner: 'Vinay', status: 'open' },
@@ -617,6 +635,15 @@ function exportJSON() {
   a.click();
 }
 function importJSON() { document.getElementById('import-file').click(); }
+function resetData() {
+  if (confirm('Reset ALL data to defaults? This will overwrite any changes you made.')) {
+    localStorage.removeItem(STORAGE_KEY);
+    data = getDefaultData();
+    saveData();
+    renderGantt(); renderRisks(); renderAssumptions();
+    alert('Reset to default data with 9 WBS phases and 68 tasks.');
+  }
+}
 function handleImport(event) {
   const file = event.target.files[0];
   if (!file) return;
