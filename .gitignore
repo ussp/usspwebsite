@@ -53,3 +53,4 @@ packages/*/node_modules/
 
 # local staging / scratch files
 positions_staging/
+clients/dcfs-ilc/planning/~$*
