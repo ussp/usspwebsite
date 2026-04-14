@@ -2,8 +2,8 @@
 
 > **Purpose:** Review whether the State of Illinois DoIT AI Policy prohibits or restricts AI-assisted code generation, and identify open questions for the team.
 > **Action Item:** From April 13 Jim Daugherty meeting — "Review the state AI policy specifically regarding code generation and send open-ended questions about any restrictions."
+> **Version:** V04142026
 > **Owner:** Vinay Lagisetty
-> **Date:** April 13, 2026
 
 ---
 

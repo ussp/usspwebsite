@@ -1,9 +1,9 @@
 # AI Tool Authorization List — DCFS Illinois Connect
 
+> **Version:** V04142026
 > **Status:** DRAFT — Living document, updated as tools are identified
 > **Owner:** Vinay Lagisetty
 > **Action Item:** From April 13 Jim meeting — "Compile a list of additional AI tools beyond Copilot/Rovo. Assess audit functionalities for potential procurement."
-> **Last Updated:** April 14, 2026
 
 ---
 
