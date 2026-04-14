@@ -21,9 +21,41 @@ These tools are purchased by the State. Deployment status needs confirmation.
 
 | Tool | Vendor | Purpose | Roles | Deployed? | Audit Capability | Notes |
 |------|--------|---------|-------|-----------|-----------------|-------|
-| **GitHub Copilot** | Microsoft/GitHub | Code suggestions, code review, documentation | Developers | **Unknown — verify with Dave** | Usage telemetry via GitHub admin | State purchased but not confirmed deployed to ILC teams |
+| **GitHub Copilot** | Microsoft/GitHub | Code suggestions, code review, documentation | Developers | **Unknown — verify with Dave** | Usage telemetry via GitHub admin | State purchased but not confirmed deployed to ILC teams. **Supports multiple AI models** — see below. |
 | **Atlassian Rovo** | Atlassian | JIRA AI — story quality, search, summarization | BA-Technical, Testers, SM | **Unknown — verify** | Atlassian admin analytics | Available with JIRA Cloud; confirm ILC has access |
 | **Confluence AI** | Atlassian | Documentation assistance, summarization | All | **Likely available** | Part of Confluence analytics | Bundled with Confluence Cloud |
+
+---
+
+## GitHub Copilot — Multi-Model Support (Jim's Question)
+
+**Jim is correct.** GitHub Copilot now supports multiple AI models — not just OpenAI. Organizations can choose which models their teams use.
+
+### Available Models in GitHub Copilot
+
+| Vendor | Models | Hosted By | Data Privacy |
+|--------|--------|-----------|-------------|
+| **OpenAI** | GPT-5.4, GPT-4.1 (default), GPT-4o, o1-preview | Azure OpenAI (GitHub-managed) | No training on Enterprise data |
+| **Anthropic Claude** | Claude Sonnet 4.6, Claude Opus 4, Claude Sonnet 4, Claude Sonnet 3.7 | Anthropic PBC + AWS | **Zero data retention agreement** with Anthropic |
+| **Google Gemini** | Gemini 3.1 Pro, Gemini 3 Flash, Gemini 2.5 Pro | Google Cloud (GCP) | Google commits to not training on GitHub data |
+
+### Key Facts for State of Illinois
+
+- **Multi-model launched:** October 2024 at GitHub Universe
+- **Enterprise controls:** Org/enterprise admins can enable/disable specific models and vendors via policy
+- **Government-appropriate tier:** Copilot Business or Enterprise — GitHub does NOT use data for training
+- **Free/Pro tiers:** NOT appropriate for government (data may be used for training as of April 2026)
+- **Data residency:** Available for US, EU, Australia, Japan
+- **Compliance:** SOC 2, ISO 27001 reporting available on Enterprise tier
+- **Default if no model selected:** Claude Sonnet 4.6 is used automatically
+
+### Implications for DCFS
+
+1. **Google Gemini IS available** through GitHub Copilot — no separate procurement needed
+2. **Claude IS available** — zero data retention is the strongest privacy guarantee
+3. **Enterprise admin controls** which models developers can use — governance team can set policy
+4. **One tool, multiple models** — simplifies procurement (just GitHub Copilot Enterprise, not separate AI vendor contracts)
+5. **Question for Dave:** Which GitHub Copilot tier does the State have? (Free/Pro = not appropriate. Business/Enterprise = good.)
 
 ---
 
