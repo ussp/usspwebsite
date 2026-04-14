@@ -48,8 +48,12 @@ Assumptions are things we believe to be true but have not yet confirmed. Each as
 | A-22 | DoIT AI Policy does NOT prohibit code generation | **Validated** (policy review) | Policy requires human-in-the-loop, not prohibition | Vinay |
 | A-23 | DoIT 30-day notice has NOT been filed for Copilot/Rovo | **Unknown** | Ask Dave — critical path item | Dave |
 | A-24 | Copilot on ILC source code may trigger Section 5e ("State data for AI") | **Unknown** | Ask Dave/Jim — needs legal interpretation | Dave |
-| A-25 | A DCFS-led governance team will be established | **Agreed** (Apr 13) | Jim wants this | Jim |
+| A-25 | A DCFS-led governance team will be established | **Agreed** (Apr 13) | Jim wants this — two-phase model (pilot governance → full governance) | Jim |
 | A-26 | ILC source code does not contain embedded PII | **Assumed** | Verify with Kashif/Shyam during Dynamics session | Jeffrey |
+| A-27 | CIO will establish full AI Governance Team after pilot results are reviewed | **Assumed** | Pilot governance is interim; full team formed when CIO is ready | CIO |
+| A-28 | Playbooks require full governance team approval before scaling to all teams | **Assumed** | Pilot produces draft playbooks; full governance approves final versions | CIO |
+| A-29 | Pilot Governance Lead will be a DCFS designee, not a vendor resource | **Assumed** | No vendor self-governance even during pilot — DCFS must chair | CIO |
+| A-30 | Governance is a separate workstream running in parallel with the pilot | **Assumed** | Governance setup, meetings, reviews happen alongside delivery work | Vinay |
 
 ---
 
@@ -91,6 +95,9 @@ Assumptions are things we believe to be true but have not yet confirmed. Each as
 |---|------|-----------|--------|-----------|-------|--------|
 | R-16 | **Pilot teams not representative** — selected teams are too easy or too hard | Low | Low | Selection criteria documented; readiness assessment informs selection | Vinay/John | Open |
 | R-17 | **Gartner consultation not available** — State doesn't have Gartner access | Low | Low | Proceed with NIST AI RMF framework; Gartner is validation, not dependency | Jim | Open |
+| R-18 | **No DCFS designee for Pilot Governance Lead** — CIO doesn't assign someone before pilot | Medium | High | Pilot cannot proceed without DCFS governance representation. Escalate to CIO. | CIO | Open |
+| R-19 | **Full governance team not formed before scale** — CIO delays establishing full team | Medium | Medium | Scale cannot begin without full governance approval of playbooks. Pilot continues in steady state. | CIO | Open |
+| R-20 | **Governance overhead slows pilot execution** — too many approvals, too many meetings | Low | Medium | Pilot governance is lightweight (1 DCFS lead + weekly 45 min). Keep it lean. | Vinay | Open |
 
 ---
 
@@ -99,10 +106,10 @@ Assumptions are things we believe to be true but have not yet confirmed. Each as
 | Severity | Count | Blockers |
 |----------|-------|----------|
 | Critical | 2 | 0 (mitigated) |
-| High | 6 | 3 (R-03, R-04, R-05) |
-| Medium | 7 | 0 |
+| High | 7 | 4 (R-03, R-04, R-05, R-18) |
+| Medium | 9 | 0 |
 | Low | 2 | 0 |
-| **Total** | **17** | **3 blockers** |
+| **Total** | **20** | **4 blockers** |
 
 **Three blockers to resolve with Dave:**
 1. R-03 — DoIT 30-day notice status

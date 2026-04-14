@@ -30,54 +30,103 @@ Jim confirmed in the April 13 meeting that he wants a governance team establishe
 
 ---
 
-## 3. Proposed Governance Team
+## 3. Two-Phase Governance Model
 
-### Composition
+Governance scales with risk. The pilot carries lower risk (2 teams, bounded scope). Full ART-wide rollout requires formal governance. This is aligned with NIST AI RMF GOVERN 2 (governance proportional to risk) and DoIT AI Policy Section 4 (agency-level oversight).
 
-| Role | Filled By | Responsibility |
-|------|-----------|---------------|
-| **Sponsor / Chair** | Jim Daugherty, CIO (DCFS/DoIT) | Executive authority. Approves tools, guardrails, scale decisions. Monthly briefing. |
-| **Interim Lead** | Dave (designated by Jim) | Day-to-day governance decisions during Jim's absence. First point of contact. |
-| **Member** | DCFS Program Director or Deputy CIO | Ensures AI aligns with agency priorities and CCWIS compliance. |
-| **Member** | DoIT Security / Compliance Rep | Data classification, DoIT policy interpretation, security controls. |
-| **Member** | DCFS Data Privacy Officer | Child welfare data boundaries (CANTS, IL Rule 431, FERPA, HIPAA). |
-| **Member** | State Product Owner(s) | Represents the business. Ensures AI serves DCFS mission. |
-| **Presenter (invited)** | Vinay Lagisetty (Krasan) | Presents risk register, monitoring data, pilot results. Reports to the team — does not sit on it. |
-| **Presenter (invited)** | Romi / Emil Kovacs (Krasan) | Presents program status, contractual alignment, resource commitments. |
+### Phase A: Pilot Governance Team (During Pilot)
 
-### Why This Structure
+Lightweight team — enough to make day-to-day decisions for the pilot. Minimum DCFS representation required.
 
-- **DCFS owns the risk** — the State is accountable for AI deployment per DoIT policy
-- **Krasan executes** — we build, train, measure, and report
-- **Separation ensures objectivity** — the team doing the work doesn't approve its own decisions
-- **Jim remains sponsor** even during absence — Dave acts on his behalf with authority to make day-to-day decisions
+| Role | Responsibility | Filled By |
+|------|---------------|-----------|
+| **Pilot Governance Lead** (DCFS) | Day-to-day governance decisions. Approves pilot scope, tools, guardrails. Reports to CIO. | DCFS designee |
+| **CIO** (Sponsor) | Executive authority. Approves pilot launch. Available for escalations. Receives weekly summary. | Agency CIO |
+| **AI Transformation Leader** (Vendor) | Presents risk register, metrics, issues. Recommends — does not approve. | Delivery vendor |
+| **Engagement Director** (Vendor) | Presents program status, contractual alignment. | Delivery vendor |
+
+**Scope:** Pilot only (2 teams). Cannot approve ART-wide decisions.
+**Cadence:** Weekly (45 min) during pilot.
+**Authority:** Approve pilot-scope changes, tool access, training, guardrail adjustments. Can halt pilot on safety concerns.
+
+### Phase B: Full AI Governance Team (Post-Pilot, for Scale)
+
+Established by the CIO after pilot results are reviewed. This is the permanent governance body that approves playbooks, scale decisions, and ongoing AI oversight.
+
+| Role | Responsibility | Filled By |
+|------|---------------|-----------|
+| **CIO** (Sponsor) | Executive authority. Approves scale decisions, tool additions, policy changes. | Agency CIO |
+| **AI Governance Chair** (DCFS) | Leads meetings. Drives agenda. Tracks action items. | DCFS designee |
+| **Program Director** (DCFS) | Ensures AI aligns with agency priorities and program compliance (e.g., CCWIS). | DCFS designee |
+| **Security / Compliance Representative** (DoIT) | Data classification, policy interpretation, security controls, incident review. | DoIT designee |
+| **Data Privacy Officer** (DCFS) | Sensitive data boundaries (child welfare, PII, regulatory data). | DCFS designee |
+| **Business Representative** (State) | Ensures AI serves the agency mission, not just delivery efficiency. | State PO or program lead |
+| **AI Transformation Leader** (Vendor) | Presents risk register, monitoring data, pilot results, playbooks, scale recommendations. **Reports to — does not sit on — the governance team.** | Delivery vendor |
+| **Engagement Director** (Vendor) | Presents program status, contractual alignment, resource commitments. | Delivery vendor |
+
+**Scope:** All teams. Approves playbooks, scale rollout, new tools, policy changes.
+**Cadence:** Monthly (60 min) at scale. As-needed for incidents.
+**Authority:** Full — approve scale, approve playbooks, add/remove tools, modify guardrails, halt AI use.
+
+### Transition: Pilot → Full Governance
+
+| Step | What Happens | When |
+|------|-------------|------|
+| 1 | Pilot completes. Results compiled. | End of pilot PI |
+| 2 | Pilot Governance Lead presents results + playbooks to CIO. | End of pilot PI + 1 week |
+| 3 | CIO establishes Full AI Governance Team — identifies members. | CIO decides timing |
+| 4 | Full team reviews and approves playbooks from pilot. | First full team meeting |
+| 5 | Full team approves scale plan (or requests changes). | First or second meeting |
+| 6 | Scale begins with governance oversight. | Next PI |
+
+**Key principle:** Playbooks are NOT final until the full governance team approves them. The pilot produces drafts. Governance approves the versions that get scaled.
+
+### Why Two Phases
+
+- **NIST AI RMF GOVERN 2:** Governance structures should be proportional to risk. Pilot = lower risk = lighter governance. Scale = higher risk = full governance.
+- **DoIT AI Policy Section 4:** Requires agency-level oversight. Pilot Governance Lead (DCFS designee) satisfies this during pilot. Full team satisfies it at scale.
+- **Practical:** CIO may not have all governance team members identified yet. Pilot gives time to identify the right people while work progresses.
+- **No vendor self-governance:** Even the pilot team has DCFS representation. The vendor presents and recommends — DCFS decides.
 
 ---
 
 ## 4. Meeting Cadence
 
-| Phase | Frequency | Duration | Focus |
-|-------|-----------|----------|-------|
-| **Now → PI Planning (Apr 14 – May 5)** | Weekly | 45 min | Establish charter, resolve blockers (5e, 5f, Copilot status), approve tools, approve pilot teams |
-| **Pilot (Sprints 1-5)** | Bi-weekly | 45 min | Monitor pilot metrics, review incidents, adjust guardrails |
-| **Post-Pilot** | As needed | 60 min | Review results, go/no-go on scale |
-| **Scale (if approved)** | Monthly | 45 min | ART-wide monitoring, ongoing risk management |
+| Phase | Team | Frequency | Duration | Focus |
+|-------|------|-----------|----------|-------|
+| **Pre-Pilot** | Pilot Governance | Weekly | 45 min | Resolve blockers, approve tools, approve pilot teams |
+| **During Pilot** | Pilot Governance | Weekly | 45 min | Monitor metrics, review incidents, adjust guardrails |
+| **Post-Pilot** | Pilot Governance → CIO | As needed | 60 min | Present results, recommend scale |
+| **Scale Setup** | Full Governance | As needed | 60 min | Review playbooks, approve scale plan |
+| **Scale Ongoing** | Full Governance | Monthly | 60 min | ART-wide monitoring, ongoing risk management |
 
 ---
 
 ## 5. Decision Rights
 
-| Decision | Who Decides | Jim/Dave Approval? |
-|----------|------------|-------------------|
-| Approve AI Usage Playbook | Governance team | Yes |
-| Approve pilot team selection | Governance team | Yes |
-| Approve training curriculum | Governance team | No (inform only) |
-| Add new AI tool | Governance team recommendation | Yes + DoIT 30-day notice |
-| Modify guardrails (relax) | Governance team recommendation | Yes |
-| Modify guardrails (strengthen) | Governance team | No (inform only) |
-| Scale to additional teams | Governance team recommendation | Yes |
-| Halt pilot (safety concern) | Any governance member or CIO | N/A — anyone can halt |
-| Approve code generation step (stair-stepped) | Governance team | Yes (each step approved individually) |
+### Pilot Phase (Pilot Governance Team)
+
+| Decision | Who Decides | CIO Approval? |
+|----------|------------|---------------|
+| Approve pilot team selection | Pilot Governance Lead | Yes |
+| Approve training curriculum | Pilot Governance Lead | No (inform) |
+| Approve AI Usage Playbook (pilot) | Pilot Governance Lead | Yes |
+| Approve each code generation stair-step | Pilot Governance Lead | Yes |
+| Modify guardrails (strengthen) | Pilot Governance Lead | No (inform) |
+| Modify guardrails (relax) | Pilot Governance Lead | Yes |
+| Halt pilot (safety concern) | Pilot Governance Lead or CIO | N/A — either can halt |
+
+### Scale Phase (Full AI Governance Team)
+
+| Decision | Who Decides | CIO Approval? |
+|----------|------------|---------------|
+| Approve finalized playbooks | Full Governance Team | Yes |
+| Approve scale to additional teams | Full Governance Team recommendation | Yes |
+| Add new AI tool | Full Governance Team recommendation | Yes + DoIT 30-day notice |
+| Modify guardrails (relax) | Full Governance Team recommendation | Yes |
+| Expand scope to non-Krasan roles | Full Governance Team | Yes |
+| Expand scope to business processes | Not within governance authority | Yes + full risk reassessment |
+| Halt AI use (safety concern) | Any member or CIO | N/A — anyone can halt |
 
 ---
 
