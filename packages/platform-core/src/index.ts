@@ -134,6 +134,43 @@ export type {
   AIEngagementContact,
   DocumentCategory,
   AIEngagementDocument,
+  // Readiness workflow types
+  ReadinessAssessmentStatus,
+  EntityType,
+  CompanySize,
+  TeamFunction,
+  TeamMethodology,
+  SeniorityLevel,
+  QuestionStatus,
+  QuestionFlag,
+  QuestionnaireStatus,
+  ResponseStatus,
+  DevRequestStatus,
+  QuestionCategory,
+  ReadinessAssessment,
+  AssessmentCompany,
+  AssessmentTeam,
+  AssessmentMember,
+  AssessmentPolicy,
+  QuestionBankItem,
+  QuestionDevelopmentRequest,
+  AssessmentQuestionnaire,
+  QuestionnaireQuestion,
+  QuestionnaireResponse,
+  ResponseAnswer,
+  QuestionFeedbackStats,
+  CreateReadinessAssessmentInput,
+  UpdateReadinessAssessmentInput,
+  UpsertAssessmentCompanyInput,
+  UpsertAssessmentTeamInput,
+  CreateAssessmentMemberInput,
+  UpdateMemberPilotInput,
+  TeamTrainingStatus,
+  CreateTrainingStatusInput,
+  UpdateTrainingStatusInput,
+  UpsertAssessmentPolicyInput,
+  CreateQuestionInput,
+  SubmitAnswerInput,
 } from "./types/ai-tools.js";
 export {
   ENGAGEMENT_STATUS_LABELS,
@@ -150,6 +187,21 @@ export {
   getMetricDefinition,
   CONTACT_CATEGORY_LABELS,
   DOCUMENT_CATEGORY_LABELS,
+  // Readiness workflow constants
+  ROLE_QUESTION_CATEGORIES,
+  ENTITY_TYPE_LABELS,
+  COMPANY_SIZE_LABELS,
+  TEAM_FUNCTION_LABELS,
+  TEAM_METHODOLOGY_LABELS,
+  SENIORITY_LABELS,
+  READINESS_TIERS,
+  POLICY_COVERAGE_AREAS,
+  // Team profiling constants
+  VENDOR_LABELS,
+  AI_TOOL_LABELS,
+  TRAINING_TRACK_LABELS,
+  ROLE_TO_DEFAULT_TRACKS,
+  ROLE_TO_DEFAULT_AI_TOOL,
 } from "./types/ai-tools.js";
 
 // Tenant types
@@ -163,6 +215,28 @@ export type {
   ToolKey,
 } from "./types/tenant.js";
 export { TOOL_KEYS, TOOL_KEY_LABELS, TOOL_KEY_SECTIONS } from "./types/tenant.js";
+
+// Readiness Deliverables types
+export type {
+  AssessmentPillar, ConstraintCategory, ConstraintSeverity,
+  UseCaseQuadrant, InvestmentTier, ImprovementType, RiskCategory, EnhancementStatus,
+  CatalogVersionRecord, AIEnhancementCatalogItem, AssessmentEnhancementStatusRecord,
+  AssessmentVersionStampRecord, AssessmentScopeRecord, AssessmentConstraintRecord,
+  ApprovedToolRecord, WorkflowPhaseRecord, AIOpportunityRecord,
+  DataReadinessRecord, UseCaseRecord, RiskRecord, PilotRecord,
+  SetScopeInput, CreateConstraintInput, CreateApprovedToolInput,
+  CreateWorkflowPhaseInput, CreateAIOpportunityInput, UpsertDataReadinessInput,
+  CreateUseCaseInput, CreateRiskInput, CreatePilotInput,
+  EnhancementCoverageStats,
+} from "./types/readiness-deliverables.js";
+export {
+  ASSESSMENT_PILLAR_LABELS, PILLAR_PHASE_MAPPING,
+  CONSTRAINT_CATEGORY_LABELS, CONSTRAINT_TEMPLATES,
+  USE_CASE_QUADRANT_LABELS, INVESTMENT_TIER_LABELS, IMPROVEMENT_TYPE_LABELS,
+  RISK_CATEGORY_LABELS, RISK_TEMPLATES,
+  DATA_READINESS_DIMENSIONS, ENHANCEMENT_STATUS_LABELS,
+  computeQuadrant, computeInvestmentTier, computeRiskScore, getRiskColor,
+} from "./types/readiness-deliverables.js";
 
 // AI Laws & Regulations
 export type { AILaw } from "./types/ai-laws.js";

@@ -24,6 +24,7 @@ from sqlalchemy import (
     Text,
     ForeignKey,
     UniqueConstraint,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import declarative_base
@@ -1286,4 +1287,518 @@ class UnresolvedSkill(Base):
         UniqueConstraint("site_id", "raw_text", name="uq_unresolved_skill_site_text"),
         Index("idx_unresolved_skill_site", "site_id"),
         Index("idx_unresolved_skill_unresolved", "site_id", "resolved"),
+    )
+
+
+# =============================================================================
+# READINESS ASSESSMENT WORKFLOW
+# =============================================================================
+
+
+class ReadinessAssessment(Base):
+    """Top-level readiness assessment record. Can be standalone or linked to an engagement."""
+
+    __tablename__ = "readiness_assessments"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    name = Column(String(255), nullable=False)
+    engagement_id = Column(UUID(as_uuid=True), nullable=True)
+    prior_assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id"), nullable=True)
+    status = Column(String(50), nullable=False, server_default="draft")
+    created_by = Column(String(255), nullable=False)
+    deadline = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_readiness_assessments_site", "site_id"),
+        Index("idx_readiness_assessments_status", "site_id", "status"),
+    )
+
+
+class AssessmentCompany(Base):
+    """Company profile data per readiness assessment."""
+
+    __tablename__ = "assessment_companies"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    name = Column(String(255), nullable=False)
+    industry = Column(String(100))
+    entity_type = Column(String(50), nullable=False)
+    state = Column(String(50))
+    size = Column(String(50))
+    sector_constraints = Column(JSONB, server_default="{}")
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_assessment_companies_assessment", "assessment_id"),
+    )
+
+
+class AssessmentTeam(Base):
+    """Team details per readiness assessment."""
+
+    __tablename__ = "assessment_teams"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    name = Column(String(255), nullable=False)
+    team_function = Column(String(50))
+    methodology = Column(String(50))
+    size = Column(Integer)
+    objectives = Column(Text)
+    pain_points = Column(Text)
+    ai_hopes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_assessment_teams_assessment", "assessment_id"),
+    )
+
+
+class AssessmentMember(Base):
+    """Team member directory per readiness assessment."""
+
+    __tablename__ = "assessment_members"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    team_id = Column(UUID(as_uuid=True), ForeignKey("assessment_teams.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    name = Column(String(255), nullable=False)
+    email = Column(String(255), nullable=False)
+    role = Column(String(50), nullable=False)
+    custom_role_label = Column(String(255))
+    seniority = Column(String(50))
+    vendor = Column(String(50))
+    in_pilot = Column(Boolean, server_default=text("false"), nullable=False)
+    ai_tool = Column(String(50))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_assessment_members_team", "team_id"),
+    )
+
+
+class TeamTrainingStatus(Base):
+    """Training completion tracking per team member per track."""
+
+    __tablename__ = "team_training_status"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    member_id = Column(UUID(as_uuid=True), ForeignKey("assessment_members.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    track_name = Column(String(100), nullable=False)
+    status = Column(String(50), server_default=text("'pending'"), nullable=False)
+    scheduled_date = Column(Date)
+    completed_date = Column(Date)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_training_status_member", "member_id"),
+        Index("idx_training_status_site", "site_id"),
+    )
+
+
+class AssessmentPolicy(Base):
+    """AI policy intake per readiness assessment."""
+
+    __tablename__ = "assessment_policies"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    has_policy = Column(Boolean, nullable=False, server_default="false")
+    policy_document_url = Column(String(500))
+    coverage = Column(JSONB, server_default="{}")
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_assessment_policies_assessment", "assessment_id"),
+    )
+
+
+class QuestionBank(Base):
+    """Versioned question bank for readiness questionnaires."""
+
+    __tablename__ = "question_bank"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=True)
+    category = Column(String(50), nullable=False)
+    capability = Column(String(100))
+    question_text = Column(Text, nullable=False)
+    description = Column(Text)
+    entity_types = Column(JSONB, server_default="[]")
+    roles = Column(JSONB, server_default="[]")
+    is_default = Column(Boolean, server_default="true")
+    sort_order = Column(Integer, server_default="0")
+    version = Column(Integer, nullable=False, server_default="1")
+    status = Column(String(20), nullable=False, server_default="active")
+    parent_question_id = Column(UUID(as_uuid=True), ForeignKey("question_bank.id"), nullable=True)
+    created_by = Column(String(255))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_question_bank_site", "site_id"),
+        Index("idx_question_bank_category", "category"),
+        Index("idx_question_bank_status", "status"),
+        Index("idx_question_bank_parent", "parent_question_id"),
+    )
+
+
+class QuestionDevelopmentRequest(Base):
+    """Tracks unmapped roles needing question development."""
+
+    __tablename__ = "question_development_requests"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    custom_role_label = Column(String(255), nullable=False)
+    status = Column(String(20), nullable=False, server_default="pending")
+    requested_from_assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id"), nullable=True)
+    resolved_by = Column(String(255))
+    resolved_at = Column(DateTime(timezone=True))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    __table_args__ = (
+        Index("idx_question_dev_requests_site", "site_id"),
+        Index("idx_question_dev_requests_status", "site_id", "status"),
+    )
+
+
+class AssessmentQuestionnaire(Base):
+    """Generated questionnaire instance per readiness assessment."""
+
+    __tablename__ = "assessment_questionnaires"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    status = Column(String(20), nullable=False, server_default="draft")
+    generated_at = Column(DateTime(timezone=True))
+    customized = Column(Boolean, server_default="false")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_assessment_questionnaires_assessment", "assessment_id"),
+    )
+
+
+class QuestionnaireQuestion(Base):
+    """Questions selected for a specific questionnaire with version pinning."""
+
+    __tablename__ = "questionnaire_questions"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    questionnaire_id = Column(UUID(as_uuid=True), ForeignKey("assessment_questionnaires.id", ondelete="CASCADE"), nullable=False)
+    question_id = Column(UUID(as_uuid=True), ForeignKey("question_bank.id"), nullable=False)
+    question_version = Column(Integer, nullable=False)
+    sort_order = Column(Integer, nullable=False, server_default="0")
+    is_required = Column(Boolean, server_default="true")
+    target_roles = Column(JSONB, server_default="[]")
+
+    __table_args__ = (
+        Index("idx_questionnaire_questions_qid", "questionnaire_id"),
+    )
+
+
+class QuestionnaireResponse(Base):
+    """Individual member response to a questionnaire, accessed via token."""
+
+    __tablename__ = "questionnaire_responses"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    questionnaire_id = Column(UUID(as_uuid=True), ForeignKey("assessment_questionnaires.id", ondelete="CASCADE"), nullable=False)
+    member_id = Column(UUID(as_uuid=True), ForeignKey("assessment_members.id", ondelete="CASCADE"), nullable=False)
+    token = Column(UUID(as_uuid=True), server_default=func.gen_random_uuid(), nullable=False, unique=True)
+    status = Column(String(20), nullable=False, server_default="not_started")
+    started_at = Column(DateTime(timezone=True))
+    completed_at = Column(DateTime(timezone=True))
+
+    __table_args__ = (
+        Index("idx_questionnaire_responses_questionnaire", "questionnaire_id"),
+        Index("idx_questionnaire_responses_token", "token", unique=True),
+    )
+
+
+class ResponseAnswer(Base):
+    """Individual answer per question per response."""
+
+    __tablename__ = "response_answers"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    response_id = Column(UUID(as_uuid=True), ForeignKey("questionnaire_responses.id", ondelete="CASCADE"), nullable=False)
+    question_id = Column(UUID(as_uuid=True), ForeignKey("question_bank.id"), nullable=False)
+    score = Column(Integer)
+    comment = Column(Text)
+    flag = Column(String(20))
+    answered_at = Column(DateTime(timezone=True))
+
+    __table_args__ = (
+        Index("idx_response_answers_response", "response_id"),
+    )
+
+
+class QuestionFeedbackStats(Base):
+    """Cached aggregate feedback stats per question."""
+
+    __tablename__ = "question_feedback_stats"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    question_id = Column(UUID(as_uuid=True), ForeignKey("question_bank.id", ondelete="CASCADE"), nullable=False, unique=True)
+    times_asked = Column(Integer, server_default="0")
+    avg_score = Column(Numeric(3, 2))
+    unclear_count = Column(Integer, server_default="0")
+    not_applicable_count = Column(Integer, server_default="0")
+    needs_review = Column(Boolean, server_default="false")
+    last_computed_at = Column(DateTime(timezone=True))
+
+    __table_args__ = (
+        Index("idx_question_feedback_question", "question_id", unique=True),
+    )
+
+
+# =============================================================================
+# READINESS DELIVERABLES — CATALOG, SCOPE, CONSTRAINTS, SDLC, USE CASES, RISKS, PILOTS
+# =============================================================================
+
+
+class CatalogVersion(Base):
+    __tablename__ = "catalog_versions"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    version_number = Column(Integer, nullable=False, unique=True)
+    release_date = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    release_notes = Column(Text)
+    item_count = Column(Integer, server_default="0")
+    created_by = Column(String(255))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+
+class AIEnhancementCatalog(Base):
+    __tablename__ = "ai_enhancement_catalog"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    pillar = Column(String(50), nullable=False)
+    name = Column(String(255), nullable=False)
+    description = Column(Text)
+    example_tools = Column(Text)
+    version = Column(Integer, nullable=False, server_default="1")
+    status = Column(String(20), nullable=False, server_default="active")
+    parent_item_id = Column(UUID(as_uuid=True), ForeignKey("ai_enhancement_catalog.id"), nullable=True)
+    catalog_version_id = Column(UUID(as_uuid=True), ForeignKey("catalog_versions.id"), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    __table_args__ = (
+        Index("idx_catalog_pillar", "pillar"),
+        Index("idx_catalog_status", "status"),
+    )
+
+
+class AssessmentEnhancementStatus(Base):
+    __tablename__ = "assessment_enhancement_status"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    catalog_item_id = Column(UUID(as_uuid=True), ForeignKey("ai_enhancement_catalog.id"), nullable=False)
+    catalog_version = Column(Integer, nullable=False)
+    status = Column(String(20), nullable=False, server_default="not_evaluated")
+    tool_used = Column(String(255))
+    blocking_constraint_id = Column(UUID(as_uuid=True), nullable=True)
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+    __table_args__ = (
+        Index("idx_enhancement_status_assessment", "assessment_id"),
+    )
+
+
+class AssessmentVersionStamp(Base):
+    __tablename__ = "assessment_version_stamps"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    source_type = Column(String(50), nullable=False)
+    source_version = Column(Integer, nullable=False)
+    source_date = Column(DateTime(timezone=True))
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    __table_args__ = (
+        Index("idx_version_stamps_assessment", "assessment_id"),
+    )
+
+
+class AssessmentScope(Base):
+    __tablename__ = "assessment_scope"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    pillar = Column(String(50), nullable=False)
+    in_scope = Column(Boolean, nullable=False, server_default="false")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    __table_args__ = (
+        UniqueConstraint("assessment_id", "pillar", name="uq_scope_assessment_pillar"),
+        Index("idx_scope_assessment", "assessment_id"),
+    )
+
+
+class AssessmentConstraintModel(Base):
+    __tablename__ = "assessment_constraints"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    description = Column(Text, nullable=False)
+    category = Column(String(50), nullable=False)
+    severity = Column(String(10), nullable=False, server_default="hard")
+    source = Column(String(255))
+    notes = Column(Text)
+    sort_order = Column(Integer, server_default="0")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    __table_args__ = (
+        Index("idx_constraints_assessment", "assessment_id"),
+    )
+
+
+class AssessmentApprovedTool(Base):
+    __tablename__ = "assessment_approved_tools"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    tool_name = Column(String(255), nullable=False)
+    vendor = Column(String(255))
+    capabilities = Column(Text)
+    restrictions = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    __table_args__ = (
+        Index("idx_approved_tools_assessment", "assessment_id"),
+    )
+
+
+class AssessmentWorkflowPhase(Base):
+    __tablename__ = "assessment_workflow_phases"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    name = Column(String(255), nullable=False)
+    description = Column(Text)
+    pillar = Column(String(50))
+    roles_involved = Column(JSONB, server_default="[]")
+    current_tools = Column(JSONB, server_default="[]")
+    time_spent_hours = Column(Numeric(6, 1))
+    pain_points = Column(Text)
+    sort_order = Column(Integer, server_default="0")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+    __table_args__ = (
+        Index("idx_workflow_phases_assessment", "assessment_id"),
+    )
+
+
+class AssessmentAIOpportunity(Base):
+    __tablename__ = "assessment_ai_opportunities"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    phase_id = Column(UUID(as_uuid=True), ForeignKey("assessment_workflow_phases.id", ondelete="CASCADE"), nullable=False)
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    description = Column(Text, nullable=False)
+    approved_tool = Column(String(255))
+    expected_improvement = Column(Text)
+    improvement_type = Column(String(30))
+    improvement_pct = Column(Numeric(5, 1))
+    constraint_compliant = Column(Boolean, server_default="true")
+    is_current_strength = Column(Boolean, server_default="false")
+    sort_order = Column(Integer, server_default="0")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    __table_args__ = (
+        Index("idx_opportunities_phase", "phase_id"),
+        Index("idx_opportunities_assessment", "assessment_id"),
+    )
+
+
+class AssessmentDataReadiness(Base):
+    __tablename__ = "assessment_data_readiness"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False, unique=True)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    data_quality = Column(Integer)
+    data_accessibility = Column(Integer)
+    data_governance = Column(Integer)
+    data_pipelines = Column(Integer)
+    data_security = Column(Integer)
+    evidence_notes = Column(JSONB, server_default="{}")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class AssessmentUseCase(Base):
+    __tablename__ = "assessment_use_cases"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    title = Column(String(255), nullable=False)
+    description = Column(Text)
+    pillar = Column(String(50))
+    affected_roles = Column(JSONB, server_default="[]")
+    impact_score = Column(Integer)
+    effort_score = Column(Integer)
+    quadrant = Column(String(30))
+    timeline_months = Column(Integer)
+    required_tools = Column(Text)
+    prerequisites = Column(Text)
+    sort_order = Column(Integer, server_default="0")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+    __table_args__ = (
+        Index("idx_use_cases_assessment", "assessment_id"),
+    )
+
+
+class AssessmentRisk(Base):
+    __tablename__ = "assessment_risks"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    description = Column(Text, nullable=False)
+    category = Column(String(30), nullable=False)
+    likelihood = Column(Integer)
+    impact_score = Column(Integer)
+    risk_score = Column(Integer)
+    mitigation = Column(Text)
+    owner = Column(String(255))
+    is_preseeded = Column(Boolean, server_default="false")
+    sort_order = Column(Integer, server_default="0")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+    __table_args__ = (
+        Index("idx_risks_assessment", "assessment_id"),
+    )
+
+
+class AssessmentPilotModel(Base):
+    __tablename__ = "assessment_pilots"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    assessment_id = Column(UUID(as_uuid=True), ForeignKey("readiness_assessments.id", ondelete="CASCADE"), nullable=False)
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False)
+    use_case_id = Column(UUID(as_uuid=True), ForeignKey("assessment_use_cases.id"), nullable=True)
+    title = Column(String(255), nullable=False)
+    scope_description = Column(Text)
+    success_criteria = Column(Text)
+    timeline = Column(String(100))
+    team_roles = Column(JSONB, server_default="[]")
+    tools_needed = Column(Text)
+    estimated_cost = Column(String(255))
+    go_nogo_criteria = Column(Text)
+    sort_order = Column(Integer, server_default="0")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+    __table_args__ = (
+        Index("idx_pilots_assessment", "assessment_id"),
     )

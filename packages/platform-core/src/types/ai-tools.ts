@@ -17,7 +17,13 @@ export type EngagementStatus = "draft" | "readiness" | "baseline" | "training" |
 
 export type IntegrationType = "jira" | "azure_devops" | "github" | "gitlab" | "linear" | "manual";
 
-export type TeamMemberRole = "developer" | "qa" | "scrum_master" | "product_owner" | "devops" | "designer";
+export type TeamMemberRole =
+  | "developer" | "qa" | "scrum_master" | "product_owner" | "devops" | "designer"
+  | "business_analyst" | "tech_lead" | "architect" | "integration_tester"
+  | "performance_tester" | "release_manager" | "data_analyst" | "data_engineer"
+  | "security_engineer" | "ux_researcher" | "technical_writer"
+  | "program_manager" | "project_manager" | "engineering_manager"
+  | "database_admin" | "system_admin" | "support_engineer" | "other";
 
 export type AssessmentType = "readiness" | "baseline" | "post_training";
 
@@ -58,6 +64,56 @@ export const TEAM_MEMBER_ROLE_LABELS: Record<TeamMemberRole, string> = {
   product_owner: "Product Owner",
   devops: "DevOps Engineer",
   designer: "Designer",
+  business_analyst: "Business Analyst",
+  tech_lead: "Tech Lead",
+  architect: "Architect",
+  integration_tester: "Integration Tester",
+  performance_tester: "Performance Tester",
+  release_manager: "Release Manager",
+  data_analyst: "Data Analyst",
+  data_engineer: "Data Engineer",
+  security_engineer: "Security Engineer",
+  ux_researcher: "UX Researcher",
+  technical_writer: "Technical Writer",
+  program_manager: "Program Manager",
+  project_manager: "Project Manager",
+  engineering_manager: "Engineering Manager",
+  database_admin: "Database Admin",
+  system_admin: "System Admin",
+  support_engineer: "Support Engineer",
+  other: "Other",
+};
+
+// Question categories each role receives in readiness questionnaires.
+// "universal" questions (7 DORA capabilities + 4 AI policy) go to all roles.
+// These are the ADDITIONAL role-specific categories.
+export type QuestionCategory = "dora_capability" | "ai_policy" | "role_specific" | "workflow";
+
+export const ROLE_QUESTION_CATEGORIES: Record<TeamMemberRole, string[]> = {
+  developer: ["ai_coding_tools", "code_review", "version_control", "technical_debt"],
+  qa: ["test_automation", "regression_testing", "bug_analysis", "test_data"],
+  scrum_master: ["sprint_analytics", "retrospective_facilitation", "impediment_tracking", "velocity_prediction"],
+  product_owner: ["backlog_management", "story_refinement", "stakeholder_reporting", "prioritization"],
+  devops: ["infrastructure_automation", "pipeline_optimization", "incident_response", "monitoring"],
+  designer: ["design_workflows", "prototyping", "accessibility", "design_systems"],
+  business_analyst: ["requirements_gathering", "process_modeling", "stakeholder_analysis", "documentation"],
+  tech_lead: ["ai_coding_tools", "code_review", "architecture_review", "governance"],
+  architect: ["architecture_review", "technical_debt", "technology_evaluation", "documentation"],
+  integration_tester: ["test_automation", "api_testing", "regression_management", "environment_config"],
+  performance_tester: ["test_automation", "performance_analysis", "load_testing", "monitoring"],
+  release_manager: ["pipeline_optimization", "release_planning", "change_management", "incident_response"],
+  data_analyst: ["data_analysis", "reporting", "visualization", "data_quality"],
+  data_engineer: ["data_pipelines", "infrastructure_automation", "data_quality", "monitoring"],
+  security_engineer: ["security_review", "compliance_automation", "incident_response", "governance"],
+  ux_researcher: ["user_research", "survey_design", "data_analysis", "accessibility"],
+  technical_writer: ["documentation", "content_generation", "review_automation", "knowledge_management"],
+  program_manager: ["governance", "stakeholder_reporting", "change_management", "risk_assessment"],
+  project_manager: ["governance", "stakeholder_reporting", "change_management", "planning"],
+  engineering_manager: ["governance", "change_management", "team_adoption", "risk_assessment"],
+  database_admin: ["infrastructure_automation", "data_quality", "monitoring", "incident_response"],
+  system_admin: ["infrastructure_automation", "monitoring", "incident_response", "security_review"],
+  support_engineer: ["incident_response", "knowledge_management", "bug_analysis", "documentation"],
+  other: [],  // universal questions only; role-specific questions developed via development requests
 };
 
 export const ASSESSMENT_STATUS_LABELS: Record<AssessmentStatus, string> = {
@@ -562,6 +618,32 @@ export const TRAINING_CATALOG: TrainingModule[] = [
   // Designer modules
   { module: "AI Design Workflows", description: "Using AI for prototyping, wireframing, and design system generation", duration_hours: 3, target_roles: ["designer"], tools: ["Figma AI", "Midjourney", "ChatGPT"] },
   { module: "AI-Assisted Accessibility Compliance", description: "Using AI to audit and improve accessibility (Section 508, WCAG)", duration_hours: 2, target_roles: ["designer", "developer"], tools: ["axe AI", "ChatGPT"] },
+  // Business Analyst modules
+  { module: "AI-Assisted Requirements Gathering", description: "Using AI to elicit, analyze, and document requirements from stakeholder interviews", duration_hours: 3, target_roles: ["business_analyst"], tools: ["ChatGPT", "Claude", "Otter.ai"] },
+  { module: "AI User Story Generation", description: "Generating user stories, acceptance criteria, and edge cases with AI assistance", duration_hours: 2, target_roles: ["business_analyst", "product_owner"], tools: ["ChatGPT", "Claude"] },
+  { module: "AI Process Modeling", description: "Using AI to create and validate process flows, swimlane diagrams, and decision trees", duration_hours: 2, target_roles: ["business_analyst"], tools: ["ChatGPT", "Miro AI"] },
+  // Tech Lead / Architect modules
+  { module: "AI Architecture Review", description: "Using AI to review architecture decisions, identify patterns, and evaluate trade-offs", duration_hours: 3, target_roles: ["tech_lead", "architect"], tools: ["ChatGPT", "Claude", "GitHub Copilot"] },
+  { module: "AI Technical Debt Analysis", description: "Leveraging AI to identify, prioritize, and plan technical debt remediation", duration_hours: 2, target_roles: ["tech_lead", "architect", "developer"], tools: ["SonarQube AI", "ChatGPT"] },
+  // Integration / Performance Tester modules
+  { module: "AI-Assisted API Testing", description: "Using AI to generate API test cases, mock data, and validate integration contracts", duration_hours: 3, target_roles: ["integration_tester", "qa"], tools: ["Postman AI", "ChatGPT", "GitHub Copilot"] },
+  { module: "AI Performance Test Design", description: "AI-assisted load test scenario design, threshold analysis, and bottleneck identification", duration_hours: 3, target_roles: ["performance_tester"], tools: ["ChatGPT", "k6", "Grafana AI"] },
+  // Data roles modules
+  { module: "AI-Powered Data Analysis", description: "Using AI for exploratory data analysis, pattern detection, and insight generation", duration_hours: 3, target_roles: ["data_analyst", "data_engineer"], tools: ["ChatGPT", "Claude", "Jupyter AI"] },
+  { module: "AI Data Pipeline Development", description: "Using AI to generate ETL code, optimize queries, and validate data transformations", duration_hours: 3, target_roles: ["data_engineer", "database_admin"], tools: ["GitHub Copilot", "ChatGPT"] },
+  // Security modules
+  { module: "AI Security Review", description: "Using AI to identify vulnerabilities, review security configurations, and generate compliance reports", duration_hours: 3, target_roles: ["security_engineer"], tools: ["ChatGPT", "Claude", "Snyk AI"] },
+  // Management modules
+  { module: "AI Change Management", description: "Using AI for adoption planning, impact analysis, and communication strategy for AI rollouts", duration_hours: 2, target_roles: ["engineering_manager", "program_manager", "project_manager"], tools: ["ChatGPT", "Claude"] },
+  { module: "AI Risk Assessment", description: "Using AI to identify, evaluate, and mitigate risks in AI adoption programs", duration_hours: 2, target_roles: ["engineering_manager", "program_manager", "security_engineer"], tools: ["ChatGPT", "Claude"] },
+  // Release / Ops modules
+  { module: "AI Release Planning", description: "Using AI for release scheduling, dependency analysis, and rollback planning", duration_hours: 2, target_roles: ["release_manager"], tools: ["ChatGPT", "Jira AI"] },
+  { module: "AI System Administration", description: "Using AI for system monitoring, log analysis, and automated remediation", duration_hours: 3, target_roles: ["system_admin", "database_admin"], tools: ["ChatGPT", "Claude"] },
+  // Support / Docs modules
+  { module: "AI Knowledge Management", description: "Using AI to create, organize, and maintain technical documentation and knowledge bases", duration_hours: 2, target_roles: ["technical_writer", "support_engineer"], tools: ["ChatGPT", "Claude", "Notion AI"] },
+  { module: "AI-Assisted Support Triage", description: "Using AI for ticket classification, root cause suggestion, and response drafting", duration_hours: 2, target_roles: ["support_engineer"], tools: ["ChatGPT", "Claude"] },
+  // UX Research modules
+  { module: "AI User Research", description: "Using AI to analyze user interviews, synthesize findings, and generate research reports", duration_hours: 3, target_roles: ["ux_researcher", "designer"], tools: ["ChatGPT", "Claude", "Dovetail AI"] },
 ];
 
 // -----------------------------------------------------------------------------
@@ -620,3 +702,393 @@ export const DOCUMENT_CATEGORY_LABELS: Record<DocumentCategory, string> = {
   playbook: "Playbook",
   reference: "Reference",
 };
+
+// =============================================================================
+// Readiness Assessment Workflow
+// =============================================================================
+
+export type ReadinessAssessmentStatus = "draft" | "collecting" | "completed";
+export type EntityType = "private" | "public_university" | "state_agency" | "federal_agency" | "municipality" | "regulated_entity";
+export type CompanySize = "small" | "medium" | "large" | "enterprise";
+export type TeamFunction = "development" | "qa" | "devops" | "data" | "mixed";
+export type TeamMethodology = "scrum" | "kanban" | "safe" | "waterfall" | "other";
+export type SeniorityLevel = "junior" | "mid" | "senior" | "lead" | "principal";
+export type QuestionStatus = "draft" | "active" | "deprecated";
+export type QuestionFlag = "unclear" | "not_applicable";
+export type QuestionnaireStatus = "draft" | "ready" | "sent" | "closed";
+export type ResponseStatus = "not_started" | "in_progress" | "completed";
+export type DevRequestStatus = "pending" | "in_progress" | "completed";
+
+export const ENTITY_TYPE_LABELS: Record<EntityType, string> = {
+  private: "Private Company",
+  public_university: "Public University",
+  state_agency: "State Agency",
+  federal_agency: "Federal Agency",
+  municipality: "Municipality",
+  regulated_entity: "Regulated Entity",
+};
+
+export const COMPANY_SIZE_LABELS: Record<CompanySize, string> = {
+  small: "Small (1-50)",
+  medium: "Medium (51-500)",
+  large: "Large (501-5000)",
+  enterprise: "Enterprise (5000+)",
+};
+
+export const TEAM_FUNCTION_LABELS: Record<TeamFunction, string> = {
+  development: "Development",
+  qa: "QA / Testing",
+  devops: "DevOps / Infrastructure",
+  data: "Data / Analytics",
+  mixed: "Mixed / Cross-functional",
+};
+
+export const TEAM_METHODOLOGY_LABELS: Record<TeamMethodology, string> = {
+  scrum: "Scrum",
+  kanban: "Kanban",
+  safe: "SAFe",
+  waterfall: "Waterfall",
+  other: "Other",
+};
+
+export const SENIORITY_LABELS: Record<SeniorityLevel, string> = {
+  junior: "Junior",
+  mid: "Mid-level",
+  senior: "Senior",
+  lead: "Lead",
+  principal: "Principal / Staff",
+};
+
+export const READINESS_TIERS = [
+  { label: "Not Ready", min: 0, max: 1.99, color: "red", description: "Critical gaps. Fix before training." },
+  { label: "Foundation Needed", min: 2.0, max: 2.99, color: "amber", description: "Key gaps remain. Targeted fixes first." },
+  { label: "Ready", min: 3.0, max: 3.99, color: "blue", description: "Adequate. Training should produce results." },
+  { label: "Well Positioned", min: 4.0, max: 5.0, color: "emerald", description: "Strong foundations. AI will amplify." },
+] as const;
+
+// AI policy coverage areas
+export const POLICY_COVERAGE_AREAS = [
+  { key: "data_privacy", label: "Data Privacy & Confidentiality" },
+  { key: "ip_ownership", label: "Code Ownership & IP" },
+  { key: "approved_tools", label: "Approved AI Tools List" },
+  { key: "prohibited_uses", label: "Prohibited Uses" },
+  { key: "data_handling", label: "Data Handling & Storage" },
+] as const;
+
+// --- Interfaces ---
+
+export interface ReadinessAssessment {
+  id: string;
+  site_id: string;
+  name: string;
+  engagement_id: string | null;
+  prior_assessment_id: string | null;
+  status: ReadinessAssessmentStatus;
+  created_by: string;
+  deadline: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AssessmentCompany {
+  id: string;
+  assessment_id: string;
+  site_id: string;
+  name: string;
+  industry: string | null;
+  entity_type: EntityType;
+  state: string | null;
+  size: CompanySize | null;
+  sector_constraints: Record<string, unknown>;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AssessmentTeam {
+  id: string;
+  assessment_id: string;
+  site_id: string;
+  name: string;
+  team_function: TeamFunction | null;
+  methodology: TeamMethodology | null;
+  size: number | null;
+  objectives: string | null;
+  pain_points: string | null;
+  ai_hopes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type MemberVendor = "krasan" | "csg" | "isi" | "state" | "other";
+export type MemberAiTool = "copilot" | "rovo" | "d365_copilot" | "power_automate" | "confluence_ai" | "other" | null;
+export type TrainingTrack = "foundation" | "ba_technical" | "configuration" | "developer" | "tester" | "scrum_master" | "leadership";
+export type TrainingStatusValue = "pending" | "scheduled" | "completed";
+
+export const VENDOR_LABELS: Record<MemberVendor, string> = {
+  krasan: "Krasan",
+  csg: "CSG",
+  isi: "ISI",
+  state: "State of Illinois",
+  other: "Other",
+};
+
+export const AI_TOOL_LABELS: Record<string, string> = {
+  copilot: "GitHub Copilot",
+  rovo: "Atlassian Rovo",
+  d365_copilot: "D365 Copilot",
+  power_automate: "Power Automate Copilot",
+  confluence_ai: "Confluence AI",
+  other: "Other",
+};
+
+export const TRAINING_TRACK_LABELS: Record<TrainingTrack, string> = {
+  foundation: "Foundation",
+  ba_technical: "BA-Technical",
+  configuration: "Configuration",
+  developer: "Developer",
+  tester: "Tester",
+  scrum_master: "Scrum Master",
+  leadership: "Leadership Briefing",
+};
+
+export const ROLE_TO_DEFAULT_TRACKS: Record<string, TrainingTrack[]> = {
+  business_analyst: ["foundation", "ba_technical"],
+  developer: ["foundation", "developer"],
+  qa: ["foundation", "tester"],
+  scrum_master: ["foundation", "scrum_master"],
+  tech_lead: ["foundation", "developer", "scrum_master"],
+  architect: ["foundation", "developer"],
+  integration_tester: ["foundation", "tester"],
+  performance_tester: ["foundation", "tester"],
+  product_owner: ["foundation", "leadership"],
+  engineering_manager: ["foundation", "leadership"],
+  program_manager: ["foundation", "leadership"],
+  project_manager: ["foundation", "leadership"],
+  other: ["foundation"],
+};
+
+export const ROLE_TO_DEFAULT_AI_TOOL: Record<string, MemberAiTool> = {
+  business_analyst: "rovo",
+  developer: "copilot",
+  qa: "copilot",
+  scrum_master: "rovo",
+  tech_lead: "copilot",
+  architect: "copilot",
+  integration_tester: "copilot",
+  performance_tester: "copilot",
+  product_owner: null,
+  engineering_manager: null,
+  program_manager: null,
+  project_manager: null,
+  other: null,
+};
+
+export interface AssessmentMember {
+  id: string;
+  team_id: string;
+  site_id: string;
+  name: string;
+  email: string;
+  role: TeamMemberRole;
+  custom_role_label: string | null;
+  seniority: SeniorityLevel | null;
+  vendor: MemberVendor | null;
+  in_pilot: boolean;
+  ai_tool: MemberAiTool;
+  created_at: string;
+}
+
+export interface TeamTrainingStatus {
+  id: string;
+  member_id: string;
+  site_id: string;
+  track_name: TrainingTrack;
+  status: TrainingStatusValue;
+  scheduled_date: string | null;
+  completed_date: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AssessmentPolicy {
+  id: string;
+  assessment_id: string;
+  site_id: string;
+  has_policy: boolean;
+  policy_document_url: string | null;
+  coverage: Record<string, boolean>;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface QuestionBankItem {
+  id: string;
+  site_id: string | null;
+  category: string;
+  capability: string | null;
+  question_text: string;
+  description: string | null;
+  entity_types: string[];
+  roles: string[];
+  is_default: boolean;
+  sort_order: number;
+  version: number;
+  status: QuestionStatus;
+  parent_question_id: string | null;
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface QuestionDevelopmentRequest {
+  id: string;
+  site_id: string;
+  custom_role_label: string;
+  status: DevRequestStatus;
+  requested_from_assessment_id: string | null;
+  resolved_by: string | null;
+  resolved_at: string | null;
+  created_at: string;
+}
+
+export interface AssessmentQuestionnaire {
+  id: string;
+  assessment_id: string;
+  site_id: string;
+  status: QuestionnaireStatus;
+  generated_at: string | null;
+  customized: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface QuestionnaireQuestion {
+  id: string;
+  questionnaire_id: string;
+  question_id: string;
+  question_version: number;
+  sort_order: number;
+  is_required: boolean;
+  target_roles: string[];
+}
+
+export interface QuestionnaireResponse {
+  id: string;
+  questionnaire_id: string;
+  member_id: string;
+  token: string;
+  status: ResponseStatus;
+  started_at: string | null;
+  completed_at: string | null;
+}
+
+export interface ResponseAnswer {
+  id: string;
+  response_id: string;
+  question_id: string;
+  score: number | null;
+  comment: string | null;
+  flag: QuestionFlag | null;
+  answered_at: string | null;
+}
+
+export interface QuestionFeedbackStats {
+  id: string;
+  question_id: string;
+  times_asked: number;
+  avg_score: number | null;
+  unclear_count: number;
+  not_applicable_count: number;
+  needs_review: boolean;
+  last_computed_at: string | null;
+}
+
+// --- Input types ---
+
+export interface CreateReadinessAssessmentInput {
+  name: string;
+  engagement_id?: string;
+  prior_assessment_id?: string;
+  deadline?: string;
+}
+
+export interface UpdateReadinessAssessmentInput {
+  name?: string;
+  status?: ReadinessAssessmentStatus;
+  deadline?: string;
+}
+
+export interface UpsertAssessmentCompanyInput {
+  name: string;
+  industry?: string;
+  entity_type: EntityType;
+  state?: string;
+  size?: CompanySize;
+  sector_constraints?: Record<string, unknown>;
+  notes?: string;
+}
+
+export interface UpsertAssessmentTeamInput {
+  name: string;
+  team_function?: TeamFunction;
+  methodology?: TeamMethodology;
+  size?: number;
+  objectives?: string;
+  pain_points?: string;
+  ai_hopes?: string;
+}
+
+export interface CreateAssessmentMemberInput {
+  name: string;
+  email: string;
+  role: TeamMemberRole;
+  custom_role_label?: string;
+  seniority?: SeniorityLevel;
+  vendor?: MemberVendor;
+  in_pilot?: boolean;
+  ai_tool?: MemberAiTool;
+}
+
+export interface UpdateMemberPilotInput {
+  vendor?: MemberVendor;
+  in_pilot?: boolean;
+  ai_tool?: MemberAiTool;
+}
+
+export interface CreateTrainingStatusInput {
+  track_name: TrainingTrack;
+  status?: TrainingStatusValue;
+  scheduled_date?: string;
+}
+
+export interface UpdateTrainingStatusInput {
+  status: TrainingStatusValue;
+  scheduled_date?: string;
+  completed_date?: string;
+}
+
+export interface UpsertAssessmentPolicyInput {
+  has_policy: boolean;
+  policy_document_url?: string;
+  coverage?: Record<string, boolean>;
+  notes?: string;
+}
+
+export interface CreateQuestionInput {
+  category: string;
+  capability?: string;
+  question_text: string;
+  description?: string;
+  entity_types?: string[];
+  roles?: string[];
+  sort_order?: number;
+}
+
+export interface SubmitAnswerInput {
+  question_id: string;
+  score?: number;
+  comment?: string;
+  flag?: QuestionFlag;
+}
