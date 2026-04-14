@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCFS ILC — AI Transformation Project Planner</title>
+<link rel="icon" type="image/png" href="../assets/krasan-favicon.png">
+<style>
+  :root { --accent: #0f3460; --highlight: #e94560; --green: #27ae60; --amber: #f39c12; --blue: #2980b9; --red: #e74c3c; --gray: #95a5a6; --light: #f8f9fa; --border: #dee2e6; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #333; font-size: 14px; }
+
+  /* Header */
+  .header { background: var(--accent); color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 18px; font-weight: 600; }
+  .header .actions { display: flex; gap: 8px; }
+  .header button { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .header button:hover { background: rgba(255,255,255,0.25); }
+  .header .version { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  /* Tabs */
+  .tabs { display: flex; background: white; border-bottom: 2px solid var(--border); padding: 0 24px; }
+  .tab { padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: 500; color: #666; }
+  .tab:hover { color: var(--accent); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--highlight); }
+  .tab .count { background: var(--highlight); color: white; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: 6px; }
+
+  /* Content */
+  .content { padding: 16px 24px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Gantt */
+  .gantt-controls { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
+  .gantt-controls button { background: var(--accent); color: white; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .gantt-controls button:hover { opacity: 0.9; }
+  .gantt-controls select, .gantt-controls input { padding: 5px 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px; }
+
+  .gantt-container { overflow-x: auto; background: white; border: 1px solid var(--border); border-radius: 6px; }
+  .gantt-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .gantt-table th { background: var(--accent); color: white; padding: 6px 8px; text-align: left; position: sticky; top: 0; z-index: 2; white-space: nowrap; }
+  .gantt-table td { padding: 4px 8px; border-bottom: 1px solid #eee; vertical-align: middle; }
+  .gantt-table tr:hover { background: #f8f9ff; }
+  .gantt-table .wbs-id { font-weight: 600; color: var(--accent); width: 60px; }
+  .gantt-table .task-name { min-width: 200px; }
+  .gantt-table .task-name.phase { font-weight: 700; background: #f0f4ff; }
+  .gantt-table input[type="text"], .gantt-table input[type="date"], .gantt-table select { width: 100%; padding: 3px 5px; border: 1px solid transparent; border-radius: 3px; font-size: 12px; background: transparent; }
+  .gantt-table input:focus, .gantt-table select:focus { border-color: var(--accent); background: white; outline: none; }
+  .gantt-table textarea { width: 100%; padding: 3px 5px; border: 1px solid transparent; border-radius: 3px; font-size: 11px; resize: vertical; min-height: 20px; background: transparent; }
+  .gantt-table textarea:focus { border-color: var(--accent); background: white; outline: none; }
+
+  /* Gantt bars */
+  .gantt-bar-cell { position: relative; height: 24px; }
+  .gantt-bar { position: absolute; height: 18px; top: 3px; border-radius: 3px; font-size: 9px; color: white; display: flex; align-items: center; padding-left: 4px; min-width: 4px; }
+  .gantt-bar.govern { background: var(--accent); }
+  .gantt-bar.baseline { background: var(--blue); }
+  .gantt-bar.design { background: #8e44ad; }
+  .gantt-bar.train { background: var(--amber); }
+  .gantt-bar.pilot { background: var(--green); }
+  .gantt-bar.measure { background: var(--highlight); }
+  .gantt-bar.playbook { background: #16a085; }
+  .gantt-bar.scale { background: var(--gray); }
+  .gantt-bar.default { background: var(--blue); }
+
+  /* Timeline header */
+  .timeline-header { display: flex; }
+  .timeline-week { flex: 1; text-align: center; font-size: 10px; padding: 2px; border-left: 1px solid rgba(255,255,255,0.2); min-width: 40px; }
+
+  /* Status badges */
+  .status { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+  .status.not-started { background: #eee; color: #666; }
+  .status.in-progress { background: #e3f2fd; color: var(--blue); }
+  .status.completed { background: #e8f5e9; color: var(--green); }
+  .status.blocked { background: #fce4ec; color: var(--red); }
+
+  /* Delete button */
+  .btn-delete { background: none; border: none; color: #ccc; cursor: pointer; font-size: 14px; padding: 2px 6px; }
+  .btn-delete:hover { color: var(--red); }
+
+  /* Risk & Assumptions tables */
+  .log-table { width: 100%; border-collapse: collapse; background: white; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .log-table th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; font-size: 12px; }
+  .log-table td { padding: 6px 10px; border-bottom: 1px solid #eee; font-size: 12px; }
+  .log-table tr:hover { background: #f8f9ff; }
+  .log-table input, .log-table select, .log-table textarea { width: 100%; padding: 4px 6px; border: 1px solid transparent; border-radius: 3px; font-size: 12px; background: transparent; }
+  .log-table input:focus, .log-table select:focus, .log-table textarea:focus { border-color: var(--accent); background: white; outline: none; }
+
+  .severity-critical { color: var(--red); font-weight: 700; }
+  .severity-high { color: var(--amber); font-weight: 600; }
+  .severity-medium { color: var(--blue); }
+  .severity-low { color: var(--gray); }
+
+  .add-row { margin-top: 8px; }
+  .add-row button { background: var(--accent); color: white; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+
+  /* Notes panel */
+  .notes-panel { position: fixed; right: 0; top: 0; width: 360px; height: 100vh; background: white; box-shadow: -4px 0 12px rgba(0,0,0,0.1); z-index: 100; transform: translateX(100%); transition: transform 0.2s; padding: 16px; overflow-y: auto; }
+  .notes-panel.open { transform: translateX(0); }
+  .notes-panel h3 { margin-bottom: 12px; color: var(--accent); }
+  .notes-panel textarea { width: 100%; height: 200px; padding: 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; resize: vertical; }
+  .notes-panel .close-btn { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 20px; cursor: pointer; color: #999; }
+
+  /* Save indicator */
+  .save-indicator { font-size: 11px; color: rgba(255,255,255,0.5); }
+  .save-indicator.saved { color: var(--green); }
+
+  @media print { .header, .tabs, .gantt-controls, .add-row, .btn-delete, .notes-panel { display: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>DCFS ILC — AI Transformation Project Planner</h1>
+    <div class="version">V04142026 · Krasan Consulting Services</div>
+  </div>
+  <div class="actions">
+    <span class="save-indicator" id="save-indicator">Auto-saved</span>
+    <button onclick="exportJSON()">Export JSON</button>
+    <button onclick="importJSON()">Import JSON</button>
+    <button onclick="window.print()">Print</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('gantt')">Gantt / WBS</div>
+  <div class="tab" onclick="switchTab('risks')">Risks <span class="count" id="risk-count">0</span></div>
+  <div class="tab" onclick="switchTab('assumptions')">Assumptions <span class="count" id="assumption-count">0</span></div>
+</div>
+
+<div class="content">
+  <!-- GANTT PANEL -->
+  <div class="panel active" id="panel-gantt">
+    <div class="gantt-controls">
+      <button onclick="addTask()">+ Add Task</button>
+      <button onclick="addPhase()">+ Add Phase</button>
+      <select id="phase-filter" onchange="renderGantt()">
+        <option value="all">All Phases</option>
+        <option value="govern">Govern</option>
+        <option value="baseline">Baseline</option>
+        <option value="design">Design</option>
+        <option value="train">Train</option>
+        <option value="pilot">Pilot</option>
+        <option value="measure">Measure</option>
+        <option value="playbook">Playbook</option>
+        <option value="scale">Scale</option>
+      </select>
+      <span style="color:#999;font-size:11px;">Click task name for notes</span>
+    </div>
+    <div class="gantt-container">
+      <table class="gantt-table" id="gantt-table">
+        <thead id="gantt-header"></thead>
+        <tbody id="gantt-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RISKS PANEL -->
+  <div class="panel" id="panel-risks">
+    <div class="add-row"><button onclick="addRisk()">+ Add Risk</button></div>
+    <br>
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th>Risk Description</th>
+          <th style="width:100px">Likelihood</th>
+          <th style="width:100px">Impact</th>
+          <th style="width:80px">Score</th>
+          <th>Mitigation</th>
+          <th style="width:100px">Owner</th>
+          <th style="width:90px">Status</th>
+          <th style="width:30px"></th>
+        </tr>
+      </thead>
+      <tbody id="risks-body"></tbody>
+    </table>
+  </div>
+
+  <!-- ASSUMPTIONS PANEL -->
+  <div class="panel" id="panel-assumptions">
+    <div class="add-row"><button onclick="addAssumption()">+ Add Assumption</button></div>
+    <br>
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th>Assumption</th>
+          <th style="width:120px">Status</th>
+          <th>How to Validate</th>
+          <th style="width:100px">Owner</th>
+          <th>Notes</th>
+          <th style="width:30px"></th>
+        </tr>
+      </thead>
+      <tbody id="assumptions-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Notes Side Panel -->
+<div class="notes-panel" id="notes-panel">
+  <button class="close-btn" onclick="closeNotes()">&times;</button>
+  <h3 id="notes-title">Task Notes</h3>
+  <textarea id="notes-text" onchange="saveNotes()"></textarea>
+</div>
+
+<input type="file" id="import-file" style="display:none" accept=".json" onchange="handleImport(event)">
+
+<script>
+// ── Data Store ──
+const STORAGE_KEY = 'dcfs-ilc-project-planner';
+const PROJECT_START = new Date('2026-04-14');
+const WEEKS_TO_SHOW = 16;
+
+let data = loadData();
+
+function getDefaultData() {
+  return {
+    tasks: [
+      { id: 'P1', wbs: '1', name: 'GOVERN', phase: 'govern', isPhase: true, start: '2026-04-14', end: '2026-05-04', status: 'in-progress', owner: 'Vinay', notes: '' },
+      { id: 't1', wbs: '1.1', name: 'DoIT AI Policy review — all 12 sections mapped', phase: 'govern', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: '' },
+      { id: 't2', wbs: '1.2', name: 'NIST AI RMF governance framework', phase: 'govern', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: '' },
+      { id: 't3', wbs: '1.3', name: 'Governance proposal to Dave', phase: 'govern', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: '' },
+      { id: 't4', wbs: '1.4', name: 'Resolve Section 5e — State data interpretation', phase: 'govern', start: '2026-04-14', end: '2026-04-25', status: 'blocked', owner: 'Dave', notes: 'Blocker: Does Copilot on ILC code = "State data for AI"? Needs legal interpretation.' },
+      { id: 't5', wbs: '1.5', name: 'Resolve Section 5f — DoIT 30-day notice status', phase: 'govern', start: '2026-04-14', end: '2026-04-25', status: 'blocked', owner: 'Dave', notes: 'Blocker: Has assessment been filed? 30-day gate if not.' },
+      { id: 't6', wbs: '1.6', name: 'Confirm Copilot deployment status & tier', phase: 'govern', start: '2026-04-14', end: '2026-04-21', status: 'blocked', owner: 'Dave', notes: 'Need to confirm: licenses exist? Business/Enterprise tier?' },
+      { id: 't7', wbs: '1.7', name: 'Gartner consultation (Jim request)', phase: 'govern', start: '2026-04-21', end: '2026-05-02', status: 'not-started', owner: 'Dave/Jim', notes: 'Jim suggested external validation from Gartner.' },
+      { id: 't8', wbs: '1.8', name: 'Establish governance team (DCFS-led)', phase: 'govern', start: '2026-04-14', end: '2026-04-25', status: 'in-progress', owner: 'Dave', notes: 'DCFS governs, Krasan executes. Need Dave to identify team members.' },
+
+      { id: 'P2', wbs: '2', name: 'BASELINE & DESIGN', phase: 'baseline', isPhase: true, start: '2026-04-14', end: '2026-05-04', status: 'in-progress', owner: 'Vinay', notes: '' },
+      { id: 't9', wbs: '2.1', name: 'AI Readiness Assessment — all 12 teams', phase: 'baseline', start: '2026-04-21', end: '2026-04-28', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't10', wbs: '2.2', name: 'JIRA baseline data pull (last 3 sprints)', phase: 'baseline', start: '2026-04-21', end: '2026-04-25', status: 'not-started', owner: 'Vinay/Matt', notes: 'Need JIRA access from Matt.' },
+      { id: 't11', wbs: '2.3', name: 'SPACE/DevEx baseline survey (pilot teams)', phase: 'baseline', start: '2026-04-25', end: '2026-04-30', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't12', wbs: '2.4', name: 'Select 2 pilot teams (Krasan roles only)', phase: 'baseline', start: '2026-04-25', end: '2026-04-30', status: 'not-started', owner: 'Romi/John', notes: '' },
+      { id: 't13', wbs: '2.5', name: 'Dynamics working session (Kashif/Shyam)', phase: 'design', start: '2026-04-16', end: '2026-04-22', status: 'not-started', owner: 'Jeffrey', notes: 'Jeffrey to arrange intro. Explore config generation capabilities.' },
+      { id: 't14', wbs: '2.6', name: 'Dynamics POC environment setup', phase: 'design', start: '2026-04-18', end: '2026-05-02', status: 'not-started', owner: 'Dinkar', notes: 'Investigate demo environment outside State for experimentation.' },
+      { id: 't15', wbs: '2.7', name: 'Map SDLC processes — current → AI-augmented per role', phase: 'design', start: '2026-04-21', end: '2026-05-02', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't16', wbs: '2.8', name: 'Stair-stepped code generation plan', phase: 'design', start: '2026-04-21', end: '2026-04-30', status: 'not-started', owner: 'Vinay', notes: 'Step 1: stories/docs → Step 2: comprehension → Step 3: tests → Step 4: config → Step 5: code' },
+      { id: 't17', wbs: '2.9', name: 'Baseline metrics report', phase: 'baseline', start: '2026-04-28', end: '2026-05-04', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't18', wbs: '2.10', name: 'Measurement methodology — tangible outputs (LOC, docs, config)', phase: 'design', start: '2026-04-14', end: '2026-04-18', status: 'completed', owner: 'Vinay', notes: '' },
+
+      { id: 'P3', wbs: '3', name: 'TRAIN', phase: 'train', isPhase: true, start: '2026-04-28', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't19', wbs: '3.1', name: 'Build training materials — prompts, examples, cheat sheets', phase: 'train', start: '2026-04-28', end: '2026-05-02', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't20', wbs: '3.2', name: 'Foundation track (1.5h) — all pilot participants', phase: 'train', start: '2026-05-02', end: '2026-05-05', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't21', wbs: '3.3', name: 'BA-Technical track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't22', wbs: '3.4', name: 'Configuration track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't23', wbs: '3.5', name: 'Developer track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't24', wbs: '3.6', name: 'Tester track (3h)', phase: 'train', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't25', wbs: '3.7', name: 'Scrum Master track (2h)', phase: 'train', start: '2026-05-07', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't26', wbs: '3.8', name: 'Leadership Briefing (1h) — Dave, POs', phase: 'train', start: '2026-05-07', end: '2026-05-09', status: 'not-started', owner: 'Vinay/Romi', notes: '' },
+
+      { id: 'P4', wbs: '4', name: 'PI 20 PLANNING', phase: 'pilot', isPhase: true, start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Romi', notes: '' },
+      { id: 't27', wbs: '4.1', name: 'PI Planning — introduce AI pilot to ART', phase: 'pilot', start: '2026-05-05', end: '2026-05-07', status: 'not-started', owner: 'Romi/Vinay', notes: '' },
+
+      { id: 'P5', wbs: '5', name: 'PILOT (Sprints 3 & 4)', phase: 'pilot', isPhase: true, start: '2026-06-02', end: '2026-06-27', status: 'not-started', owner: 'Vinay', notes: '15% capacity for AI adoption. Krasan roles only.' },
+      { id: 't28', wbs: '5.1', name: 'Sprint 3 — AI-augmented delivery (2 teams)', phase: 'pilot', start: '2026-06-02', end: '2026-06-13', status: 'not-started', owner: 'Pilot Teams', notes: '' },
+      { id: 't29', wbs: '5.2', name: 'Sprint 4 — AI-augmented delivery (2 teams)', phase: 'pilot', start: '2026-06-16', end: '2026-06-27', status: 'not-started', owner: 'Pilot Teams', notes: '' },
+      { id: 't30', wbs: '5.3', name: 'Weekly check-ins', phase: 'pilot', start: '2026-06-02', end: '2026-06-27', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't31', wbs: '5.4', name: 'Mid-pilot pulse survey (end of Sprint 3)', phase: 'measure', start: '2026-06-13', end: '2026-06-16', status: 'not-started', owner: 'Vinay', notes: '' },
+
+      { id: 'P6', wbs: '6', name: 'MEASURE & REPORT', phase: 'measure', isPhase: true, start: '2026-06-27', end: '2026-07-11', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't32', wbs: '6.1', name: 'Post-pilot SPACE/DevEx resurvey', phase: 'measure', start: '2026-06-27', end: '2026-07-02', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't33', wbs: '6.2', name: 'Compile results — pilot vs baseline vs control', phase: 'measure', start: '2026-07-02', end: '2026-07-07', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't34', wbs: '6.3', name: 'Pilot Results Report', phase: 'measure', start: '2026-07-07', end: '2026-07-11', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't35', wbs: '6.4', name: 'Executive brief (1-page for Jim)', phase: 'measure', start: '2026-07-07', end: '2026-07-11', status: 'not-started', owner: 'Vinay/Romi', notes: '' },
+
+      { id: 'P7', wbs: '7', name: 'PLAYBOOK & SCALE', phase: 'playbook', isPhase: true, start: '2026-07-07', end: '2026-07-25', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't36', wbs: '7.1', name: 'Finalize role-based playbooks (5 roles)', phase: 'playbook', start: '2026-07-07', end: '2026-07-18', status: 'not-started', owner: 'Vinay', notes: '' },
+      { id: 't37', wbs: '7.2', name: 'Go/no-go decision with governance team', phase: 'scale', start: '2026-07-14', end: '2026-07-18', status: 'not-started', owner: 'Dave/Jim', notes: '' },
+      { id: 't38', wbs: '7.3', name: 'Scale plan for next PI (if approved)', phase: 'scale', start: '2026-07-18', end: '2026-07-25', status: 'not-started', owner: 'Vinay/Romi', notes: '' },
+    ],
+    risks: [
+      { id: 'R01', desc: 'Sensitive child welfare data in AI prompts (PII exposure)', likelihood: 'Low', impact: 'Critical', mitigation: 'No PII rule in every playbook. Training module. Per-sprint spot checks.', owner: 'Vinay', status: 'open' },
+      { id: 'R02', desc: 'State pulls AI tools mid-pilot (CMS precedent Oct 2025)', likelihood: 'Medium', impact: 'Critical', mitigation: 'Full DoIT + NIST compliance upfront. Document everything.', owner: 'Romi', status: 'open' },
+      { id: 'R03', desc: 'DoIT 30-day notice not filed — delays pilot start', likelihood: 'Unknown', impact: 'High', mitigation: 'Clarify with Dave immediately. File ASAP if not done.', owner: 'Dave', status: 'open' },
+      { id: 'R04', desc: 'Copilot not deployed to ILC teams', likelihood: 'Medium', impact: 'High', mitigation: 'Start pilot with Rovo-only. Copilot needed for Dev/Config tracks.', owner: 'Dave', status: 'open' },
+      { id: 'R05', desc: 'Section 5e — Copilot on ILC code may require Agency Head consent', likelihood: 'Medium', impact: 'High', mitigation: 'Get legal interpretation from Dave/Jim before pilot.', owner: 'Dave', status: 'open' },
+      { id: 'R06', desc: 'No Dynamics sandbox environment for config generation POC', likelihood: 'High', impact: 'High', mitigation: 'Dinkar investigating POC environment. Jim offered quick POC buy.', owner: 'Dinkar', status: 'open' },
+      { id: 'R07', desc: '10-15% target may not be achievable in 13 weeks', likelihood: 'Medium', impact: 'High', mitigation: 'Measure trend direction, not just absolute numbers. Stair-stepped adoption.', owner: 'Vinay', status: 'open' },
+      { id: 'R08', desc: 'AI makes outputs worse (poor prompts = poor results)', likelihood: 'High', impact: 'Medium', mitigation: 'Training first. Prompt libraries. Quality checklist. Mandatory review.', owner: 'Vinay', status: 'open' },
+      { id: 'R09', desc: 'Team resistance to AI tools', likelihood: 'Medium', impact: 'Medium', mitigation: 'Voluntary pilot with strong participants. AI champions model.', owner: 'Vinay/John', status: 'open' },
+      { id: 'R10', desc: 'Training time impacts delivery (15% capacity reduction)', likelihood: 'High', impact: 'Medium', mitigation: 'Explicitly communicate to stakeholders. Adjust velocity expectations.', owner: 'Romi', status: 'open' },
+    ],
+    assumptions: [
+      { id: 'A01', desc: 'GitHub Copilot licenses exist and are purchased by State', status: 'unvalidated', validate: 'Ask Dave — what tier? Business/Enterprise?', owner: 'Dave', notes: '' },
+      { id: 'A02', desc: 'OpenAI models are approved for State use (via Copilot)', status: 'validated', validate: 'Jim confirmed Apr 13', owner: 'Jim', notes: '' },
+      { id: 'A03', desc: 'Google Gemini may be approved (via Copilot)', status: 'pending', validate: 'Jim to check', owner: 'Jim', notes: '' },
+      { id: 'A04', desc: 'Jim supports AI code generation (stair-stepped)', status: 'validated', validate: 'Jim: "constraint was accidental" — Apr 13', owner: 'Jim', notes: '' },
+      { id: 'A05', desc: 'Target is 10-15% improvement in 13 weeks', status: 'validated', validate: 'Jim stated in Apr 13 meeting', owner: 'Jim', notes: '' },
+      { id: 'A06', desc: 'Measurement uses tangible outputs, not story points', status: 'validated', validate: 'Jim directed this', owner: 'Jim', notes: '' },
+      { id: 'A07', desc: 'Dave is interim AI lead during Jim absence', status: 'validated', validate: 'Jim designated Dave', owner: 'Jim', notes: '' },
+      { id: 'A08', desc: 'PI 20 Planning is May 5', status: 'assumed', validate: 'Verify with Matt (RTE)', owner: 'Matt', notes: '' },
+      { id: 'A09', desc: 'Pilot targets Sprints 3 & 4 of PI 20', status: 'assumed', validate: 'Confirm with Dave/Romi', owner: 'Dave', notes: '' },
+      { id: 'A10', desc: '15% capacity can be allocated for AI adoption', status: 'assumed', validate: 'Must be agreed with team leads and POs', owner: 'Romi', notes: '' },
+      { id: 'A11', desc: 'PO and BA-Functional are NOT Krasan resources', status: 'unvalidated', validate: 'Verify team composition with Romi', owner: 'Romi', notes: '' },
+      { id: 'A12', desc: 'DoIT 30-day notice has NOT been filed', status: 'unknown', validate: 'Ask Dave — critical path item', owner: 'Dave', notes: '' },
+    ]
+  };
+}
+
+function loadData() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return getDefaultData();
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const el = document.getElementById('save-indicator');
+  el.textContent = 'Saved ✓';
+  el.className = 'save-indicator saved';
+  setTimeout(() => { el.textContent = 'Auto-saved'; el.className = 'save-indicator'; }, 2000);
+}
+
+// ── Tab switching ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    t.classList.toggle('active', ['gantt','risks','assumptions'][i] === tab);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+// ── Gantt Rendering ──
+function getWeekDates() {
+  const weeks = [];
+  for (let i = 0; i < WEEKS_TO_SHOW; i++) {
+    const d = new Date(PROJECT_START);
+    d.setDate(d.getDate() + i * 7);
+    weeks.push(d);
+  }
+  return weeks;
+}
+
+function daysBetween(d1, d2) {
+  return Math.round((new Date(d2) - new Date(d1)) / (1000*60*60*24));
+}
+
+function renderGantt() {
+  const weeks = getWeekDates();
+  const totalDays = WEEKS_TO_SHOW * 7;
+  const filter = document.getElementById('phase-filter').value;
+
+  // Header
+  const header = document.getElementById('gantt-header');
+  header.innerHTML = `<tr>
+    <th style="width:50px">WBS</th>
+    <th style="width:220px">Task</th>
+    <th style="width:90px">Start</th>
+    <th style="width:90px">End</th>
+    <th style="width:80px">Owner</th>
+    <th style="width:80px">Status</th>
+    <th style="min-width:${WEEKS_TO_SHOW * 40}px">
+      <div class="timeline-header">${weeks.map(w => `<div class="timeline-week">${(w.getMonth()+1)}/${w.getDate()}</div>`).join('')}</div>
+    </th>
+    <th style="width:30px"></th>
+  </tr>`;
+
+  // Body
+  const body = document.getElementById('gantt-body');
+  body.innerHTML = '';
+  const filteredTasks = filter === 'all' ? data.tasks : data.tasks.filter(t => t.phase === filter || t.isPhase);
+
+  filteredTasks.forEach((task, idx) => {
+    const tr = document.createElement('tr');
+    const startDay = Math.max(0, daysBetween(PROJECT_START, task.start));
+    const duration = Math.max(1, daysBetween(task.start, task.end));
+    const barLeft = (startDay / totalDays) * 100;
+    const barWidth = (duration / totalDays) * 100;
+    const barClass = task.phase || 'default';
+
+    tr.innerHTML = `
+      <td class="wbs-id">${task.wbs}</td>
+      <td class="task-name ${task.isPhase ? 'phase' : ''}" style="cursor:pointer" onclick="openNotes('${task.id}')">
+        <input type="text" value="${task.name}" onchange="updateTask('${task.id}','name',this.value)" style="${task.isPhase ? 'font-weight:700' : ''}">
+      </td>
+      <td><input type="date" value="${task.start}" onchange="updateTask('${task.id}','start',this.value)"></td>
+      <td><input type="date" value="${task.end}" onchange="updateTask('${task.id}','end',this.value)"></td>
+      <td><input type="text" value="${task.owner}" onchange="updateTask('${task.id}','owner',this.value)" style="width:70px"></td>
+      <td>
+        <select onchange="updateTask('${task.id}','status',this.value)">
+          <option value="not-started" ${task.status==='not-started'?'selected':''}>Not Started</option>
+          <option value="in-progress" ${task.status==='in-progress'?'selected':''}>In Progress</option>
+          <option value="completed" ${task.status==='completed'?'selected':''}>Completed</option>
+          <option value="blocked" ${task.status==='blocked'?'selected':''}>Blocked</option>
+        </select>
+      </td>
+      <td class="gantt-bar-cell" style="min-width:${WEEKS_TO_SHOW * 40}px; position:relative;">
+        <div class="gantt-bar ${barClass}" style="left:${barLeft}%;width:${barWidth}%;" title="${task.name}: ${task.start} → ${task.end}"></div>
+      </td>
+      <td><button class="btn-delete" onclick="deleteTask('${task.id}')" title="Remove">&times;</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function updateTask(id, field, value) {
+  const task = data.tasks.find(t => t.id === id);
+  if (task) { task[field] = value; saveData(); renderGantt(); }
+}
+
+function addTask() {
+  const maxNum = data.tasks.filter(t => !t.isPhase).length + 1;
+  data.tasks.push({
+    id: 't' + Date.now(),
+    wbs: '?.?',
+    name: 'New Task',
+    phase: 'govern',
+    start: '2026-04-14',
+    end: '2026-04-21',
+    status: 'not-started',
+    owner: '',
+    notes: ''
+  });
+  saveData(); renderGantt();
+}
+
+function addPhase() {
+  data.tasks.push({
+    id: 'P' + Date.now(),
+    wbs: '?',
+    name: 'NEW PHASE',
+    phase: 'govern',
+    isPhase: true,
+    start: '2026-04-14',
+    end: '2026-04-21',
+    status: 'not-started',
+    owner: '',
+    notes: ''
+  });
+  saveData(); renderGantt();
+}
+
+function deleteTask(id) {
+  if (confirm('Remove this task?')) {
+    data.tasks = data.tasks.filter(t => t.id !== id);
+    saveData(); renderGantt();
+  }
+}
+
+// ── Notes ──
+let currentNotesId = null;
+function openNotes(id) {
+  currentNotesId = id;
+  const task = data.tasks.find(t => t.id === id);
+  if (!task) return;
+  document.getElementById('notes-title').textContent = task.wbs + ' — ' + task.name;
+  document.getElementById('notes-text').value = task.notes || '';
+  document.getElementById('notes-panel').classList.add('open');
+}
+function closeNotes() { document.getElementById('notes-panel').classList.remove('open'); }
+function saveNotes() {
+  if (!currentNotesId) return;
+  const task = data.tasks.find(t => t.id === currentNotesId);
+  if (task) { task.notes = document.getElementById('notes-text').value; saveData(); }
+}
+
+// ── Risks ──
+function renderRisks() {
+  const body = document.getElementById('risks-body');
+  body.innerHTML = '';
+  document.getElementById('risk-count').textContent = data.risks.length;
+
+  data.risks.forEach((r, i) => {
+    const score = getLikelihoodNum(r.likelihood) * getImpactNum(r.impact);
+    const scoreClass = score >= 15 ? 'severity-critical' : score >= 10 ? 'severity-high' : score >= 5 ? 'severity-medium' : 'severity-low';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-weight:600">${r.id}</td>
+      <td><textarea onchange="updateRisk(${i},'desc',this.value)">${r.desc}</textarea></td>
+      <td><select onchange="updateRisk(${i},'likelihood',this.value)">
+        <option ${r.likelihood==='Low'?'selected':''}>Low</option>
+        <option ${r.likelihood==='Medium'?'selected':''}>Medium</option>
+        <option ${r.likelihood==='High'?'selected':''}>High</option>
+        <option ${r.likelihood==='Unknown'?'selected':''}>Unknown</option>
+      </select></td>
+      <td><select onchange="updateRisk(${i},'impact',this.value)">
+        <option ${r.impact==='Low'?'selected':''}>Low</option>
+        <option ${r.impact==='Medium'?'selected':''}>Medium</option>
+        <option ${r.impact==='High'?'selected':''}>High</option>
+        <option ${r.impact==='Critical'?'selected':''}>Critical</option>
+      </select></td>
+      <td class="${scoreClass}" style="text-align:center;font-size:16px">${score}</td>
+      <td><textarea onchange="updateRisk(${i},'mitigation',this.value)">${r.mitigation}</textarea></td>
+      <td><input type="text" value="${r.owner}" onchange="updateRisk(${i},'owner',this.value)"></td>
+      <td><select onchange="updateRisk(${i},'status',this.value)">
+        <option ${r.status==='open'?'selected':''}>open</option>
+        <option ${r.status==='mitigated'?'selected':''}>mitigated</option>
+        <option ${r.status==='closed'?'selected':''}>closed</option>
+        <option ${r.status==='accepted'?'selected':''}>accepted</option>
+      </select></td>
+      <td><button class="btn-delete" onclick="deleteRisk(${i})">&times;</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function getLikelihoodNum(l) { return {Low:1,Medium:3,High:5,Unknown:3}[l]||3; }
+function getImpactNum(i) { return {Low:1,Medium:3,High:5,Critical:7}[i]||3; }
+
+function updateRisk(idx, field, value) { data.risks[idx][field] = value; saveData(); renderRisks(); }
+function addRisk() {
+  data.risks.push({ id: 'R' + (data.risks.length + 1).toString().padStart(2,'0'), desc: '', likelihood: 'Medium', impact: 'Medium', mitigation: '', owner: '', status: 'open' });
+  saveData(); renderRisks();
+}
+function deleteRisk(idx) { if (confirm('Remove this risk?')) { data.risks.splice(idx, 1); saveData(); renderRisks(); } }
+
+// ── Assumptions ──
+function renderAssumptions() {
+  const body = document.getElementById('assumptions-body');
+  body.innerHTML = '';
+  document.getElementById('assumption-count').textContent = data.assumptions.length;
+
+  data.assumptions.forEach((a, i) => {
+    const statusColors = { validated: 'color:var(--green)', unvalidated: 'color:var(--red)', pending: 'color:var(--amber)', assumed: 'color:var(--blue)', unknown: 'color:var(--gray)' };
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-weight:600">${a.id}</td>
+      <td><textarea onchange="updateAssumption(${i},'desc',this.value)">${a.desc}</textarea></td>
+      <td><select style="${statusColors[a.status]||''};font-weight:600" onchange="updateAssumption(${i},'status',this.value)">
+        <option value="validated" ${a.status==='validated'?'selected':''}>Validated</option>
+        <option value="unvalidated" ${a.status==='unvalidated'?'selected':''}>Unvalidated</option>
+        <option value="pending" ${a.status==='pending'?'selected':''}>Pending</option>
+        <option value="assumed" ${a.status==='assumed'?'selected':''}>Assumed</option>
+        <option value="unknown" ${a.status==='unknown'?'selected':''}>Unknown</option>
+      </select></td>
+      <td><textarea onchange="updateAssumption(${i},'validate',this.value)">${a.validate}</textarea></td>
+      <td><input type="text" value="${a.owner}" onchange="updateAssumption(${i},'owner',this.value)"></td>
+      <td><textarea onchange="updateAssumption(${i},'notes',this.value)">${a.notes||''}</textarea></td>
+      <td><button class="btn-delete" onclick="deleteAssumption(${i})">&times;</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function updateAssumption(idx, field, value) { data.assumptions[idx][field] = value; saveData(); renderAssumptions(); }
+function addAssumption() {
+  data.assumptions.push({ id: 'A' + (data.assumptions.length + 1).toString().padStart(2,'0'), desc: '', status: 'assumed', validate: '', owner: '', notes: '' });
+  saveData(); renderAssumptions();
+}
+function deleteAssumption(idx) { if (confirm('Remove this assumption?')) { data.assumptions.splice(idx, 1); saveData(); renderAssumptions(); } }
+
+// ── Export / Import ──
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `dcfs-ilc-planner-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+function importJSON() { document.getElementById('import-file').click(); }
+function handleImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      data = JSON.parse(e.target.result);
+      saveData();
+      renderGantt(); renderRisks(); renderAssumptions();
+      alert('Imported successfully');
+    } catch(err) { alert('Invalid JSON file'); }
+  };
+  reader.readAsText(file);
+}
+
+// ── Init ──
+renderGantt();
+renderRisks();
+renderAssumptions();
+</script>
+</body>
+</html>
