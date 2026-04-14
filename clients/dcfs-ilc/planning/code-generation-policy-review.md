@@ -120,6 +120,40 @@ Each step requires:
 
 12. **External Tool Approval:** If we want to use tools.ussp.co for monitoring, does it require DoIT 30-day notice under Section 5f? Or is it treated differently since it's a vendor reporting tool, not an AI system being deployed to state employees?
 
+### Microsoft Dynamics 365 AI Capabilities (Research Finding)
+
+**Dynamics 365 has built-in AI/Copilot features that may already be available or licensable:**
+
+| Capability | What It Does | Relevance to ILC | Availability in GCC |
+|-----------|-------------|-------------------|-------------------|
+| **Copilot for Dynamics 365** | Conversational AI embedded in D365 apps — summaries, case routing, record management | Direct — caseworker productivity, case management | Available in GCC (must be manually enabled) |
+| **Power Automate Copilot** | Draft entire workflows from plain English | High — care workflows, intake processes, case transitions | Available |
+| **Dataverse AI-assisted data mapping** | Automates legacy data import and transformation rules | High — SACWIS/CYCIS/MARS data migration | Available (2025 Wave 2) |
+| **Power Apps model-driven Copilot** | Natural language interaction with app data, UI scaffolding | Medium — case management dashboards | GA April 15, 2026 |
+| **AI Builder Document Processing** | Extract data from case files, assessments, court docs (90%+ accuracy) | High — child welfare document processing | Available |
+| **Copilot-assisted expression editing** | Generate/fix Power Automate expressions without manual code | Medium — workflow configuration | Available (2025 Wave 1) |
+| **Dataverse prompt columns** | Auto-populate fields (case summaries, risk assessments) | Medium-High — case processing | Available |
+| **Process Mining** | AI-powered root cause analysis of workflow bottlenecks | Medium — identify config gaps | Available |
+
+**Critical for State of Illinois:**
+- Copilot apps in GCC Dataverse are **NOT enabled by default** — admin must manually install
+- M365 Copilot licensing: $30/user/month on top of base D365 licensing
+- GCC-High has M365 Copilot (launched Dec 2024)
+
+**Key question for Jeffrey/Kashif/Shyam:** Are any of these Dynamics 365 AI features already enabled in the ILC environment? If not, what's needed to activate them? This could be a faster path to AI augmentation than GitHub Copilot for the configuration team.
+
+**Impact on pilot:** If Dynamics 365 Copilot is available, the Configuration Team has a native AI tool — no need for GitHub Copilot for their workflows. This changes the tool matrix:
+
+| Role | Primary AI Tool |
+|------|----------------|
+| BA-Technical | Rovo (JIRA AI) |
+| Configuration Team | **Dynamics 365 Copilot / Power Platform AI** |
+| Development Team | GitHub Copilot |
+| Testers | Copilot + Rovo |
+| Scrum Master | Rovo |
+
+---
+
 ### For Gartner (External Validation — Jim's Request)
 
 13. **Industry Practice:** What are other state/government agencies doing with AI code generation? What guardrails have they established?
