@@ -5,6 +5,7 @@
   * [Introduction](01-introduction.md)
   * [Executive Discovery](02-executive-discovery.md)
   * [Governance & Compliance](03-governance-compliance.md)
+  * [NIST AI RMF Governance](03b-nist-ai-rmf-governance.md)
 
 * **Phase 2: Baseline & Design**
   * [Readiness Assessment](04-readiness-assessment.md)

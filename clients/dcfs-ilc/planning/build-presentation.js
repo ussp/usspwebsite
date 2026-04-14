@@ -26,6 +26,7 @@ const MAIN_SLIDES = [
   '03b-govern-baseline.html',
   '03c-train-pilot-measure.html',
   '03d-playbook-scale.html',
+  '09-gantt-timeline.html',
   '08-summary.html',
 ];
 
