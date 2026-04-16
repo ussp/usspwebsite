@@ -17,6 +17,7 @@ const navItems = [
 ];
 
 const adminItems = [
+  { href: "/readiness/questions", label: "Question Bank", desc: "Manage readiness questions", icon: "❓", section: "Admin", toolKey: null },
   { href: "/admin/tenants", label: "Tenant Management", desc: "Manage tenants, tools & users", icon: "🏢", section: "Admin", toolKey: null },
 ];
 
