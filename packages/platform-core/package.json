@@ -200,6 +200,11 @@
       "import": "./dist/types/ai-tools.js",
       "default": "./dist/types/ai-tools.js"
     },
+    "./types/readiness-deliverables": {
+      "types": "./dist/types/readiness-deliverables.d.ts",
+      "import": "./dist/types/readiness-deliverables.js",
+      "default": "./dist/types/readiness-deliverables.js"
+    },
     "./types/ai-laws": {
       "types": "./dist/types/ai-laws.d.ts",
       "import": "./dist/types/ai-laws.js",
@@ -284,6 +289,106 @@
       "types": "./dist/queries/admin/taxonomy.d.ts",
       "import": "./dist/queries/admin/taxonomy.js",
       "default": "./dist/queries/admin/taxonomy.js"
+    },
+    "./queries/admin/readiness": {
+      "types": "./dist/queries/admin/readiness.d.ts",
+      "import": "./dist/queries/admin/readiness.js",
+      "default": "./dist/queries/admin/readiness.js"
+    },
+    "./queries/admin/readiness-company": {
+      "types": "./dist/queries/admin/readiness-company.d.ts",
+      "import": "./dist/queries/admin/readiness-company.js",
+      "default": "./dist/queries/admin/readiness-company.js"
+    },
+    "./queries/admin/readiness-team": {
+      "types": "./dist/queries/admin/readiness-team.d.ts",
+      "import": "./dist/queries/admin/readiness-team.js",
+      "default": "./dist/queries/admin/readiness-team.js"
+    },
+    "./queries/admin/readiness-policy": {
+      "types": "./dist/queries/admin/readiness-policy.d.ts",
+      "import": "./dist/queries/admin/readiness-policy.js",
+      "default": "./dist/queries/admin/readiness-policy.js"
+    },
+    "./queries/admin/question-bank": {
+      "types": "./dist/queries/admin/question-bank.d.ts",
+      "import": "./dist/queries/admin/question-bank.js",
+      "default": "./dist/queries/admin/question-bank.js"
+    },
+    "./queries/admin/question-development": {
+      "types": "./dist/queries/admin/question-development.d.ts",
+      "import": "./dist/queries/admin/question-development.js",
+      "default": "./dist/queries/admin/question-development.js"
+    },
+    "./queries/admin/question-feedback": {
+      "types": "./dist/queries/admin/question-feedback.d.ts",
+      "import": "./dist/queries/admin/question-feedback.js",
+      "default": "./dist/queries/admin/question-feedback.js"
+    },
+    "./queries/admin/readiness-questionnaire": {
+      "types": "./dist/queries/admin/readiness-questionnaire.d.ts",
+      "import": "./dist/queries/admin/readiness-questionnaire.js",
+      "default": "./dist/queries/admin/readiness-questionnaire.js"
+    },
+    "./queries/readiness-response": {
+      "types": "./dist/queries/readiness-response.d.ts",
+      "import": "./dist/queries/readiness-response.js",
+      "default": "./dist/queries/readiness-response.js"
+    },
+    "./queries/admin/readiness-report": {
+      "types": "./dist/queries/admin/readiness-report.d.ts",
+      "import": "./dist/queries/admin/readiness-report.js",
+      "default": "./dist/queries/admin/readiness-report.js"
+    },
+    "./queries/admin/readiness-scope": {
+      "types": "./dist/queries/admin/readiness-scope.d.ts",
+      "import": "./dist/queries/admin/readiness-scope.js",
+      "default": "./dist/queries/admin/readiness-scope.js"
+    },
+    "./queries/admin/readiness-constraints": {
+      "types": "./dist/queries/admin/readiness-constraints.d.ts",
+      "import": "./dist/queries/admin/readiness-constraints.js",
+      "default": "./dist/queries/admin/readiness-constraints.js"
+    },
+    "./queries/admin/readiness-sdlc": {
+      "types": "./dist/queries/admin/readiness-sdlc.d.ts",
+      "import": "./dist/queries/admin/readiness-sdlc.js",
+      "default": "./dist/queries/admin/readiness-sdlc.js"
+    },
+    "./queries/admin/readiness-data": {
+      "types": "./dist/queries/admin/readiness-data.d.ts",
+      "import": "./dist/queries/admin/readiness-data.js",
+      "default": "./dist/queries/admin/readiness-data.js"
+    },
+    "./queries/admin/readiness-use-cases": {
+      "types": "./dist/queries/admin/readiness-use-cases.d.ts",
+      "import": "./dist/queries/admin/readiness-use-cases.js",
+      "default": "./dist/queries/admin/readiness-use-cases.js"
+    },
+    "./queries/admin/readiness-risks": {
+      "types": "./dist/queries/admin/readiness-risks.d.ts",
+      "import": "./dist/queries/admin/readiness-risks.js",
+      "default": "./dist/queries/admin/readiness-risks.js"
+    },
+    "./queries/admin/readiness-pilots": {
+      "types": "./dist/queries/admin/readiness-pilots.d.ts",
+      "import": "./dist/queries/admin/readiness-pilots.js",
+      "default": "./dist/queries/admin/readiness-pilots.js"
+    },
+    "./queries/admin/enhancement-catalog": {
+      "types": "./dist/queries/admin/enhancement-catalog.d.ts",
+      "import": "./dist/queries/admin/enhancement-catalog.js",
+      "default": "./dist/queries/admin/enhancement-catalog.js"
+    },
+    "./queries/admin/enhancement-status": {
+      "types": "./dist/queries/admin/enhancement-status.d.ts",
+      "import": "./dist/queries/admin/enhancement-status.js",
+      "default": "./dist/queries/admin/enhancement-status.js"
+    },
+    "./queries/admin/version-stamps": {
+      "types": "./dist/queries/admin/version-stamps.d.ts",
+      "import": "./dist/queries/admin/version-stamps.js",
+      "default": "./dist/queries/admin/version-stamps.js"
     }
   },
   "scripts": {
