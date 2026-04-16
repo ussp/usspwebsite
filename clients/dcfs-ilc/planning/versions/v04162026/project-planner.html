@@ -125,7 +125,7 @@
     <button onclick="resetData()" style="background:var(--highlight)">Reset to Default</button>
     <button onclick="exportJSON()">Export JSON</button>
     <button onclick="exportMSProjectXML()">Export MS Project</button>
-    <button onclick="exportExcel()">Export CSV</button>
+    <button onclick="exportExcel()">Export Excel</button>
     <button onclick="importJSON()">Import JSON</button>
     <button onclick="window.print()">Print</button>
   </div>
@@ -220,7 +220,7 @@
 <script>
 // ── Data Store ──
 const STORAGE_KEY = 'dcfs-ilc-project-planner';
-const DATA_VERSION = 13;  // Bump this when defaults change — auto-refreshes browser data
+const DATA_VERSION = 11;  // Bump this when defaults change — auto-refreshes browser data
 const PROJECT_START = new Date('2026-04-14');
 const WEEKS_TO_SHOW = 26;
 
@@ -376,31 +376,25 @@ function getDefaultData() {
       { id: 'R04', desc: 'Copilot not deployed to ILC teams', likelihood: 'Medium', impact: 'High', mitigation: 'Start pilot with Rovo-only. Copilot needed for Dev/Config tracks.', owner: 'Dave', status: 'open' },
       { id: 'R05', desc: 'Section 5e — Copilot on ILC code may require Agency Head consent', likelihood: 'Medium', impact: 'High', mitigation: 'Get legal interpretation from Dave/Jim before pilot.', owner: 'Dave', status: 'open' },
       { id: 'R06', desc: 'No Dynamics sandbox environment for config generation POC', likelihood: 'High', impact: 'High', mitigation: 'Dinkar investigating POC environment. Jim offered quick POC buy.', owner: 'Dinkar', status: 'open' },
-      { id: 'R07', desc: '10-15% target may not be achievable in 13 weeks. Deadline: July 20. Staggered onboarding means by July 20: BA-Tech has 7 sprints of AI data, Dev 5, Config 3, Tester 2, SM just started. Zero full-team sprints completed.', likelihood: 'High', impact: 'High', mitigation: 'Measure per-role trend direction, not just whole-team numbers. BA-Tech and Dev will have strongest data. Present staggered results showing trajectory. Consider compressing Set 2 timeline to get more full-team data before July 20. Discuss at Apr 17 meeting.', owner: 'Vinay', status: 'open' },
+      { id: 'R07', desc: '10-15% target may not be achievable in 13 weeks', likelihood: 'Medium', impact: 'High', mitigation: 'Measure trend direction, not just absolute numbers. Stair-stepped adoption.', owner: 'Vinay', status: 'open' },
       { id: 'R08', desc: 'AI makes outputs worse (poor prompts = poor results)', likelihood: 'High', impact: 'Medium', mitigation: 'Training first. Prompt libraries. Quality checklist. Mandatory review.', owner: 'Vinay', status: 'open' },
       { id: 'R09', desc: 'Team resistance to AI tools', likelihood: 'Medium', impact: 'Medium', mitigation: 'Voluntary pilot with strong participants. AI champions model.', owner: 'Vinay/John', status: 'open' },
       { id: 'R10', desc: 'Training time impacts delivery (15% capacity reduction). CIO suggested pair programming with AI-experienced resource (Apr 16).', likelihood: 'High', impact: 'Medium', mitigation: 'Staggered onboarding spreads the hit across 6 sprints. AI champions identified from pilot teams (5.4a) for peer coaching. Vinay pairs with teams in early sprints. Negotiate capacity adjustment with POs. External resource augmentation deferred — government onboarding constraints, narrow talent pool, and measurement confounding make it impractical for 3-month pilot. Revisit at scale (WBS 8+). See: feedback-jim-apr16-pair-programming.md.', owner: 'Romi/Vinay', status: 'open' },
       { id: 'R11', desc: 'Single-person bottleneck — one person (Vinay) owns Govern docs, Baseline analysis, Design, Training, and tooling. Concurrent workstreams may exceed available hours in a week.', likelihood: 'High', impact: 'High', mitigation: 'Sequential scheduling (not parallel). PPT-based pilot training (defer online to WBS 10). Flag early if dates slip. Consider bringing in support for training delivery or documentation if budget allows.', owner: 'Vinay/Romi', status: 'open' },
-      { id: 'R12', desc: 'July 20 deadline vs staggered timeline — CIO expects results in 13 weeks (by July 20). Current plan has SM training finishing July 10, first full-team sprint starting July 20. Results presented will be partial: strong data for early roles (BA-Tech, Dev), limited data for late roles (Tester, SM).', likelihood: 'High', impact: 'Critical', mitigation: 'Options: (1) Present per-role results showing trajectory for early roles. (2) Compress Set 2 design/training timeline. (3) Reduce pilot scope to 3 roles (BA-Tech, Dev, Config) for July 20, add Tester/SM in extended phase. Must discuss with Jim/Dave.', owner: 'Vinay/Romi', status: 'open' },
-      { id: 'R13', desc: 'PI Planning readiness (May 5) — Governance approval chain (1.4 > 9.1 > 9.2 > 9.3), baseline report (2.12), and foundation training (4.1) all need to be substantially complete before PI Planning. Current dates are tight. Any delay in Dave approvals cascades into PI Planning readiness.', likelihood: 'High', impact: 'High', mitigation: 'Prioritize governance deliverables and baseline for May 5. Identify minimum viable package for PI Planning (what MUST be ready vs nice-to-have). Escalate blockers to Dave immediately. May need to present preliminary plan at PI Planning and finalize after.', owner: 'Vinay', status: 'open' },
-      { id: 'R14', desc: 'Government approval delays cascade — each approval gate depends on the previous one (1.4 > 9.1 > 1.9 > 9.2 > 9.3). A 1-week delay at any gate pushes all downstream dates including training and pilot start.', likelihood: 'Medium', impact: 'High', mitigation: '1-week buffer built into government approval chain. Parallel-path where possible (start baseline while awaiting approvals). Escalate early if any gate stalls.', owner: 'Dave/Vinay', status: 'open' },
     ],
     assumptions: [
       { id: 'A01', desc: 'GitHub Copilot licenses exist and are purchased by State', status: 'unvalidated', validate: 'Ask Dave — what tier? Business/Enterprise?', owner: 'Dave', notes: '' },
       { id: 'A02', desc: 'OpenAI models are approved for State use (via Copilot)', status: 'validated', validate: 'Jim confirmed Apr 13', owner: 'Jim', notes: '' },
       { id: 'A03', desc: 'Google Gemini may be approved (via Copilot)', status: 'pending', validate: 'Jim to check', owner: 'Jim', notes: '' },
       { id: 'A04', desc: 'Jim supports AI code generation (stair-stepped)', status: 'validated', validate: 'Jim: "constraint was accidental" — Apr 13', owner: 'Jim', notes: '' },
-      { id: 'A05', desc: 'Target is 10-15% improvement in 13 weeks. Deadline: July 20, 2026 — results presented to CIO.', status: 'validated', validate: 'Jim stated in Apr 13 meeting', owner: 'Jim', notes: 'Hard deadline. See R07, R12 for timeline tension.' },
+      { id: 'A05', desc: 'Target is 10-15% improvement in 13 weeks', status: 'validated', validate: 'Jim stated in Apr 13 meeting', owner: 'Jim', notes: '' },
       { id: 'A06', desc: 'Measurement uses tangible outputs, not story points', status: 'validated', validate: 'Jim directed this', owner: 'Jim', notes: '' },
       { id: 'A07', desc: 'Dave is interim AI lead during Jim absence', status: 'validated', validate: 'Jim designated Dave', owner: 'Jim', notes: '' },
       { id: 'A08', desc: 'PI 20 Planning is May 5', status: 'assumed', validate: 'Verify with Matt (RTE)', owner: 'Matt', notes: '' },
-      { id: 'A09', desc: 'Pilot runs 8 sprints with staggered role onboarding (BA-Tech Sprint 2, Dev Sprint 3, Config Sprint 4, Tester Sprint 5, SM Sprint 6). All 5 roles active from Sprint 6.', status: 'assumed', validate: 'Confirm staggered approach with Dave/Romi. Validate against July 20 deadline.', owner: 'Dave', notes: 'Updated from original "Sprints 3 & 4" based on one-person constraint.' },
+      { id: 'A09', desc: 'Pilot targets Sprints 3 & 4 of PI 20', status: 'assumed', validate: 'Confirm with Dave/Romi', owner: 'Dave', notes: '' },
       { id: 'A10', desc: '15% capacity can be allocated for AI adoption', status: 'assumed', validate: 'Must be agreed with team leads and POs', owner: 'Romi', notes: '' },
       { id: 'A11', desc: 'PO and BA-Functional are NOT Krasan resources', status: 'unvalidated', validate: 'Verify team composition with Romi', owner: 'Romi', notes: '' },
       { id: 'A12', desc: 'DoIT 30-day notice has NOT been filed', status: 'unknown', validate: 'Ask Dave — critical path item', owner: 'Dave', notes: '' },
-      { id: 'A13', desc: 'Vinay is sole resource for Govern, Baseline, Design, and Training. No additional resource budgeted for pilot phase.', status: 'assumed', validate: 'Confirm with Romi — budget for additional support?', owner: 'Romi', notes: 'Drives sequential scheduling. See R11.' },
-      { id: 'A14', desc: 'Government approval gates take ~1 week each. 1-week buffer built into plan between approvals.', status: 'assumed', validate: 'Validate with Dave — is 1 week realistic for DCFS approvals?', owner: 'Dave', notes: 'See R14. If approvals take longer, all downstream dates shift.' },
-      { id: 'A15', desc: 'PI Planning deliverables needed by May 5: governance structure approved, baseline report (at minimum preliminary), foundation training ready, pilot scope and team selection confirmed.', status: 'at-risk', validate: 'Review at Apr 17 meeting — what is the minimum viable package for PI Planning?', owner: 'Vinay', notes: 'See R13. Current timeline is tight. Some items may need to be presented as preliminary.' },
     ]
   };
 }
@@ -701,54 +695,85 @@ function exportJSON() {
   a.click();
 }
 function exportExcel() {
-  var statusLabel = { 'not-started': 'Not Started', 'in-progress': 'In Progress', 'completed': 'Completed', 'blocked': 'Blocked' };
-  function csvEsc(s) {
-    s = (s||'').replace(/\r?\n/g, ' ');
-    if (s.indexOf(',') !== -1 || s.indexOf('"') !== -1 || s.indexOf('\n') !== -1) {
-      return '"' + s.replace(/"/g, '""') + '"';
-    }
-    return s;
-  }
+  const statusLabel = { 'not-started': 'Not Started', 'in-progress': 'In Progress', 'completed': 'Completed', 'blocked': 'Blocked' };
+  const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-  // WBS Tasks
-  var lines = ['WBS,Task,Start,End,Depends,Owner,Effort,Status,Notes / Deliverables'];
-  data.tasks.forEach(function(t) {
-    lines.push([
-      csvEsc(t.wbs), csvEsc(t.name), t.start, t.end,
-      csvEsc(t.depends||''), csvEsc(t.owner), csvEsc(t.effort||''),
-      csvEsc(statusLabel[t.status]||t.status), csvEsc(t.notes||'')
-    ].join(','));
+  // WBS Tasks sheet
+  let taskRows = '';
+  data.tasks.forEach(t => {
+    const style = t.isPhase ? ' style="font-weight:bold;background:#d9e2f3"' : '';
+    taskRows += `<tr>
+      <td${style}>${esc(t.wbs)}</td>
+      <td${style}>${esc(t.name)}</td>
+      <td${style}>${t.start}</td>
+      <td${style}>${t.end}</td>
+      <td${style}>${esc(t.depends||'')}</td>
+      <td${style}>${esc(t.owner)}</td>
+      <td${style}>${esc(t.effort||'')}</td>
+      <td${style}>${statusLabel[t.status]||t.status}</td>
+      <td${style}>${esc(t.notes)}</td>
+    </tr>`;
   });
 
-  // Blank rows then Risks
-  lines.push('');
-  lines.push('');
-  lines.push('RISK REGISTER');
-  lines.push('ID,Risk,Likelihood,Impact,Mitigation,Owner,Status');
-  data.risks.forEach(function(r) {
-    lines.push([
-      csvEsc(r.id), csvEsc(r.desc), csvEsc(r.likelihood), csvEsc(r.impact),
-      csvEsc(r.mitigation), csvEsc(r.owner), csvEsc(r.status)
-    ].join(','));
+  // Risks sheet
+  let riskRows = '';
+  data.risks.forEach(r => {
+    riskRows += `<tr>
+      <td>${esc(r.id)}</td>
+      <td>${esc(r.desc)}</td>
+      <td>${esc(r.likelihood)}</td>
+      <td>${esc(r.impact)}</td>
+      <td>${esc(r.mitigation)}</td>
+      <td>${esc(r.owner)}</td>
+      <td>${esc(r.status)}</td>
+    </tr>`;
   });
 
-  // Blank rows then Assumptions
-  lines.push('');
-  lines.push('');
-  lines.push('ASSUMPTIONS LOG');
-  lines.push('ID,Assumption,Status,Validation,Owner,Notes');
-  data.assumptions.forEach(function(a) {
-    lines.push([
-      csvEsc(a.id), csvEsc(a.desc), csvEsc(a.status),
-      csvEsc(a.validate), csvEsc(a.owner), csvEsc(a.notes||'')
-    ].join(','));
+  // Assumptions sheet
+  let assumptionRows = '';
+  data.assumptions.forEach(a => {
+    assumptionRows += `<tr>
+      <td>${esc(a.id)}</td>
+      <td>${esc(a.desc)}</td>
+      <td>${esc(a.status)}</td>
+      <td>${esc(a.validate)}</td>
+      <td>${esc(a.owner)}</td>
+      <td>${esc(a.notes||'')}</td>
+    </tr>`;
   });
 
-  var csv = '\ufeff' + lines.join('\r\n');
-  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-  var a = document.createElement('a');
+  const thStyle = 'style="background:#0f3460;color:white;font-weight:bold;padding:6px 10px"';
+  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<!--[if gte mso 9]><xml>
+<x:ExcelWorkbook><x:ExcelWorksheets>
+  <x:ExcelWorksheet><x:Name>WBS Tasks</x:Name><x:WorksheetOptions><x:FreezePanes/><x:FrozenNoSplit/><x:SplitHorizontal>1</x:SplitHorizontal><x:TopRowBottomPane>1</x:TopRowBottomPane></x:WorksheetOptions></x:ExcelWorksheet>
+  <x:ExcelWorksheet><x:Name>Risks</x:Name><x:WorksheetOptions><x:FreezePanes/><x:FrozenNoSplit/><x:SplitHorizontal>1</x:SplitHorizontal><x:TopRowBottomPane>1</x:TopRowBottomPane></x:WorksheetOptions></x:ExcelWorksheet>
+  <x:ExcelWorksheet><x:Name>Assumptions</x:Name><x:WorksheetOptions><x:FreezePanes/><x:FrozenNoSplit/><x:SplitHorizontal>1</x:SplitHorizontal><x:TopRowBottomPane>1</x:TopRowBottomPane></x:WorksheetOptions></x:ExcelWorksheet>
+</x:ExcelWorksheets></x:ExcelWorkbook>
+</xml><![endif]-->
+<style>td,th{padding:4px 8px;border:1px solid #ccc;font-family:Segoe UI,sans-serif;font-size:11px;vertical-align:top}</style>
+</head>
+<body>
+<table>
+  <tr><th ${thStyle}>WBS</th><th ${thStyle}>Task</th><th ${thStyle}>Start</th><th ${thStyle}>End</th><th ${thStyle}>Depends</th><th ${thStyle}>Owner</th><th ${thStyle}>Effort</th><th ${thStyle}>Status</th><th ${thStyle}>Notes / Deliverables</th></tr>
+  ${taskRows}
+</table>
+<table>
+  <tr><th ${thStyle}>ID</th><th ${thStyle}>Risk</th><th ${thStyle}>Likelihood</th><th ${thStyle}>Impact</th><th ${thStyle}>Mitigation</th><th ${thStyle}>Owner</th><th ${thStyle}>Status</th></tr>
+  ${riskRows}
+</table>
+<table>
+  <tr><th ${thStyle}>ID</th><th ${thStyle}>Assumption</th><th ${thStyle}>Status</th><th ${thStyle}>Validation</th><th ${thStyle}>Owner</th><th ${thStyle}>Notes</th></tr>
+  ${assumptionRows}
+</table>
+</body></html>`;
+
+  const blob = new Blob([html], { type: 'application/vnd.ms-excel' });
+  const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'dcfs-ilc-planner-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.download = `dcfs-ilc-planner-${new Date().toISOString().slice(0,10)}.xls`;
   a.click();
 }
 
