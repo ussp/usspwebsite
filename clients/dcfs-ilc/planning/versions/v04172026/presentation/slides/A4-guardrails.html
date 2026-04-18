@@ -1,0 +1,19 @@
+<div class="slide">
+  <h2>Appendix: Guardrails &mdash; Updated Post-Jim Meeting</h2>
+
+  <table>
+    <tr><th>Directive</th><th>How We've Built It In</th></tr>
+    <tr><td><strong>Human-in-the-loop for all AI output</strong></td><td>All AI suggestions (code, docs, config) reviewed by human before use. Code review process satisfies DoIT Section 4d &amp; 5d.</td></tr>
+    <tr><td><strong>AI code generation &mdash; stair-stepped</strong></td><td>Step 1: stories/docs. Step 2: test scripts. Step 3: config suggestions. Step 4: plugin/custom code. Each step requires training + review process.</td></tr>
+    <tr><td><strong>AI for SDLC only, not business processes</strong></td><td>All targeted processes are delivery processes (story writing, testing, coding, docs, configuration). Zero business process automation.</td></tr>
+    <tr><td><strong>No child information shared</strong></td><td>"No PII" rule in every playbook. Training module. Per-sprint spot checks.</td></tr>
+    <tr><td><strong>No security documentation</strong></td><td>Security plans excluded from all AI tool contexts. Team is trained on boundaries.</td></tr>
+    <tr><td><strong>Only state-approved tools</strong></td><td>Copilot + Rovo + Confluence AI. Additional tools require governance team approval + DoIT 30-day notice.</td></tr>
+    <tr><td><strong>Governance team oversight</strong></td><td>DCFS-led governance team (Jim as sponsor). Krasan presents, DCFS decides. NIST AI RMF aligned.</td></tr>
+  </table>
+
+  <div class="callout target">
+    <strong>Key change from Apr 13:</strong> Code generation is no longer excluded. Jim confirmed the original constraint was "accidental." DoIT policy supports code generation with human-in-the-loop. Stair-stepped approach approved.
+  </div>
+  <!--FOOTER-->
+</div>

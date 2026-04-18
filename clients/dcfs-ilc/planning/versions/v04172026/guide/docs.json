@@ -1,0 +1,92 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "AI Transformation Framework",
+  "theme": "mint",
+  "colors": {
+    "primary": "#0f3460",
+    "light": "#2563EB",
+    "dark": "#0f3460"
+  },
+  "logo": {
+    "light": "/public/logo.png",
+    "dark": "/public/logo.png"
+  },
+  "favicon": "/public/logo.png",
+  "topbarLinks": [
+    {
+      "name": "AI Tools Platform",
+      "url": "https://tools.ussp.co"
+    }
+  ],
+  "tabs": [
+    {
+      "name": "Framework Guide",
+      "url": "guide"
+    },
+    {
+      "name": "Appendices",
+      "url": "appendices"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Overview",
+      "pages": ["README"]
+    },
+    {
+      "group": "Phase 1: Govern",
+      "pages": [
+        "01-introduction",
+        "02-executive-discovery",
+        "03-governance-compliance"
+      ]
+    },
+    {
+      "group": "Phase 2: Baseline & Design",
+      "pages": [
+        "04-readiness-assessment",
+        "05-baseline-measurement",
+        "06-process-design"
+      ]
+    },
+    {
+      "group": "Phase 3: Train",
+      "pages": [
+        "07-training-delivery"
+      ]
+    },
+    {
+      "group": "Phase 4: Pilot & Measure",
+      "pages": [
+        "08-pilot-execution",
+        "09-measurement-reporting"
+      ]
+    },
+    {
+      "group": "Phase 5: Playbook & Scale",
+      "pages": [
+        "10-playbooks",
+        "11-scale-rollout"
+      ]
+    },
+    {
+      "group": "Platform & Deployment",
+      "pages": [
+        "12-tools-platform",
+        "13-deployment"
+      ]
+    },
+    {
+      "group": "Reference",
+      "pages": [
+        "appendix-a-kpi-catalog",
+        "appendix-b-doit-policy-map",
+        "appendix-c-research-citations",
+        "appendix-d-templates"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://www.krasanconsulting.com"
+  }
+}
