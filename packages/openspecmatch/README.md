@@ -174,6 +174,95 @@ A `SpecMatchResult` contains:
 
 Each `ItemMatch` includes a `scoreBreakdown` with four factors: `taxonomyMatch`, `levelFit`, `evidenceStrength`, and `recency`.
 
+## RFP Matching (Phase 2)
+
+OpenSpecMatch also supports **Government RFP** scoring: match a `DemandSpec` with `domain: "rfp"` against a `CapabilitySpec` with `domain: "company"`, producing a verdict (GO / GO_WITH_REMEDIATION / NO_GO) plus structured blockers + remediation plans.
+
+### Extractors
+
+- `RFPExtractor` — rule-based, takes structured requirement list; good when a bid team has already read the RFP.
+- `LLMRFPExtractor` — extracts from raw RFP text (Anthropic/OpenAI); LLM-only items are tagged with `extractor:llm_only` in their context.
+- `CompanyExtractor` — rule-based, takes structured capability input.
+- `LLMCompanyExtractor` — extracts from company profile docs / pitch decks.
+
+### Multi-entity Combinator
+
+Bids often come from a consortium (primary bidder + tech partner). `combine()` merges multiple `CapabilitySpec`s into a single consortium spec. Overlapping items keep the highest level, union evidence, and preserve per-entity attribution via a synthetic `[contributors]` evidence record.
+
+```typescript
+const consortium = engine.combineCapabilities(
+  [usspplSpec, fleetronixSpec],
+  { combinedId: "bid-consortium", combinedName: "USSPPL + Fleetronix" }
+);
+```
+
+### `government-rfp` Scoring Profile
+
+Built-in profile tuned for India Govt RFPs:
+
+- `mandatoryIsGate: true` — missing a mandatory compliance/infrastructure item sets `overallScore` to 0 and flags the gate fail.
+- Category weights: compliance 25, infrastructure 30, past_performance 18, manpower 12, financial 10, geographic 5.
+- `evidenceWeight: 0.45` — Govt values proven track record.
+- 48-month recency half-life.
+
+### Bid / No-Bid Recommender
+
+`matchRFP()` is the convenience method for the full pipeline. It attaches a `recommendation` to the result.
+
+```typescript
+import { OpenSpecMatchEngine } from "@openspecmatch/engine";
+
+const engine = new OpenSpecMatchEngine();
+
+const remediation = {
+  "cmp-001": { description: "Engage ARAI for AIS 140 TAC", estimatedEffortWeeks: 12, ownerHint: "Tech partner" },
+  "inf-001": { description: "Migrate backend to NIC Cloud", estimatedEffortWeeks: 8, ownerHint: "CTO" },
+  // ...
+};
+
+const result = engine.matchRFP(demand, capability, {
+  profileId: "government-rfp",
+  recommender: { remediation, goThreshold: 70 },
+});
+
+console.log(result.recommendation!.verdict);     // "GO" | "GO_WITH_REMEDIATION" | "NO_GO"
+console.log(result.recommendation!.blockers);    // failed mandatories + important misses
+console.log(result.recommendation!.remediation); // per-blocker remediation plans
+```
+
+### Verdict Rules
+
+| Condition | Verdict |
+|---|---|
+| Gate passes AND overall score ≥ `goThreshold` (default 70) | `GO` |
+| Gate fails BUT every mandatory blocker has a remediation path | `GO_WITH_REMEDIATION` |
+| Gate passes but overall < `goThreshold` | `GO_WITH_REMEDIATION` (fix important gaps) |
+| Gate fails AND any mandatory blocker has no remediation | `NO_GO` |
+
+### Reference Fixture — Fleettronix (AIS 140 / Andhra Pradesh)
+
+The package ships a full fixture in `src/__tests__/fixtures/fleettronix/`:
+
+- `ais140-demand.ts` — DemandSpec hand-authored from the MoRTH Gazette + VTS Guidelines.
+- `ussppl-fleetronix-capability.ts` — CapabilitySpec combining USSPPL (bidder) + Fleetronix (tech partner).
+
+Run the full pipeline interactively:
+
+```bash
+cd packages/openspecmatch
+npx tsx examples/fleettronix-rfp/run-match.ts --report
+```
+
+Expected output: `GO_WITH_REMEDIATION` verdict with 21 mandatory blockers (TAC, NIC Cloud, VAHAN, ERSS, CERT-IN, SSL, SoI, PBG, EMD, etc.), each with a remediation path.
+
+### Phase 2 Taxonomy Trees
+
+Three new taxonomy trees load by default via `createDefaultResolver()`:
+
+- **infrastructure** — NIC Cloud, VAHAN, ERSS/Dial-112, CERT-IN, SoI maps, Control Tower, MC equipment, connectivity
+- **financial** — PBG, EMD, turnover brackets, Nirbhaya funding, GeM/MSME empanelment
+- **manpower** — PIU, nodal officer, 24×7 ops, helpdesk L1/L2/L3, language coverage (Telugu, Hindi, English)
+
 ## Detailed Scoring Rules
 
 See [docs/matching-algorithm.md](docs/matching-algorithm.md) for a full explanation of how taxonomy matching, level fit, evidence, recency, and location scoring work.

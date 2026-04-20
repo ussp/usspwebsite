@@ -14,9 +14,9 @@
 - [x] 2.4 Build education tree (degrees, fields, levels — 20+ nodes)
 - [x] 2.5 Build domain-knowledge tree (sectors, industry verticals, compliance, procurement — 200+ nodes)
 - [x] 2.6 Build soft skills tree (leadership, communication, collaboration — 15+ nodes)
-- [ ] 2.7 Build infrastructure tree (DC, networking, storage — for Phase 2 RFP matching)
-- [ ] 2.8 Build financial tree (turnover, bonds, capacity — for Phase 2 RFP matching)
-- [ ] 2.9 Build manpower tree (team composition, roles — for Phase 2 RFP matching)
+- [x] 2.7 Build infrastructure tree (DC, networking, storage — for Phase 2 RFP matching) *(landed via add-rfp-matching-phase2 §1)*
+- [x] 2.8 Build financial tree (turnover, bonds, capacity — for Phase 2 RFP matching) *(landed via add-rfp-matching-phase2 §2)*
+- [x] 2.9 Build manpower tree (team composition, roles — for Phase 2 RFP matching) *(landed via add-rfp-matching-phase2 §3)*
 - [x] 2.10 Implement static alias resolver (normalizeSkill equivalent)
 - [x] 2.11 Implement taxonomy relationship calculator (exact/parent/child/sibling/related)
 - [x] 2.12 Build DB-backed custom taxonomy extensions (taxonomy_nodes table)
@@ -120,10 +120,10 @@
 - [ ] 12.7 Compare rule-based vs LLM extraction quality on 50+ real resumes
 - [ ] 12.8 Switch scoring to use LLM-extracted specs when available, rule-based as fallback
 
-## 13. Phase 2: RFP Matching (Future)
-- [ ] 13.1 Build RFP extractor (PDF → DemandSpec with financial, compliance, manpower items)
-- [ ] 13.2 Build Company extractor (company profile → CapabilitySpec)
-- [ ] 13.3 Build Combinator (multi-entity matching: USSP + partners vs RFP requirements)
-- [ ] 13.4 Build infrastructure, financial, manpower taxonomy trees
-- [ ] 13.5 Create RFP scoring profile
-- [ ] 13.6 Build bid/no-bid recommendation engine
+## 13. Phase 2: RFP Matching (delivered via add-rfp-matching-phase2)
+- [x] 13.1 Build RFP extractor (PDF → DemandSpec with financial, compliance, manpower items) *(landed via add-rfp-matching-phase2 §4 — RFPExtractor + LLMRFPExtractor)*
+- [x] 13.2 Build Company extractor (company profile → CapabilitySpec) *(landed via add-rfp-matching-phase2 §5 — CompanyExtractor + LLMCompanyExtractor)*
+- [x] 13.3 Build Combinator (multi-entity matching: USSP + partners vs RFP requirements) *(landed via add-rfp-matching-phase2 §6)*
+- [x] 13.4 Build infrastructure, financial, manpower taxonomy trees *(landed via add-rfp-matching-phase2 §1-3)*
+- [x] 13.5 Create RFP scoring profile *(landed via add-rfp-matching-phase2 §7 — GOVERNMENT_RFP_PROFILE)*
+- [x] 13.6 Build bid/no-bid recommendation engine *(landed via add-rfp-matching-phase2 §8 — recommender + matchRFP)*

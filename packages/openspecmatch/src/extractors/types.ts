@@ -6,6 +6,11 @@ export interface DemandExtractor<TInput = unknown> {
   extract(input: TInput): DemandSpec;
 }
 
+/** Extracts a DemandSpec from a source document/record (async, e.g., LLM-powered) */
+export interface AsyncDemandExtractor<TInput = unknown> {
+  extract(input: TInput): Promise<DemandSpec>;
+}
+
 /** Extracts a CapabilitySpec from a source document/record (sync) */
 export interface CapabilityExtractor<TInput = unknown> {
   extract(input: TInput): CapabilitySpec;

@@ -43,6 +43,37 @@ export const CategoryScore = z.object({
 });
 export type CategoryScore = z.infer<typeof CategoryScore>;
 
+// ── Recommendation (RFP / bid/no-bid) ───────────────────────────
+
+export const RecommendationVerdict = z.enum(["GO", "GO_WITH_REMEDIATION", "NO_GO"]);
+export type RecommendationVerdict = z.infer<typeof RecommendationVerdict>;
+
+export const BlockerItem = z.object({
+  demandItemId: z.string(),
+  category: DemandCategory,
+  rawText: z.string(),
+  criticality: z.enum(["mandatory", "important", "preferred", "optional"]),
+  score: z.number().min(0).max(100),
+});
+export type BlockerItem = z.infer<typeof BlockerItem>;
+
+export const RemediationPlan = z.object({
+  demandItemId: z.string(),
+  description: z.string(),
+  estimatedEffortWeeks: z.number().nonnegative().optional(),
+  ownerHint: z.string().optional(),
+});
+export type RemediationPlan = z.infer<typeof RemediationPlan>;
+
+export const Recommendation = z.object({
+  verdict: RecommendationVerdict,
+  rationale: z.string(),
+  blockers: z.array(BlockerItem),
+  remediation: z.array(RemediationPlan),
+  exposureUSD: z.number().nonnegative().optional(),
+});
+export type Recommendation = z.infer<typeof Recommendation>;
+
 // ── Spec Match Result ───────────────────────────────────────────
 
 export const SpecMatchResult = z.object({
@@ -61,5 +92,7 @@ export const SpecMatchResult = z.object({
   passedMandatoryGate: z.boolean(),
   failedMandatory: z.array(z.string()),
   summary: z.string().optional(),
+  /** Optional bid/no-bid verdict; populated by the recommender for RFP matches. */
+  recommendation: Recommendation.optional(),
 });
 export type SpecMatchResult = z.infer<typeof SpecMatchResult>;

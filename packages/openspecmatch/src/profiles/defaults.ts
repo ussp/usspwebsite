@@ -94,8 +94,59 @@ export const HEALTHCARE_CLINICAL_PROFILE: ScoringProfile = {
   },
 };
 
+export const GOVERNMENT_RFP_PROFILE: ScoringProfile = {
+  id: "government-rfp",
+  name: "Government RFP (India)",
+  domain: "rfp",
+  description:
+    "Profile for India Govt RFP / capability pitch scoring. Mandatory-gate ON for compliance/infrastructure blockers. Weights compliance + infrastructure + past performance.",
+  version: "1.0.0",
+  categoryWeights: {
+    // Phase 1 categories (not used in RFP scoring)
+    technical_skill: 0,
+    soft_skill: 0,
+    certification: 0,
+    education: 0,
+    domain_knowledge: 0,
+    tool_proficiency: 0,
+    // Phase 2 categories (this is where RFP scoring lives)
+    compliance: 25,
+    infrastructure: 30,
+    manpower: 12,
+    financial: 10,
+    past_performance: 18,
+    geographic: 5,
+  },
+  criticalityMultipliers: {
+    mandatory: 3.0,
+    important: 1.8,
+    preferred: 1.0,
+    optional: 0.4,
+  },
+  levelCurve: {
+    "-2": 0.40,
+    "-1": 0.75,
+    "0": 1.00,
+    "1": 1.00,
+    "2": 1.00,
+  },
+  mandatoryIsGate: true,
+  evidenceWeight: 0.45,
+  recencyHalfLifeMonths: 48,
+  gapThreshold: 55,
+  taxonomyMatchScores: {
+    exact: 1.0,
+    parent: 0.70,
+    child: 0.80,
+    sibling: 0.50,
+    related: 0.55,
+    none: 0.0,
+  },
+};
+
 /** All built-in profiles */
 export const DEFAULT_PROFILES: ScoringProfile[] = [
   SOFTWARE_ENGINEER_PROFILE,
   HEALTHCARE_CLINICAL_PROFILE,
+  GOVERNMENT_RFP_PROFILE,
 ];

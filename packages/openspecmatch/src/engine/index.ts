@@ -10,9 +10,24 @@ import { createDefaultResolver } from "../taxonomy/index.js";
 import { PositionExtractor } from "../extractors/position-extractor.js";
 import { ResumeExtractor } from "../extractors/resume-extractor.js";
 import { LLMResumeExtractor } from "../extractors/llm-resume-extractor.js";
+import { RFPExtractor, type RFPInput } from "../extractors/rfp-extractor.js";
+import {
+  LLMRFPExtractor,
+  type LLMRFPInput,
+} from "../extractors/llm-rfp-extractor.js";
+import {
+  CompanyExtractor,
+  type CompanyInput,
+} from "../extractors/company-extractor.js";
+import {
+  LLMCompanyExtractor,
+  type LLMCompanyInput,
+} from "../extractors/llm-company-extractor.js";
 import { createLLMProvider } from "../llm/index.js";
 import { matchSpecs, matchBatch } from "./matcher.js";
 import { DEFAULT_PROFILES, SOFTWARE_ENGINEER_PROFILE } from "../profiles/defaults.js";
+import { combine, type CombinationPolicy } from "./combinator.js";
+import { recommend, type RecommenderOptions } from "./recommender.js";
 
 export type OperationMode = "full" | "standard" | "minimal";
 
@@ -45,6 +60,10 @@ export class OpenSpecMatchEngine {
   private positionExtractor: PositionExtractor;
   private resumeExtractor: ResumeExtractor;
   private llmResumeExtractor: LLMResumeExtractor | null = null;
+  private rfpExtractor: RFPExtractor;
+  private companyExtractor: CompanyExtractor;
+  private llmRFPExtractor: LLMRFPExtractor | null = null;
+  private llmCompanyExtractor: LLMCompanyExtractor | null = null;
   readonly mode: OperationMode;
 
   constructor(config: EngineConfig = {}) {
@@ -52,11 +71,15 @@ export class OpenSpecMatchEngine {
     this.resolver = config.resolver ?? createDefaultResolver();
     this.positionExtractor = new PositionExtractor(this.resolver);
     this.resumeExtractor = new ResumeExtractor(this.resolver);
+    this.rfpExtractor = new RFPExtractor(this.resolver);
+    this.companyExtractor = new CompanyExtractor(this.resolver);
 
-    // Set up LLM extractor if provider configured
+    // Set up LLM extractors if provider configured
     if (config.llm) {
       const provider = createLLMProvider(config.llm);
       this.llmResumeExtractor = new LLMResumeExtractor(this.resolver, provider);
+      this.llmRFPExtractor = new LLMRFPExtractor(this.resolver, provider);
+      this.llmCompanyExtractor = new LLMCompanyExtractor(this.resolver, provider);
     }
 
     // Register profiles
@@ -152,6 +175,63 @@ export class OpenSpecMatchEngine {
       resumes.map((r) => this.extractResumeAsync(r)),
     );
     return this.matchBatch(demand, capabilities, profileId);
+  }
+
+  // ── Phase 2 Extractors ─────────────────────────────────────────
+
+  /** Rule-based RFP extraction from a structured input. */
+  extractRFP(input: RFPInput): DemandSpec {
+    return this.rfpExtractor.extract(input);
+  }
+
+  /** LLM-powered RFP extraction from raw text. Requires LLM config. */
+  async extractRFPAsync(input: LLMRFPInput): Promise<DemandSpec> {
+    if (!this.llmRFPExtractor) {
+      throw new Error(
+        "LLM RFP extraction requires an LLM provider. Pass llm config to OpenSpecMatchEngine constructor.",
+      );
+    }
+    return this.llmRFPExtractor.extract(input);
+  }
+
+  /** Rule-based Company extraction from structured input. */
+  extractCompany(input: CompanyInput): CapabilitySpec {
+    return this.companyExtractor.extract(input);
+  }
+
+  /** LLM-powered Company extraction from profile text. Requires LLM config. */
+  async extractCompanyAsync(input: LLMCompanyInput): Promise<CapabilitySpec> {
+    if (!this.llmCompanyExtractor) {
+      throw new Error(
+        "LLM Company extraction requires an LLM provider. Pass llm config to OpenSpecMatchEngine constructor.",
+      );
+    }
+    return this.llmCompanyExtractor.extract(input);
+  }
+
+  // ── RFP Matching (Phase 2) ─────────────────────────────────────
+
+  /**
+   * Match a demand against a single or combined capability spec with the
+   * government-rfp profile by default, and attach a bid/no-bid recommendation.
+   */
+  matchRFP(
+    demand: DemandSpec,
+    capability: CapabilitySpec,
+    options: { profileId?: string; recommender?: RecommenderOptions } = {},
+  ): SpecMatchResult {
+    const profileId = options.profileId ?? "government-rfp";
+    const result = this.match(demand, capability, profileId);
+    result.recommendation = recommend(demand, result, options.recommender);
+    return result;
+  }
+
+  /** Combine multiple capability specs into a consortium spec. */
+  combineCapabilities(
+    specs: CapabilitySpec[],
+    policy: CombinationPolicy,
+  ): CapabilitySpec {
+    return combine(specs, policy, this.resolver);
   }
 
   // ── Profile Management ─────────────────────────────────────────
