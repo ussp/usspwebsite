@@ -1,0 +1,1458 @@
+{
+  "demandId": "demand-ais140-ap-2026",
+  "capabilityIds": [
+    "consortium-ussppl-fleetronix-2026"
+  ],
+  "overallScore": 0,
+  "confidence": 92,
+  "engineVersion": "0.2.0",
+  "profileId": "government-rfp",
+  "computedAt": "2026-04-18T07:06:09.503Z",
+  "itemMatches": [
+    {
+      "demandItemId": "cmp-001",
+      "capabilityItemId": null,
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 0,
+        "evidenceStrength": 0,
+        "recency": 0
+      },
+      "explanation": "No match found for \"AIS 140 Type Approval Certificate (TAC) from ARAI/CIRT/iCAT/VRDE/CFMTTI/IIP/GARC\""
+    },
+    {
+      "demandItemId": "cmp-002",
+      "capabilityItemId": null,
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 0,
+        "evidenceStrength": 0,
+        "recency": 0
+      },
+      "explanation": "No match found for \"Conformity of Production (COP) annual testing\""
+    },
+    {
+      "demandItemId": "cmp-003",
+      "capabilityItemId": null,
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 0,
+        "evidenceStrength": 0,
+        "recency": 0
+      },
+      "explanation": "No match found for \"CERT-IN security certification for backend platform\""
+    },
+    {
+      "demandItemId": "cmp-004",
+      "capabilityItemId": null,
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 0,
+        "evidenceStrength": 0,
+        "recency": 0
+      },
+      "explanation": "No match found for \"SSL certificates across all endpoints\""
+    },
+    {
+      "demandItemId": "cmp-005",
+      "capabilityItemId": null,
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 0,
+        "evidenceStrength": 0,
+        "recency": 0
+      },
+      "explanation": "No match found for \"Survey of India map compliance (scale >=1:25000)\""
+    },
+    {
+      "demandItemId": "cmp-006",
+      "capabilityItemId": null,
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 0,
+        "evidenceStrength": 0,
+        "recency": 0
+      },
+      "explanation": "No match found for \"CMVR 125H enforcement workflow support\""
+    },
+    {
+      "demandItemId": "cmp-007",
+      "capabilityItemId": null,
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 0,
+        "evidenceStrength": 0,
+        "recency": 0
+      },
+      "explanation": "No match found for \"Nirbhaya Framework funding guidelines compliance\""
+    },
+    {
+      "demandItemId": "inf-001",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 75,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"NIC Cloud hosting for Monitoring Centre backend\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-002",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 75,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"VAHAN database integration (device tagging, unique ID, fitness check)\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-003",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 75,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"ERSS (Dial-112) integration for emergency alert routing\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-004",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"AIS 140 compliant vehicle tracking software\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-005",
+      "capabilityItemId": "inf-c02",
+      "score": 54,
+      "scoreBreakdown": {
+        "taxonomyMatch": "related",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "\"Real-time GPS vehicle location tracking with map playback and trip view\" is loosely related to \"Real-time GPS vehicle location tracking with map playback\"; level meets or exceeds requirement (score: 54)"
+    },
+    {
+      "demandItemId": "inf-006",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Emergency panic button alert routing to ERSS plus MC\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-007",
+      "capabilityItemId": "inf-c04",
+      "score": 98,
+      "scoreBreakdown": {
+        "taxonomyMatch": "exact",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "Exact match for \"Geo-fencing (POI, area, route) with alerts on enter/exit\"; level meets or exceeds requirement (score: 98)"
+    },
+    {
+      "demandItemId": "inf-008",
+      "capabilityItemId": "inf-c05",
+      "score": 54,
+      "scoreBreakdown": {
+        "taxonomyMatch": "related",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "\"Over-speed violation alerts to enforcement/central operations\" is loosely related to \"Over-speed violation alerts to enforcement unit\"; level meets or exceeds requirement (score: 54)"
+    },
+    {
+      "demandItemId": "inf-009",
+      "capabilityItemId": "inf-c06",
+      "score": 98,
+      "scoreBreakdown": {
+        "taxonomyMatch": "exact",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "Exact match for \"VLT device tampering detection (power cut, seal tamper)\"; level meets or exceeds requirement (score: 98)"
+    },
+    {
+      "demandItemId": "inf-010",
+      "capabilityItemId": "inf-c07",
+      "score": 98,
+      "scoreBreakdown": {
+        "taxonomyMatch": "exact",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "Exact match for \"Device health monitoring of VLT and emergency buttons\"; level meets or exceeds requirement (score: 98)"
+    },
+    {
+      "demandItemId": "inf-011",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"SMS gateway for emergency alert delivery\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-012",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Cellular m2m telecom integration (SIM activation/validity/KYC)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-013",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Mobile application for field access\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-014",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Web control tower dashboard\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-015",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Online storage: 3 months all data + 2 years alerts + 2 years archive\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-016",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Emergency-tagged data retention (never deleted)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-017",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Multi-stakeholder role-based access control (RTO, permit holder, VLT mfr, testing agency)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-018",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Data sharing API with MoRTH Dashboard\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-019",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Physical MC equipment: 55-inch LED video wall 2x2 matrix, desktops, MFP, UPS, switch\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-020",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Vehicle owner web interface for self-tracking\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-021",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Reports: device install, uptime, alerts, speed violations, fleet summary\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-022",
+      "capabilityItemId": "inf-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Interstate message exchange platform API\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-001",
+      "capabilityItemId": "man-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"24x7 helpdesk operations (phone, email, web) for VLT mfrs, Transport Dept, permit holders\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-002",
+      "capabilityItemId": "man-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Telugu language support for AP helpdesk\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-003",
+      "capabilityItemId": "man-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Monitoring Centre 24x7 operations staff\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-004",
+      "capabilityItemId": "man-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Training delivery to Transport Dept officials (JTC, RTO, MVI, AMVI)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-005",
+      "capabilityItemId": "man-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"State PIU (Project Implementation Unit) with nodal officer\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-006",
+      "capabilityItemId": "man-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Project management capability (state PMC)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-007",
+      "capabilityItemId": "man-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"2-year O&M support team post-commissioning\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "fin-001",
+      "capabilityItemId": "fin-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 75,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Project capacity: 20.35 Crore INR (Category A state) delivery budget\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "fin-002",
+      "capabilityItemId": "fin-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 75,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Working capital to bridge 80/20 milestone cashflow under Nirbhaya release pattern\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "fin-003",
+      "capabilityItemId": "fin-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 75,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Performance Bank Guarantee capacity (3-10% of contract value)\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "fin-004",
+      "capabilityItemId": "fin-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 75,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Earnest Money Deposit (EMD) capability\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "pp-001",
+      "capabilityItemId": "pp-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Prior Govt Monitoring Centre / VLT scheme delivery at state level\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "pp-002",
+      "capabilityItemId": "pp-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Public Service Vehicle (bus, taxi, school bus) fleet tracking experience\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "pp-003",
+      "capabilityItemId": "pp-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"AIS 140 compliant device deployment history at scale\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "pp-004",
+      "capabilityItemId": "pp-c04",
+      "score": 84,
+      "scoreBreakdown": {
+        "taxonomyMatch": "exact",
+        "levelFit": 100,
+        "evidenceStrength": 65,
+        "recency": 99
+      },
+      "explanation": "Exact match for \"Prior engagement with Andhra Pradesh Govt\"; level meets or exceeds requirement (score: 84)"
+    },
+    {
+      "demandItemId": "pp-005",
+      "capabilityItemId": "pp-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Fleet tracking scale proven: 5000+ devices deployed\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "geo-001",
+      "capabilityItemId": "geo-c01",
+      "score": 0,
+      "scoreBreakdown": {
+        "taxonomyMatch": "none",
+        "levelFit": 100,
+        "evidenceStrength": 95,
+        "recency": 99
+      },
+      "explanation": "No match found for \"Andhra Pradesh / Hyderabad regional presence\"; level meets or exceeds requirement (score: 0)"
+    }
+  ],
+  "strengths": [
+    {
+      "demandItemId": "inf-007",
+      "category": "infrastructure",
+      "rawText": "Geo-fencing (POI, area, route) with alerts on enter/exit",
+      "score": 98,
+      "explanation": "Exact match for \"Geo-fencing (POI, area, route) with alerts on enter/exit\"; level meets or exceeds requirement (score: 98)"
+    },
+    {
+      "demandItemId": "inf-009",
+      "category": "infrastructure",
+      "rawText": "VLT device tampering detection (power cut, seal tamper)",
+      "score": 98,
+      "explanation": "Exact match for \"VLT device tampering detection (power cut, seal tamper)\"; level meets or exceeds requirement (score: 98)"
+    },
+    {
+      "demandItemId": "inf-010",
+      "category": "infrastructure",
+      "rawText": "Device health monitoring of VLT and emergency buttons",
+      "score": 98,
+      "explanation": "Exact match for \"Device health monitoring of VLT and emergency buttons\"; level meets or exceeds requirement (score: 98)"
+    },
+    {
+      "demandItemId": "pp-004",
+      "category": "past_performance",
+      "rawText": "Prior engagement with Andhra Pradesh Govt",
+      "score": 84,
+      "explanation": "Exact match for \"Prior engagement with Andhra Pradesh Govt\"; level meets or exceeds requirement (score: 84)"
+    }
+  ],
+  "gaps": [
+    {
+      "demandItemId": "inf-001",
+      "category": "infrastructure",
+      "rawText": "NIC Cloud hosting for Monitoring Centre backend",
+      "score": 0,
+      "explanation": "No match found for \"NIC Cloud hosting for Monitoring Centre backend\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-002",
+      "category": "infrastructure",
+      "rawText": "VAHAN database integration (device tagging, unique ID, fitness check)",
+      "score": 0,
+      "explanation": "No match found for \"VAHAN database integration (device tagging, unique ID, fitness check)\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-003",
+      "category": "infrastructure",
+      "rawText": "ERSS (Dial-112) integration for emergency alert routing",
+      "score": 0,
+      "explanation": "No match found for \"ERSS (Dial-112) integration for emergency alert routing\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-004",
+      "category": "infrastructure",
+      "rawText": "AIS 140 compliant vehicle tracking software",
+      "score": 0,
+      "explanation": "No match found for \"AIS 140 compliant vehicle tracking software\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-006",
+      "category": "infrastructure",
+      "rawText": "Emergency panic button alert routing to ERSS plus MC",
+      "score": 0,
+      "explanation": "No match found for \"Emergency panic button alert routing to ERSS plus MC\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-011",
+      "category": "infrastructure",
+      "rawText": "SMS gateway for emergency alert delivery",
+      "score": 0,
+      "explanation": "No match found for \"SMS gateway for emergency alert delivery\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-012",
+      "category": "infrastructure",
+      "rawText": "Cellular m2m telecom integration (SIM activation/validity/KYC)",
+      "score": 0,
+      "explanation": "No match found for \"Cellular m2m telecom integration (SIM activation/validity/KYC)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-013",
+      "category": "infrastructure",
+      "rawText": "Mobile application for field access",
+      "score": 0,
+      "explanation": "No match found for \"Mobile application for field access\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-014",
+      "category": "infrastructure",
+      "rawText": "Web control tower dashboard",
+      "score": 0,
+      "explanation": "No match found for \"Web control tower dashboard\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-015",
+      "category": "infrastructure",
+      "rawText": "Online storage: 3 months all data + 2 years alerts + 2 years archive",
+      "score": 0,
+      "explanation": "No match found for \"Online storage: 3 months all data + 2 years alerts + 2 years archive\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-016",
+      "category": "infrastructure",
+      "rawText": "Emergency-tagged data retention (never deleted)",
+      "score": 0,
+      "explanation": "No match found for \"Emergency-tagged data retention (never deleted)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-017",
+      "category": "infrastructure",
+      "rawText": "Multi-stakeholder role-based access control (RTO, permit holder, VLT mfr, testing agency)",
+      "score": 0,
+      "explanation": "No match found for \"Multi-stakeholder role-based access control (RTO, permit holder, VLT mfr, testing agency)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-018",
+      "category": "infrastructure",
+      "rawText": "Data sharing API with MoRTH Dashboard",
+      "score": 0,
+      "explanation": "No match found for \"Data sharing API with MoRTH Dashboard\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-019",
+      "category": "infrastructure",
+      "rawText": "Physical MC equipment: 55-inch LED video wall 2x2 matrix, desktops, MFP, UPS, switch",
+      "score": 0,
+      "explanation": "No match found for \"Physical MC equipment: 55-inch LED video wall 2x2 matrix, desktops, MFP, UPS, switch\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-020",
+      "category": "infrastructure",
+      "rawText": "Vehicle owner web interface for self-tracking",
+      "score": 0,
+      "explanation": "No match found for \"Vehicle owner web interface for self-tracking\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-021",
+      "category": "infrastructure",
+      "rawText": "Reports: device install, uptime, alerts, speed violations, fleet summary",
+      "score": 0,
+      "explanation": "No match found for \"Reports: device install, uptime, alerts, speed violations, fleet summary\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "inf-022",
+      "category": "infrastructure",
+      "rawText": "Interstate message exchange platform API",
+      "score": 0,
+      "explanation": "No match found for \"Interstate message exchange platform API\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-001",
+      "category": "manpower",
+      "rawText": "24x7 helpdesk operations (phone, email, web) for VLT mfrs, Transport Dept, permit holders",
+      "score": 0,
+      "explanation": "No match found for \"24x7 helpdesk operations (phone, email, web) for VLT mfrs, Transport Dept, permit holders\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-002",
+      "category": "manpower",
+      "rawText": "Telugu language support for AP helpdesk",
+      "score": 0,
+      "explanation": "No match found for \"Telugu language support for AP helpdesk\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-003",
+      "category": "manpower",
+      "rawText": "Monitoring Centre 24x7 operations staff",
+      "score": 0,
+      "explanation": "No match found for \"Monitoring Centre 24x7 operations staff\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-004",
+      "category": "manpower",
+      "rawText": "Training delivery to Transport Dept officials (JTC, RTO, MVI, AMVI)",
+      "score": 0,
+      "explanation": "No match found for \"Training delivery to Transport Dept officials (JTC, RTO, MVI, AMVI)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-005",
+      "category": "manpower",
+      "rawText": "State PIU (Project Implementation Unit) with nodal officer",
+      "score": 0,
+      "explanation": "No match found for \"State PIU (Project Implementation Unit) with nodal officer\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-006",
+      "category": "manpower",
+      "rawText": "Project management capability (state PMC)",
+      "score": 0,
+      "explanation": "No match found for \"Project management capability (state PMC)\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "man-007",
+      "category": "manpower",
+      "rawText": "2-year O&M support team post-commissioning",
+      "score": 0,
+      "explanation": "No match found for \"2-year O&M support team post-commissioning\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "fin-001",
+      "category": "financial",
+      "rawText": "Project capacity: 20.35 Crore INR (Category A state) delivery budget",
+      "score": 0,
+      "explanation": "No match found for \"Project capacity: 20.35 Crore INR (Category A state) delivery budget\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "fin-002",
+      "category": "financial",
+      "rawText": "Working capital to bridge 80/20 milestone cashflow under Nirbhaya release pattern",
+      "score": 0,
+      "explanation": "No match found for \"Working capital to bridge 80/20 milestone cashflow under Nirbhaya release pattern\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "fin-003",
+      "category": "financial",
+      "rawText": "Performance Bank Guarantee capacity (3-10% of contract value)",
+      "score": 0,
+      "explanation": "No match found for \"Performance Bank Guarantee capacity (3-10% of contract value)\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "fin-004",
+      "category": "financial",
+      "rawText": "Earnest Money Deposit (EMD) capability",
+      "score": 0,
+      "explanation": "No match found for \"Earnest Money Deposit (EMD) capability\"; level slightly below requirement (score: 0)"
+    },
+    {
+      "demandItemId": "pp-001",
+      "category": "past_performance",
+      "rawText": "Prior Govt Monitoring Centre / VLT scheme delivery at state level",
+      "score": 0,
+      "explanation": "No match found for \"Prior Govt Monitoring Centre / VLT scheme delivery at state level\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "pp-002",
+      "category": "past_performance",
+      "rawText": "Public Service Vehicle (bus, taxi, school bus) fleet tracking experience",
+      "score": 0,
+      "explanation": "No match found for \"Public Service Vehicle (bus, taxi, school bus) fleet tracking experience\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "pp-003",
+      "category": "past_performance",
+      "rawText": "AIS 140 compliant device deployment history at scale",
+      "score": 0,
+      "explanation": "No match found for \"AIS 140 compliant device deployment history at scale\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "pp-005",
+      "category": "past_performance",
+      "rawText": "Fleet tracking scale proven: 5000+ devices deployed",
+      "score": 0,
+      "explanation": "No match found for \"Fleet tracking scale proven: 5000+ devices deployed\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "geo-001",
+      "category": "geographic",
+      "rawText": "Andhra Pradesh / Hyderabad regional presence",
+      "score": 0,
+      "explanation": "No match found for \"Andhra Pradesh / Hyderabad regional presence\"; level meets or exceeds requirement (score: 0)"
+    },
+    {
+      "demandItemId": "ctx-location",
+      "category": "geographic",
+      "rawText": "Location: Vijayawada, AP (onsite)",
+      "score": 20,
+      "explanation": "Different state for onsite role [work mode: exact]"
+    }
+  ],
+  "unknowns": [
+    {
+      "demandItemId": "cmp-001",
+      "category": "compliance",
+      "rawText": "AIS 140 Type Approval Certificate (TAC) from ARAI/CIRT/iCAT/VRDE/CFMTTI/IIP/GARC",
+      "score": 0,
+      "explanation": "No match found for \"AIS 140 Type Approval Certificate (TAC) from ARAI/CIRT/iCAT/VRDE/CFMTTI/IIP/GARC\""
+    },
+    {
+      "demandItemId": "cmp-002",
+      "category": "compliance",
+      "rawText": "Conformity of Production (COP) annual testing",
+      "score": 0,
+      "explanation": "No match found for \"Conformity of Production (COP) annual testing\""
+    },
+    {
+      "demandItemId": "cmp-003",
+      "category": "compliance",
+      "rawText": "CERT-IN security certification for backend platform",
+      "score": 0,
+      "explanation": "No match found for \"CERT-IN security certification for backend platform\""
+    },
+    {
+      "demandItemId": "cmp-004",
+      "category": "compliance",
+      "rawText": "SSL certificates across all endpoints",
+      "score": 0,
+      "explanation": "No match found for \"SSL certificates across all endpoints\""
+    },
+    {
+      "demandItemId": "cmp-005",
+      "category": "compliance",
+      "rawText": "Survey of India map compliance (scale >=1:25000)",
+      "score": 0,
+      "explanation": "No match found for \"Survey of India map compliance (scale >=1:25000)\""
+    },
+    {
+      "demandItemId": "cmp-006",
+      "category": "compliance",
+      "rawText": "CMVR 125H enforcement workflow support",
+      "score": 0,
+      "explanation": "No match found for \"CMVR 125H enforcement workflow support\""
+    },
+    {
+      "demandItemId": "cmp-007",
+      "category": "compliance",
+      "rawText": "Nirbhaya Framework funding guidelines compliance",
+      "score": 0,
+      "explanation": "No match found for \"Nirbhaya Framework funding guidelines compliance\""
+    }
+  ],
+  "categoryScores": {
+    "compliance": {
+      "score": 0,
+      "weight": 25,
+      "weightedScore": 0,
+      "itemCount": 7,
+      "matchedCount": 0
+    },
+    "infrastructure": {
+      "score": 16,
+      "weight": 30,
+      "weightedScore": 480,
+      "itemCount": 22,
+      "matchedCount": 5
+    },
+    "manpower": {
+      "score": 0,
+      "weight": 12,
+      "weightedScore": 0,
+      "itemCount": 7,
+      "matchedCount": 0
+    },
+    "financial": {
+      "score": 0,
+      "weight": 10,
+      "weightedScore": 0,
+      "itemCount": 4,
+      "matchedCount": 0
+    },
+    "past_performance": {
+      "score": 10,
+      "weight": 18,
+      "weightedScore": 180,
+      "itemCount": 5,
+      "matchedCount": 1
+    },
+    "geographic": {
+      "score": 0,
+      "weight": 5,
+      "weightedScore": 0,
+      "itemCount": 1,
+      "matchedCount": 0
+    }
+  },
+  "passedMandatoryGate": false,
+  "failedMandatory": [
+    "cmp-001",
+    "cmp-002",
+    "cmp-003",
+    "cmp-004",
+    "cmp-005",
+    "inf-001",
+    "inf-002",
+    "inf-003",
+    "inf-004",
+    "inf-005",
+    "inf-006",
+    "inf-011",
+    "inf-016",
+    "inf-018",
+    "man-001",
+    "man-003",
+    "man-005",
+    "man-007",
+    "fin-003",
+    "fin-004",
+    "geo-001"
+  ],
+  "summary": "Location concern: Different state for onsite role. Failed mandatory requirements: cmp-001, cmp-002, cmp-003, cmp-004, cmp-005, inf-001, inf-002, inf-003, inf-004, inf-005, inf-006, inf-011, inf-016, inf-018, man-001, man-003, man-005, man-007, fin-003, fin-004, geo-001",
+  "recommendation": {
+    "verdict": "GO_WITH_REMEDIATION",
+    "rationale": "Mandatory gate failed on 21 item(s), but each has a remediation path.",
+    "blockers": [
+      {
+        "demandItemId": "cmp-001",
+        "category": "compliance",
+        "rawText": "AIS 140 Type Approval Certificate (TAC) from ARAI/CIRT/iCAT/VRDE/CFMTTI/IIP/GARC",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "cmp-002",
+        "category": "compliance",
+        "rawText": "Conformity of Production (COP) annual testing",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "cmp-003",
+        "category": "compliance",
+        "rawText": "CERT-IN security certification for backend platform",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "cmp-004",
+        "category": "compliance",
+        "rawText": "SSL certificates across all endpoints",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "cmp-005",
+        "category": "compliance",
+        "rawText": "Survey of India map compliance (scale >=1:25000)",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "cmp-006",
+        "category": "compliance",
+        "rawText": "CMVR 125H enforcement workflow support",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "cmp-007",
+        "category": "compliance",
+        "rawText": "Nirbhaya Framework funding guidelines compliance",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-001",
+        "category": "infrastructure",
+        "rawText": "NIC Cloud hosting for Monitoring Centre backend",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-002",
+        "category": "infrastructure",
+        "rawText": "VAHAN database integration (device tagging, unique ID, fitness check)",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-003",
+        "category": "infrastructure",
+        "rawText": "ERSS (Dial-112) integration for emergency alert routing",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-004",
+        "category": "infrastructure",
+        "rawText": "AIS 140 compliant vehicle tracking software",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-005",
+        "category": "infrastructure",
+        "rawText": "Real-time GPS vehicle location tracking with map playback",
+        "criticality": "mandatory",
+        "score": 54
+      },
+      {
+        "demandItemId": "inf-006",
+        "category": "infrastructure",
+        "rawText": "Emergency panic button alert routing to ERSS plus MC",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-011",
+        "category": "infrastructure",
+        "rawText": "SMS gateway for emergency alert delivery",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-012",
+        "category": "infrastructure",
+        "rawText": "Cellular m2m telecom integration (SIM activation/validity/KYC)",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-013",
+        "category": "infrastructure",
+        "rawText": "Mobile application for field access",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-014",
+        "category": "infrastructure",
+        "rawText": "Web control tower dashboard",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-015",
+        "category": "infrastructure",
+        "rawText": "Online storage: 3 months all data + 2 years alerts + 2 years archive",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-016",
+        "category": "infrastructure",
+        "rawText": "Emergency-tagged data retention (never deleted)",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-017",
+        "category": "infrastructure",
+        "rawText": "Multi-stakeholder role-based access control (RTO, permit holder, VLT mfr, testing agency)",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-018",
+        "category": "infrastructure",
+        "rawText": "Data sharing API with MoRTH Dashboard",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-019",
+        "category": "infrastructure",
+        "rawText": "Physical MC equipment: 55-inch LED video wall 2x2 matrix, desktops, MFP, UPS, switch",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "inf-021",
+        "category": "infrastructure",
+        "rawText": "Reports: device install, uptime, alerts, speed violations, fleet summary",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "man-001",
+        "category": "manpower",
+        "rawText": "24x7 helpdesk operations (phone, email, web) for VLT mfrs, Transport Dept, permit holders",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "man-002",
+        "category": "manpower",
+        "rawText": "Telugu language support for AP helpdesk",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "man-003",
+        "category": "manpower",
+        "rawText": "Monitoring Centre 24x7 operations staff",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "man-004",
+        "category": "manpower",
+        "rawText": "Training delivery to Transport Dept officials (JTC, RTO, MVI, AMVI)",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "man-005",
+        "category": "manpower",
+        "rawText": "State PIU (Project Implementation Unit) with nodal officer",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "man-006",
+        "category": "manpower",
+        "rawText": "Project management capability (state PMC)",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "man-007",
+        "category": "manpower",
+        "rawText": "2-year O&M support team post-commissioning",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "fin-001",
+        "category": "financial",
+        "rawText": "Project capacity: 20.35 Crore INR (Category A state) delivery budget",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "fin-002",
+        "category": "financial",
+        "rawText": "Working capital to bridge 80/20 milestone cashflow under Nirbhaya release pattern",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "fin-003",
+        "category": "financial",
+        "rawText": "Performance Bank Guarantee capacity (3-10% of contract value)",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "fin-004",
+        "category": "financial",
+        "rawText": "Earnest Money Deposit (EMD) capability",
+        "criticality": "mandatory",
+        "score": 0
+      },
+      {
+        "demandItemId": "pp-001",
+        "category": "past_performance",
+        "rawText": "Prior Govt Monitoring Centre / VLT scheme delivery at state level",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "pp-002",
+        "category": "past_performance",
+        "rawText": "Public Service Vehicle (bus, taxi, school bus) fleet tracking experience",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "pp-003",
+        "category": "past_performance",
+        "rawText": "AIS 140 compliant device deployment history at scale",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "pp-005",
+        "category": "past_performance",
+        "rawText": "Fleet tracking scale proven: 5000+ devices deployed",
+        "criticality": "important",
+        "score": 0
+      },
+      {
+        "demandItemId": "geo-001",
+        "category": "geographic",
+        "rawText": "Andhra Pradesh / Hyderabad regional presence",
+        "criticality": "mandatory",
+        "score": 0
+      }
+    ],
+    "remediation": [
+      {
+        "demandItemId": "cmp-001",
+        "description": "Engage ARAI or iCAT for AIS 140 Type Approval certification cycle.",
+        "estimatedEffortWeeks": 12,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "cmp-002",
+        "description": "Annual COP testing cadence — engage certifying agency after TAC.",
+        "estimatedEffortWeeks": 4,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "cmp-003",
+        "description": "Engage CERT-IN empanelled auditor for backend assessment + remediation cycle.",
+        "estimatedEffortWeeks": 10,
+        "ownerHint": "Anurag Kotha"
+      },
+      {
+        "demandItemId": "cmp-004",
+        "description": "Procure wildcard SSL + enforce HTTPS; verify with external scan.",
+        "estimatedEffortWeeks": 1,
+        "ownerHint": "Anurag Kotha"
+      },
+      {
+        "demandItemId": "cmp-005",
+        "description": "Migrate to MapmyIndia or SoI-compliant tile source; verify Survey of India licensing.",
+        "estimatedEffortWeeks": 4,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "inf-001",
+        "description": "Port backend to NIC Cloud; engage NIC empanelment process.",
+        "estimatedEffortWeeks": 8,
+        "ownerHint": "Anurag Kotha"
+      },
+      {
+        "demandItemId": "inf-002",
+        "description": "Build VAHAN integration layer using NIC-published APIs; test against sandbox.",
+        "estimatedEffortWeeks": 6,
+        "ownerHint": "Anurag Kotha"
+      },
+      {
+        "demandItemId": "inf-003",
+        "description": "Engage AP Police / ERSS team; configure IP + SMS gateway per Gazette clauses (j)(k).",
+        "estimatedEffortWeeks": 4,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "inf-004",
+        "description": "Map existing Fleetronix tracking software to AIS 140 feature checklist; close gaps.",
+        "estimatedEffortWeeks": 4,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "inf-005",
+        "description": "Already in product (4.5 Lakh+ trips tracked); formalise AIS 140 feature-parity documentation.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "inf-006",
+        "description": "Extend panic routing to emit dual-destination (ERSS + Fleetronix Control Tower).",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "inf-011",
+        "description": "Procure/integrate SMS gateway with failover; configure for emergency dispatch.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "inf-012",
+        "description": "Already in product (cellular m2m); document SIM lifecycle + KYC path.",
+        "estimatedEffortWeeks": 1,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "inf-013",
+        "description": "Already in product (mobile app); customise for AP operations users.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "inf-014",
+        "description": "Already in product (Control Tower); rebrand / customise for AP Transport Dept.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "inf-015",
+        "description": "Configure storage tiers to 3mo online / 2yr alerts / 2yr archive per AIS 140.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Anurag Kotha"
+      },
+      {
+        "demandItemId": "inf-016",
+        "description": "Add emergency-tagged retention policy to storage tier; confirm 'never delete' flag.",
+        "estimatedEffortWeeks": 1,
+        "ownerHint": "Anurag Kotha"
+      },
+      {
+        "demandItemId": "inf-017",
+        "description": "Build multi-stakeholder RBAC layer (RTO / permit-holder / VLT-mfr / testing-agency).",
+        "estimatedEffortWeeks": 4,
+        "ownerHint": "Anurag Kotha"
+      },
+      {
+        "demandItemId": "inf-018",
+        "description": "Implement MoRTH Data Sharing API endpoints per AIS 140 spec.",
+        "estimatedEffortWeeks": 3,
+        "ownerHint": "Anurag Kotha"
+      },
+      {
+        "demandItemId": "inf-019",
+        "description": "Procure physical MC equipment (video wall, UPS, desktops) — AP-local AV vendor.",
+        "estimatedEffortWeeks": 4,
+        "ownerHint": "USSPPL ops"
+      },
+      {
+        "demandItemId": "inf-021",
+        "description": "Build Govt-style report pack (device install, uptime, alerts, fleet summary).",
+        "estimatedEffortWeeks": 3,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "man-001",
+        "description": "Stand up AP-dedicated 24x7 helpdesk with Telugu/Hindi/English coverage.",
+        "estimatedEffortWeeks": 6,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "man-002",
+        "description": "Telugu helpdesk covered by Hyderabad ops staff (native speakers).",
+        "estimatedEffortWeeks": 0,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "man-003",
+        "description": "Hire and train MC 24x7 operations staff (3 shifts).",
+        "estimatedEffortWeeks": 8,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "man-004",
+        "description": "Build training curriculum for Transport Dept / RTO officials.",
+        "estimatedEffortWeeks": 4,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "man-005",
+        "description": "Coordinate with AP Transport Dept on PIU + nodal officer appointment (state obligation).",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "man-006",
+        "description": "Engage state PMC or use National PMU (DIMTS) per scheme — commercial decision.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "man-007",
+        "description": "Allocate dedicated 2-year O&M squad within bid commercials.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "fin-001",
+        "description": "20.35 Cr project capacity — confirm USSPPL + Fleetronix combined capex/opex plan.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "USSPPL finance"
+      },
+      {
+        "demandItemId": "fin-002",
+        "description": "Model milestone-based cashflow against Nirbhaya 80/20 release pattern.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "USSPPL finance"
+      },
+      {
+        "demandItemId": "fin-003",
+        "description": "Secure PBG line from bank (3-10% of ~20.35 Cr ~= 60L-2Cr).",
+        "estimatedEffortWeeks": 3,
+        "ownerHint": "USSPPL finance"
+      },
+      {
+        "demandItemId": "fin-004",
+        "description": "Arrange EMD via bank FD or BG per tender requirement.",
+        "estimatedEffortWeeks": 2,
+        "ownerHint": "USSPPL finance"
+      },
+      {
+        "demandItemId": "pp-001",
+        "description": "Limited direct Govt MC reference; lead pitch on Fortune 500 scale + AP ports.",
+        "estimatedEffortWeeks": 0,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "pp-002",
+        "description": "Limited direct PSV reference; reposition cargo telematics as PSV-transferable stack.",
+        "estimatedEffortWeeks": 1,
+        "ownerHint": "Veena"
+      },
+      {
+        "demandItemId": "pp-003",
+        "description": "No AIS 140 device history today; pairs with TAC remediation above.",
+        "estimatedEffortWeeks": 0,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "pp-005",
+        "description": "Covered — 7,000+ devices deployed.",
+        "estimatedEffortWeeks": 0,
+        "ownerHint": "Anuradha"
+      },
+      {
+        "demandItemId": "geo-001",
+        "description": "Already covered — USSPPL Bowenpally + Fleetronix Gachibowli are in Hyderabad; establish AP branch presence (Vijayawada) within 60 days.",
+        "estimatedEffortWeeks": 8,
+        "ownerHint": "Veena + USSPPL ops"
+      }
+    ]
+  }
+}

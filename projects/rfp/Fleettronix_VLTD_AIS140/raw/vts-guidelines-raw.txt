@@ -1,0 +1,1553 @@
+=== PAGE 1 ===
+To,
+Speed Post/E-maiI
+No. RT-1601 1/117018-T
+Government of lndia
+Ministry of Road Transport & Highways
+Transport Section
+Transport Bhawan, 1, Parliament Street, New Dethi-110001
+1 ) The Principal Secretary(Transport)
+Commissioners of alI States/UTs.
+lf\anuary, zozo
+/ Secretary (Transport) and Transport
+Subject:Scheme for lmplementation of "Development, Customization,
+Deployment and Management of State-wise vehicle tracking platform
+for Safety & Enforcement as per AIS 140 Specifications ", in States /
+UTs under Nirbhaya Framework
+Sir/Madam,
+1. A copy of the scheme finalised by this Ministry for imptementation of the
+State-wise vehicle tracking ptatform for Safety &. Enforcement as per AIS
+140 Specifications", in States / UTs under Nirbhaya Framework is attached
+for your further necessary action.
+2. ln this connection it is brought out that Ministry of Road Transport &
+Highways, eartier issued a notification dated 28th November 2016 wherein
+Vehicle Location Tracking (VLT) Device and Emergency Buttons were
+mandated to be fitted in att public service vehictes (at[ four wheeled or
+higher, passenger carrying vehicLes) w.e.f. 01st April, 2018. This was re-
+examined by the Ministry, and it was decided to give exemption to atl
+public service vehicles which were registered up to 31st December 2018
+(otd vehictes) from the fitment of Vehicte Location Tracking Device and
+Emergency Buttons titl the time as notified by State/UT Governments in
+their respective States/UTs. Atl pubtic service vehicles registered on or
+after 01't January 2019 must be fitted with Vehicte Location Tracking
+Device and Emergency Buttons.
+3. Since very littLe progress coutd be achieved on setting up the Monitoring
+Centers, it was fett necessary to support the States under Nirbhaya
+Framework to set up Monitoring Centers at the eartiest so as to effectively
+implement the vehicte tracking system and ensure safe commute to the
+women and chitdren in pubtic passenger transport vehicles.
+4. The 37 States / UTs have been categorized into four categories, based on
+the number of vehictes and the geographical area for determination of
+maximum Project cost. The State wise maximum Project cost and funding
+structure is mentioned in scheme and witl be financed as per the Nirbhaya
+Fund Framework, in the fottowing ratio
+(i) 
+60% (Centre) :40% (State) for atl States (other than States with
+difficu tt terrain)
+(ii) 
+90% (Centre):10% (States) for States with difficutt terrains
+(iii) 100% financed by Centre for UTs
+.L
+G, 
+e-rt-
+
+=== PAGE 2 ===
+MoRTH wit[ set up a Project Management Unit (PMU) through DIMTS, to
+scrutinize State/UT apptications seeking funds under the Scheme, to
+coordinate between the stakeholders, provide technicaL support 'in
+respect of technical specifications, monitor imptementation of the
+Scheme and to review im ptementation / operation reports submitted by
+the States/UTs. A Dashboard witl be set up at MoRTH for the monitoring
+of Scheme. The State Governments/ UTs sha[[ appty in a Performa to seek
+assistance attached as per Annexure A with the scheme by 15th February
+2020 and witl atso appoint a singte point Noda[ Officer and a PIU for the
+project smooth imptementation of the project.
+The States/UTs sha[[ ensure that all the minimum features as we[[ as the
+guidetines listed in the scheme under Annexure B & C shall. be fottowed
+and imptemented so as to ensure the harmonization of implementation as
+well as the seamless tracking of the vehicte aL[ across the country.
+A copy of the draft MoU is atso attached with scheme which shatl be signed
+between the State/UT and MoRTH. Out of total Centre's share, 80% of the
+Centrat Government's share (after deducting pro-rata costs of national
+PMU, Dashboard to be set up in MoRTH and the cloud to be provided by
+NIC) witt be reteased to States/UTs on signing of MoU. Each State/UT wi[[
+setect its own lmptementation Agency for setting up of Monitoring
+Centers. The backend system of the Monitoring Centre wi[[ be hosted on
+NIC cloud. Balance 20% of the Centre's share witl be released after three
+months of successfuI operation of Monitoring Centre post commissioning
+by the States/UTs and submitting the utitization certificate for the eartier
+received share.
+Enct: -
+(i) Detaited Guidetines for Scheme.
+(ii)MoU between MoRTH and State/UT Government.
+Yours faithfutty,
+\---
+J..^-, 
+=r\rl
+(Sudip Dutta)
+Under Secretary to the Government of lndia
+Tete:01 1-23357125
+Copy to:
+. The Under Secretary, Nirbhaya ce[t, Ministry of Women and Chitd
+Devevetopment, 3rd Floor, Jeevan Vihar Building, Sansad Marg, New Dethi.
+5.
+6.
+7.
+
+=== PAGE 3 ===
+No. RT-1601 11112O18-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 110001
+out"a, tn"l 5 \anuary, 2o2o
+Subject: Scheme for lmplementation of "Development, Customization, Deployment and
+Management of State-wise vehicle tracking platform for Safety & Enforcement as per
+AIS 140 Specifications", in States / UTs under Nirbhaya Framework,
+1. 
+lntroduction
+1.1 . Ministry of Road Transport & Highways, Government of lndia had issued a
+notification on 28rh November 2016 wherein Vehicle Location Tracking (VLT) Device
+and Emergency Buttons were mandated to be fitted in att pubtic service vehictes
+(att four wheeted or higher, passenger carrying vehictes) w.e.f. 1't Aprit, 2018.
+1.7. ln order to standardize the specification of VLT and Emergency button across the
+country, AIS 140 standards were reteased by ARAI for Ministry of Road Transport &
+Highway (MoRTH). The standard mainty includes the specifications for Vehicle
+Location Tracking device (VLTD) and vehicte tracking Backend system. The vehicle
+location tracking device and the emergency button must be fitted by the
+manufacturers or their respective dealers or operators as the case may be in
+accordance with the AIS 140, as amended from time to time, titl corresponding BIS
+Standards are notified under the Bureau of lndian Standards Act, 1986.
+1.3.
+The States were required to set up Command and Control Centre's (Monitoring
+Centers) as per MoRTH notification and AIS-140 to provide interface to various
+stakehotders etc. as per code of practice of AIS 140.
+1.4. Since the States could not set up the Monitoring Centers, the effective
+imptementation of the vehicte tracking system coutd not be done. Though a few
+states for imptementation of VLT Devices and Emergency Buttons are using BSNL AIS
+140 Comptiant Common Layer backend. lt was therefore fett necessary to support
+the States under Nirbhaya Framework to set up Monitoring Centers at the eartiest
+so as to effectivety imptement the vehicte tracking system and ensure safe commute
+to the women and chitdren in pubtic passenger transport vehictes.
+1.5. The Monitoring Centers jn the States shall be used to provide interface to various
+stakehotders such as State emergency resPonse center, the transport department
+or Regional Transport Offices, MoRTH and its designated agency, law enforcement
+agency, VLT device manufacturers and their franchisees, etc. The Monitoring
+Centres shal[ receive data from the VLT devices in the vehictes and process the
+same. The Monitoring Centre shat[ atso process the aterts specified in AIS 140
+specification.
+1.6. The Ministry therefore has decided to support the States/UTs to imptement the
+project by providing funds under the Nirbhaya Framework and woutd tike to take
+onboard atl the States/UTs to imptement the same effectivety.
+J..,---r r 9-\la
+Page 1 of 17
+
+=== PAGE 4 ===
+No. RT-1601 11112018-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan, 1 , Sansad Marg, New Delhi - I 10001
+2. 
+Objectives
+2.1. Safety of women and girt chitdren is a prime concern during their travel in pubtic
+passenger transport vehictes [ike cabs, taxis, pubtic buses etc. The proposed system
+envisages to enhance the safety of the women and the gir[ chitdren by equipping att
+the pubtic passenger transport vehictes with location tracking device and
+emergency buttons for raising an atert in case of emergency.
+2.7. Monitoring Centre shatI be setup in each State I UT for monitoring the aterts and
+coordinating with State ERSS for responding to distress catts.
+3. 
+System Overview
+3.1. The proposed Vehicle Tracking System consists of a Vehicte Location Tracking (VLT)
+device, with Emergency buttons, meeting the specifications of AIS-140, mounted in
+the vehicle, which witt send the vehicte location, heatth status, aterts and other
+data to the Monitoring center at a specified periodicity. A Standard Operating
+procedure (SoP) shatt be defined by State/UT for handling emergency aterts at the
+Monitoring Centre. The Transport Department officiats witt be able to access the
+system and monitor the aterts at the Monitoring Centre. The actionabte aterts witl
+be filtered and handted as per the Standard Operating Procedure (SoP) formutated
+by State/ UT.
+3.2. The system witl be a web-based system so that the officiats concerned witt be abte
+to use the system on their desktop computers. For states equipped with futty
+functional ERSS, the VLT device shall be configured to send data to Monitoring
+Centre and to the ERSS of the State. However, for states equipped with only
+partiatty functionat ERSS, the VLT device wilt be configured to send emergency
+button press atert and related data to Monitoring Centre. The alert witt be handled
+by the monitoring officiat and forwarded to the concerned aid agency or potice
+manuatty.
+4. 
+lmptementationMechanism
+4.1. The imptementation of CMVR 125H is the responsibitity of the State Government.
+However, being a matter of safety of women and children, Ministry of Road
+Transport and Highways, Govt. of India has decided to support the state government
+for the imptementation of CMVR 125H by providing financial support under Nirbhaya
+fund managed by Ministry of Women & Chitd Devetopment (MWCD). The funding
+pattern of this project shall be as per the Nirbhaya funding guidetines. The
+contribution of MoRTH would remain in the specified proportion as per Nirbhaya
+Framework and in no case exceed the amounts spett out in the para 5.5 of this
+Scheme.
+Centre (Command and Control Centre or
+AIS-140. The states may appoint an
+Page 2 of 17
+L-
+e*e,
+4.7. The State have to setup Monitoring
+backend system) in comptiance to
+C,
+
+=== PAGE 5 ===
+No. RT-1601 11112O18-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 11O001
+lmptementation Agency to design, develop and deploy a Monitoring Centre in
+comptiance to AIS-140.
+4.3. The Centre has decided to support State/UTs in setting up the Monitoring Centre
+through Nirbhaya framework by providing financial assistance as per the Scheme.
+4.4. Detiverabtes, responsibitities, mitestones and state contributions are provided in
+subsequent paragraphs.
+4.5. NIC ctoud shat[ be used for hosting the backend system of Monitoring Centre. The
+minimum configuration for the Monitoring Centre wit[ be as listed in Annexure B.
+Over and above the minimum configuration, the States/UTs can opt for additionat
+features.
+4.6. Based on the number of vehictes covered by the notification and the geographicat
+area, the 37 States/UTs have been categorized into 4 categories. (Refer section 6.5
+of this document).
+4.7. Tilt the time the states set up the Monitoring Centres under this Scheme, they shatt
+ensure the compliance of CMVR125H for vehictes registered after 1't Jan 2019
+through VAHAN/ respective state vehicle registration system using any backend
+system as per MoRTH SO No. 5453 date 25 October 2018..
+4.8. The states shatt notify the timetines for imptementation of VLT device instattation
+with respect to the vehictes registered prior to 1't Jan 2019. The passenger transport
+vehicte owners shall have the responsibitity to purchase the vehicte tracking device
+and emergency button(s) and get them instatled from any of the type approved VLT
+device vendors.
+4-9. The State/uT witl enforce fitment/functional status of device at the time of
+registration/ permit issuance/ renewa[ / fitness check of the vehicle in VAHAN or
+the respective state vehicte registration/ permit system
+4.10. For ensuring proper fitment of VLTD in vehictes, the VLT manufacturer shatt enter
+the Unique ldentification number in VAHAN database for the purposes of tinking the
+VLT device to the specific pubtic service vehicte, in case of retro-fitment in otd
+vehicles. ln case of new vehictes where the VLT device is instatled by the vehicte
+manufacturer, then the above process shatt be undertaken by the vehicte
+manufacturer/ or their authorized agency.
+4.11. The Monitoring Centre set up by States/UTs shalt provide access to various
+stakehotders / systems such as their transport department/RTO officials, device
+supptiers, testing agencies, permit hotders, VAHAN & MoRTH. The States/UTs witt
+ensure that the Monitoring Centre are mandatori[y linked to States/ UTs' ERSS/other
+emergency response systems.
+L
+.ff-,
+Page 3 of 17
+
+=== PAGE 6 ===
+No. RT-1601 11117O18-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 11000'l
+4.12. The Monitoring Centres witl need to meet the minimum features listed in Annexure
+B. The responsibility matrix of the MoRTH/State/NtC (VAHAN) are also detailed in
+Annexure B.
+4.13. A Dashboard witt be set up at MoRTH for the monitoring of Scheme. The State/UT's
+Monitoring Centres witl share data with MORTH Dashboard as defined in AIS 140 or
+specified by MoRTH from time to time, for the purpose of monitoring of the Scheme.
+4.14. MoRTH wit[ set up a National Project Management Unit (PMU) to scrutinize State/UT
+apptications seeking funds under the Scheme, to coordinate between the
+stakehotders, monitor imptementation of the Scheme and to review
+imptementation /operation reports submitted by the States/UTs.
+5, 
+Sources of finance for the Scheme and Total Cost of the Project
+5.1. The Government of lndia has set up Nirbhaya Fund which is being administered by
+Department of Economic Affairs, Ministry of Finance. The fund is mandated to be
+utitized for projects retated to women safety and security. The instant project shall
+be financed from Nirbhaya Fund
+5.7. Total cost sha[ be shared between Centre Government and States/UTs in the ratio
+as mentioned in Nirbhaya framework guidetines.
+5.3. The Project cost to be funded by MoRTH under this Scheme will include costs
+towards the backend Software, Monitoring Centre equipment, space for setting up
+the Monitoring Centre, training, and hetpdesk support for vendors and department
+officiats, cloud service, map services, State/ UT's own manpower to be engaged for
+Monitoring Centre, state-tevel project management, and national PMU set up by
+MoRTH. Operations & Maintenance (O&M) charges for two years fotlowing the
+commissioning of the system (refer section 8) wi[[ also be part of the funding
+Scheme.
+5.4. State specific requirements in addition to the AIS-140 standards can be taken up as
+part of the project cost as per the requirement of the States/UTs.
+5.5. The 37 States / UTs have been categorized into four categories, based on the
+number of vehictes and the geographical area for determination of estimated
+Project cost. The State wise estimated Project cost and funding structure is
+mentioned in the table below:
+h, D)'q,
+Page 4 of 17
+
+=== PAGE 7 ===
+No. RT-16011/1 /2018-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan, 1 , Sansad Marg, New Delhi - 1 .l0OO1
+Table 1: Cost structure and Centre and States / UTs share
+Name of
+State / UT
+State
+/ur
+Sharing
+Formula
+(Centre
+: State)
+Cate-
+gory
+Estimated
+Project
+Cost (lNR
+Crores)
+Centre's
+Share
+(Maximum)
+(rNR
+Crores)
+Amount to be
+retained from
+Centre's
+Share (lNR
+Crores)
+State's
+Sha re
+(rNR
+Crores)
+1
+2
+3
+4
+5
+6
+7
+8
+Maharashtra
+5
+60:40
+20.35
+12.21
+4.97
+8.14
+Tamit Nadu
+s
+60:40
+20.35
+12.21
+4.97
+8.14
+Gujarat
+5
+60:40
+20.3 5
+12.21
+4.97
+8. 14
+Kerata
+S
+60:40
+20.3 5
+12.2'l
+4.97
+8.14
+Karnataka
+s
+60:40
+20.3 5
+12.21
+4.97
+8.14
+Andhra
+Pradesh
+s
+60:40
+20.35
+12.21
+4.97
+8.14
+West BengaI
+s
+60:40
+B
+15.40
+9.24
+4.00
+6.16
+Ha rya na
+S
+60:40
+B
+1 5.40
+9.24
+4.00
+6.16
+Tetangana
+S
+60:40
+B
+1 5.40
+9.24
+4.00
+6.16
+Rajasthan
+5
+60:40
+B
+15.40
+9.24
+4.00
+b. tb
+Madhya
+Pradesh
+5
+60:40
+B
+1 5.40
+9.24
+4.00
+6.16
+Odisha
+s
+60'.40
+B
+1 5.40
+9.24
+4.00
+6.16
+Biha r
+s
+60:40
+B
+15.40
+9.24
+4.00
+6.16
+Assam
+s
+90:10
+B
+15.40
+13.86
+4.00
+1 .54
+Punjab
+S
+60:40
+B
+15.40
+9.24
+4.00
+rr. I t)
+Uttar
+Pradesh
+s
+60:40
+B
+1 5.40
+9.24
+4.00
+6.16
+Jharkhand
+s
+60:40
+B
+15.40
+9.74
+4.00
+6.16
+Chhattisgarh
+S
+60:40
+B
+15.40
+9.24
+4.00
+b. tb
+Dethi
+U
+100:00
+C
+'t0.40
+10.40
+2.49
+0.00
+Jammu &
+Kashmir
+U
+100:00
+C
+1 0.40
+1 0.40
+2.49
+0.00
+HimachaI
+Pradesh
+5
+90:10
+c
+'1 0.40
+9.36
+2.49
+1 .O4
+NagaLand
+5
+90:10
+c
+10.40
+9.36
+2.49
+1 .04
+Meghataya
+s
+90:'10
+C
+10_40
+9.36
+2.49
+1 .04
+Tripura
+S
+90: '1 0
+c
+10.40
+9.36
+2.49
+1 .04
+Manipur
+s
+90:'10
+c
+10.40
+9.36
+2.49
+1 .04
+Mizoram
+S
+90: 10
+c
+10.40
+9.36
+2.49
+1 .04
+Sikkim
+S
+90: '1 0
+c
+10.40
+9.36
+2.49
+1 .04
+Arunachat
+Pradesh
+S
+90:10
+c
+10.40
+9.36
+2.49
+1 .04
+Uttarakhand
+s
+60:40
+c
+10.40
+9.36
+2.49
+1 .O4
+Goa
+S
+60:40
+C
+10.40
+6.24
+2.49
+4.16
+Pud uche rry
+U
+100:00
+D
+4.60
+4.60
+1 .35
+0.00
+\-- 
+. 
+Page 5 of 17
+J;' 
+a*a'
+
+=== PAGE 8 ===
+No. RT-1601 11112O18-T
+Government of lndia
+Ministry of Road Transport and Highways
+(TransPort Division)
+Transport Bhavan,'1 , Sansad Marg, New Delhi -'l 10001
+Name of
+State / UT
+State
+I U"l
+Sharing
+Formuta
+(Centre
+: State)
+Cate-
+gory
+Estimated
+Project
+Cost (lNR
+Crores)
+Centre's
+Share
+(Maximum)
+(rNR
+Crores)
+Amount to be
+retained from
+Centre's
+Share (lNR
+Crores)
+State's
+Share
+(rNR
+Crores)
+1
+2
+3
+4
+5
+6
+7
+8
+Chandigarh
+U
+'1 00:00
+D
+4.60
+4.60
+1.35
+0.00
+Dadra &
+Nagar Haveli
+U
+100:00
+D
+4.60
+4.60
+1.35
+0.00
+Andaman &
+Nicobar
+lslands
+U
+100:00
+D
+4.60
+4.60
+1.35
+0.00
+Daman & Diu
+U
+1 00:00
+D
+4.60
+4.60
+1.35
+0.00
+Lakshadweep
+U
+100:00
+D
+4.60
+4.60
+1.35
+0.00
+Ladakh I 
+U
+100:00
+D
+4.60
+4.60
+1.35
+0.00
+TOTAL (5chenre Value)
+46 3.90
+332.24
+117.15
+'131.66
+5.6. The Central Government shatt pay the percentage of the actual project cost as
+indicated in cotumn 3 in the above tabte subject to maximum centre's share as
+indicated in column 5 above.
+5,7. A Dashboard witt be set up by DIMTS Ltd. at MoRTH for the scheme at the cost of
+Rs. '1.3 crores ptus GST which witt be integrated with data from State/UT's
+Monitoring Centres. This amount witt be withhetd by MORTH atong with the National
+PMU cost and cost of NIC Ctoud services. The NIC Ctoud charges to be withhetd by
+MoRTH for different categories of States/UTs witl be as under:
+Category of
+State/UT
+Charges towards NIC
+Cloud (lNR Crores)
+3.75
+B
+3.04
+c
+1 .87
+D
+1 .04
+5.8. Total amount to be retained by MoRTH towards NIC Ctoud, National PMU and
+Dashboard shatl be as mentioned in cotumn 7 above. The funds to the State/UT witt
+be released after deducting these amounts proportionatety from State/UT
+payments.
+6. 
+Procedure for seeking support for implementation of the Scheme
+6.1. The State Governments/ UTs shatl apply in a Performa as prescribed by the Centrat
+Government to seek assistance (Annexure A) atong with a Project Note. The
+detaited information with respect to concerned State/UT witl have to be provided
+as per the retevant columns of the proforma attached with the Scheme as per
+Annexure A. The Project Note shatt inctude the fottowing:
+l. -:-.' a--v
+Page 6 of 17
+
+=== PAGE 9 ===
+No. RT-'1601 1 I 1 t2O18-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 110001
+. 
+Approach for setting up the monitoring centre
+. 
+Mechanism adopted currentty for compliance of CMVR 125 H
+. 
+Ptans for enforcing CMVR 125 H for vehictes registered prior to 0'1si Jan. 2019
+. 
+Estimated project cost and imptementation timeline
+For seeking funds under the Scheme, the State Governments/ UTs shall apply by
+15th February 2020,
+6.2. The State/UTs government witt appoint a singte point Nodat Officer and a PIU for
+the project imptementation. The State/UT may atso appoint a PMC to assist it in
+imptementation of the project. The States/ UTs can appoint their own PMC or can
+use the National PMU agency for providing State level PMC services however the
+cost of the PMC at the State/UT [eve[ shalt be borne by the State/UT
+6.3. The State/UT wit[ also provide an undertaking for the avaitabitity of required size
+furnished space for Monitoring Centre as we[[ as the etectricity and air conditioning.
+6.4. The applications received from the States/UTs will be scrutinized by MoRTH through
+its PMU. Once, the apptication of the State/UT is approved by MoRTH, the State/UT
+shall sign an MoU with MoRTH.
+7 . 
+Payment / lmplementation Milestones
+The payment by MoRTH of its share of project cost after retaining amount as specified
+in cotumn 7 of Tabte 1 and imptementation milestones for the implementation of the
+project witt be as fouows:
+St. No.
+Deliverables
+Payment (%)
+Timeline
+1
+Signing of MoU (MoRTH &
+State/UT)
+80%
+T
+days
+*15
+Z.
+Commissioning of the Monitoring
+Centre by the State/UT
+T+ 180 days
+(Latest by 31
+December 2020)
+3
+Three months of successful
+operation of Monitoring Centre
+post commissioning
+z0%
+3 months after
+commissionjng of
+Monitoring Centre
+Note: T witt be date of Sanction letter issued by MoRTH for funding under the Scheme.
+Setting up of a PMU
+MoRTH witt set up a National Project Management Unit (PMU) through DIMTS Ltd. to
+scrutinize State/UT apptications seeking funds under the Scheme, to coordinate
+between the stakehotders, monitor imptementation of the project and to verify
+imptementation/operation reports submitted by the State/UT.
+8.
+8.1
+,tL--
+J.--n' ed.r',
+Page 7 of 17
+
+=== PAGE 10 ===
+No. RT-'160't 1 I 1 12018-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 110001
+8.2. The PMU witl be set up immediatety and wi[[ be for a period of three years. The
+tenure of the PMU can be further increased, if required.
+8.3. DIMTS Ltd. as the Nationat PMU for the Scheme will undertake the fotlowing
+activities:
+. Scrutinize apptications by States/UTs for funding under the Scheme
+. Monitor the imptementation of the Scheme
+. Coordinate among various stakehotders including States/UTs, monitoring
+centre, NlC, etc.
+. Check/verify various imptementation /operation reports submitted by
+States/ UTs.
+. Reconcite payments made by MoRTH to States/UTs against utitization
+certificates submitted by states/ uTs.
+. Assist MoRTH in resotving queries/issues of States/UTs regarding compuance to
+AIS-1401 notifications issued by MoRTH/ other issues retated to implementation
+. Undertake periodic (quarterty) review of imptementation of the Scheme across
+various States/UTs and give suggestions for improvement in the Scheme/its
+imptementation
+. Undertake periodic visits to States/UTs (once per mitestone) implementing the
+project under the Scheme to assess the progress at the ground levet.
+8.4. The PMU witl comprise 3 fult-time resources (one senior resource with 7 years ptus
+experience and two resources with 3 year ptus experience) deployed by DIMTS at
+MoRTH. ln addition to the futt-time resources, PMU witl atso be supported by other
+subject matter experts provided by DIMTS for PMU.
+8.5. The fees of PMU witt be 2% of the Scheme vatue ptus GST, and woutd be part of the
+Scheme. The fee will be payabte to PMU as under:
+. 
+1% of the total Scheme value payabte on hatf yearty basis in advance in equal
+instaument over a period of 36 months from the date of deptoyment of PMU;
+and
+. Batance 1% of the project value payabte atong with retease of mitestone [inked
+fee to the states concerned for the respective projects, to be paid quarterty.
+9. 
+Capacity Buitding and Hand holding support
+9.1. Key stakeholders like Transport department and vendors woutd require extensive
+training for getting accustomed to the system. Depending on the roles assigned to
+the users of the system, the training requirements may vary. The States/UTS witt
+conduct Workshops and Training sessions to department officiats. The training witt
+be provided at Transport Department Headquarters or at the venue arranged by the
+States / UTs.
+J;,
+Page 8 of 17
+
+=== PAGE 11 ===
+No. RT-1601 11112018-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 110001
+9.2. The States for effective project management can appoint a State tevet PMC to guide
+them through the process and project period. The states/ UTs can appoint their
+own PMC or can use the Nationat PMU agency for providing State level PMC services
+at Manpower cost as per NICSI rates.
+10. ,rlilestones & Payment Terms
+. The payments from MoRTH shatt be reteased to States/UTs after verification of
+milestones/deliverabtes by the PMU set up by the MoRTH.
+. The initiat payment shatt be reteased by MoRTH as advance. Subsequent
+payment shatt be reteased against the achieved milestone after review by
+MoRTH PMu.
+. States shatt submit imptementation / operation report to MoRTH on achieving a
+milestone. MoRTH shatt retease its share of payment after receipt of the
+requisite imptementation / operation report from the concerned State/UT.
+o The imptementation /operation reports from States/uTs shalt be checked and
+reviewed by MoRTH PMU before retease of payments.
+o The State/UT shau ensure the commissioning of the Monitoring Centre by
+31't December 2020.
+. The payments reteased shatt be reconciled against the Utitization Certificate
+(uc).
+. 
+Second payment shatt be released after three months of successful operation of
+the Monitoring Centre post its commissioning.
+. The National PMU Costs and cost of Dashboard at MORTH witl be retained by
+MORTH and the funds to States/UTs witl be reteased after adjusting the
+proportionate amounts.
+11. Recurring cost after the project period
+The States/UTs shatt budget for entire O&M costs of the project after initial two
+years. This cost shatt be borne by the State/UT for maintaining the system, inctuding
+the fotlowing activities:
+o Cloud services
+. Connectivity & Maintenance charges for Monitoring Centre
+. Charges for operations and maintaining the hetp desk facitity
+. Annual Maintenance charges for the apptication software and hardware
+. Annual charges for Map services/ Data.
+IJ,
+Page 9 of 17
+
+=== PAGE 12 ===
+No. RT-1 601'll1 12O18'r
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 'l 10001
+Annexure A
+Proforma for seeking assistance form Ministry of Road Transport & Highways (MoRTH)
+under the Scheme "Development, customization, deployment and management of State-
+wise vehicle tracking ptatform for Safety & Enforcement with AIS 140 Specifications"
+through lA under Nirbhaya framework
+1.
+Name of the State/UT
+2.
+Number of Districts
+3.
+Number of RTO & SRTO
+4.
+Number of Motor Vehictes Dept.
+officiats
+(JTC, RTO, MVI, AMVI)
+5.
+Vehicte Statistics
+(This Scheme covers pubtic
+transport vehic[es onty)
+Total No. of Vehictes
+fatting under the
+purview of CMVR
+125H
+Vehicle Type
+Approximate Number
+Buses
+Taxis
+Education lnstitution
+Buses
+(ErB)
+Others 
+(Please
+specify)
+Total
+6.
+iionitoring Centre, Helpdesk Details
+Address of Location, ldentified
+Area (approx. 800 Sq.ft. )
+Facitities Available (Furnished/
+Unf urnished), Air-conditioned
+Etectric Power Avaitabitity
+(Yes/No)
+7.
+Vehicle Registration & Permit Details
+Existing Application (VAHAN /
+Others)
+. lf others Specify Detai[s such
+as if the Application is Web
+based
+. Whether apptication hosted
+at State Data Centre
+. Name of Product vendor
+. Contact person (Vendor)
+rr 
+\--
+trr.-,t' #tU4
+Page 10 of 17
+
+=== PAGE 13 ===
+No. RT-1601 1/112O18-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 110001
+. Contact No (Vendor)
+Migration Ptan to VAHAN (Not
+ptanned / Ongoing / Compteted)
+d.
+Emergency Response Support System Details (ERSS)
+. Status of ERSS (Functional /
+Planned)
+. ERSS System Detaits
+lf others specify detaits
+Name of Product vendor
+Contact person (Vendor)
+Contact No (Vendor)
+ERSS URL/ IP
+9.
+State Nodal Officer Details
+Name
+Designation
+Officiat Address
+Contact Number
+Emait ld
+10.
+Project Note
+. 
+Approach for setting up the Monitoring Centre
+. 
+Mechanism adopted currentty and interim for comptiance of CMVR 125 H
+. 
+Ptans for enforcing CMVR 125 H for vehicles registered prior to 01't Jan. 2019
+. 
+Estimated project cost and imptementation timeline
+Undertakine
+The State / UT of
+wishes to be a part of this national
+Scheme and agrees to fulty compty with the guidetines mentioned in this document.
+State/UT also undertakes that the state contribution shatl be made as
+per the mitestones specified in the Scheme and support mentioned under the rotes &
+responsibilities covered in the Scheme shall be extended to atl stakeholders for the successfut
+imptementation of this project.
+Name & Designation of Designated Officer
+Sign
+Date
+r 
+\ 
+\-- 
+' 
+Page 11 of 17
+t,-.,,-rt =#4'
+
+=== PAGE 14 ===
+No. RT-'l 601 1 l'l 12018-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan, 1 , Sansad AAarg, New Delhi - 1 10001
+Annexure B
+1. Minimum Features of A{onitoring Centres
+The States/UTs wi[[ set up monitoring centres which wit[ be comptiant to AIS-140
+standard and MoRTH guidetine issued in this regards. The monitoring centres witl have
+fotlowing features at the minimum:
+o Vehicte Tracking and monitoring Software as per AIS-140
+. Hosting of apptication on NIC Ctoud
+. Map service/ Data as per AIS-140.
+. 
+Protocol integration of att type approved VLT Manufactures for the State/UTs
+. m2m/ telecom service provider integration for SIM activation/vatidity support
+for the period as per MoRTH guidetines
+. Mobite apptication
+. On[ine storage for comptete data for three months, ontine storage of aterts data
+for two years and archive storage of all data for minimum two years.
+. 
+sMS gateway / packages
+. Connectivity to Monitoring Centre
+. Hetpdesk supporting tetephone catt, e-maits and web comptaint for VLT
+manufacturer/Transport Department/Permit Hotders, etc.
+. Minimum Equipment in Monitoring Centre
+o Video watl (one set of 55 inches LED, 2x2 matrix)
+o Desktop computers with operating system, Office suite
+o Multi-functionat printer
+o UPS
+o Switch
+o Connectivity
+. Manpower resources for Monitoring Centre Operations & Hetp desk support
+. Testing and certification as per AIS-140
+. 
+SSL & Security (CERT-lN) Certificates
+. 
+Data Sharing API with MoRTH
+2. Features of the System
+The Monitoring Centre wi[[ meet all the requirements as set out in AIS-140 /
+equivatent BIS standard and as per MoRTH notification issued from time to time. The
+monitoring centre wi[[ have the fottowing minimum features.
+\_.
+-(;,*
+Page 12 of 17
+
+=== PAGE 15 ===
+No. RT-1 60'1 1 11 12O18'T
+Government of lndia
+Ministry of Road Transport and Highways
+(TransPort Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 'l 1O001
+2.1 . Real-time Tracking
+The reat-time tracking witt enable users to track location of vehictes on the map, get
+status information about vehicte, and for a ptay back option on the map to view the
+path travetted by a vehicte eartier as per the requirements Usted in AIS-140'
+2.2. Secure Communication and Device iianagement
+The monitoring centre witI be integrated with att VLT device vendors' protocots as
+approved for AIS-140 by test agencies to enabting secure, authenticated connection
+between VLT device and backend inctuding m2m/ tetecom service provider
+integration etc. The monitorjng centre shatl enable device communication for
+commands, alerts as set-out in AIS-140 for the State/UT.
+2.3. lnstallation, Registration, Activation and Service Process for VLT Device
+The monitoring centre shatI create the software witt atl facitities as mentioned in
+MoRTH guidetines/ AlS140 and enabte atl requirements mentioned tike SIM vatidity,
+Activation SMS, Heatth check, VAHAN integration for activation status update
+required for registration, instattation, activation and heatth check of VLT devices.
+Providing m2m/ telecom service provider integration for SIM activation/vatidity/ KYC
+support for the period as per MoRTH guidetines.
+2.4. Web lnterface to VLT vendors for tagging
+Tagging is the process of instatting the VLT device in a vehicle and associating it with
+the software system. The monitoring centre shatl fottow the whote process as set-out
+in the MORTH guidelines and AIS'140. The initiat tagging of the vehicte witt be done by
+the Vehicte manufacturer or dealer or VLT manufacturer or their registered agencies
+on VAHAN. The software wi[[ provide necessary interface to the above users for this
+operation in integration with VAHAN / State vehicte registration system' The VLT
+device after tagging witt be activated as per process set out in AIS-140 and as per
+MoRTH guidetines issued from time to time, on the backend system as Part of
+Monitoring Centre. The tagged vehicte witt be verified and approved by the concerned
+RTO at the time of fitness check or as decided by the department in VAHAN/state
+vehictes registration ptatform.
+2.5. Monitoring Centre
+The Monitoring Centre witt enable reat-time monitoring, quick response to alerts and
+enforcement assistance.
+2.6. Map Services
+The real-time location of the vehicles witt be depicted on the GIS map of the
+State/UT. The monitoring centre wit[ be responsibte for providing the map platform
+as wetl as the required map data for the requirement of the State/UT. The map
+ptatform shoutd be in comPliance to Survey of lndia guidetines for Maps.
+The various functionatities of the map Platform will be:
+\_
+2*42
+t2,
+Page 13 of 17
+
+=== PAGE 16 ===
+No. RT-1601 11112018-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan, 1 , Sansad Marg, New Delhi - I 10001
+r Real-time Plotting: The reat-time location of a singte/muttipte vehicte(s) shatt
+be ptotted and updated on the map. Ctustered view of vehictes shall be provided
+to view large number of vehictes.
+. Map Data / Points of lnterest (POl): The map data/service shatl provide detaited
+point of interest for city/ roads, inctuding schoots, hospitat, potice station,
+Bank, ATM etc. at a scale better than 1:25000 or as required by State/UT. User
+(admin levet) witI be given options to add/edit/detete points of interest. POI
+wi[[ be shown to users in the map view.
+. Geo-fencing: Geo-fence is a predefined set of boundaries marked on a map layer
+to mark specific zones such as school zone, hospital zone etc. User (admin tevet)
+wit[ be given options to add/edit/detete geo-fence.
+. Map Eased Tools: Different map-based toots tike Zoom and Pan witl be
+integrated in the Monitoring Centre screens.
+. Track & Trip View: The tracking screen provides users with options to track
+ontine the location of vehicles on the map, disptay status view information about
+vehicte, and disptay Trip View information on the route travetted by a Vehicte
+eartier on the map. The online option disptays the current location of the Vehicte
+and Trip View disptays the route taken by the Vehicte eartier. Both Ontine and
+Trip View can be viewed as Map View.
+. Multi filter options: User will be given options to track vehicles by their
+category, speed, tocation, Vehicte number, etc.
+2.7. Alerts & Messages
+The system sha[[ generate various alerts tike over-speeding, restricted-area viotation,
+route violation (if route detaits are avaitabte) etc. as per the AIS-140 standard. Based
+on these alerts, Transport Department can respond quickty and take necessary
+actions. The various aterts to be generated are:
+. Emergency Alerts: This atert is raised when a passenger or crew in a vehicte
+presses the emergency button in need of immediate aid or assistance. This alert
+witt be routed to the emergency response system directty as wetl to the
+Monitoring Centre. Aterts witt be hightighted in the Monitoring Centre. This is
+the highest priority atert.
+. Speed violation alerts: ldentifies the vehicte moving at a speed greater than
+the attowed speed [imit and to passes the vehicle information to the nearest
+enforcement unit.
+. Geo-fence alerts: The apptication provides facility to geo-fence an area on the
+map. Geo-fence can be either done based on an area or based on a specific
+Point of lnterest. The route travetted by the vehicte can atso be geo-fenced to
+receive aterts on any route viotatjons from the actual route.
+. Geo-fence Pol (Point)
+Page 14 of 17
+
+=== PAGE 17 ===
+No. RT-16011/1 12O18-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Dethi - 1 1O0O1
+. Geo-fence Ptace (Area)
+. Geo-fence Route
+. Geo-fence Aterts can be configured to track vehicles entering the geo-fence
+area, going out of the geo-fence area or for both the instances.
+. VLT device tampering alerts: VLT device wilt send information to the server if
+its power cable gets disconnected or if it gets tampered. Apptication witI record
+an alert after verifying the information.
+2.8. Reports
+The system shau provide the Transport Department with options for generating
+various reports [ike device instatlation report, device uptime report, number and type
+of alerts, route report, distance report, speed violation report, fteet summary report
+and alert reports.
+2.9. lntegration with VAHAN, ERSS and Legacy Systems
+VAHAN software of Motor Vehictes Department is used for management of the services
+provided by Transport Department to the pubtic. The system is integrated with VAHAN
+and can be integrated with other legacy systems running in the state for getting
+vehicte registration detaits. The States/UTs witl ensure that the Monitoring Centre
+are mandatorily tinked to States/UTs' ERSS/other emergency response systems.
+2.10. Data Archival
+The monitoring centre shatl provision ontine storage for comptete data for three
+months, online storage of aterts data for two years and archive storage of atl data for
+a minimum period of two years. The emergency tagged data, which might be required
+for evidence purposes, sha[[ not be deleted from the system. The data identified as
+otd based on an archival policy can be moved to and stored in a separate storage
+device for long-term retention as per State/ UT poticy. The monitoring centre shoutd
+provision the storage for the State/UT at the Monitoring Centre or any other place
+identified by State/UT for retention by the State.
+2.11. Access to Stakeholder of the System
+The monitoring centre shatl provide access to alt the stakehotders as per AIS-140 and
+MoRTH Guidetines or as decided by the State/UT through a rote-based access
+mechanism.
+2.12. Health Monitoring of VLT device and Emergency buttons
+To ensure that the VLT device and Panic buttons serve in need and are in proper
+working condition, the health monitoring of both VLT device and Emergency buttons
+are performed periodicatly. The system shatl be so designed that the Emergency
+button cannot be tampered with in any way, as any attempt to do so wit[ atert the
+Monitoring Centre regarding the activity.
+\--
+J-, 
+e,-tr-,
+Page '1 5 of '17
+
+=== PAGE 18 ===
+No. RT-1601111/2O18-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,l, Sansad Marg, New Dethi - 'l'10001
+2.13. Web lnterface to Vehicle Owners
+lnterface shatl be provided to the vehicte owners, using which they can track their
+vehicles.
+2.14. Data Exchange/Sharing with External System
+The monitoring centre wit[ need to share/exchange data in real time with external
+system such as interstate message exchange platform etc. The monitoring centre wi[[
+provide APls for sharing / exchange of data with externat systems as defined in AIS-140
+or prescribed by MoRTH from time to time.
+2.1 5. Data Sharing with MoRTH
+APls witt be provided for sharing of data with MoRTH as defined in AIS-140 or notified
+by MoRTH from time to time, for the purpose of monitoring of comptiance of
+imptementation of VLTD.
+3. ResponsibilityMatrix
+s/N
+Major Activities
+/vloRTH
+States
+/ UTs
+Ntc/
+VAHAN
+1
+Finatization of Scheme for setting up of
+Monitoring Centre
+2.
+Setting up of National PMU
+3.
+Signing of MoU for setting up of
+Monitoring Centre
+4.
+Setection of lmptementation agency for
+setting up of Monitoring Centre
+5.
+Retease funds to States/ UTs
+6.
+Support the project with the State's
+contribution as specified under the
+MoRTH guidetines
+7.
+lmptementation of Monitoring Centre
+for the State/ UT
+8.
+lntegration with VAHAN Apptication
+9.
+Data sharing by Monitoring Centre with
+MoRTH.
+10.
+Constitute a State level Project
+Management Unit, with a nodat officer
+for monitoring and supporting the
+project implementation
+11
+Operation & Maintenance of Monitoring
+Centre
+^t\---i
+J.--,-r'%'=
+Page 16 of 17
+
+=== PAGE 19 ===
+No. RT-16011/112018-T
+Government of lndia
+Ministry of Road Transport and Highways
+(Transport Division)
+Transport Bhavan,1, Sansad Marg, New Delhi - 110001
+Annexure - C
+GeneraI Guidelines for lmplementation of State-wise Monitoring Centre for VLT devices
+as per AIS- 140
+1. The specified pubtic service vehicte owners have to ensure that the VLT devices
+instatted in their vehictes, are in working condition and regutarty send required data
+to the corresponding Monitoring Centre through ceItutar connectivity.
+2. The specified new public service vehicles shatl not be registered in the State/UT if the
+vehictes are not equipped with or fitted with vehicte location tracking device and one
+or more emergency buttons, in compliance with the CMVR.
+3. The Unique ldentification number and others details of each VLT device shalt be
+uptoaded on the VAHAN database by the Vehicte manufacturer or its authorized
+agency, in case of New Vehictes using their secured authenticated access. The Unique
+ldentification number of VLTD shatt be tagged to vehictes detaits (Engine no./Chassis
+Number) in VAHAN for the purpose of tinking the VLT device to the specific pubtic
+service vehicle. For the registration of new PSV in VAHAN, the VLTD shall be activated
+and functional and the Unique lD of VLTD shatt be tagged to the vehictes jn VAHAN.
+4. ln case of retro-fitment in vehicles, the VLT device manufacturers or their authorized
+deaters shall install the VLT devices in pubtic service vehicles and register the devices
+atong with Unique ldentification number and other detaits on VAHAN and the
+corresponding Monitoring Centre systems in real-time.
+5. The State/UT sha[[ enforce fitment/functional status of device at the time of
+registration/ permit issuance/ renewal / fitness check of the vehicte in VAHAN or the
+respective state vehicte registration/ permit system and the State/UT Monitoring
+System.
+6. The VLT device shatl be activated on the Monitoring Centre as per the process set-out
+in AIS 140 and the functional status shatl be updated in VAHAN/ State registration
+software by the Monitoring Centre of the State.
+7. VLT device manufacturers or their authorised dealers shatt provide comprehensive
+warranty/ maintenance support for the VLT device and facititate ce[[utar connectivity
+for a minimum period of two years for new pubtic service vehictes and one year for
+other vehictes.
+8. The State/UTs shau ensure compliance to rute 125 H of Central Motor Vehictes Rules,
+1989 and check fitment and functional status of the VLT device in the pubtic service
+vehictes at the time of checking of the vehicles for fitness certification in VAHAN and
+State/ UT Monitoring Centre.
+\-
+(;' 
+ztrtt4'
+Page 17 of 17
+
+=== PAGE 20 ===
+MEMORANDUM OF UNDERSTANDTNG (MoU)
+BETWEEN
+Ministry of Road Transport & Highways, Government of India
+AND
+Transport Department, Government of {State/UT name}
+For Implementation of "Monitoring Centre for Tracking and Monitoring of public
+Service Vehicles as per AIS-140 standard under Nirbhaya Framework',
+Page 1of 8
+
+=== PAGE 21 ===
+This MoU is made on the {dateJ at lptace]
+BY AND BETWEEN
+Ministry of Road Transport & Highways, Government of lndia, {designation of the
+signing representative] (hereinafter referred to as the "iloRTH,, or ,,Ministry,, which
+expression shat[ untess excluded by or repugnant to the context be deemed to mean and
+include its successors in office or ass.ignees) of the FIRST part
+AND
+The fstate/ur] Government represented by {designation of the signing representative},
+Transport Department, (hereinafter referred to as the ,,{state/UT},, which expression
+shat[ unless excluded by or repugnant to the context be deemed to mean and inctude its
+successors in office or assignees) of the SECOND part.
+WHEREAS, MoRTH had issued a notification on zgth November 2016 wherein Vehicte
+Location Tracking Device (vLT or vLTD) and Emergency Buttons were mandated to be
+fitted in att pubtic service vehictes (four wheeted or higher, passenger carrying vehictes)
+w.e'f. 1st Aprit, 2018. ln order to standardize the specifications of vLTD and Emergency
+Buttons across the country, AIS 140 standard was released. subsequentty, Ministry
+exempted att public service vehicles from the purview of provisions of rute 1z5H of the
+centrat Motor Vehicte Rutes 1989 up to 1st Aprit 20'19 vide notification dated 18th Aprit,
+2018 as it had come to the notice of this Ministry that difficutties were being faced in
+implementing vehicle Location Tracking Device and Emergency Buttons due to lack of
+Monitoring centres to monitor and track the vehictes. The matter was re-examined in the
+Ministry, and it was decided to give exemption to att pubtic service vehicles which were
+registered up to 31st December 2018 (otd vehicles) from the fitment of VLTD and
+Emergency Buttons tit[ the time as notified by state/ur Governments in their respective
+states/urs. Alt pubtic service vehicles registered on or after 1'r January 2019 must be
+fitted with VLTD and Emergency Buttons.
+AND WHEREAS, MoRTH, in order to support the States/UTs to set up Monitoring Centers,
+brought a scheme under Nirbhaya Framework (Scheme). The scheme Guidetines are
+provided at Annexure A.
+AND WHEREAS, the funding pattern under the Scheme shatt be as per the Nirbhaya
+Framework guidetines as per which, for UTs 100% funds witt be provided, for states with
+difficult terrains 907" and for the remaining states 60% funds witt provided under the
+Scheme. The batance funds shatl be provided by the respective States.
+AND WHEREAS, MoRTH has agreed to fund the {Srate/UT
+I to imptement the project
+(Project) for setting up of the Monitoring centre at a total estimated cost of Rs. []NR in
+iigur'e: ari 'rrrcs] comprising MoRTH contribution not exceeding Rs. I ll.]R]r'r tignr.i ar.]c
+',,orJ: ] subject to conditions specified in this MoU and Scheme issued by MoRTH vide No.
+RT-16011i 'l /2018-T [car.d].
+Page 2 of8
+
+=== PAGE 22 ===
+Now lr ls HEREBY AGREED By AND BETIVEEN THE pARTrEs HERETO As FoLLows:-
+1. Effective Date
+This Memorandum of Understanding comes into effect from the date of signing of this
+MoU by and between the parties.
+2. Objective and Overview of the project
+The objective of the project is to improve safety of women and chitdren in pubtic
+service vehictes through the implementation of CMVR 125H.
+Accordingty, atl the specified pubtic service vehictes sha[ be equipped with vehicte
+location tracking (VLT) device with muttipte emergency buttons for requesting
+emergency response.
+The {state/UT} shat[ set up a Monitoring centre for monitoring the aterts and heatth
+status of VLTD and emergency buttons fitted in the vehictes.
+The Monitoring centre witt inctude a backend system for handting and processing the
+data and aterts (except Emergency button press atert) sent from the vLT devices fitted
+in vehictes.
+The Monitoring centre shalt be integrated with ERSS through a backend system, for
+handting the alerts generated by a passenger in distress, by pressing the emergency
+button fitted in the vehictes.
+3. Scope of the project
+The scope of the project shatI be as betow:
+. Setting up the Monitoring Centre
+> Space for setting up of Monitoring Centre
+F Development / Customisation of backend software
+> Cloud Hosting & Deployment of backend software and map platform on NIC
+Ctoud
+> Map data and services and atong with its lntegration
+> Equipment at Monitoring Centre
+> Connectivity to Monitoring Centre
+D Hetpdesk support
+. State levet project management for Monitoring Centre. The {State/UT} may
+appoint a project management consuttant (pMC) for project management.
+. Manpower for operations of Monitoring Centre
+. Training and capacity buitding
+. operations and maintenance (o&M) of Monitoring centre for two years after its
+commissioning
+Pagc 3 of8
+
+=== PAGE 23 ===
+The costs towards the above scope shatt onty be considered as project cost for the
+purpose of funding under the Scheme, as per the terms of this MoU.
+4. Roles & Responsibilities of iioRTH
+The roles and responsibitities of MoRTH shalt be as betow:
+. supporting the {state/ur} by providing standard guidetines and instructions for
+setting up of Monitoring Centre
+' 
+Providing funding support for setting up of Monitoring centre in the {state/ur} as
+per Nirbhaya Framework
+. set up a Nationat pMU in MoRTH through DrMTs Ltd. to coordinate between the
+stakeholders, monitor implementation of the project, review detiverables and
+imptementation /operation reports, recommend retease of payments and reconcite
+payments against the utilization certjficates.
+. 
+Providing support for the integration with VAHAN
+. Coordination with MHA and other departments as per the requirements
+5. Roles & Responsibilities of {State/UT}
+The rotes and responsibitities of [State/UT] sha[[ be as betow:
+. Setting up of the Monitoring Centre, as per the Scheme Guidelines.
+. Appointment of lmptementation Agency for setting up Monitoring Centre.
+. Support the project by ensuring timety payment of its contribution.
+' 
+Appoint a Nodal officer and a pru for the project implementation. The [state/ur]
+may also appoint a PMC to assist it in imptementation of the project. The nodat
+officer shatl be the singte point of contact for atI correspondences and co_
+ordination in connection with the project imptementation.
+' 
+Ensure that the Monitoring centre is tinked with state ERss/other emergency
+response system.
+' 
+Ensure that the Monitoring centre is mandatority comptiant to the minimum
+features specified by MoRTH in the Scheme Guidetines.
+. undertake various activities as required for ensuring comptiance to CMVR and
+MoRTH notifications/ guidetines such as issuing necessary orders / directions to
+permit hotders/ VLT manufacturers/ RTO officiats etc.
+. 
+Ensure that the registration / fitness of specified pubtic service vehictes are done at
+the RTo lever onty after checking the fitment and functional status of the vLT
+device in VAHAN/any other vehicte registration system being used by the
+[State/UT].
+. Integrate the Monitoring centre with vahan/any other vehicte registration system
+in use.
+Page 4 of 8
+
+=== PAGE 24 ===
+6.
+' 
+Ensure necessary infrastructure, tike desktops and rnternet connectivity at Regionat
+Transport Offices, for using the proposed system.
+. O&M of the Monitoring Centre
+o Titt the time the state set up the Monitoring centre under this scheme, it shatt
+ensure the compliance of cMVR 125H for vehictes registered after 1't Jan 201g
+through VAHAN/ state vehicte registration system using;ny backend system as per
+MoRTH guidetines.
+Project Cost and payment Terms
+MoRTH shatt pay the [percentage as per the Scheme] of the actual project cost,
+subject to a maximum of Rs. {amount as per the SchemeJ, after deduction of Rs.
+{amount as per the Scheme} towards the NrC cloud, Nationat pMU and M.RTH
+Dashboard on a proportionate basis.
+The payment of MoRTH share after deduction as above, witt be as per the milestones
+below:
+51. No.
+Milestone
+Payment (%)
+fimeline
+1
+Signing of MoU
+Conrmlssionlng - -;i -
+Monitoring Centre by
+State/UT
+the
+the
+80%
+T +15 days
+2
+T + 180 days
+(Latest by 3'1
+December 2020)
+3
+Three months of successiut
+operation of Monitoring Centre
+post commissioning
+3 months after
+commissioning of
+Monitoring
+Centre
+Note: T witt be date of sanction letter issued by MoRTH for funding under the scheme.
+. The initiat payment shatl be released by MoRTH as advance. Subsequent payments
+shatl be reteased against the achieved mitestones after checking by MoRTH pMU.
+. {state/ur} shall submit imptementation / operation report to MoRTH on achieving
+a mitestone. MoRTH shatt retease its share of payment after receipt of the requisite
+imptementation / operation report from the fstate/UT].
+. The State/UT shatl ensure the commissioning of the Monitoring Centre by 3.1,t
+December 2020.
+. The implementation /operation reports from [State/UT] shatt be checked and
+reviewed by MoRTH PMU before retease of second payment, which shatt be
+reteased after three months of successful operation of the Monitoring centre post
+its commissioning.
+. The cost of NIC Ctoud, Nationat pMU and Dashboard at MORTH wiu be retained by
+MORTH and the funds to {state/UTj witt be reteased after adjusting the
+proportionate amounts.
+Page 5 of8
+
+=== PAGE 25 ===
+. The [state/ur] shatt submit utitization certificate (UC) for each instalment of
+payment reteased by MoRTH upon utitization of money for the specified purpose.
+7. Activities after Commissioning
+The [state/ur] shatt budget for entire o&M costs of the project after initiat two years.
+This cost sha[[ be borne by the lstate/ur] for maintaining the system, inctuding the
+fottowing activities:
+. Ctoud services
+. Connectivity & Maintenance charges for Monitoring Centre
+. Charges for operations and maintaining the hetp desk facitity
+. Annual Maintenance charges for the apptication software and hardware
+. Annual charges for Map services/ Data.
+8. Validity
+This MoU shatl be vatid for 36 months from the Effective Date. The MoU may be
+extended on mutuat consent.
+9. Amendment
+This MoU shal[ be the sote repository of the terms agreed to between the parties and
+no amendment thereof shall take effect and be binding unless such amendment is
+recorded in writing and signed by the representatives of the parties.
+10. Severability
+lf any part of this MoU is found by a court of competent jurisdiction or other
+competent authority to be invatid, unlawfut or unenforceable, then such part witt be
+severed from the remainder of this MoU which witt continue to be vatid and
+enforceabte to the futtest extent permitted by taw.
+1 1. Disputes/Arbitration
+Any or atl disputes between the parties witt be settted amicabty between the parties
+through mutual discussions by the signatories or their designated nominees. Faiting
+amicabte settlement, both the parties agree to refer the dispute to the secretary
+(Transport), MoRTH whose decision shatt be final.
+12. Jurisdiction
+The vatidity and interpretation of this Mou shatt be governed by the taws of lndia and
+courts in Delhi atone shatl have jurisdiction to tay any matter relating to this Mou.
+13. Communication
+The fottowing contact persons are identified for each party, assigning them the
+responsibitity during the project.
+Pagc 6 of 8
+
+=== PAGE 26 ===
+MoRTH
+fState/UTl
+Any notice, request, demand, approval, consent, or other communications provided or
+permitted hereunder shatt be in Engtish tanguage and in writing and sent by registered
+post or by e-mait addressed to the Representative Authority.
+Each party acknowledges that it has read this MoU, understands it, and agrees to be
+bound by its terms and further agrees that it is the comptete and exctusive statement
+of the MoU between the parties for this project.
+IN WITNESS WHEREOF, THE PARTIES SIGNED THIS MOU AT THE PLACE AND ON THE DAY
+WRITTEN ABOVE.
+For and on behalf of
+Signature
+Name
+Designation
+Contact No. and email
+Ptace and Date
+Seat
+Signature
+Name
+Designation
+Contact No. and emait
+Ptace and Date
+Seal
+Pagc 7 of 8
+{State/UT} Transport Department
+
+=== PAGE 27 ===
+Annexure A
+Scheme Guidelines
+Page 8 of8
+

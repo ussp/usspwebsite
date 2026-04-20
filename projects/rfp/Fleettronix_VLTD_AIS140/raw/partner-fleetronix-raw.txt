@@ -1,0 +1,516 @@
+=== PAGE 1 ===
+
+=== PAGE 2 ===
+About Us
+At Fleetronix, we’re not just transforming logistics; we’re reshaping 
+the future of your business. Founded by visionary women 
+entrepreneurs, our journey began with a mission: combat supply 
+chain theft plaguing different types of firms Fortune 500 clients being 
+one of them. Through relentless dedication, we’ve achieved 
+remarkable success, expanding from a team of four to 180. By 
+harnessing technology and innovation, we’ve developed cutting-
+edge solutions that ensure your cargo’s safety and streamline 
+operations. Our commitment to excellence, backed by data-driven 
+insights, drives us to rewrite norms and inspire new possibilities. With 
+Fleetronix, you’re not just partnering with a company – you’re 
+collaborating with the future
+High Quality
+Service
+99 %
+Customer 
+Satisfaction
+100 %
+Customers
+Registered
+500 +
+Trips
+Onboarded
+5Lacs +
+“Securing every mile with advanced technology while empowering 
+every move through reliable and efficient fleet solutions.”
+“Driven by continuous innovation and built on a strong foundation 
+of trust, we deliver dependable and future-ready fleet management 
+solutions.”
+
+=== PAGE 3 ===
+Our Mission
+Swift:
+Ensuring fast, responsive, and timely 
+fleet operations at every step
+Smart:
+Enabling data-driven decisions for 
+optimized and efficient performance
+Intelligent:
+Leveraging advanced technology to 
+deliver accurate insights and 
+proactive solutions
+
+=== PAGE 4 ===
+Our Vision
+F – Future Ready:
+Future-ready fleet and mobility solutions
+L – Leadership:
+Leading innovation in fleet technology
+E – Efficiency:
+Enhancing operational efficiency
+E – Excellence:
+Excellence in service and delivery
+T – Technology:
+Technology-driven solutions
+R – Reliability:
+Reliable and consistent performance
+O – Optimization:
+Optimizing every movement and resource
+N – Next-Gen:
+Next-generation mobility solutions
+I – Intelligence:
+Intelligent insights and automation
+X – eXperience:
+Exceptional customer experience
+
+=== PAGE 5 ===
+Generate Value from Digital Transformation
+Fleetronix offers an easy-to-adopt user-friendly mobile platform to operate 
+and manage your business on the go.
+Mobile
+Platform 
++
+Connected
+Intelligent
+Platform
+Freight Safety 
+Video Solution
+End-to-End 
+Traceability & 
+Round-Trip 
+Optimization
+Real-Time 
+Visibility & 
+Wagon Tracking
+Cloud-Based 
+Platform & 
+Enterprise 
+Intelligence
+AI-Powered 
+Insights & 
+Video 
+Telematics
+Digital 
+Security & E-
+Sealing
+
+=== PAGE 6 ===
+•
+Trip delay alerts 
+during transit
+•
+Route-wise transit 
+time monitoring
+•
+Unauthorized 
+stoppage during trip
+•
+Journey start and 
+end time tracking
+▪
+Loading & Unloading 
+waiting time tracking
+▪
+Vehicle idle time at 
+the loading location
+▪
+Empty vs. loaded 
+vehicle status
+▪
+Real-time vehicle 
+presence at loading 
+yard 
+•
+Vehicle breakdown 
+alerts
+•
+Accident detection & 
+alerts
+•
+Sudden Stoppage 
+identification
+•
+Delay at breakdown 
+location
+•
+Seal tampering 
+detection
+•
+Seal 
+open/close 
+monitoring
+•
+QR seal 
+mismatch 
+detection
+•
+Authorized driver 
+verification
+•
+Driver mismatch 
+identification
+•
+Over-speeding 
+alerts
+•
+Driver compliance 
+violations
+•
+Route deviation alerts
+•
+Geo-fence violation 
+alerts
+•
+Red zone alerts
+•
+Unauthorized route 
+movement
+Loading 
+Delays
+Breakdowns/ 
+Accidents
+In-transit Delay
+Seals mis-
+match
+Drivers 
+mismatch
+Route Deviations
+Fleetronix Differentiator:
+From source to destination we manage exceptions
+Not just tracking trucks- we track risk, responsibility & results
+Uninstallation Checkpoint 
+1.Verified uninstallation                     2.On-ground physical vehicle audit       3.Immediate plant escalation for anomalies
+
+=== PAGE 7 ===
+AI-Driven Fleetronix Mobile Application:
+“The AI-driven 
+Fleetronix application 
+intelligently detects and 
+displays vehicles with a 
+history of trip 
+violations, including 
+instances of halts in 
+designated risk zones, 
+enabling proactive 
+monitoring and 
+improved operational 
+safety.”
+
+=== PAGE 8 ===
+Fleetronix Control Tower:
+•
+Trips ETA Status
+•
+Trips Onboarded 
+Yesterday
+•
+Trips Onboarded 
+Today
+•
+Count of vehicles at 
+loading point
+•
+Count of vehicles at 
+unloading location
+•
+Count of vehicles in 
+In-transit
+•
+Trips reached & ended
+•
+Risky Trips:
+i.
+Power cut
+ii.
+Red zone
+iii.
+Loading Delay
+iv.
+Unloading Delay
+v.
+Seals Mismatch
+• Violations(Historic)
+I.
+  Vehicles
+II.
+  Drivers
+• Exceptions
+I.
+   IGN Off
+II.
+   H-Break
+• Trip Status
+I.
+   Loading
+II.
+   Unloading
+III.
+   En-Route
+IV.
+   Ended
+
+=== PAGE 9 ===
+Fleetronix Foot Print in India:
+PORTS
+MINES
+MATERIALS
+Kandla
+SECL
+Coal
+Haldia
+NCL
+Chromite
+Tuna
+CCL
+Iron Ore
+NEL-Jamnagar
+WCL
+Pet coke
+JSW-Jaigarh
+SCCL
+Lam coke
+MRPL
+OMC
+Manganese
+Karaikal
+Nut coke
+Tuticorin
+Scrap
+Krishnapatnam
+Pillets
+Vishakhapatnam
+
+=== PAGE 10 ===
+Fleetronix Foot Print in Zambia:
+PORTS
+MINES
+MATERIALS
+Lusaka
+Maamba Collieries 
+Limited (MCL)
+Coal
+Ndola
+Mulungwa Coal 
+Mine
+Copper & Cobalt
+Kitwe
+Collum Coal Mine 
+(Nkandabwe)
+Gemstones
+Kabwe Maamba Energy 
+Limited
+Zinc & Limestone
+Manganese
+
+=== PAGE 11 ===
+Rail Wagon Visibility & Control:
+Fleetronix New Capabilities:
+WhatsApp Video 2026-01-21 at 1.51.53 PM.mp4
+➢Real-time wagon location across sidings, yards, and in-transit rail sections
+➢Arrival, placement, and release alerts at source, intermediate, and destination sidings
+➢Detention & dwell time monitoring to identify loading/unloading and yard delays
+➢Route & rake consistency tracking to flag unauthorized diversion or misplacement
+➢Exception-based alerts & reports for idle wagons, missed milestones, and turnaround optimization
+
+=== PAGE 12 ===
+Freight Safety Video Solution:
+➢Protect every load, not just every trip
+➢Continuous video monitoring of trailers, loading 
+bays, and doors to detect tampering, theft 
+attempts, and unsafe handling of freight.
+Fleetronix New Capabilities:
+
+=== PAGE 13 ===
+Fleetronix New Capabilities:
+AI Dashcam: Smart alerts for safer driving.
+
+=== PAGE 14 ===
+Live Video Streaming:
+For a vehicle with an active 
+camera, user can watch live 
+stream of the desired camera 
+channel 
+
+=== PAGE 15 ===
+AI Dashcam Alarms: 
+❖Distraction 
+❖Unfastened seat belt
+❖Yawning
+❖Smoking
+❖Cell Phone usage 
+❖Drowsy Driving
+Alarms:
+Alarms are generated for:
+❖Fatigue Driving 
+❖Geofence 
+❖Idle Engine 
+❖Speeding 
+❖Misuse
+ADAS Alarms: 
+❖Tailgating 
+❖Forward Collision Warning 
+❖Traffic Speed Violated
+Video Alarms:
+GPS Based Alarms:
+
+=== PAGE 16 ===
+Fuel Sensor Solution:
+Monitors real-time fuel levels with high accuracy.
+Detects fuel theft, sudden drops, and unauthorized usage.
+Helps improve efficiency and control fuel costs.
+
+=== PAGE 17 ===
+Fleetronix 1.0 Competitive Analysis
+
+=== PAGE 18 ===
+Fleetronix 2.0 — From Utility to Marketplace
+Not Just a Utility — A Full Stack for Flow
+We evolved from solving single logistics tasks to orchestrating entire transport interactions:
+●
+Shipper Search Engine + Auto-Matchmaking:
+●
+Smart shipper discovery for transporters — categorized, verified, and relevance-ranked. 
+●
+AI-matched loads based on route, capacity, and preference. 
+●
+Driver/Transporter tiering logic built-in
+●
+Voice/Chat-Based Load Booking
+●
+WhatsApp + In-App Voice Assistant (regional language)
+●
+Reduces tech-barrier for ground users
+●
+Masked Negotiation Flow
+●
+No awkward calls, no broker hijack. Automated, anonymous negotiation until price 
+agreement.
+●
+Driver & Transporter Matchmaking
+●
+Built-in logic for assigning drivers to loads and vehicles — no Excel, no chaos.
+●
+Zero Escrow, Full Trust Flow
+●
+We don’t hold funds. We facilitate transparent transactions without delays or wallet 
+complexity.
+●
+No-Training UX
+●
+Designed for truckers and their phones — even a helper boy can operate it without 
+training.
+
+=== PAGE 19 ===
+Fleetronix X — From Marketplace to Full Ecosystem
+We’re building a platform that doesn’t just serve transporters, it empowers the entire 
+ecosystem.
+Key Extensions:
+●
+Load Sharing & Return Matching: Prevent idle fleets with intelligent load redistribution 
+and empty return utilization.
+●
+Gamification & Ratings: Improve driver behavior and app usage with leaderboard-
+based engagement and trust scores.
+●
+Accessories Marketplace: From tires to GPS trackers, monetize footfall via verified 
+hardware/services partners.
+●
+3rd Party Onboarding: Anyone can plug in — customs brokers, fleet insurers, fuel card 
+vendors, fastag providers.
+A true logistics infra layer, not just another booking app.
+
+=== PAGE 20 ===
+Why We’ll Win
+Not a Logistics App. A Logistics OS.
+1. Infra-First, Not App-First:
+ We didn’t just build a workflow. We built foundational rails — data, visibility, control — and let the flow 
+emerge.
+2. Modular, Not Monolithic:
+ Drivers, transporters, and shippers don’t need one big app. They need just what they need, when they 
+need it.
+3. Self-Evolving Flywheel:
+ Every match, route, panic, return, and seal adds to our intelligence. The system learns and optimizes.
+4. Capex-Light, Ops-Free, Truly Scalable:
+ No fleet to manage. No warehouse to run. No escrow headache. Just product-led scale.
+5. India-Specific Behavioral DNA:
+ From voice-first to panic routing to unbundled pricing — we’ve baked Bharat into our code.
+
+=== PAGE 21 ===
+Fleetronix Business Overview
+Metric
+Details
+Turnover (FY 22–23)
+1.7 Cr
+Turnover (FY 23–24)
+5.7 Cr
+Turnover (FY 24–25)
+5.5 Cr
+Turnover (FY 25–26)*
+6.5 Cr (Projected)
+Total Trips (Inception)
+4.5 Lakh+
+Total Strength
+180
+Deployed Devices
+7,000+
+
+=== PAGE 22 ===
+What does Fleetronix do?
+Fleetronix provides in-transit cargo theft 
+prevention
+technology and services.
+Why should Customers use Fleetronix?
+24×7 support, end-to-end service, secure 
+and reliable
+tracking at low cost.
+Benefits to Customers?
+Reduction in supply chain risk.
+Positioning:
+
+=== PAGE 23 ===
+Veena L
+Co-Founder
+M.Sc in Bio-
+Technology Drives
+Finance
+India and Africa business
+exposure
+Sita Reddy
+Co-Founder
+Anuradha Parakala
+Co-Founder
+M.Tech from IITMadras.
+Visionary leader fusing family
+construction legacy with Tech
+innovations
+Drives business excellence and
+growth.
+Bachelors in commerce +ISBWomen 
+leadership program
+Drives Growth and Operations with 
+innovative logistics strategies.
+Top corporate woman entrepreneur in 
+Telangana, 2022.Ted x Speaker
+Executed by All Woman Team
+
+=== PAGE 24 ===
+THANK YOU
+Collaborate For Sustainable Transportation.
+We look forward to working with you.
+Head Office:
+Pt. No: 70/p, Rd. No
+Janardhan Hills,
+P Janardhan Reddy Nagar, Gachibowli,
+Hyderabad, Telangana-500032, 
+India
+Shivaraj Somnal
+Operations Manager
++(91) 91543 06964
+info@fleetronix.io |shivaraj@fleetronix.io 
+www.fleetronix.io
+
