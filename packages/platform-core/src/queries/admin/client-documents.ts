@@ -1,3 +1,20 @@
+// ============================================================================
+// CONFIDENTIAL — INTERNAL ONLY
+// ============================================================================
+// Client documents (MVA, NDA, SSA, Work Orders) contain commercial terms,
+// bill rates, pay rates, and client-specific pricing. These records MUST
+// NEVER be exposed to:
+//   - The candidate / consultant the Work Order is for
+//   - External clients other than the owning client
+//   - Any candidate-facing portal or public API route
+//
+// RBAC: admin + recruiter only (see rbac.ts `client_documents.*` + the
+// PROTECTED_RESOURCES set that excludes viewer's `*.read` wildcard).
+//
+// If you are adding a candidate-facing feature, DO NOT import from this
+// module. Use candidate-scoped queries only.
+// ============================================================================
+
 import { getServiceClient } from "../../supabase/server.js";
 import { getSiteId } from "../../config.js";
 import type {
@@ -9,6 +26,22 @@ import type {
 const BUCKET = "client-documents";
 const COLUMNS =
   "id, site_id, client_id, assignment_id, doc_type, display_name, description, file_name, file_type, file_size, storage_path, effective_date, expiry_date, uploaded_by, notes, created_at, updated_at";
+
+/**
+ * Rate-free projection of an assignment for the Work Order picker and row
+ * display. DO NOT add bill_rate / pay_rate to this type — those fields
+ * must stay off the document UI per the confidentiality model.
+ */
+export interface AssignmentSummaryForDoc {
+  id: string;
+  candidate_id: string;
+  candidate_name: string;
+  candidate_type: "internal_employee" | "external" | "vendor" | string;
+  role_title: string;
+  start_date: string | null;
+  end_date: string | null;
+  status: string;
+}
 
 export const ALLOWED_MIME_TYPES = [
   "application/pdf",
@@ -177,4 +210,78 @@ export async function getDownloadUrl(
   const { data, error } = await supabase.storage.from(BUCKET).createSignedUrl(storagePath, 60);
   if (error) return { error: error.message };
   return { signedUrl: data.signedUrl };
+}
+
+// ── Assignment lookups (rate-free projection) ──────────────────────────
+
+/**
+ * List assignments for a client, projected without bill_rate / pay_rate,
+ * for use in the Work Order picker and row display. Default sort: active
+ * status first, then by end_date ascending (soonest-ending on top).
+ */
+export async function listAssignmentsForClient(
+  clientId: string,
+  siteId?: string
+): Promise<AssignmentSummaryForDoc[]> {
+  const supabase = getServiceClient();
+  const site = siteId || getSiteId();
+  const { data, error } = await supabase
+    .from("employee_assignments")
+    .select(
+      "id, candidate_id, role_title, start_date, end_date, status, candidates(full_name, candidate_type)"
+    )
+    .eq("site_id", site)
+    .eq("client_id", clientId)
+    .order("status")
+    .order("end_date", { ascending: true });
+  if (error || !data) return [];
+  return data.map((row) => {
+    const raw = row as unknown as Record<string, unknown>;
+    const cRaw = raw.candidates as unknown;
+    const c = (Array.isArray(cRaw) ? cRaw[0] : cRaw) as Record<string, unknown> | null;
+    return {
+      id: raw.id as string,
+      candidate_id: raw.candidate_id as string,
+      candidate_name: (c?.full_name as string) || "Unknown",
+      candidate_type: (c?.candidate_type as string) || "external",
+      role_title: raw.role_title as string,
+      start_date: (raw.start_date as string) || null,
+      end_date: (raw.end_date as string) || null,
+      status: raw.status as string,
+    };
+  });
+}
+
+/**
+ * Fetch a single assignment summary by id (rate-free). Used to render
+ * Work Order rows.
+ */
+export async function getAssignmentSummary(
+  assignmentId: string,
+  siteId?: string
+): Promise<AssignmentSummaryForDoc | null> {
+  const supabase = getServiceClient();
+  const site = siteId || getSiteId();
+  const { data, error } = await supabase
+    .from("employee_assignments")
+    .select(
+      "id, candidate_id, role_title, start_date, end_date, status, candidates(full_name, candidate_type)"
+    )
+    .eq("site_id", site)
+    .eq("id", assignmentId)
+    .maybeSingle();
+  if (error || !data) return null;
+  const raw = data as unknown as Record<string, unknown>;
+  const cRaw = raw.candidates as unknown;
+  const c = (Array.isArray(cRaw) ? cRaw[0] : cRaw) as Record<string, unknown> | null;
+  return {
+    id: raw.id as string,
+    candidate_id: raw.candidate_id as string,
+    candidate_name: (c?.full_name as string) || "Unknown",
+    candidate_type: (c?.candidate_type as string) || "external",
+    role_title: raw.role_title as string,
+    start_date: (raw.start_date as string) || null,
+    end_date: (raw.end_date as string) || null,
+    status: raw.status as string,
+  };
 }

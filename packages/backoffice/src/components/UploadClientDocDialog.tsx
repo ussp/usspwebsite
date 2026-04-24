@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import type { ClientDocType } from "@ussp-platform/core";
+import { useState, useEffect } from "react";
+import type { ClientDocType, AssignmentSummaryForDoc } from "@ussp-platform/core";
 import { CLIENT_DOC_TYPES, CLIENT_DOC_TYPE_DEFAULTS } from "@ussp-platform/core";
 
 interface Props {
@@ -10,6 +10,12 @@ interface Props {
   onUploaded: () => void;
 }
 
+const TYPE_LABELS: Record<string, string> = {
+  internal_employee: "W-2 Employee",
+  external: "1099 / External",
+  vendor: "Corp-to-Corp",
+};
+
 export default function UploadClientDocDialog({ clientId, onClose, onUploaded }: Props) {
   const [docType, setDocType] = useState<ClientDocType>("mva");
   const [displayName, setDisplayName] = useState(CLIENT_DOC_TYPE_DEFAULTS.mva.label);
@@ -17,10 +23,21 @@ export default function UploadClientDocDialog({ clientId, onClose, onUploaded }:
   const [effectiveDate, setEffectiveDate] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [assignmentId, setAssignmentId] = useState("");
+  const [assignments, setAssignments] = useState<AssignmentSummaryForDoc[]>([]);
+  const [loadingAssignments, setLoadingAssignments] = useState(false);
   const [notes, setNotes] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (docType !== "work_order") return;
+    setLoadingAssignments(true);
+    fetch(`/api/clients/${clientId}/assignments-for-docs`)
+      .then((r) => r.json())
+      .then((j) => setAssignments(j.data || []))
+      .finally(() => setLoadingAssignments(false));
+  }, [docType, clientId]);
 
   function handleDocTypeChange(newType: ClientDocType) {
     setDocType(newType);
@@ -156,17 +173,37 @@ export default function UploadClientDocDialog({ clientId, onClose, onUploaded }:
           {docType === "work_order" && (
             <div>
               <label className="block text-sm font-medium mb-1">
-                Link to assignment (optional)
+                Link to consultant&apos;s assignment
               </label>
-              <input
-                type="text"
-                value={assignmentId}
-                onChange={(e) => setAssignmentId(e.target.value)}
-                placeholder="Assignment UUID"
-                className="w-full border border-light-gray rounded px-3 py-2 text-sm font-mono"
-              />
+              {loadingAssignments ? (
+                <p className="text-sm text-dark/50">Loading assignments...</p>
+              ) : assignments.length === 0 ? (
+                <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded px-3 py-2">
+                  No assignments exist for this client yet. Create one under
+                  /assignments first, or leave blank for a master-level Work Order.
+                </p>
+              ) : (
+                <select
+                  value={assignmentId}
+                  onChange={(e) => setAssignmentId(e.target.value)}
+                  className="w-full border border-light-gray rounded px-3 py-2 text-sm"
+                >
+                  <option value="">— No link (master-level WO) —</option>
+                  {assignments.map((a) => {
+                    const endLabel = a.end_date ? `ends ${a.end_date}` : "no end date";
+                    const typeLabel = TYPE_LABELS[a.candidate_type] || a.candidate_type;
+                    const statusBadge = a.status !== "active" ? ` [${a.status}]` : "";
+                    return (
+                      <option key={a.id} value={a.id}>
+                        {a.candidate_name} ({typeLabel}) — {a.role_title} — {endLabel}
+                        {statusBadge}
+                      </option>
+                    );
+                  })}
+                </select>
+              )}
               <p className="text-xs text-dark/50 mt-1">
-                Paste the assignment ID from /assignments/[id]. Leave blank for master-level Work Orders.
+                Work Orders tie to one consultant at this client. Internal record — not visible to the consultant.
               </p>
             </div>
           )}

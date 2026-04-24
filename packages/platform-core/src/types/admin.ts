@@ -731,6 +731,7 @@ export interface UpdateAssignmentInput {
 export interface AssignmentFilters {
   candidate_id?: string;
   status?: AssignmentStatus;
+  client_id?: string;
   end_client_id?: string;
   expiring_within_days?: number;
 }

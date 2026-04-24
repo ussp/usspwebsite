@@ -263,3 +263,4 @@ export {
 } from "./types/admin.js";
 export * as corporateDocuments from "./queries/admin/corporate-documents.js";
 export * as clientDocuments from "./queries/admin/client-documents.js";
+export type { AssignmentSummaryForDoc } from "./queries/admin/client-documents.js";

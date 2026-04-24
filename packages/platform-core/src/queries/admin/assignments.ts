@@ -26,6 +26,9 @@ export async function getAssignments(
   if (filters.status) {
     query = query.eq("status", filters.status);
   }
+  if (filters.client_id) {
+    query = query.eq("client_id", filters.client_id);
+  }
   if (filters.end_client_id) {
     query = query.eq("end_client_id", filters.end_client_id);
   }
