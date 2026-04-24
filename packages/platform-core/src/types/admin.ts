@@ -939,3 +939,218 @@ export interface CreateCandidateReferenceInput {
   ref_email?: string;
   relationship?: string;
 }
+
+// ── Corporate Vault (USSP entity-level docs) ───────────────────────────
+
+export type CorporateDocType =
+  | "w9"
+  | "articles_incorporation"
+  | "bep_cert"
+  | "cert_good_standing"
+  | "cert_insurance"
+  | "ach_voided_check"
+  | "other";
+
+export const CORPORATE_DOC_TYPES: CorporateDocType[] = [
+  "w9",
+  "articles_incorporation",
+  "bep_cert",
+  "cert_good_standing",
+  "cert_insurance",
+  "ach_voided_check",
+  "other",
+];
+
+export const CORPORATE_DOC_TYPE_DEFAULTS: Record<
+  CorporateDocType,
+  { label: string; defaultExpiryDays: number | null; description: string }
+> = {
+  w9: {
+    label: "W-9 Form",
+    defaultExpiryDays: 365,
+    description: "IRS tax identification form. Convention-refreshed annually.",
+  },
+  articles_incorporation: {
+    label: "Articles of Incorporation",
+    defaultExpiryDays: null,
+    description: "State-issued incorporation document. No expiry.",
+  },
+  bep_cert: {
+    label: "BEP Certification Letter",
+    defaultExpiryDays: 365,
+    description: "Illinois Business Enterprise Program certification. Annual renewal.",
+  },
+  cert_good_standing: {
+    label: "Certificate of Good Standing",
+    defaultExpiryDays: null,
+    description: "Secretary of State certificate. Typically on-demand.",
+  },
+  cert_insurance: {
+    label: "Certificate of Insurance",
+    defaultExpiryDays: 365,
+    description: "COI naming clients + State as additional insured. Annual renewal.",
+  },
+  ach_voided_check: {
+    label: "ACH Voided Check / Bank Letter",
+    defaultExpiryDays: null,
+    description: "Bank document for ACH payment setup. Refresh only when account changes.",
+  },
+  other: {
+    label: "Other Corporate Document",
+    defaultExpiryDays: null,
+    description: "Any other USSP corporate document.",
+  },
+};
+
+export interface CorporateDocument {
+  id: string;
+  site_id: string;
+  doc_type: CorporateDocType;
+  display_name: string;
+  description: string | null;
+  file_name: string;
+  file_type: string;
+  file_size: number;
+  storage_path: string;
+  issued_date: string | null;
+  expiry_date: string | null;
+  is_current: boolean;
+  superseded_by_id: string | null;
+  uploaded_by: string;
+  notes: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface CreateCorporateDocumentInput {
+  doc_type: CorporateDocType;
+  display_name: string;
+  description?: string;
+  file_name: string;
+  file_type: string;
+  file_size: number;
+  storage_path: string;
+  issued_date?: string | null;
+  expiry_date?: string | null;
+  notes?: string;
+}
+
+export interface UpdateCorporateDocumentInput {
+  display_name?: string;
+  description?: string | null;
+  issued_date?: string | null;
+  expiry_date?: string | null;
+  notes?: string | null;
+}
+
+// ── Client Documents (per-client signed paperwork) ─────────────────────
+
+export type ClientDocType =
+  | "mva"
+  | "nda"
+  | "ssa"
+  | "requisition"
+  | "work_order"
+  | "other";
+
+export const CLIENT_DOC_TYPES: ClientDocType[] = [
+  "mva",
+  "nda",
+  "ssa",
+  "requisition",
+  "work_order",
+  "other",
+];
+
+export const CLIENT_DOC_TYPE_DEFAULTS: Record<
+  ClientDocType,
+  { label: string; description: string }
+> = {
+  mva: {
+    label: "Master Vendor Agreement",
+    description: "Top-level vendor agreement with the client.",
+  },
+  nda: {
+    label: "Mutual NDA",
+    description: "Non-disclosure agreement signed with the client.",
+  },
+  ssa: {
+    label: "Subcontractor Services Agreement",
+    description: "Signed subcontract enrollment contract.",
+  },
+  requisition: {
+    label: "Requisition Process Document",
+    description: "Client-specific requisition / submission process paperwork.",
+  },
+  work_order: {
+    label: "Work Order",
+    description: "Per-placement work order. Optionally linked to an assignment.",
+  },
+  other: {
+    label: "Other Client Document",
+    description: "Any other client-specific document.",
+  },
+};
+
+export interface ClientDocument {
+  id: string;
+  site_id: string;
+  client_id: string;
+  assignment_id: string | null;
+  doc_type: ClientDocType;
+  display_name: string;
+  description: string | null;
+  file_name: string;
+  file_type: string;
+  file_size: number;
+  storage_path: string;
+  effective_date: string | null;
+  expiry_date: string | null;
+  uploaded_by: string;
+  notes: string | null;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export interface CreateClientDocumentInput {
+  client_id: string;
+  assignment_id?: string | null;
+  doc_type: ClientDocType;
+  display_name: string;
+  description?: string;
+  file_name: string;
+  file_type: string;
+  file_size: number;
+  storage_path: string;
+  effective_date?: string | null;
+  expiry_date?: string | null;
+  notes?: string;
+}
+
+export interface UpdateClientDocumentInput {
+  display_name?: string;
+  description?: string | null;
+  assignment_id?: string | null;
+  effective_date?: string | null;
+  expiry_date?: string | null;
+  notes?: string | null;
+}
+
+// ── Shared: expiry status derivation ───────────────────────────────────
+
+export type ExpiryStatus = "none" | "on_file" | "expiring_soon_90" | "expiring_soon_30" | "expired";
+
+export function deriveExpiryStatus(expiryDate: string | null | undefined, today: Date = new Date()): ExpiryStatus {
+  if (!expiryDate) return "none";
+  const datePart = expiryDate.split("T")[0];
+  const parts = datePart.split("-").map((n) => parseInt(n, 10));
+  const [y, m, d] = parts;
+  if (!y || !m || !d) return "none";
+  const expiryUtc = Date.UTC(y, m - 1, d);
+  const todayUtc = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+  const daysOut = Math.round((expiryUtc - todayUtc) / 86_400_000);
+  if (daysOut < 0) return "expired";
+  if (daysOut <= 30) return "expiring_soon_30";
+  if (daysOut <= 90) return "expiring_soon_90";
+  return "on_file";
+}

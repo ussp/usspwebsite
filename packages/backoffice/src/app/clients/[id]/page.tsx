@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
+import ClientDocumentsCard from "@/components/ClientDocumentsCard";
 
 interface Client {
   id: string;
@@ -423,6 +424,8 @@ export default function EditClientPage() {
               </tbody>
             </table>
           </div>
+
+          <ClientDocumentsCard clientId={params.id as string} />
         </div>
       </main>
     </>

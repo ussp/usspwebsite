@@ -241,3 +241,25 @@ export {
 // AI Laws & Regulations
 export type { AILaw } from "./types/ai-laws.js";
 export { AI_LAW_CATALOG, getLawsByState, getAvailableStates, getFederalLaws } from "./types/ai-laws.js";
+
+// Corporate Vault + Client Documents
+export type {
+  CorporateDocType,
+  CorporateDocument,
+  CreateCorporateDocumentInput,
+  UpdateCorporateDocumentInput,
+  ClientDocType,
+  ClientDocument,
+  CreateClientDocumentInput,
+  UpdateClientDocumentInput,
+  ExpiryStatus,
+} from "./types/admin.js";
+export {
+  CORPORATE_DOC_TYPES,
+  CORPORATE_DOC_TYPE_DEFAULTS,
+  CLIENT_DOC_TYPES,
+  CLIENT_DOC_TYPE_DEFAULTS,
+  deriveExpiryStatus,
+} from "./types/admin.js";
+export * as corporateDocuments from "./queries/admin/corporate-documents.js";
+export * as clientDocuments from "./queries/admin/client-documents.js";

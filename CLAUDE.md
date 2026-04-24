@@ -275,3 +275,9 @@ className="font-[family-name:var(--font-spartan)]"      // Display
 | Suspend/reactivate a tenant | `tools.ussp.co/admin/tenants/[siteId]` — Suspend/Reactivate button |
 | Add new tool to entitlements registry | `platform-core/src/types/tenant.ts` (TOOL_KEYS + labels), sidebar navItems toolKey, TOOL_REGISTRY in tenant detail page |
 | Change tenant branding | `tenants` table via admin UI or direct DB update |
+| Upload a corporate document (W-9, BEP, COI, etc.) | `app.ussp.co/corporate-vault` — admin-only. Upload dialog pre-fills expiry from `CORPORATE_DOC_TYPE_DEFAULTS` in `platform-core/src/types/admin.ts` |
+| Replace a corporate document | `app.ussp.co/corporate-vault` — click "Replace" on any row. Prior version flipped to `is_current=false` and preserved for audit |
+| Edit a corporate document's expiry date | `app.ussp.co/corporate-vault` — click "Edit expiry" inline |
+| Upload a client-specific document (MVA, NDA, Work Order) | `app.ussp.co/clients/[id]` — Documents card. Doc types from `CLIENT_DOC_TYPE_DEFAULTS` in `platform-core/src/types/admin.ts` |
+| Link a Work Order to an assignment | Upload Client Doc dialog — select "Work Order" doc_type, paste assignment UUID |
+| Add a new corporate doc type | Edit `CORPORATE_DOC_TYPES` + `CORPORATE_DOC_TYPE_DEFAULTS` in `packages/platform-core/src/types/admin.ts`, rebuild platform-core |

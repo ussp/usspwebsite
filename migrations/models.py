@@ -1802,3 +1802,88 @@ class AssessmentPilotModel(Base):
     __table_args__ = (
         Index("idx_pilots_assessment", "assessment_id"),
     )
+
+
+# =============================================================================
+# CORPORATE_DOCUMENTS TABLE (USSP entity-level docs: W-9, BEP, COI, etc.)
+# =============================================================================
+
+
+class CorporateDocument(Base):
+    """
+    USSP's own corporate documents, stored once and reused across every prime.
+
+    Covers: W-9, Articles of Incorporation, BEP Certification Letter,
+    Certificate of Good Standing, Certificate of Insurance, ACH voided check,
+    plus an extensible "other" type. Admin-only.
+
+    Version history: when a doc of a given doc_type is replaced, the prior row
+    flips is_current=false and superseded_by_id points to the new row.
+    Default list queries filter is_current=true.
+    """
+
+    __tablename__ = "corporate_documents"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    doc_type = Column(String(50), nullable=False)  # w9 | articles_incorporation | bep_cert | cert_good_standing | cert_insurance | ach_voided_check | other
+    display_name = Column(String(255), nullable=False)
+    description = Column(Text)
+    file_name = Column(String(500), nullable=False)
+    file_type = Column(String(100), nullable=False)
+    file_size = Column(Integer, nullable=False)
+    storage_path = Column(String(1000), nullable=False)
+    issued_date = Column(Date)
+    expiry_date = Column(Date)
+    is_current = Column(Boolean, nullable=False, server_default=text("true"))
+    superseded_by_id = Column(UUID(as_uuid=True), ForeignKey("corporate_documents.id"), nullable=True)
+    uploaded_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"), nullable=False)
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_corporate_documents_site_type_current", "site_id", "doc_type", "is_current"),
+        Index("idx_corporate_documents_site_expiry", "site_id", "expiry_date"),
+    )
+
+
+# =============================================================================
+# CLIENT_DOCUMENTS TABLE (per-client signed paperwork: MVA, NDA, Work Orders)
+# =============================================================================
+
+
+class ClientDocument(Base):
+    """
+    Per-client signed paperwork: MVA, NDA, SSA, Requisition Process, Work Orders.
+
+    Scoped to an existing client via client_id FK. Work Orders may optionally
+    link to a specific employee assignment. Admin + recruiter access.
+    No version history — replacing means delete-then-upload.
+    """
+
+    __tablename__ = "client_documents"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    site_id = Column(String(50), ForeignKey("sites.id"), nullable=False, server_default="ussp")
+    client_id = Column(UUID(as_uuid=True), ForeignKey("clients.id"), nullable=False)
+    assignment_id = Column(UUID(as_uuid=True), ForeignKey("employee_assignments.id"), nullable=True)
+    doc_type = Column(String(50), nullable=False)  # mva | nda | ssa | requisition | work_order | other
+    display_name = Column(String(255), nullable=False)
+    description = Column(Text)
+    file_name = Column(String(500), nullable=False)
+    file_type = Column(String(100), nullable=False)
+    file_size = Column(Integer, nullable=False)
+    storage_path = Column(String(1000), nullable=False)
+    effective_date = Column(Date)
+    expiry_date = Column(Date)
+    uploaded_by = Column(UUID(as_uuid=True), ForeignKey("staff_users.id"), nullable=False)
+    notes = Column(Text)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        Index("idx_client_documents_site_client", "site_id", "client_id"),
+        Index("idx_client_documents_site_assignment", "site_id", "assignment_id"),
+        Index("idx_client_documents_site_type", "site_id", "doc_type"),
+    )

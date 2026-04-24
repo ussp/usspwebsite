@@ -2,8 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-const navItems = [
+type NavItem = {
+  href: string;
+  label: string;
+  icon: string;
+  tooltip: string;
+  adminOnly?: boolean;
+};
+
+const navItems: NavItem[] = [
   { href: "/", label: "Dashboard", icon: "📊", tooltip: "Overview of key metrics, pipeline, and recent activity" },
   { href: "/positions", label: "Positions", icon: "💼", tooltip: "Manage job postings — create, edit, activate, or close positions" },
   { href: "/clients", label: "Clients", icon: "🏢", tooltip: "Direct clients who contract with USSP" },
@@ -16,11 +25,15 @@ const navItems = [
   { href: "/articles", label: "Articles", icon: "📝", tooltip: "Manage blog articles and insights published on the website" },
   { href: "/staff", label: "Staff", icon: "👥", tooltip: "Manage back office users, roles, and permissions" },
   { href: "/partnerships", label: "Partnerships", icon: "🤝", tooltip: "Partner organizations and vendor relationships" },
+  { href: "/corporate-vault", label: "Corporate Vault", icon: "🗄️", tooltip: "USSP corporate documents (W-9, BEP, COI, etc.) — admin only", adminOnly: true },
   { href: "/taxonomy", label: "Taxonomy", icon: "🧬", tooltip: "Manage skills taxonomy for candidate matching — add custom skills, review unresolved terms" },
 ];
 
 export default function AdminSidebar() {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const role = (session?.user as Record<string, unknown> | undefined)?.role as string | undefined;
+  const isAdmin = role === "admin";
 
   return (
     <aside className="fixed left-0 top-0 z-30 h-screen w-60 bg-near-black text-white flex flex-col">
@@ -30,6 +43,7 @@ export default function AdminSidebar() {
       </div>
       <nav className="flex-1 px-3 py-4 space-y-1">
         {navItems.map((item) => {
+          if (item.adminOnly && !isAdmin) return null;
           const isActive =
             item.href === "/"
               ? pathname === "/"

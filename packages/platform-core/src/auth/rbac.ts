@@ -7,6 +7,7 @@ const ROLE_PERMISSIONS: Record<StaffRole, string[]> = {
     "applications.*",
     "candidates.*",
     "document_requests.*",
+    "client_documents.*",
     "clients.*",
     "end_clients.*",
     "contacts.read",
@@ -30,6 +31,12 @@ const ROLE_PERMISSIONS: Record<StaffRole, string[]> = {
   viewer: ["*.read"],
 };
 
+// Resources that are NOT covered by the generic `*.read` wildcard — they
+// must be granted explicitly (via `resource.*` or `resource.read`). Used to
+// keep sensitive resources (corporate vault, client documents) out of the
+// default viewer role.
+const PROTECTED_RESOURCES = new Set(["corporate_vault", "client_documents"]);
+
 export function hasPermission(role: StaffRole, permission: string): boolean {
   const permissions = ROLE_PERMISSIONS[role];
   if (!permissions) return false;
@@ -46,8 +53,11 @@ export function hasPermission(role: StaffRole, permission: string): boolean {
   // Check resource.* (e.g., "positions.*" matches "positions.create")
   if (permissions.includes(`${resource}.*`)) return true;
 
-  // Check *.action (e.g., "*.read" matches "positions.read")
-  if (permissions.includes(`*.${action}`)) return true;
+  // Check *.action (e.g., "*.read" matches "positions.read"),
+  // but skip protected resources.
+  if (!PROTECTED_RESOURCES.has(resource) && permissions.includes(`*.${action}`)) {
+    return true;
+  }
 
   return false;
 }
