@@ -39,7 +39,22 @@ export async function getCandidateByLinkedInOrEmail(
       .eq("site_id", siteId)
       .eq("email", email)
       .single();
-    if (data) return data;
+    if (data) {
+      // Self-heal: if we matched by email and the row has no linkedin_sub
+      // yet, capture the current sub so future logins match by sub directly
+      // (faster path) and survive an email change. We only write when sub
+      // is null — never overwrite an existing one.
+      if (linkedinSub && !data.linkedin_sub) {
+        await supabase
+          .from("candidates")
+          .update({ linkedin_sub: linkedinSub })
+          .eq("id", data.id)
+          .eq("site_id", siteId)
+          .is("linkedin_sub", null);
+        data.linkedin_sub = linkedinSub;
+      }
+      return data;
+    }
   }
 
   return null;
