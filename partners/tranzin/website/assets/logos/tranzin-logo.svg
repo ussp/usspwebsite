@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="120" viewBox="0 0 480 120">
+  <defs>
+
+    <!-- Gold vertical gradient for diamond nodes and wordmark accents -->
+    <linearGradient id="gold-v" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#FAE880"/>
+      <stop offset="30%"  stop-color="#D4AF37"/>
+      <stop offset="65%"  stop-color="#B8921A"/>
+      <stop offset="100%" stop-color="#7C5C08"/>
+    </linearGradient>
+
+    <!-- Gold horizontal gradient for tagline text -->
+    <linearGradient id="gold-h" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#E8C84A"/>
+      <stop offset="45%"  stop-color="#FAE880"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+
+    <!-- Radial glow for diamond centre -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#FFFDE0" stop-opacity="0.9"/>
+      <stop offset="55%"  stop-color="#D4AF37" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+    </radialGradient>
+
+  </defs>
+
+  <!-- ── DIAMOND MARK (centred in 0,0 → 104,120 space, scaled to fit ~104px tall) ── -->
+  <!-- Structural construction lines -->
+  <line x1="52" y1="4"   x2="52"  y2="116" stroke="#5298D4" stroke-width="0.9" stroke-opacity="0.38"/>
+  <line x1="100" y1="30" x2="4"   y2="90"  stroke="#5298D4" stroke-width="0.9" stroke-opacity="0.38"/>
+  <line x1="100" y1="90" x2="4"   y2="30"  stroke="#5298D4" stroke-width="0.9" stroke-opacity="0.38"/>
+
+  <!-- Outer hexagon -->
+  <polygon points="52,4 100,30 100,90 52,116 4,90 4,30"
+    fill="none" stroke="#5298D4" stroke-width="2.2" stroke-opacity="0.88"/>
+
+  <!-- Middle hexagon -->
+  <polygon points="52,26 84,44 84,76 52,94 20,76 20,44"
+    fill="none" stroke="#2E68A8" stroke-width="1.1" stroke-opacity="0.54"/>
+
+  <!-- Inner gold hexagon -->
+  <polygon points="52,46 70,57 70,63 52,74 34,63 34,57"
+    fill="none" stroke="#D4AF37" stroke-width="1.0" stroke-opacity="0.8"/>
+
+  <!-- Centre glow -->
+  <circle cx="52" cy="60" r="18" fill="url(#glow)"/>
+
+  <!-- Vertex nodes -->
+  <circle cx="52"  cy="4"   r="2.8" fill="url(#gold-v)"/>
+  <circle cx="100" cy="30"  r="2.8" fill="url(#gold-v)"/>
+  <circle cx="100" cy="90"  r="2.8" fill="url(#gold-v)"/>
+  <circle cx="52"  cy="116" r="2.8" fill="url(#gold-v)"/>
+  <circle cx="4"   cy="90"  r="2.8" fill="url(#gold-v)"/>
+  <circle cx="4"   cy="30"  r="2.8" fill="url(#gold-v)"/>
+
+  <!-- Centre node -->
+  <circle cx="52" cy="60" r="5.5" fill="url(#gold-v)"/>
+
+  <!-- ── VERTICAL DIVIDER ── -->
+  <line x1="130" y1="26" x2="130" y2="94"
+    stroke="#D4AF37" stroke-width="0.9" stroke-opacity="0.32"/>
+
+  <!-- ── TRANZIN WORDMARK ── -->
+  <!-- T -->
+  <text x="150" y="82"
+    font-family="'DM Sans', Arial Black, Arial, sans-serif"
+    font-size="56" font-weight="800"
+    letter-spacing="6"
+    fill="#F6F4EE">T</text>
+  <!-- R -->
+  <text x="196" y="82"
+    font-family="'DM Sans', Arial Black, Arial, sans-serif"
+    font-size="56" font-weight="800"
+    letter-spacing="6"
+    fill="#F6F4EE">R</text>
+  <!-- A — gold -->
+  <text x="244" y="82"
+    font-family="'DM Sans', Arial Black, Arial, sans-serif"
+    font-size="56" font-weight="800"
+    letter-spacing="6"
+    fill="url(#gold-v)">A</text>
+  <!-- N -->
+  <text x="292" y="82"
+    font-family="'DM Sans', Arial Black, Arial, sans-serif"
+    font-size="56" font-weight="800"
+    letter-spacing="6"
+    fill="#F6F4EE">N</text>
+  <!-- Z -->
+  <text x="342" y="82"
+    font-family="'DM Sans', Arial Black, Arial, sans-serif"
+    font-size="56" font-weight="800"
+    letter-spacing="6"
+    fill="#F6F4EE">Z</text>
+  <!-- I — gold -->
+  <text x="390" y="82"
+    font-family="'DM Sans', Arial Black, Arial, sans-serif"
+    font-size="56" font-weight="800"
+    letter-spacing="6"
+    fill="url(#gold-v)">I</text>
+  <!-- N -->
+  <text x="412" y="82"
+    font-family="'DM Sans', Arial Black, Arial, sans-serif"
+    font-size="56" font-weight="800"
+    letter-spacing="6"
+    fill="#F6F4EE">N</text>
+
+  <!-- ── TAGLINE RULE ── -->
+  <line x1="150" y1="92" x2="468" y2="92"
+    stroke="#D4AF37" stroke-width="0.6" stroke-opacity="0.28"/>
+
+  <!-- ── TAGLINE — centred under TRANZIN ── -->
+  <text
+    x="309" y="108"
+    font-family="'DM Sans', Arial, sans-serif"
+    font-size="10" font-weight="600"
+    letter-spacing="3.2"
+    text-anchor="middle"
+    fill="url(#gold-h)">OUTCOMES FIRST. TECHNOLOGY SECOND.</text>
+
+</svg>

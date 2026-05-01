@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tranzin — Outcomes First. Technology Second.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:#0B1935; --royal:#0B3D91; --gold:#D4AF37; --gold2:#FAE880;
+  --obsidian:#060B18; --cream:#ECEAE6;
+  --tl:rgba(236,234,230,0.75); --tm:rgba(236,234,230,0.42);
+  --fd:'Cormorant Garamond',Georgia,serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+  --r:4px; --rl:8px; --tr:0.22s ease;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--fb);background:var(--obsidian);color:var(--cream);line-height:1.7;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--obsidian);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px;}
+
+/* PAGE SYSTEM */
+.pg{display:none;}
+.pg.on{display:block;}
+
+/* WRAP */
+.w{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 30px;border-radius:var(--r);font-family:var(--fb);font-size:14px;font-weight:500;letter-spacing:.04em;transition:all var(--tr);cursor:pointer;border:none;white-space:nowrap;}
+.bg{background:var(--gold);color:var(--obsidian);border:1.5px solid var(--gold);}
+.bg:hover{background:var(--gold2);border-color:var(--gold2);transform:translateY(-1px);}
+.bgh{background:transparent;color:var(--cream);border:1.5px solid rgba(236,234,230,.28);}
+.bgh:hover{border-color:var(--cream);}
+.bo{background:transparent;color:var(--gold);border:1.5px solid var(--gold);}
+.bo:hover{background:var(--gold);color:var(--obsidian);}
+.blg{padding:15px 38px;font-size:15px;}
+.bfw{width:100%;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(6,11,24,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(212,175,55,.14);transition:box-shadow .3s;}
+.ni{display:flex;align-items:center;justify-content:space-between;height:80px;}
+
+/* ── LOGO ── */
+.logo-wrap{cursor:pointer;display:flex;flex-direction:row;align-items:center;flex-shrink:0;gap:0;text-decoration:none;}
+.logo-wrap:hover{opacity:.88;}
+.logo-diamond{display:block;flex-shrink:0;}
+.logo-divider{width:1px;height:36px;background:rgba(212,175,55,0.32);margin:0 13px;flex-shrink:0;}
+.logo-text{display:flex;flex-direction:column;align-items:center;}
+.logo-wordmark{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;letter-spacing:.3em;color:#F6F4EE;text-transform:uppercase;line-height:1;}
+.logo-wordmark .ga{background:linear-gradient(160deg,#FAE880 0%,#D4AF37 50%,#B8921A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-tagline{font-family:'DM Sans',sans-serif;font-size:6px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;color:#D4AF37;margin-top:5px;white-space:nowrap;text-align:center;}
+
+.nl{display:flex;align-items:center;gap:2px;}
+.nl button{font-size:13.5px;font-weight:400;color:var(--tl);padding:8px 14px;border-radius:var(--r);border:none;background:none;cursor:pointer;font-family:var(--fb);transition:color var(--tr);letter-spacing:.01em;}
+.nl button:hover{color:var(--cream);}
+.nt{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer;}
+.nt span{display:block;width:22px;height:1.5px;background:var(--cream);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;background:var(--obsidian);position:relative;overflow:hidden;}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(11,61,145,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(11,61,145,.07) 1px,transparent 1px);background-size:62px 62px;pointer-events:none;}
+.hglow{position:absolute;top:-10%;right:-5%;width:65%;height:85%;background:radial-gradient(ellipse at 65% 35%,rgba(11,61,145,.32) 0%,transparent 65%);pointer-events:none;}
+.hglow2{position:absolute;bottom:-5%;left:-5%;width:40%;height:50%;background:radial-gradient(ellipse at 30% 70%,rgba(212,175,55,.06) 0%,transparent 60%);pointer-events:none;}
+.hi{position:relative;z-index:1;max-width:820px;}
+.eye{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;display:flex;align-items:center;gap:10px;}
+.eye::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2.2s infinite;flex-shrink:0;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.6);}}
+.h1{font-family:var(--fd);font-size:clamp(46px,7vw,86px);font-weight:500;line-height:1.06;color:var(--cream);margin-bottom:26px;}
+.h1 span{color:var(--gold);}
+.hsub{font-size:clamp(16px,2vw,19px);color:var(--tl);max-width:580px;margin-bottom:42px;font-weight:300;line-height:1.7;}
+.hctas{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ── PROOF BAR ── */
+.proof{background:var(--navy);border-top:1px solid rgba(212,175,55,.2);border-bottom:1px solid rgba(212,175,55,.2);padding:40px 0;}
+.pi{display:flex;align-items:center;justify-content:center;}
+.pitem{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 72px;}
+.pn{font-family:var(--fd);font-size:44px;font-weight:600;color:var(--gold);line-height:1;margin-bottom:6px;}
+.pl{font-size:12px;color:var(--tl);letter-spacing:.04em;font-weight:300;}
+.pdiv{width:1px;height:56px;background:rgba(212,175,55,.2);flex-shrink:0;}
+
+/* ── SECTIONS ── */
+.s{padding:92px 0;}
+.sn{background:var(--navy);}
+.sr{background:var(--royal);position:relative;overflow:hidden;}
+.sr::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.04) 1px,transparent 1px);background-size:42px 42px;}
+.srz{position:relative;z-index:1;}
+.sh{text-align:center;margin-bottom:54px;}
+.se{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.st{font-family:var(--fd);font-size:clamp(30px,4vw,52px);font-weight:500;line-height:1.13;color:var(--cream);margin-bottom:16px;}
+.ss{font-size:16px;color:var(--tl);max-width:520px;margin:0 auto;font-weight:300;line-height:1.68;}
+.cl{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.ct{font-family:var(--fd);font-size:clamp(26px,3.5vw,42px);font-weight:500;color:var(--cream);line-height:1.18;margin-bottom:16px;}
+.cb{font-size:15px;color:var(--tl);line-height:1.75;font-weight:300;margin-bottom:14px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+
+/* ── 3 CARDS ── */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.08);border-radius:var(--rl);overflow:hidden;}
+.g3c{background:var(--navy);padding:36px 28px;transition:background var(--tr);}
+.g3c:hover{background:rgba(11,29,53,.95);}
+.g3ico{margin-bottom:20px;}
+.g3t{font-family:var(--fd);font-size:21px;font-weight:500;color:var(--cream);margin-bottom:12px;}
+.g3b{font-size:14px;color:var(--tl);line-height:1.72;font-weight:300;}
+
+/* ── SOLUTIONS TILES ── */
+.sg{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.07);border-radius:var(--rl);overflow:hidden;}
+.st2{background:var(--obsidian);padding:28px 20px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:all var(--tr);position:relative;}
+.st2::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform var(--tr);}
+.st2:hover{background:var(--navy);}
+.st2:hover::after{transform:scaleX(1);}
+.st2:hover .sarr{transform:translateX(4px);color:var(--gold);}
+.snum{font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.1em;}
+.stit{font-family:var(--fd);font-size:18px;font-weight:500;color:var(--cream);line-height:1.25;}
+.sdesc{font-size:13px;color:var(--tl);line-height:1.62;font-weight:300;flex:1;}
+.sarr{font-size:16px;color:var(--tm);transition:all var(--tr);align-self:flex-end;margin-top:6px;}
+
+/* ── APPROACH ── */
+.ai{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.as{display:flex;flex-direction:column;}
+.astep{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid rgba(212,175,55,.12);}
+.astep:last-child{border-bottom:none;}
+.anum{font-family:var(--fd);font-size:30px;font-weight:600;color:var(--gold);opacity:.35;line-height:1;min-width:42px;}
+.atit{font-size:14px;font-weight:500;color:var(--cream);margin-bottom:4px;}
+.adesc{font-size:13px;color:var(--tl);font-weight:300;line-height:1.62;}
+
+/* ── STORY CARDS ── */
+.sgg{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.scard{background:var(--navy);border:1px solid rgba(212,175,55,.12);border-radius:var(--rl);padding:36px;transition:all var(--tr);}
+.scard:hover{border-color:rgba(212,175,55,.3);transform:translateY(-2px);}
+.itag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.2);padding:3px 10px;border-radius:20px;margin-bottom:16px;}
+.sct{font-family:var(--fd);font-size:20px;font-weight:500;color:var(--cream);margin-bottom:12px;line-height:1.3;}
+.scb{font-size:14px;color:var(--tl);line-height:1.7;font-weight:300;margin-bottom:20px;}
+.slink{font-size:13px;font-weight:500;color:var(--gold);cursor:pointer;background:none;border:none;font-family:var(--fb);padding:0;transition:opacity var(--tr);}
+.slink:hover{opacity:.7;}
+
+/* ── TEAM ── */
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.tc{background:var(--obsidian);border:1px solid rgba(212,175,55,.1);border-radius:var(--rl);padding:32px 24px;transition:all var(--tr);}
+.tc:hover{border-color:rgba(212,175,55,.26);transform:translateY(-2px);}
+.tav{width:48px;height:48px;border-radius:50%;background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.28);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--gold);margin-bottom:18px;letter-spacing:.05em;}
+.tn{font-family:var(--fd);font-size:21px;font-weight:500;color:var(--cream);margin-bottom:3px;}
+.tr2{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block;}
+.tb{font-size:13px;color:var(--tl);line-height:1.7;font-weight:300;}
+
+/* ── INNER PAGE HERO ── */
+.ph{padding:140px 0 72px;background:var(--obsidian);border-bottom:1px solid rgba(212,175,55,.1);position:relative;overflow:hidden;}
+.ph::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(11,61,145,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(11,61,145,.07) 1px,transparent 1px);background-size:62px 62px;}
+.ph::after{content:'';position:absolute;top:-20%;right:-10%;width:55%;height:90%;background:radial-gradient(ellipse at 65% 35%,rgba(11,61,145,.28) 0%,transparent 65%);}
+.ph .w{position:relative;z-index:1;}
+.pe{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.pt{font-family:var(--fd);font-size:clamp(34px,5vw,64px);font-weight:500;line-height:1.1;color:var(--cream);margin-bottom:20px;max-width:760px;}
+.psub{font-size:17px;color:var(--tl);font-weight:300;max-width:560px;line-height:1.68;}
+
+/* ── CAPABILITY (solutions page) ── */
+.cap{padding:72px 0;border-bottom:1px solid rgba(212,175,55,.08);}
+.cap:last-child{border-bottom:none;}
+.capg{display:grid;grid-template-columns:1fr 1.6fr;gap:52px;align-items:start;}
+.capn{font-family:var(--fd);font-size:68px;font-weight:600;color:rgba(212,175,55,.1);line-height:1;margin-bottom:6px;}
+.capt{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(212,175,55,.28);padding:3px 10px;border-radius:20px;}
+
+/* ── 4 STEPS ── */
+.sg4{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.07);border-radius:var(--rl);overflow:hidden;margin-top:3rem;}
+.sc4{background:var(--obsidian);padding:36px 24px;transition:background var(--tr);}
+.sc4:hover{background:var(--navy);}
+.sn4{font-family:var(--fd);font-size:44px;font-weight:600;color:rgba(212,175,55,.18);line-height:1;margin-bottom:14px;}
+.st4{font-family:var(--fd);font-size:19px;font-weight:500;color:var(--cream);margin-bottom:10px;line-height:1.3;}
+.sb4{font-size:13px;color:var(--tl);line-height:1.7;font-weight:300;}
+
+/* ── WHY GRID ── */
+.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.dc{border-left:2px solid var(--gold);padding:22px 22px 22px 26px;background:rgba(11,25,53,.4);border-radius:0 var(--rl) var(--rl) 0;transition:background var(--tr);}
+.dc:hover{background:rgba(11,25,53,.75);}
+.dt{font-family:var(--fd);font-size:18px;font-weight:500;color:var(--cream);margin-bottom:8px;}
+.dd{font-size:13px;color:var(--tl);line-height:1.68;font-weight:300;}
+
+/* ── FULL STORY ── */
+.sf{background:var(--navy);border:1px solid rgba(212,175,55,.12);border-radius:var(--rl);padding:44px;margin-bottom:22px;transition:border-color var(--tr);}
+.sf:hover{border-color:rgba(212,175,55,.24);}
+.slbl{font-size:11px;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:block;margin-top:22px;}
+.slbl:first-of-type{margin-top:0;}
+.stxt{font-size:14px;color:var(--tl);line-height:1.72;font-weight:300;margin-bottom:4px;}
+.ob{background:rgba(212,175,55,.05);border:1px solid rgba(212,175,55,.14);border-radius:var(--r);padding:20px 24px;margin-top:20px;}
+.olbl{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;}
+.otxt{font-size:14px;color:var(--cream);line-height:1.65;}
+
+/* ── CONNECT FORM ── */
+.fsec{padding:72px 0;background:var(--navy);}
+.fig{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+.finfo h2{font-family:var(--fd);font-size:36px;font-weight:500;color:var(--cream);margin-bottom:14px;line-height:1.2;}
+.finfo p{font-size:15px;color:var(--tl);font-weight:300;line-height:1.72;margin-bottom:10px;}
+.reas{display:flex;flex-direction:column;gap:10px;margin-top:28px;}
+.ri{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--tl);font-weight:300;}
+.rd{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:7px;flex-shrink:0;}
+.cform{background:var(--obsidian);border:1px solid rgba(212,175,55,.12);border-radius:var(--rl);padding:36px;}
+.fg{margin-bottom:18px;}
+.flbl{display:block;font-size:12px;font-weight:500;color:var(--cream);margin-bottom:7px;letter-spacing:.03em;}
+.fi,.fsl,.fta{width:100%;background:rgba(11,25,53,.5);border:1px solid rgba(212,175,55,.15);border-radius:var(--r);padding:11px 14px;font-family:var(--fb);font-size:14px;color:var(--cream);transition:border-color var(--tr);-webkit-appearance:none;appearance:none;}
+.fi:focus,.fsl:focus,.fta:focus{outline:none;border-color:var(--gold);}
+.fi::placeholder,.fta::placeholder{color:var(--tm);}
+.fsl option{background:var(--navy);color:var(--cream);}
+.fta{min-height:110px;resize:vertical;}
+.fnote{font-size:11px;color:var(--tm);margin-top:10px;line-height:1.5;}
+
+/* ── FINAL CTA ── */
+.fcta{padding:108px 0;background:var(--obsidian);border-top:1px solid rgba(212,175,55,.12);text-align:center;}
+.fh{font-family:var(--fd);font-size:clamp(34px,5vw,58px);font-weight:500;color:var(--cream);margin-bottom:18px;line-height:1.15;}
+.fsub{font-size:17px;color:var(--tl);max-width:490px;margin:0 auto 36px;font-weight:300;line-height:1.65;}
+
+/* ── FOOTER ── */
+.foot{background:var(--obsidian);border-top:1px solid rgba(212,175,55,.08);padding:56px 0 0;}
+.fti{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;padding-bottom:56px;border-bottom:1px solid rgba(212,175,55,.07);}
+.ftag{font-size:13px;color:var(--tm);margin-top:10px;font-weight:300;}
+.fls{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.fct{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.fls ul{display:flex;flex-direction:column;gap:9px;}
+.fls button{font-size:13px;color:var(--tl);font-weight:300;transition:color var(--tr);background:none;border:none;cursor:pointer;font-family:var(--fb);text-align:left;padding:0;}
+.fls button:hover{color:var(--cream);}
+.fb2{padding:20px 0;}
+.fb2 .w{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.fb2 p{font-size:11px;color:var(--tm);font-weight:300;}
+
+/* ── FADE ── */
+.fad{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease;}
+.fad.vis{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .ai,.g2,.fig,.capg{grid-template-columns:1fr;gap:40px;}
+  .sg4{grid-template-columns:repeat(2,1fr);}
+  .g3,.sg{grid-template-columns:1fr;}
+  .sgg,.tg{grid-template-columns:1fr;}
+  .fti{grid-template-columns:1fr;gap:36px;}
+  .fls{grid-template-columns:repeat(2,1fr);}
+  .pi{gap:0;flex-wrap:wrap;}
+  .pitem{padding:14px 32px;min-width:33%;}
+}
+@media(max-width:640px){
+  .nl{display:none;flex-direction:column;position:fixed;top:80px;left:0;right:0;background:rgba(6,11,24,.98);padding:16px;gap:4px;border-bottom:1px solid rgba(212,175,55,.12);}
+  .nl.open{display:flex;}
+  .nt{display:flex;}
+  .hctas{flex-direction:column;}
+  .hctas .btn{width:100%;}
+  .pi{flex-direction:column;}
+  .pdiv{width:50px;height:1px;margin:4px 0;}
+  .pitem{padding:12px 20px;min-width:100%;}
+  .sg4{grid-template-columns:1fr;}
+  .sg{grid-template-columns:1fr;}
+  .fls{grid-template-columns:1fr;}
+  .fb2 .w{flex-direction:column;text-align:center;}
+  .cform{padding:22px 16px;}
+  .sf{padding:26px;}
+  .dg{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+<div class="w ni">
+
+  <!-- LOGO -->
+  <div class="logo-wrap" onclick="go('home')" role="button" tabindex="0" aria-label="Tranzin home">
+    <!-- Diamond mark -->
+    <svg class="logo-diamond" width="36" height="42" viewBox="0 0 90 104" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gd" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FAE880"/>
+          <stop offset="30%" stop-color="#D4AF37"/>
+          <stop offset="65%" stop-color="#B8921A"/>
+          <stop offset="100%" stop-color="#7C5C08"/>
+        </linearGradient>
+        <radialGradient id="gr" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFFDE0" stop-opacity="0.88"/>
+          <stop offset="55%" stop-color="#D4AF37" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <line x1="45" y1="2"  x2="45" y2="102" stroke="#5298D4" stroke-width="0.8" stroke-opacity="0.4"/>
+      <line x1="88" y1="26" x2="2"  y2="78"  stroke="#5298D4" stroke-width="0.8" stroke-opacity="0.4"/>
+      <line x1="88" y1="78" x2="2"  y2="26"  stroke="#5298D4" stroke-width="0.8" stroke-opacity="0.4"/>
+      <polygon points="45,2 88,26 88,78 45,102 2,78 2,26"  fill="none" stroke="#5298D4" stroke-width="2"   stroke-opacity="0.9"/>
+      <polygon points="45,22 74,39 74,65 45,82 16,65 16,39" fill="none" stroke="#2E68A8" stroke-width="1"   stroke-opacity="0.55"/>
+      <polygon points="45,40 62,50 62,54 45,64 28,54 28,50" fill="none" stroke="#D4AF37" stroke-width="0.9" stroke-opacity="0.8"/>
+      <circle cx="45" cy="52" r="16" fill="url(#gr)"/>
+      <circle cx="45"  cy="2"   r="2.2" fill="url(#gd)"/>
+      <circle cx="88"  cy="26"  r="2.2" fill="url(#gd)"/>
+      <circle cx="88"  cy="78"  r="2.2" fill="url(#gd)"/>
+      <circle cx="45"  cy="102" r="2.2" fill="url(#gd)"/>
+      <circle cx="2"   cy="78"  r="2.2" fill="url(#gd)"/>
+      <circle cx="2"   cy="26"  r="2.2" fill="url(#gd)"/>
+      <circle cx="45"  cy="52"  r="4.5" fill="url(#gd)"/>
+    </svg>
+    <!-- Divider -->
+    <div class="logo-divider"></div>
+    <!-- Name + Tagline -->
+    <div class="logo-text">
+      <div class="logo-wordmark">TR<span class="ga">A</span>NZ<span class="ga">I</span>N</div>
+      <div class="logo-tagline">OUTCOMES FIRST. TECHNOLOGY SECOND.</div>
+    </div>
+  </div>
+
+  <button class="nt" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nl" id="nl">
+    <li><button onclick="go('journey')">Our Journey</button></li>
+    <li><button onclick="go('solutions')">Solutions</button></li>
+    <li><button onclick="go('approach')">Our Approach</button></li>
+    <li><button onclick="go('stories')">Success Stories</button></li>
+    <li><button onclick="go('why')">Why Tranzin</button></li>
+    <li><button class="btn bg" style="padding:10px 22px;font-size:13px;" onclick="go('connect')">Free Assessment</button></li>
+  </ul>
+</div>
+</nav>
+
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div class="pg on" id="pg-home">
+
+  <section class="hero">
+    <div class="hgrid"></div>
+    <div class="hglow"></div>
+    <div class="hglow2"></div>
+    <div class="w hi">
+      <p class="eye">The AI revolution is here</p>
+      <h1 class="h1">You are at the most<br/><span>important moment</span><br/>in your business history.</h1>
+      <p class="hsub">The question is not whether to transform — it is not optional anymore. It is the need of the hour. TRANZIN guides small and medium businesses through every step of that transformation, turning operational friction into intelligent flow.</p>
+      <div class="hctas">
+        <button class="btn bg blg" onclick="go('connect')">Get your free AI readiness assessment</button>
+        <button class="btn bgh blg" onclick="go('journey')">Learn our story</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="w pi">
+      <div class="pitem"><span class="pn">3+</span><span class="pl">Decades of Cross-Industry Experience</span></div>
+      <div class="pdiv"></div>
+      <div class="pitem"><span class="pn">4–6 wks</span><span class="pl">Average Assessment-to-Roadmap Timeline</span></div>
+      <div class="pdiv"></div>
+      <div class="pitem"><span class="pn">HI + AI</span><span class="pl">Human-Led, Technology-Powered</span></div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="w">
+      <div class="sh">
+        <p class="se">The moment</p>
+        <h2 class="st">The AI revolution doesn't wait.<br/>Neither should you.</h2>
+      </div>
+      <div class="g3">
+        <div class="g3c fad">
+          <div class="g3ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#D4AF37" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <h3 class="g3t">What is happening</h3>
+          <p class="g3b">AI is reshaping every industry. SMBs that move now will lead. Those that wait will be left behind — not by large corporations, but by competitors just like them who moved first.</p>
+        </div>
+        <div class="g3c fad">
+          <div class="g3ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L15 9H22L16.5 13.5L18.5 21L12 17L5.5 21L7.5 13.5L2 9H9L12 2Z" stroke="#D4AF37" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+          <h3 class="g3t">What we see</h3>
+          <p class="g3b">You don't need more tools. You need one proven automation that works for your business, deployed fast, with results you can measure in weeks — not months.</p>
+        </div>
+        <div class="g3c fad">
+          <div class="g3ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="#D4AF37" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          <h3 class="g3t">What we do</h3>
+          <p class="g3b">Tranzin guides SMBs through AI transformation as a collective. We bring proven capabilities, real implementations, and a team that has done this before. You don't start from zero.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s sn">
+    <div class="w">
+      <div class="sh">
+        <p class="se">Our solutions</p>
+        <h2 class="st">Not a catalog of tools.<br/>A curated set of proven capabilities.</h2>
+        <p class="ss">Every solution has been deployed in production, tested in real conditions, and proven to deliver measurable results.</p>
+      </div>
+      <div class="sg">
+        <div class="st2 fad" onclick="go('solutions')"><span class="snum">01</span><h3 class="stit">Customer service automation</h3><p class="sdesc">Resolve more. Respond faster. Without adding headcount.</p><span class="sarr">→</span></div>
+        <div class="st2 fad" onclick="go('solutions')"><span class="snum">02</span><h3 class="stit">Marketing intelligence</h3><p class="sdesc">Know your market before your competitor does.</p><span class="sarr">→</span></div>
+        <div class="st2 fad" onclick="go('solutions')"><span class="snum">03</span><h3 class="stit">Business analytics & BI</h3><p class="sdesc">Your data is already telling you something. Are you listening?</p><span class="sarr">→</span></div>
+        <div class="st2 fad" onclick="go('solutions')"><span class="snum">04</span><h3 class="stit">Workflow automation</h3><p class="sdesc">Stop doing manually what a machine can do better.</p><span class="sarr">→</span></div>
+        <div class="st2 fad" onclick="go('solutions')"><span class="snum">05</span><h3 class="stit">Autonomous Workforce Planning</h3><p class="sdesc">The right people, in the right place, at the right time.</p><span class="sarr">→</span></div>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem;"><button class="btn bo" onclick="go('solutions')">Explore all solutions</button></div>
+    </div>
+  </section>
+
+  <section class="s sr">
+    <div class="w srz">
+      <div class="ai">
+        <div>
+          <p class="se">Our approach</p>
+          <h2 class="st" style="text-align:left;">Start small.<br/>Win fast.<br/>Expand with confidence.</h2>
+          <p class="ss" style="text-align:left;margin:0 0 2rem;">Every Tranzin engagement delivers your first results in 4–6 weeks. No big bang. No multi-year projects.</p>
+          <button class="btn bg" onclick="go('approach')">See how it works</button>
+        </div>
+        <div class="as">
+          <div class="astep"><span class="anum">01</span><div><h4 class="atit">Free AI readiness assessment</h4><p class="adesc">We map your operations and identify your single biggest automation opportunity.</p></div></div>
+          <div class="astep"><span class="anum">02</span><div><h4 class="atit">Transformation strategy</h4><p class="adesc">One automation to start. Clear ROI targets. A timeline you can hold us to.</p></div></div>
+          <div class="astep"><span class="anum">03</span><div><h4 class="atit">Implementation & results</h4><p class="adesc">First results in 4–6 weeks. You see impact before committing to the next step.</p></div></div>
+          <div class="astep"><span class="anum">04</span><div><h4 class="atit">Expand with confidence</h4><p class="adesc">Once you have proof, we scale transformation across your business.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="w">
+      <div class="sh">
+        <p class="se">Success stories</p>
+        <h2 class="st">These are not exceptional cases.<br/>This is what transformation looks like.</h2>
+      </div>
+      <div class="sgg">
+        <div class="scard fad"><span class="itag">Healthcare</span><h3 class="sct">Transforming customer service in a high-stakes environment</h3><p class="scb">A healthcare organization deployed AI-powered triage and routing — eliminating ticket backlog and cutting response times across 1,100+ installations.</p><button class="slink" onclick="go('stories')">Read the full story →</button></div>
+        <div class="scard fad"><span class="itag">Entertainment & Media</span><h3 class="sct">Bringing intelligence to audience engagement and operations</h3><p class="scb">Real-time dashboards, competitive intelligence, and audience segmentation — replacing instinct-based decisions with intelligence-driven strategy.</p><button class="slink" onclick="go('stories')">Read the full story →</button></div>
+      </div>
+      <div style="text-align:center;margin-top:2rem;"><button class="btn bg blg" onclick="go('connect')">Start writing your transformation story</button></div>
+    </div>
+  </section>
+
+  <section class="s sn">
+    <div class="w">
+      <div class="sh"><p class="se">The team</p><h2 class="st">The people behind your transformation.</h2></div>
+      <div class="tg">
+        <div class="tc fad"><div class="tav">VL</div><h3 class="tn">Vinay Lagisetty</h3><span class="tr2">Technology Advisor & AI Architect</span><p class="tb">Deep expertise in AI platform architecture with a track record of production-grade implementations across healthcare and entertainment. He ensures every solution we deploy is built to last and built to perform.</p></div>
+        <div class="tc fad"><div class="tav">AL</div><h3 class="tn">Ashwin Lima</h3><span class="tr2">Growth Navigator</span><p class="tb">35 years of enterprise sales experience across North America. He understands how businesses buy, what makes them hesitate, and what gives them the confidence to move forward.</p></div>
+        <div class="tc fad"><div class="tav">NK</div><h3 class="tn">Naren Kollu</h3><span class="tr2">Founder & AI Transformation Strategist</span><p class="tb">Designed the Tranzin model from the ground up — the philosophy, the approach, and the ecosystem. Built Tranzin specifically to deliver real AI transformation outcomes for SMBs.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fcta">
+    <div class="w">
+      <h2 class="fh">Your transformation starts<br/>with one conversation.</h2>
+      <p class="fsub">Free AI readiness assessment. No cost. No obligation. Just clarity on where your biggest automation opportunity is.</p>
+      <button class="btn bg blg" onclick="go('connect')">Book your free assessment now</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="w fti">
+      <div>
+        <div style="display:flex;flex-direction:row;align-items:center;gap:0;">
+          <svg width="28" height="33" viewBox="0 0 90 104" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gdf" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FAE880"/><stop offset="30%" stop-color="#D4AF37"/><stop offset="65%" stop-color="#B8921A"/><stop offset="100%" stop-color="#7C5C08"/></linearGradient><radialGradient id="grf" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFFDE0" stop-opacity="0.88"/><stop offset="55%" stop-color="#D4AF37" stop-opacity="0.28"/><stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/></radialGradient></defs><line x1="45" y1="2" x2="45" y2="102" stroke="#5298D4" stroke-width="0.8" stroke-opacity="0.4"/><line x1="88" y1="26" x2="2" y2="78" stroke="#5298D4" stroke-width="0.8" stroke-opacity="0.4"/><line x1="88" y1="78" x2="2" y2="26" stroke="#5298D4" stroke-width="0.8" stroke-opacity="0.4"/><polygon points="45,2 88,26 88,78 45,102 2,78 2,26" fill="none" stroke="#5298D4" stroke-width="2" stroke-opacity="0.9"/><polygon points="45,22 74,39 74,65 45,82 16,65 16,39" fill="none" stroke="#2E68A8" stroke-width="1" stroke-opacity="0.55"/><polygon points="45,40 62,50 62,54 45,64 28,54 28,50" fill="none" stroke="#D4AF37" stroke-width="0.9" stroke-opacity="0.8"/><circle cx="45" cy="52" r="16" fill="url(#grf)"/><circle cx="45" cy="2" r="2.2" fill="url(#gdf)"/><circle cx="88" cy="26" r="2.2" fill="url(#gdf)"/><circle cx="88" cy="78" r="2.2" fill="url(#gdf)"/><circle cx="45" cy="102" r="2.2" fill="url(#gdf)"/><circle cx="2" cy="78" r="2.2" fill="url(#gdf)"/><circle cx="2" cy="26" r="2.2" fill="url(#gdf)"/><circle cx="45" cy="52" r="4.5" fill="url(#gdf)"/></svg>
+          <div style="width:1px;height:28px;background:rgba(212,175,55,0.28);margin:0 11px;"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="logo-wordmark" style="font-size:14px;letter-spacing:.28em;">TR<span class="ga">A</span>NZ<span class="ga">I</span>N</div>
+            <div class="logo-tagline" style="font-size:5.5px;margin-top:4px;">OUTCOMES FIRST. TECHNOLOGY SECOND.</div>
+          </div>
+        </div>
+        <p class="ftag" style="margin-top:10px;">Outcomes First. Technology Second.</p>
+      </div>
+      <div class="fls">
+        <div><h4 class="fct">Company</h4><ul><li><button onclick="go('journey')">Our Journey</button></li><li><button onclick="go('why')">Why Tranzin</button></li><li><button onclick="go('connect')">Connect</button></li></ul></div>
+        <div><h4 class="fct">Solutions</h4><ul><li><button onclick="go('solutions')">Customer service</button></li><li><button onclick="go('solutions')">Marketing intelligence</button></li><li><button onclick="go('solutions')">Business analytics</button></li><li><button onclick="go('solutions')">Workflow automation</button></li><li><button onclick="go('solutions')">Workforce planning</button></li></ul></div>
+        <div><h4 class="fct">Get Started</h4><ul><li><button onclick="go('connect')">Free assessment</button></li><li><button onclick="go('approach')">Our approach</button></li><li><button onclick="go('stories')">Success stories</button></li></ul></div>
+      </div>
+    </div>
+    <div class="fb2"><div class="w"><p>© 2026 Tranzin Corporation. All rights reserved.</p><p>tranzin.com &nbsp;·&nbsp; tranzin.ca &nbsp;·&nbsp; tranzin.in</p></div></div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════ JOURNEY ═══════════════ -->
+<div class="pg" id="pg-journey">
+  <section class="ph"><div class="w"><p class="pe">Our Journey</p><h1 class="pt">We are living through the most pivotal moment in business history.</h1><p class="psub">Every generation has its defining shift. AI is that shift. And it is happening right now.</p></div></section>
+
+  <section class="s"><div class="w"><div class="g2">
+    <div><p class="cl">The pivot moment</p><h2 class="ct">The AI revolution doesn't wait for anyone.</h2></div>
+    <div><p class="cb">Every generation has its defining shift. The industrial revolution. The internet. Mobile. Each time, businesses that moved with the shift thrived. Those that waited, didn't.</p><p class="cb">AI is that shift. And it is happening right now. For the first time, small and mid-sized businesses have access to the same transformational capabilities that were once exclusive to the Fortune 500. The playing field has changed. The question is whether you step onto it.</p></div>
+  </div></div></section>
+
+  <section class="s sn"><div class="w"><div class="g2">
+    <div><p class="cl">The collective transformation</p><h2 class="ct">Transformation is not a solo journey.</h2></div>
+    <div><p class="cb">Think of how a thriving ecosystem transforms — a forest, a coral reef, a colony. Each part supports the others. The whole emerges stronger than any individual could alone. That is the Tranzin model.</p><p class="cb">SMBs, proven AI capabilities, and experienced practitioners moving through this AI revolution together. Not one business figuring it out alone. A collective ecosystem emerging stronger. You are part of this story. We all are.</p></div>
+  </div></div></section>
+
+  <section class="s sr"><div class="w srz"><div class="g2">
+    <div><p class="cl">Our belief</p><h2 class="ct">Behind every SMB are people who bet everything on a vision worth fighting for.</h2></div>
+    <div><p class="cb">Small and mid-sized businesses generate the majority of jobs, drive local economies, and fuel innovation at ground level. Yet when it comes to technology transformation, SMBs are consistently underserved — given tools without guidance, sold software without strategy, and left to figure out implementation alone.</p><p class="cb">Tranzin exists to change that. We bring the same quality of AI transformation that the world's leading enterprises are experiencing — scaled, simplified, and delivered for businesses like yours. Not adapted from enterprise. Built from the ground up for you.</p><button class="btn bg" onclick="go('connect')" style="margin-top:24px;">Begin the journey — free assessment</button></div>
+  </div></div></section>
+
+  <section class="s"><div class="w">
+    <div class="sh"><p class="se">The team</p><h2 class="st">The people behind your transformation.</h2></div>
+    <div class="tg">
+      <div class="tc fad"><div class="tav">VL</div><h3 class="tn">Vinay Lagisetty</h3><span class="tr2">Technology Advisor & AI Architect</span><p class="tb">Deep expertise in AI platform architecture with a track record of production-grade implementations across healthcare and entertainment. He ensures every solution we deploy is built to last and built to perform.</p></div>
+      <div class="tc fad"><div class="tav">AL</div><h3 class="tn">Ashwin Lima</h3><span class="tr2">Growth Navigator</span><p class="tb">35 years of enterprise sales experience across North America. He understands how businesses buy, what makes them hesitate, and what gives them the confidence to move forward.</p></div>
+      <div class="tc fad"><div class="tav">NK</div><h3 class="tn">Naren Kollu</h3><span class="tr2">Founder & AI Transformation Strategist</span><p class="tb">Designed the Tranzin model from the ground up — the philosophy, the approach, and the ecosystem. Built Tranzin specifically to deliver real AI transformation outcomes for SMBs.</p></div>
+    </div>
+  </div></section>
+
+  <section class="fcta"><div class="w"><h2 class="fh">Your transformation starts with one conversation.</h2><p class="fsub">No cost. No obligation. Just clarity on where your biggest automation opportunity is.</p><button class="btn bg blg" onclick="go('connect')">Begin the journey — free assessment</button></div></section>
+  <footer class="foot"><div class="w fti"><div><p style="font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--tl);">TRANZIN</p><p class="ftag">Outcomes First. Technology Second.</p></div><div class="fls"><div><h4 class="fct">Company</h4><ul><li><button onclick="go('home')">Home</button></li><li><button onclick="go('why')">Why Tranzin</button></li></ul></div><div><h4 class="fct">Solutions</h4><ul><li><button onclick="go('solutions')">All solutions</button></li></ul></div><div><h4 class="fct">Get Started</h4><ul><li><button onclick="go('connect')">Free assessment</button></li></ul></div></div></div><div class="fb2"><div class="w"><p>© 2026 Tranzin Corporation.</p><p>tranzin.com · tranzin.ca · tranzin.in</p></div></div></footer>
+</div>
+
+
+<!-- ═══════════════ SOLUTIONS ═══════════════ -->
+<div class="pg" id="pg-solutions">
+  <section class="ph"><div class="w"><p class="pe">Our Solutions</p><h1 class="pt">Not a catalog of tools.<br/>A curated set of proven capabilities.</h1><p class="psub">Every solution Tranzin brings has been deployed in production, tested in real conditions, and proven to deliver measurable results. We don't experiment on your business. We bring what works.</p></div></section>
+
+  <section class="s"><div class="w">
+    <div class="cap"><div class="capg"><div><div class="capn">01</div><span class="capt">Customer service automation</span></div><div><p class="cl">Automation that works while your team focuses on what matters</p><h2 class="ct">Resolve more. Respond faster. Without adding headcount.</h2><p class="cb">Your customer service team is handling the same questions, the same issues, the same requests — every single day. AI can triage and route those interactions automatically, respond to common queries instantly, and free your team to handle the conversations that actually need a human.</p><p class="cb">Deployed in healthcare environments with measurable reduction in response time and ticket backlog. This isn't a chatbot that frustrates your customers — it's intelligent triage that understands context, routes correctly, and escalates with full context when a human needs to step in.</p><button class="btn bg" onclick="go('connect')" style="margin-top:20px;">Start with a free assessment</button></div></div></div>
+    <div class="cap"><div class="capg"><div><div class="capn">02</div><span class="capt">Marketing intelligence</span></div><div><p class="cl">Real intelligence. Not more reports.</p><h2 class="ct">Know your market before your competitor does.</h2><p class="cb">Marketing decisions made on instinct are expensive. Marketing decisions made on real-time intelligence are powerful. Our marketing intelligence capability gives you visibility into your competitive landscape, your audience behavior, and your campaign performance — all in one unified view.</p><p class="cb">We surface the signals your competitors miss. Audience segmentation that goes beyond demographics. Campaign automation that adapts in real time based on what is actually working. Stop guessing. Start knowing.</p><button class="btn bg" onclick="go('connect')" style="margin-top:20px;">Start with a free assessment</button></div></div></div>
+    <div class="cap"><div class="capg"><div><div class="capn">03</div><span class="capt">Business analytics & BI</span></div><div><p class="cl">From raw data to clear decisions</p><h2 class="ct">Your data is already telling you something. Are you listening?</h2><p class="cb">Most SMBs are sitting on more data than they realize — in their CRM, their operations, their customer interactions. The problem isn't a lack of data. It's the absence of a clear view that turns that data into decisions your leadership team can act on today.</p><p class="cb">Our BI capability transforms raw operational data into clear dashboards and actionable intelligence. You see performance in real time. You spot problems before they become crises. No data science team required. Clarity in weeks.</p><button class="btn bg" onclick="go('connect')" style="margin-top:20px;">Start with a free assessment</button></div></div></div>
+    <div class="cap"><div class="capg"><div><div class="capn">04</div><span class="capt">Workflow automation</span></div><div><p class="cl">34+ connectors. Zero disruption.</p><h2 class="ct">Stop doing manually what a machine can do better.</h2><p class="cb">The average SMB has dozens of manual processes that repeat daily, weekly, monthly — consuming time, creating errors, and slowing growth. Every one of those processes is costing you more than you think.</p><p class="cb">Our workflow automation engine connects your existing systems and automates those processes end-to-end. 34+ connectors means it works with the tools you already use. No rip-and-replace. No disruption. One automated process frees your team. Five transforms your operations.</p><button class="btn bg" onclick="go('connect')" style="margin-top:20px;">Start with a free assessment</button></div></div></div>
+    <div class="cap"><div class="capg"><div><div class="capn">05</div><span class="capt">Autonomous Workforce Planning</span></div><div><p class="cl">AI-driven resource intelligence</p><h2 class="ct">The right people, in the right place, at the right time.</h2><p class="cb">Staffing is one of the largest costs and greatest operational challenges for growing SMBs. Too many people on slow days. Not enough on peak days. Scheduling built on gut feel instead of data.</p><p class="cb">Our AI-driven workforce planning analyzes your demand patterns, schedules resources intelligently, and tracks performance in real time. You stop overstaffing, understaffing, and guessing — and start operating with precision.</p><button class="btn bg" onclick="go('connect')" style="margin-top:20px;">Start with a free assessment</button></div></div></div>
+  </div></section>
+
+  <section class="fcta"><div class="w"><h2 class="fh">Not sure where to start?</h2><p class="fsub">That is exactly what the free AI readiness assessment is for. We map your operations and tell you which capability delivers the fastest, clearest ROI.</p><button class="btn bg blg" onclick="go('connect')">Get your free assessment</button></div></section>
+  <footer class="foot"><div class="w fti"><div><p style="font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--tl);">TRANZIN</p><p class="ftag">Outcomes First. Technology Second.</p></div><div class="fls"><div><h4 class="fct">Company</h4><ul><li><button onclick="go('journey')">Our Journey</button></li><li><button onclick="go('why')">Why Tranzin</button></li></ul></div><div><h4 class="fct">Solutions</h4><ul><li><button onclick="go('solutions')">All solutions</button></li></ul></div><div><h4 class="fct">Get Started</h4><ul><li><button onclick="go('connect')">Free assessment</button></li><li><button onclick="go('approach')">Our approach</button></li></ul></div></div></div><div class="fb2"><div class="w"><p>© 2026 Tranzin Corporation.</p><p>tranzin.com · tranzin.ca · tranzin.in</p></div></div></footer>
+</div>
+
+
+<!-- ═══════════════ APPROACH ═══════════════ -->
+<div class="pg" id="pg-approach">
+  <section class="ph"><div class="w"><p class="pe">Our Approach</p><h1 class="pt">We don't hand you tools<br/>and wish you luck.</h1><p class="psub">Every Tranzin engagement follows a proven four-stage approach. Start small, identify your single most winnable automation, deploy fast, prove ROI — then expand.</p></div></section>
+
+  <section class="s"><div class="w">
+    <div class="sh"><p class="se">The four stages</p><h2 class="st">Start small. Win fast.<br/>Expand with confidence.</h2><p class="ss">We designed our approach specifically to eliminate the risk of large AI projects that deliver nothing.</p></div>
+    <div class="sg4">
+      <div class="sc4"><div class="sn4">01</div><h3 class="st4">Free AI readiness assessment</h3><p class="sb4">We map your operations, identify your biggest automation opportunity, and tell you exactly what is possible — and what it will take. No cost. No obligation. Just clarity.</p></div>
+      <div class="sc4"><div class="sn4">02</div><h3 class="st4">Transformation strategy</h3><p class="sb4">We define your roadmap. One automation to start. Clear ROI targets. A timeline you can hold us to. You know exactly what you are getting and when you will get it.</p></div>
+      <div class="sc4"><div class="sn4">03</div><h3 class="st4">Implementation & results</h3><p class="sb4">We deploy your first automation using proven, production-grade capabilities. First results in 4–6 weeks. You see impact — measurable, documented, real — before committing to the next step.</p></div>
+      <div class="sc4"><div class="sn4">04</div><h3 class="st4">Expand with confidence</h3><p class="sb4">Once you have proof, we scale transformation across your business. Each new automation builds on the last. The collective capability grows with you — and so does the ROI.</p></div>
+    </div>
+  </div></section>
+
+  <section class="s sr"><div class="w srz"><div class="g2">
+    <div><p class="cl">Why this approach works</p><h2 class="ct">No big bang. No multi-year projects. Results in weeks.</h2></div>
+    <div><p class="cb">Every engagement starts with one winnable automation — small enough to deploy quickly, meaningful enough to generate real ROI. When you see results, you expand. When you expand, you compound.</p><p class="cb">That is how transformation actually happens. Not in one big leap. In deliberate, proven steps — together with a team that has done this before across healthcare, entertainment, public sector, IT, and EdTech.</p><p class="cb">You are not the first SMB to go through this journey with us. You benefit from everything the collective has learned before you.</p><button class="btn bg" onclick="go('connect')" style="margin-top:24px;">Start your journey — free assessment</button></div>
+  </div></div></section>
+
+  <section class="fcta"><div class="w"><h2 class="fh">Ready to take the first step?</h2><p class="fsub">The free AI readiness assessment is where every transformation begins. One conversation. Complete clarity. No obligation.</p><button class="btn bg blg" onclick="go('connect')">Book your free assessment</button></div></section>
+  <footer class="foot"><div class="w fti"><div><p style="font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--tl);">TRANZIN</p><p class="ftag">Outcomes First. Technology Second.</p></div><div class="fls"><div><h4 class="fct">Company</h4><ul><li><button onclick="go('journey')">Our Journey</button></li><li><button onclick="go('why')">Why Tranzin</button></li></ul></div><div><h4 class="fct">Solutions</h4><ul><li><button onclick="go('solutions')">All solutions</button></li></ul></div><div><h4 class="fct">Get Started</h4><ul><li><button onclick="go('connect')">Free assessment</button></li><li><button onclick="go('stories')">Success stories</button></li></ul></div></div></div><div class="fb2"><div class="w"><p>© 2026 Tranzin Corporation.</p><p>tranzin.com · tranzin.ca · tranzin.in</p></div></div></footer>
+</div>
+
+
+<!-- ═══════════════ STORIES ═══════════════ -->
+<div class="pg" id="pg-stories">
+  <section class="ph"><div class="w"><p class="pe">Success Stories</p><h1 class="pt">These are not exceptional cases.<br/>This is what transformation looks like.</h1><p class="psub">Every story here started with one conversation — a free assessment, a clear picture of what was possible, and a decision to move forward.</p></div></section>
+
+  <section class="s"><div class="w">
+    <article class="sf fad">
+      <span class="itag">Healthcare</span>
+      <h2 class="ct" style="margin:16px 0 24px;">Transforming customer service in a high-stakes environment</h2>
+      <span class="slbl">The challenge</span>
+      <p class="stxt">A healthcare organization managing high volumes of patient and administrative queries was struggling with response times, ticket backlog, and inconsistent service delivery. Manual triage was creating bottlenecks that affected patient experience directly and carried real operational cost. Leadership knew automation was the answer — but didn't know where to start or which solution to trust.</p>
+      <span class="slbl">The transformation</span>
+      <p class="stxt">Tranzin started with a free AI readiness assessment that mapped the organization's query volume, ticket categories, and escalation patterns. We identified customer service automation as the single highest-ROI opportunity. We deployed AI-powered intelligent triage, automated routing, and instant response capability — integrated directly into the organization's existing systems. Operational in weeks, not months.</p>
+      <div class="ob"><span class="olbl">The outcome</span><p class="otxt">Significant reduction in response time. Ticket backlog eliminated. The team refocused on high-value patient interactions. The system now operates across 1,100+ installations in the ecosystem — proof that what worked here can work at scale.</p></div>
+    </article>
+
+    <article class="sf fad">
+      <span class="itag">Entertainment & Media</span>
+      <h2 class="ct" style="margin:16px 0 24px;">Bringing intelligence to audience engagement and operations</h2>
+      <span class="slbl">The challenge</span>
+      <p class="stxt">An entertainment organization needed better visibility into audience behavior, competitive positioning, and operational performance — but lacked the data infrastructure to turn raw information into decisions leadership could act on. Reports existed. Intelligence did not. Every major decision was being made on instinct.</p>
+      <span class="slbl">The transformation</span>
+      <p class="stxt">Tranzin implemented marketing intelligence and business analytics capabilities — giving leadership real-time dashboards that consolidated data from across the organization, competitive intelligence that surfaced what competitors were doing before it became visible in the market, and audience segmentation that showed exactly who was engaging and why. Built on existing data sources — no new infrastructure required.</p>
+      <div class="ob"><span class="olbl">The outcome</span><p class="otxt">Faster decisions based on real data. Clearer understanding of audience segments that directly informed programming and marketing strategy. Operational improvements driven by intelligence, not instinct. Leadership confidence measurably higher across the team.</p></div>
+    </article>
+
+    <div style="text-align:center;padding:52px 0 20px;">
+      <p class="se">Coming next</p>
+      <h2 class="st" style="margin-bottom:14px;">The next transformation story could be yours.</h2>
+      <p class="ss" style="margin-bottom:32px;">Every organization above started with one conversation. A free assessment. A clear picture of what was possible. Then a decision to move forward.</p>
+      <button class="btn bg blg" onclick="go('connect')">Start writing your story</button>
+    </div>
+  </div></section>
+
+  <footer class="foot"><div class="w fti"><div><p style="font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--tl);">TRANZIN</p><p class="ftag">Outcomes First. Technology Second.</p></div><div class="fls"><div><h4 class="fct">Company</h4><ul><li><button onclick="go('journey')">Our Journey</button></li><li><button onclick="go('why')">Why Tranzin</button></li></ul></div><div><h4 class="fct">Solutions</h4><ul><li><button onclick="go('solutions')">All solutions</button></li></ul></div><div><h4 class="fct">Get Started</h4><ul><li><button onclick="go('connect')">Free assessment</button></li><li><button onclick="go('approach')">Our approach</button></li></ul></div></div></div><div class="fb2"><div class="w"><p>© 2026 Tranzin Corporation.</p><p>tranzin.com · tranzin.ca · tranzin.in</p></div></div></footer>
+</div>
+
+
+<!-- ═══════════════ WHY ═══════════════ -->
+<div class="pg" id="pg-why">
+  <section class="ph"><div class="w"><p class="pe">Why Tranzin</p><h1 class="pt">Enterprise-grade transformation.<br/>Built for businesses like yours.</h1><p class="psub">There is no shortage of AI vendors and consultants. Here is what makes Tranzin different — and why it matters for you specifically.</p></div></section>
+
+  <section class="s"><div class="w">
+    <div class="sh"><p class="se">Five reasons SMBs choose Tranzin</p><h2 class="st">We designed everything for the way<br/>you actually operate.</h2></div>
+    <div class="dg">
+      <div class="dc fad"><h3 class="dt">You are not alone</h3><p class="dd">You join a collective ecosystem of businesses, capabilities, and practitioners moving through this AI revolution together. Shared knowledge. Proven paths. Real support from people who have done this before.</p></div>
+      <div class="dc fad"><h3 class="dt">Proven, not theoretical</h3><p class="dd">Every capability we deploy has been tested in production environments — healthcare, entertainment, public sector, IT, and EdTech. We don't experiment on your business. We bring what already works.</p></div>
+      <div class="dc fad"><h3 class="dt">Outcome first, always</h3><p class="dd">We measure success by your results — not by hours billed or tools deployed. If you don't see ROI, we haven't done our job. It is that simple.</p></div>
+      <div class="dc fad"><h3 class="dt">A partner, not a vendor — your AIification journey, our shared commitment</h3><p class="dd">Tranzin doesn't sell you a product and move on. We walk with you through the transformation journey — from your first assessment to your tenth automation. We grow when you grow.</p></div>
+      <div class="dc fad"><h3 class="dt">Speed to real results</h3><p class="dd">Your first automation goes live in 4–6 weeks. You see measurable impact before committing to the next step. No long lead times. No waiting a year to find out if it worked.</p></div>
+    </div>
+  </div></section>
+
+  <section class="s sr"><div class="w srz"><div class="g2">
+    <div><p class="cl">Our belief</p><h2 class="ct">SMBs are the backbone of economic growth. You deserve enterprise-grade transformation.</h2></div>
+    <div><p class="cb">The largest enterprises in the world are deploying AI across every function right now. They have dedicated technology teams, implementation budgets, and vendor relationships that give them an enormous advantage.</p><p class="cb">Tranzin exists to close that gap. We bring the same quality of AI transformation — scaled, simplified, and delivered for the way SMBs actually operate. Not adapted from enterprise. Built from the ground up for you.</p><button class="btn bg" onclick="go('connect')" style="margin-top:24px;">See what this looks like for your business</button></div>
+  </div></div></section>
+
+  <section class="fcta"><div class="w"><h2 class="fh">Ready to find out what<br/>Tranzin can do for you?</h2><p class="fsub">The free AI readiness assessment gives you complete clarity on your biggest automation opportunity — in one conversation, at no cost.</p><button class="btn bg blg" onclick="go('connect')">Book your free assessment</button></div></section>
+  <footer class="foot"><div class="w fti"><div><p style="font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--tl);">TRANZIN</p><p class="ftag">Outcomes First. Technology Second.</p></div><div class="fls"><div><h4 class="fct">Company</h4><ul><li><button onclick="go('journey')">Our Journey</button></li><li><button onclick="go('why')">Why Tranzin</button></li></ul></div><div><h4 class="fct">Solutions</h4><ul><li><button onclick="go('solutions')">All solutions</button></li></ul></div><div><h4 class="fct">Get Started</h4><ul><li><button onclick="go('connect')">Free assessment</button></li><li><button onclick="go('stories')">Success stories</button></li></ul></div></div></div><div class="fb2"><div class="w"><p>© 2026 Tranzin Corporation.</p><p>tranzin.com · tranzin.ca · tranzin.in</p></div></div></footer>
+</div>
+
+
+<!-- ═══════════════ CONNECT ═══════════════ -->
+<div class="pg" id="pg-connect">
+  <section class="ph"><div class="w"><p class="pe">Connect</p><h1 class="pt">The transformation journey<br/>begins with one conversation.</h1><p class="psub">You don't need to have it figured out before you talk to us. Most SMBs come to us with one question: "Where do I even start?" That is exactly what we are here for.</p></div></section>
+
+  <section class="fsec"><div class="w"><div class="fig">
+    <div class="finfo">
+      <h2>Get your free AI readiness assessment.</h2>
+      <p>Tell us about your business and your biggest operational challenge. We will come back to you within 24 hours with a clear picture of your biggest automation opportunity — and what it would take to capture it.</p>
+      <p>No cost. No pressure. Just clarity.</p>
+      <div class="reas">
+        <div class="ri"><span class="rd"></span><span>Free assessment — no cost, no obligation</span></div>
+        <div class="ri"><span class="rd"></span><span>Response within 24 business hours</span></div>
+        <div class="ri"><span class="rd"></span><span>Clear, actionable findings — not a sales pitch</span></div>
+        <div class="ri"><span class="rd"></span><span>Your information stays private and secure</span></div>
+      </div>
+      <div style="margin-top:44px;padding-top:36px;border-top:1px solid rgba(212,175,55,.1);">
+        <p class="cl">Prefer to talk first?</p>
+        <h3 style="font-family:var(--fd);font-size:24px;font-weight:500;color:var(--cream);margin-bottom:10px;">Schedule a strategy conversation.</h3>
+        <p style="font-size:14px;color:var(--tl);font-weight:300;line-height:1.68;margin-bottom:18px;">Book a 30-minute call directly with our team. We listen, ask the right questions, and tell you honestly whether Tranzin is the right fit.</p>
+        <a href="mailto:hello@tranzin.com" class="btn bo">Schedule a call →</a>
+      </div>
+    </div>
+    <div>
+      <form class="cform" onsubmit="submitForm(event)">
+        <div class="fg"><label class="flbl" for="nm">Full name *</label><input class="fi" type="text" id="nm" placeholder="Your full name" required/></div>
+        <div class="fg"><label class="flbl" for="em">Business email *</label><input class="fi" type="email" id="em" placeholder="you@yourcompany.com" required/></div>
+        <div class="fg"><label class="flbl" for="co">Company name *</label><input class="fi" type="text" id="co" placeholder="Your company name" required/></div>
+        <div class="fg"><label class="flbl" for="rv">Annual revenue range</label><select class="fsl" id="rv"><option value="" disabled selected>Select a range</option><option>$2M – $10M</option><option>$10M – $50M</option><option>$50M – $100M</option><option>$100M – $200M</option></select></div>
+        <div class="fg"><label class="flbl" for="ind">Industry</label><select class="fsl" id="ind"><option value="" disabled selected>Select your industry</option><option>Healthcare</option><option>Entertainment &amp; Media</option><option>Public Sector</option><option>Information Technology</option><option>Education &amp; EdTech</option><option>Other</option></select></div>
+        <div class="fg"><label class="flbl" for="ao">Area of interest</label><select class="fsl" id="ao"><option value="" disabled selected>Where would you like to start?</option><option>Customer service automation</option><option>Marketing intelligence</option><option>Business analytics &amp; BI</option><option>Workflow automation</option><option>Autonomous Workforce Planning</option><option>Not sure — let Tranzin advise</option></select></div>
+        <div class="fg"><label class="flbl" for="ch">Your biggest operational challenge right now</label><textarea class="fta" id="ch" placeholder="Tell us what is slowing your business down, where you are losing time or money, or what you have been trying to solve..."></textarea></div>
+        <button type="submit" id="sbtn" class="btn bg blg bfw">Request my free assessment</button>
+        <p class="fnote">By submitting you agree to be contacted by the Tranzin team. We respect your privacy and will never share your information.</p>
+      </form>
+    </div>
+  </div></div></section>
+
+  <section style="padding:72px 0;background:var(--obsidian);text-align:center;">
+    <div class="w"><p class="se">You are in the right place</p><h2 class="st" style="margin-bottom:14px;">The AI revolution is not waiting.<br/>Neither should you.</h2><p class="ss">Outcomes first. Technology second. Always.</p></div>
+  </section>
+
+  <footer class="foot"><div class="w fti"><div><p style="font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--tl);">TRANZIN</p><p class="ftag">Outcomes First. Technology Second.</p></div><div class="fls"><div><h4 class="fct">Company</h4><ul><li><button onclick="go('journey')">Our Journey</button></li><li><button onclick="go('why')">Why Tranzin</button></li></ul></div><div><h4 class="fct">Solutions</h4><ul><li><button onclick="go('solutions')">All solutions</button></li></ul></div><div><h4 class="fct">Get Started</h4><ul><li><button onclick="go('approach')">Our approach</button></li><li><button onclick="go('stories')">Success stories</button></li></ul></div></div></div><div class="fb2"><div class="w"><p>© 2026 Tranzin Corporation. All rights reserved.</p><p>tranzin.com &nbsp;·&nbsp; tranzin.ca &nbsp;·&nbsp; tranzin.in</p></div></div></footer>
+</div>
+
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+function go(id) {
+  var pages = document.querySelectorAll('.pg');
+  for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('on'); }
+  var target = document.getElementById('pg-' + id);
+  if (target) { target.classList.add('on'); window.scrollTo(0, 0); setTimeout(runFade, 80); }
+  var nav = document.getElementById('nl');
+  if (nav) nav.classList.remove('open');
+}
+
+function toggleNav() {
+  var nav = document.getElementById('nl');
+  if (nav) nav.classList.toggle('open');
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  var btn = document.getElementById('sbtn');
+  btn.textContent = 'Thank you — we will be in touch within 24 hours.';
+  btn.disabled = true;
+  btn.style.opacity = '.65';
+}
+
+function runFade() {
+  var els = document.querySelectorAll('.pg.on .fad');
+  if (!window.IntersectionObserver) {
+    for (var i = 0; i < els.length; i++) { els[i].classList.add('vis'); }
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) { entries[i].target.classList.add('vis'); obs.unobserve(entries[i].target); }
+    }
+  }, { threshold: 0, rootMargin: '0px 0px -30px 0px' });
+  for (var i = 0; i < els.length; i++) {
+    var r = els[i].getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) { els[i].classList.add('vis'); }
+    else { obs.observe(els[i]); }
+  }
+}
+
+window.addEventListener('scroll', function() {
+  var n = document.querySelector('nav');
+  if (n) n.style.boxShadow = window.scrollY > 20 ? '0 4px 28px rgba(0,0,0,.45)' : 'none';
+});
+
+setTimeout(runFade, 120);
+</script>
+</body>
+</html>
