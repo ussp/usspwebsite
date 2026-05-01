@@ -1,0 +1,13 @@
+{
+  "name": "tranzin-marketing-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tranzin marketing website (static, served by Railway)",
+  "scripts": {
+    "start": "serve -s . -l tcp://0.0.0.0:${PORT:-3000}",
+    "dev": "serve -s . -l 4000"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}
