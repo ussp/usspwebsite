@@ -1,6 +1,10 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
+// Node runtime — platform-core's getSiteId() uses require() inside a try/catch
+// to read next/headers, which the Edge Runtime forbids (no dynamic code eval).
+export const runtime = "nodejs";
+
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
   const isLoginPage = req.nextUrl.pathname === "/login";
