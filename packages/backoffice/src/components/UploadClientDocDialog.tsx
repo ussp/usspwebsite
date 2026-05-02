@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import type { ClientDocType, AssignmentSummaryForDoc } from "@ussp-platform/core";
-import { CLIENT_DOC_TYPES, CLIENT_DOC_TYPE_DEFAULTS } from "@ussp-platform/core";
+import { CLIENT_DOC_TYPES, CLIENT_DOC_TYPE_DEFAULTS } from "@ussp-platform/core/types/admin";
 
 interface Props {
   clientId: string;

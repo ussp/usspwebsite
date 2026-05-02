@@ -2,14 +2,17 @@ import { getServiceClient } from "../../supabase/server.js";
 import { getSiteId } from "../../config.js";
 import type { AdminResume, CreateResumeInput } from "../../types/admin.js";
 
-// pdf-parse loaded lazily on first use
+// pdf-parse loaded lazily on first use. The require is hidden from bundler
+// static analysis (via indirect eval) so client-component bundles that reach
+// this module through the platform-core barrel don't try to bundle pdf-parse,
+// which uses Node's fs and cannot resolve in a browser bundle.
 let _pdfParse: ((buffer: Buffer) => Promise<{ text: string }>) | null | undefined = undefined;
 
 async function getPdfParse(): Promise<((buffer: Buffer) => Promise<{ text: string }>) | null> {
   if (_pdfParse !== undefined) return _pdfParse;
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    _pdfParse = require("pdf-parse") as (buffer: Buffer) => Promise<{ text: string }>;
+    const indirectRequire = (0, eval)("require") as NodeRequire;
+    _pdfParse = indirectRequire("pdf-parse") as (buffer: Buffer) => Promise<{ text: string }>;
   } catch {
     _pdfParse = null;
   }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import type { ClientDocument, AssignmentSummaryForDoc } from "@ussp-platform/core";
-import { CLIENT_DOC_TYPE_DEFAULTS, deriveExpiryStatus } from "@ussp-platform/core";
+import { CLIENT_DOC_TYPE_DEFAULTS, deriveExpiryStatus } from "@ussp-platform/core/types/admin";
 import ExpiryBadge from "./ExpiryBadge";
 import UploadClientDocDialog from "./UploadClientDocDialog";
 

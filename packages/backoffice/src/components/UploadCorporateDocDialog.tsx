@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { CorporateDocType } from "@ussp-platform/core";
-import { CORPORATE_DOC_TYPES, CORPORATE_DOC_TYPE_DEFAULTS } from "@ussp-platform/core";
+import { CORPORATE_DOC_TYPES, CORPORATE_DOC_TYPE_DEFAULTS } from "@ussp-platform/core/types/admin";
 
 interface Props {
   initialDocType?: CorporateDocType;

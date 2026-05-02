@@ -1,4 +1,4 @@
-import { deriveExpiryStatus } from "@ussp-platform/core";
+import { deriveExpiryStatus } from "@ussp-platform/core/types/admin";
 
 interface Props {
   expiryDate: string | null | undefined;
