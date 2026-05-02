@@ -56,10 +56,17 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Run on every request EXCEPT static asset routes and Next internals.
-  // We deliberately include `/api/auth/*` so NextAuth callbacks are tagged
-  // with the correct tenant before they look up the user in staff_users.
+  // Run on every request EXCEPT static assets, Next internals, healthcheck,
+  // AND the NextAuth callback routes. We exclude `/api/auth/*` deliberately:
+  // when middleware mutates request headers (even via NextResponse.next with
+  // a cloned Headers object), Next.js strips the Host header from what the
+  // downstream handler sees, which breaks Auth.js's URL derivation
+  // (callbackUrl ends up as https://localhost:3000/...). Keeping NextAuth
+  // off middleware preserves the Host header. Tenant resolution inside
+  // NextAuth callbacks still works because getSiteId() falls back to
+  // process.env.SITE_ID (ussp on this shared service) — and tenants that
+  // need their own AUTH_URL get a dedicated Railway service.
   matcher: [
-    "/((?!_next/static|_next/image|favicon\\.ico|robots\\.txt|sitemap\\.xml|healthz|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|css|js|map)$).*)",
+    "/((?!api/auth|_next/static|_next/image|favicon\\.ico|robots\\.txt|sitemap\\.xml|healthz|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|css|js|map)$).*)",
   ],
 };
