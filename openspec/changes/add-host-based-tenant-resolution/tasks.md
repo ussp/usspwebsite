@@ -50,7 +50,7 @@
 
 ## 7. Document and clean up (Phase 3)
 
-- [ ] 7.1 Rewrite `docs/ai-tools/14-tenant-onboarding.md` — remove the "create Railway service" steps. New steps: (1) tenant row via Admin UI, (2) DNS record, (3) add redirect URI to existing OAuth client, (4) verify.
+- [x] 7.1 Rewrite `docs/ai-tools/14-tenant-onboarding.md` — completed 2026-05-01. New flow: (1) DB rows via Admin UI or REST, (2) Custom domain on existing `tools` service, (3) DNS records, (4) Add redirect URI to "USSP Back Office" OAuth client, (5) Verify. Tranzin worked example included.
 - [ ] 7.2 Add a brief "host-based tenancy" section to `packages/platform-core/README.md` (or create one) explaining the request-context model for new contributors.
-- [ ] 7.3 If a `tranzin-tools` Railway service was provisionally created, decommission it.
+- [x] 7.3 ~~Decommission `tranzin-tools` Railway service~~ — no-op; never provisionally created. Onboarding went directly via the host-based path.
 - [ ] 7.4 Archive this OpenSpec change after one week of stable production: `openspec archive add-host-based-tenant-resolution`.
