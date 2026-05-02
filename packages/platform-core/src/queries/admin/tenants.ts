@@ -37,6 +37,30 @@ export async function getTenantBySiteId(
   return data;
 }
 
+/**
+ * Resolve a tenant row by request hostname (matches `tenants.domain`).
+ * Returns null when no tenant claims this domain — caller MUST handle this
+ * (don't silently default to a fallback tenant; that's a data-leak class).
+ *
+ * Used by the ai-tools middleware to translate an incoming `Host` header
+ * into a `site_id` that subsequent server code reads via `getSiteId()`.
+ */
+export async function getTenantByDomain(
+  domain: string
+): Promise<Tenant | null> {
+  if (!domain) return null;
+  const supabase = getServiceClient();
+  const { data, error } = await supabase
+    .from("tenants")
+    .select(TENANT_COLUMNS)
+    .eq("domain", domain)
+    .eq("active", true)
+    .maybeSingle();
+
+  if (error || !data) return null;
+  return data;
+}
+
 export async function createTenant(
   input: CreateTenantInput
 ): Promise<{ success: boolean; tenant?: Tenant; error?: string }> {
