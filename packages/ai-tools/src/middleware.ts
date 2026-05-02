@@ -34,18 +34,15 @@ export async function middleware(request: NextRequest) {
   const tenant = await getTenantByDomain(cleanHost);
 
   if (!tenant) {
-    // No tenant claims this host. Don't fall back — return 404 so a
-    // misconfigured DNS entry can't silently leak data from the wrong
-    // tenant.
-    if (process.env.NODE_ENV !== "production") {
-      return new NextResponse(
-        `No tenant registered for host "${cleanHost}". Add a row to the ` +
-          `tenants table with domain="${cleanHost}" via the admin UI ` +
-          `(/admin/tenants) and try again.`,
-        { status: 404, headers: { "content-type": "text/plain" } }
-      );
-    }
-    return new NextResponse("Not Found", { status: 404 });
+    // Host doesn't match any registered tenant. This is normal for:
+    //  - Railway's auto-issued *.up.railway.app domain (used by healthchecks
+    //    and as a permanent stable URL even when custom domains are added)
+    //  - Internal Railway probes (*.railway.internal)
+    //  - Initial requests during a custom-domain handoff before DNS verifies
+    // Pass through without setting x-tenant-site-id; getSiteId() falls back
+    // to process.env.SITE_ID (the owner tenant on this service). This
+    // preserves the original service-per-tenant behaviour as the safe default.
+    return NextResponse.next();
   }
 
   // Propagate the resolved site_id to downstream handlers via a request
