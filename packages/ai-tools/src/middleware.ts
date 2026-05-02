@@ -60,6 +60,6 @@ export const config = {
   // We deliberately include `/api/auth/*` so NextAuth callbacks are tagged
   // with the correct tenant before they look up the user in staff_users.
   matcher: [
-    "/((?!_next/static|_next/image|favicon\\.ico|robots\\.txt|sitemap\\.xml|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|css|js|map)$).*)",
+    "/((?!_next/static|_next/image|favicon\\.ico|robots\\.txt|sitemap\\.xml|healthz|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|css|js|map)$).*)",
   ],
 };
