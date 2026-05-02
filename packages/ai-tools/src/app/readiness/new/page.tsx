@@ -1,11 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 
 export default function NewAssessmentPage() {
+  return (
+    <Suspense fallback={null}>
+      <NewAssessmentForm />
+    </Suspense>
+  );
+}
+
+function NewAssessmentForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const reassessId = searchParams.get("reassess");
