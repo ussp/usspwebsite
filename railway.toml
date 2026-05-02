@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "cd packages/platform-core && npx tsc && cd ../.. && next build"
+buildCommand = "cd packages/openspecmatch && npx tsc && cd ../platform-core && npx tsc && cd ../.. && next build"
 
 [deploy]
 startCommand = "npm run start"

@@ -1,5 +1,5 @@
 [build]
-buildCommand = "cd packages/platform-core && npx tsc && cd ../ai-tools && next build"
+buildCommand = "cd packages/openspecmatch && npx tsc && cd ../platform-core && npx tsc && cd ../ai-tools && next build"
 watchPatterns = ["packages/platform-core/src/**", "packages/ai-tools/**"]
 
 [deploy]

@@ -3,7 +3,7 @@
 nixPkgs = ["nodejs_20"]
 
 [phases.build]
-cmds = ["npm install", "cd packages/platform-core && npx tsc && cd ../.. && npm run build"]
+cmds = ["npm install", "cd packages/openspecmatch && npx tsc && cd ../platform-core && npx tsc && cd ../.. && npm run build"]
 
 [start]
 cmd = "npm run start"
