@@ -210,7 +210,7 @@ Jim's target mapped to tangible metrics:
 | Cycle time | TBD from baseline | -10% | -15% |
 | Defect density | TBD from baseline | -10% | -15% |
 
-**Note:** We won't know if 10-15% is realistic until we have baseline data. The stair-stepped approach means full impact may not be visible until Sprint 4-5 (Steps 4-5 of the stair).
+**Note:** We won't know if 10-15% is realistic until we have baseline data. Adoption maturity and HITL fluency typically improve over the first several sprints, so full impact may not be visible until Sprint 4-5.
 
 ---
 
