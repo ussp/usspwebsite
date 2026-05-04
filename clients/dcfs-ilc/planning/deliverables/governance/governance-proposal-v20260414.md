@@ -49,20 +49,38 @@ Lightweight team — enough to make day-to-day decisions for the pilot. Minimum 
 **Cadence:** Weekly (45 min) during pilot.
 **Authority:** Approve pilot-scope changes, tool access, training, guardrail adjustments. Can halt pilot on safety concerns.
 
-### Phase B: Full AI Governance Team (Post-Pilot, for Scale)
+### Phase B: DCFS AI Governance Team (Stood up DURING Pilot, for Scale)
 
-Established by the CIO after pilot results are reviewed. This is the permanent governance body that approves playbooks, scale decisions, and ongoing AI oversight.
+Established by DCFS during the pilot — not after. Recommended **as a range**, not a fixed team size, so DCFS can start immediately with minimum-viable and grow.
+
+#### Minimum Viable (3 DCFS seats) — can start immediately
 
 | Role | Responsibility | Filled By |
 |------|---------------|-----------|
-| **CIO** (Sponsor) | Executive authority. Approves scale decisions, tool additions, policy changes. | Agency CIO |
-| **AI Governance Chair** (DCFS) | Leads meetings. Drives agenda. Tracks action items. | DCFS designee |
-| **Program Director** (DCFS) | Ensures AI aligns with agency priorities and program compliance (e.g., CCWIS). | DCFS designee |
-| **Security / Compliance Representative** (DoIT) | Data classification, policy interpretation, security controls, incident review. | DoIT designee |
-| **Data Privacy Officer** (DCFS) | Sensitive data boundaries (child welfare, PII, regulatory data). | DCFS designee |
-| **Business Representative** (State) | Ensures AI serves the agency mission, not just delivery efficiency. | State PO or program lead |
-| **AI Transformation Leader** (Vendor) | Presents risk register, monitoring data, pilot results, playbooks, scale recommendations. **Reports to — does not sit on — the governance team.** | Delivery vendor |
-| **Engagement Director** (Vendor) | Presents program status, contractual alignment, resource commitments. | Delivery vendor |
+| **CIO** (Sponsor) | Executive authority. Approves scale decisions, tool additions, policy changes. | DCFS CIO |
+| **AI Governance Chair** *(combines Chair + Program oversight)* | Leads meetings. Drives agenda. Tracks action items. Ensures AI aligns with agency priorities and CCWIS. | DCFS designee |
+| **Security & Privacy Lead** *(combines Security + Data Privacy)* | Data classification, policy interpretation, security controls, incident review, PII boundaries — for DCFS systems (CANTS, CCWIS, FERPA, HIPAA). | DCFS designee |
+
+This satisfies NIST AI RMF GOVERN minimums and DoIT AI Policy §4 agency-oversight requirements. **DCFS can seat this in days, not weeks.**
+
+#### Expanded (adds 3 DCFS seats) — add as pilot matures or before scale
+
+| Role | Responsibility | Filled By |
+|------|---------------|-----------|
+| **Program Director** | Dedicated CCWIS / program alignment (split from Chair when volume warrants). | DCFS designee |
+| **Data Privacy Officer** | Sensitive data boundaries — split from Security when scale introduces more data surfaces. | DCFS designee |
+| **Business Representative** | Ensures AI serves the agency mission, not just delivery efficiency. | DCFS PO or program lead |
+
+#### Vendor (always)
+
+| Role | Responsibility | Filled By |
+|------|---------------|-----------|
+| **AI Transformation Leader** | Presents risk register, monitoring data, pilot results, playbooks, scale recommendations. **Reports to — does not sit on — the governance team.** | Delivery vendor |
+| **Engagement Director** | Presents program status, contractual alignment, resource commitments. | Delivery vendor |
+
+**Why a range:** different orgs have different bench depth. MVG lets DCFS start today, not after 6 designees are identified. Roles split (Chair/Program, Security/Privacy) only when volume or complexity warrants it.
+
+**DoIT relationship:** external liaison for state-wide AI policy. DoIT sets the policy framework (DoIT AI Policy effective Apr 1, 2025); this team operates *under* that framework and reports compliance up to DoIT. DoIT is **not a team member**.
 
 **Scope:** All teams. Approves playbooks, scale rollout, new tools, policy changes.
 **Cadence:** Monthly (60 min) at scale. As-needed for incidents.
@@ -111,7 +129,7 @@ Established by the CIO after pilot results are reviewed. This is the permanent g
 | Approve pilot team selection | Pilot Governance Lead | Yes |
 | Approve training curriculum | Pilot Governance Lead | No (inform) |
 | Approve AI Usage Playbook (pilot) | Pilot Governance Lead | Yes |
-| Approve each code generation stair-step | Pilot Governance Lead | Yes |
+| Sample AI-assisted PRs per sprint for HITL adherence | Pilot Governance Lead | No (inform) |
 | Modify guardrails (strengthen) | Pilot Governance Lead | No (inform) |
 | Modify guardrails (relax) | Pilot Governance Lead | Yes |
 | Halt pilot (safety concern) | Pilot Governance Lead or CIO | N/A — either can halt |
@@ -192,6 +210,43 @@ Detailed NIST mapping: `guide/03b-nist-ai-rmf-governance.md`
 3. **Schedule the kickoff meeting** — week of April 14
 4. **Resolve the 3 blockers** — DoIT notice, Section 5e, Copilot status
 5. **Confirm Jim's delegation scope** — what can Dave approve vs what needs Jim?
+
+---
+
+## 11. Phase B Charter — What It Should Include (Forward-Looking)
+
+The Phase B charter — the operating document for the full DCFS AI Governance Team at scale — will be written when Phase B is seated. Pilot learnings should feed directly into it. The charter should incorporate, at minimum:
+
+### 11.1 Controls that scale differently than pilot
+
+| Pilot approach (process-based) | Scale approach (technical + process) |
+|--------------------------------|---------------------------------------|
+| Tool admin dashboards for AI usage monitoring | Formal AI usage log — structured, auditable, exportable (if DoIT requires) |
+| Spot checks for PII / case data drift | Technical PII detection controls — Microsoft Purview DLP policies for Copilot, GitHub Copilot content exclusion rules, automated prompt scanning |
+| Escalation path via Teams channel (1-hour CIO notification) | Formalized incident reporting system with ticketing and SLA tracking |
+| Training + playbook sign-off per pilot participant | Org-wide AI use certification with periodic re-verification |
+
+### 11.2 Governance items to revisit at scale
+
+- **Membership** — expand Phase B from MVG (3 seats) to full (6 seats): Program Director, Data Privacy Officer, Business Representative.
+- **Cadence** — move from monthly 60-min to scaled cadence (monthly full team + weekly operating-level sub-committees).
+- **Decision rights** — revise matrix for ART-wide decisions: tool additions, guardrail changes, scope expansion.
+- **Reporting to DoIT / Maximus** — establish formal reporting templates beyond ad-hoc updates.
+
+### 11.3 Capture these pilot-phase learnings when drafting Phase B charter
+
+- **Explicit PII monitoring in weekly compliance check** — included in Pilot Governance Charter §5.5. Carry forward as a named checkpoint in Phase B weekly/monthly review.
+- **Tool usage from dashboards** — works for pilot; DoIT may require formal manual log at scale. Phase B team to determine.
+- **Escalation path** — pilot model is lightweight (1-hour CIO notification). Scale may require tiered escalation with ticketing.
+- **Audit trail** — JIRA + GitHub history covers pilot. At scale, add automated log aggregation (SIEM or equivalent).
+- **Training recertification** — pilot runs one-time training. Scale should require periodic (e.g., annual) recertification for all AI tool users.
+
+### 11.4 Open items for Phase B to resolve (by end of pilot)
+
+- Does DoIT require a formal AI usage log once we scale beyond pilot? (Flagged in Pilot Governance Charter §7.3 for Phase B to resolve.)
+- Do we need Microsoft Purview or an equivalent DLP tool for prompt-level PII protection?
+- How does the team handle new AI tools as they emerge (approval process, re-assessment cycle)?
+- How is scaling paced — team-by-team, role-by-role, or all-at-once?
 
 ---
 

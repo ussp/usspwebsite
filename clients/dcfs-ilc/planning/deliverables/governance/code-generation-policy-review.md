@@ -51,23 +51,14 @@ This satisfies Section 4d (human-in-the-loop) and Section 5d (AI output review).
 
 ---
 
-## Stair-Stepped Approach (Agreed with Jim)
+## Approach: AI-Assisted Code Generation from Day One with HITL
 
-Rather than enabling full code generation immediately, the team agreed to a phased approach:
+AI-assisted code generation is in scope from day one under mandatory human-in-the-loop (HITL). The developer reviews, edits, and accepts every AI suggestion, and every change goes through standard peer PR review and approval before commit. No autonomous AI commits. This satisfies DoIT Policy sections 4d (human in the loop) and 5d (AI output review).
 
-| Step | What | When | Risk Level |
-|------|------|------|-----------|
-| **Step 1** | User story quality improvement (Rovo) | Sprint 1-2 | Low — no code involved |
-| **Step 2** | Documentation generation from code/config (Copilot) | Sprint 2-3 | Low — read-only, no production code |
-| **Step 3** | Code explanation and comprehension (Copilot) | Sprint 2-3 | Low — read-only analysis |
-| **Step 4** | Test script generation (Copilot) | Sprint 3 | Medium — generates test code, reviewed before use |
-| **Step 5** | Configuration suggestions (Copilot/Dynamics) | Sprint 3-4 | Medium — config-first platform, needs Dynamics expert review |
-| **Step 6** | Plugin/custom code suggestions (Copilot) | Sprint 4+ | Medium-High — requires full code review process |
-
-Each step requires:
+Prerequisites for any developer using AI-assisted code generation:
 - Training completed for the role
 - Guardrails understood and acknowledged
-- Code review process in place
+- Code review process in place (peer PR review + approval)
 - Governance team informed
 
 ---
@@ -164,14 +155,14 @@ Each step requires:
 
 ## Recommendation
 
-**Proceed with the stair-stepped approach.** The DoIT policy supports AI code generation with human-in-the-loop. The key blockers are administrative (Section 5e/5f clarifications), not policy prohibitions.
+**Proceed with AI-assisted code generation from day one under mandatory HITL.** The DoIT policy supports AI code generation with human-in-the-loop. The key blockers are administrative (Section 5e/5f clarifications), not policy prohibitions.
 
 **Immediate actions:**
 1. Send Questions 1-3 to Dave/Jim for resolution
 2. Send Questions 4-6 to Jeffrey for the Dynamics working session
 3. Send Questions 10-12 to Dave for monitoring tool clarification
 4. Include code generation in the governance proposal (Task #4)
-5. Update the framework to include Steps 1-6 in the pilot plan
+5. Include HITL-governed code generation in the pilot plan from sprint 1
 6. Default to JIRA + Power BI for monitoring until external tools are approved
 
 ---
