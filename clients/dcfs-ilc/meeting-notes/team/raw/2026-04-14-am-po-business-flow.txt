@@ -1,0 +1,209 @@
+Unknown Speaker  0:00  
+YY, how's it going? Can you hear me?
+
+Luna, John  1:16  
+Okay? Hey Michael, thank you so much. Greatly appreciated.
+
+Clemons, Michael B.  1:53  
+Oh, no problems. No problems. It's basically on. I'm a little behind on what's actually happening, but Okay,
+
+Luna, John  2:00  
+so before you start recording, Bill has a AI initiative. He wants us to start looking at it's not part of the current dynamics project. So what we're doing is Mr. Vinay is a consultant, AI consultant. We're working with him. Jim Romy myself, we're trying to get you up and file some more state the state people. I mean, it's a combination of both groups, and we're just trying to give them as just background to see what kind of tools we can use here that makes sense for the different teams. So here, there he is.
+
+Hey, Vinay, how you doing? Can you hear me? If Vinay, can you hear me?
+
+Don't think you can hear me. There he is. Can you hear us? We can't
+
+hear you. Are you talking?
+
+Can't hear you? Do?
+
+Years now. Can you hear me?
+
+Test one two test.
+
+Testing one two, just not. So we let's see.
+
+Well, we don't have 30 minutes now. We got 27 minutes.
+
+So Michael, so the part of this project we're giving now, here he is,
+
+Vinay, can you hear us?
+
+I can hear you guys. I just joined from my phone for now. Okay, so I'm just following what Michael, so Michael, we're just collecting some information. Matt and Carl are going to go walk through JIRA confluence with Vinay and Krishna walked through shared services and CIC pipelines with Vinay on Friday. So this, the whole purpose of this call is that just an upper level walk through and on the business flow with the current projects, with Dynamics, but it's something upper level, just so Vinay can have an idea what the business flow is. That's all, yeah, I want to transition. Mr. Michael Clemons, he's with the PMO team. He works with so he understands the business flow. Andrew, he's with the CIO and some meetings, because CIOs going and offline soon. So we have Michael on short notice, his replacement. Much thanks to Michael. Hey, Michael, is that good? Did I give you much background? Is that good that we covered so far? I think you're on mute. Mike,
+
+Okay,
+
+Clemons, Michael B.  6:33  
+oops, sorry. I was on mute. I was on I'm not, I'm not with, I'm not with PMO. I'm on the PO team, so we manage the BPR and the PO parts of this project.
+
+Speaker 1  6:48  
+Okay, yeah, my mistake. So, I mean, I thought you guys would be the best to do a higher level, just a business flow and everything with the project is that you
+
+Clemons, Michael B.  7:07  
+are you talking about like,
+
+Unknown Speaker  7:10  
+yeah, the dynamics project, yeah, for
+
+Clemons, Michael B.  7:13  
+the for a JIRA flow, that really would be more Bill.
+
+Luna, John  7:16  
+Bill was, yeah, we got the for the JIRA, that's going to be Matt and Carl. We got that covered. Yeah, if you can help us just with a high level business flow, that would be great.
+
+Clemons, Michael B.  7:31  
+When you when you say a business flow, are you talking about the DCFS
+
+Luna, John  7:35  
+business flow? Yeah, poor dynamics. How that dynamics being used, that kind of thing.
+
+Vinay Lagisetty  7:40  
+Wrote some context to the project, maybe that that's going to be helpful. So, yeah, Jim asked us to come down. You can't hear me here. Also issues here, I can hear you. Can you hear me?
+
+Luna, John  7:59  
+I can hear you. Okay, Vinay, can you hear okay?
+
+Vinay Lagisetty  8:05  
+I can hear you, but I'm not sure why.
+
+Clemons, Michael B.  8:08  
+Michael, I can hear you. Vinay, oh, I can't Okay.
+
+Vinay Lagisetty  8:17  
+I don't know. So, Michael, so basically,
+
+Unknown Speaker  8:23  
+yeah, that's what I did. I knocked off and
+
+Vinay Lagisetty  8:29  
+locked back in. Do you want to just disconnect and come back in?
+
+A lot of not a big fan of teams.
+
+Unknown Speaker  8:57  
+You know? What am I? I'm gonna restart.
+
+Unknown Speaker  9:01  
+Okay, okay, sorry.
+
+Vinay Lagisetty  9:20  
+So Michael, I think we can probably just, I'll just put give the context at a high level and see where it goes. John, you're back. Can you hear I can hear you now. Okay, yeah, I had to re log into a different phone. For some reason, teams was not working. I thought it was the problem the computer. Anyway, no. Mike, so Michael, just to give you a context that Jim has asked us to introduce AI to enhance our software development processes so that we could gain some efficiencies. So he's he has put a target around 10 to 15% efficiency gains across the teams and wherever. The goal is to to understand everybody's workflows and see where the potential to introduce AI is. Figure out the right tools, get permissions from the state, get those tools and adopt those AI practices, or the best practices we have to create. So from that context in mind, we are just trying to understand everybody's role and also understand their software, what parts of the processes that particular role is doing, and potentially come up with ideas to see if we can use some of the AI tools to enhance your workflows. That's pretty much the larger context.
+
+Clemons, Michael B.  10:51  
+So in this project, we have somewhere between 12 to 14 different product teams, and those product teams are aligned with DCFS verticals, and each of those verticals have a number of capable functional areas and capabilities within those functional areas that need to take place. It would be very hard to lay out DCFS because literally, there are hundreds of epics, hundreds of stories, but for each of those teams, those teams need to be able to provide capability, not just within their vertical but understand who their upstream providers are of data and who their downstream customers are of that data and have some level of understanding once my product team finishes doing what it's doing, where do I send it to but even before that, where do I get my data as a product team? So that picture how that exists doesn't there's no diagram that was created for this project that says, Well, this functional area flows into. This functional area flows, flows, flows. So there's no overall map to show how that data originates, which organization THAT or WHICH functional area that data originates in, what's done to it in that functional area. That's all very detailed in the story level of where we are right now in JIRA. So I think that if I had to take a step back, I would say, well, first off, what I want to do is understand for each functional area how it aligns with dynamics, and which functional module in Dynamics would be used to say, Okay, how much of this can we leverage, and then how much do we need to extend in order for them to get their full capabilities that they need within a functional area.
+
+Vinay Lagisetty  13:23  
+So Jim, if I'm understanding, sorry, Michael, if I'm understanding, correct you as a product owner, you look at the legacy system and map out, Hey, this is a story, or the epic I'm working on. This is a story I'm working on. And write the product story in the JIRA, and trying to understand like the Microsoft Dynamic space, and figuring out which functional modules to use, and making sure that story gets translated in into the JIRA Right, correct.
+
+Clemons, Michael B.  13:59  
+So a long time ago, before we were product owners, we were working with the SMEs in the respective functional areas to understate. What's your current state? Where do you have system support? Where do you not have system support? In the areas where you don't have system support, how optimized is that system support?
+
+Vinay Lagisetty  14:25  
+What does a system support mean in this scenario?
+
+Clemons, Michael B.  14:29  
+System support means as an organization, as a functional area, the access and the systems that I use perform the tasks in order for me to do my job, got it. Got it. So one of the things with DCFS is that there are a number of processes that exist outside of the system, and they're being maintained in Excel, spreadsheets, on paper, Access databases. Some of it makes it into the system through it starts out as paper. It starts out as a fillable PDF. It gets to a place where someone takes that fillable PDF, then they key it into the system. So understanding, that's how we have come to understand, oh, okay, now I know what you do in this functional area. I know how you're getting your data. I know what you're doing with the data. I know how systems are either supporting you or not supporting you in this area. So that was the BPR side when we transitioned into the product owner, what we did with the subject matter experts in that functional area, and the product managers is we started to help create a vision of this is how it would look in the future, if we can take all of these manual tasks, all of these things that originate outside of the system, and Put them into a system that utilizes true data entry, business logic, workflow, notifications, assignments, such and such, which dynamics offers. So we're helping them visualize that future state. I think one of the challenges has been when we ask our POS, how much of dynamics have you actually seen our POS? Have seen very little of what dynamics does, kind of out of the box and so it, you know, in some of these meetings, it appears that the development work is starting from scratch. Instead of saying, Hey, I know this form and dynamics provides this level of functionality. It's already tied to auditing, it's already tied to workflow. It's already tied to task management. It already has the ability to capture notes, capture attachments. Let's take this leverage it, build on it so that you can get the functionality that you need, which is above and beyond what dynamics provides out of the box.
+
+Vinay Lagisetty  17:22  
+Michael, in this case, once you complete the capture of the your requirements from the how the system is getting used right now, you are also making a suggestion, what modules and the dynamics has to be used, or is it some other part of that you're just giving the story and the vision, and someone is sitting down and saying, How do I implement it into the dynamics correct?
+
+Clemons, Michael B.  17:44  
+We don't have the knowledge on the PO side to say, you know, like in my prior life, when I managed a dynamics team, my business analyst would go to the functional analyst and say, hey, my team needs to do this. And the functional analyst would say, well, it's this module, and it's these screens within that module. Let me show them to you. And then they would show the business analyst. And the business analyst was like, Yeah, I understand what dynamics does, but that's only about 65% of what we need to get done. And then the functional analyst says, Well, tell me more about what you're trying to do, and we'll see if we can take these screens and modify them so that one, it captures more of the data that you have. Two, it captures and automates the business logic that you need in your area that you're currently doing manually. And then we can actually extend this so that it's not just data in a table somewhere, we can say that, okay, who does it need to go to next in the routing of the system? What are the SLAs around that once you hit submit, who's supposed to get it? How long should it be for an SLA before you know that they've touched it by the time they've worked it, by the time they've resolved it and passed it on downstream or passed it back to you. So we don't have an understanding from a PO perspective of here's what dynamics offers and the capability you're asking for. Here's where it resides in the system, all right, so that's where we have our challenge. So what we're doing is we're writing stories in JIRA, basically saying, from a capabilities perspective, this user needs to be able to do the following things. And our expectation is that the technical team will say, Okay, now that I understand the users and I understand what they're trying to do, let me see how dynamic supports that, how we leverage it, how we extend it, so that you can get what you need, at least from a minimum viable product perspective.
+
+Vinay Lagisetty  19:59  
+Yes, yes. Makes sense. Makes sense. And when you write this collection of like, when you're talking interaction with your users and everything, are you doing this right now, scheduling calls with the end users, understanding their feedbacks, everything through just the video calls and everything on capturing their what needs to be done?
+
+Clemons, Michael B.  20:21  
+Yes. So what we do is, we had a lot of discovery meetings up front, massive amount of mapping sessions with them. We've distilled that down into opportunities to improve pain points that the team would like to resolve in their functional area. And then what we did was we did a high level saying, Hey, here's what we envision for in the future. Get rid of this manual process. Get rid of this manual process. Give you this automated area where you can do your data entry. Instead of you sending this as an attachment and email, you can attach it within the system, and it will ultimately get to where it needs to be. That person will be able to do their reviews, approvals, rejections, what have you. So we've helped them to understand that, and that's what we write into our stories. And epics is the more detailed version of that
+
+Vinay Lagisetty  21:13  
+got it and when, when you're doing this process, right? What kind of a tools do you use like the data capture right now? Are you just taking down notes? Are you using any help with the like AI tools which are capturing notes for you, or any of the tools being used
+
+Clemons, Michael B.  21:35  
+right now, all of our maps were captured in Vizio. Okay? And so as we create process maps for functional areas with the So, for example, say, there's a process and there's five functional areas or five roles that participate, we've documented it such that we understand from the time it starts to the time it ends. Here's what each functional area does. Here are the handoffs between functional areas. Here's any kind of rework loop if there's something that's not right, because in the manual world of paper, there's a lot of times where there's rework loops, because people leave fields blanks on forms. People enter things that are not valid combinations on forms, and they have to go backwards in the process. So we capture all of that in Vizio. And now what we're doing is we're taking all of that information and saying, here are the needs, and we're writing JIRA epics and stories to be able to account for what needs to get done now the technical team has got to be able to take all that information and say that, okay, for this functional area, and I don't know how much the technical team understands of the legacy systems, to be able to look at the legacy systems, to be able to say that, well, in the legacy World, you had these paper documents and you've had these legacy screens as a part of that. Oh, I can correlate those legacy screens into some form of what dynamics already has out there. Is it a one to one? Probably not, but there's probably some kind of thing that says these five screens in the legacy system can be addressed with some extension by these two or three screens in the dynamics environment. Or, you know, we've got 19, I think 19 different building blocks out there that we have. We've got Adobe, we've got e cap, red cap, North 52 actually, I think one of those caps might not be a building block, but there's a lot of different tools that are meant to work with Dynamics, where you have the cost benefit rule, okay, dynamics doesn't do this out of the box. Is it easier to extend dynamics, or is it easier to implement a third party tool where 90% of that is already there and it just becomes a configurable task?
+
+Vinay Lagisetty  24:11  
+Got it okay? And so you're capturing information in Visio, and when you're writing stories, you're writing stories right now in a Word document, I'm assuming. And then
+
+Clemons, Michael B.  24:28  
+all of those stories are in JIRA. We were initially there was a lot of when JIRA was kind of getting rolling about a year ago, there's a lot of writing of stories and Excel spreadsheets, and then people had to take them and translate them into the proper fields in JIRA, and we've pretty much gotten away from that. There still are some times when we're trying to get the epic roadmap together, and we will take epics out of JIRA as an extract to be able to really do some refinement to figure out, okay, are these epics that can that are serial, where they happen one after the other, or are there some epics where parts of them are concurrently being worked on at the same time, because of similarities, it might be something that exists across multiple teams. So for example, one team might be working on a case in multiple teams might be working on something similar for their version of that case during that same time frame, but it's all captured in JIRA. Basically, what we've told people is that if it doesn't exist in JIRA. It's not real, so it's in JIRA.
+
+Vinay Lagisetty  25:45  
+So when, when, when you do this discovery, discovery is going into this Vizio, and your notes are directly going into JIRA, or is there somewhere in in between you're having capturing the notes, and then someone is translating these notes, personal notes, into a cheetah story.
+
+Clemons, Michael B.  26:08  
+So in our swim lanes, in our Visio diagrams, we are writing massive amounts of notes around process steps and things basically as an annotation to a process step. If there is a problem at a process step, we're capturing the pain points from the what we call the voice of the customer, whoever that functional area is, and we're also capturing the opportunities to improve. Well, those pain points and opportunities to improve are then translated to a spreadsheet for that functional area. So all of those things exist in a spreadsheet. Ultimately, when you take the vision Visio diagram and opportunities to improve, it informs you of what the future state should look like. And that vision was presented to the teams year ago, 18 months ago, and then once the team started to understand when I say teams, it's not just the technical side and the product team, but also the SMEs and the product manager, now they can take that information and say, Okay, what we're going to do is we're going to create our epics in JIRA, and then we're going to go down the level and create all of the stories associated with completing that epic. And then there's other things, like tasks and things like that, enablers that are also captured in JIRA. Got it.
+
+Vinay Lagisetty  27:38  
+Got it makes sense. So yeah, I think I get a pretty high level overview of what tools you're using, but looks like a lot of notes, taking, capturing information, at least into the Visio, then having an Excel, and then creating, adding the stories into the and you're attaching the Visio on the Excel to the giraffes, I assume, right. There's also,
+
+Clemons, Michael B.  28:04  
+we also use confluent confluence, yes. And in Confluence, each team has a board, and it's kind of where they're thinking out loud and spatially, lighting things up and laying things out so they can understand, uh oh, wait a minute, these two things have to be done in this order. They either have to be serial, or we might have to flip them around, or we can work on these partially in a concurrent manner. And so they use Confluence to kind of visually see some of how those things would lay out in their product team roadmap.
+
+Vinay Lagisetty  28:44  
+Is it like a Gantt chart they're using to do that? No, no. A lot of
+
+Clemons, Michael B.  28:48  
+it, a lot of it is diagrams that they created in Confluence. And what it does in Confluence is they'll create kind of the flow and say that. Okay, at this point, here are the epics that are in play at this point in the process, and then as they move forward, they're able to show when any given epic comes into it's not just a backlog type of item, it's something that's actually now being developed. Yeah, the insertion point of this epic into the development path, this is when it should start.
+
+Vinay Lagisetty  29:31  
+Got it, and I know we're coming close to the time. I just want to, I mean, this is a great I mean, you phenomenal. Me, explained what you're doing. I just want to understand when you are doing this, the data capture and everything, is it happening before the PI planning? Or in the PI planning, you're saying, Hey, these are the data, or these are the new stories we have to build out. This is an area. So is it happening during the before the PA planning or after the PA planning? How does that that come in? Yeah, so
+
+Clemons, Michael B.  30:09  
+basically, prior to the PI, all of the teams are urged to go into the PI with their stories that they, you know, predict they're going to be in that current pi, to have all those stories written and vetted as much as possible with the pm and any subject matter experts, because subject matter experts are at the pi. So when they write these stories, they're refining them as much as possible so they can make sure they have as much information when they go into the PI Event. Now there are times when they'll come out of pi and they'll say, of everything we had in backlog, we've only got four of the six sprints completely filled out for this pi, and we are still working on the last two sprints to make sure that everything we need to work on them is there. So I don't know if every team comes out of the PI with all six sprints completely laid out exactly the way that they need to be.
+
+Vinay Lagisetty  31:25  
+No, that makes sense. Yeah, it's so but you, for your team, is like a feeder of stories to the development teams. So you guys are saying, Hey, these are the stories we are potentially going to work on. There might be still, some stories which are still you guys have created that you still have to implement and everything, yeah,
+
+Clemons, Michael B.  31:47  
+and so that's there's another component here that I have to make sure I talk about as well. We also have bas on the team. Krasin has bas on the team. And a part of what the BAS should be doing as well is the BAS weren't here during all the discovery that took place going back to 2022 and what the BAS need to be able to do is, for their functional area that they represent, they should be completely well versed on this is what the functional area done does. Here's all the documentation, here's all the visual maps, here's the oti spreadsheet. They should have a very good understanding of that, because the more they understand that, the better they will be able to contribute to story creation, or I should say, epic creation. And story creation got it okay. Because really, in this generally, the BAS would be the ones, because the BAS in most organization, if I'm the BA, I know my functional area, because I write all the business processes. I generally write the training materials and SOP, and I'm the person that does the training of the trainer when it's time to transition this out of my functional area to a common training group with inside the organization. So the BAS, it's super, super important for the BAS to be very well versed on all the discovery that's taken place, and understand how that fits into the big picture of the future state. Because without that knowledge, they're going to have a difficult time writing the stories to support the capabilities needed by the functional area.
+
+Vinay Lagisetty  33:43  
+And Michael, what would be your role called? Is it like a product owner?
+
+Clemons, Michael B.  33:49  
+My My role is I'm actually the lead for the product owner. So I have five different product owners that report to me. Andrew also has product owners. You haven't met Andrew. He wasn't able to make it today, but Andrew also has five or six different product owners that report to him. We do is we oversee the product owners and we answer questions. And sometimes we we interface with the PM, sometimes we interface with the subject matter experts in areas where we need additional clarification, or if we feel that we're starting to stall out in an area trying to keep things moving along,
+
+Vinay Lagisetty  34:31  
+got it and every team is going to have one product owner, I'm assuming Correct. Okay, makes sense? John, go ahead.
+
+Speaker 1  34:38  
+I'm done. Is everybody okay, on the time when a couple minutes over,
+
+Vinay Lagisetty  34:43  
+I know everybody. I think Michael, that was phenomenal. I think I have a lot more than I came in for. I will digest this information again. This is a high level meeting. The goal again is to figure out, how can we help your team to use some of the AI tools. And maybe there is a discovery session we will do like, if the tools that the teams are already using some form of AI, if not, what would they like? And maybe we can come up with some suggestions and figure out from there. Okay, thank you, Michael, thank you
+
+Speaker 1  35:23  
+once again, so much for on the short notice, pretty much appreciated.
+
+Clemons, Michael B.  35:28  
+Oh, no worries. Thanks for just kind of getting this together. I think that AI implemented in the right parts in the process can fill in a lot of those gaps. It's going to be great, I think, for not only correlating information within a vertical but if multiple teams are working on some of the similar things, AI might be able to say that, okay, let's create a best of breed when it comes to this type of functionality that's being requested.
+
+Luna, John  36:01  
+So, yeah, you know what? In addition, Michael, if you, if your team has any ideas how the the PO pm team might want to use AI on this project, let me know. We'll just add it to the list too.
+
+Clemons, Michael B.  36:21  
+Do you Do you have a an AI platform in mind right now, because we don't have, as a company, we don't have an AI subscription, at least for the POS, we don't have an AI subscription tool.
+
+Vinay Lagisetty  36:38  
+We are, we are required. We are asking Jim on multiple tools right now. We JIRA has an inbuilt AI platform called rovo, which can be used against Confluence and everything. We are asking for Microsoft. 365 we're asking for GitHub. 365 dynamics has its own AI, but if you have any tool suggestions you think your team will benefit from, please send it over. That is something we can make a request and see if we can get you those tools as well. Yep, okay, sure, yeah.
+
+Clemons, Michael B.  37:15  
+From an AI perspective, yeah, I'm not, I'm not sure that our POS would really have the knowledge at a platform level to know what would be best, because I don't really think our POS would be able to take five different platforms and lay them out like I always say the Turbo Tax, to be able to say, Okay, here's Your five platforms, here's the functionalities. And to put the check boxes in where they're strong, and the x is in where they're not strong. I don't think the POS have that kind of background to be able to
+
+Vinay Lagisetty  37:52  
+do that. Again, we will help out to identify that's what I'm trying to understand, the workflow. I really think Microsoft 365 copilot is empty. It's called m3 65 copilot, which is required. I will like, we're going to definitely request for that one we again, as as we know the more follow through the workflow and figure out what tools come out. I think we we will be able to figure out places where we can help, help and add value.
+
+Clemons, Michael B.  38:23  
+Okay, great. Well, thanks. Great meeting you. Do you pronounce your name? Vinay, Vinay, Vinay, Vinay, okay, all right.
+
+Luna, John  38:32  
+All right. Thanks everyone, Vinay, just a reminder. I think you have another call with Matt and Carl for how Jiren Clemons gets used this afternoon. Okay, sure. All right, once again, thanks. Thanks, Michael. On short notice, that's it. I'll see you guys later. I recorded this, and I have transcripts if you need Vinay, okay, so I'll talk to you guys later.
+
+Clemons, Michael B.  38:55  
+Thanks, yeah, and John, if you could provide the recording link that way I can shoot it over to Andrew.
+
+Unknown Speaker  39:01  
+Okay, yeah for sure. Okay, cool. All right, I'll see you guys later. Thank you. Thanks everyone. Bye.
+

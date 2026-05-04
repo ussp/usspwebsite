@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCFS ILC — AI Transformation Workspace</title>
+<link rel="icon" type="image/png" href="assets/krasan-favicon.png">
+<style>
+  :root {
+    --accent: #0f3460;
+    --highlight: #e94560;
+    --green: #27ae60;
+    --amber: #f39c12;
+    --blue: #2980b9;
+    --red: #e74c3c;
+    --gray: #95a5a6;
+    --light: #f8f9fa;
+    --border: #dee2e6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .header {
+    background: var(--accent);
+    color: white;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .header-left h1 { font-size: 20px; font-weight: 600; }
+  .header-left .sub { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 3px; }
+  .header-right { font-size: 12px; text-align: right; color: rgba(255,255,255,0.85); }
+  .header-right .date { font-weight: 600; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 32px 48px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    font-size: 15px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h2 .badge {
+    background: var(--highlight);
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+
+  /* Next-steps table */
+  .next-steps { width: 100%; border-collapse: collapse; }
+  .next-steps th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .next-steps td {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+    font-size: 13px;
+  }
+  .next-steps tr:last-child td { border-bottom: none; }
+  .next-steps .due { white-space: nowrap; font-weight: 600; color: var(--accent); }
+  .next-steps .due.blocker { color: var(--red); }
+  .next-steps .due.soon { color: var(--amber); }
+  .next-steps .owner { color: #666; font-size: 12px; }
+  .pri {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .pri.blocker { background: #fce4ec; color: var(--red); }
+  .pri.high    { background: #fff3e0; color: var(--amber); }
+  .pri.normal  { background: #e8f5e9; color: var(--green); }
+
+  /* Links list */
+  .links { list-style: none; }
+  .links li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .links li:last-child { border-bottom: none; }
+  .links a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+    flex: 1;
+  }
+  .links a:hover { text-decoration: underline; color: var(--accent); }
+  .links .tag {
+    font-size: 10px;
+    background: var(--light);
+    color: #666;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+  .links .tag.html { background: #e3f2fd; color: var(--blue); border-color: #bbdefb; }
+  .links .tag.pptx { background: #ffebee; color: var(--red); border-color: #ffcdd2; }
+  .links .tag.pdf  { background: #fff3e0; color: var(--amber); border-color: #ffe0b2; }
+  .links .tag.md   { background: #f3e5f5; color: #8e44ad; border-color: #e1bee7; }
+  .links .tag.dir  { background: #e8f5e9; color: var(--green); border-color: #c8e6c9; }
+
+  /* Phase chips */
+  .phases {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .phase-chip {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+  .phase-chip.active { background: var(--highlight); color: white; border-color: var(--highlight); }
+  .phase-chip.done   { background: #e8f5e9; color: var(--green); }
+  .phase-chip.next   { background: var(--light); color: #666; }
+
+  /* Stat row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 700px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  .stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .stat .num { font-size: 26px; font-weight: 700; color: var(--accent); }
+  .stat .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .stat.blocker .num { color: var(--red); }
+  .stat.progress .num { color: var(--amber); }
+  .stat.done .num { color: var(--green); }
+
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    margin-top: 32px;
+  }
+  .footer a { color: #999; }
+
+  .blockers-note {
+    background: #fff8e1;
+    border-left: 3px solid var(--amber);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .blockers-note strong { color: var(--accent); }
+  .blockers-note a { color: var(--blue); }
+
+  .limitations-note {
+    background: #fdecea;
+    border-left: 3px solid var(--red);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .limitations-note strong { color: var(--red); }
+  .limitations-note a { color: var(--blue); }
+
+  /* Phase blocks */
+  .phase-block { margin-bottom: 18px; }
+  .phase-block:last-child { margin-bottom: 0; }
+  .phase-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .phase-title .phase-date { color: #888; font-weight: 500; font-size: 11px; margin-left: auto; }
+  .phase-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  .phase-dot.done   { background: var(--green); }
+  .phase-dot.active { background: var(--highlight); box-shadow: 0 0 0 3px rgba(233,69,96,0.15); }
+  .phase-dot.next   { background: #ccc; }
+  .sub-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+  .phase-block .links { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>DCFS ILC — AI Transformation Workspace</h1>
+    <div class="sub">Krasan × DCFS × USSP · Pilot: 12 teams, 160 consultants · Target: 15% productivity lift</div>
+  </div>
+  <div class="header-right">
+    <div class="date">Today: Thu Apr 23, 2026</div>
+    <div>PI 20 Planning · May 5-7</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Phase chips -->
+  <div class="phases">
+    <span class="phase-chip done">✓ Phase 0 Governance</span>
+    <span class="phase-chip active">► Phase 1 Baseline &amp; Design</span>
+    <span class="phase-chip next">Phase 2 Train</span>
+    <span class="phase-chip next">Phase 3 Pair Programming</span>
+    <span class="phase-chip next">Phase 4 Pilot &amp; Measure</span>
+    <span class="phase-chip next">Phase 5 Playbook &amp; Scale</span>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat blocker"><div class="num">7</div><div class="label">Blockers</div></div>
+    <div class="stat progress"><div class="num">8</div><div class="label">In Progress</div></div>
+    <div class="stat"><div class="num">57</div><div class="label">Open Tasks</div></div>
+    <div class="stat done"><div class="num">4</div><div class="label">Done This Week</div></div>
+  </div>
+
+  <div class="grid">
+
+    <!-- LEFT: Next steps -->
+    <div>
+      <div class="card">
+        <h2>This Week — What I Need to Work On <span class="badge">Priority</span></h2>
+        <div class="blockers-note">
+          <strong>✓ Dave meeting (Apr 22) — done.</strong> Follow-up email sent · <a href="meeting-notes/2026-04-22-dave-meeting.md">notes</a>.
+          <br>
+          <strong>Next actions:</strong>
+          <br>• Send 30-day DoIT notice starting email to Dave (G3) — blocker for pilot start.
+          <br>• Confirm Copilot tool-limitation scope with Dave (G12) — <em>"can't go outside / no web search"</em>.
+        </div>
+        <div class="limitations-note">
+          <strong>⚠ New constraint surfaced Apr 22:</strong>
+          State-authorized Microsoft Copilot is <strong>sandboxed to the State tenant</strong> — no web search, no external URL fetch, no public article summarization. Grounded only on tenant data (M365, Dataverse, SharePoint, Teams).
+          <br>
+          <a href="meeting-notes/2026-04-22-dave-meeting.md">Meeting notes</a> ·
+          <a href="planning/deliverables/tool-authorization-list.md">Tool Limitations &amp; Boundaries</a>
+        </div>
+        <table class="next-steps">
+          <thead>
+            <tr><th>Due</th><th>Task</th><th>Owner</th><th>Pri</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="due blocker">Today Apr 23</td>
+              <td>Send DoIT 30-day notice starting email to Dave<br><span class="owner">G3 · blocker for pilot start · template + owner needed</span></td>
+              <td>Vinay → Dave</td>
+              <td><span class="pri blocker">Blocker</span></td>
+            </tr>
+            <tr>
+              <td class="due blocker">Fri Apr 25</td>
+              <td>Confirm Copilot tool-limitation scope with Dave<br><span class="owner">G12 · policy vs tenant · web grounding toggle · @web · Copilot Studio connectors</span></td>
+              <td>Vinay → Dave</td>
+              <td><span class="pri blocker">Blocker</span></td>
+            </tr>
+            <tr style="opacity:0.55;">
+              <td class="due" style="color:var(--green);">✓ Apr 22</td>
+              <td><s>Dave meeting — walked agenda, cleared blockers</s><br><span class="owner">G1 · done · follow-up email sent to Dave</span></td>
+              <td>Romi + Vinay</td>
+              <td><span class="pri normal">Done</span></td>
+            </tr>
+            <tr style="opacity:0.55;">
+              <td class="due" style="color:var(--green);">✓ Apr 22</td>
+              <td><s>Vinay DCFS fingerprinting</s><br><span class="owner">G11 · done &amp; sent</span></td>
+              <td>Vinay</td>
+              <td><span class="pri normal">Done</span></td>
+            </tr>
+            <tr>
+              <td class="due blocker">Overdue (Apr 22)</td>
+              <td>Baseline survey — questions draft (qual + quant)<br><span class="owner">B5 · slipped one day</span></td>
+              <td>Vinay</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+            <tr>
+              <td class="due soon">Fri Apr 24</td>
+              <td>JIRA data pull — Intact + 3 control teams, last 3 sprints<br><span class="owner">B2 · needs JIRA API/export access</span></td>
+              <td>Matt</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+            <tr>
+              <td class="due soon">Fri Apr 24</td>
+              <td>Baseline survey — review<br><span class="owner">B6</span></td>
+              <td>John + Jeff + Romi</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+            <tr>
+              <td class="due soon">Fri Apr 24</td>
+              <td>Baseline survey — tool setup (SurveyMonkey via Tracy)<br><span class="owner">B7</span></td>
+              <td>Robert</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+            <tr>
+              <td class="due">Fri Apr 25</td>
+              <td>Data team discovery call with Chase<br><span class="owner">B9 · overdue, still not scheduled</span></td>
+              <td>Chase + Vinay</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+            <tr>
+              <td class="due">Fri Apr 25</td>
+              <td>Identify pair-programmer roles + order (stair-step)<br><span class="owner">P1 · BA first? Dev first?</span></td>
+              <td>Vinay + Romi</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+            <tr>
+              <td class="due">Fri Apr 25</td>
+              <td>Pilot Governance Lead — DCFS designee identified<br><span class="owner">G7 · may propose David himself</span></td>
+              <td>Dave + Jim</td>
+              <td><span class="pri blocker">Blocker</span></td>
+            </tr>
+            <tr>
+              <td class="due">Mon Apr 28</td>
+              <td>Intact pilot team kickoff (5-6 members)<br><span class="owner">B10</span></td>
+              <td>Romi + Rina</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+            <tr>
+              <td class="due">Mon Apr 28</td>
+              <td>Baseline survey — distribute to pilot team<br><span class="owner">B8</span></td>
+              <td>Vinay</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+            <tr>
+              <td class="due">Mon Apr 28</td>
+              <td>QUS story-quality scan script — feed data<br><span class="owner">B3</span></td>
+              <td>Vinay</td>
+              <td><span class="pri normal">Normal</span></td>
+            </tr>
+            <tr>
+              <td class="due">Thu Apr 30</td>
+              <td>Baseline metrics report (feeds May 5 PI Planning)<br><span class="owner">B11</span></td>
+              <td>Vinay</td>
+              <td><span class="pri high">High</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Follow-ups Owed To Us</h2>
+        <table class="next-steps">
+          <tbody>
+            <tr><td>Apr 14 PO/BPR</td><td>Michael's AI tool ideas for PO/PM workflow</td><td>Michael Clemons</td></tr>
+            <tr><td>Apr 14 PO/BPR</td><td>John loops Andrew in on recording</td><td>John</td></tr>
+            <tr><td>Apr 14 Atlassian</td><td>Tool access request list + Rovo tier lookup</td><td>Matt + Carl</td></tr>
+            <tr><td>Apr 16 Architecture</td><td>AI use-case ideas (plugins/APIs/logic apps)</td><td>Shyam + Kashif</td></tr>
+            <tr><td>Apr 16 Architecture</td><td>Maximus-required doc list</td><td>Krishna + Jeff</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px; font-size:12px; color:#666;"><em>Action: send one-paragraph follow-up email to each group this week.</em></p>
+      </div>
+
+      <div class="card">
+        <h2>Deliverables by Phase <span class="badge">Docs</span></h2>
+
+        <div class="phase-block">
+          <div class="phase-title"><span class="phase-dot done"></span>Phase 0 — Governance &amp; Access <span class="phase-date">(This week)</span></div>
+          <ul class="links">
+            <li><a href="planning/deliverables/governance-proposal-v04142026.md">Governance Proposal</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/pilot-governance-charter-v04222026.md">Pilot Governance Charter</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/compliance-map-v04222026.md">Compliance Map (DoIT)</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/code-generation-policy-review.md">Code-Gen Policy Review</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/tool-authorization-list.md">Tool Authorization List</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/doit-ai-assessment-report-template-v04222026.md">DoIT AI Assessment Report (template)</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/scope-running-book-v04212026.md">Scope Running Book</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/assumptions-and-risks.md">Assumptions &amp; Risks</a><span class="tag md">MD</span></li>
+            <li><a href="reference-docs/doit-ai-policy-summary.md">DoIT AI Policy — Summary</a><span class="tag md">MD</span></li>
+            <li><a href="reference-docs/20250401-DoIT-AI Policy-v2- A11Y.pdf">DoIT AI Policy v2 (full)</a><span class="tag pdf">PDF</span></li>
+            <li><a href="reference-docs/DCFS AI Rollout Plan.docx">DCFS AI Rollout Plan</a><span class="tag pptx">DOCX</span></li>
+          </ul>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title"><span class="phase-dot active"></span>Phase 1 — Baseline &amp; Design <span class="phase-date">(Apr 21 → May 13)</span></div>
+          <ul class="links">
+            <li><a href="planning/deliverables/measurement-methodology-v04142026.md">Measurement Methodology</a><span class="tag md">MD</span></li>
+            <li><a href="planning/rollout-plan.md">Rollout Plan</a><span class="tag md">MD</span></li>
+            <li><a href="planning/meeting-prep/matt-baseline-metrics-apr21.md">Baseline Metrics Session (Matt, Apr 21)</a><span class="tag md">MD</span></li>
+            <li><a href="planning/meeting-prep/dave-meeting-agenda-apr22.md">Dave Meeting Agenda (Apr 22)</a><span class="tag md">MD</span></li>
+            <li><a href="planning/meeting-prep/dave-meeting-deck-content-apr22.md">Dave Meeting Deck Content</a><span class="tag md">MD</span></li>
+            <li><a href="planning/meeting-prep/architecture-discovery-questions.md">Architecture Discovery Questions</a><span class="tag md">MD</span></li>
+            <li><a href="planning/presentation/framework-presentation-main.html">Framework Deck — Main</a><span class="tag html">HTML</span></li>
+            <li><a href="planning/presentation/framework-presentation.html">Framework Deck — Full</a><span class="tag html">HTML</span></li>
+            <li><a href="planning/DCFS-AI-Framework-Krasan.pptx">DCFS AI Framework (PPTX)</a><span class="tag pptx">PPTX</span></li>
+            <li><a href="planning/presentation/speaker-notes.md">Speaker Notes</a><span class="tag md">MD</span></li>
+            <li><a href="planning/presentation/speaker-notes-30min.md">Speaker Notes — 30 min</a><span class="tag md">MD</span></li>
+            <li><em style="color:#999; font-size:12px;">Baseline survey draft — in progress (Vinay, Apr 22)</em></li>
+            <li><em style="color:#999; font-size:12px;">Baseline metrics report — due Apr 30 (Vinay)</em></li>
+          </ul>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title"><span class="phase-dot next"></span>Phase 2 — Train <span class="phase-date">(May 5 → May 20)</span></div>
+
+          <div class="sub-title">General AI Training (everyone)</div>
+          <ul class="links">
+            <li><a href="planning/guide/07-training-delivery.md">Training Delivery Plan — full chapter</a><span class="tag md">MD</span></li>
+            <li><em style="color:#999; font-size:12px;">Foundation Session (1.5h) — DoIT policy, guardrails, HITL — everyone attends</em></li>
+            <li><em style="color:#999; font-size:12px;">Leadership Briefing (1h) — dashboard, success criteria — Jim/Dave</em></li>
+          </ul>
+
+          <div class="sub-title">Role-Based Playbooks (v0 drafts)</div>
+          <ul class="links">
+            <li><a href="planning/deliverables/playbooks/playbook-ba-v04212026.md">BA Playbook</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/playbooks/playbook-tester-v04212026.md">Tester Playbook</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/playbooks/playbook-developer-v04212026.md">Developer Playbook</a><span class="tag md">MD</span></li>
+            <li><a href="planning/deliverables/playbooks/playbook-data-v04212026.md">Data Playbook</a><span class="tag md">MD</span></li>
+          </ul>
+
+          <div class="sub-title">Role-Based Training Tracks (per 07-training-delivery.md)</div>
+          <ul class="links">
+            <li><em style="color:#999; font-size:12px;">BA Track (3h) — Rovo for stories &amp; acceptance criteria — Week of May 12</em></li>
+            <li><em style="color:#999; font-size:12px;">Developer Track (3h) — Copilot for D365 X++ / Logic Apps — Week of May 12</em></li>
+            <li><em style="color:#999; font-size:12px;">Tester Track (3h) — Copilot + Rovo for test design — Week of May 12</em></li>
+            <li><em style="color:#999; font-size:12px;">Scrum Master / SA Track (2h) — M365 Copilot-heavy — Week of May 12</em></li>
+            <li><em style="color:#999; font-size:12px;">BA-Tech Track (2h) — Week of May 12</em></li>
+          </ul>
+
+          <div class="sub-title">Training Materials (to build)</div>
+          <ul class="links">
+            <li><em style="color:#999; font-size:12px;">Prompt libraries + cheat sheets per role — due May 3</em></li>
+            <li><em style="color:#999; font-size:12px;">Role track decks (5 roles) — due May 3</em></li>
+            <li><em style="color:#999; font-size:12px;">Guardrails one-pager — before Foundation session</em></li>
+            <li><em style="color:#999; font-size:12px;">Sample ILC stories / code modules selected for exercises</em></li>
+          </ul>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title"><span class="phase-dot next"></span>Phase 3 — Pair Programming <span class="phase-date">(May 5 → Jun 15)</span></div>
+          <ul class="links">
+            <li><a href="planning/deliverables/pair-programmer-strategy-v04222026.md">Pair-Programmer Strategy</a><span class="tag md">MD</span></li>
+            <li><a href="planning/meeting-prep/feedback-jim-apr16-pair-programming.md">Jim's Pair-Programming Feedback (Apr 16)</a><span class="tag md">MD</span></li>
+            <li><em style="color:#999; font-size:12px;">Pair-programmer role order + stair-step plan — due Apr 25</em></li>
+            <li><em style="color:#999; font-size:12px;">Onboarding packet for pair programmers — due May 5</em></li>
+          </ul>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title"><span class="phase-dot next"></span>Phase 4 — Pilot &amp; Measure <span class="phase-date">(May 14 → Jul 20)</span></div>
+          <ul class="links">
+            <li><a href="planning/deliverables/pilot-governance-charter-v04222026.md">Pilot Governance Charter (operational)</a><span class="tag md">MD</span></li>
+            <li><em style="color:#999; font-size:12px;">tools.ussp.co configuration — engagement, teams, baseline (May 5)</em></li>
+            <li><em style="color:#999; font-size:12px;">Read-only dashboard for Dave (May 5)</em></li>
+            <li><em style="color:#999; font-size:12px;">Weekly metrics collection (ongoing)</em></li>
+            <li><em style="color:#999; font-size:12px;">Per-sprint AI output spot-check (3-5 artifacts/week)</em></li>
+            <li><em style="color:#999; font-size:12px;">Mid-pilot pulse survey (~Jun 10)</em></li>
+            <li><em style="color:#999; font-size:12px;">Mid-pilot governance checkpoint memo (~Jun 10)</em></li>
+          </ul>
+        </div>
+
+        <div class="phase-block">
+          <div class="phase-title"><span class="phase-dot next"></span>Phase 5 — Playbook &amp; Scale <span class="phase-date">(Jul 20 → Aug)</span></div>
+          <ul class="links">
+            <li><em style="color:#999; font-size:12px;">Post-pilot SPACE/DevEx resurvey (Jul 23)</em></li>
+            <li><em style="color:#999; font-size:12px;">Pilot Results Report — AI vs baseline vs control (Aug 1)</em></li>
+            <li><em style="color:#999; font-size:12px;">Playbooks v1.0 — BA, Tester, Dev, SA, BA-Tech, Data (Aug 8)</em></li>
+            <li><em style="color:#999; font-size:12px;">Executive results dashboard + 1-page CIO brief (Aug 1)</em></li>
+            <li><em style="color:#999; font-size:12px;">Go/no-go recommendation for ART rollout (End of Aug)</em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Links -->
+    <div>
+      <div class="card">
+        <h2>Project Plan &amp; Tracker</h2>
+        <ul class="links">
+          <li><a href="planning/project-planner.html">Interactive Gantt Project Planner</a><span class="tag html">HTML</span></li>
+          <li><a href="planning/open-tasks-v04222026.md">Open Tasks Tracker (v04222026)</a><span class="tag md">MD</span></li>
+          <li><a href="planning/rollout-plan.md">Rollout Plan</a><span class="tag md">MD</span></li>
+          <li><a href="planning/daily-calendar.md">Daily Calendar Log</a><span class="tag md">MD</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Framework Presentation</h2>
+        <ul class="links">
+          <li><a href="planning/presentation/framework-presentation-main.html">Framework Deck (Main)</a><span class="tag html">HTML</span></li>
+          <li><a href="planning/presentation/framework-presentation.html">Framework Deck (Full)</a><span class="tag html">HTML</span></li>
+          <li><a href="planning/DCFS-AI-Framework-Krasan.pptx">DCFS-AI-Framework-Krasan</a><span class="tag pptx">PPTX</span></li>
+          <li><a href="planning/presentation/speaker-notes.md">Speaker Notes</a><span class="tag md">MD</span></li>
+          <li><a href="planning/presentation/speaker-notes-30min.md">Speaker Notes — 30 min</a><span class="tag md">MD</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Meeting Prep (Apr 22 Dave)</h2>
+        <ul class="links">
+          <li><a href="planning/meeting-prep/dave-meeting-agenda-apr22.md">Dave Meeting Agenda</a><span class="tag md">MD</span></li>
+          <li><a href="planning/meeting-prep/dave-meeting-deck-content-apr22.md">Dave Meeting Deck Content</a><span class="tag md">MD</span></li>
+          <li><a href="planning/meeting-prep/matt-baseline-metrics-apr21.md">Matt Baseline Metrics (Apr 21)</a><span class="tag md">MD</span></li>
+          <li><a href="planning/meeting-prep/architecture-discovery-questions.md">Architecture Discovery Questions</a><span class="tag md">MD</span></li>
+          <li><a href="planning/meeting-prep/feedback-jim-apr16-pair-programming.md">Jim's Pair-Programming Feedback</a><span class="tag md">MD</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Meeting Notes</h2>
+        <ul class="links">
+          <li><a href="meeting-notes/_index.md">Index</a><span class="tag md">MD</span></li>
+          <li><a href="meeting-notes/2026-04-22-dave-meeting.md">Apr 22 — Dave Meeting (tool limitation surfaced)</a><span class="tag md">MD</span></li>
+          <li><a href="meeting-notes/2026-04-13-jim-meeting.md">Apr 13 — Jim Meeting</a><span class="tag md">MD</span></li>
+          <li><a href="meeting-notes/2026-04-08-dinkar-discussion.md">Apr 8 — Dinkar Discussion</a><span class="tag md">MD</span></li>
+          <li><a href="meeting-notes/2026-04-03-kickoff.md">Apr 3 — Kickoff</a><span class="tag md">MD</span></li>
+          <li><a href="meeting-notes/">All meeting notes</a><span class="tag dir">DIR</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Reference Docs</h2>
+        <ul class="links">
+          <li><a href="reference-docs/doit-ai-policy-summary.md">DoIT AI Policy — Summary</a><span class="tag md">MD</span></li>
+          <li><a href="reference-docs/20250401-DoIT-AI Policy-v2- A11Y.pdf">DoIT AI Policy v2 (full)</a><span class="tag pdf">PDF</span></li>
+          <li><a href="reference-docs/DCFS AI Rollout Plan.docx">DCFS AI Rollout Plan</a><span class="tag pptx">DOCX</span></li>
+          <li><a href="planning/AI-Augmented Agile Delivery _ Krasan Consulting Services v04132026.pdf">AI-Augmented Agile Delivery (Krasan)</a><span class="tag pdf">PDF</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Framework Guide (13 sections)</h2>
+        <ul class="links">
+          <li><a href="planning/guide/README.md">Guide README</a><span class="tag md">MD</span></li>
+          <li><a href="planning/guide/index.html">Guide (HTML index)</a><span class="tag html">HTML</span></li>
+          <li><a href="planning/guide/">Full guide folder</a><span class="tag dir">DIR</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Onboarding</h2>
+        <ul class="links">
+          <li><a href="onboarding/vinay-onboarding.md">Vinay Onboarding Checklist</a><span class="tag md">MD</span></li>
+          <li><a href="playbooks/claude-code-m365-email-setup.md">Claude Code M365 Email Setup</a><span class="tag md">MD</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>D:\Code\ussp\clients\dcfs-ilc\ · Last generated Apr 23, 2026</p>
+    <p><a href="README.md">README.md</a> · <a href="planning/">planning/</a> · <a href="playbooks/">playbooks/</a> · <a href="meeting-notes/">meeting-notes/</a> · <a href="reference-docs/">reference-docs/</a></p>
+  </div>
+
+</div>
+
+</body>
+</html>

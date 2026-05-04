@@ -1,0 +1,266 @@
+Shyamsundar 	 Venkataraman  0:03  
+Hello, everyone. Hello, Hey, good afternoon. Hey, good afternoon.
+
+Vinay Lagisetty  0:10  
+Hey. Are we waiting for anyone else?
+
+Shyamsundar 	 Venkataraman  0:16  
+No, I think we are good. We can get started.
+
+Vinay Lagisetty  0:19  
+Hey, thanks for arranging this call. Yeah, again, you, I think most of us are aware of the project, right? Or do I have to just go over?
+
+Shyamsundar 	 Venkataraman  0:34  
+Yeah, you can, you can give Vinay, if you can, yeah, just
+
+Krishna Mekala  0:37  
+take Yeah, maybe couple of minutes. Oh, yeah, sure, I can Yeah, I think we met, but yeah, Shyam and Kashif, they are part of the Enterprise Architecture. Okay, so they are overseeing the, I call the teams, and, you know, the overall architecture for the entire project.
+
+Vinay Lagisetty  0:53  
+Yeah, that's why I wanted to make sure whether we are aware of it. So, okay, yeah, let me just go over briefly on what high level we are doing right now, Jim got us on board to do take advantage of the AI processes in the industry and accelerate our throughput. Right he's expecting efficiency gain of 15% across the board, across the 12 teams, and across the 160 plus people. So my role is to just understand how we are. What's our current STLC processes are identified. Opportunities like low hanging fruits, or any improvements we can do in our processes to figure out where we can use AI and do it at a pilot level, prove that we can achieve these efficiencies and also the compliance and the governance and risk around it, and then try to roll it out to the rest of the 12 teams we have overall. That's a high level overview, but we are also responsible for establishing a governance body for Jim, so guiding Jim's team to figure out how to implement that, do it policy, as well as the who should be part of the governance body? What should be the governance process? So that's a separate track, which, which, which is more us to guide the TC, DCFS to do it, but I don't think so we have to really do the governance itself and to start this project, I think we were given a deadline of July 21 if I'm not wrong, or July 20, one of those two dates to complete the project, complete the pilot, identify, create The Runbooks. And there is a 13 week deadline overall to do this, and then post 13 weeks we try to roll it out to other teams as well. So that's at a pretty high level. I'm I think if you have any questions, I can address that first, and then we can dive in a little bit. So the
+
+Kashif Ali  3:27  
+Go ahead. Kashif, yeah, please go ahead. It's okay. Yeah, please go ahead.
+
+Shyamsundar 	 Venkataraman  3:31  
+No, like this. So like, what are the areas it's more to do with SDLC, or can we have AI in the areas of business process improvement or that kind of thing also, is that under the purview of what Jim suggested?
+
+Vinay Lagisetty  3:56  
+So if I'm breaking it down, are we changing the workflows to include AI from a user input and output perspective, or is it just the improving the story stories, and I'm trying to understand
+
+Shyamsundar 	 Venkataraman  4:18  
+the question, do you know what the business domain is and what we are trying to do,
+
+Vinay Lagisetty  4:25  
+given kind of have an eye,
+
+Shyamsundar 	 Venkataraman  4:27  
+yeah, maybe, maybe I will start with an overview, and then as we go down right, we can see where you might AI might Add value, right? So, fair enough. So, like, high level, like, we have a legacy, three legacy platforms, right? So DCFS is trying to modernize them and kind of retire, sunset these legacy platforms. And it is wants to kind of re architect and re platform and bring them into the system called as Illinois connect. So this is a modular dynamics 365, and Dataverse based child welfare case management ecosystem. So the goal is to support like, end to end child safety investigations, permanency licensing and using a capability based architecture instead of having like a monolithic system, okay? So that is the high level goal. So now if we see some of the critical domains which are there, right? So we have some modules such as intake. So intake is handling all these hotline calls and abuse neglect allegations. Then there is another module called as investigations, so which determines like the safety risk and legal thresholds. And there is something called as family services or intact, which supports the foster care families without removal, right? And then permanency is one more module where they are trying to place the change children into foster care, adoption outcomes. And then there is, like provider licensing, like an external ecosystem engagement. So like each domain, each of these, what I described, it owns business logic, but it is kind of kind of all interlinked together with the other domains. So this is at a high level, the domain structure, yeah. Then if we come to like the platform architecture, right? So the core platform, Illinois Connect is being built on dynamics 365, and Dataverse. So this will be providing like case management workflow, entity relationships, security model, baseline and activity model, right? So this is at a platform level, architecture level, I'm just going briefly. Then there is an integration layer wherein we have external, like from the business standpoint, right? External integrations like codes, integration with courts, because legal, this is legal aspect is involved. Then we have integrations with providers, right providers who provide these facilities. Then we have like, address validation, then Identity Services, Adobe sign and all that from a business perspective. Then, then, of course, this involves, when you say integration at a business perspective, then, obviously from a technical perspective, we will have like, APIs, you know? So we will have Azure API Management and all that kind of semantics, right? So there will be internal consumers, there will be external consumers. Then there is a data and analytics layer, like which supports like federal reporting, performance, analytics, identity resolution and case lifecycle metrics, and that is all supported using like Azure Data Factory, data bricks, SQL Server, data lake and Power BI, right? So then we have a security architecture, because all this is quite sensitive information, right? So we dynamics, implement security, but on top of that, there's heavy business logic build secure, again, with related to security on top of that, right? So this is, that is the security area. Then the governance models is like, we have, like, base, baseline enforcement capabilities, then domain specific logic. So there is a kind of an enterprise governance. So this is broadly what I can say from a business and a technical standpoint. Kashif, you want to add something amazing.
+
+Vinay Lagisetty  8:58  
+So, no, we are not going to be changing anything in the domain level that's not the objective of this particular transformation. This is only to do with accelerating our development lifecycle.
+
+Shyamsundar 	 Venkataraman  9:14  
+Okay, so you're just focused on accelerating the development lifecycle.
+
+Vinay Lagisetty  9:18  
+So yes, whether we can write like let me address some of the use cases, right? We can identify more use cases. That's the whole point. But right now, can we improve the story quality? Can we improve the test coverage? Are we doing the full like the can we generate the code using AI? Are we consistent in the in that methodology, and are we improving the documentation? And, yeah, basically any of the cases which are going through our development which can accelerate our development lifecycle, one of the things which we were talking about was also, is a code review. Can we accelerate the code review process if there are whatever the processes they are there, can we automate some of the security assessments if they are there in the lifecycle we are talking about, the deployment we are talking about, I think there are still on the data side. I have not spoken to the data teams, but I'm sure there are a lot of data areas where they can do the data mapping and things like that, where, once I understand the process, we could come up with some more use cases. So we are identified close to 20 plus use cases I can send out. And the goal is to identify what are high value added use cases, what can save more time to achieve the first objective of 10, 15% time reduction. Again, we don't want to measure it through story points and things like that. We want to measure it through other metrics. The problem with the story points is also it is very finicky. Every team has a different way of creating a story point. So we are going to look at other metrics, which Jim might have to review, and say, Yeah, okay with these kind of metrics. So yeah, we're not changing any of the business processes at this moment. But I'm sure once this is implemented, Jim would like to our suggestions or feedbacks to improve the domain specific areas as well.
+
+Shyamsundar 	 Venkataraman  11:32  
+Okay, Kashif, yeah,
+
+Kashif Ali  11:35  
+like this, expectations are 15 to 20% improvement. Do we have any case study behind it which we have used to identify these numbers? Or what are the basis for these numbers?
+
+Vinay Lagisetty  11:52  
+Yeah, 10 to 15% there's it's not 15 to 20. The expectations are 10 to 15, but Jim is insisting on 15. The case study says pretty much Jim spoke to Gartner, and they said it's a 23% efficiency. So that's what he's banking it from.
+
+Kashif Ali  12:14  
+And do you have any relevant to this kind of work, which we are doing here,
+
+Vinay Lagisetty  12:24  
+in general, in my past, yeah, in my past teams, the efficiencies has been lot more than 20% but there was not many constraints in there. Here in this environment, there are a lot of constraints. It's not pure code development. Your maximum throughput enhancements are coming through code development. But here the it's a configuration first model. So I'm not really sure if we can I mean, we don't know yet. That is where the pilot team is supposed to do we are supposed to test out what kind of efficiency gains we can happen here. And also, there is a people maturity also, right? It's just not you. We teach some teams, hey, do it, and then automatically going to get better at it. So efficiencies will come through more time. The more they use it, the more we can refine the process to get there. Typically, it would really take two to three sprints to achieve or stabilize your but here we don't have much time. We're we're given like two sprints from Pilot team perspective. So again, we are going to bake in all those information and present it to Jim, saying that, hey, this is that, you know, there is a continuous improvement going on we will be able to achieve and all those things.
+
+Kashif Ali  13:50  
+Yeah, yeah. So this number is definitely great if we can make it through 15. Yeah, that, that sounds, you know, very, very great idea to have that much improvement. But the constraints which we have is like, first, the platform which we are using, as you rightly mentioned, like it's more configuration based as compared to code base, and things are splitted and scattered here and there. It's not like straightforward analyzing the codes and, you know, and get the idea what is happening, or there are a lot of components involved here. And so I'm wondering, like, what are the key mayors which we are expecting to like, the indicators which we are expecting to be like, would be improved, and we will see improvement in those and we'll see like, the okay this is happening because we are introducing AI, and How comfortable is the agency using AI for accessing their business requirements, even the code and everything. So right now
+
+Vinay Lagisetty  15:02  
+we have been working on I'm glad we're having this call right now, because if you would have asked me this the same thing four days ago, I would have said, I don't know. So, so things are evolving. So initially, when we did the proposal to Jim. He said we should not be touching any code, right? Like there is no code touch. It should be around the court. But in the last meeting, all guards were off, right? He said he's very comfortable, as long as the constraint of do it policy is but what does the DO IT policy say is they should be human in the loop. They don't say that the code should not be generated by AI, but saying that any code, anything which is done by AI, they should be human. Validating that one. Right? So the DO IT policy, we validated the policy. The agencies are comfortable, Jim is comfortable. So once Jim is comfortable, he needs to submit document on what we are doing, using AI to the do it. Authorities. 30 days notification. I think that notification is sent on Tuesday right now. So post that Tuesday. We don't know if we have to wait for the 30 days to complete to get started, but we still have our process designed to be completed. We need to still do some baseline testing and everything. But from a code generation perspective, that's been clear. And the configuration, in my opinion, is just code, right? Yeah, not really code, but it's still configuration can be treated as code. So we're going to still use the same policy that as long as the configurations are reviewed by human and the other things which protections we have to do, which is the test coverage and the documentation approvals by the team or team, I think that should satisfy The condition as well. And the tools we thought initially we were restricted to also increase the tools. The initially we were told we were only having access to Atlassian row and also the copilot, which is GitHub copilot, but now the tools have expanded to Microsoft copilot. I think dynamics has the copilot extension, so we are including both other additional tools there, and from a governance perspective, we still want to do some audit. I think Microsoft has some auditing tools we need to explore and come up with an auditing session. I think there is a zone review. I believe.
+
+Shyamsundar 	 Venkataraman  18:09  
+Sorry, sorry, you mentioned GitHub copilot, and what was the other one?
+
+Vinay Lagisetty  18:14  
+GitHub copilot, Microsoft copilot, and dynamics. I think it's d3 65 copilot.
+
+Shyamsundar 	 Venkataraman  18:22  
+Okay, so Claude is not approved.
+
+Vinay Lagisetty  18:26  
+No cloud is not approved. Within copilot, we can use either Google, because copilot can be connected to either open AI model or Google model. I think we're going to start with an open AI model see how things go, and we'll figure out whether we have to switch the model later on, maybe there will be different models for different things, right? But Cloud, I don't think so. It's approved.
+
+Shyamsundar 	 Venkataraman  18:56  
+Okay, okay, yeah, in the middle, yeah, oh, no,
+
+Vinay Lagisetty  19:01  
+no one is approval, one is access. The two issues right? Approval by the state, access, whether the DCFS has access to it, we are validating both what's approved and what's available. So that's something we are still exploring at this point. Okay, so, yeah, we have identified four tools. Has a governance tool, which we have to write some dashboards around it, but that's that's straightforward. You already have Power BI and things like that. Yeah. Overall, the goal is to just understand the development processes from end to end, figure out where the time is getting burnt, and see if we can accelerate time in any shape or form and code and everything is okay at this point. Hopefully that clarifies a little bit,
+
+Shyamsundar 	 Venkataraman  20:02  
+yeah, yeah, that clarifies a little bit, yeah, sure.
+
+I've given you a kind of a good overview. So next, what do you need from us?
+
+Vinay Lagisetty  20:18  
+Have can you just walk me through, what does, where does your team gets involved from an architecture perspective, and where, what is a process generally like, what tools do They use on a day to day basis?
+
+Shyamsundar 	 Venkataraman  20:41  
+Okay, so, yeah, I'll start with the first one. So we both are from shared services team. Okay, yeah, so we are like across the board, and there are about 10 to 12 product teams, so each product team is working on one module. I described a few of the modules right intake, intact, permanency and all that. So we both myself and Kashif, we get we are across the board. So there is a solution architect in each of those teams. Yes, and those solution architects, they work with the product manager and the product owner in each team. And within a PI, there is pi planning every quarter. And within a PI they, you know, what is pi planning, right? So they Yeah, they story point and all that. And they say, okay, these bunch of features we are going to try to develop and release during this pi and so there is architecture and design around those features. And so we we are looking at it from an enterprise lens, and we are saying, okay, overall, is this fitting in, and is this going to work well with the other modules? What are the interdependencies? What are the integration patterns we are trying to standardize on all of that myself and Kashif. So we are playing that kind of a role, and we are also overall in the tech stack. We are seeing what features we can use out of the box versus what needs to be written as custom code we are making, we're helping teams make those kind of decisions as well, right? And we are establishing, like, the core the reference security architecture, the reference integration architecture, the whole topology and all that. We are making sure the teams align to all of this. And we are like the guardrails. Yeah, right. So are you
+
+Vinay Lagisetty  22:44  
+part of the code review or configuration reviews as well?
+
+Shyamsundar 	 Venkataraman  22:50  
+Yeah, each team is doing that along with the solution architect, and there is a team lead and this solution architect are doing that.
+
+Vinay Lagisetty  22:59  
+It doesn't come to the shape, yeah,
+
+Shyamsundar 	 Venkataraman  23:02  
+but any architecture and design, it comes to like there is a architecture review board is there, but below that there is a pre ARB board where I myself and a couple of Maximus architects, we are sitting like the guardrail. So any design, any architecture, which any essay develops, it has to be reviewed by us and approved. And they also, the essays also come up with like solution design documents which we we look into, and we provide feedback and all that.
+
+Vinay Lagisetty  23:39  
+So when does that happen? Like, with like, when does the review happen? Like, is it happening at the every sprint level, or only when the design change is affecting other other subsystems? It is ongoing
+
+Shyamsundar 	 Venkataraman  23:55  
+in every API. Like, actually the designs should be developed, and they should be ready before the when the PI planning completes. But we are finding that essays are and teams within the teams, they are doing it on an ongoing basis. So it is, yeah, you can say it is correct. It is at Sprint level. It is happening. Sprint level is happening.
+
+Vinay Lagisetty  24:24  
+So I'm going to just try to repeat what you said and see if I captured my understanding. So sure, yeah, the so if a new story is coming into a sprint, right? So the the essays are going to determine whether it's like, what should be a configuration, what should be a custom code? It's happening at the essay level, and if it is happening at the configuration and it says are interacting with you to making sure we don't need any sub module, or getting some kind of a validation from you guys and then approving that to either configuration team or to a development team.
+
+Shyamsundar 	 Venkataraman  25:09  
+Kashif, you want to answer that?
+
+Kashif Ali  25:14  
+Sorry, I missed the last part. So can you
+
+Vinay Lagisetty  25:16  
+please comment? No, no, I'm just seeing how the sprint flows, right, like if a sprint is happening. Now you, let's say there is a new story which they have to complete in the sprint. So the team sits together. The essay is figuring out the story has to be. He's determining whether it is a configuration item or is it code item, and then working with the developer, or assigning it to the developer or to the configuration teams. So if they say, has to have a conversations with you guys at that point, they will have a conversation with you to validate, if needed, right or or if a new module can be used, or like asked for in the dynamics, and then go back to the team for the confirmation, like for the implementation. And implementation post implementation is typically like, hey, they do the implementation. Then the testing guys are writing their test cases to make sure the coverage is there and and at some point, it's at the end of the sprint, it's getting released to the development and where the shared services is probably doing a deployment back into the infrastructure.
+
+Kashif Ali  26:25  
+So, yeah, so the recipient definitely start with the like the chromeing session, where they select their stories, they go through the details, and then they estimate at that time that the whole team is involved, and they identify, Okay, if this what kind of configuration is going to need and what kind of code or customization it will require to implement these stories. So they based on that, they know do ask question at that time to the product owner and get clarification, and then they get kind of 60, 70% of understanding like what will be needed. So they estimated on that time, and then definitely for every story they do plan, like their sub tasks, like who will be doing the development and then testing, and if there is any design review that will be done, the peer review, and then QE testing. So already did all should be validated in their story and recorded as well. So they do consult us, and they ask for the feedback and input from the Shared Services team. Whenever there is like integration involved, there is a new, as you mentioned, like new module is introduced, a new design pattern is required, which is needed for implementation of that part. Then they do come up with their options, their design and then we discuss together and see if it is like how much the impact, that impact is determined, first internally, then we have meeting pre ARB meetings, and ARB meetings to identify and approve those changes if it is gonna impact the whole system or major part of the system. So we have those whole like, dedicated approval processes available. There will be decide, like, what kind of approval and what level of approval is needed. Yep, based on that, they generate the technical design document or the solution design documents for their, you know, implementation, the stories, and those are, get, those are, get reviewed by us as well, if it's a visa component.
+
+Vinay Lagisetty  28:43  
+What are the tools which are going back and forth, doing the design reviews, the documentation? Is it all in Confluence?
+
+Kashif Ali  28:51  
+Yes. Conference is the major for overall idea maturity and introducing the you know, since we have multiple teams introducing at the like, high level or the organization level things over there, and, yeah, maybe that is used for the these reviews and these decisions as well. And they produce their own, like diagrams to using Visio. That's one tool which we are using. Other than that, they're generating Word documents for us.
+
+Vinay Lagisetty  29:27  
+So the Visio gets integrated into Confluence.
+
+Kashif Ali  29:32  
+The files are get attached to the confluence or the presentation which we are creating for the whole
+
+Shyamsundar 	 Venkataraman  29:39  
+things as an image as an image, yeah,
+
+Vinay Lagisetty  29:42  
+that's, that's pretty Do we have other options? Can we use mermaid or something like that, which is more? But is it the Visio standard?
+
+Shyamsundar 	 Venkataraman  29:56  
+Yeah, Visio is the architecture tooling standard, diagramming standard, yeah,
+
+Vinay Lagisetty  30:03  
+but if you're updating the image, the the confluence does not get the context right. If it's just an image,
+
+Shyamsundar 	 Venkataraman  30:12  
+yeah, but obviously there is content around that, right? So, content not just,
+
+Vinay Lagisetty  30:20  
+okay, yeah, I think, I think, I definitely see some opportunities there. So, so when you're interfacing with the whether the document is going to the architecture review board or working with essays, right, your primary mode of interaction is all through Confluence.
+
+Shyamsundar 	 Venkataraman  30:49  
+No Confluence and solution design document is in Word format.
+
+Vinay Lagisetty  30:55  
+SDS, yeah, solutions and document, okay? SDD, yes, SDD is in the Word format,
+
+Shyamsundar 	 Venkataraman  31:05  
+and then there is a workflow around it, like there is a JIRA ticket, which is raised for previous then it is attached to that, and then the meeting is scheduled and approval comes. There is a workflow in
+
+Vinay Lagisetty  31:21  
+SharePoint somewhere, and as a version control, yeah, if it's a document in SharePoint, so you have a site in the SharePoint, so it's primarily SharePoint in Illinois, Illinois SharePoint, it is there. So it's primarily SharePoint so that then we can definitely use Microsoft 365, and then so, based on what you guys know, right, I know we're already five, sorry, guys, based on what you know, where do You think the opportunities are there and what toolkits?
+
+Shyamsundar 	 Venkataraman  32:04  
+Yeah, we can do some research and come back. We both can take it as an exercise, and based on what we talked I think that might be a better way, right? Yeah, definitely, definitely.
+
+Vinay Lagisetty  32:15  
+I mean, so do you know if you already using any of the AI tools like just to improve the grammar. Any of the are you? Are you currently using any AI at all?
+
+Shyamsundar 	 Venkataraman  32:29  
+Yeah. Informally, we are using, like, to preview some designs. And each person is using, but not as a agency level, yeah, yeah.
+
+Vinay Lagisetty  32:42  
+So the only reason I'm touching on that topic is Jim also knows everybody is using it informally.
+
+Shyamsundar 	 Venkataraman  32:49  
+Also encourages. Jim used to be another person called Rob baller. He was the CTO. They both encouraged the use of AI informally. But yeah, we didn't have, like, a formal, yeah,
+
+Vinay Lagisetty  33:00  
+formal engagement. So my goal again, is to identify saying that, hey, you're not going to get a 15% efficiency if people are already using the tools, right? So I want to be making, I mean, we are formalizing it. We call it before. We used to call it shadow IT. Now it's called Shadow AI, it's the same thing. So, you're formalizing this stuff, and I just
+
+Shyamsundar 	 Venkataraman  33:26  
+want to not everybody is using. I have seen people who are not using, who are not using.
+
+Vinay Lagisetty  33:31  
+Hopefully we will coach them, train them. That's where our maximum bang for the buck is right for people who are using. We're just formalizing the process, and hopefully we'll find some new techniques. They can use it more, hopefully, right? But people who are again, there are tools definitely you guys don't have access to if you need any tools, this is the time to ask. If you think, hey, hey, this is going to help me in my process. Ask for the tool. Let me go and see if we can get an approval for that right again, we capture the current state on the future process and see where we can use efficiencies of AI, again, you guys are the users. I'm there to facilitate and connect the whole story together. So I'll be working with you guys to figure out that, and part of the pilot is to determine all the use cases and prioritize them, build a training material so that we can be consistent across organization.
+
+Shyamsundar 	 Venkataraman  34:33  
+Yeah, one thing what I can think of is right, we are even though most of it is like configuration and all that. There are some plugins which are being developed. So those are code, and then there is some API is being developed. There's some logic apps and function apps and those kind of things in Azure. So there AI can speed up. Yes, right? Some opportunities I do see, but yeah, we will go and think and come back with more. You can also, you can also, based on what you heard, you can also do that. Yeah, I will
+
+Vinay Lagisetty  35:13  
+put some document together and share it with you and see if we can go there. And where are you guys located right now, in general, what
+
+Shyamsundar 	 Venkataraman  35:21  
+time zones all of us, yeah, all of us are remote. I am in Pacific Time Zone. And Kashif is in Central. He's in Houston. Krishna is in Illinois, Central, okay, yeah. And there's another person, Jeff, yeah, he is an eastern time zone.
+
+Krishna Mekala  35:42  
+Got it just one additional thing. I mean, it's not directly related to architecture, but since you know, this is like a government engagement, right? There is lot of documentation, yes, and there's a third party team that verifies audits, right? I mean, if there are tools that can actually, you know, reduce some of that workflow delays, I think there is definitely, you know, there are gains to be achieved there.
+
+Vinay Lagisetty  36:14  
+So the how, I mean, we're talking about the design documents, all the artifacts which are coming out of the process and the third party, what is it verifying
+
+Krishna Mekala  36:24  
+their Maximus is a company called Maximus, so it's a, it's a 50% federally funded project, okay? So their their responsibilities basically making sure that things are moving and working as per the guidelines, and then report it back to the federal government. So part of their responsibilities also make sure that the processes are documented we are following as per the documentation. You know they they measure the maturity model where we are in terms of not doing all of the areas. So there are lot of
+
+Vinay Lagisetty  37:05  
+things we produce, some kind of an artifact at the end of the sprint, or something which is shared with them, or they go and do their own reporting without we submitting
+
+Krishna Mekala  37:15  
+anything to them. Yeah, it's not at the sprint level. But there are artifacts like the DevOps strategy, you know what? What is your development strategy? What is your test strategy, right? Example, although all those things and then ARP is a big thing where there is a documentation too, right?
+
+Vinay Lagisetty  37:33  
+So, yeah, yeah, who is building those documents? Which goes to Maximus, or it's just part of our regular operations. I just want to make sure these documents exist and these documents are updated. A lot
+
+Krishna Mekala  37:48  
+of it is from our side, the shared services, but some of it comes from other teams. Also got IT teams responsible or, you know, basically creating those documents and updating them.
+
+Vinay Lagisetty  37:59  
+Do you have a list of those documents? By any chance?
+
+Krishna Mekala  38:03  
+Krishna, I don't know everything, but yeah, Jeff might be able to Jeff. I think Jeff is back from today, so yeah, he can help you, but I can help you with some of those. Yeah, we have time for this, right? This is going into, I'm just saying, Yeah, that's one area. Maybe keep track of. There are tools, you know, that help just, not just creating the documents, right, but also the workflow to improve those. Because there's versioning, you know, the new updates happening, and we have to track them. There are comments back and forth. I mean, we're using Office, but if you know, if the office with the AI can improve some of that, and that will say office
+
+Vinay Lagisetty  38:43  
+with AI. And do you guys use Visual Studio Code? Does your team? Can you mute here? So do you do you guys use Visual Studio as as your toolkit
+
+Krishna Mekala  39:02  
+from custom development, yes, configuration, but, yeah, okay, but
+
+Vinay Lagisetty  39:10  
+so you guys are into shade services, right from architecture. You use Visual Studio.
+
+Krishna Mekala  39:16  
+No, we, we
+
+Shyamsundar 	 Venkataraman  39:18  
+don't do any development.
+
+Krishna Mekala  39:20  
+We're not like hands on. We don't do
+
+Vinay Lagisetty  39:23  
+I was not asking from from that perspective, our teams
+
+Kashif Ali  39:28  
+use your studio to do the plugins like code and client side scripting using via studio, but we share services. Team do not do that.
+
+Vinay Lagisetty  39:39  
+So I mean, the reason I'm saying is, like, I literally update my Word documents using Visual Studio. Just saying there's lot more we can attach based on if we if we will, we can test out this use cases and see, hey, if it's helping, I'm not hurting. If it's hurting, we just not use it. If it's helping, we continue to use it, right? So anyway, just ideas. We'll get to it. It's actually I feel using Visual Studio much easier to update documentation, rather than me going and doing some edits anyway. But this is good guys. Thank you so much. Let me digest this information, document it, and figure out what are the next steps, and I'll probably put some of the planning calls. Probably after my governance is done, my next week, I'm going to focus a lot on governance, and once the governance is done, we'll jump back into the planning sessions. Okay, sure, Yep, thank you. In the meantime, think about the use cases. Shoot me an email. I still am about to get my class an email. I don't know what's going on, but I'm going to follow up for that. Until then, I'm using this email.
+
+Shyamsundar 	 Venkataraman  40:59  
+I did I did see you. I did see you on teams, so you cross an email. Is there no one communicated to
+
+Vinay Lagisetty  41:09  
+me check what's going on. That would make a life little bit easy, because I have my personal and everything mixed in here, like that. Yeah? Cool. Thanks guys, yeah, thank you, thanks. Thank you. Bye, thank you bye.
+

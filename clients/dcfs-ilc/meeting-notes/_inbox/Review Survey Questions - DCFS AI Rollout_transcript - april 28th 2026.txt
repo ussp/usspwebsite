@@ -1,0 +1,325 @@
+Vinay Lagisetty  0:30  
+Hey, Robert,
+
+good afternoon. Vinay, how are you good? Thank you.
+
+Robert Rodriguez  0:52  
+Solve and I talked to one of our marketing folks, and she had sent over some questions. I think I mentioned it on this morning's call. I didn't look at him. Did you happen to have a second to take a look? I know you're busy, guy.
+
+Vinay Lagisetty  1:07  
+No, no, I did take a look. We might again. We need to know the intent. That's a good time to talk about it. Ai, Hey,
+
+are we still waiting on Jeff?
+
+Emil Romulus Kovacs  1:35  
+He was invited, right? So you should join in York. I think he provided his feedback, and I think Oid to us,
+
+invited Alec. Say, what said?
+
+Robert Rodriguez  1:58  
+I also invited Alex, so I'm waiting, okay as
+
+Emil Romulus Kovacs  2:01  
+well. Okay, that's good.
+
+Vinay Lagisetty  2:03  
+Yeah, look and me had the cleanup of the tasks and everything we were only able to cover till baseline, but we're gonna sit on Thursday to clean up the design. There are, like, lot more tasks which are getting added. So
+
+Emil Romulus Kovacs  2:32  
+and stuff.
+
+All right. Leo quorum, I think we can get started. Hi Jeff, hey guys.
+
+Robert Rodriguez  2:56  
+So who's running with it?
+
+Emil Romulus Kovacs  2:58  
+So Vinay, I'm assuming you do you want to start us out.
+
+Vinay Lagisetty  3:05  
+I can open the survey so I do have your feedback. I mean, I obviously Romy. I just saw your questions, but we can cover it here. Yeah. So like, one of the things that you show your screen, yeah, I'm opening it up. Just edit in a desktop, open.
+
+Oh, god, it's asking for lock in that password all over again, let me close it. Okay, let me close it. I was just trying to open it in the from the email that didn't work at all, download. That's what you get.
+
+Okay, let me open up your questions. So typically, what happens is, I send it as a tool, and it's usually like, based on the role they pick, and it all comes up, but because we're doing thing in Survey Monkey, so we are trying to,
+
+Emil Romulus Kovacs  4:49  
+well, we actually don't know that yet. Okay, so I'm not sure. Talking to Robert earlier, I think we might want to go through
+
+basically, to Tracy,
+
+yeah, yeah. And I don't know if she's gonna, she's gonna do Survey Monkey or not, but probably not. But I don't know
+
+Robert Rodriguez  5:12  
+she has Survey Monkey. I do know that I did not speak to her yet, but she does have a survey capability. She sends us surveys out after the PI events, right? And I think they're Survey Monkey, but don't worry about the mechanism. As soon as you get the questions and you the audience, then I'll make sure it gets out. Yeah, so
+
+Vinay Lagisetty  5:37  
+I did look at this like results, right that, obviously it's covering some of the answers we are looking for. Do you know when this AI usage for consultants were done about
+
+three weeks ago. Oh, okay,
+
+so someone did what I could do is I could take these questions and remove the overlaps that is significant.
+
+Emil Romulus Kovacs  6:05  
+Can I ask a real quick question? Sure. Do we know who the audience of this survey was?
+
+Robert Rodriguez  6:11  
+This was sent out to crafts and employees, and from what I understand, talking to Melinda, this went out to some DCFS folks.
+
+Emil Romulus Kovacs  6:19  
+Okay, so what I'm saying is that these numbers, these answers, when I may not represent DCFS as much as it represents crashing in general,
+
+Robert Rodriguez  6:32  
+right? Yeah,
+
+Vinay Lagisetty  6:34  
+this will represent generally DCFS, right? Not cross.
+
+Emil Romulus Kovacs  6:38  
+No, no, no. Other way around. The other way around. This survey is general to krassin. It's not DCFS specific.
+
+Vinay Lagisetty  6:50  
+Oh, so it is to everybody in cross
+
+Emil Romulus Kovacs  6:53  
+at Cresson, no, no, no,
+
+Vinay Lagisetty  6:55  
+no, then we can't use this.
+
+Emil Romulus Kovacs  6:56  
+That's why I'm that's why I'm asking, got
+
+Vinay Lagisetty  6:59  
+it, got it. Got it. Okay, okay. That makes sense. That makes sense we are doing survey for this specific
+
+Emil Romulus Kovacs  7:04  
+project, correct? So this is why I don't think it should dictate what we're asking specifically at DCFS,
+
+Vinay Lagisetty  7:14  
+yes, yes. And I do like some of the questions, though. So I'm going to, what I'm going to do is I'm going to, I mean, it's pretty much similar, right? But there are one or two questions I would probably borrow from this or use. I mean, this is still going to serve. It still only was answered by 45 people out of probably a big percentage of people who have taken it was centered. So, okay, that's resolves. My biggest question is, we should be still doing a survey, right?
+
+Emil Romulus Kovacs  7:53  
+We should, but to your point, Vinay, I'm sorry to interrupt you. To your point, we might want to take some if we have any good questions here we want to add to our survey. We should,
+
+Vinay Lagisetty  8:04  
+when I was confused was we were using perplexity and everything and like, we're not allowed on those things, Claude and everything, that's so, yeah, so obviously this is not that useful as I thought it was. I'm like, if they were using Claude and perplexity, I'm like, okay, that's my perception was, I need to enhance my questions, because it writes, we need to capture that. Okay, no, I think I will. I will see if we can, if we need to improve, and and, and then, and I'm going to make that choice tonight. I don't need much time for this. Okay, now let's jump into the the actual feedback is so we don't know we're doing it in Survey Monkey, right?
+
+Emil Romulus Kovacs  8:48  
+I think we can assume that it will be for the for the purposes of this exercise, but I don't know that we can. We can. We don't know for sure.
+
+Vinay Lagisetty  8:57  
+Okay, yeah, so let me go to the feedback you specifically gave about this one. One was from Jeff. He was talking about, we will target questions specifically by role, or we will give the questions to all of them. There is questions targeted by role in here. I just need to, I mean, this is again, a general survey. I can just make the question clear, saying that, hey, if you're not in this roles, you don't have to answer. But generally, when I send out the service, I we don't do the rules are defending to specific rules. We send it to everybody, but they do select which rule they are responding to.
+
+Emil Romulus Kovacs  9:49  
+So okay, but then in the question, the E questions you do have specifically saying that the scrum master should answer them. So that's why it's
+
+Vinay Lagisetty  9:58  
+confusing, yes, so those are specifically maintained for Scrum Masters, right? So there are questions for
+
+Emil Romulus Kovacs  10:11  
+for certain role. So some questions are specifically just designate for certain roles. The other ones are not, and it's just confusing, right?
+
+Vinay Lagisetty  10:19  
+So generally, what happens is, when they select the role, the survey actually shows the additional questions for the tool. We don't, I don't know if we have that capability here, so it's just, it's just showing the all the questions. And if we just, usually just put a tag saying that, hey, if you're us.
+
+Emil Romulus Kovacs  10:38  
+So answer this. I think what we should think the way we should think about this, and it's kind of piggybacking a little bit on what Robert said. Let's not worry about the delivery mechanism. Let's just decide as a group, what makes sense, right? Does it make sense to have all the questions to everyone, all the rules, or does it make sense to indicate if you're in this role, you answer these questions right? What? Because I'm just thinking out loud, and you have more experience with this if I'm not a tester and I answer a tester question, it's going to skew your view of what testers are experienced experiencing, or what their experience has been, because non testers answered it right?
+
+Vinay Lagisetty  11:29  
+No. In usually in the talk, we do collect what their role is, and we only we can, we can screen it out, and we're doing the analysis there. So what I'm going to do here is specifically, I'm going to add a column saying that role, role, specific questions and non roles like general questions, right? That one column, if I export from my tool, I think that will give you the entire information. I did not export that. So I can do that export.
+
+Emil Romulus Kovacs  12:04  
+So you could have roll like a BA, and then roll could be also, all right, yes, meaning everyone
+
+should, yes, yes, okay, okay,
+
+Vinay Lagisetty  12:14  
+so that's the first question I think both you and Jeff had right right. On the second feedback I got it, I would like to say, include ca one, CA two, CA three, only if they have provided training about AI else, I would say 95% will come back with strongly disagree, which is fine, actually. So that's Jeff's feedback with question a one, will the question appear on the survey after the pilot has started, or for the pilots.
+
+Emil Romulus Kovacs  12:46  
+So, yeah, it says in your current ILC pilot work. So it's assuming you're in the current pilot. And a lot of people will not know what that what I
+
+Vinay Lagisetty  13:00  
+will flag this one because we are supposed to, okay, I'll flag this one and reword it in your current work. It doesn't have to be pilot in the code, exactly, exactly, right?
+
+Emil Romulus Kovacs  13:15  
+That helps, yeah. Q3,
+
+Vinay Lagisetty  13:20  
+p3, is between.
+
+Emil Romulus Kovacs  13:25  
+So I think I understand. So if I'm a scrum lead and I need to fill this out constraints and this network firewall, data policy, constraining what it's just not clear what it's what am I thinking? What? What is it constraining? What are these things constraining? Right? Yes, it's just not clear.
+
+Vinay Lagisetty  13:49  
+Yes, yes, I will, I will add few more details. I mean, it's, it's so network and firewall is basically preventing them access to outside data policy is the data policy. So I can probably write description for each and every constraint. A not having licensing, is another thing, not having access. So they're like, like, I'm going to add few more constraints in there, so that that constraint is little bit more descriptive in the options so that they can actually select, yeah, that's it.
+
+Emil Romulus Kovacs  14:25  
+Yeah, more information there so they know what they're selecting.
+
+Vinay Lagisetty  14:28  
+Why? Yeah, no problem. So any other things? Is the Tid joint. I'm here. Hey, Jeff, so we, I don't know if you were there. I got your question on the b1 will target specifically for role. I'm going to add those role specifics and,
+
+Emil Romulus Kovacs  14:49  
+okay, yeah,
+
+no, I've heard all of that. Yeah. Okay. Any, any
+
+Vinay Lagisetty  14:56  
+further refinements needed? No, no,
+
+I think the rest I'm good with.
+
+Okay, I will do this refinements. And I would recommend if I remove all the if I remove all this specifics in out of here, then you guys are comfortable sending it out to at least three to four teams, right? Right?
+
+Emil Romulus Kovacs  15:26  
+So that's the next question that I had, and that's Robert needs to have this information. Who is the target of this Who's Who should we send these questions to? Because Tracy will want to know exactly the recipients, right? So it sounds like you don't want to send it
+
+Vinay Lagisetty  15:44  
+to all the teams correct. We could then you get a proper baseline, because not everyone is going to respond. It's just you want to include this workload to everybody. Is the question.
+
+Robert Rodriguez  15:58  
+Did you say it's a 10 to 15 minute thing.
+
+Vinay Lagisetty  16:01  
+Yeah, this is just selection. This is not like there is only one or two places where we are asking for anything. This is primarily selection, agree, disagree, ask, agree, disagree. Kind of when you get this kind of thing, Vinay,
+
+Robert Rodriguez  16:13  
+typically, what kind of response do you get in terms of 15 to 20% so let's just say 120 people. So that's maybe, you know, so that's maybe less than about 20 people or so, right? Yeah, would that be enough?
+
+Vinay Lagisetty  16:29  
+Yeah? I mean, typically at 30 is considered to be a good sample size, right? And if you look at even here, I think they got around 40 people.
+
+Robert Rodriguez  16:40  
+Yeah, yeah, so
+
+Vinay Lagisetty  16:44  
+the entire crossing team, right?
+
+Robert Rodriguez  16:47  
+Okay, if you're good with that, I'll go ahead and because I'm already talking to Tracy, and she is agreeing that she can give us that kind of support, I've asked her about Survey Monkey and the turnaround time once it's in her hands, and then as all I need is the distribution list, and I think we've got what we need from Tracy.
+
+Emil Romulus Kovacs  17:09  
+I i what you guys think, but I think there's no harm, because in sending it to every all the teams, yeah, because it's a, it's a, it's a short survey, this is not going to take a bunch of time, right? I agree. Also, it would be good to have a kind of a and Tracy shouldn't put this together, a summary, kind of an introduction to Hey, an email that kind of describes what this is about and why we need it and and also, by all that stuff to go.
+
+I handle all that I've passed by. You guys make sure it okay. You know the test, it's fine, but don't worry about that. I got a cover letter already in mind.
+
+And awesome, awesome, because that way I just don't want Tracy to have to think much. She just needs to distribute it, right? You know what I'm saying? That's all, yep, yep.
+
+I'll work with her closely, awesome, try and get this done quick. So, yeah,
+
+Robert Rodriguez  18:09  
+it would include, it would include the PMO, ba, the POS and the PMs, right?
+
+Emil Romulus Kovacs  18:14  
+Everybody on the everybody
+
+on the team, right? Yeah. So not just crescent, but basically all the all team members, really, yeah,
+
+because it's, it's a general agree, agree, yeah, make sure that's correct. It should be everyone. That's why we need a, kind of a description of what we're doing to when we before, we ask everyone to fill it out. And Robert, you know, one, one more thing before you, before we send this out, it would be good to kind of get in touch with David Naica, okay? To give him a heads up, here's what we're doing. Is that okay?
+
+Yeah, okay, yeah, I'll touch base with David as well. Yeah, that'd be great.
+
+I just don't want to him, for him to be surprised and say, What do you guys do? You know, I don't want that.
+
+Yeah, no, this is great. We'll over communicate. That's fine. Yeah, that's good stuff.
+
+Vinay Lagisetty  19:11  
+Cool. One question, do you mind if I add? I mean, I was very conscious about adding more open text questions. But if you're doing a larger survey, do you mind if I add couple of more open text questions? So you want to
+
+Emil Romulus Kovacs  19:27  
+be careful, not too many, because we don't want to take too much time from people, right?
+
+Vinay Lagisetty  19:32  
+Yeah, because the space dev survey requirements, they are more little bit open ended. I've removed, explicitly removed, some questions. There. I was just, I'm just thinking about just one or two.
+
+Emil Romulus Kovacs  19:45  
+That's fine. That's limited. What's going to happen, is the reality of it. People ask us, Well, how should I charge my time? What should I put you know, you know it's going to happen. Yes, it's good, yes, and
+
+Vinay Lagisetty  20:02  
+so I'll just leave it here. That's fine, yeah,
+
+Emil Romulus Kovacs  20:09  
+okay, cool, cool. Thank you, Vinay, this really looks good. Thanks for putting this together. I'm sure you've probably done this before million times, but thank you for for putting this together. That's really helpful.
+
+Vinay Lagisetty  20:21  
+Yep, sure. Let me work on this. Try to send you a copy today or tomorrow morning. And since we're all here, did we get a chance to review the that Dave's Yeah, there was an email I sent you to share it with Dave about the update, Romulus, the 30 day
+
+Emil Romulus Kovacs  20:44  
+notice, yes, I read. I already sent it to Dave and copied you.
+
+Vinay Lagisetty  20:50  
+Oh, perfect. I did not look into it. And the last one is the governance document. Did we? Do we have any other feedback on the governance document?
+
+Emil Romulus Kovacs  20:59  
+I provided my feedback, and I think Jeff also provided his feedback.
+
+Vinay Lagisetty  21:05  
+Okay, so I will wrap that one up too. And where is it? Where is your feedback on that? This one, I got it, yeah.
+
+He responded after I did, yeah,
+
+Emil Romulus Kovacs  21:19  
+I responded kind of top of his, yeah.
+
+Vinay Lagisetty  21:34  
+Yeah, so,
+
+yeah, I will, I will fix the escalation path.
+
+Emil Romulus Kovacs  21:41  
+But, I mean, it looks good, looks good.
+
+Vinay Lagisetty  21:48  
+Obviously, they'll have to the DVD was intentional, okay, the TV was intentional. The metrics we have not identified. We had the metrics, Jeff, before we removed it. Yeah, yeah. So, and I did say that metrics will be part of the sprint one kick off, and I said we will explicitly added that that's, that's part of the project. What metrics need to be identified and measured? So the governance document can be updated right once we identify the metrics so on, then the whatever we update will be part of the revision, because they already have a version log in the top part of the document, or if you want some draft metrics in there, we could put it and then we change it, but the metrics is something we need to work on tomorrow.
+
+Emil Romulus Kovacs  22:50  
+Yeah, we are. We have a meeting set up for that tomorrow. Yeah.
+
+Vinay Lagisetty  22:57  
+Pilot lead team will who notifies column. It's not clear who is that, since I can't find the definition of the roles in the document. So Romy, you're saying that
+
+Emil Romulus Kovacs  23:12  
+who notifies column in that section mentions pilot team and pilot team lead. I don't know what that means exactly, because that those, I don't know what pilot team, who that refers to? Intact team, yeah, but who on the intact you can't just see the whole pilot team, right? You got a specific you have specific roles that ask notifies, right? It's like, okay, the first one, it says, pilot team to AI transformation, okay, who from the pilot team? Is it a scrum lead, or who, who's notifying to who's raising this to the AI transformation
+
+lead? Any, any of the
+
+Vinay Lagisetty  23:55  
+team, anyone of them should be able to notify.
+
+Emil Romulus Kovacs  24:00  
+I think we should say that not just pilot pilot team members or pilot team you know,
+
+Lobo, Jeffrey  24:06  
+line in that barrel says that no routing pilot team members go back to that same spot. See, the first barrel actually says that from me, routing pilot team members escalate via the AI transformation lead,
+
+Emil Romulus Kovacs  24:24  
+okay, then we should say that members here, yes, just say, just to be consistent, that's all I'm saying. And then the pilot team lead. There's also in the fourth 11234, it says pilot team lead. I don't know who that is. What is a pilot team lead? Is this a scrum lead? Yeah, okay, so just, let's say that that's all I'm saying.
+
+Yeah, good point, yeah.
+
+Who is the engagement director? I'm just curious you, you, I was afraid of that answer. There's a chance to change it. If, no, no, no. I mean, I think it makes sense. I'm effectively, that's my role. So that's fine.
+
+Vinay Lagisetty  25:16  
+So initially there were names here, so I just, I can remove it.
+
+Emil Romulus Kovacs  25:21  
+This is fine. Yeah, it's fine. I don't think we need to be that specific, but yes, okay, cool.
+
+Vinay Lagisetty  25:32  
+I'll update the I mean, that's a minor version, so minor changes. That's fine. Yeah. Okay, cool. I will send this one out first, and then I'll send that.
+
+Emil Romulus Kovacs  25:45  
+Can you? Are you going to send that to David Naica or directly
+
+up to you? Yeah, thanks, guys. I'm jumping off.
+
+Vinay Lagisetty  25:54  
+Yeah, Vinay, did you say yes? I can send it to David mica directly. And, yeah, just copy me.
+
+Emil Romulus Kovacs  26:01  
+Copy me. And just say, because you don't, I don't. Let's not slow things down. Let's just go ahead and send
+
+it to him. All right. Thank you. Thank you. Thank you guys. Bye.
+

@@ -1,0 +1,837 @@
+John Luna  0:43  
+A sorry, John, you're fine. So you know, after I did the report card I was looking at, I went through rollout to see what, see how in sync it was, it was it was okay. But, you know, I was surprising that I don't know if this was pre configured or if it's part of the how JIRA sets up their spaces and their accounts, but it was aware of the Agile guide. It was aware of documents that the teams used. So I found that that was interesting. I also did, what else did it do grammar? Well, that's, you know, it did a grammar check and the syntax for the user. I thought that was interesting.
+
+Vinay Lagisetty  1:31  
+Also for the robot, yeah, yeah. I think row has lot more functionality. I From what I'm finding out, row has multiple tiers. Yeah, I don't know which tier of rovo we are in,
+
+Vinay Kumar  1:48  
+yeah, yeah, that's
+
+Vinay Lagisetty  1:49  
+because the second level row has like a $17 per user, at least. And I don't know which tier we are in. So that's something unless, I mean, we can do a if someone has that access, we might have to do some testing to find out which tier we are in, or find out, literally,
+
+Vinay Kumar  2:12  
+yeah, I used to be a JIRA admin. That's one thing I learned. Every time you add something, it just the price just jumps.
+
+Vinay Lagisetty  2:19  
+Yep, that's where they get you.
+
+Vinay Kumar  2:24  
+Zepper, Robo, yeah, the price is the invoice. I used to have paid your invoice. It just, every time we added something, it just went up.
+
+Vinay Lagisetty  2:36  
+And they also give you for the first 10 users, free so you add it, and the moment you add more people into the project, that just skyrockets to like, I
+
+John Luna  2:45  
+think at the time, is 300 was the ball, and it was like 30,000 32,000 per quarter, something like that. And it for every 10 people over 300 the price went up like five or 6000 something like that. That's what I learned the minute anybody left the company, just getting retire that account right away so you can get used again.
+
+Vinay Lagisetty  3:10  
+So good morning. Morning guys.
+
+Emil Romulus Kovacs  3:16  
+Are you guys ready for this amazing meeting we're about to have,
+
+Vinay Lagisetty  3:24  
+let's see how it goes.
+
+Emil Romulus Kovacs  3:26  
+Yes, I think we have to have the right attitude for it. So welcome Matt. Good morning.
+
+All right, so I'm going to start recording here before I do just wanted to ask the do you all have a chance to look at the plan and the risks and assumptions that Vinay sent out yesterday? Okay, good. All right. And Vinay, if you want to pull it up and share your screen. I can do it too. However you want to do it. Let me do it so that, okay. Can update it if you want. Yeah, for some Okay, here we go. For some reason I can't record this. Can somebody Yeah?
+
+Kovacs, Emil R.  4:16  
+I think I can start recording. I think it's Yeah, go ahead, right now. It's just started.
+
+Emil Romulus Kovacs  4:29  
+Thank you. All right, so let's start with your first with your list of questions, Vinay, that you had in your email, right? Let me pull out my email as well.
+
+Vinay Lagisetty  4:45  
+I need to probably expand it a little bit so that you guys can see
+
+Emil Romulus Kovacs  4:49  
+it. Welcome back, Jeff.
+
+Vinay Kumar  4:52  
+Oh, yeah, welcome back.
+
+John Luna  4:58  
+Welcome back. You. It.
+
+Vinay Lagisetty  5:20  
+So the first thing I wanted to know is, let me find my email. Yeah, there you go.
+
+Just going through it myself. I Yeah, the biggest concern I had, I mean, let me open up another version. This is difficult to collapse and read. The biggest question I had was, did we I mean, are there any constraints I need to take into account between one gate getting completed and moving to another gate. And how do we do? We have to align our plan with what's happening in the sprint level. So, so that I can get the sprint dates, and I can try to see what gets delivered by what sprint
+
+Emil Romulus Kovacs  6:19  
+what you mean by gate? What do you mean by gate?
+
+Vinay Lagisetty  6:21  
+So typically, for me, govern is a gate like this, that is before we go to the base lining, or before we go to the design. There are some things which we can do it in parallel.
+
+Emil Romulus Kovacs  6:32  
+Okay, so talking about dependencies, I just want to make sure it's the same thing you mean. That's what you mean, right? Yeah. Okay. So so if there's a dependency for which step
+
+Vinay Lagisetty  6:49  
+in general, like right now, the biggest dependency for me is the having the agreement between do it than us on a basic governance which is which, I called it a pilot governance here, where is it establishing the so these are the two things which we presented to them, and they are agreeing on something, right? And they have, they are at least agreeing on a couple of people who are going to act as the governance body who can approve the governance document.
+
+Emil Romulus Kovacs  7:34  
+So is this line for here in is the RMF framework, governance framework, or is it number one, the first one? Do it AI policy? Which one are you talking about here?
+
+Vinay Lagisetty  7:45  
+I'm talking about number five, structure proposal.
+
+Emil Romulus Kovacs  7:50  
+Okay, so I was thinks
+
+Vinay Lagisetty  7:53  
+also, which is uploaded by them, okay,
+
+Emil Romulus Kovacs  7:58  
+so I would say first we have to have, so do we? So we have to have a draft right to be submitted for approval. Correct, okay, so number six depends on number five, right, or 1.4 depends on number three. Correct, yeah, okay, so I see that there. Okay, good, so I think that's the first thing we need to do. Now, here's a question. If you go to risks, I have a question about something, and look at line number four or three, whatever you want to call it. I'm sorry. No, I'm sorry. That's not it. Stroller. Let me see I me see.
+
+Yeah, so yeah, line number four. Got it, okay? I think that's not a risk. I think that's a dependency. That's a task that should be part of our plan, right? Filing the notice. Do you agree disagree?
+
+Vinay Lagisetty  9:14  
+Yeah. I mean, we do have to file a notice and 30 days before we start, which should be a task as well as I don't know what will affect here.
+
+Emil Romulus Kovacs  9:29  
+So it's a dependency. It's a task like any other project. You got to get it done before you can continue with something
+
+Kovacs, Emil R.  9:36  
+else, right? But it's still a risk, if that doesn't get done, what are the dedications? Right? There's to be mitigation that we put in place if you're not doing
+
+Emil Romulus Kovacs  9:44  
+that really okay. But so that's a good conversation to have, because if we're going to make everything a risk that the dependency, that doesn't make sense to me, that's we have to we it's just another step in the project plan. And sure, anything that is delayed. Any anything in this plan that is delayed is going to be a risk. So are we going to do everything that is
+
+Vinay Lagisetty  10:08  
+dealing 1.6 which is as a task? Maybe I can clarify this statement, but this is just Yeah.
+
+Emil Romulus Kovacs  10:20  
+All All I'm saying is we should say, like file 30 day notice, that's a task that needs to be done right by someone, by on a certain date. That's all I'm saying. It's a task and and that is going to then, then we have something else depending on that task to be completed, just like any other project plan, right? We'll have tasks that depend on each other.
+
+Vinay Lagisetty  10:42  
+So is it something we have to prepare the document?
+
+Emil Romulus Kovacs  10:46  
+So I don't know anything about this. I This is news to me, the 30 day notice. I don't know where that was my next question, where policy?
+
+Kovacs, Emil R.  10:54  
+It's in the policy, right, in the AI policy that you need to file those notices and give them enough time to review and approve, right?
+
+Emil Romulus Kovacs  11:04  
+So what is the notice supposed to be? What is this notice about?
+
+Kovacs, Emil R.  11:09  
+So whatever changes you're making that are impacting AI and introducing AI that has to go through an approval process and then 30 days they need, 30 days before you actually implementing to be able to get that approval.
+
+Emil Romulus Kovacs  11:24  
+So I think, yeah, I don't think they have
+
+Vinay Lagisetty  11:26  
+to approve it. That was not clear to me in the document. All it said is they need to be notified, which I don't know if there is a approval stage or, I think all it may be, if there is any concern, they might get back to you in 30 days, but I really don't think,
+
+Emil Romulus Kovacs  11:51  
+Yeah, I hear you, Vinay. I don't think it should delay us from moving forward once we once we give notice. Let me do this. Put this on, make me the honor, because I'm going to talk to Dave about this, right? And in the notes, let's just say Dave wrote me to coordinate with Dave on the notice or something on this, right?
+
+Kovacs, Emil R.  12:17  
+Vinay, did you put this as a risk because of what Jim had mentioned about, you know, getting approvals because of working with the unions, and how difficult he thought that was going to be.
+
+Vinay Lagisetty  12:27  
+I think unions was something else that he was talking about. Specifically union is when a job posting is done, he wants to make sure there is that AI work to be included as a part of the job. That's what I see, yeah, it was nothing to what he was trying to say is I need this work to be completed in 13 weeks so that I can whenever the new job postings are going to happen for the full time hires. He wants to make sure that AI work is included so that he could work with the unions or whatever. Right? That's my understanding.
+
+Emil Romulus Kovacs  13:02  
+So just just to roll me to work with Dave, and that's it.
+
+Vinay Lagisetty  13:06  
+Okay. And then this one, can I put the start date as Monday? Monday, which is what 12, the 20th will be 20.
+
+Emil Romulus Kovacs  13:21  
+Okay, and, and is really, I mean, it depends on the what comes out of it. But I guess then the other thing, the question that comes out for this is, what does that notice look like? Is that described in the policy, or is it just a simple email? Or what is it to document?
+
+Vinay Lagisetty  13:45  
+It doesn't say anything.
+
+Emil Romulus Kovacs  13:47  
+Okay, so that's something I'll ask. Have to ask David Nika. And the reason I don't know what the end date on this is, I don't know how much David Nika knows about this. He may just say, I have no idea. I have to look into that.
+
+Jeffrey Lobo  14:01  
+I'm reading here the policy right any agency planning to use AI system shall, prior to such use, assess the AI systems adherence to this policy and create a written report documenting the findings and conclusions of the assessment. This report will need sign off from the agency head, and must be provided to do it at least 30 calendar days before utilizing agency makes a commitment to the procurement, development or deployment of an AI system.
+
+Vinay Lagisetty  14:32  
+So agency head is the gym itself, right, right? So what? When? When we were on the call Jeff, it Jim was like, Hey, I'm signing this one off, but we do need to notify after he signed off.
+
+Vinay Kumar  14:51  
+Yeah, you need to provide to do it, that report which is signed off, yeah, yeah.
+
+Vinay Lagisetty  14:56  
+So what should be in that report that details are not there.
+
+Vinay Kumar  15:01  
+It's an assessment. It says documenting the findings and conclusion of the assessment. So there's to be some sort of assessment. We don't have an assessment. I think for us, it's slightly different. We are deploying tools that the development team will use. We're not deploying any change to business process. No, that is that is utilizing a system, so it's slightly different, right?
+
+Vinay Lagisetty  15:24  
+Yeah, but, but even the assessment of the do they mean by STLC assessment and hey, these are where the tools we are. These are the tools we're going to use, and this is where we are going to use. So that to just now,
+
+Emil Romulus Kovacs  15:41  
+it sounds like findings. The word findings tells me the result of an assessment. Findings of an assessment, but it's not clear to me, assessing. What is that clear to you?
+
+Kovacs, Emil R.  15:55  
+Jeff, what are we? I think the assessment is largely, what are you what are you implementing? What is that impact of the change, and how is it affecting the business? Right? I think that is typically what they would want to say, yeah.
+
+Emil Romulus Kovacs  16:10  
+The only thing I can think of in those regard is we are simply trying. We are we're targeting a 10 to 15% improvement in SDLC efficiency.
+
+Kovacs, Emil R.  16:24  
+Yeah, that's it. There's going to be somebody on staff, Romulus, on Jim's side, who knows how to write these things that we should plug into, and get them to do that. This is going to be, this is, this is kind of institutional knowledge that we don't have. So we should look for the state and they've got somebody, I guarantee you, they've got somebody who works on policy and does this kind of thing.
+
+Emil Romulus Kovacs  16:48  
+I hope so. Okay, so I'll just take it up with Dave, and he should help us with this, right? I have no idea. But okay, we can move on. We don't have to keep harping on this. I think we, we can't add more to this. So I'll, I'll work with Dave on this,
+
+Vinay Lagisetty  17:04  
+yeah, for the governance structure and draft. I will see if I can. I mean, there is a lot of good information, which we got yesterday, so I have to decide between documenting that information or completing the governance. So I'm going to make the governance a priority to send out for at least the internal review Jeff and Romy and other team members. The way I'm thinking about the governance in general is splitting the governance into two pieces. One is the pilot team and one is the permanent team, which Jim has to take, like next 10 weeks to figure out what it is for the pilot team. I think they should be one person. Obviously the pilot team is the team which is going to govern during the 13th week space, right? We can review the risks and everything should be. It should be our chief architects, and also the CIO and the Dave, anybody they think is a security specialist who might want to be involved or a data specialist. I think it should not be a big team like a full fledged AI governance team. It's just, should be a small team just to govern the pilot part of it, that's my stage one pilot team, and stage two is when it got nothing to do with us. It's up to Jim at that point. He figures out who should be the permanent team should be. We can just put a recommendation. Hey, these should be the four or five roles you need to have at the minimum. And it's just like any architecture Review Board. It's just an AI governance board.
+
+Emil Romulus Kovacs  18:38  
+So I think we can. We should feel free to decide which team, which I think, Jeff, and if you were in the loop on this or not, but we're thinking about the finance team for the pilot.
+
+Kovacs, Emil R.  18:54  
+Yeah, I saw, I saw that. I do not know whether, I don't know, I think, where we came up with that. But I think that's fine if we want to pick the
+
+Emil Romulus Kovacs  19:02  
+finance the way, the way we came up with it. It's one of the more stable teams,
+
+Kovacs, Emil R.  19:07  
+yeah, but they're not working through our traditional dev processes, etc. At the moment, they're not their infrastructure is not utilizing our
+
+Emil Romulus Kovacs  19:19  
+team, etc. The other thing that came came up Jeffrey, is the impact,
+
+Jeffrey Lobo  19:24  
+right, right? I requested the intact team primarily. I think if we want a true representation of somebody using workflow and the development cycle, SDLC, etc, then I don't think finances yet, the is necessarily the best one.
+
+Emil Romulus Kovacs  19:42  
+Yeah, when we were going with two teams, we were thinking budget, finance and intact. But now that we are really talking about one team, which makes more sense, after having more discussions, it I agree. I think the impact team is going to give us a better representation of the impact on SDLC, right, right,
+
+Kovacs, Emil R.  20:05  
+right, follow our actual workflow today,
+
+Emil Romulus Kovacs  20:08  
+right? Yeah, that's
+
+Kovacs, Emil R.  20:09  
+that does make more sense, yeah?
+
+Emil Romulus Kovacs  20:12  
+So unless there's objection, let's just make that decision now and say, Let's target the intact team for the pilot. Any objections? No, it's good. Okay, so we can record that Vinay somewhere. I don't know we want to record it, but that's our team, pilot team to work with.
+
+Vinay Lagisetty  20:32  
+I'll just write it down here. I'll figure it out later. Yeah, for
+
+Emil Romulus Kovacs  20:40  
+that, yeah, yeah, it's intact, not impact. It's an N, no impact. Intact, intact, intact, intact. You have a P, and Rina is going to be RSL for that, correct? That we can work with right? And actually, I already gave her a heads up, and I thought that we're going to be two teams, so she actually is already in the know she she won't be surprised. So so first we need to figure out the team. So we landed on a team. And the other one to your point, Vinay, you were brought up that we need to get approval on which roles. I think we just need to make a proposal based on when we know and I'm pretty sure they'll be okay with it and Dave will be okay with it. I don't want to ask, Hey, what do you think I want us to propose something so we can just, I think we should probably just talk about right now. But definitely we want testing or a senior May the test lead, Jeff, to be part of this, right? Yeah, yeah, the dev lead or senior developer, or, I don't know, do we have to how many senior developers do we have on the screen?
+
+Kovacs, Emil R.  22:01  
+Anybody check? I think we have two. I think I'll double check now, okay,
+
+Vinay Lagisetty  22:13  
+yeah, it's one BA, I'm sure there's an we can look it up.
+
+Emil Romulus Kovacs  22:20  
+Yeah, just hang on for a sec. Let's, let's validate the things before we move on to the next role. Well intact.
+
+So we have one senior, no, we have two senior developers. And we actually have two senior testers, right? One, ba, as far as BA,
+
+Kovacs, Emil R.  22:54  
+no, B is two senior three.
+
+Emil Romulus Kovacs  22:57  
+We have three Bas, two of them are, are a senior now, I don't know about Robin Kelly, but Sushil might be a good, a good person. What do you think, Jeff and
+
+Kovacs, Emil R.  23:15  
+Well, right now, Robin's not doing well
+
+Emil Romulus Kovacs  23:16  
+right now. That's why, that's why I'm thinking Sushil, right.
+
+Kovacs, Emil R.  23:20  
+Yeah. So I put the team image in the chat there, if anybody wants to see, right? But that's the team that we have, okay?
+
+Emil Romulus Kovacs  23:28  
+And then we have an architect colleague, yeah, she's good, but, but she's Junior architect, but she still could, it's fine.
+
+Kovacs, Emil R.  23:36  
+I think she's got experience and pushing in the AI side anyway.
+
+Emil Romulus Kovacs  23:41  
+So if we could, I would, I think it would be good and open to any, anybody say whatever you guys think. But what
+
+Vinay Lagisetty  23:49  
+like, it's written as a platform developer. They are the people who do both the development and configuration.
+
+Vinay Kumar  23:58  
+Yeah, it's a dynamic side. Basically right platform develop, typically, all of the no code, low code, any plugins, etc that have to be developed. And then we have software developers, typically, which are the more traditional.net etc skill set. But that's
+
+Vinay Lagisetty  24:14  
+not clear in this diagram, right?
+
+Jeffrey Lobo  24:16  
+They don't have any software developers specifically in their team. They only have Platform Developers, okay? So I think we'll have to look at they, but they are creating some plugins, etc, right? So we'll have to look at the mix of what tools and what they can utilize, yeah, but,
+
+Emil Romulus Kovacs  24:33  
+but that, but it's a pretty it's a representative setup for most teams, so it's not that different. This is what it looks like on average. Yes, so I would recommend that we use, sorry, just let me finish this one thought. I would recommend that we use architect, Sushil one, VA two, the two Platform Developers, the senior ones, Anusha and Vignesh, right? And the two senior testers,
+
+Jeffrey Lobo  25:07  
+yeah, I think Chaitanya, although he's Junior, plug him in, because he is basically one of the more vocal and more I guess, he is pushing the boundaries. So I think I'd rather also him being rather than Vignesh, have an ocean and Chaitanya in the mix, really right, at least from an initial participation, and then it will flow to the rest of the team. But yeah,
+
+Emil Romulus Kovacs  25:31  
+but we're still talking in terms of numbers. We're talking about two developers, two testers, one architect and one BA, correct, yes, so we
+
+Vinay Lagisetty  25:42  
+are going to limit our pilot to only these five people.
+
+Emil Romulus Kovacs  25:45  
+Well, that's what I'm asking. Because I'm just asking the question, because these are people that actually know we can kind of rely on to do good work, right? Yeah, I'm not saying, I'm just, it's just a question, is this, does it? Will this work? Do we need to do it differently? I mean, that's
+
+Vinay Lagisetty  26:07  
+that's gonna work, because, because of the aggressive timeline, the less people we have to train and show a there is a functional improvement. So we are just limiting the scope of the pilot to because I think the pilot is more going to be like getting the initial draft documents or documents out. So I'm I think the lesser, the faster
+
+Emil Romulus Kovacs  26:31  
+was one more person that I'd like to recommend. But can you just repeat the
+
+Vinay Lagisetty  26:34  
+last the tester names I have, Kali Sushil, vinaysh and Chaitanya
+
+Vinay Kumar  26:42  
+Anusha and Chaitanya Anusha
+
+Vinay Lagisetty  26:44  
+and Chaitanya not Vinay, no.
+
+Vinay Kumar  26:47  
+And then the testers are remeer and Natalie,
+
+Vinay Lagisetty  26:54  
+the first two senior, yeah, correct,
+
+Emil Romulus Kovacs  26:57  
+correct. Okay,
+
+Jeffrey Lobo  27:00  
+perfect. From a testing perspective, let get Camilla involved from an overall perspective, just because she's across the teams, I'd like to make sure that she's aware of what we're seeking.
+
+Emil Romulus Kovacs  27:10  
+Who's Camilla? I don't see the name she's
+
+Jeffrey Lobo  27:12  
+she's in the admin team, but she's lead across all of the teams for testing.
+
+Emil Romulus Kovacs  27:18  
+Okay, so she's a test lead kind of, yeah, that's that's okay. That's fine. So we'll have three testers. Then, yeah, okay. I would like to recommend also, and I know it, and I'll have to work with with the PMO on this. Valerie, the PMO. Bari hut, I think let's put the question mark there for now, because I don't think we should ignore a PMO PA, they are part of the SDLC. They're integral part of it, right?
+
+Kovacs, Emil R.  27:57  
+But mainly from from a review perspective, rather than doing the work, though, right? I think they are.
+
+Emil Romulus Kovacs  28:06  
+They can use AI also to help them do that work, right?
+
+Kovacs, Emil R.  28:10  
+Okay, I see we're going, yeah. So I think that yeah, they do reviews of stories after they write in to say that they complied to the needs.
+
+Emil Romulus Kovacs  28:21  
+I mean, I mean, in my mind, at least knowing what you know, they could take the criteria that they are applying and feed it through the AI engine to see if that story meets that criteria, and then, right, finish up the review, you know, it just would enable them to speed.
+
+Kovacs, Emil R.  28:38  
+I think they are bottleneck at the moment. So, yes, I think there will be an efficiency gain if we can do that.
+
+Emil Romulus Kovacs  28:42  
+Yeah, exactly right, without and I think it would be a great win, because that might, that might enable them or prevent them from having to hire more people to do reviews, because right now they're saying we can't keep up, right? Well, maybe they'll be able to keep up and they won't need in the state, won't incur additional costs, right? Anyway, I'm going to
+
+Vinay Lagisetty  29:10  
+what is the name and the PMO, you suggested Valerie Hutton,
+
+Emil Romulus Kovacs  29:21  
+I can put it in chat. Yeah,
+
+Vinay Lagisetty  29:30  
+it's right there. And she is, she sits above these teams, right the
+
+Emil Romulus Kovacs  29:36  
+PMO, well, I don't know if it's above. I think she just happens to be a BA, that's from a PMO standpoint, does reviews of the stories to kind of qualify them that they're ready to be picked up by the team to work on. That's her primary goal, right? So he's, she's kind of like a story. QA, person, in a way, right?
+
+Okay, and give me a minute. I need to make notes here, tasks or do we? Can we capture this? Because I want to somewhere in this. I want to capture the fact that that's another item for me to follow up on, and maybe this document would be that you have is probably a good way to do it.
+
+Vinay Lagisetty  30:32  
+So this is for the PMO assignment.
+
+Emil Romulus Kovacs  30:42  
+I Well, it's for me to work with the PMO, to coordinate with them to make sure Valerie that they're ready to for to have Valerie work with us on this. Does that make sense? Yeah.
+
+I actually already set this expectation with Becky, Jeff, just so you know, Robert, I already told her that we may need help, but all I said was we may need help from the PMO to give Vinay an overview so they already know about the whole AI thing, so I'm going to probably work with her, just to confirm that it's to work with Valerie to participate in this Okay, and let's make this next week as well, Monday. And Vinay, if you don't mind, the task being PMO ba assignment instead of it just PMO assignment for a task name. Thank you.
+
+Vinay Lagisetty  31:55  
+This one. And I also want to talk about the tool authorization list. Romulus. Did we get a chance to send out the tools required the one email I sent out to you the other day with Jim?
+
+Emil Romulus Kovacs  32:10  
+No, I'm sorry, no, I did not do anything with that.
+
+Vinay Lagisetty  32:13  
+So we do have, I mean, based on my understanding right now, we definitely need more tools. That's how the unfortunately, the licensing is there, or someone has to confirm that we have these tools with me at that so,
+
+Emil Romulus Kovacs  32:33  
+so Vinay, I think that's a conversation with the I think what we need to do is to you and I have a have a meeting with date, okay? And let's just cover, we can cover the notice thing, right? We can cover the tools, anything else so that let's do it all at once,
+
+Vinay Lagisetty  32:55  
+in one meeting, I would say, the scope of the pilot, the governance of the pilot, and the tools required for the pilot. It's all about the pilot, like conforming the scope of the pilot. Hey, are you good with this and general guidelines on what we are doing in a timeline perspective, just a high level timeline perspective, and saying, Hey, this is our approach. Are we good.
+
+Emil Romulus Kovacs  33:23  
+So I think the next step, then, really, is maybe. A session with you and him. And then, if you can give me the items the agenda to cover that, he'll know what to expect ahead of time. And then that will cover three things
+
+Vinay Lagisetty  33:46  
+at once. Okay, we do that.
+
+Emil Romulus Kovacs  33:50  
+Scope. Scope will cover the team and
+
+Vinay Lagisetty  33:54  
+everything, sorry, the
+
+Emil Romulus Kovacs  33:56  
+30 day notice
+
+Vinay Lagisetty  33:59  
+and tools, tool list and our pilot planning, or the overall project planning. So you created a tools list already. Vinay, oh, yeah, I have it here. This is the running tool list. But right now, what we have is the confluence. Ai features, which is which? Again, there are two tiers which we don't know which to be, which one is here. We know we have at least Lobo access, but what tier of robot? We don't know. And then those things are keep changing all the time. We know we have GitHub copilot, but that doesn't necessarily mean
+
+Emil Romulus Kovacs  34:48  
+we have the copilot required for Dynamics and Microsoft compiler. We don't know that yet, so we need to confirm. So that's why we have to have this conversation, right? Yes, so we just happen to know that GitHub we have and Robo, we just don't know about the other one. It doesn't mean we don't have it. We just need to validate one way or another, right? So I'll set that up, and I'll take this and add so you already have here this agenda. I'll just take this and make it part of the agenda, and I'll give Dave a heads up, and then we can just remove the whole the other task. I had to work with Dave, right? Because we're kind of combining multiple things in one
+
+Vinay Lagisetty  35:48  
+it's technically not part of governance.
+
+Emil Romulus Kovacs  35:50  
+I'll move these things around this just that's fine, yeah, my main thing is I want to be able to filter on my
+
+Vinay Lagisetty  35:57  
+tasks so I know what to do, right? Yeah, yeah.
+
+Emil Romulus Kovacs  36:07  
+So this has to happen next week, I'm assuming, because we don't, it is absolutely, I don't know if he'll it's really based on his availability.
+
+Vinay Lagisetty  36:18  
+I'll check with him and do it from Wednesday, because
+
+Emil Romulus Kovacs  36:22  
+I need some time to put this document together.
+
+Vinay Lagisetty  36:25  
+Sure. So Wednesday
+
+Emil Romulus Kovacs  36:27  
+at the earliest, earliest? Please. Then change the date to the 22nd and instead of 21st
+
+Vinay Lagisetty  36:35  
+the start date, right? That's a Wednesday.
+
+Emil Romulus Kovacs  36:50  
+Okay? And do me a favor. Do me a favor. Sorry, in the notes. Instead of just say agenda, just say schedule meeting with Dave to cover
+
+scope notice and all that. Okay, yeah, yeah, there you go. Thank you.
+
+Vinay Lagisetty  37:16  
+Okay, so the other I mean, let's go back to the scope of the meeting. The one of the main concerns I had about this plan was it was too generic without knowing the DCFS context and everything. I wanted to see if you had an opportunity to just high level recommend what different approvals are, are needed, or if it's not needed, it's just us
+
+Emil Romulus Kovacs  37:45  
+doing all the approvals.
+
+Vinay Lagisetty  37:46  
+So I just what kind of approvals are you talking about? Let's say we come up with a document and we does the DCFS to review
+
+Emil Romulus Kovacs  37:55  
+the document is up to their standards. Or I really don't want to go there at all. I want us to be very nimble and quick. And this is a pilot, okay? And I think Jim trust us, that he that we know what he's looking for, and I don't want to slow us down with any any approval thing. This is, again, this is not affecting anything in real time, right? Meaning, what's going on on the ground?
+
+Vinay Lagisetty  38:26  
+It's, it's really a pilot, so let's
+
+Emil Romulus Kovacs  38:28  
+not even worry about that. Oh, that anybody disagrees any issues with that,
+
+okay, so hopefully that also
+
+Vinay Lagisetty  38:41  
+simplifies things.
+
+Emil Romulus Kovacs  38:42  
+Vinay, yeah, definitely to
+
+Vinay Lagisetty  38:44  
+simplify a lot of things. Good. I kept like a three to four days gaps between whenever we needed some documents to be
+
+Emil Romulus Kovacs  38:53  
+reviewed and approved. So we can just squeeze those, yeah, yes, it's really it comes down to good documentation, but not approval. We just need to document
+
+Vinay Lagisetty  39:03  
+data so we can present them later. Okay, so the once the scope is approved, Will, obviously, the governance is established. We are like cleaning up all these things. The second thing is the baselining, right? We are quickly coming down to baseline. Yes, I'm doing the interviews to get approximate questions. Now we have the roles defined. I can start preparing once the Wednesday meeting is over. Kind of assessment tools. So technically, I would have built it as a survey in, you know? I mean, this is what we have done, is we built a tool to send out. Like, I don't know if you have any survey tools, which are there, which you could use, or if it is just five people right now,
+
+Emil Romulus Kovacs  39:52  
+I could do it in an Excel. And so here's a question, Robert and maybe Jeff. But Robert, what do you think about worse working with marketing to
+
+Kovacs, Emil R.  40:04  
+help, yeah, to help us with the survey. I think they'd be glad to do
+
+Emil Romulus Kovacs  40:09  
+it as you want to talk to Melinda
+
+Vinay Lagisetty  40:10  
+and Tony, yeah, yeah. So is it Survey Monkey
+
+Vinay Kumar  40:15  
+within, within DCFS or within Krasan? It's within Krasan. You know what? Vinay, let me talk to Tracy. Wouldn't Tracy
+
+Vinay Lagisetty  40:22  
+Dempsey, maybe know if we
+
+Emil Romulus Kovacs  40:24  
+have access to something like that? Yeah, she
+
+Vinay Lagisetty  40:27  
+would, yes. I think that's a better option to start with Quick, quick questions, guys, this is, isn't it considered sensitive information? Can an external tool be still used to
+
+Emil Romulus Kovacs  40:39  
+do a survey about DCFS? That's a good question. So I think that's, that's what we need to ask Tracy as well.
+
+Kovacs, Emil R.  40:47  
+She would know. Give me just a quick synopsis, Vinay, of the type of survey
+
+Vinay Lagisetty  40:53  
+that you're you're wanting to create. This is to understand the DCFS process. This is to understand baselining questions, qualitative and quantitative. It is going to be client information. So I had tools outside that. The reason I'm not proposing any of those tools is
+
+Emil Romulus Kovacs  41:13  
+because it is client specific information. So how about this? Vinay, how about let's take a look at his example survey. We put something together before we decide how to move forward with it, because it's kind of hard for me to to imagine, to kind of assess which way to go until we actually see a sample. Okay, you want me to hang tight? Romulus, yeah, let's hang and not yet. I think Tracy would ask the same question. What's in the survey? Yeah, well, so let's have that first all.
+
+Kovacs, Emil R.  41:46  
+Right, yes. John, yeah, what about a survey for the teams? Maybe they have some ideas where they can these tools can help
+
+Emil Romulus Kovacs  41:55  
+you think that was, this is, I don't think this is a survey about the tools. I mean, I think we have knowledge about the tools, right? I mean, when we're now here, knows about tools that we can use, right? Or which, assuming
+
+Vinay Lagisetty  42:15  
+teams like the application of these tools? Maybe they have some ideas. Yeah. So the two things right? One, we are collecting what the process is. Second thing collecting what tools they're already using and what tools do they want? Would they would like? So we're collecting all this baseline assessment as a qualitative information, but the quantitative information is our scrum points. So there will be two different surveys to one is from the teams to know their workflow and that current tools they're using, I mean, from based on what I'm talking to the teams, teams are already using some of the AI tools right in everybody is using their own version, which we call shadow AI. So that is to quantify shadow AI usage. Also, because if Jim is expecting 10% or 15% and the teams are already using AI to enhance you're just formalizing the process, you're not going to get a throughput improvement beyond that. So we just have to be careful. In this survey, we are trying to collect the baseline and also the existing tool usage, whether it is approved or not approved. And Jim encouraged. From what I understood, Jim was constantly encouraging to use the AI tools, so teams didn't mention that. Hey, we were encouraged by Jim to go ahead and use the AI tools so it's it's not
+
+Emil Romulus Kovacs  43:35  
+like there is zero AI tool usage there. No, you're right, but it's also probably not very consistent and structured, right,
+
+Vinay Lagisetty  43:43  
+probably ad hoc, right?
+
+Emil Romulus Kovacs  43:45  
+Yes, that is absolutely right. So another reason that we should probably look at a sample. Once you have a survey, is we might be able to answer some questions without any issues, right? Because we have knowledge about how the teams work already, what the workflow is like this as DLC, I have a strong feeling
+
+Vinay Lagisetty  44:07  
+that we can probably knock out a few things right off the bat. That's fine, I mean. But when you do a major rollout, this is the same service you would probably use from other teams to collect the baseline. So again, it's
+
+Emil Romulus Kovacs  44:22  
+it's a it's the measurement problem, right? All right. Let's just see where it is, what it looks like, and we'll go from there. And I don't want to make any assumptions until we see what the survey looks like. Okay, so maybe, maybe you want to have a
+
+Vinay Lagisetty  44:40  
+task for you to have that survey created, right? Yeah, I
+
+Emil Romulus Kovacs  44:46  
+have to convert this one. Okay. Okay, all right, Excel. Excel.
+
+What? Sorry to excel. Convert.
+
+Vinay Lagisetty  45:09  
+And where is this? This spreadsheet going to be living so we can, oh, well, I heard yesterday someone was able to look up my name in the Krasan. Yeah, but
+
+Emil Romulus Kovacs  45:22  
+I never was notified. So I'm can we? Can we decide that right now, because I don't want to run out of time and then
+
+Vinay Kumar  45:31  
+not know where to work with this document. Well, I did establish that,
+
+Emil Romulus Kovacs  45:37  
+you know that teams
+
+Robert Rodriguez  45:38  
+channel is that you want to utilize that, yeah, so
+
+Vinay Lagisetty  45:45  
+pull it up and send the link. Yeah? Everybody right here, yeah, I still don't have the you of the what is it? Access to Krasan, but someone told me they were able to look at my name
+
+Vinay Kumar  45:59  
+in in their teams yesterday. All right, man, I'll take
+
+Vinay Lagisetty  46:03  
+that as a to do to make sure that you're squared away today. Yes, if I can just log into teams,
+
+Robert Rodriguez  46:09  
+then I can put wherever, I mean, instead of me sending emails, yeah, that should be easy.
+
+Emil Romulus Kovacs  46:13  
+I'm not sure why that hasn't happened, so I'll take care of that. Thank you, yeah, yeah. So I definitely see that it's called a DCFS AI rollout, yeah, yeah. And then in the shared tab is where you have, we have all the access to all the different files and folders, right, right. So let's make sure that Vinay, you have
+
+Kovacs, Emil R.  46:37  
+access to it. Does everybody on the call have access to that Chase?
+
+Emil Romulus Kovacs  46:41  
+Do you have access to that?
+
+Kovacs, Emil R.  46:44  
+You're unmuted, you're muted. Sorry, yes, I am. I believe I have all the the PMOS
+
+Chase Yeung  46:51  
+and all those folders. Okay, perfect. I just want to double check and
+
+Emil Romulus Kovacs  46:56  
+Vinay, I'll get that squared away for you today. Sure. Chase just, I know, I know it could keep asking the same question, but the DCFS AI rollout channel itself, teams, you do you were able
+
+Kovacs, Emil R.  47:10  
+to get to it. Okay, yes. Okay, good. Thank you. And by the way, everybody the policies in there, so if you haven't had an opportunity, and I'll just Vinay, I'll take the attachments that you've already sent out yesterday and
+
+Vinay Lagisetty  47:22  
+put them in there already, unless you're making updates. And then I won't just do it. I will. I generally like to version My Documents until the teams comes in, like until the SharePoint, or whatever comes in. I generally like to version the documents to the current day. So if it changes, it will
+
+Emil Romulus Kovacs  47:41  
+update the date perfect.
+
+Kovacs, Emil R.  47:44  
+I don't know the policy there. Robert, can you Ping? Ping. Put the link of that location in chat here, in the meeting chat of the channel.
+
+Vinay Lagisetty  48:00  
+And also there was a PMO assigned.
+
+Emil Romulus Kovacs  48:02  
+Pm assigned for this one, right?
+
+Vinay Kumar  48:04  
+You want to put it already there. Did he not say with you?
+
+Vinay Lagisetty  48:10  
+Yesterday, I sent out an email. Actually, I need to connect with him, and I was planning to transfer this PMO activity to
+
+Vinay Kumar  48:18  
+him so that I can focus on the work. And that's exactly what he's there for.
+
+Emil Romulus Kovacs  48:23  
+He's blocking, tackle. Pm Okay, yeah,
+
+Robert Rodriguez  48:26  
+Jeff, the link is there? I just,
+
+Kovacs, Emil R.  48:29  
+yeah, thank you. Thank you. I can see it, yeah. Oh, sorry, Jeff, I have it. I just That's all right,
+
+Robert Rodriguez  48:39  
+I don't see the policy. Can we put the products? It's not the strategic implementation
+
+Emil Romulus Kovacs  48:45  
+of AI augmented development. Where is that? Is that the policy?
+
+Vinay Lagisetty  48:51  
+That's what I got from David. I believe this
+
+Emil Romulus Kovacs  48:54  
+should be the DO IT policy, but let me open it. That's not the policy. That's just a
+
+Kovacs, Emil R.  49:01  
+that's just the memo. Okay, I thought this was
+
+Vinay Lagisetty  49:04  
+What didn't we get the policy from Darren? Is this? This one policy
+
+Emil Romulus Kovacs  49:09  
+with the document there? Yeah, yeah. Please do I think that's all right.
+
+Kovacs, Emil R.  49:14  
+That's why we're here to make sure everything is in place. Okay, I just put it into
+
+Vinay Lagisetty  49:26  
+that folder, 40. We've already gone through 48 minutes. So one additional major question, Romy, another one was, there was around the Gartner assessment, when they will be involved,
+
+Emil Romulus Kovacs  49:41  
+what they will be involved with? I honestly when I forget it, until we have Jim back. He just mentioned it. The only reason that was interesting for us, for our purposes, for now, and we can always add also that as an agenda. To follow up with Dave, to say, hey, well, do we need to worry about that? Is there anything for us to worry about? Right? The only reason he brought it up is to say, Hey, I'm going from 5%
+
+Vinay Lagisetty  50:07  
+to 15% and here's why. Right. No, that I understand, but the issue is going to be when we put some plan together, and it's not. Gartner has their own own stuff, so they're experts
+
+Emil Romulus Kovacs  50:21  
+in pointing out fingers, not so it's better, yeah, let's just work with Dave to say, Okay, what? What's the expectation here? We're going to move forward with what we're doing in our plan and let us know when. When do we need? Is there? Do we need to present this to Gartner? If so, when all that stuff?
+
+Vinay Lagisetty  50:39  
+Okay, but that's another topic we can add.
+
+Emil Romulus Kovacs  50:44  
+Yeah, I think, I think we need to get that straight away, because there is fine. So the question there is, how do we
+
+Vinay Lagisetty  50:53  
+work with them? What's the expectation? And then what is the assessment? I do have access to Gartner, okay, I don't know if Krasan has access to I do have access to Gartner, but only academic version of the Gartner, so I can pull up their style of assessment to use that particular things, but
+
+Emil Romulus Kovacs  51:15  
+that's just not going to fit into gym schedule. Okay? So let's and we'll cover that. Let's just cover that's another agenda item, and
+
+Vinay Lagisetty  51:23  
+we'll, we'll talk about and see where we are. Okay? So I think we'll just get through baseline in next 10 minutes. I don't think so we'll go beyond that. But overall, that's the most important thing. You know, service is the one thing which I'm going to build and work with you guys to finalize. Obviously, every SC and BA is going to contribute toward the survey list. And the second one is for the baselining. The one of the biggest thing is metrics. Oh, good. Now I remembered it. I will add it. We need to finalize metrics.
+
+Emil Romulus Kovacs  52:00  
+We have to agree on now, are we ready to have a conversation
+
+Vinay Lagisetty  52:05  
+on Wednesday though? Oh, well, we need to get some guidelines on what
+
+Emil Romulus Kovacs  52:10  
+metrics they want to see, right? Like, well, I just don't think that Dave is going to unless I know Chase or Jeff, you disagree. I don't know that Dave is going to really have a good idea on that. We have to actually
+
+Vinay Lagisetty  52:26  
+propose a number of metrics we want to how about this? Can we do the metric? We're just going to tell them, hey, we're going to identify
+
+Emil Romulus Kovacs  52:35  
+the metrics to improve after the baselining
+
+Vinay Kumar  52:37  
+is done, right? I think so let's do that. As part of that baseline you come
+
+Emil Romulus Kovacs  52:41  
+up with the metrics that you would use? Yeah, I just don't think Dave has the background to
+
+Vinay Lagisetty  52:46  
+really give us good direction on that. Yep, some best practice metrics. Basically,
+
+no, I like this approach. After baselining, we just know what are the constraints of the Okay, correct, correct. I probably will drop some of this service. I think that too many.
+
+Emil Romulus Kovacs  53:15  
+Okay, baseline mistake supporting, Okay, this one, and also line 31 it's one pilot team. We already selected
+
+Vinay Kumar  53:22  
+it, so I don't think we need to do that anymore. Did I
+
+Emil Romulus Kovacs  53:27  
+do that? Yeah, selected. I
+
+Vinay Lagisetty  53:47  
+any things you see needs to be done in the baselining guys, I mean, a report review. We should probably have a we do have a client review call other than that, anything else.
+
+Emil Romulus Kovacs  54:05  
+So I think for the JIRA baseline, because ultimately we'll rely on JIRA to measure right? Yeah, yeah, there's the most I know. I'm just trying to understand what that means there. So I think the best thing here is to Luna, are you and Matt get together as soon as possible to actually talk through that and see what's in there. What is what are good candidates for baselining? Matt, are you good?
+
+And then, yeah, also line 28 Vinay, I think it should be you and Matt as well, because he's the RTE. So he really needs to understand it. He needs to see the analysis and extraction
+
+Vinay Lagisetty  55:03  
+all that as well. Work with you. Okay, yeah.
+
+Jeffrey Lobo  55:09  
+Have you identified the complete scope as part of this baseline, which, which line number is that one? Like, what roles are we basically plugging and we is
+
+Vinay Lagisetty  55:19  
+that aligned? Creating a scope document. I put it here, but I can move that one here, and this one, I'll just put it finalize the scope document. I mean, it's it should be here, actually, because we are going to have a call with Team.
+
+Emil Romulus Kovacs  55:48  
+Rob. Do you think that the pm should
+
+Kovacs, Emil R.  55:50  
+join these meetings or not? Yeah, actually, I was going to ask Vinay to invite him, but I'll invite him to this. I thought you had access to some stuff, so I might have I'll invite him make sure he's on board.
+
+By the roll, by the way, he has AI experience, and he's also a professor. So this guy,
+
+Vinay Lagisetty  56:16  
+yeah, he's good. He's a good guy, nice. So, Jeff, you are alluding to this one, right, creating a scope
+
+Emil Romulus Kovacs  56:22  
+document for the pilot. Yeah, yeah, right.
+
+Jeffrey Lobo  56:32  
+He's on the he's on the he wasn't on this meeting because I forgot
+
+Emil Romulus Kovacs  56:36  
+that we repurposed it. He's on the rest of the meetings. So Vinay, that create that, that task you just looked at, create a scope document. Isn't that a precursor or prerequisite for our meeting? With, yeah.
+
+Vinay Lagisetty  56:51  
+With Dave, right. Yeah, this is before we actually
+
+Emil Romulus Kovacs  56:57  
+have a meeting, right? So I'm saying is the dependency? There's a dependency.
+
+Vinay Lagisetty  57:04  
+Yes, 17. I don't even
+
+Emil Romulus Kovacs  57:07  
+have a version number yet, so
+
+Vinay Lagisetty  57:08  
+I need to, yeah, so you will put it Okay, yeah,
+
+Emil Romulus Kovacs  57:10  
+I need a like, a project tool. Like, writing these numbers is, like, pretty annoying. Good, good. So we only have four minutes left
+
+Vinay Lagisetty  57:27  
+from a baseline. If you guys don't have many questions, or you don't see blatantly, I'm missing any tasks in here. I
+
+Emil Romulus Kovacs  57:39  
+think it's a good start, and I guess the So, I think we know what we need to do next, in a very immediate next, right couple of days, I had my tasks, and when I obviously, you have yours, Rob, I think we need to figure out what's the next time we meet, right? I think it's Tuesday, but that's too early on. It's not early. We decided that we could meet at eight central right on Tuesday, moving forward so that would be a good time. I think when I had to have a Touchpoint right Tuesday, yes, definitely.
+
+No, it's not on my calendar. Oh no, it is on my Krasan calendar. Okay, so can everybody else check that is on your calendar as well to make sure you have it. And Jeff, I'll have to move our one on one to another time slot for
+
+Kovacs, Emil R.  58:40  
+Tuesday, because that's our one. Okay? I have it for a half an hour. You and I have a checkpoint after that, we can roll that into an
+
+Emil Romulus Kovacs  58:53  
+hour, okay? If these meetings seem Yeah, well, yeah, maybe we should make it an hour. And then if we don't use an hour, that's fine, right? Yeah, all right, all right, it sounds good. And then we can also reschedule our one on
+
+Kovacs, Emil R.  59:10  
+ones Robert, just to make sure
+
+Emil Romulus Kovacs  59:12  
+whatever works that works for me, yeah, yeah.
+
+Kovacs, Emil R.  59:18  
+So I'm going to make just this next one an hour, and then if we need to keep it,
+
+Emil Romulus Kovacs  59:23  
+then I'll move the rest, yeah, but let's just see. Okay, okay, that sounds good. All right, so we have a plan. We have a couple of tasks, and on Tuesday, we'll follow up on where we are with the tasks. That cool. Yeah, right. All right. And my I'm gonna have to read the actual policy, because I want to make sense. Sounds like a lot of fun, and I'm gonna have to be
+
+Vinay Lagisetty  59:54  
+familiar with it myself pretty long. It takes
+
+Emil Romulus Kovacs  59:59  
+a couple of times to read to Yeah, I'm sure,
+
+Vinay Lagisetty  1:00:03  
+but it's the basis of everything. So yes, yes, it is. Yeah, last question in the last two minutes is, when is the PI planning happening and when is the it's going to end? Is a
+
+Emil Romulus Kovacs  1:00:19  
+two day pa plan? So day one is May 5. Tuesday, May 5 is day one of pi. Thursday May 7 is
+
+Vinay Lagisetty  1:00:34  
+the last day of pi. It's a half a day, and your sprints are starting from
+
+Emil Romulus Kovacs  1:00:42  
+May 11. So no, I think it's the 13th, right? Matt,
+
+like the first spring. Are we talking about the first Prince of the next pi, 2014 the next pi goes from the 14th to August 12, 14th. Okay, day one, if sprint one
+
+Kovacs, Emil R.  1:01:07  
+is 14th. Thursday, the fourth
+
+correct, the 14th, the 27th is 2.1.
+
+Vinay Lagisetty  1:01:17  
+Got it perfect. So now, now the question is, so by 14, if we are completing all the baselining, then we could target for that sprint.
+
+Emil Romulus Kovacs  1:01:33  
+The training part
+
+Vinay Lagisetty  1:01:35  
+of it, right? Okay, let me align these things with that, dates, the PM, and the second thing would be Romy. I think this reduces our risk. If we are just going with five people to train. I don't think so. We need to be worried about the compression, like the allocation of time, and what Jim was talking about adding new people, all those things for the pair
+
+Emil Romulus Kovacs  1:02:05  
+programming to happen here, I don't know. So I we have to be careful with that, because she's very adamant about their programming. So yeah, I think we still need to make that part of our plan, but we also don't want to be delayed just because we can't find the resource, the right resources. So we have to move forward assuming we'll have the right people, and if we don't, then training has to happen, right? With minimal impact on velocity. And I think we can reduce impact on velocity because we're not having the whole team,
+
+Vinay Lagisetty  1:02:40  
+you know, work on it, right? Exactly. I think the fact we are working with two people, two people in each category, they will act as champions within their
+
+Emil Romulus Kovacs  1:02:54  
+team in correct iteration, correct All right, we're past our time, and like I said, I'm a time Nazi, so I'm gonna have to end our meeting. And it was great talking to you great, great session.
+
+Kovacs, Emil R.  1:03:09  
+I think we made some good
+
+Emil Romulus Kovacs  1:03:10  
+progress here. Thank you guys. Thank you guys. Have a great day and a great weekend. Oh, you.
+

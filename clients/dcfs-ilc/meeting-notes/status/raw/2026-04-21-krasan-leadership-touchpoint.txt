@@ -1,0 +1,447 @@
+Alec Granderson  2:15  
+Morning Morning. Good Morning. Morning. Morning.
+
+Emil Romulus Kovacs  2:33  
+All right, I don't see Jeff or Yeah, I think Jeff is the only one missing, right? Krishna is here. Okay, good. Is Jeff invited to this? Let's see. I think
+
+Robert Rodriguez  2:51  
+he is. I think I put him on the invite. I think he actually accepted that he might be a minute later, usually walking.
+
+Emil Romulus Kovacs  2:59  
+That's fine. All right, so Alec, would you mind introducing yourself, since I don't think you've joined these meetings before?
+
+Alec Granderson  3:09  
+Yes, good morning, everyone. My name is Alec Granderson, and I am a senior project manager working with Krasin, and I was asked to join the team to kind of work with Vinay, to work on the overall schedule for the effort that we're trying to undertake.
+
+Emil Romulus Kovacs  3:29  
+Thank you, Alec, and we definitely need your help. So thank you for joining us. Appreciate it. Do you know everybody on the call?
+
+Alec Granderson  3:43  
+No, a few, but not not everyone.
+
+Emil Romulus Kovacs  3:46  
+All right, so il run it. Il run quickly through it, just so we don't take too long. Okay, so Vinay is helping us out. He's our AI expert, so to speak, and he's helping us out with this initiative. You know him, I'm sure Chase is with it's on the DCFS engagement. And what is your official title, Chase?
+
+Speaker 1  4:15  
+It's very long. So senior Data Architect with legacy conversion team, blah, blah, blah leadership, something like that.
+
+Emil Romulus Kovacs  4:25  
+Think of her as the data the data gal, right? Yes, yes. So she's definitely in that so she's representing the data side of the house on that engagement. John is our agile Delivery Manager. And basically what that means is he works with the teams to make sure there's they are productive and stay on top of things we have. Robert, I think, you know Robert, right. And then Matt is our RTE release train engineer. Okay, on this product, on this it's a safe to say project, program. So he's playing the role of Rte. We have Krishna. Krishna, I think you're playing multiple roles. What you want to tell us exactly what your role is?
+
+Krishna Mekala  5:18  
+Yeah. I mean, good morning, Alec. My name is Krishna. I'm part of shared services. Work closely with Jeff. I'm, you know, shared services, we manage in multiple areas, like the UX DevOps, you know, some of the testing strategies, architecture, okay, so I coordinate a lot of work with different teams and also within the team, okay, yeah, my official title is senior business architect, but my role is product owner, so, yeah,
+
+Emil Romulus Kovacs  5:49  
+okay, a little confusing, yeah, but he's an important part of the team. And then Jeff is the Enterprise Architect. Believe, right? Is that your official title, Jeff, you're on mute.
+
+John Luna  6:06  
+Yes, that's right. Romy, welcome Alec
+
+Emil Romulus Kovacs  6:11  
+and John, you had your hand up. Should we record this? Yeah, we can. I'll start recording now. Thank you. All right, we can go and get started. First thing I unless I'm missing something, I don't think that the latest version of the spreadsheet is in the in the in teams. Is that correct? Can we add it to Vinay,
+
+you're on mute, I don't know. Or maybe you're talking. Oh no, no, I'm not mute. I'm sorry. So the latest version of the spreadsheet that we talked through last time, I don't see it in teams, in the files, the
+
+Vinay Lagisetty  7:04  
+project plan, correct? Yeah, I sent shade it with Alec.
+
+Emil Romulus Kovacs  7:13  
+Okay, so, Alec, do you have access? Yeah, let's do this. Alec, maybe can be done owning that. And Alec, do you let me make sure you have access to that? We're going to give you access. If Robert hasn't yet to that folder,
+
+Unknown Speaker  7:32  
+I'll go ahead and give him access right now.
+
+Vinay Lagisetty  7:35  
+But Alec, I thought you converted it to smart sheets, right?
+
+Alec Granderson  7:39  
+I sure did. I sure did. And if you know, to be honest with you, if you guys like, I can let me share my screen with you. Hold on one second, see if I can do this.
+
+Emil Romulus Kovacs  7:53  
+Robert, please still go ahead and do that. Yeah, access to that folder. Yeah. I
+
+Alec Granderson  8:04  
+us. Let me do this. Here. Hold on one sec.
+
+And then let me do
+
+this screen. Let me see All right? Is everyone seeing the actual screen now? Yeah, okay, so what I did was I went ahead and converted this I don't know if any of you guys are familiar with smart sheets, but I went ahead and converted this over into smart sheets. And to be honest with you, I kind of set this up in such a way that have everything grouped together and the different sections that were on the the spreadsheet, which Vinay shared with me. So this is kind of going through it, and I want to be very, very honest with you guys, based upon the days that we're currently, I didn't alter any of the the different dates that were already in the Excel spreadsheet. I just want you to guys to see where this is coming out to be. And I know there are some meetings and stuff in there, but you know, overall, you know, you all have about eight sprints in there, two week sprints in there. And if you, you, you deal with that this is going to be, you know, very long. I just want to throw that out there now so I know that I didn't even baseline this, because you already had things in progress and things of that nature, and so I left it exactly like it was. I just put it into more of a schedule based on what you currently have. So I'm all set with us being able to walk through this, but I just wanted to throw that out there with the predecessors and things like this. From what I could discern, this is what you guys are, this is what we're working with. So we want to walk through this and go to the governance. I want to, I'm happy to, I want
+
+Emil Romulus Kovacs  10:19  
+to, I want to first establish where we store this document and that we have access to it. So let's, let's get that out of the way. So Robert, did you? Does he have access to that folder?
+
+Robert Rodriguez  10:33  
+Yeah, he should know. I made him a member of an owner as well.
+
+Emil Romulus Kovacs  10:37  
+Okay, so can you, Alec, could you make sure you navigate to that? I don't know if you can put a link in there for and chat Robert for Alec to try to access it. And I haven't used smart sheets before, but I'm assuming it's just a file type I can open in teams. That's what it says. But I don't know.
+
+Alec Granderson  10:59  
+Well, here's and here's the thing, I think what, what you have to do is, everybody can kind of take a look at it, but you know, you have to be able to have a email address, and then you have to use a password, and then that will give you access to that sheet. And then you can look at that sheet, and, and, and it has certain fields that are locked down, but there's other areas that you might you should be able to update.
+
+Emil Romulus Kovacs  11:30  
+Okay, so can you check Alec see if you have access to that folder?
+
+Alec Granderson  11:35  
+Sure? Hold on one sec.
+
+Unknown Speaker  11:37  
+It's right. There's a hook. Yeah, there you go. Mm, hmm,
+
+Emil Romulus Kovacs  11:43  
+okay, so go to the shared menu item there. Okay, go on there. Okay, yeah. So this is, this is the, this is the location of RV, anything and everything has to do with it this. Okay, so that project plan is dated. I mean, I think that doesn't reflect the changes we talked about last time
+
+Vinay Lagisetty  12:09  
+that Vinay and we all get talked and that's significantly changed. I spend the Friday to update it.
+
+Emil Romulus Kovacs  12:17  
+So, Alec, my question to you is this, is it possible to I want to keep this very straightforward. Honestly, I don't really, I really don't want to have to have a password or anything. I'd like to just have a file that I can see in that folder and click on it and open it and say, Here's my project plan. Okay, if we can do that, because I just have too many, too many things. I think we have too many things floating around. And we can make this our home for our files, sure, because that's, that's the intent of it, and then make it very easy to open to look at the latest version of it.
+
+Alec Granderson  12:56  
+Okay, okay. Let me see if I can what the only thing is, I, if I think about it's going to be updating this because, I mean, if I can put a PDF in there of the file, but then if you want to update data, then I guess we'd have to keep it in Excel.
+
+Emil Romulus Kovacs  13:15  
+Then, right? I think Alec, I mean, unless I'm missing something, I would like you to kind of keep it current, working with Vinay and this team. So this is why it's important that, if you could join these meetings, to keep it current, right? Once you have it to a certain state that is current, then smaller updates are going to be easier, right? Okay, and yes, BDF, whatever Excel, whatever works. That doesn't require a password, would be my preference. So we don't have to go through all that to just look at it. Okay? So you don't have to figure it out at the moment. Just let us know in the chat afterwards. I mean, there's a, you know, a meeting chat that's created by teams that we can always communicate and say, Hey, here's, I've uploaded the project plan in this format and leave it at that. Okay, sounds good. All right. Thank you. So let's then pick up kind of where we left off. So I
+
+Vinay Lagisetty  14:27  
+think last time one note Rumi on the last one that that is not fully baselined yet, as ALEC is saying, so that should be outside this meeting, a smaller meeting to sit down and baseline the whole project now we
+
+Emil Romulus Kovacs  14:43  
+have that was, so that's where I was going with this. Vinay next, okay, because we talked about last time we had a couple of topics we kind of touched on to compress the timeline, right and and I don't I'm assuming that that hasn't yet been reflected
+
+Vinay Lagisetty  15:01  
+in this plan that has been reflected in the plan, the one Alec has, but I can open it and walk through okay, as much as il compress
+
+Emil Romulus Kovacs  15:09  
+it, let's talk that. Let's do that.
+
+Vinay Lagisetty  15:11  
+Okay, why don't you just start with another topic. I just did not open those things up. Give me like few minutes, I'll open those things up.
+
+Emil Romulus Kovacs  15:18  
+Okay. I don't know if you can listen while I'm talking, but I have a meeting with Dave today. There's a couple of several, sort of several tasks that has Dave's name, and it's primarily to review and approve type of tasks. And I have a meeting with him today, later today, and I will work with him to set up a quick review of what we have and the things we need from him. So I'd like to do that tomorrow. So today, I'll talk to him about it, set the expectation, and then tomorrow, I'd like to actually get together with him and Vinay with you at a minimum, right? Is there anybody else we need in that meeting? Again, this meeting is really to kind of go over things that we need, from from, from Dave, and that's the main purpose of it, and kind of set the expectation for a timeline. And if we have any questions anybody else, I don't want to make this a huge meeting. I don't want Dave to feel overwhelmed. So so far, it's just me and Vinay. Any any suggestions, or do you think that's good enough? And we'll record
+
+Vinay Lagisetty  16:44  
+it. So I'm assuming we'll be updating the slide. We will be going through our updated slide deck with presenting the plan, because our Dick never had a plan before. Presenting the plan and also presenting, what are the open items from Dave?
+
+Emil Romulus Kovacs  17:01  
+Correct, that's the that's the goal. And Vinay, would you mind just putting together a very quick agenda for the meeting? Sure, and send it to me today before, because I'd like to actually talk through it with him about the agenda. Does that make sense? I don't want to just talk in generalities. When I talk to him,
+
+Vinay Lagisetty  17:24  
+no worries. I can, I can put something Yeah, yeah.
+
+Emil Romulus Kovacs  17:28  
+I'm meeting with him at 330 Central, so just FYI, if I have it before, then that'd be ideal. We're talking about just a couple of agenda items, right? So, okay, so that's one to do for today. Don't have the project plan in front of me in any other tasks that are currently the need to be worked on that we need to focus on right now, other than what we just covered with Dave.
+
+Vinay Lagisetty  18:08  
+Yeah. So primarily, at least according to my plan, which I wanted to really start with, is the sit with Matt, and we need to figure out, how do we do the baselining of our sprints? What are the metrics we need to I mean, at least with Dave also, we need to show Hey, these are the metrics we want to address. Is that metric satisfactory? So Matt, I need your time today to see what options do we have for baselining? What do you collect? And I would
+
+Emil Romulus Kovacs  18:48  
+suggest that you add Jeff as well. Jeff, I think it's important that you be part of that conversation, sure. And this is just just priorities. This is a high priority. So if you have another meeting, what I will make it work one way or another. Because these, these, we don't have much time to work with on this project, on this initiative, and every day counts, and all of what we're doing now is setting the foundation everything, setting everything up to actually start the pilot. Okay?
+
+Vinay Lagisetty  19:24  
+So, yeah, go ahead. That's the one meeting, I think, which is very critical, and it gives me clarity for tomorrow also. So Jeff, Matt, I'm pretty open. Is what time works? If we can finalize that, I definitely need few minutes to prepare. Well, let's just
+
+Emil Romulus Kovacs  19:42  
+decide, yeah, let's just decide right now, this is the time. Let's, let's pick a time that works for the three of you, and make John is optional. I think he should be there as well, if he can join. But at a minimum, we gotta make sure Matt and Jeff are in that meeting. How about 12 to 1230
+
+Vinay Lagisetty  20:04  
+Yeah, that should work. Okay, you're talking about Central, right or Eastern, yeah, central central is good, yeah,
+
+Unknown Speaker  20:13  
+okay, I'll send an invite.
+
+Emil Romulus Kovacs  20:15  
+Does that work for you?
+
+Vinay Lagisetty  20:19  
+Oh, I need to also do fingerprinting. They finally sent me my application, so I will do it after me. I get your stuff with the agenda.
+
+Emil Romulus Kovacs  20:32  
+That's fine again, as soon as long as I have it before 330 Central, I'm good.
+
+Speaker 2  20:39  
+Vinay, did you get your your email address square way across.
+
+Speaker 3  20:44  
+That's yeah, I think the last time there was an email address that John put in the chat, right?
+
+Vinay Lagisetty  20:51  
+So finally, I got my email address, they sent a temporary password. I tried it. It doesn't work. I do a reset of the password. It says you did not set up the password. So then I went back to them, so they're going to address it sometime today, hopefully by today, end of the day, I will have my email. Okay, but I know what it is. It's Vinay dot Lagisetty at grass, and whatever that rest of the name is.
+
+Speaker 2  21:18  
+You do me a favor. Can you put it in the chat? I just want to make sure you're added to this.
+
+Vinay Lagisetty  21:23  
+Sure. Let me find it so I also have the project plan open. So let me go over the project plan first. I'm then, okay,
+
+Emil Romulus Kovacs  21:33  
+okay, let's screen Hey.
+
+Vinay Lagisetty  21:47  
+So this is what I have. So a couple of things I've done is I've eliminated a lot of work streams and lot of overlap. So the baselining is technically starting today, and we need to complete before the AI. So what is involved in baselining is basically the, this is what I'm doing, is that readiness assessment tool, which is basically not a tool, but just an Excel. In this case, we were supposed to check on Survey Monkey or something like that. If that is not possible, we can just do it on Google Sheets, whatever it is, right?
+
+Emil Romulus Kovacs  22:30  
+We we can do Survey Monkey. I think Robert, we can do that right work with crossing.
+
+Speaker 2  22:35  
+That's what you want. Yeah, we have, we have Survey Monkey. Survey Monkey, yes, yeah.
+
+Emil Romulus Kovacs  22:40  
+And, and we are talking about, well, would that work for somebody outside of Cresson, even though, like most, it'll be mostly cross. And I
+
+Speaker 2  22:50  
+think, I think we talked about this quickly, we were going to get Tracy Dempsey involved, and that's right, she right, and oWM, and she was going to help us out when we decided what we needed. So I can put that meeting together, if you guys know what you want,
+
+Vinay Lagisetty  23:04  
+yeah, so I can send out the list of questions, which I think we had three meetings last week on going, getting an over overall, high level view of of the teams and what the processes look like. So I have fairly good understanding of what questions should go in again. We'll do a deep down later on, but this is just to kind of check the status where we are with the AI and what kind of improvements they would like and all that stuff on what do they think about AI and behavior? So you'll
+
+Emil Romulus Kovacs  23:37  
+send us the questions
+
+Vinay Lagisetty  23:38  
+today, right? Not sure I can do it today? Probably, yeah, I will focus today on our meeting for tomorrow, putting the tech and the other things, but tomorrow I can start sending out the questionnaire, but that needs to be reviewed by our us. We need to figure out who the right parties are. We don't need everybody to review, but if everyone wants to review, that's great, but whoever wants to review this is just, I think, definitely John, definitely Jeff. I think you both have to review that. But beyond that, I will leave it up to you, who is the right people to also review those questions, and then once we find as a set of questions that's going out, this is a critical task, which is for me, the cheetah baselining. So this is where Matt, we both have to just sit down with John and Jeff to really understand what's important for cross. And because this is one of the metrics we need to present for tomorrow. If the meeting for Dave is happening tomorrow. We need to show that. Yeah, we need to show that. Hey, these are the metrics we are thinking of. Get the feedback, and then once we get the feedback, we go back and, like, really figure out, right? I mean, there is no magic answer to this one. So once we know the metrics, that's when we basically, I will probably skip this step. This is probably not needed, but yeah, so overall, the baselining and initial baseline report will be done. We need to figure out the format of the report, because not only we will be determining the baseline, but once this whole project is done, we're going to have, hey, this is the metrics we have improved, right? And then, how did it improve? Why we improved? I did that improve lessons learned and things like that, but like any other project, right? So that's the baseline part of it that we could compress it a little bit based on. I mean, we have this two things we can compress, and based on what I see, I think we should be okay with the baseline and the tracking. I mean, we already selected the team, so we know what we are dealing with. Then from a design perspective, this is where the bulk of the challenge was, where we were taking on too many roles, but I think we simplified it to five roles right now, like the tester, essay, Dev. When I say Dev, it's configurator, slash development teams and be a tech. And I think you were talking to the PMO Romy, from what I remember, there was one task somewhere. PMO, in and out, decision kind of a thing. I don't know where you are with that. But again, the issue is, the more roles we add, the more time we need to prep their documents and everything. And again, since I'm the only one right now, I assume I could get help of somebody to prep this documents. I don't know how to do it in parallel yet, but again, the design is like I was trying to squeeze where we can squeeze right now. We'll figure out the logistics later on, but I, I just kept it as TBD for now. So this will just shift a little bit, like couple of days, so that the initial documents are done here, and then we are going through this documents, this one, so then the training part of it, this is where I could squeeze the maximum, again, assuming we get some help somewhere, which also should include the training documentation creation and also delivering the the documents to them. Pilot, again, squeezed as much as I could. We had, like, many up to eight sprints last time I because I just accelerated onboarding of the teams. Again, we'll face similar issues on if we'll have enough bandwidth to push all these things, assuming we can find the bandwidth and everything I did compress the schedules as much
+
+Emil Romulus Kovacs  28:04  
+as I could in the other I have a question about the roles. I just wanted to bring this up, and I'm open just to do your thoughts, everybody's thoughts. So right now we have the dev essay. Ba and I thought we also had to had test, right? Testing? Okay, just a question. I'm not trying to add more, if we don't need to, is, how about the scrum lead? Do we need to include the scrum lead in this, or not necessary in terms of how much gain we get out of this. I don't want to add the role that we don't get off if we don't get much juice out of that.
+
+Vinay Lagisetty  28:49  
+Exactly. I that's, that's my primary thing. When testers, we know we can get, ss, we know we can get and, Bs, I know we can get, right?
+
+Emil Romulus Kovacs  29:00  
+These are the yeah and developers too. We know
+
+Vinay Lagisetty  29:05  
+we can get Yes, yes, yeah. Dev, SA, da. We know we can. That's I'm
+
+Emil Romulus Kovacs  29:11  
+actually wondering about SA. How do we know that we can get I mean, in the short run, it just seems like the essays role is a little more complicated, maybe a little, maybe not, compared to the from
+
+Vinay Lagisetty  29:28  
+my call with the essay team. There is they go through a lot of documentation, right, right, right. There is document creation from what I believe, there might be a if you include Microsoft, 365, copilot, whatever we call it, there is an opportunity. There huge opportunity and but again, every role we can justify the same thing, because people are going through a lot of documentation in this project,
+
+Emil Romulus Kovacs  30:01  
+correct, right? So, and that's one thing we want to also confirm with Dave, is about copilot, Microsoft. Copilot, Microsoft, 365 whatever that's called, yeah, yeah.
+
+Vinay Lagisetty  30:12  
+So there are the problem with the confusing word of copilot is this, right? There is git copilot. There is Microsoft 365 copilot, which is your Word docs and other things. And then there is dynamics, 365 copilot, which is different. So if you can't really use it to work with Dynamics, from what I understand, like without having that dynamics, 365 copilot. So again, some things, some one of your leaderships can show it or track it. It will be great. I don't have access to Dynamics for me to test it out yet. I that's a, I think Dinkar was supposed to look into the second environment, or a play environment for me.
+
+Emil Romulus Kovacs  31:04  
+So I know, so we do know that, at least my understanding is that we should have access to GitHub and obviously Robo. Those are the two things that we've confirmed so far, right?
+
+Vinay Lagisetty  31:18  
+Yes, those are the two and we and the
+
+Emil Romulus Kovacs  31:20  
+thing that we need to confirm with Dave is Microsoft 365, copilot, and hopefully dynamics copilot, right? It will be ideal.
+
+Vinay Lagisetty  31:30  
+One additional question is we don't know what level of Robo access we have. There are multiple levels of Robo so right now we don't even know what level of licensing in rovo we have. That's another so we need that
+
+Emil Romulus Kovacs  31:44  
+answer to, okay, yes, yes, of course.
+
+Vinay Lagisetty  31:47  
+I mean, okay, that lower level access. We just need to focus on that functionality when we are trying to figure out the variables.
+
+Emil Romulus Kovacs  31:54  
+Okay, all right, that's why it'll be nice to have that agenda before I talk to Dave, so I can actually those are my points. Yeah, perfect. All right. Okay, so
+
+Vinay Lagisetty  32:07  
+this is compressed, and we could try to accelerate more, but again, we do have limitation of training and all those things, right then we need some time. Post, post, the sprint closure to measure these things, to compile this results. Again, this is not something, I mean, I don't have to do, but because the methodology of the baselining is done here, right? So that is if we can accelerate here by adding people in the sorry, there is a measure. Yeah, the measure. Then we need to focus on when the measure is going on. We are cleaning up our playbooks, and then we are putting a plan together for the scale. So, yeah, I parallelized as much as I could and the end result, instead of it going all the way till November and December, forget about scale. This is not what we don't have to worry about it. I could squeeze it up to we had a deadline of 720 if you remember 727 21 I could squeeze it up to here, like 810 but if you really look into it, our pilots are trying to get done by 720 and then it's measurement, presentation and all that stuff.
+
+Emil Romulus Kovacs  33:36  
+I think, I think that would be kind of the compromise here to say, okay, the actual pilot ends on 720, or thereabouts, right? But then we need to actually assess the results, right? That's what you're saying, yeah. So we can then and then assess the results. Then also do the training. We have to put together the playbook based on the results as well, right? Yeah, dependent on each other, right?
+
+Vinay Lagisetty  34:06  
+Yeah. So I do have also a strategy I was thinking about, how do we do the twin programming? That's Yes, I can. I can definitely. I mean, it's not going to change this timeline or hearing shape or form. It just gets a maximum throughput in the quality dimension. It's not going to change the timeline just because you add it to a programmer. Just want to make that clear, right? So what's good?
+
+Emil Romulus Kovacs  34:34  
+Here's, I'm sorry before you do that, before you go there, quick question, what do you how much, how much time do you think it takes from these roles, from these people, in terms of percentage of dedicated time to kind of do this, to participate in this effort?
+
+Vinay Lagisetty  34:59  
+So in reality, they are trying to, we are understanding the role, and we're doing the suggestions right. And once we do the suggestions, we have to train them on. I mean, depending on every individual, there are some super smart individuals here who are way ahead of the curve, right? So they're doing their own stuff. Depends on where one is, the journey of the AI, it will require that level of amount of training. It's hard to tell without talking to the individual person in detail, where they are. Assuming we are starting from scratch. You can assume at least, man, it's difficult. You can spend time in AI as much as you want, but the goal is you need to initially come up with your prompt. First, you need to understand the tools, the limitations. Come up with the prompts. Then create a runbook. Nothing is going to work initially. Then you need to talk about context, refining the prompts and redoing it right. I think our first pass will be done. And I was looking at the the training guides yesterday, and how much, what is the minimum amount of information we need to train them. Usually this is done over like four to six weeks. Guys, the training part of it, we are trying to compress this into two weeks. So just keep that in mind that I've never seen an program rollout this fast to achieve results. And only way this fast achieving results happens is we generally do a hackathon. We select the best teams, we make them the pilot teams, because they are highly, highly motivated, and the hackathon does most of the stuff for us in qualifying, which are the people we need to work with right who are inclusively motivated to learn this technology, and then we do a pilot on that hackathon tree, that the reason we do hackathons is to identify the people we want to work with in a pilot like for such complex so we're
+
+Emil Romulus Kovacs  37:13  
+not going to have a hackathon, but we do have a team that we've already identified, and I think at this point, what we need to do is make sure that individuals we select, because we know the team are the best ones that you
+
+Vinay Lagisetty  37:28  
+know we're working right. You guys know the best on that part of it. All I'm saying is this is not a traditional methodology. How we understand pilots. I get it, but yeah, if you're saying they are going to spend the same amount of time they're traditionally spending, that's going to be pretty hard. Like, are they going to go above and beyond, and all those things, I cannot make a judgment of that right and saying that it will take 10, 15% at the minimum, for them to really embrace the technology and really apply these things.
+
+Emil Romulus Kovacs  38:04  
+And even even with pair programming, you still need to dedicate some time. It's not like pair programming solves that problem, right?
+
+Vinay Lagisetty  38:11  
+Pair programming doesn't solve that problem, but it it. It removes the friction of, oh, I don't know what I'm doing, because the other guy says, let's try this. So it's not like I'm thinking about, should I do it or not? It removes the inhibition. And when this guy is doing that development, the program is just experimenting with an AI tool at the same time. So it does solve a lot of frictional problems in adoption. And that's not really bad. And I was talking to some of the people who are exposed to programmers and some of the consultants over the weekend, and, yeah, I think that's going to solve it. It's It's just harder to find a pair programmer for short periods of time. There's a practical limitations. Like, the good thing is, let's assume we have four to five like we have a BA who has an AI experience dev with our AI experience essay, or whatever tested with AI experience. So they all are in the team one, right? And then what happens is, like they're working through this all these sprints, then you can start parallelly, a lot of things and at the same time, now, once they're done with the team one and the baselining and the measurement, each and every person can be an AI subject matter expert embedded into different Scrum teams. So there are advantages,
+
+Emil Romulus Kovacs  39:55  
+yeah, okay, so I think I don't know what you guys think. And Alec. This is a question for you, too, but it seems to me, would be nice to kind of identify some major milestones that are kind of important from this project plan to hit right? Yeah, in order, in order to stay on track, or at least have it have a snowball sale chance and help to kind of actually stick to this timeline. So let's talk about and maybe identify those milestones. And then the other thing I'd like to do is maybe add a task somewhere that to meet with. First of all, identify the right resources on the team and meet with them and actually have a separate, just a short, kind of meeting with them to kind of set expectations for them. Does that make sense?
+
+Vinay Lagisetty  40:58  
+What sorry to the intact team,
+
+Emil Romulus Kovacs  41:02  
+I'm assuming correct, not the whole team, not the whole team. I'm talking about the people who are going to be part of this effort, right? The pilot, for the pilot, the pilot, we are correct, the pilot, the pilot members, members of the pilot team.
+
+Vinay Lagisetty  41:19  
+I think we have a task somewhere to select the team and have a conversation, but we mark the Test complete, so we can just open that one back saying that we need to talk to them. Yeah, so
+
+Emil Romulus Kovacs  41:30  
+we identified the team, but I'm talking about more about within the team. Now we're gonna we have certain individuals. Not everybody on the team will be part of this pilot. That's what I'm trying to say, right? So I think we need to have a separate kind of working session with them. Think of it as a kickoff, right? For them to really get excited and but we need to talk to them say, Hey, this is an exciting opportunity. Here's what's going to happen. Here's what we need from you things like that. And here's that, here's a timeline we're looking at so that everybody's on board and we're on the same page. Does that make sense? Yeah, and I think that's a milestone actually, event, because that kickoff is a milestone event, right? That's why I wanted to bring that up. So then let's talk about milestones. What would be the milestones in this project plan that we definitely want to make sure we hit, because everything else kind of depends on that to be hit.
+
+Vinay Lagisetty  42:38  
+Well, I thought I put everything as a sign off, baseline client, review and sign off. So I would consider for myself, there might be internal milestones, but baseline reporting, client, sign off, client, everything, client, approval and sign off. It's just like showing you know, that's like a mind milestone is done, review and approvals. So there are hints I left in there where I really think they are.
+
+Emil Romulus Kovacs  43:06  
+Stones Alec. Is there a way to maybe visually represented? Because kind of hard, oh, we're seeing, here's a list of things, right? Yeah. But it would be nice to have a visual representation of a milestone somewhere. I'm not saying to figure this out right now.
+
+Alec Granderson  43:20  
+Yeah, I in smart sheets is, well, it's better to do it that way. But in this, you know, in this Excel, I don't know, I guess I can highlight it, but I guess you can have those identified as the milestones. And first of all, we know that those milestones don't have any duration, so the milestone is just there, saying that after we have executed an activity, versus, you know, we're at the end of that. So we could definitely do that.
+
+Emil Romulus Kovacs  43:47  
+It's a it's a point in time.
+
+Alec Granderson  43:50  
+It's not a duration, right? Correct, correct, okay, yeah, we can do that.
+
+Emil Romulus Kovacs  43:55  
+We can do that. Okay, all right,
+
+Vinay Lagisetty  43:58  
+but we still want Jeff and John to go through this and see if there are some play I mean, we did cover till last time around baselining. I believe we didn't go into the detail. But someone has to go through this and make sure we have covered our bases. I think it's done better individually, and come back and say, Hey, this is good. I don't see any red flags kind of a thing.
+
+Emil Romulus Kovacs  44:27  
+So I think recommendation Vinay, when you meet with Jeff and Matt today, maybe part of it could be because of your you will be talking about baseline, right? And part of it might be just going through this baseline section
+
+Vinay Lagisetty  44:43  
+in that, oh yeah, that that we can do. I'm very comfortable baseline section. What I'm worried about is, am I, I mean, there might be things in here which may not be appropriate to these environmental conflicts, right? Or there might be things we need more, right? This is, this is still a high level project plan. There are multiple details.
+
+Emil Romulus Kovacs  45:05  
+It is, no I understand. I just want to first cover, focus on the immediate need right right now, knowing that we'll have to add more detail for the later stages, and we'll do that next, but let's focus right now on what's ahead in front of us get make sure we're on track, and approvals and baselining, those are the things and kind of whatever else you have here that's current that needs to be in progress right now. Let's focus on those things now. And I don't know if we can. I guess the dates are here, so we should know what should be happening right now, right?
+
+Speaker 3  45:46  
+So Vinay, are we supposed to use the smart sheet that Alec
+
+Vinay Lagisetty  45:50  
+is created? Yeah, that I just sent this one to ALEC on Friday, after I compress the schedule, and I think we'll shift gears towards Alec. I just didn't have Alec's presentation to share, and this is just to show what I know. That's mine. We'll decommission this one. Alec, you'll
+
+Jeffrey Lobo  46:10  
+send us the link to that.
+
+Yeah. I'll
+
+Alec Granderson  46:14  
+try to do that and see if we can do and I can put this in the smart sheets, because this is, this is actually a little change, though, from from this condensed thing, I think, because when I saw it, it wasn't this condensed. So I have to go, go back and look
+
+Emil Romulus Kovacs  46:29  
+at this. Yeah, yeah. I noticed that too. Yeah. We need to have one source of truth, right?
+
+Vinay Lagisetty  46:34  
+Yeah. So this is the last one I sent Alec on Friday evening. Okay, Friday, almost around three o'clock or four o'clock, okay, the last one I sent,
+
+Emil Romulus Kovacs  46:46  
+okay. And moving forward, maybe it would be best to kind of once Alec, once you have your your plan up to date with this, then we just work with that. Instead of yeah,
+
+Vinay Lagisetty  47:01  
+just work with right? I just need to get right. I mean, hopefully my email will be resolved today.
+
+Emil Romulus Kovacs  47:05  
+Right, right? Exactly. Robert, you have your hand up,
+
+Robert Rodriguez  47:11  
+yeah, question, and then two things, actually, for Alec, as you go through and start filling in some of these tbds, if you would think of me around any documentation and any training and sort of any communication things that can certainly be part of that. And then to Romy and Vinay, the dates are still pretty far out, right? Am I missing something? Did we? Did the dates change?
+
+Emil Romulus Kovacs  47:39  
+I think the major change well, when I correct me if I'm wrong, but first of all, he did compress. But I think the major thing that is going to help us out here is the pilot itself will end as expected, you know, say, end of July. So if we can do that, we can certainly justify needing more time to analyze the data, prepare the playbook, do all these activities in order to prepare to scale right. We can't just say the pilots over we're ready to scale right. I think that's reasonable, okay, but at least if we can say the pilot itself will end as expected. Then we can talk about, okay, what next? What's next after that?
+
+Speaker 2  48:26  
+Okay. Does that make sense? Makes total sense. I like that positioning. That makes That's logical.
+
+Vinay Lagisetty  48:33  
+Yeah, we still have one more sprint I could cut off, like when the testers join and yes, it's done. We could still cut off that sprint, but we will not have a true measurement. Like, you can't onboard everybody to start using AI in the day one. You need to go role by role. That's, that's what is a limiting factor. And, like, we could start with it. Like, probably we will get them introduced to everything, right? But the the either me or somebody is working with them on a day to day basis to resolve those questions, and we can't do everything in parallel, unless and until we are getting other AI resources on board we have experience to work with the specific roles, and that's optimization for later on. Right now we are focused here. We'll get to this point that that's something paid programming and other things we are talking about. There is a way to compress this. We just have to work through the base.
+
+Emil Romulus Kovacs  49:36  
+So another, another milestone, actually date, I think should be onboarding the pair programmers right to the team.
+
+Is that correct? Make them when are they going to be available to join, right? That's important.
+
+Speaker 3  50:05  
+So we've identifying two people for each role. So are those the pairs that we're talking about? Or what? What does it mean?
+
+Emil Romulus Kovacs  50:13  
+Yes, okay, theoretically, theoretically, it's one to one. I mean, each, each developer should have two. Developers should each have a pair, right? A corresponding person.
+
+Speaker 3  50:29  
+So where are those people coming from? From another, another team or their own team?
+
+Emil Romulus Kovacs  50:35  
+Hang on. Hang on. Hang on. A lot of questions. Jeff, just a sec. So Vinay, you were going to say something,
+
+Vinay Lagisetty  50:45  
+so I'll just say this quick. So let's assume you have a business analyst, right? You you want, when you're doing a creative programming, you are getting an outside resource who is a business analyst who has already used AI tools to do their job, and you're pairing our business analyst, or ba tech, with that business analyst who have used the AI tools, and they work together for a couple of sprints so that they can learn from each other, or in this case, the BA Tech is learning all the AI tools, how they're using in the real world scenario. That's the prayer programming suggestion which was given. Same thing for the dev, same thing for the essay, same thing for the testers.
+
+Emil Romulus Kovacs  51:33  
+So it's one on one, right? You for each each person, you have a corresponding program or person, AI, person, correct? Yes. Okay, so that should answer your question. Jeff, this is not internal. We're going to have to find something externally.
+
+Jeffrey Lobo  51:51  
+Okay, so we will get, for each of these roles, we will get some external folks that I already can have, have experience with what the tool set we're talking about, correct.
+
+Emil Romulus Kovacs  52:02  
+That's the that's the intent correct,
+
+Unknown Speaker  52:06  
+and who's procuring those, Vinay,
+
+Emil Romulus Kovacs  52:12  
+so that's something that very much. Yeah, so I think so Dinkar is in the loop on this. He understands the need as well. Okay, so we need to, we need to ramp that up quickly, and that's why I wanted to have a milestone for that right by when do we need these in place, right? And maybe we don't need all the roles all at once. So let's identify which which ones we want. First? Is it a stair step thing? Do we want to because I it's kind of hard to imagine that we'll have six, however many external resources onboarded. This is a, this is a bit aggressive, to say the least, right? Let me know that.
+
+Vinay Lagisetty  53:06  
+Yeah, so, guys, I need to drop in three minutes. Yes, there is a Chicago Park District. It starts exactly at nine. I need to just set up something.
+
+Emil Romulus Kovacs  53:19  
+Yeah, that's fine. That's fine. So real quick, just to recap, so Vinay will meet with Jeff and Matt today at 1230 Central. Also you will send to me like the agenda for meeting with Dave today. And then the next thing, I think, is the survey questions. That's not today. Maybe that's tomorrow,
+
+Vinay Lagisetty  53:43  
+yeah, but, but also the tech for what we are presenting to Dave tomorrow.
+
+Emil Romulus Kovacs  53:48  
+Yes. Tech, okay, okay, but that's, that's it, right now, correct? Vinay, add me
+
+Alec Granderson  53:55  
+to your 1230 meeting, please, so I can look,
+
+Speaker 3  53:58  
+I think I'll just forward. I'll just forward it to you. Alec, okay, appreciate it.
+
+Emil Romulus Kovacs  54:06  
+Okay, yeah. Robert, real quick. Do you have any update on onboarding?
+
+Robert Rodriguez  54:14  
+Vinay, oh, he's got his fingerprints. Paperwork is in his hands. And I mean, today he should get his email fixed. I made sure that he got it. I just didn't know there was a technical mess up. So if you have any
+
+Vinay Lagisetty  54:26  
+trouble, just reach out to me. Vinay, yeah, it's just someone has to reset the password. The password they shared is not working. I already conformed. Informed back to the team.
+
+Robert Rodriguez  54:35  
+Okay, connected Ryan? Have you connected with Ryan?
+
+It's likely, who what? Yeah, if you don't get any response in the next you know, couple of 20 minutes, 30 minutes, let me know, and I'll get you in touch with Brian, or I'll just ping them anyhow,
+
+Emil Romulus Kovacs  54:49  
+Sure, thank you. Yeah, and just to be clear, I'm talking about the DCFS onboarding,
+
+Speaker 2  54:55  
+yeah, yeah. He's got the balls in his court at this point. Yes, okay, I
+
+Vinay Lagisetty  54:59  
+have to go to the fingerprinting today, once I complete these things, I got the application back yesterday at five ish, and it was already closed by the time.
+
+Emil Romulus Kovacs  55:10  
+Quick, before you leave, Luna, I'm going to be out Thursday, Friday this week, but there's no reason for you guys not to meet and continue. Okay, if you I think the
+
+Vinay Lagisetty  55:22  
+next, yeah, we should so many pending
+
+Emil Romulus Kovacs  55:24  
+items, right, right. Okay, all right, anything else that we need to cover today, from anyone, any, anything we we need to cover that's important. Okay, thank you all for joining. Really appreciate it, and we'll catch up soon. Thank you. Bye, now. Bye.
+

@@ -1,0 +1,732 @@
+Vinay Lagisetty  0:55  
+Guys. This is Vinay, can you hear me?
+
+Unknown Speaker  0:59  
+Yes, hello, yeah, we can hear you both.
+
+Vinay Lagisetty  1:07  
+I think, Jeff, okay, Jeff, my child, Let's give him a second.
+
+We can probably get started. I will just give a brief introduction. And if Jeff joins, he knows most of this information anyway, again, thanks for joining. My name is Vinay. I we I've joined krassen recently to lead this specific project called AI transformation within the DCFS environment. So I was told that you guys are from the intact team. Yes, that is correct. Okay, there you go. Jeff is here.
+
+Lobo, Jeffrey  2:16  
+Hey, good afternoon. Sorry. I was running late. Had to grab some lunch. I like Jeff, hey,
+
+Vinay Lagisetty  2:28  
+we were just kidding here, right? Yeah, yeah, go
+
+Lobo, Jeffrey  2:31  
+ahead, yeah. So
+
+Vinay Lagisetty  2:33  
+I was just telling them we were here for the AI transformation.
+
+Lobo, Jeffrey  2:38  
+So just one sec. Is Kamila on?
+
+Unknown Speaker  2:45  
+Yeah, she's not here yet.
+
+Lobo, Jeffrey  2:48  
+Okay, let me just ping her and make sure so that you don't need to repeat yourselves. And no worries, I
+
+Vinay Lagisetty  2:55  
+will some introduction about themselves before
+
+Lobo, Jeffrey  2:59  
+go ahead with that. Yeah.
+
+Vinay Lagisetty  3:04  
+So if you guys don't mind, if you could quickly introduce yourself so that I know exactly which role I'm speaking to and what you guys do.
+
+Nataliia Revutska  3:14  
+Yes, hello. My name is Nataliya. I'm a senior testing engineer. Also, also they assigned me a QA lead in intact team. They're all so I'm I have those responsibilities as well. So I'm working with DCFS for one and a half year already as a senior test engineer in intact team.
+
+Vinay Lagisetty  3:37  
+Thanks, Nataliya, thank you.
+
+Remya Raj  3:40  
+Hi, Vinay. My name is Remya. I'm a senior testing specialist with the same team as Natali and I recently joined last November. So yeah, we are helping the testing team with the intact
+
+Lobo, Jeffrey  4:01  
+Hi. There you go. We just got Kamila join Yep. Kamila, how are you?
+
+Kamila Aibedullova  4:06  
+Kamila, good afternoon. Everyone. Happy Friday.
+
+Vinay Lagisetty  4:12  
+Happy Friday. Just two more hours to go.
+
+Kamila Aibedullova  4:17  
+Time flies. I'm Kamila. I'm key lead for this project, and also key lead in one small team, admin and legal team, and very interested in using AI.
+
+Vinay Lagisetty  4:35  
+Are you part of the intact team?
+
+Kamila Aibedullova  4:36  
+Also, no, I'm not in intake admin and legal.
+
+Lobo, Jeffrey  4:42  
+Yeah. So Vinay Kamila is not in in she is a lead in one of the teams, which is admin, but she's also playing a role across all of the teams as like the testing services lead, right? So I think that's, that's why I've included here as part
+
+Vinay Lagisetty  5:01  
+of this Sure. So my goal for today is very simple. I will be going over a significant amount of the presentation. I will just fast track it, just to give you a quick intro about what's going on in the organization, what you guys can expect, and what the timelines are. And I think that should take around 20 minutes or so. And post that, what I want to do is to just understand your role, what you guys do, what are the tools you use, and what's your familiarity with the AI, and also, have you dabbled into those things? So yeah, it's pretty interactive session. Just ask me any questions you want, but when I go through the slide presentation, I will be as fast as I can so that we can actually go to the real stuff. So let me start sharing my screen.
+
+It's super slow. Hold on, yeah, so you guys can see it, yeah, yes, yes, we can wow. It's, it's, it's one of those days it needs a restart. This is when I click a button, it takes almost like two seconds to react. So again, this is AI augmentation. Our goal really is to make sure this project we use AI tools consistently across all the roles. Jim, basically the CIO of DCFS is expecting a 15% improvement in productivity once this project is done. So hopefully we can achieve it again. This is just so that we are. We're just making sure the same people are just understanding their workflows and enhancing the tools, not looking for any kind of compression, but but more velocity in the throughput, right? We will be starting with a basic measurement. I'll cover that in a bit. Again, we want to roll this workflow across all 12 teams, but we're going to start with one, one team which is intact, and there are like five roles we have selected, which is the testing lead, testing services, services testing and the configuration guys, and as well as the BA. This part of this project is split into eight different phases. One is the governance. And in the governance, all we're trying to do is trying to establish the boundaries what AI can do and should do and what it should not do. That is basically one of the key policy here is AI cannot work automate in an automated way. It needs to always have human in the loop. So you can use AI assistance, but you can't let ai do all the work and then approve it without reviewing it. So human in the loop is the core, essential form. We'll be using it. Before we get into the project and start using AI tools, we will be doing a baselining of the team, just understanding, like, what were the metrics doing before we introduce the tool, so that we can have some kind of a measurement to go back with, and we will be filling out service, so that you guys can fill out the service, and so that we can capture the health of the team also during the baseline. And we will be kind of getting into this design part of it. Again, we are just having an introduction call right now to just understand what your day to day looks like and what kind of processes can be optimized through AI. And we'll get into more detail into the design, where we will document your workflow and document what tools potentially can be used, and say, Hey, this is how you guys have to plan to use it, and a kind of a sample playbook will be developed so that we can try to use those playbooks again. The train phase is more around getting you guys trained with the AI tools. If you need it, there will be, it will be a mixture of pre recorded sessions, like based on the tools on also some of the live sessions as needed. So we will already have, should have developed the playbooks by this time, at least a rough draft. So every role should have their playbook in their hand, and we will be covering those playbooks and see if you guys have any doubts, kind of get you through some kind of a hands on learning on that.
+
+Once the train phase is done, we'll go through the pilot, and in the pilot is where you will be using those tools and giving us the feedback. And the goal is to update the runbook, figure out what works, what doesn't work, and how can we make it better? You guys will be figuring out tricks as you use it. You will you'll definitely find more usage for it. That's the goal. Just document the best practices. Obviously, I was told intact team is the best. So hopefully you guys can refine it right during the pilot, and then we go for the measure. So once the pilot is done, we are doing a quick measurement and to see where did we improve, where did we not improve? And throughout all these phases, there will be a governance going on. We'll be reporting to the see CIO on the team on a month, week to week basis, in fact. And once the measure is done, we'll be finalizing the playbooks, and we will be trying to roll out a plan on how other 11 teams can take advantage of the toolset. So I went through that pretty fast. Any questions so far?
+
+Okay, am I still connected?
+
+Speaker 1  11:43  
+Yes, Yes, Vinay, I think sounds good. Yeah. No questions so far.
+
+Vinay Lagisetty  11:56  
+Sorry, there was there a question.
+
+Kamila Aibedullova  12:01  
+Everything is clear.
+
+Vinay Lagisetty  12:04  
+So in the governance, I don't think so this is much relevant to you guys, but so let me skip that. So right now we we know we can use GitHub copilot and we have test. I mean, we have not tested GitHub copilot, but we tested that at last year, over yesterday, with your intact team. And I think dynamics copilot is been enabled. We just saw that working yesterday, so there are parts of it which are enabled. And I think Microsoft copilot is something you guys might have access to. So any other tools you are aware of which are AI, which you think, I mean, before we get even getting to this, have you guys dabbled into AI at all? Just chat GPT or anything?
+
+Remya Raj  12:54  
+Yeah, chat GPT. Yes. Other than that, I don't think I have no
+
+Vinay Lagisetty  13:07  
+ah, Nataliia, actually.
+
+Nataliia Revutska  13:10  
+I mean, I'm using chat GPT for my personal, you know, questions, but not, you know, it's a new technology, and when it's started to be, you know, accessible for public, I was already working with the DCFS, and so I didn't have any experience using AI for testing. Got it.
+
+Vinay Lagisetty  13:36  
+And so do you foresee, or you guys know your roles better. Do you? Do you foresee any tools, new tools you would need access to within your environment to accelerate your work?
+
+Remya Raj  13:57  
+Are you talking about? Are you talking about AI based tools here.
+
+Vinay Lagisetty  14:02  
+AI based tools also are non AI based tools also, if you have any ideas.
+
+Lobo, Jeffrey  14:07  
+So I think maybe Vinay, we can look at what they do currently, right? They use JIRA, and they use a plugin called Zephyr within JIRA to create manual test cases from the stories. So I think for us, if you're looking at efficiencies, then is there some way by which we those test cases get built out to help out, like, is there something that in JIRA with the Zephyr plugin, there is any scope? I think I haven't done any research, but maybe that's an area.
+
+Vinay Lagisetty  14:41  
+Yeah, I think that's a good one. We definitely going to jump into that, that details right now, but let me cover these two slides, and we can just jump into screen sharing and go from there. So again, as you can see, this is the timeline. So we will be work. We'll be starting aggressively working with you guys, probably from after your PI session is done, to kind of start building those playbooks and also doing, how does your day and everything flow through? So one of the key things to note is, when you start a sprint, the goal is to use the tools as much as you can, and obviously we should capture the lessons learned. And as you can see, the timeline is pretty spread out, so I think it's pretty it's even possible to get through this timeline and update the documentation. Let me see what else is that cover. We can skip this. This is risks. No, there's not much. Hopefully we will just the next thing we'll do is we'll just go through your process. How do you use if you can share your screen and show me, how do you get your requirements? How do you build your test cases? And what do you guys do? And what tools do you use, like Visual Studio or not Visual Studio, whatever it is, right, so that we can at least have a baseline understanding of where we can help you use AI tools,
+
+Lobo, Jeffrey  16:21  
+I think just, just to make sure that the clear, right? So intact, the intact team was selected as the pilot team. So there's a few roles that have been picked, like five roles that we picked out to look at, AI augmentation to your process, such that we build efficiency, right? So that's a goal, using the intact roles, specifically, there will be playbooks created so that you can use those to utilize AI, right? And then it's going to be measured. And at the end of the pilot, once those measurements are reviewed, there will be a rollout that's that's looked at across all of the teams, right? So that's a goal. I don't I may have missed some of the conversations, so I might be repeating but I think just to re emphasize,
+
+Nataliia Revutska  17:10  
+sounds good, I have a question. Is it time for questions now? Yeah, go ahead. What does this ai do? What does it help with? Like, more manual test cases creation or more like code automation. Is it more technical, or does it help, like, because
+
+Vinay Lagisetty  17:31  
+yes, it can do both, right? That's the goal. Is to figure out what tools will be useful in where it can help you generate test test cases to have a full test coverage, right? It can help you to code the test cases, and it can help you to also make sure if you're building any reports or something like that. It can automate that process also, so the tools will be different. GitHub will create in in if you prompt it well, you can code it and at last year, Lobo, if you want to use at last year over to generate the test cases, I think we should try to use that. I think we can experiment with few of those things just to see how much of your workload can be offloaded, and if you're building any manual reports or anything, obviously Microsoft 365 copilot. And you, if you want to, you, I don't know if my dynamics 365 will be really helpful for you, but you could. We could try to see where those use cases come into picture. So the goal is to map out your flow and then figure out, oh, this is where we can use it. This is where we can use this is where you can use it. We should try to maximize the usage to and it's once we map out the process. We you will be able to find out easily. Sounds good? Can we do a quick thing is to someone go over, share the screen and go over, what happens in the beginning of the sprint? Where do you get your requirements from? What you guys do?
+
+Remya Raj  19:23  
+Yeah, so Vinay, I can share my screen and go over a user story and yeah. So here you go. So this is a pretty short one. It is a very simple one. So this is to hide this audit history for two roles, two security rules, which are supervisor and worker, and here you go. So that is how the acceptance criteria look like, and there is business rules and validations.
+
+Vinay Lagisetty  19:55  
+So this story created, this is the story where the tester is working on on the the configurator is working on at the same time, right?
+
+Remya Raj  20:09  
+What do you mean by configurator? Developer? Developer, yes. So, so now it is queued for system test release as of now. And so the next stage will be testing in test so we are waiting for deployment on this so that I can start testing. So the development is already done for this. Yeah, and so this is the Sapphire plugin for JIRA. This is where we have all the test cases. So here I have created a test cycle, and these are the four test cases that I have for four different security rules. And so two of them can view and two of them cannot view, is the test cases that I have for right now. So this is pretty much the basic workflow that we have, like from a tester's perspective, what happens when we have a user story assigned to create test cases?
+
+Vinay Lagisetty  21:10  
+Okay? You are using sefra for this one. Yes, correct.
+
+Remya Raj  21:19  
+And we have test cycles for each and every user. Story, pretty much.
+
+Vinay Lagisetty  21:24  
+Okay, so I'm thinking, Can you click on the Ask row in the top once?
+
+Remya Raj  21:32  
+Yeah, here, yeah.
+
+Vinay Lagisetty  21:37  
+You should aware of, can you see for this IPT, whatever? Can you copy, paste that one into row and say, can you create test cases for this particular story?
+
+Remya Raj  21:55  
+Okay, right here, yeah, oh, I think it. That's okay. That's okay, okay, that's fine.
+
+Vinay Lagisetty  22:04  
+Just Control V the like the paste the text also, Oh, okay.
+
+Remya Raj  22:13  
+That's what I tried to do. That's when it this. I think
+
+Vinay Lagisetty  22:16  
+it didn't drag and drop. Well, just, you can just copy and paste it.
+
+Remya Raj  22:20  
+Okay? Let's just delete this. I think it was already on my clipboard. How do I delete this?
+
+Vinay Lagisetty  22:29  
+Oh, just click
+
+Lobo, Jeffrey  22:30  
+backspace or something. Yeah, sorry,
+
+Remya Raj  22:35  
+control me. Okay, create test cases for this user story, yeah.
+
+Vinay Lagisetty  22:53  
+I don't know if rovo is integrated with Jeffrey, but let's see here.
+
+Lobo, Jeffrey  23:00  
+We are not we have not attempted it, so it'll be interesting. Let me search for more concepts about this user story to create comprehensive test cases. Okay,
+
+okay, it's identified the right JIRA issue, let me provide the test cases.
+
+Unknown Speaker  23:27  
+Can I close this one?
+
+Vinay Lagisetty  23:31  
+Yeah, you can close up. Yeah,
+
+Remya Raj  23:35  
+okay, oh, wow. Test Case one,
+
+Vinay Lagisetty  23:40  
+you need to probably read it, yeah, I know.
+
+Lobo, Jeffrey  23:44  
+I think it will only pick the two roles you had. I don't think it'll come up with, Oh, it did actually come up with the other rules. It did, yeah, cool, because you must have identified that in your user story too, as acceptance criteria.
+
+Remya Raj  23:59  
+So there are, there is an additional test case, verify, no direct URL access to audit history for, oh, nice. Okay, okay, cool, yeah.
+
+Vinay Lagisetty  24:09  
+Can you do one more thing? Can you just say, Would you like me to add this test cases to Jeffrey, so it's, it's, it's able to add it directly to, I see, I see, I mean, don't trust that, right? But you need to, for a new user story, we probably have to go and edit that and and then we have to develop prompts on coverage, and we need to just build better prompts, giving boundary conditions, how you think, and everything. So there will be a lot of, I mean, in the initial go, it will look honestly nice, but there will be a lot of boundary conditions. You need to be really, really careful about how we can mature that thing. But I think at a basic level, do you know if you can find something which is not really live, and we can probably create new tests and delete them.
+
+Remya Raj  25:04  
+Not live, as in, not yet in test.
+
+Lobo, Jeffrey  25:08  
+Test backlog. It might be in your backlog, but development might not have been completed, right?
+
+Remya Raj  25:14  
+So, okay, Natali, do you can
+
+archive test cases from, side, yeah,
+
+yeah, we can definitely say that.
+
+Lobo, Jeffrey  25:23  
+And so maybe clone clone, I think you'll need a story, right, though. Oh, I don't know. I think we want to see whether it automatically creates the traceability, etc, too. So one thing maybe we clone a story, and then on that clone story, we can probably do what you're doing here, right? So then you don't have existing test cases, etc, and it should automatically create new ones, really.
+
+Kamila Aibedullova  25:54  
+I think we can delete them later.
+
+Nataliia Revutska  25:57  
+Yeah, yeah. We can archive, yeah, and it's no like connection from sapphire to user stories. You cannot trace their that path. So we can try.
+
+Lobo, Jeffrey  26:11  
+You don't create traceability. You have to, yeah,
+
+Speaker 2  26:18  
+sorry, yeah, we, we mentioned there the user story. I'm sorry, yeah, there is accessibility. Yeah, my bad answer. No worries, yeah, oh yeah.
+
+Unknown Speaker  26:31  
+So Natali, do you know of any user story that
+
+Remya Raj  26:36  
+try user story on, 52435243, okay.
+
+Lobo, Jeffrey  26:48  
+This one, this is the same queue for test release,
+
+Unknown Speaker  26:54  
+but there are no test cases inside. Oh, you
+
+Vinay Lagisetty  26:56  
+haven't raised them yet.
+
+Speaker 2  26:57  
+Okay, yeah, they are not inserted in sapphire yet,
+
+Remya Raj  27:03  
+so I'll copy paste this one.
+
+Lobo, Jeffrey  27:07  
+Yep, yep.
+
+Vinay Lagisetty  27:11  
+So from my research, I'm at least it's saying we need a Zephyr agent for rovo. It might have been already installed. We'll see.
+
+Unknown Speaker  27:25  
+So what should be the prompt.
+
+Vinay Lagisetty  27:27  
+Can just say, can you generate users, test stories,
+
+Remya Raj  27:35  
+user test cases, test cases for this user story, yeah,
+
+Lobo, Jeffrey  27:41  
+if it does that, then we can say, can you insert these, something to that effect?
+
+Unknown Speaker  27:45  
+Yeah, okay, so I'll submit this for now, yep.
+
+Lobo, Jeffrey  28:00  
+See it's getting quicker now, as we go,
+
+Remya Raj  28:04  
+yes from last time this one, okay,
+
+Kamila Aibedullova  28:11  
+but we need to revise them. I know, yeah.
+
+Vinay Lagisetty  28:15  
+I mean, we there is so much of the prompt you saw like one line, that would be probably like 20 lines or 30 lines. We need to come up with a prompt such a detailed enough so that that can cover right
+
+Kamila Aibedullova  28:30  
+and so I also need to add negative scenarios or edge cases, yeah, on the story.
+
+Remya Raj  28:37  
+So here, after the test cases, it is saying, but the comments on the story or the testry should be disabled, in fact. So it is asking, Would you like me to add these test cases as a comment? Comment, okay, no more to comment. No, we don't want to comment.
+
+Vinay Lagisetty  28:55  
+Can? Can? Can you say, can you insert this test cases into zephra? Insert?
+
+Remya Raj  29:12  
+So but now we have to mention which folder and subfolder these test cases should go into, right?
+
+Vinay Lagisetty  29:20  
+Yeah, depends on how you're linking. Where are you linking that from?
+
+Remya Raj  29:25  
+Yeah, let me. So can I go to different, different tab?
+
+Vinay Lagisetty  29:33  
+Yeah, okay. So can you the text of the prompt? So here, yes, can you copy the text from the chat?
+
+Remya Raj  29:51  
+Yes. So this is how we have so we have different folders and subfolders where we have all the test cases. For example, under activities tab Audit History, we have test cases for the specific user story
+
+Vinay Lagisetty  30:09  
+got it so.
+
+Kamila Aibedullova  30:13  
+So you need to create the folder first, and then, yeah, give the problem, send it to the folder and name of the
+
+Unknown Speaker  30:23  
+to go to this sub
+
+Vinay Lagisetty  30:25  
+folder here. Yes, it should be able to if we have a zefra agent. So can you see if ask rovo to see if it has a zefra agent, just see, do you Have the agent enabled.
+
+Okay, so this is one thing, one thing we need to ask, because it will really speed up the this one.
+
+Remya Raj  31:10  
+Oh, yeah, so Right, like it only can add a comment on the JIRA story.
+
+Lobo, Jeffrey  31:19  
+Yeah, in the current implementation,
+
+Vinay Lagisetty  31:23  
+try this prompt. Just, just try it, the one I sent you right now. Okay,
+
+here. Sorry, no in the chat, I said teams
+
+Unknown Speaker  31:43  
+in Crescent, okay,
+
+Remya Raj  31:44  
+in the meeting chat, in the meeting chat, actually, in the meeting chat, is
+
+it in Krasin account? No, no, whatever on the top of
+
+Kamila Aibedullova  31:55  
+this, on the top of your menu, on the top of your screen, you have chat also, if you go there in
+
+Unknown Speaker  32:02  
+this meeting that we have now,
+
+Remya Raj  32:05  
+oh, okay, okay, sorry, sorry, yeah, so here, so the last one,
+
+yeah, but close this window from Tim's saying Philly noise, check,
+
+Nataliia Revutska  32:22  
+sorry, say that again.
+
+Remya Raj  32:24  
+Close this window that you have opened this chat, okay, yeah, you need, you need to go to cross
+
+Kamila Aibedullova  32:28  
+and, okay, okay, got it, okay. And meeting chat, yes.
+
+Remya Raj  32:40  
+So this one create test cases, the last one, right? Yeah, okay, cool, and go here.
+
+Submit. No, wait. Okay.
+
+Vinay Lagisetty  33:04  
+It may not work because we don't have a sefer agent.
+
+Remya Raj  33:07  
+Yeah, there is no sefer scale integration available, yeah. Oh, it output in this
+
+Vinay Lagisetty  33:18  
+format, yeah. Okay, cool. So we need to, we need to ask for this then,
+
+Lobo, Jeffrey  33:25  
+yeah, I got a note. Is that Zephyr agent? Is that what it's called?
+
+Vinay Lagisetty  33:29  
+It's, they've been changing the names I've been seeing Jeffrey agent is the new name right now?
+
+Lobo, Jeffrey  33:35  
+Yeah, Zephyr scale is the plugin. But I guess therefore agent must be, must be the integration
+
+Vinay Lagisetty  33:43  
+between the aim for the role. Yep.
+
+So Jeff, can I? I mean, obviously I need to update all our documents asking for this tool, because this will accelerate work. It is still going to accelerate work. It's just not going to be like, fully integrated, right?
+
+Lobo, Jeffrey  34:07  
+Yeah, send a request already while they're talking, yeah, yeah.
+
+Vinay Lagisetty  34:11  
+So I want to send you the request, and I think it needs to consolidate and go to Dave, right?
+
+Lobo, Jeffrey  34:20  
+Yeah. I'll check with the JIRA admin at the moment anyway, independently, just to see. What will that take, really, yes.
+
+Vinay Lagisetty  34:36  
+Okay, let me put this thing together and I will send it to you guys. So let's, let's go beyond this JIRA board, right? What else do you do? Once a story comes in, it's, it's marked for testing. You're generating the test cases. What is the next life cycle look like beyond this one?
+
+Remya Raj  34:55  
+So after the test cases are really we like after the deployment is done, and we start executing the test cases in Sapphire.
+
+Vinay Lagisetty  35:06  
+But you need to write the test cases, right?
+
+Remya Raj  35:08  
+Yeah. So after the test cases are ready and the deployment is done, we start executing, what was your question again? Sorry, probably.
+
+Vinay Lagisetty  35:18  
+So now you generated the test cases there you added the test cases, yes, but you need to write how to test it right when you're saying executing, what does it executing mean? How are you executing?
+
+Remya Raj  35:30  
+By executing, I mean the actual test like following each and every step that is mentioned in the test case. Like, mostly manual.
+
+Yeah, it's manual.
+
+But we have, I mean, automation also is coming up in our team, yeah, so, but right now it is mainly manual.
+
+Vinay Lagisetty  35:54  
+So between generating the stress cases and actually doing the manual work, right, what is the location of your time between generating the test cases and doing the manual work?
+
+Remya Raj  36:10  
+Can you what I mean? Yeah, I didn't understand the question.
+
+Vinay Lagisetty  36:15  
+So let's say there was a if you go to the real use case that you will you will be executing the test case, right? That means one of the test case, you will be manually going into the system and testing different role, right? So between designing this test cases in zefra, that is one job, that's a design of the test cases, and then you have to how much time that would take per story typically,
+
+Remya Raj  36:44  
+oh, it would actually vary on the user story itself. So the right now, what we are looking at is pretty much a very simple user story with just one scenario, but there would be other like, complicated user stories where it will have like, multiple scenarios and multiple business rules and multiple validations that we have to do so together with the edge cases and negative test cases, that will be like a pretty much. It will take longer than what we are looking at right now, so it actually depends on the user story itself. How complicated? Yeah, so
+
+Vinay Lagisetty  37:21  
+that I understand. But if, if, if you have to split your time between designing the test cases and actually doing the test manually to update them, how much time do you approximately spend between designing the test case and and using it like, like executing,
+
+Unknown Speaker  37:41  
+executing it?
+
+Nataliia Revutska  37:42  
+Yeah, it's depends also on the user story. And if the requirements are clear online,
+
+Vinay Lagisetty  37:49  
+I get the take an example. Let's say this story right here, right? Yeah, just take an example and give me an error. It doesn't have to be accurate.
+
+Remya Raj  37:57  
+So are you asking about like executing there are, for example, four test cases in this user story, right? Yeah. So the amount of time taken for this user story to be tested, most of the time would be like to switch between the security roles. There are total four roles. So to switch between them. It takes some time, so once we so there is another tool that we have to switch between the security role. So we have to those put in a change request in here to do the change of security role. So that takes some time, and we have to go like back and forth between the actual application and the role change request. So probably, I would say, like less than an hour to actually execute all four test cases. But then we'll also look at other like surrounding areas, also
+
+Vinay Lagisetty  39:01  
+meaning, for
+
+Remya Raj  39:02  
+example, it actually talks about, if the user, the user can see the Audit History section, right? So when I actually executed the test cases, I looked at like how the view is for each and every security role or four of them. And I also actually had to, like, create a new Audit History test data to see that the New Audit History entries also viewable for the security role. It's just an additional
+
+Lobo, Jeffrey  39:35  
+So, yeah, so test data preparation will take time, right?
+
+Vinay Lagisetty  39:39  
+Yes, correct. Yeah. It and the test data preparation is pretty much manual at this point.
+
+Remya Raj  39:47  
+Yes, yeah, some of them are automated. Some are not at this point. Okay,
+
+Lobo, Jeffrey  39:57  
+so there's also another step right, once you create the test case, there is a peer review step by it's done by another person. Peer review. It Yes, correct. And only once that peer review is completed it's ready for execution.
+
+Vinay Lagisetty  40:10  
+Correct. That is correct. Correct. Okay, and,
+
+Speaker 2  40:17  
+and when deployment is done, yeah, sometimes we prepare test cases one or two day before deployments. Depends during
+
+Vinay Lagisetty  40:25  
+the peer review. Do you use like, something, like a checklist, a I'm checking for this, like negative test cases. I'm looking for the different roles. Do you have a checklist for the different for the peer review?
+
+Nataliia Revutska  40:39  
+No, because not every user story will be talking about all four security rules. Sometimes it's only for one for two security roles, and you do, sometimes you do negative Testing, testing for other security roles. But we don't have checklist.
+
+Lobo, Jeffrey  40:58  
+Okay? Kamila, Kamila, did we have, did we not create a standard for peer reviewing,
+
+Kamila Aibedullova  41:06  
+for peer reviewing? No, we don't have that yet.
+
+Lobo, Jeffrey  41:09  
+Okay, we can create something in the back, like in the something, because we need that to look at, how do we automate some of that peer review?
+
+Vinay Lagisetty  41:22  
+We can't completely automate, but at least we can help you accelerate the process, and we still need the checklist for that. So can you show me how do you test? Like, for example, like just any, take anything, and show me how you're testing right now.
+
+Remya Raj  41:39  
+Sure. So here, let me go to this page. So the test case pretty much says go to any OCC case and go to case Overview tab, and I'm testing case member section, and you have to click open the one of the any one of the existing case member details, and check if I am able to see this Audit History section. Actually, this is not yet deployed. It will be like deployed in the next hour or so. I'm waiting for this, but there are four different security roles, so this is how I check access. Like, who am I? Which role Am I assigned here? So right now I'm a worker, and the test case would say, like, which security roles are able to see this section for Audit History. Okay? So right now worker is not seeing it, so this is pretty much what I would do for one test case. Yeah, but, but
+
+Lobo, Jeffrey  42:49  
+I think in zfo, as you run the test, you go and go step by step and say, pass to fail, right?
+
+Remya Raj  42:56  
+Yes, yes, we do that and
+
+take screenshots.
+
+Yeah, we do take screenshots and add it to the Yeah, yeah.
+
+Kamila Aibedullova  43:08  
+Maybe, maybe you can show one cycle this execution, yes.
+
+Remya Raj  43:12  
+So here, let me go to the current one, which I haven't executed yet. So we go to. So here you can see the test cases, and I go to the test player. So here, what we do is we go here, and if it is passed, we can mark it as the appropriate one. And here we do the actual result. We do the screenshot, attach it here, and that is how we do the
+
+task or fail. So
+
+Kamila Aibedullova  43:49  
+each step in each user story has few test cases, at least one for each acceptance criteria. If you have one acceptance criteria, at least one test case is created, sometimes more for negative then created. And each test case can have different types, different number of test steps inside of it. Here are the steps here for one test case, and each step on each step we update during the execution we update, is it fail or pass?
+
+Vinay Lagisetty  44:28  
+Yeah, yeah, yeah. So a quick question on this, like, when, when, when you switch on the switch between rules. You're logging in with your your own account and asking for a switch of a role, rather than logging into a different role.
+
+Nataliia Revutska  44:53  
+Actually, by shared services, they deployed such an app to Dynamics, 365, role switch automation, which allow us very, you know, convenient to switch overalls. We have allowed security roles there, which are our roles for our application.
+
+Remya Raj  45:14  
+Yeah. So what do you do is just click New and choose any role that you want to test and do some comment here and click Save and Close. So it will take, like, probably, like, few seconds. So right now it isn't requested, and once it is assigned, you can go to your application and do a hard refresh, and you can see that the role change would have happened by then.
+
+Lobo, Jeffrey  45:47  
+Yeah, so we build this app internally so that somebody doesn't have to go and do something when the tester says, oh, I want to change my role. Previously, it was all manual that they would reach out to somebody at either the test lead or an administrator, and they would create it. So we created this app such that it's self service, really,
+
+Remya Raj  46:11  
+yeah, that my service was a pretty painful process. Like, we would have to, like, ping the developer, and like, one single developer would be assigned, and then it will be, like, a lot of back and forth. So this is, like, very convenient for us right now,
+
+Vinay Lagisetty  46:26  
+got it, got it, got it, got it. So that's an automation you guys did already.
+
+Remya Raj  46:31  
+And, yeah, this was done by the Shared Services team.
+
+Vinay Lagisetty  46:37  
+Yeah, the so when this is for the configuration testing, but do you guys also do testing for if they're doing code generation, like if, let's say you have this path of configuration first, then you have not 52 rules, right? Do you the North 52 testing is also the same manual testing. There is no specific testing on not 52 rules.
+
+Lobo, Jeffrey  47:05  
+Yes, it is. Basically they do an integrated test, right? They're testing the story or the the application which already has that not 52 rule released. So, yeah, in it, yeah. So it's not separate, but it's embedded, really, yeah, embedded
+
+Vinay Lagisetty  47:21  
+in the process. So what about the like, any customization you guys are working through like, the like, now they have to develop a.net code or something like that.
+
+Lobo, Jeffrey  47:33  
+Say, for example, right? The primary worker, like, instead of just the whole name, they only need an abbreviation the first letter and the last letter right, and say it was not possible in JavaScript and not possible, they would write a plugin, and the plugin would be connected here. So again, I know at the moment, there's a separate team that developed that that PCF may do separate testing on the PCF, but otherwise it would be again embedded within the within the app, right? So you test it more from an app not independently,
+
+Vinay Lagisetty  48:07  
+got it, got it. So. So the development team would do some kind of unit tests, but these are more checking from a user perspective. Yeah, got it, got it, got it. And so all the documentation is just your copy pasting the screenshots and everything. And ZDA is taking care of the documentation whether it worked or not, and the reports are getting generated.
+
+Lobo, Jeffrey  48:31  
+Yeah, at the moment we haven't started running that was one something, Kamila, I was going to talk to you to every sprint, we have to complete some testing reports. Every pi, we have to complete some testing reports to show what is completed, and some metrics of how many bugs were were picked up, etc, how many got fixed. So there are some we haven't created any reports yet, but I think that's something that's yet to be done, but we have to do it,
+
+Kamila Aibedullova  48:57  
+not only pi. We can do it in the sprint. Yeah. From sprint to sprint, and then, yeah, Jeff, I have this some ideas. We need to work on this documentation.
+
+Lobo, Jeffrey  49:11  
+Yeah, so there's still so the message, Vinay is, I guess we are still firming up a lot of this, right? We've got the testing going, but reporting we haven't done because it's like Currently, we have not generated any statistics yet, but mainly it is everything that we do is captured in the in the sprint, in the scanner, prioritization of any bugs, etc, is all handled like that. But I think there is some reporting necessary for each team and across teams that we haven't done yet.
+
+Vinay Lagisetty  49:43  
+Yeah, I think that's an opportunity for us to do it, because I'm not seeing many opportunities from a manual testing. I mean, can it be done absolutely, but do we have the right tool stack here? No, yeah. So I think,
+
+Lobo, Jeffrey  50:02  
+because even with the test cases, right? I think I don't know what each team is doing, but there's multiple ways you can do it. You can either manually write the steps in Zephyr itself, or you use a spreadsheet. You create all the steps in the spreadsheet, and then you load it up into Zephyr. So I think the teams either use one or the other, right? What is your preference? We did in text.
+
+Nataliia Revutska  50:25  
+We tried both. Now, each one is using their way. I personally manually input steps in cipher.
+
+Vinay Lagisetty  50:35  
+Yeah, I think like, if Excel option is there, that's another thing. We can always write prompts to generate an Excel. I mean, in fact, once we if we go agent is a big easy we just have to come up with better prompts, and maybe multiple prompts, one for the negative testing, one for the positive testing, and things like that. That's lot more detail. Again, I like looks like, if I'm taking a guess, it's test case preparation is only 20% of the work, and actually doing the test is 80% of the work. And is that a fair thing to say?
+
+Kamila Aibedullova  51:21  
+I think you're right, but also some documentation takes it's the test case. Execution is not taking 80% of work. They have some documentation to run, to manage.
+
+Vinay Lagisetty  51:38  
+So what is the documentation? It's basically that test report or something. Okay, yeah, is, is. How does that work? What do you guys do in the test report creation
+
+Kamila Aibedullova  51:53  
+for Zephyr scale also created automatically. We also have a lot of another types of work. So this part of his only functional testing. We also will have a ADA testing, which is also manual. That part, I think we cannot,
+
+Vinay Lagisetty  52:15  
+but that's part of every use case, right? Every story, it's aI testing is mandatory, right? Yes, correct. We did not use tools like Selenium or anything. There was no talk about that.
+
+Kamila Aibedullova  52:35  
+And we use access to accessibility insight for for ad, but we don't use Selenium. It will not cover.
+
+Lobo, Jeffrey  52:44  
+I think that's something again, maybe we can have a session to walk through that Vinay, just to look at that process, right?
+
+Vinay Lagisetty  52:53  
+Yeah, thing here, it's like, I'm trying to find opportunities where we can because the 80% or 60% of the work is manual, that becomes challenging here.
+
+Lobo, Jeffrey  53:06  
+The other side is, sorry, I was going to say that. So this is all the manual testing we're talking about, right? We've also just started the process of building automated scripts right in a plant. I think that's I like, because that is, again, in its infancy. I don't know what how we can look at I'd started talking to them about what AI does, but they don't have anything yet. From an eggplant standpoint, I think end of the year they have something that they're releasing that will help with that. But I think, I don't know, maybe that's another thing that we can look at. I don't at this stage, I don't think there's much that we will have from any AI that we bring to eggplant, which is outside of eggplants capability.
+
+Vinay Lagisetty  53:56  
+Really, where does eggplant exactly fit in, which
+
+Lobo, Jeffrey  54:03  
+So, like this is all manual testing. We also the teams are building out automation test suites, right? And so the goal is to have end to end test cases there, and to use that for smoke testing, regression testing, etc, right? So that you don't need to manually test them
+
+Vinay Lagisetty  54:21  
+for the smoke tests and regulation this, okay, yeah, yeah, and,
+
+Kamila Aibedullova  54:25  
+and they a client, have the AI, which is using AI, and we're gonna set up. We will set it up. I think that that part can generate date part using the AI to generate test cases and write the script for that part. I think we cannot use our own sources, but I think if, if you will help QA team to create test cases, it will be a huge help to generate test cases in Zephyr scale. Yeah, I think that's what we're looking for to find where we can implement AI, yeah.
+
+Vinay Lagisetty  55:15  
+The whole goal is to see, I mean, not everything can be done by AI, right? It's going to be doing limited parts of it. The whole goal is to see, look at what are the most of the workflows you guys have, software development lifecycle workflows, and figuring out, hey, just figuring out the tools. And if we need more tools, the goal is to go and ask for those tools, with the CIO saying that, hey, we need this tool to automate here, so that's also the part of the pilot is to come up with a recommendation of tools as well. Okay,
+
+okay, I think it's a good session, at least I get a clarity on what we can expect, but that we'll do this in lot more detail. And thanks for the quick insight into what you guys do. And I will make sure I capture this information. And I think for sure we need to ask for this fra agent, which we're going to do, and I will continue this conversation as we keep going forward, great.
+
+Lobo, Jeffrey  56:25  
+And I think just for the team here, right? I think broader communication about what the AI pilot will be, etc, will be forthcoming. I think these are sessions just for us to explore and for Vinay to get familiar with how we'll enhance our tools, etc, right? But I know that your team will ask, Oh, what did you all get out of that, etc, but I think more communication will be forthcoming.
+
+Kamila Aibedullova  56:53  
+Sounds good. Thank you for opening the rover. I saw it, but never tried it. I will explore it.
+
+Lobo, Jeffrey  57:00  
+Also get guess what these folks will be doing this afternoon? Vinay
+
+Vinay Lagisetty  57:12  
+base lighting to go saying that you're already using it, right? So we'll get to it. That's the whole point. We want to use tools, right? We'll help you guys looking forward. Thanks.
+
+Yeah, thanks guys. Bye, thank you. Next weekend,
+
+Unknown Speaker  57:37  
+you too. Bye,
+
+Vinay Lagisetty  57:38  
+so that format is little bit different, so it's going to take me a little bit more time than what I mean I have template.
+
+Lobo, Jeffrey  57:46  
+I think hold it off till Monday. We don't need to rush it
+
+Vinay Lagisetty  57:49  
+really, right? Yeah, that's one, do you? So, yeah, I think we'll hold it off till Monday. And the thing is, I was trying to roll this one out so that I could add the survey questions for review.
+
+Lobo, Jeffrey  58:07  
+The other thing is, maybe, like, if your document is finalized, I'd push it back to Kristin or ask dinker, can they get somebody from internal Krasin to convert what you created into that template, right?
+
+Vinay Lagisetty  58:23  
+I mean, that's what I was thinking.
+
+Lobo, Jeffrey  58:25  
+I'm like, yeah, do ask for that, because otherwise, like, better use of your time, right?
+
+Vinay Lagisetty  58:29  
+So, but the issue was the format and my sections did not align, so I had to go write the content. Oh, so it was not that was my initial thought process, but I will show you what I have
+
+Hold on. Word document is Word document,
+
+Lobo, Jeffrey  58:52  
+the section headings and stuff maybe can change, right? You don't have to stick with all of those sections that were then. Then work.
+
+Vinay Lagisetty  58:59  
+It's almost done. I just want to double as as usual, my daughter calls me saying that, hey, there is no band today. Come and pick me up.
+
+Lobo, Jeffrey  59:13  
+Okay, those are things we can't plan for.
+
+Vinay Lagisetty  59:15  
+Yeah, like, today should have gone to the aftercare but, but the aftercare bus goes away, and she's like, I have a band today, and she went for the band. And now she's like, calls me, like, Hey, can you come and pick me up? I don't have band credit, yeah. So it's pretty much done. This is what I have, right? Yeah, but the sections I had, versus like, I probably have to just to update here. Anyway, it's done pretty much, yeah, I still have some sections which I did not migrate. So, yeah, I think it's close to looking figure, and I cut down lot of content. By the way, I knew like, like, come down
+
+Lobo, Jeffrey  1:00:04  
+to 3.7 instead of eight, eight sections you had before.
+
+Vinay Lagisetty  1:00:10  
+Well, I again, I'm trying to figure out what, like some if I go to a bank, FinTech, it's big documents, right? Government, typically big, but here it's pilot small, so I'm figuring out what is the appropriate length. And again, if some external people comes in, hey, when we're saying we're consulting, we don't want to say we are just taking a template and putting it here without, yes, I'm just trying to balance it out based on your guys input and feedback at the same time, trying to like, by this time, we should have a clear idea of 10 to 15% but till yesterday, I was like, okay, I can win here, win here, win here. But today I was like, Oh, my God, it's hard to squeeze out from testing. Yeah, it's, I'm not seeing many opportunities there, because we need different set of tools, and most of the tools will come through, not AI, through automation, actually.
+
+Lobo, Jeffrey  1:01:05  
+So this, I think this agent we should be able to, I just pinged Carl Lobo is basically one who has, who works with the JIRA admin team. Okay, so I asked him about that. He said he's checking and I think most likely we should be able to enable that somehow. I don't know where you have to pay for additional license, yeah, then, then it's just enabling it. They should
+
+Vinay Lagisetty  1:01:25  
+be able to do it. Only issue is, because it's a test cases, are they sending the p2 information outside?
+
+Lobo, Jeffrey  1:01:31  
+No, no, no, I don't. There's no data that they're putting in these test cases, right?
+
+Vinay Lagisetty  1:01:35  
+Okay, that's just a process. Yeah?
+
+Lobo, Jeffrey  1:01:38  
+Okay. I have you want me to set up a session with the BAS next week? Yeah, sure. And I'll also include a scrum lead anyway. So the scrum lead get some information.
+
+Vinay Lagisetty  1:01:51  
+I thought we already had a session with Bs, but that the
+
+Lobo, Jeffrey  1:01:55  
+solution architect and the Devra, yeah.
+
+Vinay Lagisetty  1:01:58  
+In general, we had a session half an hour. Quick Intro session with Bs, Oh, you did that was pre, pre in the beginning, before I even started the baseline document. Oh, but
+
+Lobo, Jeffrey  1:02:08  
+intact, the intact BA, not what I'm trying
+
+Vinay Lagisetty  1:02:11  
+to it was generic, generic.
+
+Lobo, Jeffrey  1:02:12  
+Va, okay, so then maybe we'll do a session quickly with the intact BA, so that it brings them up to speed. Yes, and, and I think I'll get this crumb lead in that so that they aware what is happening.
+
+Vinay Lagisetty  1:02:22  
+Yeah, yeah, absolutely. I think rovo is getting more critical tool than any other tool out right now, because everyone is touching the sprint part of it. So looks like the robot training has to be done to everybody
+
+Lobo, Jeffrey  1:02:39  
+scrum leads. Also, there might be opportunities in rovo for them too, right? Absolutely, yeah,
+
+Vinay Lagisetty  1:02:45  
+yeah, absolutely. I think robo is becoming critical. Dynamics is definitely critical for those guys, which there's lot of configurations which are probably still need to enable. I think we're getting to a good point, but there's not much of development. I wish there was development. There is a lot of efficiencies you can gain.
+
+Lobo, Jeffrey  1:03:07  
+Yeah, I think there's probably some amount of development from the pro code that they do, right, which will basically any plugins that are created. But I think we are trying to reduce that amount of custom development work. You know what
+
+Vinay Lagisetty  1:03:25  
+the world is going back to custom development. That's the same thing with Yes. So instead of this enterprise apps dependencies before it was then it became to SAS world, where you have a someone optimize entire workflows and standards, and you just have to use that app for your business. But now it's coming down to like personal apps, right? But if the same person, it's not Vinay is personal app. We can do a personal app, but personal apps are more like, Hey, you have this business function. I can create a personal app for this business function. It doesn't have to, it doesn't have to be a SaaS problem where it has to be 1000s of customers. Now the coding is so cheap, if it's even two customers, they'll write a personal app for that. Oh, wow, yeah. So I think the it's that whole change is happening right now, because now you have not 52 rule engine, and then you have a customization right then the new design would say, Why do I need not 52 when that that the AI can generate the entire code Follow the same it says, Not 52 and a JavaScript. Now I just need a JavaScript and and the Microsoft Dynamics configuration with the front end of the back end, right? Yeah. But I
+
+Lobo, Jeffrey  1:04:50  
+think you can part of the federal government's mandate is that business rules extracted into a business rule engines. That's why we have to do it. I don't know.
+
+Vinay Lagisetty  1:05:00  
+I'm not saying that's because the policy was designed probably 10 years ago. Yeah, right. So all I'm saying is the newer policies are going to change. This is not for this project, yeah. So I'm working with the Department of Defense, Air Force Research, right? So right now, the infrastructure has to be created at a code level. Yeah. Configuration as code you cannot create, you cannot go to an admin panel and say, create a new, easy to instance or anything. It needs to be only through code, yep. So, yeah, it's changing again. It's, it's coming back to that age old, unit, script, methodologies, back back to like 2030, years ago. Yeah, the carrier, right, so it's fine. Stuff, okay, thanks. I don't worry
+
+Lobo, Jeffrey  1:05:50  
+now that you pick up your daughter.
+
+Vinay Lagisetty  1:05:52  
+Yeah, I'll come back and either release this document tonight or on the Monday.
+
+Lobo, Jeffrey  1:05:57  
+Yep. No worries. Take care. Thanks. Bye. Bye.
+

@@ -1,0 +1,612 @@
+Unknown Speaker  0:00  
+Have any business. Chaitanya, this. Kali, hey,
+
+Vinay Lagisetty  0:07  
+I don't know if Jeff is joining.
+
+Unknown Speaker  0:16  
+Not sure. Vinay,
+
+Vinay Lagisetty  0:28  
+he said no response, so I'm assuming he's not joining okay. No worries. Yeah,
+
+so I can get quickly started at least give you a lay of the land what's going on, and then we can have jump into basic information collection at this point, I would say, are you guys aware of this AI transformation project for the DCFS?
+
+Speaker 1  1:16  
+Yeah, Jeff mentioned to me about that. I just know that it's a transformation project, but I don't know any more details about that. Okay, no worries.
+
+Vinay Lagisetty  1:26  
+So the I think it's probably easy to just share the deck so that it's let me pull up. I'm not going to go too much detail into the deck, but I'm just at least it will give you a good, high level overview, so that we we can jump into the focus of the call. Hey, Jeff, Hi, Joe. Hey, we just got started. But great.
+
+Speaker 2  1:53  
+Yeah, I think I don't know if Kali or Chaitanya have any for any details. You might I don't know in the last couple of minutes, if you've talked about it, but just give them
+
+Vinay Lagisetty  2:05  
+getting, yeah, we're just getting started on that, just Chaitanya and Kali. Just if you could let me know what your roles are, so that I can frame my conversation into that particular structure.
+
+Speaker 1  2:18  
+Sure, sure, Vinay. I'm solo. I'm the solution architect for the intact and productive services team, okay? And yeah, Chaitanya is, yeah, you can go ahead.
+
+Speaker 3  2:28  
+Yeah, Chaitanya, I'm the platform developer with intact and preventative sales team. So I've been on display past one year, more than one year. So you're more the developer. Jeff, are we
+
+Vinay Lagisetty  2:41  
+also getting a tester or Yes,
+
+Lobo, Jeffrey  2:43  
+I think I set up a separate meeting for testing. Got with the testers from the intact team. I think it's Natalia, and I guess the first name, I'll just tell you in a minute. And I've got Kamilla as a test services lead. She'll be part. I think I've set up meeting for tomorrow for that. No worries.
+
+Vinay Lagisetty  3:01  
+Okay, that's that's good. I was assuming you guys were testers, so I'm glad I asked that question. Anyway, let me quickly share my screen. We'll go in this detail again. But your team has been selected to be part of the pilot, so that's the reason you probably guys are both here. Overall, we did this quick presentation with the management right now, the project scope is pretty straightforward. How can we help the team use AI tools to accelerate their throughput? Right? There are a lot of AI tools. You guys might, might have been already using some AI tools on your own. Again, this is an initiative by Jim who is the CIO for DCFS, and he wants us to see at least a 15% improvement in the productivity so we are, our focus is. Our focus is purely on productivity. Right again, we're going to start with baselining. First, how the team has been performing, collect some interesting metrics, do a survey kind of a thing, what do you feel? And everything. And then then we do a start with a small pilot and and the goal of the pilot is the right now it's we just we were planning to do with two teams. But I think it's better with one team to just understand our kind of document how AI can be used. So then one of the key policies we will cover this in detail as well, is human in the loop, right? It's mandatory that there is no AI touching the core. I mean, AI can touch the code, but it can't write. It can write the code and auto submit it. Human has to review the code and do all that stuff. So we need to and the AI can write configurations, but they cannot push the configurations. You need to review it and push the configurations. So some of the guardrails which we have to establish based on the policies of both DCFS and doid, right? We're going to cover that that. But essentially the there will be eight different stages in the project, which is govern, which is where we are, where we are, establishing a governance team, and also the objective of the the entire the project itself. And we'll quickly jump into baselining, where we'll be capturing some of the informations, like metrics we can potentially improve, or we want to improve, that is approved by DCFS, saying that, hey, we all agree that these are the metrics we're going to work with, because AI can be used anywhere and everywhere, right but, but I just want to make sure that that we are chasing the right metrics, so if that is what they measure. So again, we can look into automation, augmentation or anticipation. I don't see much of anticipation here, but it's more going to be automation and augmentation use cases. The third one is the design stage. It's where I will be working with you to understand your current workflow. What do you do? Where do you get the JIRA ticket? From the story, from a post that story. What do you do? Right? This is just to understand, hey, can we use this tool versus that tool? Work with you. You guys must have done your own digging into AI already. So the goal is to just quickly come up with productivity improvements. Hey, if I had this tool, it would help me do this. If I had better documentation, it would help me do this. If I had better test cases, it would so it's something. The more you understand it, I think the more you will feel like, Hey, I think we can improve this aspect. That's where the collaboration will come from, basically. So we look at the current process and we see, can we use AI tools to accelerate that process for an outcome? Right? And during this design phase, we will have some suggestions. We'll have our playbooks, which we want you to use, and that gets passed on to the train phase, where we will be suggesting a list of courses for you to self learn, as well as how people are using what kind of prompt engineering it's and we are this is Where we are determining, like how to use the tool, like, if it's Jira, how do you propose to use the tool and everything? And also some some strategies around how bas testers, developers and other people can use it.
+
+There will be, we'll be collecting some use cases already in this design stage, but hopefully we can come up with some training materials so that you guys can see how they can be used. Right? The training is something we're still working on. And then you will have the pilot. Pilot is basically we where you are in a sprint, trying to apply these tools you have learned, and see if there is a productivity increase, if it's not coming back with solutions, lessons learned, and trying to see come up with, hey, I need more tools, or this is not really doing Whatever it is, right? The goal is to really, really, really start using the tools and getting the feedbacks and also finding out any gaps in our assessments, and go back and we try to fix it. That's where you guys will become really, really key in the pilot. And again, we, which we what we are trying is we are trying to find AI people who have experience with AI in at least in your roles, and we want to onboard them which they might be working hand in hand with you, to sit with you, to see what you're doing. And they coming up with a suggestion of a tool, or, Hey, let's try this prompt, whatever it is. So the goal is, we want to go and find out people who have this experience and who can work with you as a paid programmer. So you'll be sharing your screen going through what you're doing and do you guys come to office?
+
+Unknown Speaker  9:46  
+No, we are remote. Everybody's remote.
+
+Vinay Lagisetty  9:48  
+Yeah, everybody's remote. So pair program is typically in office, and we call it extreme programming as well. Remote can be done. Only thing is, you guys will be on Team all day, right? Which is fine. It's as long as you have two screens. One screen is a record we call the shared view. One screen is called your personal view, and pair programming is basically the shared view kind of thing, right? Then it comes down to the measure phase, where we are measuring like you're now, you're done with the two sprints. You found out a Runbooks are updated. You found out the gaps and everything with then we are measuring. Did that AI actually increase the productivity? What happened and everything. And all during this time, we are doing a weekly check in with the CIO directly, watching out metrics, anything you observed. So it's not like there's a vacuum all the six weeks with there is a CIO check in every week, and then we finalize our playbooks and we distribute it to the rest of the teams at the scale level. So that's the plan so far. And I think this plan will be tentatively approved. As I said, we are in the govern phase right now and the baseline so we are doing and obviously I'm doing some pre work on the design so that I know what to cover in the baseline. So it's not like all phases are like isolated in nature. They're all going in parallel, but because so that we can get the information up ahead, I'll pause here. I just want to quickly see if guys have any questions
+
+Speaker 3  11:42  
+that right? I'm just digesting it. So I don't have any Yeah, we are good
+
+Vinay Lagisetty  11:51  
+for learning. So this is not in relevant. This is not Yeah, this might be relevant. So the tool selection, and you said, one is the developer, one is a architect, right? Yeah, okay, so I think this is the place you need to tell me if these are the tools, which we have asked for, if you need more tools, if you have any idea, but you can say, hey, I looked into it. Personally. I think we need this tool. This is great. You can give the suggestions. My goal is to make sure present it to Jim and see if we can get an approval for those tools, if not, find an alternate tools which are in the ecosystem,
+
+Chaitanya, Anudeep  12:42  
+GitHub, corporate is a really good one, but I'm not sure about that flash and rovo. I never Robo, but yeah, GitHub corporate is a really good one.
+
+Vinay Lagisetty  12:55  
+Yeah. So do you use it already, or do you have access to it?
+
+Speaker 3  13:01  
+No, no, I'm not use it. I have read some some articles
+
+Vinay Lagisetty  13:07  
+and No, no, that's exactly okay. You are a dynamics developer right along side with the GitHub. Do you need the there is something called the dynamics copilot for configuration generation,
+
+Speaker 3  13:23  
+I don't think so there is a dynamics copilot. Kali, do you can confirm
+
+Speaker 1  13:29  
+GitHub copilot? I know, but copilot Pro, copilot for developers, copilot Pro is the one are we planning to propose that tool, Vinay,
+
+Vinay Lagisetty  13:44  
+copilot role is what you're looking for. Is it GitHub copilot Pro or what? Which one?
+
+Speaker 1  13:54  
+I'm not very sure. But I was, I was just, I was just training into, I mean to was taking some course the Microsoft 365 with generative AI. So there the it's mentioned about copilot Pro. So I just wanted to understand
+
+Vinay Lagisetty  14:12  
+confirmation what exact license we're gonna have that's been, I think it's a business and enterprise for individuals, it's probably pro again, I just want you to look into this, because dynamics is big into copilot. There is a copilot for Dynamics 365 okay, okay.
+
+Speaker 3  14:37  
+There is something for Dynamics 365 don't think so it is integrated with
+
+Vinay Lagisetty  14:43  
+it's not enabled, yes,
+
+Chaitanya, Anudeep  14:44  
+yeah, it's not enabled, yeah, we
+
+Vinay Lagisetty  14:46  
+need to specifically ask for these kind of things. So again, your workflows are not that clear to me, right? So let's say you're using Visual Studio Tools. Obviously, GitHub copilot is amazing, right? But let's say you're using dynamics to do the configuration. I'm sure dynamics 365 co there will be something around that one. I'm still trying to find
+
+Lobo, Jeffrey  15:16  
+this question, Vinay, I think this dynamics 365 copilot that you're talking about is largely, I believe, for features that you're developing from a business perspective. I don't think it is like a it's a gain from a developer perspective. Here we're talking about SDLC gains, right? I think this is basically embedded into like business process from an end user perspective, like it can create chat, it can pull out data within the tool itself, from history of cases, etc, like agents and stuff to be implemented as part of the application. I'm not so sure it is. It is from a development and architecture perspective to gain some of those benefits?
+
+Vinay Lagisetty  16:01  
+Yeah, possibly, I think GitHub copilot might solve most of these things. And I mean, I don't play with GitHub copilot that much as I do play with Claude, quite a bit. But when I if you approximately, let's do a working session later on. But if you can give me approximate story and see we can quickly experiment and see whether GitHub copilot will enable the story once again. Let Give me, give me a quick second, let me see if I can open up copilot. And sometimes these questions are easier to just do it and know that.
+
+Chaitanya, Anudeep  16:42  
+And one more thing, Vinay, I guess the copilot is enabled for power automata flows, but I don't see it and enabled here in AI economic Kali.
+
+Lobo, Jeffrey  16:55  
+So we are getting it has been licensed by do it, but we haven't enabled it yet, right? GitHub, copilot, so that's something that we will get enabled. Okay? That what you're referring to, Chaitanya,
+
+Chaitanya, Anudeep  17:09  
+yeah, basically the power when it mostly we are doing low code, no code, right, as per the developer perspective, like, what I'm thinking is like, when we given up, when we give the prompt, when we give the prompt to the the copilot in the power automata, it helps us to bring the basic framework of the power automata flow for us. But I it is, I guess it is enabled in the I have seen in the previous project, but I'm not sure it is here.
+
+It is not enabled
+
+Vinay Lagisetty  17:48  
+yet. Could you send me exactly what you want so that I can make sure it's in the request?
+
+Speaker 3  17:57  
+I don't have it in the environment. Let me see if I can see any screenshot or a link which I can provide.
+
+Chaitanya, Anudeep  18:10  
+Chaitanya, may be the intake summary, power, automate, flow. I just tried.
+
+I just tried. But there is that I've not got the copilot I'm seeing if I can, I don't think it's enabled in our environment. Yeah, it's not enabled in our environment.
+
+Vinay Lagisetty  18:26  
+Is it copilot for what? Because everything is a copilot in Microsoft, unfortunately. But so is it copilot for power automate.
+
+Speaker 3  18:38  
+That's the one I have seen previously. Okay, yeah, this,
+
+Vinay Lagisetty  18:57  
+so I'm using plot, right? I'm asking it to generate dynamics. 365, configurations for rule 431, 42 CRT part to whatever. I selected one rule in cn, TS, right? And again, it went just, it doesn't have any knowledge of the TCFs or anything. It's just independent, but it will, it is generating the configurations right now, so I'm assuming a GitHub copilot will be able to,
+
+Speaker 1  19:33  
+so does the GitHub copilot enable power? I mean copilot in the power automate flow.
+
+Vinay Lagisetty  19:40  
+No, not necessarily No, no, not necessarily see, that's the challenge with power. Automate flow, right? Let me see power automate low copilot,
+
+Speaker 3  19:53  
+basically, basically, what happens when I like, it's just like a prompt we give. I have seen few videos when I'm learning, but let me see if I can pull up something. Yeah, I can. I share my screen for a quick show, yeah, yeah, yeah. Not sure to what extent. I never used it, but I am seeing it right now.
+
+Chaitanya, Anudeep  20:25  
+It's like a copilot window, right Chaitanya in the right side. And there we can give the prompt, yeah, yeah.
+
+Let me I just gave a prompt right now, yeah. See like, yeah, this the it's a copilot itself.
+
+Vinay Lagisetty  20:42  
+So sorry, I'm not seeing the Oh, yeah, now I'm seeing it. Okay, all right, yeah,
+
+Speaker 2  20:47  
+create your automation with copilot. Yeah.
+
+Chaitanya, Anudeep  20:50  
+Create automation with copilot, yeah, for example, let's take the example which they have given. Like, yeah. This will help us basically, to view the steps which are there in the power automate, and the configuration, I guess it should be manually, created
+
+Vinay Lagisetty  21:08  
+manually, so right now you are in the environment, so you do have access to it, right?
+
+Speaker 2  21:13  
+Yes. So this is cool. This is yeah, this is the my copilot, Microsoft copilot, yeah, on the right, yep, yes. No, we could
+
+Vinay Lagisetty  21:24  
+you go up the original screen once,
+
+Speaker 3  21:27  
+yeah, sure you can access by make.gov dot, power up. I am not.
+
+Chaitanya, Anudeep  21:33  
+I don't have any actually still getting his access. But so any browser allows us to add copilot, right? So any all browsers is copilot is enabled. So that's probably what is being used here.
+
+Right now, my browser doesn't have anything enabled. No, no. Basically the when we logged, usually the development. Most of the work will be done from the make dot power apps.com, itself. But when we go into the Microsoft, make.gov, dot power ottoman.us, where it is dedicated website for power, automate and development. There we can describe the things, but we have to give it prompt Exactly. And as we have seen right now, it will help us to create the suggested flow. But the configuration should be manually done. Like manually, we have to give the water, the parameters and all this stuff.
+
+Vinay Lagisetty  22:33  
+It will improve some of the process. Yeah, this, I mean, good thing is you already are able to access it, that's a good thing. The prompt and everything can be automated through story. Is another question. If you have even GitHub copilot right access to we could see if you can take a story and automate a prompt for this. Okay, right from take this prompt, and we'll see the limitations of what it will generate and and that's the goal, right like you are following a workflow right now, so every workflow, we just have to see if we can use a tool to accelerate that particular workflow, so we can connect your entire workflow through as much AI help as possible. You still have to do the validation configurations and whatever is missing that's not changing, but, yeah, that's part of the design. Is a this is the existing workflow. And when we're doing a future state, which is the future state workflow, that's where we are envisioning. Can we use this? Can we use this? Can we use this? If it uses it, it's is it actually adding more work on it, using more work and and then that's the optimization phase, current states, future state optimization.
+
+Speaker 1  24:03  
+So Vinay, you're, you're suggesting to take one story and work using AI, right? Using the copilot, yeah.
+
+Vinay Lagisetty  24:14  
+I mean, as much as we can one story, you have some you'll have some development steps, right? You might be doing configuration and or in the configuration you might be doing some things. We have to go into the details, right? If you're doing development, you're taking a story, or writing, I don't know, you're doing test driven strategy, or writing the code and then writing tests, whatever it is, right? So how are the requirements? Are the requirements here? I see it in clarity. So the lot of steps we can still automate, even from a description perspective, right? Is the story complete? Do you have everything you want? Can we do a pre check on those things? Can you, are you right, asking the right questions so that within a single meeting, you're able to get the entire story done? Right? From that, are you? How fast you can prototype that particular thing, how fast you can create test cases. So everything has a step right? We need to break it down into the smallest habits you have and see if each and every habit can improve through AI and
+
+the hardest part would be, if I come to you and say, can you describe your day and the workflow? Trust me, that's going to be the hardest part, because it's difficult, like, what do you do on a day to day basis? You intuitively do it, but when you ask you to describe it, that's going to be difficult, right? So we just have to be diligent at those things. Yeah. So, yeah, this is a good one. The power automate. I didn't even know you guys have access to it. So that's
+
+Lobo, Jeffrey  26:00  
+what about like when you're creating your model driven app? Is that creating forms, etc? Is there aspects that copilot works with that, or is that not the case? Jeff, I guess
+
+Chaitanya, Anudeep  26:15  
+have seen this copilot for power automata specifically, but I don't think so it is integrated for the Model Driven app, form, edition, Kali. Do you have any insights on
+
+Speaker 1  26:34  
+I have seen like in the Model Driven apps, the copilot, when the copilot is enabled, the widget, the copilot widget, will just open in the right side in the form. It will be in the right side of the form, and we can ask questions, if it's needed. We can ask any prompts or yeah, that that's how I've seen the applications, Jeff.
+
+Speaker 2  26:58  
+We need to look at where we where and how that is enabled for us, Vinay,
+
+Speaker 1  27:07  
+in the admin center, we'll have, we have the copilot configuration, so I'm not sure, like if we need to buy the license or something, we can, we can configure it, and that that widget will be always available in the CRM applications
+
+Speaker 2  27:26  
+you're talking about in, I mean, talk largely from a development standpoint, right?
+
+Speaker 1  27:32  
+Yeah, like, I mean in the even for the users, right? If they, if they open the form, the copilot will be visible.
+
+Speaker 2  27:40  
+The widget will Yeah, but we're not talking about the user's perspective at the moment, right? If largely focusing on just a development aspect, yeah?
+
+Lobo, Jeffrey  27:49  
+SDLC, yeah. For development, it's mostly GitHub copilot.
+
+Vinay Lagisetty  27:54  
+So you the so when you do the configuration, how does GitHub copilot help in the configuration of the dynamics
+
+Speaker 1  28:04  
+get to copilot. We don't know much about that. We just need to research more and look
+
+Speaker 2  28:08  
+into it, yeah, because it hasn't been enabled yet, right? So we don't know really.
+
+Vinay Lagisetty  28:14  
+So if you just most of the when you say, when you're doing configurations in in dynamics is a power automate. I'm assuming this is to generate apps and workflows, right? But where are you doing the configurations and dynamics?
+
+Chaitanya, Anudeep  28:31  
+It's more on power Automata is more like the back end, back end for the back end where, where we can run the asynchronous workflows and call API's and all this.
+
+Vinay Lagisetty  28:46  
+What about, what about the dynamics itself? Do you? Can you do the way you do actual configurations on the dynamics?
+
+Speaker 1  28:54  
+Yeah, maybe Chaitanya, you can share the screen and show the form configuration?
+
+Speaker 3  28:59  
+Yeah, I'll show you the form configuration, existing form configurations, yeah, table.
+
+Chaitanya, Anudeep  29:10  
+Oh, there you have start, get started with copilot. You've got it in here too.
+
+Vinay Lagisetty  29:18  
+Yeah, in the top, I see there is a copilot.
+
+Speaker 2  29:25  
+Go back. I think the homepage had Yeah. Home Page, yeah.
+
+Chaitanya, Anudeep  29:30  
+This will help us to create the table specifically, specifically Jeff like in relationships and for example, let me go to debate the sandbox environment. Shit, it's not enabled, okay, yeah, basically, we can say, create a standard table with me Testing. Copilot,
+
+attribute, s of single line, no text, no 10,000 this will help us to create the table. Specifically, it helps us to create the table like for example, but I'm not sure if this will help us to create the forms. Forms. Specifically,
+
+Lobo, Jeffrey  30:48  
+it's enabled here, right? If you see there is, yeah, so generator, AI, but then is there on the right is a how do you generate forms? Is there no ability to use co pilot for that? I'm not exactly sure. Yeah. I think we'll have to play around with it really, yeah, yeah.
+
+Chaitanya, Anudeep  31:05  
+You can see here that testing corporate is created. Let me close and go back. Let me see if the field creating tables, okay.
+
+Unknown Speaker  31:25  
+Frame we have to play around and see, but I don't think so.
+
+Chaitanya, Anudeep  31:33  
+It is there inside the forms itself. Let me go to our existing form, which is there. So,
+
+yeah, I don't see. Okay, yeah.
+
+Vinay Lagisetty  31:56  
+So, so, can you go back to the so now you created it. Click on the testing operator table saying, create an app or a new app and Model Driven app. Yeah, forms area, yeah, you open the testing copilot.
+
+Chaitanya, Anudeep  32:19  
+Yeah. This one, right? Testing copilot. The table is not created. Vinay, I just tried this. I noticed this copilot is used to create tables and relationships. I don't think so. I we have to play around and see if forms can be created from this corporate or not.
+
+Vinay Lagisetty  32:39  
+What it says it's possible. So it says, click on if you would have created the testing copilot, whatever table go to the forms area, tabs on to the left on the current UI, you will see a data first auto create default form.
+
+Unknown Speaker  32:54  
+Okay. Shall I start again?
+
+Vinay Lagisetty  32:57  
+Just do it. Just do A quick test. We'll understand do.
+
+Chaitanya, Anudeep  33:41  
+A let me see if I can give a prompt again. It is,
+
+Vinay Lagisetty  33:51  
+he says, go to the forms area. But is a table created?
+
+Speaker 3  33:55  
+A table is not created. It's throwing some error creating. I'm not sure we have to play around and let me create a relationship. Maybe
+
+Chaitanya, Anudeep  34:09  
+we can create a relationship with the existing some sample table.
+
+Unknown Speaker  34:15  
+Yeah, I'm trying to do that.
+
+Chaitanya, Anudeep  34:21  
+Create a relationship of a relationship of relationship one to n bit is maybe I have to give the logical name.
+
+Then I think, Jeff, this is by default, enabled in our environments. I think looks like, I guess
+
+Speaker 2  34:54  
+copilot is enabled. I think GitHub, copilot is not there yet, because that will be for like with connect with Visual Studio and do plugin development, etc. Interesting like, so table is presented,
+
+Chaitanya, Anudeep  35:13  
+yeah, the what is happening is Jeff, I guess it is not capturing all other tables which are there in this environment. Yeah, let me create a relationship with self relationship,
+
+Vinay Lagisetty  35:34  
+part of a different app. Or did it create a different
+
+Chaitanya, Anudeep  35:40  
+Okay, I'm getting like in order to create a relationship, probably we have to add that particular table into the into this one and like ERD and save it. Let's save that. It failed again. Field, creating table. Please try again.
+
+Not exactly sure we'll have
+
+Vinay Lagisetty  36:15  
+time to do this, debugging and everything. But I this is the challenge the most of the tools might exist. I mean, at least. The good thing is that we do have a tool, right? And we are going to get you guys some time to experiment with the tool. And let's figure out the use case. The whole point is, if we can lay down all the steps and hopefully we can train other teams, that's the intent of the pilot, right? Figuring it out, experimenting and really trying to see what works what doesn't work, and creating some Runbooks and guides which other teams can follow that will increase the productivity. Again, I always caveat it, saying that it may or may not, and that's the reason why, because these tools are immature, and they will evolve the moment you start using it. The next two weeks, you will see a feature, I'm like, I can use it right? It's not going to stick to it. It's it's going to evolve, but the productivity will go up from from eventually that, once you get the comfort of it, so how much of your time you spend on this tool Power Apps to do this, forms and table creation?
+
+Chaitanya, Anudeep  37:40  
+Yeah, most of the time it will be here only Vinay, because we are the dynamics is completely low code, no code. And occasionally we may, we may need to utilize VS code for VS code and vs studio for writing plugins and custom components like like, where dynamics is limiting, where the requirement is different from what is required, then we may need to require, need to do some component framework where we need to design the custom, custom, Custom components and plugins basically used for synchronous operations where it requires immediate or immediate, where power automata has some limitations. We may need to use plugins at that point.
+
+Speaker 1  38:31  
+Maybe you can also show the form configuration like open the form and,
+
+Chaitanya, Anudeep  38:38  
+okay, let me go back. I have seen when, when I was in cope with divers, one of the icon here, so
+
+maybe our existing solutions.
+
+Yeah, yeah. Basically, this is how we do it. Vinay, basically, for example, maybe not. This is this may not be a good example. I
+
+Yeah, for example, it's mostly, it's mostly a drag and drop. But when it comes to when commit, when it comes to writing the logic, we basically, we basically have we create some JS files, or not 50 form, no code, no code. There is a tool called not 52 we will try to create those and attach it here to make sure that the logic is satisfied. Basically on change properties or on Save properties, we'll try to do those things.
+
+Speaker 1  39:58  
+Yeah, and also the business rules form libraries. So this is the complete configuration for the Model Driven app forms. In the left side you see the business rules JavaScript and all that, really,
+
+Chaitanya, Anudeep  40:09  
+yeah, yeah. These are the JavaScript files, and these are the business rules. So basically, these are all what we are seeing is the front end of it, like mostly the front end of it, when it requires any other further processing, we may need to write the dot.net click in I can show you a.net clicking. Yeah, I have one, one of the.net
+
+Vinay Lagisetty  40:36  
+click in here. The one limitation is here. This is a GCC environment, John and Jeff, sorry. I think that's probably the reason copilot might have not even the designer, might have not even been rolled out into this environment. That is, again, not a restriction of the copilot. It's just limitation of the release. So we need to track those things out also, because
+
+Unknown Speaker  41:07  
+it limits, limits the gain really,
+
+Vinay Lagisetty  41:10  
+yeah, it limits what we can really use, and the fact it's, it's not a licensing issue because the copilot is already enabled in the Power Apps, and it's just not showing up here in the forms. Just tells me, we just have to check the limitations with Microsoft or the GCC. Sorry, it was showing something. I didn't mean to cut you off, but at least I wanted to capture that information for node purposes. You also showed JavaScript, right? The JavaScript and I saw the JavaScript was generated by North 52
+
+Chaitanya, Anudeep  41:47  
+Yeah, not 52 is one of the low code. No code tool. Vinay basically took wherever the low code, no code is possible. We are proceeding with the North 52 and when the North 52 has the limitation, then we are going for the JavaScript. So, yeah, this is mostly the front end logic. Here, here, more. Most of the things which we see here the business rules, which are out of the box, dynamics, dynamics supports some business rules, graphical interface to make those front end logical references I can show you here, like for example, for certain condition is met, we have to show an error message when the business rules are not surfacing the use, then we are going for not 52 then if the North 52 is not surfacing our use, then we are going for the JavaScript. And JavaScript we usually use just the No, just the VS code or the notepad for program note. Let's for doing the stuff
+
+Vinay Lagisetty  42:55  
+that can be shifted to Visual Studio, and Visual Studio can quickly write that JavaScript for you.
+
+Speaker 1  43:04  
+So does does the GitHub pilot go? Pilot, will it write the JavaScript and Oh, yeah? Like, okay, okay, and the plugin code?
+
+Vinay Lagisetty  43:15  
+Yeah, GitHub copilot. Pretty phenomenal. Again. The goal is we need to make sure we are embedding your use cases right. Like, for example, what JavaScript to write, why you're writing it, the prompt needs to know what kind of testing has to be done, edge cases and all that stuff. So as long as the prompt is descriptive, you can do it. I've seen we generated prompts using Excel, right? I just needed, like, if I have to generate like, hundreds of rules, I say, hey, I need this rule. This the role, but everyone validates everything in Excel. And then the developers go, you can just do a concat of those different things into a prompt and then use that prompt to generate something, right? We could do, yeah, we just need to be creative. In this case, whenever you think there is a lot of repetitive work you're doing that can be easily automated, right? And you don't have to. I mean, obviously you're still doing work, but it's you're still validating, but you're writing less code, and you're just validating that code that gives you more time for documentation and other things.
+
+Speaker 1  44:30  
+Yeah. So Vinay, you now if you have a story in JIRA, right? So in that JIRA will have a description, saying, if there is a description like create a JavaScript or for the business rule, if there is a business rule or a validation, is it, is there a way to connect that story to the GitHub copilot and develop the JavaScript automatically?
+
+Vinay Lagisetty  44:56  
+Yeah, I just don't know the limitations of what we can do. And if the GitHub copilot can connect with JIRA, can it? Yes, it can. But again, in GCC enrollment, these are the things we need to test right. I could like there is something called, even before you are taking the story, we could make sure if the story is up to the quality, or what is the story method you use. Jeff, here, is there a particular method the story has to be there's a Darwin method and other things. Is there a specific method we are using,
+
+Unknown Speaker  45:41  
+not really, I think,
+
+Vinay Lagisetty  45:45  
+but that's right, yeah,
+
+Speaker 1  45:48  
+we'll have the acceptance criteria description and the scenarios the regular JIRA user stories.
+
+Vinay Lagisetty  45:53  
+Okay, so let's say you, you, when you take the story, you can, you're, you're making sure the acceptance criteria and everything is done right. You can validate that based on that. You could generate guide saying that, I need JavaScript for this. I need route 52 so you could do all these things in, in in an automation. You could write a script which can connect with Copilot to do it. We don't know the limitations of the environment. We don't know what's possible here. There are a lot of things which technically we can Is it doable in our environment? Is the question?
+
+Speaker 3  46:40  
+This is a tip. This is the user story format we found. Okay, this is one of the user story
+
+Vinay Lagisetty  46:50  
+so it has the business rule. What else is this? Does this documents? Oh, no, it's just a validations.
+
+Unknown Speaker  47:02  
+Validations, yeah.
+
+Vinay Lagisetty  47:05  
+So if we can say, Hey, these are the validations, it has to be in part of a JavaScript. Yes, it can do it. So you also, 52 is generating the JavaScript. Automatically, right? Or the validation modes,
+
+Chaitanya, Anudeep  47:29  
+basically not. 52 is a low code, no code. It more looks like power FX and power FX similar to that, but it's not exactly power FX, but it has its own own kind of Yeah. This is how the north with to looks like, yeah.
+
+Vinay Lagisetty  47:57  
+You're taking, what I'm saying is you're taking one of the you're taking a story and going to not 52 right? Somewhere, yes. So it's not like, so who is doing the translation of taking a story and saying, Hey, this needs to go into not 52
+
+Chaitanya, Anudeep  48:24  
+mostly it will go a preceding order, like if it is not possible, there are for writing the business rules, business rules, or business validations. First we will go for the business rules, which I have just shown. Let me see. So there is like a
+
+Lobo, Jeffrey  48:41  
+decision tree. We have, Vinay right that how we go about implementing business rules. So I guess, from a story perspective, there are certain business rules that are defined. So we will start first try and implement them using the capability within Dynamics. The business rule default in dynamics. If that's not possible, then the goal is to use not 52 if not 52 is not possible, then you go to JavaScript. If JavaScript is not possible, then you go to develop a plugin or looking at pro code, really.
+
+Speaker 1  49:14  
+Yeah. Development guidelines. We have a development guidelines, and we follow that order.
+
+Vinay Lagisetty  49:20  
+Vinay, okay, development guidelines is configuration. Then not 52
+
+Speaker 2  49:27  
+which is an external business rule engine, yeah,
+
+Vinay Lagisetty  49:31  
+and then you're looking at JavaScript,
+
+Speaker 1  49:36  
+yeah, JavaScript for client side validations and for server side, it's mostly plugins or Azure Functions, or not 50 to also does server side. So, yeah, okay, but mostly out of the box functionalities. We make sure in the CRM we give first priority to like for out of the box functionality, only if it's not possible using out of the box configurations we do custom coding. Yeah, that I understood.
+
+Vinay Lagisetty  50:09  
+So, yeah, okay,
+
+Speaker 1  50:20  
+Vinay, you also mentioned about Atlassian tool, right?
+
+Speaker 2  50:26  
+Yeah, it's already available in in JIRA at the moment.
+
+Lobo, Jeffrey  50:30  
+Okay, so cat, how do we use that?
+
+Vinay Lagisetty  50:35  
+It's just a copilot like button, like you can say, can I generate a new story? It's going to, obviously, you need to give you a Brd diagram for it to generate a new story. People use it for that, then they use it to consolidate the story into a single story, because it generates way too many stories. Sometimes, like in the past, what we have seen is it generates such a small stories you can't even put a number for it, right? So you consolidate the stories to the appropriate and and make sure your story requirements are met. Again, the tool itself is not that mature at last in Lobo, but it will do a pretty decent job if you know what you're doing, like if you someone has a business context. Can you look into the this document and things like it, and in the top you see, ask row,
+
+Speaker 1  51:31  
+ask row, okay, right. Okay, okay, so we might need to, like, understand, how do we connect this story to GitHub? Copilot, right?
+
+Vinay Lagisetty  51:46  
+Yes, if you have a prompt like, yes, you could do that like, but you could literally copy paste the story to GitHub. Copilot, oh, okay, okay. So, right now, you're always connected to conference and everything. So you can pull up your but you need to also tell Hey, what is my context? Right? You need to lay out the context. So you need to first get the you
+
+uh, the Brd, whatever the Brd documents are, first ask the robot to say, Hey, this is the Brd I want you to use within conference. And then write your question there,
+
+Speaker 1  52:39  
+yeah, no, we don't have a separate Brd documents. All our requirements are in the in these stories,
+
+Vinay Lagisetty  52:48  
+yeah, but general context of the application will be there, right? Yeah, you still need that kind of a linkage, but the fact it's connected to a conference should automatically tell that it's there.
+
+Speaker 1  53:03  
+If you put the diagram, will it create a stories?
+
+Vinay Lagisetty  53:07  
+No. The issue with that one is, you guys are using JPEG for a diagram, Visio. Visio, we are using video right, Vizio, but when you're putting it into Atlassian, are you putting it as with you or mermaid, or any, I think from what I heard there, they told me JPEG
+
+Speaker 1  53:34  
+like if you have a flow diagram or an architecture diagram in Visio, and If you put that diagram here, will it create the stories at least, at least the high level stories or epics?
+
+Vinay Lagisetty  53:48  
+I'm not sure if rovo has can read the but there is a possibility you you there are other ways to do it. So in in this regard, what I would do is I would convert the physio diagram to a mermaid and then put a mermaid relationship in here. Then that would probably work. But we, again, we don't know the full capability. Can you go back to your copilot once Sure?
+
+Speaker 3  54:28  
+In a new window you want the copilot, which is there for
+
+Vinay Lagisetty  54:34  
+Microsoft copilot? Okay, there's so many copilots guys. So we are, we're still trying to understand which copilot, yeah,
+
+Unknown Speaker  54:47  
+yeah, lot
+
+Vinay Lagisetty  54:48  
+of movement. So are you in this government context right now? Can you sign me?
+
+Unknown Speaker  55:02  
+Yeah, I'm assigned in what? Okay.
+
+Vinay Lagisetty  55:15  
+You do have access to copilot,
+
+so it's by default. I think the copilot is enabled, yes. So now take your image, whatever image you're talking about, and just copy, paste it here.
+
+Chaitanya, Anudeep  55:36  
+Okay, can you give me one of the suggestion, Kali, wherever image one second, I can see a lot of my personal drive items, and from the shared point there, automatically, I think, yeah, so
+
+I'll just give one sample diagram for you and post it.
+
+Vinay Lagisetty  55:59  
+So this is another tool completely, technically, right?
+
+Unknown Speaker  56:01  
+So she has sent you, Chaitanya.
+
+Vinay Lagisetty  56:13  
+This doesn't look like Visio diagram. Is it Visio?
+
+Speaker 1  56:20  
+This one, yeah, okay, I give some colors and all that. It looks like mermaid, right?
+
+Vinay Lagisetty  56:30  
+Yeah, it looks like mermaid.
+
+Speaker 1  56:31  
+So I was like, it is my it looks like mermaid, but I recreated a museum, okay, so that it will be easy for me to edit and all.
+
+Vinay Lagisetty  56:42  
+Okay. So no, you don't need to define just ask. Create the stories,
+
+Chaitanya, Anudeep  56:48  
+stories, user stories.
+
+Vinay Lagisetty  56:50  
+Create a user stories here.
+
+Unknown Speaker  56:52  
+So what was your diagram?
+
+Unknown Speaker  56:54  
+Kali, it is the FAC. Case, flow. A flow. Okay. Flow. Case, floor. Okay,
+
+Chaitanya, Anudeep  57:05  
+that is interesting to see. I think I would think it would come up with shells. I don't think it will
+
+Unknown Speaker  57:12  
+come up with create multiple stories, yeah, create multiple user stories
+
+Speaker 3  57:19  
+based on the diagram for Dynamics, 360 application,
+
+Vinay Lagisetty  57:23  
+yeah, then we can upgrade this prompt. You obviously will, will upgrade this prompt. But for now, it should give you, but may I will do a good job, because it needs probably give you
+
+Speaker 2  57:34  
+shells, right shells of the stories, because this is so high level. Yeah.
+
+Speaker 1  57:47  
+Shall I go for a quick answer? Okay, can you also do this for Atlantic and Lobo Chaitanya, put the diagram there and just
+
+Vinay Lagisetty  58:02  
+unless they added the capability of Atlas and row, we don't know,
+
+Speaker 2  58:06  
+I think, yeah, oh, you mean taking a diagram and converting.
+
+Vinay Lagisetty  58:10  
+I mean, we'll see every day they keep adding functional so it's created quite a few ads.
+
+Unknown Speaker  58:17  
+Yeah, this is really good.
+
+Vinay Lagisetty  58:19  
+Jeff, okay, my requirement is, don't start using it. Project, please.
+
+Speaker 3  58:30  
+Actually did not take that image Kali. It is saying identifying new versus the old custom.
+
+Chaitanya, Anudeep  58:39  
+It did its own stuff, but it said that the image was low resolutions. It could not use it. No, no, I think,
+
+Vinay Lagisetty  58:44  
+guys, it's easy. If Kali, you're already working on mermaid, right, it will understand mermaid. The problem with images is it needs an external decoding. Okay, okay, so, but the point is, we can describe what stories you want, like how many you can describe a lot more structured approach. It is going to create stories. That's one of the easiest use cases. The issue is the diagrams, right? That it's, it's, if it's a complicated diagram. This is not a complicated diagram. This is very just a flow diagram. So, I mean, I can't hardly read it, so obviously, it's not able to do much. But what, what I'm trying to tell is JPEGs don't do a great job. It needs a large compression. It's probably compressing it, it's not able to get it. So if we do, if you do, you have a mermaid, you could just use that, and that would give you a better
+
+Speaker 1  59:50  
+Okay, input. Can you just try with this diagram? Chaitanya, the module diagram, I
+
+Unknown Speaker  1:00:04  
+downloading as PMG,
+
+Speaker 2  1:00:07  
+that should be okay. It's okay. I gotta jump on to another call, but I think this is good progress, really. Thank you. Thank you. Yep. Thank you.
+
+Speaker 1  1:00:19  
+Thank you. Give. So, if so you're saying Vinay the robo, robo will not work for the user stories, right? If you
+
+Vinay Lagisetty  1:00:32  
+give no actually, rover is an amazing tool for user stories. Yeah, the problem for user stories we should use row or not. Microsoft, 361, the issue is the diagrams. Okay, if you along with the diagram, if you put a mermaid document, you will have a better luck with that. If you're already using mermaid, doesn't have to be moment any relationship based visual like the because you have to think llms are text, they only understand text and relationships. They understand descriptive relationships diagrams. There is a pre processing diagrams have to be converted into relationships. So it has to go back to some form of a mermaid in a token format, and then interpret that one. If your front end engine in an LLM is bad, it it's the same issue.
+
+Chaitanya, Anudeep  1:01:38  
+Okay? So it gives good number of epics, yeah, as a customer service representative, as a case worker, intake specialist, as a case manager, maybe we have to be specific like, yeah, you need to
+
+Vinay Lagisetty  1:01:59  
+say in the user story, you need to have this your prompt has to be there. You need to discuss whatever your requirements of a final user story acceptance criteria has to be here, right? Yeah, yeah. So go back to Robo and just do a quick test on rovo for me.
+
+Unknown Speaker  1:02:17  
+Yeah, the same thing I can write
+
+Vinay Lagisetty  1:02:19  
+on Robo with it.
+
+Speaker 3  1:02:20  
+Yeah, it gave me a good like, what should I do next? It gave me the priority, yeah,
+
+Chaitanya, Anudeep  1:02:30  
+yeah, this diagram and see
+
+Vinay Lagisetty  1:02:42  
+I see is
+
+Unknown Speaker  1:02:51  
+missing. I am not able to yeah,
+
+Chaitanya, Anudeep  1:03:06  
+oh yeah, we got it. It's working.
+
+Vinay Lagisetty  1:03:12  
+Vinay, yeah, it will. The role will be much better for this use case. Okay, okay, okay, my caveat is, don't start using it right now. Wait for one more sprint, then you guys can start. We'll start with all this stuff, because I don't want your baselines to shift anything in in by before May 4, because that's why we're doing a baseline test, sure when you guys are in PI planning again, so this is good. I didn't expect to go this far. I was just trying to collect the basic information. But looks like you guys have Lobo, which will accelerate your work. Kali, I think Chaitanya for you, the Microsoft, Hosh, posh of things, but should accelerate your work. I think you guys are probably one of the easy test cases we I'm sure testers, it's going to help tremendously, right with if we have GitHub copilot. So looks like we do have some access to Dynamics copilot, some access to Lobo, some access to we just have to figure out the GitHub copilot.
+
+Speaker 1  1:04:27  
+Okay, yeah. So what are the next steps? How do you want us to start with this project?
+
+Vinay Lagisetty  1:04:34  
+Really? Okay, so the next steps. Let me share my screen to wrap up again. This was just an introduction call for me to introduce myself.
+
+So let's go to this slide. So again, as I said, we are doing a geometric baselining right now, and we need to get the governance we need to get an approval that we can't we can start using these tools. So that's what I'm working on right now, and that's one of the reason I'm saying don't use too much, because I still not approved. Right? This is the request we put to the CIO yesterday, saying that we need these two tools. I mean, this is pending confirmation, meaning that, can we use it? Right? Because there is the in the back end, I need to set up something called a Microsoft Preview to see what you're when you're using this tool. What is the token usage going to be like? Is there a information which we are sending into Microsoft, which we are not supposed to the P to information that that. And then we'll sit down, probably sometime around the design place where we'll say, Hey, this is what the current flow looks like. What we just did, right? We just do it with all the tools, and say, Hey, we can generate stories. There's a one use case we can do, and we just have to document that stuff. And then in the I think, after May 12, you'll be given for freedom to use as much as you want, and do the testings at that point. And at the same time, every week we are trying to see if you're coming up with new ideas, new problems, whatever it is, trying to see where the copilots can be used and get that so overall, yeah, I think pretty much That's That's okay, that you can skip that. So, yeah, I think once we get the confirmation, we'll just do some working sessions to document this stuff. Okay, yeah, no, actually, it comes right now. There will be before you, when you start this, we want to send out a survey to just fill up and see what we feel, where we are, and things like that. And from there, the there will be set of trainings we'll be collecting basically around copilot Microsoft. You guys are doing some, some of the training on your own. But again, the training is not just for you, right? It's across the 12 teams, or like even future viewers, who else is going to be onboarding. So the training to make sure everybody has a consistent knowledge in your role, kind of a thing. So we need to design some training. Ai, I wish I had this training. I wish I thought again. We want to make sure that's available to you and communicate with our CIO as well. Awesome. Okay, cool. Thank you so much.
+
+Speaker 1  1:07:47  
+Thank you. Thank you so much, Vinay for this amazing demo and explanation
+
+Vinay Lagisetty  1:07:52  
+we will get into more hands on. And I mean, it's not a big target, 15% improvement using AI tools, I think can be done, but, but I want to be careful not to over promise anything to the C suite. Yep, cool. Thank you guys. Thank you bye. Thank you bye.
+

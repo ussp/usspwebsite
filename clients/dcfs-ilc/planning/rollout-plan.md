@@ -1,11 +1,28 @@
 # DCFS Illinois Connect — AI-Augmented Agile Delivery Plan
 
-> **Version:** V04142026 (DRAFT v4)
-> **Status:** Updated post-Jim meeting April 13, 2026
+> **Version:** V04272026 (DRAFT v6.2)
+> **Status:** Updated post-Apr 23–24 discovery sessions — tester role manual-UI ceiling surfaced; **Zephyr Scale Agent for Atlassian Rovo** identified as high-value new tool (pending DoIT §5f notice); Dynamics developer workflow precedence captured; Apr 24 governance review feedback incorporated
 > **Framework Guide:** See [guide/README.md](guide/README.md) for the complete 13-chapter framework reference
+> **Scope details:** See [deliverables/scope-running-book-v04212026.md](deliverables/scope-running-book-v04212026.md) (v0.2) — living source of truth for in-scope, out-of-scope, Phase 2/3 candidates, tool asks, and what can be measured in Pilot 1
+> **Role playbooks (v0 drafts) — 5 roles:** [BA](deliverables/playbooks/playbook-ba-v04212026.md) · [Tester](deliverables/playbooks/playbook-tester-v04212026.md) · [Testing Services Lead](deliverables/playbooks/playbook-testing-services-lead-v04222026.md) · [Developer](deliverables/playbooks/playbook-developer-v04212026.md) · [Data](deliverables/playbooks/playbook-data-v04212026.md) — refined into v1.0 deliverables at end of pilot PI
 > **Owner:** Vinay Lagisetty (AI Transformation Leader, Krasan) + Romi (Engagement Director, Krasan)
 > **Audience:** Dave (Interim AI Lead), Jim Daugherty (CIO, DCFS/DoIT), Dinkar (Krasan Executive Sponsor)
 > **Methodology:** GQM (Basili 1994), DORA/Accelerate (Forsgren 2018), SPACE (Microsoft Research 2021), QUS (Lucassen 2016), Six Sigma DMAIC, NIST AI RMF 1.0
+
+## Change log
+- **v6.2 (Apr 27):** Three discovery meetings processed (Apr 23 Dynamics developer workflow, Apr 24 testing workflow, Apr 24 governance charter review). Key updates:
+  - Per-role candidate metric selection moved from baseline phase → **design phase as a formal deliverable** (per Apr 24 governance review).
+  - **Tester role flagged at risk of missing uniform 15% target** — workflow is ~80% manual UI execution where AI cannot drive under HITL governance. Consider role-specific targets (see §9).
+  - **NEW TOOL IDENTIFIED: Zephyr Scale Agent for Atlassian Rovo** — bridges Rovo into Zephyr Scale so generated test cases save directly into Zephyr folders linked to JIRA stories. Highest-value tester acceleration. **NOT in current authorized 4 — requires DoIT §5f 30-day notice before pilot use.**
+  - **GitHub Copilot enablement gap** — licensed by DoIT but not yet provisioned for this team's GCC environment. Hard blocker for highest-value developer use cases.
+  - **Visio→Mermaid conversion** added as cross-cutting prerequisite (Visio-as-JPEG diagrams are not AI-parseable; surfaced Apr 16 architect side, confirmed Apr 23 dev side).
+  - **DCFS Work Product template** adoption is now a cross-deliverable rule for all client-shareable artifacts (per Apr 24 governance review).
+  - **Prompt-logging owner gap inside DCFS** identified as governance gap (PII detection at scale) — separate Vinay+Jeff call needed; deferred to post-pilot but must be a named pilot output.
+  - Pilot governance charter v0.3 DRAFT delivered in DCFS template format on Apr 24; v2 charter milestone Apr 27.
+- **v6.1 (Apr 22):** Reconciled 5-role vs 4-role inconsistency. **Testing Services Lead** (formerly "Test Lead") added as 5th Phase 1 role — portfolio-level owner of the testing bottleneck, highest leverage on the % Work Completed headline. Playbook v0 drafted. Tool-ask gap list added to scope book §2.5: Power BI Copilot, Teams/SharePoint/Loop Copilot, ADO Copilot, verification of Eggplant AI + Zephyr AI features.
+- **v6 (Apr 21):** Apr 21 Jira/process walkthrough findings captured in new [scope-running-book-v04212026.md](deliverables/scope-running-book-v04212026.md). Key new framing: testing is the bottleneck; story quality is the upstream lever; dual-pipeline measurement (refinement + delivery); V3 workflow transition is a measurement confound risk. Four role playbooks (v0) drafted for pilot kickoff: BA, Tester, Developer, Data.
+- **v5 (Apr 20):** Pilot team confirmed = Intact (5-6 people). Governance simplified — no external approval gates. Metrics defined post-baseline. Tuesday 8 AM CT cadence. Approved toolset corrected (Claude NOT approved; add M365 Copilot + D365 Copilot). 30-day notice reframed as task. PI 20 Planning dates confirmed May 5+7; Sprint 2.1 starts May 14.
+- **v4 (Apr 14):** Post-Jim meeting.
 
 ---
 
@@ -17,7 +34,7 @@ Krasan proposes a structured AI augmentation pilot across select ILC product tea
 
 **Approach:** Govern → Baseline → Design → Train → Pilot → Measure → Playbook → Scale
 
-**Philosophy:** AI amplifies the existing team — same people, better tools, more output. No workforce reduction. AI-assisted code generation with human-in-the-loop review (stair-stepped introduction).
+**Philosophy:** AI amplifies the existing team — same people, better tools, more output. No workforce reduction. AI-assisted code generation is in scope from day one, with mandatory human-in-the-loop review (developer accepts/edits every suggestion; peer review + PR approval before commit).
 
 **Governance:** DCFS-led governance team (NIST AI RMF + DoIT AI Policy aligned). Krasan executes and reports. See [governance proposal](governance-proposal-v04142026.md).
 
@@ -34,7 +51,7 @@ Krasan proposes a structured AI augmentation pilot across select ILC product tea
 - **Tech stack:** Dynamics 365, Visual Studio, JIRA, Confluence, GitHub
 
 ### The Ask
-CIO Jim Daugherty has asked Krasan to develop and execute an AI rollout plan to improve productivity across the ILC product teams. The target is **10-15% improvement within 13 weeks**, measured by tangible outputs. Jim confirmed (April 13) that AI code generation should be included via a stair-stepped approach, and designated Dave as interim AI lead during his absence.
+CIO Jim Daugherty has asked Krasan to develop and execute an AI rollout plan to improve productivity across the ILC product teams. The target is **10-15% improvement within 13 weeks**, measured by tangible outputs. AI-assisted code generation is in scope under a mandatory human-in-the-loop model (per DoIT AI Policy section 4d and 5d). Dave is designated interim AI lead during Jim's absence.
 
 ### Current State
 - Teams are delivering satisfactorily — client is happy with current commitments
@@ -73,8 +90,7 @@ All AI use by State agencies must comply with the DoIT "Policy on the Acceptable
 
 | Constraint | Source | Impact |
 |-----------|--------|--------|
-| No autonomous code generation | Jim (CIO) + Romi | Copilot for suggestions only; developers implement all code |
-| No AI-generated production code commits | Rollout Plan Doc | Same as above — AI assists, human authors |
+| Human-in-the-loop on all AI output | DoIT Policy 4d + 5d | Developer reviews/edits/accepts every AI suggestion; peer review + PR approval before commit. No autonomous commits. |
 | No sensitive DCFS data in prompts | DoIT Policy 4f | Training required; child welfare data is highly sensitive |
 | Only state-approved AI tools | Jim | Start with Copilot + Rovo; any additional tools require state approval process |
 | CMS precedent — tools can be pulled | Dinkar | October 2025: Federal pulled AI tools from CMS/Medicare mid-sprint. We must stay well within boundaries |
@@ -111,7 +127,8 @@ All AI use by State agencies must comply with the DoIT "Policy on the Acceptable
 | 15 | Distribute baseline SPACE/DevEx survey to pilot team candidates | Vinay | Apr 25 |
 | 16 | Select pilot teams based on readiness + baseline data | Romi + John + Chase | Apr 25 |
 | 17 | Map current → AI-augmented state for SDLC processes per role | Vinay | Apr 28 |
-| 18 | Finalize metrics set based on Jim's priorities | Vinay | Apr 28 |
+| 18 | Per-role candidate metric set selected (formal **design-phase** deliverable per Apr 24 governance review — was previously a baseline-phase task) | Vinay + role leads | Apr 28 |
+| 18a | Visio→Mermaid conversion for IllinoisConnect architecture diagrams (cross-cutting AI ingestion prerequisite — surfaced Apr 16 architect side, confirmed Apr 23 dev side) | Vinay + Shyam/Kashif | Apr 30 |
 | 19 | Produce baseline metrics report | Vinay | Apr 30 |
 
 ### Phase 2: Train (Late April / Early May)
@@ -183,10 +200,24 @@ All AI use by State agencies must comply with the DoIT "Policy on the Acceptable
 
 | What | Why |
 |------|-----|
-| Autonomous code generation | Jim: firm boundary; DoIT policy: human in the loop |
-| AI-generated production code commits | Rollout plan: AI assists only, human authors |
+| Autonomous AI commits (no human review) | DoIT policy 4d: human-in-the-loop on all AI decisions; 5d: human reviews AI output before use |
 | Pasting DCFS case data / PII into AI prompts | DoIT policy 4b, 4f: protected data restrictions |
 | Using non-state-approved AI tools | Jim: only Copilot + Rovo without further approval |
+
+> **Apr 27 update — workflow discovery findings (Apr 23 + Apr 24 walkthroughs)**
+>
+> **Developer (Apr 23, with Jeff/Kali/Chaitanya — illinois.gov):** Strict implementation precedence at DCFS — OOB Dynamics rules → North52 (low-code rule engine) → JavaScript (VS Code/Notepad++) → .NET plugins / PCF / Azure Functions (Visual Studio). Highest-value Copilot fits: plugin/PCF/Azure Function authoring in VS, JavaScript form-event handlers, Power Automate flow scaffolding (Copilot pane already enabled). **Power Apps form designer Copilot NOT enabled in GCC tenant** (release-cadence gap). JIRA Rovo story decomposition proven live in session.
+>
+> **Tester (Apr 24, with Jeff/Remya/Kamila — illinois.gov):** Workflow is ~80% manual UI execution and ~20% authoring. AI gains land primarily in the 20% authoring slice (test case generation from acceptance criteria, sprint/PI test reports — currently no reports exist, so any output is additive). **Manual UI execution unlikely to move under HITL governance.**
+>
+> **🆕 NEW TOOL: Zephyr Scale Agent for Atlassian Rovo**
+> Bridges Rovo into Zephyr Scale so generated test cases save directly into Zephyr folders linked to a JIRA story (current Rovo limitation: can only post a JIRA comment). Suggested by Vinay during a live demo where a real Intact story was pasted into Rovo and produced 4 role-based test cases plus a negative case — but no path to land them in Zephyr without manual paste.
+> - **Status:** NOT in current authorized 4 (GitHub Copilot, Atlassian Rovo, M365 Copilot, D365 Copilot).
+> - **Action required:** DoIT §5f 30-day notice before pilot use.
+> - **Owners:** Jeff Lobo + Carl Lobo (JIRA admin) scoping enablement; Vinay drafts §5f notice.
+> - **Pilot fallback if not enabled in time:** generate via Rovo, manual copy-paste into Zephyr folders.
+>
+> **🚧 BLOCKER: GitHub Copilot enablement** — licensed by DoIT but not yet provisioned for this team's GCC environment. Blocks the highest-value developer use cases (plugin/PCF/Azure Function authoring). Vinay + Romi to escalate.
 
 ---
 
@@ -208,6 +239,25 @@ Our measurement approach is grounded in published, peer-reviewed research:
 ### 6.2 Proposed Metrics
 
 **Note:** Final metrics to be selected after executive discovery interview with Jim. Recommended starter set below — pick 8-12 max to avoid measurement burden.
+
+> **Apr 27 update — per-role metric selection moved to design phase**
+>
+> Per the Apr 24 governance charter review, **per-role candidate metric selection is now a formal design-phase deliverable**, not a baseline-phase task. Each role lead drives candidate metric refinement against the role's actual workflow (informed by Apr 23/24 discovery walkthroughs). The per-role candidate metric set lives in `deliverables/metrics/pilot-metrics-by-role-v04232026.md` — to be re-versioned post-discovery.
+>
+> **New tester-side candidate baselines (from Apr 24 walkthrough):**
+> - test-case-authoring-time
+> - test-cases-per-story
+> - negative-case-coverage %
+> - test-report-drafting-time *(NEW metric — no sprint/PI reports exist today, so any AI-drafted output is purely additive)*
+>
+> **Caveat:** test-execution-time metric will be hard to move because ~80% of tester work is manual UI execution where AI cannot drive (HITL governance forbids autonomous).
+>
+> **New developer-side candidate baselines (from Apr 23 walkthrough):**
+> - time per JS validator
+> - time per North52 expression
+> - time per .NET plugin
+> - story-to-deploy cycle time
+> - % stories needing rework due to incomplete acceptance criteria
 
 #### Velocity & Delivery (from JIRA — automated)
 
@@ -300,6 +350,17 @@ All metrics tracked in the **AI Transformation Monitor** at `tools.ussp.co`:
 | Sensitive child welfare data in AI prompts | Low | Critical | Strict training; "No PII" rule in every playbook; spot checks per sprint |
 | Pilot teams not representative | Low | Low | Selection criteria; 2-3 diverse teams |
 | Team resistance to AI tools | Medium | Medium | Voluntary pilot with strong participants; training shows value before asking for adoption |
+| **R-NEW-6** Zephyr Scale Agent for Rovo §5f notice timeline (Apr 27) | Medium | Medium | Pilot fallback: Rovo-only with manual copy-paste from JIRA comment to Zephyr folders. File §5f notice immediately to clear path for full Agent before Pilot Sprint 2 |
+| **R-NEW-7** GitHub Copilot enablement gap — licensed by DoIT, not yet provisioned for team GCC environment (Apr 27) | High | High | Vinay + Romi escalate to Jim/David; if unresolved before pilot start, developer use cases shift to Rovo-only and JS-Copilot-via-VS-Code path |
+| **R-NEW-8** Tester role unable to hit uniform 15% productivity target due to ~80% manual UI execution (Apr 27) | High | Medium | Adopt **role-specific targets** (see §9 update); tester gains land in 20% authoring slice + new sprint/PI report drafting (gap today = pure upside) |
+| **R-NEW-9** Power Apps form-designer Copilot missing in GCC tenant (Apr 27) | Medium | Low | Release-cadence gap — confirm with Microsoft / DoIT; affects only ~10% of dev workflow; not a pilot-blocker |
+| **R-NEW-10** Baseline pollution from pre-pilot AI tool exploration (Apr 27) | Medium | Medium | Tighten baseline window; document any pre-pilot tool usage by team members; consider exclusion criteria when computing deltas |
+| **R-NEW-11** Story quality dependency on AI gains — bad input → worse output (Apr 27) | High | Medium | BA training first; story hygiene pre-check in dev playbook; AI amplifies skill |
+| **R-NEW-12** Visio-as-JPEG architecture diagrams not AI-parseable (Apr 27) | High | Low | Visio→Mermaid conversion as cross-cutting prerequisite (task 18a) |
+| **R-NEW-13** Prompt-logging owner gap inside DCFS (PII detection at scale) (Apr 27) | High | High | Surfaced Apr 24 — separate Vinay+Jeff call needed; deferred to post-pilot but must be a named pilot output |
+| **R-NEW-14** Tester peer-review checklist absent (Apr 27) | Medium | Medium | Create checklist (Kamila + Vinay) — prerequisite for AI peer-review pre-screening use case |
+| **R-NEW-15** Sprint/PI test-report baseline gap — no reports exist today (Apr 27) | Low | Low | Reframe as opportunity: AI-drafted reports are pure additive output; build a template before pilot starts |
+| **R-NEW-16** Wrong-Vinay email-collision risk (operational — multiple Vinays in DCFS distribution lists) (Apr 27) | Low | Low | Always use full email with `vinay.lagisetty@krasanconsulting.com`; Alec to verify distribution lists |
 
 ---
 
@@ -315,7 +376,21 @@ All metrics tracked in the **AI Transformation Monitor** at `tools.ussp.co`:
 | Team satisfaction (SPACE survey) | No decrease (ideally increase) | Survey scores |
 | Playbooks produced | 1 per role | BA-Tech, Config, Developer, Tester, Scrum Master |
 | DoIT policy compliance | 100% | Documented compliance on all 12 sections |
-| Code generation adoption | Stair-stepped through 5 levels | Governance team approves each step |
+| Human-in-the-loop adherence | 100% of AI-assisted commits pass through developer review + peer PR approval | Audit via PR history + per-sprint spot checks |
+
+> **Apr 27 update — role-specific targets consideration**
+>
+> The uniform 10–15% target may not fit all 5 roles equally. Per the Apr 24 testing walkthrough, ~80% of tester work is manual UI execution where AI cannot help under HITL governance — a uniform 15% applied only to the 20% authoring slice nets ~3% portfolio impact for that role. Recommend differentiated targets in the design phase, defended by per-role workflow analysis:
+>
+> | Role | Plausible target | Rationale |
+> |------|------------------|-----------|
+> | BA / BA-Tech | 15–20% | Story authoring, AC generation, refinement prep — high AI fit |
+> | Developer (config-heavy) | 10–15% | JS, Power Automate flows, plugin authoring — strong Copilot fit (gated on Copilot enablement) |
+> | Tester | 5–10% (authoring slice) | 80% manual UI execution unmovable; gains in test-case-authoring + new sprint/PI report drafting |
+> | Testing Services Lead | 10–15% | Portfolio-level reporting, cross-team pattern detection |
+> | Solution Architect | 10–15% | Documentation generation, pattern explanation — M365 Copilot fit |
+>
+> **Headline:** retain a single 10–15% portfolio target for executive comms; refine internal per-role targets in the design phase.
 
 See [measurement-methodology-v04142026.md](measurement-methodology-v04142026.md) for full methodology.
 
@@ -353,23 +428,37 @@ See [measurement-methodology-v04142026.md](measurement-methodology-v04142026.md)
 | 5 | AI Usage Playbook — DoIT-compliant guardrails | Before PI Planning | Vinay + Robert |
 | 6 | Weekly status updates | During pilot | Vinay + Romi |
 | 7 | Pilot results report (before/after comparison) | End of pilot PI | Vinay |
-| 8 | Role-based playbooks (BA, Tester, Developer, Data) | End of pilot PI | Vinay |
+| 8 | Role-based playbooks v1.0 (BA, Tester, Developer, Data) — see [v0 drafts](deliverables/playbooks/) | End of pilot PI | Vinay |
 | 9 | Executive recommendation for ART-wide rollout | End of pilot PI | Vinay + Romi |
+| 10 | **DCFS Work Product template** adopted for all client-shareable deliverables (cross-deliverable rule, per Apr 24 governance review) | Ongoing | Vinay |
+| 11 | DoIT §5f 30-day notice for Zephyr Scale Agent for Atlassian Rovo (per Apr 27 finding) | Apr 30 (file ASAP) | Vinay + Robert |
+| 12 | Pilot governance charter v0.4 — metrics text trimmed, references separate metrics doc (per Jeff's Apr 24 question) | Apr 30 | Vinay |
 
 ---
 
 ## 12. Working Team
 
+### Client-side (DCFS / Illinois DoIT)
 | Person | Role | Contribution |
 |--------|------|-------------|
-| **Vinay** (Krasan) | AI Transformation Leader | Plan, training, measurement, tool assessment, playbooks |
-| **Romi** (Krasan) | Delivery Lead | Jim relationship, access, compliance, Springfield trip |
-| **Robert** (Krasan) | Workforce Manager | DoIT policy bridge, documentation, coordination |
-| **Matt** (Krasan) | RTE | JIRA/Confluence access, Rovo capabilities, tool config |
-| **John** (Krasan) | Agile Delivery Mgr | Pilot candidate identification, testing focus, Copilot experience |
-| **Chase** (Krasan) | Data Architect | Data team representation, data use cases |
-| **Darren** (State) | Chief Solution Architect | Architecture context, dev process walkthrough |
-| **Dinkar** (Krasan) | Executive Sponsor | Strategic direction, bench resource commitment |
+| **Jim Daugherty** | CIO, DCFS | Initiative sponsor; 10–15% productivity target; approved AI code generation under HITL |
+| **David Nika** | Deputy CIO — Data Management, Illinois DoIT | **Interim AI lead during Jim's absence**; point of contact for governance, tool authorization, 30-day DoIT notice (David.Nika@illinois.gov) |
+| **Darren** | Chief Solution Architect | Architecture context, dev process walkthrough |
+
+### Krasan
+| Person | Role | Contribution |
+|--------|------|-------------|
+| **Vinay Lagisetty** | AI Transformation Leader | Plan, training, measurement, tool assessment, playbooks |
+| **Emil "Romi" Kovacs** | Engagement Director | Client relationship (Jim, Dave), access, compliance, account head |
+| **Alec Granderson** | Senior PM | Project schedule (Smart Sheets source of truth), milestones, dependencies |
+| **Robert Rodriguez** | Workforce Manager | DoIT policy bridge, documentation, onboarding, coordination |
+| **Matt Tomeo** | RTE | JIRA/Confluence access, Rovo capabilities, tool config, baseline data |
+| **John Luna** | Agile Delivery Mgr | Pilot candidate identification, testing focus, Copilot experience |
+| **Jeffrey Lobo** | Enterprise Architect | Maximus audit reqs, arch-side AI use cases |
+| **Chase Yeung** | Senior Data Architect | Data team representation, data use cases |
+| **Krishna Mekala** | Senior Business Architect / PO | Shared services coordination |
+| **Vinay Kumar** | JIRA Admin | JIRA configuration, plugin access |
+| **Dinkar** | Executive Sponsor | Strategic direction, pair-programmer procurement |
 
 ---
 

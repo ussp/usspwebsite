@@ -1,0 +1,322 @@
+Vinay Lagisetty  0:07  
+Good afternoon.
+
+Hello and hello. No, it's Hello. Can you hear me? Got it Yes. Second
+
+Carl, can you speak once more? Testing, 123, hello, okay, one second. There's problem with my system. Give me one second. You can hear me right. Matt,
+
+am still waiting for John,
+
+hopefully I should be able to hear you now. Just one two, if not I have to rejoin. Evidently, not let me rejoin in a one second sure what's going on. Shoot, man,
+
+hey, man, yeah, yeah.
+
+Carl Oberg  2:43  
+Oh, I guess it's more of a training issue on people that actually log their dependencies.
+
+This is the story section, right?
+
+Okay, yeah, no, I'll need to, I'll need to look at the look like across 100 epics.
+
+Matthew Tomeo  3:05  
+That's what that because that's what it's going
+
+Carl Oberg  3:12  
+to be, yeah, and that's, that's what I'll have to play with, okay? Because that's awesome, though. We're showing the epics in Gantt form, yeah, so I need to see how I can get dependencies tracked on that.
+
+Matthew Tomeo  3:28  
+So you can only see it in like two sprints at a time, right? Because the more you make it smaller, the harder and harder it is to see as it gets smaller, right? If you try, like if you tried to look at the dependence that view across all six sprints, it would be like a big pile to be really small.
+
+Let me just look at that with These four sprints. I
+
+Carl Oberg  4:10  
+shown the dependency
+
+Vinay Lagisetty  4:46  
+you guys hear me now? Yeah, can you hear you? Yes. So sorry, guys, not sure what's going on. There is no way to test Microsoft Teams before I joined Carl. Anyway, yeah, there is.
+
+So I just joined through my phone and and I'll try to rejoin after the computer restarts over the teams, but we can get started. Okay? Okay, well, hey, just a quick introduction about myself. My name is Vinay and Carl. I don't think so we have met in any of the calls. Nope. So, yeah, I just came in, still trying to complete my onboarding process, but I think one of the objectives I'm working towards is Jim has asked us to put how to integrate AI tools into our workflows across all the roles, and he gave us a 13 week deadline to figure out how to document what we're going to do, get the approvals and use it, complete the pilot and get some overall documentation, like a playbook which can be used for entire art, I believe. So the goal is we're going to start this with the first two teams, and we're going to develop the process on the playbooks, and I think at the end of it, the playbooks have to be approved by some governance body, which Jim is going to establish, and then he's going to see how it's going to be rolled out for the for the 10 teams. Okay, so this is a DCFS objective. This is the DCFS objective. Whether the 13 weeks is reliable or not. We still have to work through those and work with Jim, but at least for now and they also gave they're expecting a 10% improvement, 10 to 15% I would say Jim is more on 15% improvement, and that's a difficult ask. We know that, and the goal is to figure out where we can do it, how can we can do it, and also identify some of the challenges within the DCFS space and why it's possible, why it's not. Again, I was bought in by crescent, so I'll be representing Crescent in the entire project. And again, this is just a learning step for us. Again, I think this is an Crescent initiative, but which was pretty much asked by, yeah. Also, I did I miss out anything? Matt, I don't
+
+Matthew Tomeo  8:08  
+think so. Carl, we were asked to show Vinay Robo what we what tools we have they use Robo and our JIRA workflow and how we use all that confluence, big picture plans, tempo and answer any questions. Sorry about good.
+
+Vinay Lagisetty  8:31  
+I just will take a step back. Carl, I think the I was just at this point, since it's a half an hour, very quick call. It's just the first week we were trying to understand what your workflow looks like. Like. I just had a meeting with the PO team today morning. They discussed about their work stream, like the how they work with their clients, how they come up with the epics and stories, and what tools they use. I'm just trying to understand our this particular role and where what tools are used. What is the work stream look like? We can document the current process and figure out if this like we what are the tools we need to ask Jim so that he can give us the right access to the right tools. So I believe we already have GitHub copilot and the rovo. Rovo is an additional access I know that it's like, I'm assuming they already bought it. That's why you guys have access to it.
+
+Carl Oberg  9:38  
+Well, robo is baked into Atlassian products. I mean, it's, it's the new or it's an AI orchestration layer that basically from, from rovo. You know, the what i've what I've researched on rovo, is that it's a Atlassian is kind of built its product base by buying products, basically. So we have confluence, we have JIRA, we have Trello, and Bitbucket ties in third party applications, tie in tempo, timekeeping, just it's the ecosystem kind of expands all of that and what rovo? Rovo is basically a connector between all of those elements. Rovo is not yet able, we're not able to go in and create generative AI yet in air. It's just, it's basically a good communication layer that talks. I can use I can use rovo to pull things out of confluence. I can use rovo to create user stories, create test cases, create so, so it's that type of a tool, but where I'm concerned about bringing people in to start using it to do those things, is they need to know that it's just a tool, that it's not their brain. Yes, it's not there. And the other biggest gap is we have some great documentation deficits where things are not aligned and structured, orderly, big challenges, and that's and as you know, since, since you're the AI czar, we can't, you know the AI, the AI responses are only as good as the prompt, and the ecosystem that's is pulling from the context layer. So that's, that's, that's the big gap. I mean, do I use AI? Yes, did I go through the Google boot camp? Yes, did I go through my previous company I worked on AI projects? Yes, still, my biggest fear is the person giving the prompts, realizing it's just a tool.
+
+Vinay Lagisetty  11:57  
+Yes, I like the the this is where we have to step up and document all these things, because I personally believe people read the CIO magazines and all the great Gartner did 30% improvements. And my usual role is coming and saying, Hey, let's build a governance around it. Let's build a process around it. It's easy to scale one or two people, but when you're talking to you're scaling 120 people to be consistent, that is a tall task. And I think that's, that's one of the goals for me is to definitely communicate this to Jim, that the it's not just the tool maturity, it's the data maturity, and also the prompt maturity in this case, and the people maturity also. So that's the goal, at least. Yeah. I mean, but,
+
+Carl Oberg  13:00  
+but, but is it useful? Heck, yeah. I mean, I spend seven hours a day in meetings, yep. So I pull the I pull the text based transcript. I also get the summaries. But I line, I line item, everything. When I take notes, I write cue points on the recording. You know, this can be found at 1430 and I, you know, write a little note to myself so I can go in and grab that and pull it out. But again, it's just, it's just a tool with regard to JIRA and rovo. I mean, I am, I am confident. You know, having rovo helped create Pirs post incident reviews according to DCFS structure, because there is a lot of information and comments and everything that go into, you know, the the incident that's created in, you Know, ILCs or CC WIS, possibly looking at it for, you know, gathering release notes, because that's part of that's one of the teams under the deployment escalation and doing you at and prod deployments. That's one of my teams that handles all of those. And again, exploring with the user stories I use, I mean, I use it to create user stories. I've tested that, the test case world I haven't done yet.
+
+Vinay Lagisetty  14:28  
+Before going into the details. Carl, can you give me a brief overview about Which team do you lead? And, like, what are the roles of the team you lead?
+
+Carl Oberg  14:41  
+That's such a hard question to answer. I mean, I'm over platform operations. I work under Stephanie four, but I have five teams. I've got the Azure power platform. I got the JIRA admins, the ECM, file net, data cap team. I've got the IMS, DB two as well as mainframe, you know, good old IMSA work that's done additionally, though,
+
+Vinay Lagisetty  15:11  
+are those people part of our sprint teams?
+
+Carl Oberg  15:16  
+No, they're all, they're all under DCFS, but I've been until we got Matt on board, until Matt came and joined the world, the whole JIRA ecosystem kind of fell to me as far as creating so I worked with these teams. I did everything from basic agile training, business analyst training, how to use JIRA workflows that we created, you know, the DCFS had created for the work streams, and then, you know, building, building out the PI, you know, pi planning. So basically, I kind of, I kind of touch a lot of different things.
+
+Vinay Lagisetty  15:59  
+So got it. And so what would be the JIRA work stream look like from your perspective? Like, yes, there is the PO teams which are creating the stories, right, product owners, and then there is be a technical which is create, taking those stories and trying to map it to the dynamics, what kind of configurations, or if any configurations can be done, or is it a custom solution that finding out the gaps and everything?
+
+Carl Oberg  16:36  
+Yeah, standard, standard, you know, standard product management hierarchy, where the vision is created from the product team and the PO represents on the product side, on the business side of things. So they then take that to the business analysts, to in my book, business analysts are the people that know the most about everything, because they have to work on the product side, understand their vision, gather the requirements, flush it out, and then they have to translate it into technical requirements. Yes, with and the way we've designed, the way JIRA has been designed, is JIRA is kind of part of that cradle to grave process, because we have a planning board that that doesn't sprint, it just kind of sits there while these epics get refined, while the user stories that fall into these epics are refined, while dependencies and gaps and roadblocks and stuff happen and are interlocked. And then from there, each each team has their storyboards, and that's where the actual sprint work comes in. That's kind of the primary core that Matt tracks as a release train engineer
+
+Vinay Lagisetty  17:52  
+got it, and when the story gets completed, the it moves to the testing teams. And right now, the test I just heard that there is a new tool called eggplant which is rolled out, yes, right. So is it more for unit tests, or ISD?
+
+Carl Oberg  18:18  
+Eggplant is going to when it gets rolled out and everything. It's actually just supposed to be kind of automated testing or smoke testing. Can happen. You know, unit testing should be whatever they want to do, J, unit, N, unit, okay. And, you know, post, man, whatever do
+
+Vinay Lagisetty  18:40  
+they write this test right now? Are they using any of the JIRA tools to generate this test cases
+
+Carl Oberg  18:48  
+right now? They're kind of manually operated. Matt has that changed at all? They're manually loaded into a plugin tool called Zephyr scale so and the actual testing and test runs live inside that JIRA story.
+
+Yeah, and Krishna and Jeff could give us this more specifics on that, but that's to my knowledge, that's correct.
+
+Vinay Lagisetty  19:13  
+So okay, so someone is creating a story test, scripts or tests and loading it into this particular tool, and JIRA is monitoring whether that the tests are done or not.
+
+Vinay Kumar  19:27  
+It tells us what the test runs past, okay, all that type of thing, real, real, basic.
+
+Vinay Lagisetty  19:36  
+And post the tests are done, it's cleared. Is there another team which does the UAT?
+
+Carl Oberg  19:44  
+That's it's the same team, but the workflow happens where you got your workflow up, Matt, the workflow happens where, when, when all the testing is done and the definition of done is met, it then gets queued for deployment. My team handles deploying into the UAT environments, so it's more of a structure, because that's kind of production ready. And here's, here's the, here's the work that we were been working on recently and just got approved. Is this the final we were showing it as
+
+it is today? Because I assume that's what you were going to want to explain. I didn't know you want to show in future state or or you want to see it as is today.
+
+Vinay Lagisetty  20:40  
+I mean, this is current state, right? This is
+
+Vinay Kumar  20:44  
+current state, yeah, this is
+
+Vinay Lagisetty  20:50  
+current that's fine. I mean, by the time I get started, I think it will be the current state. I'm assuming got it.
+
+Vinay Kumar  20:59  
+This is, this is our these. This is what our JIRA looks like right now. So the team has a the pm up the pm team. They have a planning board where they do their refinement and analysis and then they move it for rated for development, and then it moves to the team's scrum board, and then this is what the team goes through in their sprints. And these are the statuses that we have in JIRA currently, but we are working to update this right now, so we're going to be adjusting it and simplifying our workflow and simplifying our JIRA statuses, yeah, and we're going to break it. We're breaking out the environment, the columns so that we can for the appropriate teams. They can kind of label these, like Dev, test, integration, UAT, as they go through the process. So but these are the states in JIRA that we have currently, well, that we that we're working on moving to this is the current state right now, today, okay,
+
+Vinay Lagisetty  22:26  
+and when it transitions to the UAT teams, if you can scroll down or up to
+
+Oh, acceptance, completion, and the who handles the CICD for this one at the is it cross and responsible for the CI CD?
+
+Vinay Kumar  22:54  
+And, yeah, the Shared Services team, and then platform operations, my team,
+
+Vinay Lagisetty  23:02  
+okay, okay, so they're in the 12 sprint teams are in, releasing it, and your team is taking care of the deployments
+
+Vinay Kumar  23:15  
+to you at and prod, yes,
+
+Vinay Lagisetty  23:18  
+and I'm Assuming the oh, there is a prod infrastructure. There's, there are already three modules which are live in the is the dynamics already live
+
+Vinay Kumar  23:33  
+for UAT, for intake and believe, FPR and yeah, some models, right?
+
+Vinay Lagisetty  23:45  
+Yeah, few models which are live, there's,
+
+Carl Oberg  23:46  
+there's FPR, C well, and intake that are, that are in product, that are productionized, right now, got,
+
+Vinay Lagisetty  23:55  
+got, Okay, makes sense.
+
+Okay, so this is our process. This gives me a good, high level overview. And Carl looks like you. You have some experience dealing with AI, so we, in the future calls, we might have to sit down and and figure out what your suggestions are, what your use cases are. We'll try to capture that and see where we could incorporate the AI tools. And do you at this point, have any suggestion on if your teams, or you envision any tools which we need to ask DC? DCFS to give us access to, um,
+
+Carl Oberg  24:48  
+I do, yes. I mean, there's, there's some, there's some plugins. I'm sure Matt's got his punch list too, because, you know, you can't get more bare bones than what we found when we showed up here. That would just streamline the workflows and make, make, make it, reduce the hours required by teams and stuff. Because one of the one of the biggest issues we have is actually getting good reporting and metrics out of out of Atlassian, because, because Atlassian is our source of record that everything's everything's folding into it, from our ticketing systems for throughout DCFS, we just have a new JIRA dev element team that just got stood up that well, I just heard has eight projects on it registry that they're going To start developing on, as well as the work that we have going building out the Illinois connect project more and getting better reporting. And, you know, we have all of these, the PMO office, the, you know, the ISI and the CSG and Maximus, and all of them that require reporting as well.
+
+Vinay Lagisetty  25:58  
+And Atlassian JIRA I've used in previous projects quite a bit. They already have fantastic reporting in built with tools.
+
+Vinay Kumar  26:10  
+I mean, I can write JQL queries all day long, but program level is where we need to. Is what me and Matt are focusing on now is, how can we get that proper program level reporting, okay? And because before, before we started doing pi, you know, scaled agile, the workflow was for just individual team sprinting, yeah, and that's what we're correcting here with what you're seeing on our new proposed workflows, so that it's homogeneous.
+
+Vinay Lagisetty  26:47  
+Got it? Do you already have any tool ideas which you will need?
+
+Vinay Kumar  26:52  
+Well, upgrading our big picture would be a good start, because we're on a base level right now, and that'll give us a lot of the reporting, like, one of the things we have right now is, you know, dependency tracking, poor poor Matt and his team are having to live in spreadsheet land and then port that over to PowerPoint.
+
+Vinay Lagisetty  27:15  
+Oh, okay, I think Matt then we both need to jump on a Carl to understand. What are the areas you would like to employ, any tool suggestions you might have, yeah.
+
+Vinay Kumar  27:31  
+And as far as all of that goes, with Illinois connect, Matt's my customer. I want to give him what it is that he needs to be successful in his job. Got it because at the bottom line, what we're doing here at DCFS is to help families that are going through the worst situation in their lives and helping them navigate through it. That's that's our core customer.
+
+Vinay Lagisetty  27:55  
+Yeah, and Matt in your work stream? Do you? What does the work stream look like for you?
+
+Matthew Tomeo  28:09  
+Well, so we operate in what you're seeing right now. So this is all of the teams right here, and the epics flow through the same the same workflow. Right now we're talking about creating a proper EPIC program board where so that all the epics get brought up a level to a program board, and then all the individual teams will parent their work to epics that are on this program board, and then the program board is where we can, like, run all of our epic level metrics, run all of our epic level events and ceremonies. Because right now, the epics all live on the individual team on 15 different individual team boards.
+
+Vinay Lagisetty  29:04  
+Sorry, can you repeat
+
+Vinay Kumar  29:07  
+that statement again right now? All the epics, 15 individual team boards right now? Okay, got it.
+
+Vinay Lagisetty  29:15  
+Got it. So someone is taking the depict and copy pasting it?
+
+Vinay Kumar  29:18  
+No, they're, they're building them on their own individual team boards. I mean, I'm sure there's duplicative epics out there.
+
+Carl Oberg  29:25  
+Yeah, PMS are,
+
+so we want to put that in one in epics in its own stream. Yes, so that way, Matt can get better data out of that. We can have dependency tracking that is absolutely accurate. So teams can, you know, Team A and Team D can have issues under that same epic without it causing cross pollination. So the epics have their own story, you know, their own pointing.
+
+Vinay Lagisetty  29:57  
+Yeah, I was when we were configuring, I mean, this is not in this company we I was, I'm wondering how we did it. I know I forgot Gina configurations, but I think we had a epic across multiple teams.
+
+Vinay Kumar  30:12  
+Exactly. Yeah, that's what we want to build. That's what we want to do,
+
+me and me and man of me and man have had that in our previous companies we work for, got it, got it.
+
+Matthew Tomeo  30:23  
+Yeah, that will lead to less epics, because, yeah, teams, teams should be able to share, share epics, and the product owners can work, and product managers and PMS can work together at the epic level to chase those Yeah,
+
+Carl Oberg  30:41  
+because two teams, 14 teams, 29 teams, they're all working towards the same common objective.
+
+Vinay Lagisetty  30:46  
+Yes, yes. I mean, that's, that's, that's how it was. We, we had an epic which was shared across, probably, I don't know, five to seven teams, and the, I mean, there were some epics which we never touched, because that was not us, and they were epics which we were completely part of. So, yeah, I think JIRA has that capability. It's just matter of restructuring it. Yeah, you didn't happen to
+
+Carl Oberg  31:15  
+run that by Jim when he gave you his approvals. Did you map? Yeah,
+
+I don't think so. I just just what you're looking at right now.
+
+Matthew Tomeo  31:27  
+Okay, so we didn't
+
+Carl Oberg  31:28  
+discuss the separate epic board yet. No, I oh no, no, no, definitely not. I didn't broach that. No, but, but I'm getting to a point where I will be able
+
+Vinay Lagisetty  31:39  
+to good, yeah, but we could touch that one topic in here. I mean, no, I know it's not truly AI, but it's still as a part of the rollout we need to complete 10% efficiency, if it's just matter of getting you some tool access math, I think we can do it part of the sprint. And I don't know if that is what pursuing in this project?
+
+Vinay Kumar  32:04  
+Yeah, I guess I I don't know what they mean by what I do. I still don't quite understand what 15% efficiency means. Does does that mean that? Does Jim mean that? That means we're going to do 15% more story points, 15% I just don't know what that means, because I am a big
+
+Vinay Lagisetty  32:25  
+not fan of story points at all the I'll tell you one reason is when we when we use AI tools, and now everybody is starting to use AI tools. The five story points become three story points anyway. So the points are supposed to be time and again. There is no consistency ever going to be I mean, you can come up with rules and everything, but between teams there will be variations. Because if it's a lot of junior members, their story points are going to look a little bit different complexity ranking versus another one. So I was never fan of story point comparison as a as a measure, because as a teams get experience the story points they achieve and the quite different.
+
+Vinay Kumar  33:17  
+They're going to size smaller when the AI tools and become more efficient. Yes, exactly what I told Jim. So I guess I don't I just need to understand exactly what he's measuring in terms of efficiency to be able to make to be able to
+
+Vinay Lagisetty  33:30  
+make measurement. And story points is definitely not a way to measure the psychology involved in in humans, right? And that's the that story points was created to mitigate the counting of lines and whatever it is. Right now we're going back to actually, really do a metric. You have to go back to the foundations. Have I increased test coverage? Have I increased quality? Have I increased my documentation? How I increase, like a documentation to code count, how I increase the code itself. Am I doing better? Boundary checks, Error Corrections. You have 22 to 40 metrics we can
+
+Carl Oberg  34:11  
+choose from. So basically, take, take the current definition of Done, create the new AI, enhanced definition of Done, and use that as a comparison on performance improvement,
+
+Vinay Lagisetty  34:22  
+probably yes, you bring up a good point, which is called, when we're doing a test coverage. Can use AI to go and do a AI test coverage review, or security review, or whatever it is, documentation review your so now you have your teams which are like, the team leaders are supposed to do a code review and everything, but are we assisting the code reviewers to see unified view? Like, hey, again, you said it yourself. Carl, if you don't prompt the AI to do the documentation, it won't do it. It's lazy, right? Yeah, I mean, and
+
+Carl Oberg  35:04  
+one of the, one of the easy, low hanging fruit metrics that I I mean, that I'd love to see, is smoke testing every time something is moved, yeah, being able, being able to do that, and then also do a environment check, making sure that the environments have stability and that they're accurate, that they're a lot like, like UAT matches production as much as we can those type of things. Because those are, those are time soaks.
+
+Vinay Lagisetty  35:32  
+No, that's, that's good to know. I mean, yes, that is more.
+
+Vinay Kumar  35:36  
+You know, we've done that. We've done deployments where they were actually up in UAT on a different version of what production had
+
+Vinay Lagisetty  35:45  
+got it. So this is more
+
+Vinay Kumar  35:48  
+it's checks and balances, and it's validating, it's validating the checklist that everything's been addressed to get, to get that code into production.
+
+Vinay Lagisetty  36:00  
+Yeah, yeah. And again, not every use case. We might come out with, maybe an AI use case, but then we can just bucket those things, and we can still try to address them here. I don't know how it goes, but yeah, right now this is a good start for me, at least, to get my brain around. I'm just doing all the data collection on what I need across your notes and putting it together. But if you do get any ideas on any of the AI tools you would like to use, please drop me a note. I am still getting on boarded. I still don't have my cross and email address, but you can use my Vinay at Lagisetty, which is still secure enough, but yeah, cross an email address should be coming in a day or two.
+
+Vinay Kumar  36:51  
+Okay. Well, welcome aboard.
+
+Vinay Lagisetty  36:53  
+Thank you guys.
+
+Vinay Kumar  36:55  
+And yeah. I mean, as far as one thing I would love to do, I would, I would love to go into vertex and build out a business analyst, story writing agent that tells them what they want, what, what they need to put in, yeah,
+
+Vinay Lagisetty  37:10  
+the like, to check the consistency, or to actually write,
+
+Vinay Kumar  37:13  
+just to make sure that all the, all the basis is covered, you know, like where there's Where there's a requirements prompt that makes them put in requirements, and then kind of actually, kind of write the actual story itself as a actor. I need this so that this will happen. And then, you know, again, just just properly train the AI into our environment, so that it's kind of closed loop.
+
+Vinay Lagisetty  37:40  
+I would say that's going to take some time, but
+
+Vinay Kumar  37:43  
+Well, we're not Google certified in DCFS. We're co
+
+Vinay Lagisetty  37:49  
+pilot the the big thing is our like the llms, can be really, really lazy. They just do what you ask them to do. So now you need another checker to check what AI is doing. So which is what humans are right now is like, Hey, are you making sure you're following all the best practices? Are you making sure you address this? Are you making sure you understood my constraints and boundaries? So this is going to be challenging to teach. It's not a traditional training.
+
+Carl Oberg  38:25  
+It's yeah, which is yeah, I've I've never, I've never told anyone to use it,
+
+Vinay Lagisetty  38:36  
+yeah. And that's where the playbooks come into picture. We design something again, we'll be limit dealing with the limited team, try to help them, and then see if we can rule it out.
+
+Carl Oberg  38:46  
+So can you, I mean, so are you going to build after we determine what's usable and stuff, are you going to build like little agents that they'll just
+
+Vinay Lagisetty  39:01  
+click to enact? We cannot do that in DCFS because of do it policy, humans, whatever, any step, AI, does humans have to review and then only approve?
+
+Vinay Kumar  39:16  
+Oh, yeah, yeah, no. I mean, that's yeah. That's part of the playbook. Line by line review, that thing,
+
+Vinay Lagisetty  39:21  
+yes, line by line, review that, that that, and make sure that there is nothing going on there. So, you know the what you're talking about is headless Po, headless, PA, headless. Oh, no, no.
+
+Vinay Kumar  39:36  
+I was just talking about clicking on it, and then it asks, ask for the prompts, you know, kind of pre build agents with parameters,
+
+Vinay Lagisetty  39:45  
+yeah, we could. We could do that.
+
+Vinay Kumar  39:49  
+No, headless, nothing.
+
+Vinay Lagisetty  39:53  
+I know there is a FinTech which I've been working on. We were doing everything headless. And the challenges we saw four POS. Pos resigned in a less than a month, two for retirement. Two were stressed out because the two people retired, so now you lost four. So our direction was higher, to and go for four, headless POS. So yeah, me. So anyway, thanks. I know we little bit over the time I didn't too
+
+Vinay Kumar  40:30  
+let's blame your computer not working.
+
+To do next steps, anything to keep this going for you do? You need some time to digest this, and then you'll come back to us.
+
+Vinay Lagisetty  40:45  
+I have, I have a delivery on Thursday to put a 13 week plan, which I've been working since morning. I'm not able to come up within 13 weeks, so I'm going to present a 20 week plan now and see how team wants to squeeze it in, I guess. So that's that's for the Thursday I'm preparing the review with the team to say, Hey, this is what we can do. And in the meantime, if you can send me any AI tools you think are useful for you, that's what I'm going to put it in the because we have a 30 day prerequisite. That means we need to request the 30 days ahead so that they can get those things. And which is what we're trying to send it to Jim, saying that, hey, give us access to these tools.
+
+Vinay Kumar  41:40  
+Okay, good to know. Okay, thank you so much. Thank you appreciate it.
+
+Vinay Lagisetty  41:50  
+Open. Questions are there? I'll send an email to you guys. Yeah, please do, yep. Thanks, Matt, thanks for the time. Bye.
+
