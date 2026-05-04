@@ -235,6 +235,7 @@ describe("Question selection logic", () => {
       version: 1,
       status: "active",
       parent_question_id: null,
+      anonymous_aggregate: false,
       created_by: "test",
       created_at: "",
       updated_at: "",

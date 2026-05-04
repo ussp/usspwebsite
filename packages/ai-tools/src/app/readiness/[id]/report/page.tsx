@@ -18,6 +18,14 @@ interface CapabilityScore {
   by_role: Record<string, { avg: number; count: number }>;
 }
 
+interface SentimentScore {
+  capability: string;
+  label: string;
+  avg_score: number;
+  response_count: number;
+  distribution: Record<1 | 2 | 3 | 4 | 5, number>;
+}
+
 interface ReportData {
   assessment: { id: string; name: string; status: string };
   company: { name: string; entity_type: string; state: string } | null;
@@ -26,6 +34,7 @@ interface ReportData {
   overall_score: number;
   tier: { label: string; color: string; description: string };
   capability_scores: CapabilityScore[];
+  sentiment_scores: SentimentScore[];
   response_rate: { total: number; completed: number; percentage: number };
   regulatory_gaps: string[];
   prior_comparison: {
@@ -34,6 +43,20 @@ interface ReportData {
     capability_deltas: { capability: string; current: number; prior: number; delta: number }[];
   } | null;
 }
+
+// Some sentiment statements are phrased so higher scores indicate concern/risk
+// (e.g. "AI will make my role obsolete"), others where higher is positive
+// (e.g. "I trust AI output"). Invert the risk-framed ones so the bar color
+// reads consistently: green = healthy, red = needs attention.
+const SENTIMENT_RISK_FRAMED: Record<string, boolean> = {
+  job_replacement: true,
+  management_intent: true,
+  skill_atrophy: true,
+  adoption_pressure: true,
+  ai_trust: false,
+  training_adequacy: false,
+  net_sentiment: false,
+};
 
 const TIER_COLORS: Record<string, string> = {
   red: "bg-red-100 text-red-800 border-red-200",
@@ -215,6 +238,64 @@ export default function ReportPage({ params }: { params: Promise<{ id: string }>
                   </div>
                 ))}
             </div>
+          </div>
+        )}
+
+        {/* Team sentiment (anonymous aggregate) */}
+        {report.sentiment_scores && report.sentiment_scores.length > 0 && (
+          <div className="bg-white rounded-lg border border-light-gray p-5 mb-6">
+            <h2 className="text-sm font-semibold uppercase text-dark/40 mb-2">
+              Team Sentiment
+              <InfoTip text="Sentiment questions are aggregated only — no per-member or per-role attribution is available, by design. Anonymous responses surface honest signal about concerns like job-replacement fear, trust, skill atrophy, and pressure. Risk-framed statements ('AI will make my role obsolete') are inverted so green = healthy, red = needs attention." />
+            </h2>
+            <p className="text-xs text-dark/50 mb-4">
+              Responses to sentiment questions are aggregated anonymously. Individual responses are not viewable — only the overall distribution.
+            </p>
+            <div className="space-y-4">
+              {report.sentiment_scores.map((s) => {
+                const isRiskFramed = SENTIMENT_RISK_FRAMED[s.capability] ?? false;
+                const displayScore = isRiskFramed ? 6 - s.avg_score : s.avg_score;
+                const barColor = displayScore >= 4 ? "bg-emerald-400" : displayScore >= 3 ? "bg-blue-400" : displayScore >= 2 ? "bg-amber-400" : "bg-red-400";
+                const total = s.distribution[1] + s.distribution[2] + s.distribution[3] + s.distribution[4] + s.distribution[5];
+                return (
+                  <div key={s.capability}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm font-medium">{s.label}</span>
+                      <span className="text-xs text-dark/50">
+                        avg {s.avg_score.toFixed(1)}{isRiskFramed && <span className="ml-1 text-amber-700">(risk-framed)</span>} &middot; n={s.response_count}
+                      </span>
+                    </div>
+                    {/* Distribution bar: stacked segments for counts at each score */}
+                    <div className="flex w-full h-3 rounded overflow-hidden bg-light-gray" aria-label={`Score distribution for ${s.label}`}>
+                      {([1, 2, 3, 4, 5] as const).map((score) => {
+                        const count = s.distribution[score];
+                        const pct = total > 0 ? (count / total) * 100 : 0;
+                        if (pct === 0) return null;
+                        const segColor = score === 1 ? "bg-red-400" : score === 2 ? "bg-amber-400" : score === 3 ? "bg-yellow-300" : score === 4 ? "bg-blue-400" : "bg-emerald-400";
+                        return (
+                          <div
+                            key={score}
+                            className={segColor}
+                            style={{ width: `${pct}%` }}
+                            title={`Score ${score}: ${count} (${pct.toFixed(0)}%)`}
+                          />
+                        );
+                      })}
+                    </div>
+                    {/* Inverted healthy bar for at-a-glance read */}
+                    <div className="w-full bg-light-gray rounded-full h-2 relative mt-1">
+                      <div
+                        className={`h-2 rounded-full ${barColor}`}
+                        style={{ width: `${(displayScore / 5) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="text-xs text-dark/40 mt-4 leading-relaxed">
+              Risk-framed statements (e.g. &ldquo;AI will make my role obsolete,&rdquo; &ldquo;I feel pressure to adopt&rdquo;) are inverted in the health bar so the color reading is consistent across the section. The raw distribution bar above each statement shows actual response counts.
+            </p>
           </div>
         )}
 

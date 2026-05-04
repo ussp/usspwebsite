@@ -937,6 +937,7 @@ export interface QuestionBankItem {
   version: number;
   status: QuestionStatus;
   parent_question_id: string | null;
+  anonymous_aggregate: boolean;
   created_by: string | null;
   created_at: string;
   updated_at: string;

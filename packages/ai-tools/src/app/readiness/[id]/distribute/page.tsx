@@ -11,6 +11,7 @@ import type { TeamMemberRole } from "@ussp-platform/core";
 
 interface MemberResponse {
   id: string;
+  response_id?: string;
   name: string;
   email: string;
   role: string;
@@ -30,6 +31,8 @@ export default function DistributePage({ params }: { params: Promise<{ id: strin
   const [percentage, setPercentage] = useState(0);
   const [distributing, setDistributing] = useState(false);
   const [reminding, setReminding] = useState(false);
+  const [importing, setImporting] = useState(false);
+  const [importResult, setImportResult] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`/api/readiness/${id}`).then((r) => r.json()).then(setAssessment);
@@ -58,6 +61,42 @@ export default function DistributePage({ params }: { params: Promise<{ id: strin
     setReminding(false);
   }
 
+  function downloadTemplate() {
+    window.location.href = `/api/readiness/${id}/questionnaire/export`;
+  }
+
+  function downloadForMember(responseId: string | undefined) {
+    if (!responseId) {
+      alert("This member has no response yet — click Send All first to create their response record.");
+      return;
+    }
+    window.location.href = `/api/readiness/${id}/questionnaire/export?responseId=${encodeURIComponent(responseId)}`;
+  }
+
+  async function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImporting(true);
+    setImportResult(null);
+    try {
+      const form = new FormData();
+      form.append("file", file);
+      const res = await fetch(`/api/readiness/${id}/questionnaire/import`, { method: "POST", body: form });
+      const data = await res.json();
+      if (!res.ok) {
+        setImportResult(`Error: ${data.error || "Import failed"}`);
+      } else {
+        const warn = data.warnings?.length ? ` (${data.warnings.length} warning${data.warnings.length > 1 ? "s" : ""})` : "";
+        setImportResult(`Imported ${data.answers_imported} answer${data.answers_imported !== 1 ? "s" : ""}${warn}`);
+        loadResponses();
+      }
+    } catch (err) {
+      setImportResult(`Error: ${err instanceof Error ? err.message : "Import failed"}`);
+    }
+    setImporting(false);
+    e.target.value = "";
+  }
+
   const STATUS_COLORS: Record<string, string> = {
     not_sent: "bg-gray-100 text-gray-600",
     not_started: "bg-amber-100 text-amber-700",
@@ -80,7 +119,17 @@ export default function DistributePage({ params }: { params: Promise<{ id: strin
             <h1 className="text-xl font-bold mb-1">Distribution & Tracking<InfoTip text="Each team member receives a unique email link to their questionnaire. No login required for respondents. You can send reminders to those who haven't completed." /></h1>
             <p className="text-sm text-dark/50">Send questionnaires and track responses.</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
+            <button onClick={downloadTemplate}
+              className="text-sm border border-light-gray rounded-lg px-3 py-2 hover:bg-light-gray/40 transition-colors"
+              title="Download a blank XLSX template. Respondent fills Email: cell, scores, and comments. Use this when you distribute via email / SharePoint instead of the web link.">
+              Download Template
+            </button>
+            <label className="text-sm border border-light-gray rounded-lg px-3 py-2 hover:bg-light-gray/40 transition-colors cursor-pointer"
+              title="Upload a filled XLSX (per-respondent or template) to import the answers.">
+              {importing ? "Importing..." : "Import Responses"}
+              <input type="file" accept=".xlsx" onChange={handleImport} disabled={importing} className="hidden" />
+            </label>
             {!hasSent && (
               <button onClick={distribute} disabled={distributing}
                 className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors disabled:opacity-50">
@@ -95,6 +144,12 @@ export default function DistributePage({ params }: { params: Promise<{ id: strin
             )}
           </div>
         </div>
+
+        {importResult && (
+          <div className={`rounded-lg p-3 mb-4 text-sm ${importResult.startsWith("Error") ? "bg-red-50 text-red-700 border border-red-200" : "bg-emerald-50 text-emerald-700 border border-emerald-200"}`}>
+            {importResult}
+          </div>
+        )}
 
         {/* Progress bar */}
         {hasSent && (
@@ -119,6 +174,7 @@ export default function DistributePage({ params }: { params: Promise<{ id: strin
                 <th className="px-4 py-3 font-medium">Role</th>
                 <th className="px-4 py-3 font-medium">Status</th>
                 <th className="px-4 py-3 font-medium">Completed</th>
+                <th className="px-4 py-3 font-medium">Offline</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-light-gray">
@@ -138,6 +194,14 @@ export default function DistributePage({ params }: { params: Promise<{ id: strin
                   </td>
                   <td className="px-4 py-3 text-dark/50 text-xs">
                     {m.completed_at ? new Date(m.completed_at).toLocaleString() : "—"}
+                  </td>
+                  <td className="px-4 py-3">
+                    <button onClick={() => downloadForMember(m.response_id)}
+                      disabled={!m.response_id}
+                      className="text-xs text-primary hover:underline disabled:text-dark/30 disabled:cursor-not-allowed disabled:hover:no-underline"
+                      title={m.response_id ? "Download this respondent's XLSX with their response_id embedded" : "No response record yet — click Send All first"}>
+                      Download
+                    </button>
                   </td>
                 </tr>
               ))}

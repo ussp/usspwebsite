@@ -20,6 +20,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     const response = responses.find((r: { member_id: string }) => r.member_id === m.id);
     return {
       ...m,
+      response_id: response?.id || undefined,
       response_status: response?.status || "not_sent",
       response_token: response?.token || null,
       started_at: response?.started_at || null,

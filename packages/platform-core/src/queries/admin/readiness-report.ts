@@ -16,6 +16,14 @@ export interface CapabilityScore {
   by_role: Record<string, { avg: number; count: number }>;
 }
 
+export interface SentimentScore {
+  capability: string;
+  label: string;
+  avg_score: number;
+  response_count: number;
+  distribution: Record<1 | 2 | 3 | 4 | 5, number>;
+}
+
 export interface ReadinessReportData {
   assessment: Awaited<ReturnType<typeof getReadinessAssessment>>;
   company: Awaited<ReturnType<typeof getAssessmentCompany>>;
@@ -25,6 +33,7 @@ export interface ReadinessReportData {
   overall_score: number;
   tier: typeof READINESS_TIERS[number];
   capability_scores: CapabilityScore[];
+  sentiment_scores: SentimentScore[];
   response_rate: { total: number; completed: number; percentage: number };
   regulatory_gaps: string[];
   prior_comparison: PriorComparison | null;
@@ -49,6 +58,13 @@ const CAPABILITY_LABELS: Record<string, string> = {
   ai_policy_coverage: "AI Policy Coverage",
   regulatory_awareness: "Regulatory Awareness",
   ai_governance: "AI Governance",
+  job_replacement: "Job Replacement Concern",
+  management_intent: "Management Intent Trust",
+  ai_trust: "Trust in AI Output",
+  skill_atrophy: "Skill Atrophy Concern",
+  adoption_pressure: "Adoption Pressure",
+  training_adequacy: "Training Adequacy",
+  net_sentiment: "Net Sentiment",
 };
 
 export async function generateReadinessReport(
@@ -86,14 +102,18 @@ export async function generateReadinessReport(
 
   // Get question metadata for capability mapping
   const questionIds = [...new Set(allAnswers.map((a) => a.question_id))];
-  let questionMap: Record<string, { capability: string | null; category: string }> = {};
+  let questionMap: Record<string, { capability: string | null; category: string; anonymous_aggregate: boolean }> = {};
   if (questionIds.length) {
     const { data: questions } = await supabase
       .from("question_bank")
-      .select("id, capability, category")
+      .select("id, capability, category, anonymous_aggregate")
       .in("id", questionIds);
     for (const q of questions || []) {
-      questionMap[q.id] = { capability: q.capability, category: q.category };
+      questionMap[q.id] = {
+        capability: q.capability,
+        category: q.category,
+        anonymous_aggregate: Boolean(q.anonymous_aggregate),
+      };
     }
   }
 
@@ -103,8 +123,10 @@ export async function generateReadinessReport(
   for (const m of members) memberRoleMap[m.id] = m.role;
   for (const r of responses) responseMemberMap[r.id] = r.member_id;
 
-  // Aggregate scores by capability
+  // Aggregate scores by capability.
+  // Anonymous-flagged questions skip the by-role track to preserve respondent privacy.
   const capabilityData: Record<string, { scores: number[]; byRole: Record<string, number[]> }> = {};
+  const sentimentData: Record<string, number[]> = {};
 
   for (const answer of allAnswers) {
     if (answer.score == null || answer.flag === "not_applicable") continue;
@@ -113,18 +135,23 @@ export async function generateReadinessReport(
     if (!qMeta?.capability) continue;
 
     const cap = qMeta.capability;
-    if (!capabilityData[cap]) capabilityData[cap] = { scores: [], byRole: {} };
 
+    if (qMeta.anonymous_aggregate) {
+      if (!sentimentData[cap]) sentimentData[cap] = [];
+      sentimentData[cap].push(answer.score);
+      continue;
+    }
+
+    if (!capabilityData[cap]) capabilityData[cap] = { scores: [], byRole: {} };
     capabilityData[cap].scores.push(answer.score);
 
-    // Track by role
     const memberId = responseMemberMap[answer.response_id];
     const role = memberId ? memberRoleMap[memberId] : "unknown";
     if (!capabilityData[cap].byRole[role]) capabilityData[cap].byRole[role] = [];
     capabilityData[cap].byRole[role].push(answer.score);
   }
 
-  // Compute capability scores
+  // Compute capability scores (identifiable track)
   const capabilityScores: CapabilityScore[] = Object.entries(capabilityData).map(([cap, data]) => {
     const avg = data.scores.reduce((s, v) => s + v, 0) / data.scores.length;
     const byRole: Record<string, { avg: number; count: number }> = {};
@@ -144,7 +171,23 @@ export async function generateReadinessReport(
     };
   });
 
-  // Overall score
+  // Compute sentiment scores (anonymous track — aggregate only, no byRole)
+  const sentimentScores: SentimentScore[] = Object.entries(sentimentData).map(([cap, scores]) => {
+    const avg = scores.reduce((s, v) => s + v, 0) / scores.length;
+    const distribution: Record<1 | 2 | 3 | 4 | 5, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    for (const s of scores) {
+      if (s >= 1 && s <= 5) distribution[s as 1 | 2 | 3 | 4 | 5] += 1;
+    }
+    return {
+      capability: cap,
+      label: CAPABILITY_LABELS[cap] || cap,
+      avg_score: Math.round(avg * 100) / 100,
+      response_count: scores.length,
+      distribution,
+    };
+  });
+
+  // Overall score — identifiable capabilities only; sentiment is a separate signal, not a readiness axis
   const allCapScores = capabilityScores.map((c) => c.avg_score);
   const overallScore = allCapScores.length
     ? Math.round((allCapScores.reduce((s, v) => s + v, 0) / allCapScores.length) * 100) / 100
@@ -198,6 +241,7 @@ export async function generateReadinessReport(
     overall_score: overallScore,
     tier,
     capability_scores: capabilityScores,
+    sentiment_scores: sentimentScores,
     response_rate: {
       total: responses.length,
       completed: completedResponseIds.length,
