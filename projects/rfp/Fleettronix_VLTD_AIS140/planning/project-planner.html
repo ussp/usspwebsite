@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fleetronix VLTD / AIS 140 — Project Planner</title>
+<style>
+  :root { --accent: #0B2A4A; --highlight: #C9A227; --green: #27ae60; --amber: #f39c12; --blue: #2980b9; --red: #e74c3c; --gray: #95a5a6; --light: #f8f9fa; --border: #dee2e6; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; color: #333; font-size: 14px; }
+
+  /* Header */
+  .header { background: var(--accent); color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 18px; font-weight: 600; }
+  .header .actions { display: flex; gap: 8px; }
+  .header button { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .header button:hover { background: rgba(255,255,255,0.25); }
+  .header .version { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  /* Tabs */
+  .tabs { display: flex; background: white; border-bottom: 2px solid var(--border); padding: 0 24px; }
+  .tab { padding: 10px 20px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: 500; color: #666; }
+  .tab:hover { color: var(--accent); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--highlight); }
+  .tab .count { background: var(--highlight); color: white; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: 6px; }
+
+  /* Content */
+  .content { padding: 16px 24px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Gantt */
+  .gantt-controls { display: flex; gap: 8px; margin-bottom: 12px; align-items: center; }
+  .gantt-controls button { background: var(--accent); color: white; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .gantt-controls button:hover { opacity: 0.9; }
+  .gantt-controls select, .gantt-controls input { padding: 5px 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px; }
+
+  .gantt-container { overflow-x: auto; background: white; border: 1px solid var(--border); border-radius: 6px; }
+  .gantt-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .gantt-table th { background: var(--accent); color: white; padding: 6px 8px; text-align: left; position: sticky; top: 0; z-index: 2; white-space: nowrap; }
+  .gantt-table td { padding: 4px 8px; border-bottom: 1px solid #eee; vertical-align: middle; }
+  .gantt-table tr:hover { background: #f8f9ff; }
+  .gantt-table .wbs-id { font-weight: 600; color: var(--accent); width: 60px; }
+  .gantt-table .task-name { min-width: 300px; }
+  .gantt-table .task-name.phase { font-weight: 700; background: #f0f4ff; }
+  .collapse-btn { background: none; border: none; cursor: pointer; font-size: 12px; color: var(--accent); padding: 0 4px; }
+  .gantt-table tr.collapsed-child { display: none; }
+  .dep-tag { font-size: 9px; background: #e3f2fd; color: var(--blue); padding: 1px 5px; border-radius: 8px; margin-left: 4px; white-space: nowrap; }
+  .col-effort { display: none; }
+  .show-effort .col-effort { display: table-cell; }
+  .gantt-table input[type="text"], .gantt-table input[type="date"], .gantt-table select { width: 100%; padding: 3px 5px; border: 1px solid transparent; border-radius: 3px; font-size: 12px; background: transparent; }
+  .gantt-table input:focus, .gantt-table select:focus { border-color: var(--accent); background: white; outline: none; }
+  .gantt-table textarea { width: 100%; padding: 3px 5px; border: 1px solid transparent; border-radius: 3px; font-size: 11px; resize: vertical; min-height: 20px; background: transparent; }
+  .gantt-table textarea:focus { border-color: var(--accent); background: white; outline: none; }
+
+  /* Gantt bars — phase colors */
+  .gantt-bar-cell { position: relative; height: 24px; }
+  .gantt-bar { position: absolute; height: 18px; top: 3px; border-radius: 3px; font-size: 9px; color: white; display: flex; align-items: center; padding-left: 4px; min-width: 4px; }
+  .gantt-bar.pursuit { background: var(--amber); }
+  .gantt-bar.partnership { background: var(--blue); }
+  .gantt-bar.compliance { background: #8e44ad; }
+  .gantt-bar.sourcing { background: #e67e22; }
+  .gantt-bar.team { background: var(--green); }
+  .gantt-bar.proposal { background: var(--accent); }
+  .gantt-bar.award { background: var(--highlight); }
+  .gantt-bar.mobilize { background: #16a085; }
+  .gantt-bar.deliver { background: #d35400; }
+  .gantt-bar.operate { background: var(--gray); }
+  .gantt-bar.mandate { background: #d6336c; }
+  .gantt-bar.default { background: var(--blue); }
+
+  /* Timeline header */
+  .timeline-header { display: flex; }
+  .timeline-week { flex: 1; text-align: center; font-size: 10px; padding: 2px; border-left: 1px solid rgba(255,255,255,0.2); min-width: 40px; }
+
+  /* Status badges */
+  .status { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+  .status.not-started { background: #eee; color: #666; }
+  .status.in-progress { background: #e3f2fd; color: var(--blue); }
+  .status.completed { background: #e8f5e9; color: var(--green); }
+  .status.blocked { background: #fce4ec; color: var(--red); }
+  .gantt-table td select { min-width: 95px; }
+
+  /* Delete button */
+  .btn-delete { background: none; border: none; color: #ccc; cursor: pointer; font-size: 14px; padding: 2px 6px; }
+  .btn-delete:hover { color: var(--red); }
+
+  /* Risk & Assumptions tables */
+  .log-table { width: 100%; border-collapse: collapse; background: white; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .log-table th { background: var(--accent); color: white; padding: 8px 12px; text-align: left; font-size: 12px; }
+  .log-table td { padding: 6px 10px; border-bottom: 1px solid #eee; font-size: 12px; }
+  .log-table tr:hover { background: #f8f9ff; }
+  .log-table input, .log-table select, .log-table textarea { width: 100%; padding: 4px 6px; border: 1px solid transparent; border-radius: 3px; font-size: 12px; background: transparent; }
+  .log-table input:focus, .log-table select:focus, .log-table textarea:focus { border-color: var(--accent); background: white; outline: none; }
+
+  .severity-critical { color: var(--red); font-weight: 700; }
+  .severity-high { color: var(--amber); font-weight: 600; }
+  .severity-medium { color: var(--blue); }
+  .severity-low { color: var(--gray); }
+
+  .add-row { margin-top: 8px; }
+  .add-row button { background: var(--accent); color: white; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+
+  /* Notes panel */
+  .notes-panel { position: fixed; right: 0; top: 0; width: 360px; height: 100vh; background: white; box-shadow: -4px 0 12px rgba(0,0,0,0.1); z-index: 100; transform: translateX(100%); transition: transform 0.2s; padding: 16px; overflow-y: auto; }
+  .notes-panel.open { transform: translateX(0); }
+  .notes-panel h3 { margin-bottom: 12px; color: var(--accent); }
+  .notes-panel textarea { width: 100%; height: 200px; padding: 8px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; resize: vertical; }
+  .notes-panel .close-btn { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 20px; cursor: pointer; color: #999; }
+
+  /* Save indicator */
+  .save-indicator { font-size: 11px; color: rgba(255,255,255,0.5); }
+  .save-indicator.saved { color: var(--green); }
+
+  @media print { .header, .tabs, .gantt-controls, .add-row, .btn-delete, .notes-panel { display: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Fleetronix VLTD / AIS 140 — Project Planner</h1>
+    <div class="version">V04272026 · USSPPL × Fleetronix · State of Andhra Pradesh · Scope 🟠 unverified — see 1.1a</div>
+  </div>
+  <div class="actions">
+    <span class="save-indicator" id="save-indicator">Auto-saved</span>
+    <button onclick="resetData()" style="background:var(--highlight)">Reset to Default</button>
+    <button onclick="exportJSON()">Export JSON</button>
+    <button onclick="exportMSProjectXML()">Export MS Project</button>
+    <button onclick="exportExcel()">Export CSV</button>
+    <button onclick="importJSON()">Import JSON</button>
+    <button onclick="window.print()">Print</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('gantt')">Gantt / WBS</div>
+  <div class="tab" onclick="switchTab('risks')">Risks <span class="count" id="risk-count">0</span></div>
+  <div class="tab" onclick="switchTab('assumptions')">Assumptions <span class="count" id="assumption-count">0</span></div>
+</div>
+
+<div class="content">
+  <!-- GANTT PANEL -->
+  <div class="panel active" id="panel-gantt">
+    <div class="gantt-controls">
+      <button onclick="addTask()">+ Add Task</button>
+      <button onclick="addPhase()">+ Add Phase</button>
+      <select id="phase-filter" onchange="renderGantt()">
+        <option value="all">All Phases</option>
+        <option value="pursuit">Pursuit</option>
+        <option value="partnership">Partnership</option>
+        <option value="compliance">Compliance</option>
+        <option value="sourcing">Sourcing</option>
+        <option value="team">Team & Readiness</option>
+        <option value="proposal">Proposal</option>
+        <option value="award">Award & Contract</option>
+        <option value="mobilize">Mobilize</option>
+        <option value="deliver">Deliver</option>
+        <option value="operate">Operate</option>
+        <option value="mandate">Approved Vendor Channel (B2C) — contingent</option>
+      </select>
+      <button onclick="toggleEffort()" id="effort-toggle" style="background:rgba(255,255,255,0.15);border:1px solid var(--border);">Show Effort</button>
+      <span style="color:#999;font-size:11px;">Click task name for notes</span>
+    </div>
+    <div class="gantt-container">
+      <table class="gantt-table" id="gantt-table">
+        <thead id="gantt-header"></thead>
+        <tbody id="gantt-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RISKS PANEL -->
+  <div class="panel" id="panel-risks">
+    <div class="add-row"><button onclick="addRisk()">+ Add Risk</button></div>
+    <br>
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th>Risk Description</th>
+          <th style="width:100px">Likelihood</th>
+          <th style="width:100px">Impact</th>
+          <th style="width:80px">Score</th>
+          <th>Mitigation</th>
+          <th style="width:100px">Owner</th>
+          <th style="width:90px">Status</th>
+          <th style="width:30px"></th>
+        </tr>
+      </thead>
+      <tbody id="risks-body"></tbody>
+    </table>
+  </div>
+
+  <!-- ASSUMPTIONS PANEL -->
+  <div class="panel" id="panel-assumptions">
+    <div class="add-row"><button onclick="addAssumption()">+ Add Assumption</button></div>
+    <br>
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th>Assumption</th>
+          <th style="width:120px">Status</th>
+          <th>How to Validate</th>
+          <th style="width:100px">Owner</th>
+          <th>Notes</th>
+          <th style="width:30px"></th>
+        </tr>
+      </thead>
+      <tbody id="assumptions-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Notes Side Panel -->
+<div class="notes-panel" id="notes-panel">
+  <button class="close-btn" onclick="closeNotes()">&times;</button>
+  <h3 id="notes-title">Task Notes</h3>
+  <textarea id="notes-text" onchange="saveNotes()"></textarea>
+</div>
+
+<input type="file" id="import-file" style="display:none" accept=".json" onchange="handleImport(event)">
+
+<script>
+// ── Data Store ──
+const STORAGE_KEY = 'fleetronix-vltd-ais140-planner';
+const DATA_VERSION = 2;
+const PROJECT_START = new Date('2026-04-25');
+const WEEKS_TO_SHOW = 40;
+
+let data = loadData();
+
+function getDefaultData() {
+  return {
+    _version: DATA_VERSION,
+    tasks: [
+      // ── PHASE 1: PURSUIT ──
+      { id: 'P1', wbs: '1', name: 'PURSUIT', phase: 'pursuit', isPhase: true, start: '2026-04-25', end: '2026-08-31', status: 'in-progress', owner: 'Veena/Vinay', notes: 'Pre-RFP positioning. Win the right to be invited / shortlisted before formal RFP. Anchored on the Minister-level capability presentation already scheduled. Deliverables: capability deck (DONE), follow-up package, stakeholder map, demo readiness, RFP-trigger watch.' },
+      { id: 't1', wbs: '1.1', name: 'Joint capability deck — finalize for Minister meeting', phase: 'pursuit', start: '2026-04-25', end: '2026-04-28', status: 'in-progress', owner: 'Vinay', notes: 'USSPPL × Fleetronix joint deck (31 slides). Front 7 slides cover joint cover, About USSPPL, Why USSPPL on this mandate, Illinois TOPS public-sector cred, Sensor-based solutions for US businesses, AP programme objective + operating concept, AIS 140 compliance & device posture. Deliverable: USSPPL-Fleetronix-Minister-Pitch.pptx.' },
+      { id: 't1a', wbs: '1.1a', name: '🚨 SCOPE VALIDATION — written confirmation from AP Transport / DoIT', phase: 'pursuit', start: '2026-04-28', end: '2026-05-16', status: 'not-started', owner: 'Veena/Vinay', notes: '🟠 Project scope is NOT YET CLEAR. Verbal Minister meeting indicated 80K direct Govt tender + 1.6M B2C mandate channel — none of this is in writing. BLOCKING task: send Critical-Questions-to-Validate.md to AP Transport Dept and AP DoIT and capture written replies. Until this is 🟢 VERIFIED, treat all volume / structure / track-split claims as working hypothesis. Do not commit commercials. Deliverable: written replies that confirm or refute the dual-track hypothesis, RFP timing, eligibility, empanelment model.', depends: '1.2' },
+      { id: 't2', wbs: '1.2', name: 'Minister-level capability presentation', phase: 'pursuit', start: '2026-04-28', end: '2026-05-05', status: 'not-started', owner: 'Veena/Vinay', notes: 'Pre-RFP capability briefing for the Hon\'ble Minister for Transport, Government of Andhra Pradesh. Veena leads relationship; Vinay supports on USSP credentials and Govt-grade delivery wrap. Anuradha on tech / device posture. Deliverable: meeting held, takeaways captured.', depends: '1.1' },
+      { id: 't3', wbs: '1.3', name: 'Post-meeting follow-up package', phase: 'pursuit', start: '2026-05-05', end: '2026-05-09', status: 'not-started', owner: 'Vinay', notes: 'Within 48h of Minister meeting: thank-you note, deck PDF, ICAT COP cert, Fleetronix compliance one-pager, USSPPL credentials sheet. Deliverable: follow-up email + attachments sent.', depends: '1.2' },
+      { id: 't4', wbs: '1.4', name: 'Stakeholder map — AP Transport, DoIT, Police', phase: 'pursuit', start: '2026-04-28', end: '2026-05-16', status: 'not-started', owner: 'Veena/Anurag', notes: 'Identify decision-makers and influencers across AP Transport Dept, AP DoIT, AP Police IT, RTO district offices, STA. Deliverable: stakeholder map with names, roles, relationship status.' },
+      { id: 't5', wbs: '1.5', name: 'Pre-RFP demo / proof-of-capability', phase: 'pursuit', start: '2026-05-16', end: '2026-06-27', status: 'not-started', owner: 'Anuradha/Anurag', notes: 'If invited: live demo of Fleetronix control tower running Bharat101 fleet for AP Transport reviewers. Includes mock SOS event, geo-fence breach, panic-button drill. Deliverable: demo run-book and outcomes log.', depends: '1.2' },
+      { id: 't6', wbs: '1.6', name: 'AP Govt secondary engagements', phase: 'pursuit', start: '2026-05-05', end: '2026-07-31', status: 'not-started', owner: 'Veena', notes: 'Reach AP DoIT, RTOs, and AP Police IT through introductions earned via the Minister meeting. Each meeting reduces RFP-stage surprise. Deliverable: meeting log and warm-relationship register.' },
+      { id: 't7', wbs: '1.7', name: 'RFP issuance watch', phase: 'pursuit', start: '2026-04-28', end: '2026-08-31', status: 'in-progress', owner: 'Vinay', notes: 'Daily AP eProc + Transport Dept watch for the AIS 140 / VLTD RFP. Set Govt-tender alert. Deliverable: RFP captured on day of issue.' },
+
+      // ── PHASE 2: PARTNERSHIP ──
+      { id: 'P2', wbs: '2', name: 'PARTNERSHIP (USSPPL × Fleetronix)', phase: 'partnership', isPhase: true, start: '2026-05-01', end: '2026-06-20', status: 'not-started', owner: 'Vinay/Veena', notes: 'Formalize the USSPPL-Fleetronix joint-bid relationship before RFP issues. Avoids last-minute scramble on roles, IP, revenue, and signing authority. Deliverables: signed teaming agreement, joint go-to-market plan.' },
+      { id: 't8', wbs: '2.1', name: 'Teaming agreement — first draft', phase: 'partnership', start: '2026-05-01', end: '2026-05-16', status: 'not-started', owner: 'Vinay', notes: 'Lead bidder = USSPPL; Fleetronix = named technology subcontractor. Draft covers: scope split, exclusivity for AP, IP boundaries, data handling, change of control. Deliverable: teaming agreement v1.' },
+      { id: 't9', wbs: '2.2', name: 'Roles, scope, revenue split', phase: 'partnership', start: '2026-05-16', end: '2026-05-30', status: 'not-started', owner: 'Vinay/Veena', notes: 'Agree split for: device + installation + commissioning (Fleetronix-led), Monitoring Centre + integrations + governance (USSPPL-led), AMC and managed services (joint). Deliverable: term sheet with revenue split.', depends: '2.1' },
+      { id: 't10', wbs: '2.3', name: 'IP / data ownership terms', phase: 'partnership', start: '2026-05-16', end: '2026-06-06', status: 'not-started', owner: 'Vinay', notes: 'Citizen / vehicle data resides with State; platform IP per partner; jointly-developed AP-specific extensions: shared. Deliverable: IP and data clauses ready for legal.' },
+      { id: 't11', wbs: '2.4', name: 'Teaming agreement — sign', phase: 'partnership', start: '2026-05-30', end: '2026-06-06', status: 'not-started', owner: 'L. Vijay Kumar Setty', notes: 'USSPPL MD and Fleetronix authorised signatory both sign. Deliverable: countersigned teaming agreement.', depends: '2.2,2.3' },
+      { id: 't12', wbs: '2.5', name: 'Joint go-to-market plan', phase: 'partnership', start: '2026-06-06', end: '2026-06-20', status: 'not-started', owner: 'Vinay/Veena', notes: 'Define joint pitch, demo, and reference posture for AP and the next 2 States that may issue similar VLTD RFPs. Deliverable: joint go-to-market 1-pager.', depends: '2.4' },
+
+      // ── PHASE 3: COMPLIANCE & EVIDENCE ──
+      { id: 'P3', wbs: '3', name: 'COMPLIANCE & EVIDENCE', phase: 'compliance', isPhase: true, start: '2026-04-28', end: '2026-07-04', status: 'not-started', owner: 'Anurag/Anuradha', notes: 'Build a complete, defensible compliance dossier before bid submission: AIS 140 cert chain, integration evidence, security posture, references. Anything missing here forces last-minute scrambling at RFP time.' },
+      { id: 't13', wbs: '3.1', name: 'ICAT COP cert validation — Bharat101', phase: 'compliance', start: '2026-04-28', end: '2026-05-09', status: 'not-started', owner: 'Anurag', notes: 'Verify ICAT COP No. CC0GV9323 (issued 28-Mar-2026, valid 31-Mar-2027). Walk the chain: COP → reference test report CT0GV9322 → previous COP CC0GU9331 → TAC BH2GIC-14220014002. Deliverable: validated cert chain memo with copies.' },
+      { id: 't14', wbs: '3.2', name: 'iTriangle TAC chain documentation', phase: 'compliance', start: '2026-04-28', end: '2026-05-16', status: 'not-started', owner: 'Anuradha', notes: 'Get full TAC documentation from iTriangle — VLTD device + aQuila SOS family (ITRPB0029, ITRPB0037, ITRPB0038). Deliverable: iTriangle TAC dossier in vault.' },
+      { id: 't15', wbs: '3.3', name: 'VAHAN integration walkthrough', phase: 'compliance', start: '2026-05-05', end: '2026-05-23', status: 'not-started', owner: 'Anurag/Anuradha', notes: 'Confirm device + platform actually integrates with VAHAN (claimed in Fleetronix compliance response). Walk through API, auth, data flow. Deliverable: VAHAN integration architecture note + screenshots/logs.' },
+      { id: 't16', wbs: '3.4', name: 'AP Transport backend integration test', phase: 'compliance', start: '2026-05-09', end: '2026-06-06', status: 'not-started', owner: 'Anurag', notes: 'Fleetronix attests AP Transport Dept integration capability — verify with technical test (sandbox, mock data, signed protocol). Deliverable: AP backend integration test report.', depends: '3.3' },
+      { id: 't17', wbs: '3.5', name: 'AP Police emergency systems integration scoping', phase: 'compliance', start: '2026-05-16', end: '2026-06-13', status: 'not-started', owner: 'Anuradha', notes: 'SOS / panic events route into Police emergency systems per AIS 140. Confirm protocol, SLA, escalation path, and any AP-specific custom layer. Deliverable: AP Police integration scope note.' },
+      { id: 't18', wbs: '3.6', name: 'CERT-In assessment plan', phase: 'compliance', start: '2026-05-23', end: '2026-06-27', status: 'not-started', owner: 'Vinay/Anurag', notes: 'Plan for CERT-In empanelment / cyber-audit certification — needed for Govt cloud hosting. Identify auditor, scope, timeline, cost. Deliverable: CERT-In path document.' },
+      { id: 't19', wbs: '3.7', name: 'Reference dossier — Govt deployments', phase: 'compliance', start: '2026-05-30', end: '2026-07-04', status: 'not-started', owner: 'Veena', notes: 'Fleetronix compliance response says "Government project experience — details on request." Pull together specific State / RTO / Govt references with dates, scale, contact. Deliverable: reference dossier.' },
+      { id: 't20', wbs: '3.8', name: 'Compliance dossier — bid-ready package', phase: 'compliance', start: '2026-06-27', end: '2026-07-04', status: 'not-started', owner: 'Anurag', notes: 'Consolidate cert chain, integration evidence, references, security posture into a single bid-ready compliance dossier. Deliverable: compliance dossier v1.', depends: '3.1,3.2,3.3,3.4,3.5,3.6,3.7' },
+
+      // ── PHASE 4: SOURCING & SUPPLY CHAIN ──
+      { id: 'P4', wbs: '4', name: 'SOURCING & SUPPLY CHAIN', phase: 'sourcing', isPhase: true, start: '2026-04-25', end: '2026-07-11', status: 'in-progress', owner: 'Vinay/Anuradha', notes: 'Lock down device sourcing before commercial bid. Two tracks: iTriangle (incumbent OEM) and China FOB (alternative / leverage). Final decision must support AIS 140 cert path and target volume tiers (10K/25K/50K).' },
+      { id: 't21', wbs: '4.1', name: 'Email Ratish Nair — China FOB sourcing intro', phase: 'sourcing', start: '2026-04-27', end: '2026-04-27', status: 'in-progress', owner: 'Vinay', notes: 'Drafted 2026-04-25, awaiting Naren contact details + send authorization. Asks for VLTD + panic-button manufacturers, FOB China, both bundled and unbundled pricing at 10K/25K/50K. Deliverable: email sent to rathishvnair@gmail.com.' },
+      { id: 't22', wbs: '4.2', name: 'iTriangle commercial negotiation', phase: 'sourcing', start: '2026-05-05', end: '2026-06-13', status: 'not-started', owner: 'Anuradha', notes: 'Lock in volume-tier pricing for Bharat101 + aQuila SOS. Explore exclusivity for AP. Deliverable: iTriangle commercial term sheet.' },
+      { id: 't23', wbs: '4.3', name: 'China sourcing options vetting', phase: 'sourcing', start: '2026-05-11', end: '2026-06-20', status: 'not-started', owner: 'Vinay/Ratish', notes: 'Evaluate 2-3 China manufacturers Ratish recommends. Verify IRNSS/NavIC support, AIS 140 certifiability, dual-SIM, panic-button bundling. Deliverable: shortlist of vetted China manufacturers.', depends: '4.1' },
+      { id: 't24', wbs: '4.4', name: 'BOM analysis — iTriangle vs alternatives', phase: 'sourcing', start: '2026-06-06', end: '2026-06-27', status: 'not-started', owner: 'Anurag', notes: 'Compare device cost, panic-button cost, AMC, lead time, MOQ across iTriangle and China options. Map to AIS 140 cert risk for each. Deliverable: BOM comparison + recommendation.', depends: '4.2,4.3' },
+      { id: 't25', wbs: '4.5', name: 'Final device sourcing decision', phase: 'sourcing', start: '2026-07-04', end: '2026-07-11', status: 'not-started', owner: 'Vinay/Veena', notes: 'Pick primary OEM and secondary fall-back. Confirm with USSPPL MD and Fleetronix. Deliverable: signed sourcing decision.', depends: '4.4' },
+      { id: 't26', wbs: '4.6', name: 'Bundling decision — VLTD only vs VLTD + panic button', phase: 'sourcing', start: '2026-07-04', end: '2026-07-11', status: 'not-started', owner: 'Anuradha', notes: 'Most public service vehicles need both per AIS 140; some State variants accept VLTD-only with separate panic. Decide bundle for AP commercial. Deliverable: bundling decision memo.', depends: '4.4' },
+
+      // ── PHASE 5: TEAM & READINESS ──
+      { id: 'P5', wbs: '5', name: 'TEAM & READINESS', phase: 'team', isPhase: true, start: '2026-04-27', end: '2026-08-15', status: 'in-progress', owner: 'Vinay/Veena', notes: 'Build the operational and contractual readiness USSPPL needs to bid as prime. Covers e-Procurement registration, signing authority, India delivery team plan, AP local presence plan.' },
+      { id: 't27', wbs: '5.1', name: 'USSPPL e-Procurement registration check', phase: 'team', start: '2026-04-28', end: '2026-05-05', status: 'not-started', owner: 'L. Vijay Kumar Setty', notes: 'Verify USSPPL is registered on AP eProc and any Centre Govt portals required. Renew if expired. Deliverable: registration status confirmation.' },
+      { id: 't28', wbs: '5.2', name: 'Digital Signature Certificate (DSC) currency', phase: 'team', start: '2026-04-28', end: '2026-05-09', status: 'not-started', owner: 'L. Vijay Kumar Setty', notes: 'Confirm USSPPL MD DSC is valid through bid window + contract signing. Deliverable: DSC confirmation.' },
+      { id: 't29', wbs: '5.3', name: 'India team — Naren onboarding & role definition', phase: 'team', start: '2026-04-27', end: '2026-05-09', status: 'not-started', owner: 'Vinay/Veena', notes: 'Naren added to project team 2026-04-27 (full name, role, contact pending). Confirm Naren\'s role on this engagement and integration with Veena + Anurag + Anuradha. Deliverable: Naren role memo + contact added to project brief.' },
+      { id: 't30', wbs: '5.4', name: 'India delivery team plan', phase: 'team', start: '2026-05-16', end: '2026-06-13', status: 'not-started', owner: 'Vinay', notes: 'Plan the post-award delivery team: programme manager, integration architects, field ops lead, Monitoring Centre lead. Map USSP India bench + USSPPL hires + Fleetronix surge. Deliverable: delivery team plan + org chart.' },
+      { id: 't31', wbs: '5.5', name: 'AP local presence plan', phase: 'team', start: '2026-06-06', end: '2026-07-04', status: 'not-started', owner: 'Veena', notes: 'AP-based field ops office, local recruitment, district coverage plan, ground-support hubs. Deliverable: AP local presence plan.' },
+      { id: 't32', wbs: '5.6', name: 'Programme manager identification (post-award trigger)', phase: 'team', start: '2026-08-01', end: '2026-08-15', status: 'not-started', owner: 'Vinay', notes: 'Pre-identify candidate(s) for the State engagement programme manager role so hire can complete within 30 days of award. Deliverable: shortlist + outreach.' },
+
+      // ── PHASE 6: PROPOSAL ──
+      { id: 'P6', wbs: '6', name: 'PROPOSAL', phase: 'proposal', isPhase: true, start: '2026-08-01', end: '2026-09-26', status: 'not-started', owner: 'Vinay/Anurag', notes: 'Triggered by RFP issuance (assumed Q3 2026 — placeholder dates). Bid is the primary deliverable. Compliance dossier (3.8), sourcing decision (4.5/4.6), and partnership signed (2.4) must all be in place. Deliverables: technical bid, commercial bid, legal dossier, signed submission.' },
+      { id: 't33', wbs: '6.1', name: 'RFP analysis', phase: 'proposal', start: '2026-08-01', end: '2026-08-08', status: 'not-started', owner: 'Anurag/Vinay', notes: 'On RFP issue: extract scope, eligibility, evaluation criteria, timelines. Map our compliance dossier to evaluation criteria. Identify gaps. Deliverable: RFP-to-bid mapping document.', depends: '1.7' },
+      { id: 't34', wbs: '6.2', name: 'Technical proposal — solution architecture', phase: 'proposal', start: '2026-08-08', end: '2026-08-29', status: 'not-started', owner: 'Anurag', notes: 'Field, backend, Monitoring Centre, integrations, security. Plus operating model and SLAs. Deliverable: technical proposal Vol 1 — solution.', depends: '6.1' },
+      { id: 't35', wbs: '6.3', name: 'Technical proposal — operations & rollout plan', phase: 'proposal', start: '2026-08-08', end: '2026-08-29', status: 'not-started', owner: 'Anuradha', notes: 'Field ops, install schedule, district phasing, run-book, training, support. Deliverable: technical proposal Vol 2 — operations.', depends: '6.1' },
+      { id: 't36', wbs: '6.4', name: 'Commercial proposal', phase: 'proposal', start: '2026-08-15', end: '2026-09-05', status: 'not-started', owner: 'Vinay/Veena', notes: 'Per-vehicle pricing (Option A vs B), AMC, project mgmt fee, Monitoring Centre capex, year-by-year projection. Locks against 4.5 sourcing decision. Deliverable: commercial proposal.', depends: '4.5,4.6,6.1' },
+      { id: 't37', wbs: '6.5', name: 'Legal & compliance dossier', phase: 'proposal', start: '2026-08-08', end: '2026-09-05', status: 'not-started', owner: 'L. Vijay Kumar Setty', notes: 'Incorporation docs, financials, tax compliance, signing authority, teaming agreement, references, MSME / startup status if applicable. Deliverable: legal dossier.', depends: '2.4,3.8' },
+      { id: 't38', wbs: '6.6', name: 'Internal review & red-team', phase: 'proposal', start: '2026-09-05', end: '2026-09-19', status: 'not-started', owner: 'All', notes: 'Internal red-team review of full bid; second-pair eyes on commercials; legal sign-off. Deliverable: reviewed bid v-final.', depends: '6.2,6.3,6.4,6.5' },
+      { id: 't39', wbs: '6.7', name: 'Bid submission', phase: 'proposal', start: '2026-09-19', end: '2026-09-26', status: 'not-started', owner: 'L. Vijay Kumar Setty', notes: 'eProc submission with DSC; physical copies if required; receipt acknowledged. Deliverable: submitted bid + receipt.', depends: '6.6' },
+
+      // ── PHASE 7: AWARD & CONTRACT ──
+      { id: 'P7', wbs: '7', name: 'AWARD & CONTRACT', phase: 'award', isPhase: true, start: '2026-09-26', end: '2026-12-19', status: 'not-started', owner: 'Vinay/Vijay', notes: 'Post-bid window — clarifications, presentations, evaluation, award, contract. Highly variable timeline depending on Govt evaluation cadence.' },
+      { id: 't40', wbs: '7.1', name: 'Bid clarifications', phase: 'award', start: '2026-09-26', end: '2026-10-17', status: 'not-started', owner: 'Anurag', notes: 'Respond to Govt queries within stated SLA. Track all responses for consistency. Deliverable: clarifications log.', depends: '6.7' },
+      { id: 't41', wbs: '7.2', name: 'Bid presentation (if shortlisted)', phase: 'award', start: '2026-10-17', end: '2026-11-07', status: 'not-started', owner: 'Vinay/Anuradha', notes: 'Live presentation + Q&A to evaluation committee. Deliverable: presentation deck + outcome note.' },
+      { id: 't42', wbs: '7.3', name: 'Award notification handling', phase: 'award', start: '2026-11-07', end: '2026-11-21', status: 'not-started', owner: 'L. Vijay Kumar Setty', notes: 'On award: acknowledge, secure performance-bond / EMD as required. Deliverable: award acknowledgement + bond.' },
+      { id: 't43', wbs: '7.4', name: 'Contract negotiation', phase: 'award', start: '2026-11-21', end: '2026-12-12', status: 'not-started', owner: 'L. Vijay Kumar Setty/Vinay', notes: 'SLAs, payment milestones, change-control, exit clauses, IP, data, audit. Deliverable: negotiated contract.', depends: '7.3' },
+      { id: 't44', wbs: '7.5', name: 'Contract signing', phase: 'award', start: '2026-12-12', end: '2026-12-19', status: 'not-started', owner: 'L. Vijay Kumar Setty', notes: 'USSPPL MD signs as authorised signatory. Deliverable: countersigned contract.', depends: '7.4' },
+
+      // ── PHASE 8: MOBILIZE ──
+      { id: 'P8', wbs: '8', name: 'MOBILIZE', phase: 'mobilize', isPhase: true, start: '2026-12-19', end: '2027-02-27', status: 'not-started', owner: 'Programme Manager', notes: 'First 60-90 days post-signing: stand up the programme, hire field ops, place hardware order, secure Monitoring Centre site.' },
+      { id: 't45', wbs: '8.1', name: 'Programme governance setup', phase: 'mobilize', start: '2026-12-19', end: '2027-01-09', status: 'not-started', owner: 'Programme Manager', notes: 'PMO charter, steering committee, weekly cadence with State, escalation paths. Deliverable: programme governance charter.' },
+      { id: 't46', wbs: '8.2', name: 'Field ops team hiring (AP)', phase: 'mobilize', start: '2026-12-19', end: '2027-02-13', status: 'not-started', owner: 'Veena', notes: 'Install technicians, supervisors, district leads, ground support. Deliverable: field ops team mobilised.' },
+      { id: 't47', wbs: '8.3', name: 'Hardware procurement order — first lot', phase: 'mobilize', start: '2027-01-09', end: '2027-02-06', status: 'not-started', owner: 'Anuradha', notes: 'PO to OEM (per 4.5 decision) for first lot — typically 25% of total volume. Deliverable: PO + delivery schedule.', depends: '7.5' },
+      { id: 't48', wbs: '8.4', name: 'Monitoring Centre site selection', phase: 'mobilize', start: '2026-12-26', end: '2027-02-06', status: 'not-started', owner: 'Veena/Vinay', notes: 'Identify, lease, fit-out State-approved Monitoring Centre site in AP. Power, network, redundancy. Deliverable: Centre site secured + fit-out plan.' },
+      { id: 't49', wbs: '8.5', name: 'Workforce training & SOP rollout', phase: 'mobilize', start: '2027-01-23', end: '2027-02-27', status: 'not-started', owner: 'Anuradha', notes: 'Train installers, Centre operators, support staff on AIS 140 SOP, escalation, panic-event handling. Deliverable: training records + SOP doc.' },
+
+      // ── PHASE 9: DELIVER ──
+      { id: 'P9', wbs: '9', name: 'DELIVER', phase: 'deliver', isPhase: true, start: '2027-02-13', end: '2027-09-25', status: 'not-started', owner: 'Programme Manager', notes: 'Pilot district → state-wide rollout → Monitoring Centre go-live → integrations live. Sequential with overlap.' },
+      { id: 't50', wbs: '9.1', name: 'Pilot district installation (1 RTO)', phase: 'deliver', start: '2027-02-13', end: '2027-03-27', status: 'not-started', owner: 'Field Ops Lead', notes: 'First RTO — install, commission, dashboard live for State ops. Deliverable: pilot district go-live.', depends: '8.3,8.4,8.5' },
+      { id: 't51', wbs: '9.2', name: 'Pilot acceptance testing', phase: 'deliver', start: '2027-03-13', end: '2027-04-10', status: 'not-started', owner: 'Anurag', notes: 'State-led UAT against contract acceptance criteria. Includes mock SOS drill + integration validation. Deliverable: signed UAT.', depends: '9.1' },
+      { id: 't52', wbs: '9.3', name: 'Monitoring Centre stand-up', phase: 'deliver', start: '2027-02-27', end: '2027-04-24', status: 'not-started', owner: 'Anuradha', notes: 'Centre live with 24×7 ops, dashboards, escalation workflows. Deliverable: Centre operational.', depends: '8.4,8.5' },
+      { id: 't53', wbs: '9.4', name: 'VAHAN / Police integrations live', phase: 'deliver', start: '2027-03-13', end: '2027-04-24', status: 'not-started', owner: 'Anurag', notes: 'Integrations cut-over from sandbox to production. Deliverable: integrations live + signed-off.', depends: '3.4,3.5,9.3' },
+      { id: 't54', wbs: '9.5', name: 'State-wide rollout — wave 1 (5 RTOs)', phase: 'deliver', start: '2027-04-24', end: '2027-06-19', status: 'not-started', owner: 'Field Ops Lead', notes: 'Replicate pilot pattern across next 5 RTOs. Deliverable: wave 1 districts live.', depends: '9.2' },
+      { id: 't55', wbs: '9.6', name: 'State-wide rollout — wave 2 (remaining RTOs)', phase: 'deliver', start: '2027-06-19', end: '2027-09-11', status: 'not-started', owner: 'Field Ops Lead', notes: 'Remaining districts; full state coverage. Deliverable: full state coverage live.', depends: '9.5' },
+      { id: 't56', wbs: '9.7', name: 'Final acceptance — State-wide go-live', phase: 'deliver', start: '2027-09-11', end: '2027-09-25', status: 'not-started', owner: 'Programme Manager', notes: 'State-wide acceptance, milestone payment trigger. Deliverable: State-wide acceptance certificate.', depends: '9.6' },
+
+      // ── PHASE 10: OPERATE ──
+      { id: 'P10', wbs: '10', name: 'OPERATE', phase: 'operate', isPhase: true, start: '2027-09-25', end: '2030-12-31', status: 'not-started', owner: 'Operations Lead', notes: 'Steady-state run. SLAs, quarterly Centre reviews, continuous improvement. Multi-year managed-services horizon.' },
+      { id: 't57', wbs: '10.1', name: '24×7 operations launch', phase: 'operate', start: '2027-09-25', end: '2027-10-09', status: 'not-started', owner: 'Operations Lead', notes: 'Hand-off from delivery to operations. SOPs, on-call, shift roster. Deliverable: ops launch package.', depends: '9.7' },
+      { id: 't58', wbs: '10.2', name: 'Monthly SLA reporting cadence', phase: 'operate', start: '2027-10-09', end: '2030-12-31', status: 'not-started', owner: 'Operations Lead', notes: 'Monthly report to State on uptime, response time, panic-event SLA, device-replacement SLA. Deliverable: ongoing monthly SLA reports.' },
+      { id: 't59', wbs: '10.3', name: 'Quarterly Centre reviews', phase: 'operate', start: '2027-12-25', end: '2030-12-31', status: 'not-started', owner: 'Programme Manager', notes: 'Joint review with State on operational performance, incident trends, improvement asks. Deliverable: quarterly review minutes.' },
+      { id: 't60', wbs: '10.4', name: 'Continuous improvement programme', phase: 'operate', start: '2027-10-09', end: '2030-12-31', status: 'not-started', owner: 'Anurag', notes: 'Track AIS 140 amendments, Govt advisories, citizen-grievance trends. Roll forward platform releases. Deliverable: CI backlog + release log.' },
+
+      // ── PHASE 11: APPROVED VENDOR CHANNEL (B2C) — CONTINGENT ON SCOPE VALIDATION ──
+      { id: 'P11', wbs: '11', name: 'APPROVED VENDOR CHANNEL (B2C) — CONTINGENT', phase: 'mandate', isPhase: true, start: '2026-05-09', end: '2027-12-31', status: 'not-started', owner: 'TBD', notes: '🟠 ENTIRE PHASE IS CONTINGENT on scope validation (1.1a). If the 1.6M mandate is confirmed as a State-empanelled B2C channel, USSPPL applies to be an approved vendor and SUB-CONTRACTS the channel build (sales, marketing, RTO install centres, payment, AMC, customer support, fleet-owner app) to a partner with FASTag-style distribution muscle. Veena leads B2G (Track A); B2C lead is TBD. If scope validation lands as B2G-only, this phase is parked.' },
+      { id: 't61', wbs: '11.1', name: 'Validate B2C empanelment scope with AP Transport (BLOCKING)', phase: 'mandate', start: '2026-05-09', end: '2026-05-30', status: 'not-started', owner: 'Veena/Vinay', notes: '🟠 BLOCKING. Confirm: (1) is the 1.6M mandate a B2C empanelment? (2) Is there an existing approved-vendor list or one being created? (3) Empanelment criteria + timing. (4) Is pricing State-capped or vendor-discretionary? (5) Mandate trigger (registration / fitness / renewal)? Deliverable: written replies — see Critical-Questions-to-Validate.md §A4–§A9.', depends: '1.1a' },
+      { id: 't62', wbs: '11.2', name: 'Sub-contractor candidate research', phase: 'mandate', start: '2026-05-09', end: '2026-05-30', status: 'not-started', owner: 'TBD', notes: 'Build candidate list of 8-10 sub-contractors with FASTag-style or VLTD-retail distribution muscle in AP / India. Three candidate groups: FASTag distributors / aggregators (SiOnline, bank BCs, Paytm), VLTD-experienced channel players (Vamosys, MapmyIndia, LocoNav, Roadpoint), AP RTO/Govt-services BPOs (CSC, NICSI partners). See sourcing/sourcing-and-channel-research.md §4. Deliverable: scored sub-contractor candidate list.' },
+      { id: 't63', wbs: '11.3', name: 'Empanelment application package preparation', phase: 'mandate', start: '2026-06-01', end: '2026-07-15', status: 'not-started', owner: 'TBD', notes: 'CONTINGENT on 11.1 confirming the empanelment exists. Prepare USSPPL application: corporate docs, AIS 140 cert chain, financials, references, technical capability, channel plan, service standards. Deliverable: empanelment application v1.', depends: '11.1' },
+      { id: 't64', wbs: '11.4', name: 'Sub-contractor commercial talks — shortlist 2 finalists', phase: 'mandate', start: '2026-06-01', end: '2026-07-15', status: 'not-started', owner: 'TBD', notes: 'CONTINGENT on 11.1. From candidates in 11.2, run commercial talks; score on AP coverage, install bay count, agent count, monthly run-rate, willingness to operate as sub-contractor. Deliverable: 2 finalists + draft commercial term sheet.', depends: '11.1,11.2' },
+      { id: 't65', wbs: '11.5', name: 'Empanelment submission to AP Transport', phase: 'mandate', start: '2026-07-15', end: '2026-09-30', status: 'not-started', owner: 'TBD', notes: 'Submit USSPPL empanelment application per AP State scheme. Deliverable: submitted application + acknowledgement.', depends: '11.3' },
+      { id: 't66', wbs: '11.6', name: 'Sub-contractor selection + agreement signed', phase: 'mandate', start: '2026-09-30', end: '2026-11-30', status: 'not-started', owner: 'TBD', notes: 'CONTINGENT on empanelment grant. Pick winning sub-contractor; sign back-to-back agreement (revenue split, service standards, term, exit, IP, brand). Deliverable: signed sub-contractor agreement.', depends: '11.4,11.5' },
+      { id: 't67', wbs: '11.7', name: 'Channel-build kick-off (sub-contractor-led)', phase: 'mandate', start: '2026-12-01', end: '2027-03-31', status: 'not-started', owner: 'TBD', notes: 'Sub-contractor stands up: dealer network, RTO install bays, retail price book, payment + EMI, customer support stack, fleet-owner mobile app, marketing campaign. USSPPL provides device, platform, AIS 140 cert, brand. Deliverable: channel ready for go-live in pilot district.', depends: '11.6' },
+      { id: 't68', wbs: '11.8', name: 'B2C channel pilot launch — 1 RTO district', phase: 'mandate', start: '2027-04-01', end: '2027-06-30', status: 'not-started', owner: 'TBD', notes: 'Pilot launch in one AP RTO district aligned with Track A (B2G) pilot district where possible. Validate retail demand, install throughput, AMC adoption. Deliverable: B2C pilot district outcomes report.', depends: '11.7' },
+      { id: 't69', wbs: '11.9', name: 'B2C channel state-wide rollout', phase: 'mandate', start: '2027-07-01', end: '2027-12-31', status: 'not-started', owner: 'TBD', notes: 'Phased state-wide channel expansion. Tied to mandate trigger calendar (registration / fitness / renewal cadence). Deliverable: state-wide channel live.', depends: '11.8' },
+    ],
+    risks: [
+      { id: 'R01', desc: 'AP RFP delayed or not issued — entire opportunity slips. Pre-RFP capability briefing earns invitation, but Govt timelines are not in our control.', likelihood: 'Medium', impact: 'Critical', mitigation: 'RFP issuance watch (1.7). Maintain warm secondary engagements (1.6). Use the partnership window (Phase 2) and compliance dossier (Phase 3) productively while waiting — they hold value across multiple State opportunities.', owner: 'Veena/Vinay', status: 'open' },
+      { id: 'R02', desc: 'USSPPL not eligible for AP State e-Procurement at RFP issuance — registration lapsed, DSC expired, or ineligible based on category.', likelihood: 'Medium', impact: 'Critical', mitigation: 'Registration check (5.1) + DSC currency (5.2) front-loaded. Confirm category eligibility before RFP issues — not after.', owner: 'L. Vijay Kumar Setty', status: 'open' },
+      { id: 'R03', desc: 'ICAT COP for Bharat101 lapses (current validity 31-Mar-2027). If RFP / contract spans the renewal, a gap could nullify the bid or a payment milestone.', likelihood: 'Medium', impact: 'High', mitigation: 'Force iTriangle to commit to renewal calendar and share renewal evidence at least 90 days before expiry. Add cert-validity clause to teaming agreement. Track in compliance dossier.', owner: 'Anuradha', status: 'open' },
+      { id: 'R04', desc: 'iTriangle OEM dependency — single supplier risk. If iTriangle pulls out, raises prices, or fails to scale, the bid is exposed.', likelihood: 'Medium', impact: 'High', mitigation: 'China FOB sourcing track (4.1, 4.3) provides leverage and a Plan B. BOM analysis (4.4) lets us model iTriangle vs alternative cost on day one. Plan B device must be AIS 140 certifiable, not just cheaper.', owner: 'Vinay', status: 'open' },
+      { id: 'R05', desc: 'CERT-In empanelment / cyber-audit not in place — could block Govt cloud hosting decision and force re-architecture mid-bid or post-award.', likelihood: 'High', impact: 'High', mitigation: 'CERT-In path document (3.6) early. Identify auditor + cost + timeline before bid. Budget the cost into commercials (6.4).', owner: 'Vinay/Anurag', status: 'open' },
+      { id: 'R06', desc: 'AP Transport / Police backend integration claimed by Fleetronix is thinner than represented — actual integration requires custom work and a longer timeline than allowed in bid.', likelihood: 'Medium', impact: 'High', mitigation: 'Verify with technical test (3.4) and scoping (3.5) before bid commits to a timeline. Build buffer into delivery plan (Phase 9). If gap is large, raise it in bid as conditional / phased.', owner: 'Anurag', status: 'open' },
+      { id: 'R07', desc: 'Centre 60% / State 40% funding pattern shifts or Centre share is delayed by Ministry — affects payment milestones and cash flow.', likelihood: 'Medium', impact: 'High', mitigation: 'Bid commercials assume current 60:40 split; include a payment-trigger clause tied to Centre disbursement. Maintain visibility into MoRTH disbursement cadence through partner network.', owner: 'L. Vijay Kumar Setty', status: 'open' },
+      { id: 'R08', desc: 'Fleetronix State-scale capacity — current footprint is 7,000+ devices. AP Cat-A scope may need 20K-50K devices. Scaling field ops, install, and support 5-10× is non-trivial.', likelihood: 'Medium', impact: 'High', mitigation: 'AP local presence plan (5.5). USSP India bench surge (5.4). Stage rollout across waves (9.5, 9.6) so capacity ramps with delivery, not all at once. Include scale plan in bid (6.3).', owner: 'Veena', status: 'open' },
+      { id: 'R09', desc: 'Incumbent / competitor advantage — large Indian PSU or systems integrator may already be wired into the AP RFP scope.', likelihood: 'Medium', impact: 'High', mitigation: 'Pre-RFP relationship investment (1.4, 1.6). Differentiation built around all-woman tech founders (Nirbhaya alignment), Govt-grade USSP wrapper, and proven AIS 140 hardware. Prepare for RFP shaping influence by competitor.', owner: 'Vinay/Veena', status: 'open' },
+      { id: 'R10', desc: 'China sourcing geopolitical / strategic concerns — sourcing AIS 140 hardware from China for an Indian Govt project may be politically sensitive (PMC India context).', likelihood: 'Medium', impact: 'Medium', mitigation: 'China track is leverage and Plan B, not Plan A. Primary OEM stays Indian (iTriangle). If China path is used, ensure Indian assembly / re-labelling and full ARAI/ICAT cert in India. Be ready to drop the track entirely if Govt sentiment shifts.', owner: 'Vinay', status: 'open' },
+      { id: 'R11', desc: 'Cross-entity role conflict — Veena is a Fleetronix co-founder operating in a USSP-side capacity. Conflict of interest if interests of the two firms diverge during bid.', likelihood: 'Low', impact: 'Medium', mitigation: 'Teaming agreement (2.1, 2.4) explicitly addresses Veena\'s dual role. Clear roles + revenue split (2.2). Dispute-resolution clause.', owner: 'Vinay', status: 'open' },
+      { id: 'R12', desc: 'Cyber-incident on Bharat101 device or platform during pilot or operate phase — data breach, panic-event manipulation, or device hijack could end the contract.', likelihood: 'Low', impact: 'Critical', mitigation: 'CERT-In auditor (3.6) does pre-go-live + annual audits. Device firmware integrity, OTA-update authentication, secure boot. Cyber-incident SOP in run-book.', owner: 'Anurag', status: 'open' },
+      { id: 'R13', desc: 'Single-state opportunity — if AP is the only realistic State, scale economics for OEM negotiation, AMC, and hiring are weaker than a multi-State story.', likelihood: 'Medium', impact: 'Medium', mitigation: 'Joint go-to-market plan (2.5) targets 2 additional States. Bid commercials should not assume multi-State, but partnership posture (2.4) should make follow-on bids low-friction.', owner: 'Vinay/Veena', status: 'open' },
+      { id: 'R14', desc: 'Naren onboarding stalls or role unclear — India team operates with ambiguity for several weeks; pursuit work suffers.', likelihood: 'Medium', impact: 'Low', mitigation: 'Define role + access within 2 weeks (5.3). If onboarding cannot complete, reassign open work-stream items to Anurag or Veena and update project memory.', owner: 'Vinay/Veena', status: 'open' },
+      { id: 'R15', desc: 'iTriangle COP renewal disruption — if iTriangle changes test process or fails recertification, our preferred device is uncertified between expiry and re-issue.', likelihood: 'Low', impact: 'High', mitigation: 'Get iTriangle commitment to start renewal Q4 2026. Maintain China sourcing track as fall-back. Watch ICAT public bulletins.', owner: 'Anuradha', status: 'open' },
+    ],
+    assumptions: [
+      { id: 'A01', desc: 'AP RFP for AIS 140 / VLTD Monitoring Centre will issue in Q3 2026.', status: 'assumed', validate: 'Confirm with AP Transport contacts during pursuit phase (1.6). Track AP eProc daily (1.7).', owner: 'Vinay', notes: 'Pre-RFP signal is the Minister-level capability invitation. If RFP slips to Q4 or Q1 2027, all downstream dates shift.' },
+      { id: 'A02', desc: 'Centre 60 : State 40 funding pattern remains intact at RFP issuance.', status: 'assumed', validate: 'Watch MoRTH advisories, AP Transport budget releases.', owner: 'L. Vijay Kumar Setty', notes: 'Affects commercials and payment-milestone structure.' },
+      { id: 'A03', desc: 'USSPPL is registered on AP eProc and signing authority (DSC) is current.', status: 'unvalidated', validate: 'Direct check via 5.1 + 5.2.', owner: 'L. Vijay Kumar Setty', notes: 'Critical-path eligibility item.' },
+      { id: 'A04', desc: 'iTriangle is willing to extend its OEM relationship to support the USSPPL × Fleetronix joint bid for AP.', status: 'unvalidated', validate: '4.2 commercial negotiation.', owner: 'Anuradha', notes: 'Without iTriangle, we fall back to the China sourcing track, which is unproven for AIS 140 cert.' },
+      { id: 'A05', desc: 'Fleetronix can scale from current 7,000+ device footprint to 20K-50K devices in AP within the contract delivery window.', status: 'at-risk', validate: 'Field ops capacity plan (5.5) and India delivery plan (5.4) test this directly.', owner: 'Veena', notes: 'Larger capacity gap may force a phased rollout in the bid (Phase 9).' },
+      { id: 'A06', desc: 'Fleetronix integration claims for AP Transport Dept and AP Police emergency systems are technically valid and bid-defensible.', status: 'unvalidated', validate: 'Technical tests in 3.4 and 3.5.', owner: 'Anurag', notes: 'Stated by Fleetronix in the Compliance & Technical Response document.' },
+      { id: 'A07', desc: 'ICAT COP renewal for Bharat101 (currently valid through 31-Mar-2027) is routine with iTriangle\'s current process.', status: 'assumed', validate: 'Get iTriangle commitment + renewal calendar.', owner: 'Anuradha', notes: 'See R03, R15. Plan must have a fall-back if renewal stalls.' },
+      { id: 'A08', desc: 'USSPPL serves as prime / lead bidder; Fleetronix is named technology subcontractor.', status: 'assumed', validate: 'Teaming agreement 2.1.', owner: 'Vinay', notes: 'Inverts only if AP RFP eligibility specifically requires the technology firm as prime.' },
+      { id: 'A09', desc: 'AP State retains the project on its current scope — no re-tender or scope reset before contract award.', status: 'assumed', validate: 'Stakeholder map (1.4) tracks signal.', owner: 'Veena', notes: 'Govt re-tender is a known industry risk; mitigated by relationship investment.' },
+      { id: 'A10', desc: 'Naren joins the project team and takes on a defined role alongside Veena, Anurag, and Anuradha.', status: 'pending', validate: '5.3 role memo.', owner: 'Vinay', notes: 'Added to project team 2026-04-27. Full name, role, and contact pending.' },
+      { id: 'A11', desc: 'Ratish Nair returns actionable China FOB sourcing options within ~4 weeks of email.', status: 'pending', validate: '4.3 vetting against Ratish recommendations.', owner: 'Vinay', notes: 'Email drafted 2026-04-25, awaiting send authorization.' },
+      { id: 'A12', desc: 'Pre-RFP Minister-level capability presentation lands well — earns invitation to formal RFP process and warm reception during evaluation.', status: 'pending', validate: '1.2 outcome + 1.3 follow-up traction.', owner: 'Veena/Vinay', notes: 'If the meeting goes badly, pursuit posture must shift to broader stakeholder coverage (1.4, 1.6).' },
+      { id: 'A13', desc: 'Single-state AP opportunity is a viable economic path on its own — multi-state is upside, not required for bid economics.', status: 'assumed', validate: 'Commercials in 6.4 must close on AP-only volumes.', owner: 'Vinay', notes: 'See R13.' },
+      { id: 'A14', desc: 'CERT-In empanelment can be obtained in time for bid submission or, at minimum, has a credible path documented.', status: 'unvalidated', validate: '3.6 CERT-In assessment plan.', owner: 'Vinay/Anurag', notes: 'See R05. Some State RFPs require empanelment up-front; others accept a credible plan.' },
+      { id: 'A15', desc: 'USSP India bench can provide surge resources (architects, integration engineers, programme management) within agreed lead times during mobilize and delivery phases.', status: 'assumed', validate: 'Confirm bench capacity with USSP delivery leadership before bid commercials are finalised (6.4).', owner: 'Vinay', notes: 'Bench depth assumption is built into the "Why USSPPL" pitch and must hold during delivery.' },
+    ]
+  };
+}
+
+function loadData() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed._version === DATA_VERSION) return parsed;
+      console.log(`Planner data updated: v${parsed._version || 1} → v${DATA_VERSION}`);
+    }
+  } catch(e) {}
+  return getDefaultData();
+}
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  const el = document.getElementById('save-indicator');
+  el.textContent = 'Saved ✓';
+  el.className = 'save-indicator saved';
+  setTimeout(() => { el.textContent = 'Auto-saved'; el.className = 'save-indicator'; }, 2000);
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    t.classList.toggle('active', ['gantt','risks','assumptions'][i] === tab);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+function getWeekDates() {
+  const weeks = [];
+  for (let i = 0; i < WEEKS_TO_SHOW; i++) {
+    const d = new Date(PROJECT_START);
+    d.setDate(d.getDate() + i * 7);
+    weeks.push(d);
+  }
+  return weeks;
+}
+
+function daysBetween(d1, d2) {
+  return Math.round((new Date(d2) - new Date(d1)) / (1000*60*60*24));
+}
+
+if (!data.collapsedPhases) {
+  data.collapsedPhases = {};
+  data.tasks.forEach(t => { if (t.isPhase) data.collapsedPhases[t.id] = true; });
+}
+
+function toggleCollapse(phaseId) {
+  data.collapsedPhases[phaseId] = !data.collapsedPhases[phaseId];
+  saveData();
+  renderGantt();
+}
+
+function renderGantt() {
+  const weeks = getWeekDates();
+  const totalDays = WEEKS_TO_SHOW * 7;
+  const filter = document.getElementById('phase-filter').value;
+
+  const header = document.getElementById('gantt-header');
+  header.innerHTML = `<tr>
+    <th style="width:50px">WBS</th>
+    <th style="width:220px">Task</th>
+    <th style="width:90px">Start</th>
+    <th style="width:90px">End</th>
+    <th style="width:70px">Depends</th>
+    <th style="width:80px">Owner</th>
+    <th class="col-effort" style="width:60px">Effort</th>
+    <th style="width:80px">Status</th>
+    <th style="min-width:${WEEKS_TO_SHOW * 40}px">
+      <div class="timeline-header">${weeks.map(w => `<div class="timeline-week">${(w.getMonth()+1)}/${w.getDate()}</div>`).join('')}</div>
+    </th>
+    <th style="width:30px"></th>
+  </tr>`;
+
+  const body = document.getElementById('gantt-body');
+  body.innerHTML = '';
+  const filteredTasks = filter === 'all' ? data.tasks : data.tasks.filter(t => t.phase === filter || t.isPhase);
+
+  let currentPhaseId = null;
+
+  filteredTasks.forEach((task) => {
+    if (task.isPhase) currentPhaseId = task.id;
+    const isChild = !task.isPhase;
+    const isCollapsed = isChild && currentPhaseId && data.collapsedPhases[currentPhaseId];
+
+    const tr = document.createElement('tr');
+    if (isCollapsed) tr.classList.add('collapsed-child');
+
+    const startDay = Math.max(0, daysBetween(PROJECT_START, task.start));
+    const duration = Math.max(1, daysBetween(task.start, task.end));
+    const barLeft = (startDay / totalDays) * 100;
+    const barWidth = (duration / totalDays) * 100;
+    const barClass = task.phase || 'default';
+
+    const collapseBtn = task.isPhase
+      ? `<button class="collapse-btn" onclick="event.stopPropagation();toggleCollapse('${task.id}')" title="Collapse/Expand">${data.collapsedPhases[task.id] ? '▶' : '▼'}</button>`
+      : '';
+
+    const depDisplay = task.depends ? `<span class="dep-tag">${task.depends}</span>` : '';
+
+    tr.innerHTML = `
+      <td class="wbs-id">${task.wbs}</td>
+      <td class="task-name ${task.isPhase ? 'phase' : ''}" style="cursor:pointer" onclick="openNotes('${task.id}')">
+        ${collapseBtn}
+        <input type="text" value="${task.name}" onchange="updateTask('${task.id}','name',this.value)" style="${task.isPhase ? 'font-weight:700' : ''}; ${task.isPhase ? 'width:calc(100% - 24px);display:inline' : 'width:100%'}">
+      </td>
+      <td><input type="date" value="${task.start}" onchange="updateTask('${task.id}','start',this.value)"></td>
+      <td><input type="date" value="${task.end}" onchange="updateTask('${task.id}','end',this.value)"></td>
+      <td>${task.isPhase ? '' : `<input type="text" value="${task.depends||''}" onchange="updateTask('${task.id}','depends',this.value)" placeholder="e.g. 1.4" style="width:50px;font-size:11px" title="Enter WBS # of dependency">`}${depDisplay}</td>
+      <td><input type="text" value="${task.owner}" onchange="updateTask('${task.id}','owner',this.value)" style="width:70px"></td>
+      <td class="col-effort"><input type="text" value="${task.effort||''}" onchange="updateTask('${task.id}','effort',this.value)" placeholder="" style="width:50px;font-size:11px;text-align:center"></td>
+      <td>
+        <select onchange="updateTask('${task.id}','status',this.value)">
+          <option value="not-started" ${task.status==='not-started'?'selected':''}>Not Started</option>
+          <option value="in-progress" ${task.status==='in-progress'?'selected':''}>In Progress</option>
+          <option value="completed" ${task.status==='completed'?'selected':''}>Completed</option>
+          <option value="blocked" ${task.status==='blocked'?'selected':''}>Blocked</option>
+        </select>
+      </td>
+      <td class="gantt-bar-cell" style="min-width:${WEEKS_TO_SHOW * 40}px; position:relative;">
+        <div class="gantt-bar ${barClass}" style="left:${barLeft}%;width:${barWidth}%;" title="${task.name}: ${task.start} → ${task.end}${task.depends ? ' (depends on ' + task.depends + ')' : ''}"></div>
+      </td>
+      <td><button class="btn-delete" onclick="deleteTask('${task.id}')" title="Remove">&times;</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function updateTask(id, field, value) {
+  const task = data.tasks.find(t => t.id === id);
+  if (task) { task[field] = value; saveData(); renderGantt(); }
+}
+
+function addTask() {
+  data.tasks.push({
+    id: 't' + Date.now(), wbs: '?.?', name: 'New Task', phase: 'pursuit',
+    start: '2026-04-25', end: '2026-05-02', status: 'not-started', owner: '', notes: ''
+  });
+  saveData(); renderGantt();
+}
+
+function addPhase() {
+  data.tasks.push({
+    id: 'P' + Date.now(), wbs: '?', name: 'NEW PHASE', phase: 'pursuit', isPhase: true,
+    start: '2026-04-25', end: '2026-05-02', status: 'not-started', owner: '', notes: ''
+  });
+  saveData(); renderGantt();
+}
+
+function deleteTask(id) {
+  if (confirm('Remove this task?')) {
+    data.tasks = data.tasks.filter(t => t.id !== id);
+    saveData(); renderGantt();
+  }
+}
+
+let currentNotesId = null;
+function openNotes(id) {
+  currentNotesId = id;
+  const task = data.tasks.find(t => t.id === id);
+  if (!task) return;
+  document.getElementById('notes-title').textContent = task.wbs + ' — ' + task.name;
+  document.getElementById('notes-text').value = task.notes || '';
+  document.getElementById('notes-panel').classList.add('open');
+}
+function closeNotes() { document.getElementById('notes-panel').classList.remove('open'); }
+function saveNotes() {
+  if (!currentNotesId) return;
+  const task = data.tasks.find(t => t.id === currentNotesId);
+  if (task) { task.notes = document.getElementById('notes-text').value; saveData(); }
+}
+
+function renderRisks() {
+  const body = document.getElementById('risks-body');
+  body.innerHTML = '';
+  document.getElementById('risk-count').textContent = data.risks.length;
+
+  data.risks.forEach((r, i) => {
+    const score = getLikelihoodNum(r.likelihood) * getImpactNum(r.impact);
+    const scoreClass = score >= 15 ? 'severity-critical' : score >= 10 ? 'severity-high' : score >= 5 ? 'severity-medium' : 'severity-low';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-weight:600">${r.id}</td>
+      <td><textarea onchange="updateRisk(${i},'desc',this.value)">${r.desc}</textarea></td>
+      <td><select onchange="updateRisk(${i},'likelihood',this.value)">
+        <option ${r.likelihood==='Low'?'selected':''}>Low</option>
+        <option ${r.likelihood==='Medium'?'selected':''}>Medium</option>
+        <option ${r.likelihood==='High'?'selected':''}>High</option>
+        <option ${r.likelihood==='Unknown'?'selected':''}>Unknown</option>
+      </select></td>
+      <td><select onchange="updateRisk(${i},'impact',this.value)">
+        <option ${r.impact==='Low'?'selected':''}>Low</option>
+        <option ${r.impact==='Medium'?'selected':''}>Medium</option>
+        <option ${r.impact==='High'?'selected':''}>High</option>
+        <option ${r.impact==='Critical'?'selected':''}>Critical</option>
+      </select></td>
+      <td class="${scoreClass}" style="text-align:center;font-size:16px">${score}</td>
+      <td><textarea onchange="updateRisk(${i},'mitigation',this.value)">${r.mitigation}</textarea></td>
+      <td><input type="text" value="${r.owner}" onchange="updateRisk(${i},'owner',this.value)"></td>
+      <td><select onchange="updateRisk(${i},'status',this.value)">
+        <option ${r.status==='open'?'selected':''}>open</option>
+        <option ${r.status==='mitigated'?'selected':''}>mitigated</option>
+        <option ${r.status==='closed'?'selected':''}>closed</option>
+        <option ${r.status==='accepted'?'selected':''}>accepted</option>
+      </select></td>
+      <td><button class="btn-delete" onclick="deleteRisk(${i})">&times;</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function getLikelihoodNum(l) { return {Low:1,Medium:3,High:5,Unknown:3}[l]||3; }
+function getImpactNum(i) { return {Low:1,Medium:3,High:5,Critical:7}[i]||3; }
+
+function updateRisk(idx, field, value) { data.risks[idx][field] = value; saveData(); renderRisks(); }
+function addRisk() {
+  data.risks.push({ id: 'R' + (data.risks.length + 1).toString().padStart(2,'0'), desc: '', likelihood: 'Medium', impact: 'Medium', mitigation: '', owner: '', status: 'open' });
+  saveData(); renderRisks();
+}
+function deleteRisk(idx) { if (confirm('Remove this risk?')) { data.risks.splice(idx, 1); saveData(); renderRisks(); } }
+
+function renderAssumptions() {
+  const body = document.getElementById('assumptions-body');
+  body.innerHTML = '';
+  document.getElementById('assumption-count').textContent = data.assumptions.length;
+
+  data.assumptions.forEach((a, i) => {
+    const statusColors = { validated: 'color:var(--green)', unvalidated: 'color:var(--red)', pending: 'color:var(--amber)', assumed: 'color:var(--blue)', unknown: 'color:var(--gray)', 'at-risk': 'color:var(--red)' };
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-weight:600">${a.id}</td>
+      <td><textarea onchange="updateAssumption(${i},'desc',this.value)">${a.desc}</textarea></td>
+      <td><select style="${statusColors[a.status]||''};font-weight:600" onchange="updateAssumption(${i},'status',this.value)">
+        <option value="validated" ${a.status==='validated'?'selected':''}>Validated</option>
+        <option value="unvalidated" ${a.status==='unvalidated'?'selected':''}>Unvalidated</option>
+        <option value="pending" ${a.status==='pending'?'selected':''}>Pending</option>
+        <option value="assumed" ${a.status==='assumed'?'selected':''}>Assumed</option>
+        <option value="at-risk" ${a.status==='at-risk'?'selected':''}>At Risk</option>
+        <option value="unknown" ${a.status==='unknown'?'selected':''}>Unknown</option>
+      </select></td>
+      <td><textarea onchange="updateAssumption(${i},'validate',this.value)">${a.validate}</textarea></td>
+      <td><input type="text" value="${a.owner}" onchange="updateAssumption(${i},'owner',this.value)"></td>
+      <td><textarea onchange="updateAssumption(${i},'notes',this.value)">${a.notes||''}</textarea></td>
+      <td><button class="btn-delete" onclick="deleteAssumption(${i})">&times;</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+function updateAssumption(idx, field, value) { data.assumptions[idx][field] = value; saveData(); renderAssumptions(); }
+function addAssumption() {
+  data.assumptions.push({ id: 'A' + (data.assumptions.length + 1).toString().padStart(2,'0'), desc: '', status: 'assumed', validate: '', owner: '', notes: '' });
+  saveData(); renderAssumptions();
+}
+function deleteAssumption(idx) { if (confirm('Remove this assumption?')) { data.assumptions.splice(idx, 1); saveData(); renderAssumptions(); } }
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `fleetronix-vltd-planner-${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+}
+function exportExcel() {
+  var statusLabel = { 'not-started': 'Not Started', 'in-progress': 'In Progress', 'completed': 'Completed', 'blocked': 'Blocked' };
+  function csvEsc(s) {
+    s = (s||'').replace(/\r?\n/g, ' ');
+    if (s.indexOf(',') !== -1 || s.indexOf('"') !== -1 || s.indexOf('\n') !== -1) {
+      return '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+  var lines = ['WBS,Task,Start,End,Depends,Owner,Effort,Status,Notes / Deliverables'];
+  data.tasks.forEach(function(t) {
+    lines.push([
+      csvEsc(t.wbs), csvEsc(t.name), t.start, t.end,
+      csvEsc(t.depends||''), csvEsc(t.owner), csvEsc(t.effort||''),
+      csvEsc(statusLabel[t.status]||t.status), csvEsc(t.notes||'')
+    ].join(','));
+  });
+  lines.push(''); lines.push(''); lines.push('RISK REGISTER');
+  lines.push('ID,Risk,Likelihood,Impact,Mitigation,Owner,Status');
+  data.risks.forEach(function(r) {
+    lines.push([
+      csvEsc(r.id), csvEsc(r.desc), csvEsc(r.likelihood), csvEsc(r.impact),
+      csvEsc(r.mitigation), csvEsc(r.owner), csvEsc(r.status)
+    ].join(','));
+  });
+  lines.push(''); lines.push(''); lines.push('ASSUMPTIONS LOG');
+  lines.push('ID,Assumption,Status,Validation,Owner,Notes');
+  data.assumptions.forEach(function(a) {
+    lines.push([
+      csvEsc(a.id), csvEsc(a.desc), csvEsc(a.status),
+      csvEsc(a.validate), csvEsc(a.owner), csvEsc(a.notes||'')
+    ].join(','));
+  });
+  var csv = '﻿' + lines.join('\r\n');
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'fleetronix-vltd-planner-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+}
+
+function exportMSProjectXML() {
+  const uidMap = {};
+  data.tasks.forEach((t, i) => { uidMap[t.wbs] = i + 1; });
+  const pctMap = { 'completed': 100, 'in-progress': 50, 'blocked': 25, 'not-started': 0 };
+  let tasksXml = '';
+  data.tasks.forEach((task, i) => {
+    const uid = i + 1;
+    const start = task.start + 'T08:00:00';
+    const end = task.end + 'T17:00:00';
+    const pct = pctMap[task.status] || 0;
+    const outline = task.isPhase ? 1 : 2;
+    const summary = task.isPhase ? 1 : 0;
+    const name = task.name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const notes = (task.notes || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const owner = (task.owner || '').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    let predXml = '';
+    if (task.depends) {
+      task.depends.split(',').forEach(dep => {
+        const depWbs = dep.trim();
+        if (uidMap[depWbs]) {
+          predXml += `
+        <PredecessorLink>
+          <PredecessorUID>${uidMap[depWbs]}</PredecessorUID>
+          <Type>1</Type>
+        </PredecessorLink>`;
+        }
+      });
+    }
+    tasksXml += `
+    <Task>
+      <UID>${uid}</UID>
+      <ID>${uid}</ID>
+      <Name>${name}</Name>
+      <WBS>${task.wbs}</WBS>
+      <OutlineLevel>${outline}</OutlineLevel>
+      <Summary>${summary}</Summary>
+      <Start>${start}</Start>
+      <Finish>${end}</Finish>
+      <PercentComplete>${pct}</PercentComplete>
+      <Notes>${notes}</Notes>
+      <ResourceNames>${owner}</ResourceNames>${predXml}
+    </Task>`;
+  });
+  const xml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project xmlns="http://schemas.microsoft.com/project">
+  <Name>Fleetronix VLTD / AIS 140 — Project</Name>
+  <StartDate>${PROJECT_START.toISOString().slice(0,10)}T08:00:00</StartDate>
+  <CalendarUID>1</CalendarUID>
+  <Calendars>
+    <Calendar>
+      <UID>1</UID>
+      <Name>Standard</Name>
+      <IsBaseCalendar>1</IsBaseCalendar>
+      <WeekDays>
+        <WeekDay><DayType>1</DayType><DayWorking>0</DayWorking></WeekDay>
+        <WeekDay><DayType>7</DayType><DayWorking>0</DayWorking></WeekDay>
+      </WeekDays>
+    </Calendar>
+  </Calendars>
+  <Tasks>${tasksXml}
+  </Tasks>
+</Project>`;
+  const blob = new Blob([xml], { type: 'application/xml' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `fleetronix-vltd-planner-${new Date().toISOString().slice(0,10)}.xml`;
+  a.click();
+}
+function importJSON() { document.getElementById('import-file').click(); }
+function toggleEffort() {
+  const table = document.getElementById('gantt-table');
+  table.classList.toggle('show-effort');
+  const btn = document.getElementById('effort-toggle');
+  btn.textContent = table.classList.contains('show-effort') ? 'Hide Effort' : 'Show Effort';
+}
+function resetData() {
+  if (confirm('Reset ALL data to defaults? This will overwrite any changes you made.')) {
+    localStorage.removeItem(STORAGE_KEY);
+    data = getDefaultData();
+    saveData();
+    renderGantt(); renderRisks(); renderAssumptions();
+    alert('Reset to default data with 11 phases and 70 tasks.');
+  }
+}
+function handleImport(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      data = JSON.parse(e.target.result);
+      saveData();
+      renderGantt(); renderRisks(); renderAssumptions();
+      alert('Imported successfully');
+    } catch(err) { alert('Invalid JSON file'); }
+  };
+  reader.readAsText(file);
+}
+
+renderGantt();
+renderRisks();
+renderAssumptions();
+</script>
+</body>
+</html>
