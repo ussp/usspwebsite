@@ -111,7 +111,7 @@ The pilot launches at PI Planning:
 - AI-generated outputs are being **reviewed and refined** (not blindly accepted)
 - Weekly check-ins surface **real feedback** (both positive and negative)
 - Metrics show **directional improvement** (even if small — trend matters more than magnitude)
-- No **compliance violations** (no PII in prompts, no autonomous code)
+- No **compliance violations** (no PII in prompts; HITL adherence on all AI-assisted commits)
 
 ## What to Watch For
 

@@ -50,7 +50,7 @@ These are non-negotiable constraints for the DCFS engagement:
 
 | Guardrail | Detail |
 |-----------|--------|
-| **No autonomous code generation** | Copilot provides suggestions only — developers implement all code. Documented in every playbook. |
+| **Human-in-the-loop required on all AI output. No autonomous AI commits.** | Developer reviews, edits, and accepts every AI suggestion; peer PR review and approval before commit. Documented in every playbook. |
 | **AI for SDLC only** | All targeted processes are delivery processes (story writing, testing, coding, docs). Zero business process automation. |
 | **No child information shared** | "No PII" rule in every playbook. Training module. Per-sprint spot checks. |
 | **No security documentation** | Security plans excluded from all AI tool contexts. Team is trained on boundaries. |

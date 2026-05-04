@@ -15,7 +15,7 @@ AI is becoming standard for high-performing delivery teams. The State has alread
 
 ### Amplify, Don't Replace
 
-AI augments the existing team — same people, better tools, more output. There is no workforce reduction. No autonomous code generation. AI assists, the human decides.
+AI augments the existing team — same people, better tools, more output. There is no workforce reduction. Human-in-the-loop is required on all AI output; no autonomous AI commits. AI assists, the human decides.
 
 ### Measure, Don't Guess
 
@@ -46,7 +46,7 @@ Govern → Baseline → Design → Train → Pilot → Measure → Playbook → 
 
 ## Key Constraints
 
-- **No autonomous code generation** — Copilot for suggestions only; developers implement all code
+- **Human-in-the-loop required on all AI output. No autonomous AI commits.** — Developer reviews, edits, and accepts every AI suggestion; peer PR review and approval before commit
 - **No PII in AI prompts** — No case data, no child information, no security documentation
 - **DoIT AI Policy compliance** — All 12 sections mapped to our compliance approach
 - **State-approved tools only** — GitHub Copilot + Atlassian Rovo. No additional tools without state approval

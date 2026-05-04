@@ -118,17 +118,17 @@ Document the actual JIRA workflow states for this team:
 
 For this specific team, which processes will be augmented:
 
-| SDLC Process | Role | Current State (how they do it today) | AI-Augmented State | AI Tool | Stair Step |
-|-------------|------|-------------------------------------|-------------------|---------|-----------|
-| Use case / requirement writing | BA-Technical | | | Rovo | Step 1 |
-| Acceptance criteria generation | BA-Technical | | | Rovo | Step 1 |
-| Configuration design | Config team | | | Power Platform AI | Step 4 |
-| Configuration generation | Config team | | | D365 Copilot | Step 4 |
-| Plugin / custom code | Developers | | | GitHub Copilot | Step 5 |
-| Code review | Developers | | | GitHub Copilot | Step 2 |
-| Documentation | All | | | Copilot | Step 2 |
-| Test script creation | Testers | | | Copilot + Rovo | Step 3 |
-| Sprint insights | Scrum Master | | | Rovo | Step 1 |
+| SDLC Process | Role | Current State (how they do it today) | AI-Augmented State | AI Tool | HITL Controls |
+|-------------|------|-------------------------------------|-------------------|---------|---------------|
+| Use case / requirement writing | BA-Technical | | | Rovo | Author reviews/edits; peer review |
+| Acceptance criteria generation | BA-Technical | | | Rovo | Author reviews/edits; peer review |
+| Configuration design | Config team | | | Power Platform AI | Author reviews/edits; peer review |
+| Configuration generation | Config team | | | D365 Copilot | Author reviews/edits; peer review |
+| Plugin / custom code | Developers | | | GitHub Copilot | Developer reviews/edits/accepts; peer PR approval before commit |
+| Code review | Developers | | | GitHub Copilot | Reviewer validates AI-flagged issues |
+| Documentation | All | | | Copilot | Author reviews/edits; peer review |
+| Test script creation | Testers | | | Copilot + Rovo | Tester reviews/edits; peer review |
+| Sprint insights | Scrum Master | | | Rovo | Scrum Master validates before sharing |
 
 > **Fill in "Current State"** during the Dynamics working session with Kashif/Shyam and team interviews.
 

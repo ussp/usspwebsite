@@ -144,7 +144,7 @@
 
 ## Section 8: Constraints & Guardrails
 
-**8.1** We understand no autonomous code generation. Are there any other specific restrictions?
+**8.1** We will apply human-in-the-loop on all AI output — developer reviews/edits/accepts every AI suggestion, and peer PR review and approval before commit. No autonomous AI commits. Are there any other specific restrictions?
 
 **8.2** Can we access JIRA data programmatically (API) for automated metric collection, or must it be manual?
 

@@ -218,7 +218,7 @@ Organizations should document the intended purpose of each AI system (MAP 1.1), 
 
 | MAP Subcategory | Documentation |
 |----------------|---------------|
-| MAP 1.1 (Purpose) | AI-assisted code completion and suggestion for Dynamics 365 development on the ILC program. Copilot provides inline code suggestions based on context (current file, open files, comments). Developers review, edit, accept, or reject every suggestion. No autonomous code generation. |
+| MAP 1.1 (Purpose) | AI-assisted code completion and suggestion for Dynamics 365 development on the ILC program. Copilot provides inline code suggestions based on context (current file, open files, comments). Developers review, edit, accept, or reject every suggestion; peer PR review and approval before commit. Human-in-the-loop required on all AI output; no autonomous AI commits. |
 | MAP 1.2 (Users) | Developers on the 12 ILC product teams (~60-70 developers). Users are Krasan consultants with varying experience levels. All users receive role-specific training before access. |
 | MAP 1.3 (Context) | Used in developer IDEs (Visual Studio, VS Code) during the coding phase of the SDLC. Connected to private GitHub repositories containing ILC source code. Does not access DCFS production databases, case management systems, or sensitive data stores. |
 | MAP 1.4 (Legal/regulatory) | DoIT AI Policy (all 12 sections), DCFS-specific guardrails (Chapter 3), CCWIS Final Rule (software quality requirements), relevant data protection laws (HIPAA, FERPA, 42 CFR Part 2, IRS Pub 1075) as they apply to data that might appear in source code or comments. |
