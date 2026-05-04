@@ -52,7 +52,7 @@ Click next.
 
 ## Slide 5: Govern, Baseline & Design (2 min)
 
-> "This is where we are right now. We've mapped all 12 sections of the DoIT AI Policy. We know the guardrails — no autonomous code, no PII, SDLC only. Two things we need from you: the DoIT assessment status, and whether Copilot on ILC code triggers Section 5e."
+> "This is where we are right now. We've mapped all 12 sections of the DoIT AI Policy. We know the guardrails — HITL on all AI output with no autonomous AI commits, no PII, SDLC only. Two things we need from you: the DoIT assessment status, and whether Copilot on ILC code triggers Section 5e."
 
 > "For baseline, we need JIRA access to pull the last 3 sprints. For design, we need to know which SDLC processes matter most to you — that's what we want to hear today."
 

@@ -102,7 +102,7 @@
 
 "These are the three phases we're in right now — or about to be in, pending your input."
 
-*(Govern column)* "**Govern** — we've already reviewed all 12 sections of the DoIT AI Policy. We've mapped our compliance approach. We know the guardrails: no autonomous code, no PII in any AI tool, SDLC processes only. There are two items we need your help with — whether Copilot on ILC code triggers Section 5e, and whether the DoIT assessment has been filed."
+*(Govern column)* "**Govern** — we've already reviewed all 12 sections of the DoIT AI Policy. We've mapped our compliance approach. We know the guardrails: HITL required on all AI output with no autonomous AI commits, no PII in any AI tool, SDLC processes only. There are two items we need your help with — whether Copilot on ILC code triggers Section 5e, and whether the DoIT assessment has been filed."
 
 *(Baseline column)* "**Baseline** — we need to capture where teams are today. Pull the last 3 sprints from JIRA — velocity, cycle time, quality metrics. Distribute a readiness assessment to all 12 teams. This tells us which teams are ready for the pilot and where the training needs to focus."
 
