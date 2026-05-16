@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training Playlist By Role V20260514</title>
+<style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    color: #1c1c1c;
+    max-width: 920px;
+    margin: 32px auto;
+    padding: 0 24px;
+    background: #ffffff;
+}
+h1 { font-size: 28px; border-bottom: 2px solid #2563eb; padding-bottom: 8px; margin-top: 0; }
+h2 { font-size: 22px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; margin-top: 32px; }
+h3 { font-size: 18px; margin-top: 24px; }
+h4 { font-size: 16px; margin-top: 20px; }
+a { color: #2563eb; text-decoration: none; }
+a:hover { text-decoration: underline; }
+blockquote {
+    border-left: 4px solid #2563eb;
+    background: #f3f4f6;
+    margin: 16px 0;
+    padding: 12px 16px;
+    color: #374151;
+}
+code {
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.9em;
+}
+pre {
+    background: #1c1c1c;
+    color: #f9fafb;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+pre code { background: transparent; padding: 0; color: inherit; }
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+    font-size: 14px;
+}
+th, td {
+    border: 1px solid #e5e7eb;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+}
+th { background: #f3f4f6; font-weight: 600; }
+tr:nth-child(even) td { background: #fafafa; }
+ul, ol { padding-left: 24px; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 1px solid #e5e7eb; margin: 32px 0; }
+.footer { color: #6b7280; font-size: 12px; margin-top: 48px; padding-top: 16px; border-top: 1px solid #e5e7eb; }
+</style>
+</head>
+<body>
+<h1 id="dcfs-ai-pilot-curated-training-playlist-by-role">DCFS AI Pilot — Curated Training Playlist by Role</h1>
+<blockquote>
+<p><strong>Date:</strong> May 14, 2026
+<strong>Version:</strong> v2 — adds AI fundamentals, context engineering, D365 AI, measurement, and internal playbook references
+<strong>Status:</strong> Draft</p>
+</blockquote>
+<hr>
+<h2 id="how-to-use-this">How to use this</h2>
+<ol>
+<li>Each role has a <strong>must-watch core</strong> (~2–3h pre-work) — required before the role's working session (see structure below)</li>
+<li><strong>Stretch picks</strong> are optional deeper dives — for the most engaged participants</li>
+<li><strong>Reference shelf</strong> items are linked once and re-used by office hours / cheat sheets</li>
+<li>All resources are <strong>free</strong> and <strong>government-appropriate</strong> (Microsoft, GitHub, Atlassian, NIST, DORA Research)</li>
+<li>Pre-work is consumed on a <strong>personal browser</strong> (or VS Code for hands-on labs) — not via in-tenant Copilot, since the State tenant Copilot can't browse the web</li>
+</ol>
+<hr>
+<h2 id="how-training-is-structured">How training is structured</h2>
+<p>Training is delivered in three layers per role. This playlist is layer 1 only.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What</th>
+<th>Format</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Pre-work</strong></td>
+<td>Self-paced learning of the curated playlist below</td>
+<td>Personal time, ~2–3h per role</td>
+<td>Each participant</td>
+</tr>
+<tr>
+<td><strong>2. Working session</strong></td>
+<td>Collaborative session with the AI enablement team — explore how AI fits into real role-specific workflows, walk through actual use cases, and update the runbook based on what we learn together</td>
+<td>Live, working session (not lecture), ~2–3h per role</td>
+<td>AI enablement team + pilot team</td>
+</tr>
+<tr>
+<td><strong>3. Office hours</strong></td>
+<td>Open Q&amp;A and applied support during the pilot sprints</td>
+<td>30 min/week per role</td>
+<td>AI enablement team</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>working session</strong> is the heart of training — it isn't an instructor-led class. The AI enablement team and the pilot team work side by side on real ILC artifacts, surface specific use cases, refine the role's runbook (playbook) based on what works, and capture anti-patterns to avoid.</p>
+<hr>
+<h2 id="gcc-availability-notes-may-2026-read-first">GCC availability notes (May 2026) — read first</h2>
+<p><strong>This affects what we can actually demo in working sessions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tool / Feature</th>
+<th>GCC (regular)</th>
+<th>GCC-High</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Microsoft 365 Copilot Chat</strong></td>
+<td>✅ Available</td>
+<td>✅ Available</td>
+<td><a href="https://techcommunity.microsoft.com/blog/publicsectorblog/continuing-our-momentum-expanding-microsoft-365-copilot-capabilities-across-u-s-/4506954">Microsoft Public Sector Blog</a></td>
+</tr>
+<tr>
+<td><strong>M365 Copilot in Word / Excel / PowerPoint (agentic)</strong></td>
+<td>⚠️ Partial — rolling out</td>
+<td>✅ Available (Dec 2025)</td>
+<td><a href="https://techcommunity.microsoft.com/blog/publicsectorblog/microsoft-365-copilot-is-now-available-in-gcc-high/4473310">Microsoft GCC-High announcement</a></td>
+</tr>
+<tr>
+<td><strong>Power BI Copilot</strong></td>
+<td>❌ <strong>NOT supported</strong> — GPU availability</td>
+<td>❌ NOT supported</td>
+<td><a href="https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-government-us-overview">Power BI for US Government</a></td>
+</tr>
+<tr>
+<td><strong>Power Automate Copilot</strong></td>
+<td>✅ Confirmed enabled Apr 23</td>
+<td>—</td>
+<td>DCFS tenant walkthrough</td>
+</tr>
+<tr>
+<td><strong>Power Apps Copilot for tables</strong></td>
+<td>✅ Confirmed enabled Apr 23</td>
+<td>—</td>
+<td>DCFS tenant walkthrough</td>
+</tr>
+<tr>
+<td><strong>Power Apps form-designer Copilot</strong></td>
+<td>❌ NOT enabled</td>
+<td>—</td>
+<td>DCFS tenant walkthrough</td>
+</tr>
+<tr>
+<td><strong>GitHub Copilot</strong></td>
+<td>⚠️ Licensed, not yet provisioned for our team</td>
+<td>—</td>
+<td>DoIT enablement pending</td>
+</tr>
+<tr>
+<td><strong>D365 Copilot</strong></td>
+<td>❌ Not enabled in tenant</td>
+<td>—</td>
+<td>Microsoft engagement in flight to clarify GCC availability</td>
+</tr>
+<tr>
+<td><strong>Copilot Studio + Agent Builder</strong></td>
+<td>✅ Available (Apr 2026)</td>
+<td>✅ Available</td>
+<td><a href="https://adoption.microsoft.com/en-us/copilot/gcc/">Microsoft Adoption GCC</a></td>
+</tr>
+<tr>
+<td><strong>Atlassian Rovo</strong></td>
+<td>✅ Enabled</td>
+<td>—</td>
+<td>DCFS tenant walkthrough</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="module-0a-ai-fundamentals-everyone-75-min">Module 0a — AI Fundamentals (everyone, ~75 min)</h2>
+<p><strong>Goal:</strong> baseline AI literacy. Every participant — from leadership to BA to dev — should understand the basics of what generative AI is, how an LLM produces output, what it's good at, and what it isn't, before touching a tool.</p>
+<h3 id="must-watch-core">Must-watch core</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/fundamentals-generative-ai/">Microsoft Learn — Introduction to generative AI and agents</a></td>
+<td>30 min</td>
+<td>LLMs, prompts, agents — the foundational concepts</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/intro-generative-ai-explore-basics/">Microsoft Learn — Introduction to generative AI: Exploring the basics</a></td>
+<td>20 min</td>
+<td>Hands-on framing with Microsoft Copilot examples</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/explore-generative-ai/">Microsoft Learn — AI fluency: Explore generative AI</a></td>
+<td>25 min</td>
+<td>What's changing about creativity &amp; productivity work</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stretch-picks">Stretch picks</h3>
+<ul>
+<li><a href="https://microsoft.github.io/generative-ai-for-beginners/">Generative AI for Beginners (Microsoft, 21 lessons, free, self-paced)</a> — full curriculum if someone wants to go deep; available as <a href="https://github.com/microsoft/generative-ai-for-beginners">GitHub repo</a></li>
+<li><a href="https://github.com/microsoft/AI-For-Beginners">AI for Beginners (Microsoft, 12 weeks, 24 lessons)</a> — broader AI/ML for those who want the wider field</li>
+</ul>
+<hr>
+<h2 id="track-0-doit-ai-policy-governance-mandatory-gate-45-min">Track 0 — DoIT AI Policy &amp; Governance (mandatory gate, ~45 min)</h2>
+<p><strong>Goal:</strong> every participant can articulate boundary rules before getting a tool license.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://doit.illinois.gov/content/dam/soi/en/web/doit/documents/support/policies/2021/20250401-DoIT-AI%20Policy-v2-%20A11Y.pdf">State of Illinois — DoIT Policy on the Acceptable and Responsible Use of AI (v2)</a></td>
+<td>25 min</td>
+<td>Authoritative State of Illinois policy</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://doit.illinois.gov/content/dam/soi/en/web/doit/meetings/ai-taskforce/reports/20241220-gen-ai-task-force-report.pdf">Illinois Generative AI and NLP Task Force Report (Dec 2024)</a></td>
+<td>15 min</td>
+<td>State context on GenAI risks (civil rights, labor, consumer protection)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://airc.nist.gov/airmf-resources/playbook/">NIST AI RMF Playbook overview</a></td>
+<td>15 min</td>
+<td>GOVERN / MAP / MEASURE / MANAGE structure we'll reference repeatedly</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reference-shelf">Reference shelf</h3>
+<ul>
+<li><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI Risk Management Framework — full landing</a></li>
+<li><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf">NIST Generative AI Profile (AI 600-1) — full PDF</a> — 200+ suggested actions, 12 GenAI-specific risks</li>
+<li><a href="https://www.microsoft.com/en-us/ai/principles-and-approach">Microsoft Responsible AI principles</a></li>
+<li><a href="https://resources.github.com/copilot-trust-center/">GitHub Copilot Trust Center</a> — IP, data, audit</li>
+</ul>
+<hr>
+<h2 id="foundation-prompt-engineering-everyone-75-min">Foundation — Prompt Engineering (everyone, ~75 min)</h2>
+<p><strong>Goal:</strong> baseline prompt literacy. The CSCI pattern: Clear goal, Specific Source, Contextual framing, Iterative refinement.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/introduction-microsoft-365-copilot/">Microsoft Learn — Introduction to Microsoft 365 Copilot</a></td>
+<td>30 min</td>
+<td>What M365 Copilot does + responsible AI framing</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://learn.microsoft.com/en-us/training/paths/craft-effective-prompts-copilot-microsoft-365/">Microsoft Learn — Craft effective prompts for Microsoft 365 Copilot (path)</a></td>
+<td>25 min (first module)</td>
+<td>Clear goal / context / source / expectation pattern</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/introduction-prompt-engineering-with-github-copilot/">Microsoft Learn — Introduction to prompt engineering with GitHub Copilot</a></td>
+<td>20 min</td>
+<td>Prompt engineering core principles in IDE context</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reference-shelf_1">Reference shelf</h3>
+<ul>
+<li><a href="https://www.microsoft.com/en-us/research/group/dynamics-insights-apps-artificial-intelligence-machine-learning/articles/prompt-engineering-improving-our-ability-to-communicate-with-an-llm/">Microsoft Research — Prompt Engineering: Improving our Ability to Communicate with an LLM</a> — research-grade depth</li>
+<li><a href="https://www.promptingguide.ai/">DAIR.AI Prompt Engineering Guide</a> — vendor-neutral comprehensive reference</li>
+<li><a href="https://m365.cloud.microsoft/copilot-prompts">Microsoft 365 Copilot Prompts Gallery</a> — copyable, role-tagged prompts</li>
+</ul>
+<hr>
+<h2 id="foundation-context-engineering-grounding-everyone-45-min">Foundation+ — Context Engineering &amp; Grounding (everyone, ~45 min)</h2>
+<p><strong>Goal:</strong> understand why <strong>context matters more than prompt cleverness</strong>. Every Copilot answer is the result of: system instructions + prior conversation + retrieved/grounded content + user prompt — all squeezed into a finite context window. Misunderstanding this is the #1 source of "Copilot got it wrong" complaints.</p>
+<h3 id="must-watch-core_1">Must-watch core</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://techcommunity.microsoft.com/blog/fasttrackforazureblog/grounding-llms/3843857">Microsoft Tech Community — Grounding LLMs</a></td>
+<td>15 min</td>
+<td>What grounding is, why it matters for accuracy + governance</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://learn.microsoft.com/en-us/fabric/fundamentals/how-copilot-works">Microsoft Learn — How Copilot in Microsoft Fabric works</a></td>
+<td>15 min</td>
+<td>Anatomy of a Copilot answer — system, retrieval, prompt, response</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://www.futuresavvy.co.uk/tips-tricks/understanding-and-managing-context-windows-how-to-keep-your-copilot-conversations-focused">Copilot Context Windows: What They Are &amp; How to Manage Them</a></td>
+<td>15 min</td>
+<td>Practical: managing long conversations + when to start fresh</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stretch-picks_1">Stretch picks</h3>
+<ul>
+<li><a href="https://thenewstack.io/context-engineering-going-beyond-prompt-engineering-and-rag/">The New Stack — Context Engineering: Going Beyond Prompt Engineering and RAG</a> — the broader discipline (system instructions + retrieval + memory + placement + format)</li>
+<li><a href="https://learn.microsoft.com/en-us/training/modules/build-copilot-ai-studio/">Microsoft Learn — Develop a RAG-based solution with your own data using Microsoft Foundry</a> — hands-on RAG (for Solution Architects + Configuration Team)</li>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/retrieval-augmented-generation">Microsoft Learn — Enhance AI responses with RAG in Copilot Studio</a> — practical RAG application</li>
+<li><a href="https://www.elastic.co/what-is/context-engineering">What is Context Engineering? (Elastic)</a> — architecting reliable AI</li>
+</ul>
+<h3 id="key-takeaways-will-reinforce-in-foundation-session">Key takeaways (will reinforce in Foundation session)</h3>
+<ul>
+<li><strong>M365 Copilot in DCFS grounds on the Microsoft Graph</strong> — your accessible Teams, SharePoint, OneDrive, Outlook content. Not the web. Not other tenants.</li>
+<li><strong>Rovo grounds on JIRA + Confluence</strong> in your instance.</li>
+<li><strong>GitHub Copilot grounds on the open repo + your prompt context</strong> — not on closed/external repos.</li>
+<li><strong>Context windows are finite.</strong> Long chat histories and verbose prompts crowd out retrieved content. Start fresh conversations when topic shifts.</li>
+</ul>
+<hr>
+<h2 id="internal-playbooks-runbooks-everyone-required-reference-30-min">Internal Playbooks &amp; Runbooks (everyone — required reference, ~30 min)</h2>
+<blockquote>
+<p>DCFS-specific playbooks built for this engagement. Every role gets a copy of their own playbook + the cross-role policies before going live with tools. Links resolve relative to this HTML file &mdash; place the playbook files in the same folder as this document (e.g. your Downloads folder) and the links will open them directly.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Audience</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="playbook-ba-v20260421.docx">BA Playbook</a></td>
+<td>BA-Technical</td>
+<td>Workflow steps + PII warning blocks</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="playbook-developer-v20260427.docx">Developer Playbook</a></td>
+<td>Developer</td>
+<td>Tool usage + HITL checkpoints</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="playbook-tester-v20260427.docx">Tester Playbook</a></td>
+<td>Tester</td>
+<td>Test case workflow + PII-safe test data</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="playbook-data-v20260421.docx">Data Playbook</a></td>
+<td>Data Team</td>
+<td>Data handling + AI Data Mapping use</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="playbook-testing-services-lead-v20260422.docx">Testing Services Lead Playbook</a></td>
+<td>TSL</td>
+<td>Reporting + escalation runbook</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="pilot-governance-charter-v20260428.docx">Pilot Governance Charter</a></td>
+<td>All</td>
+<td>Governance cadence, escalations, decision rights</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="tool-authorization-list.docx">Tool Authorization List</a></td>
+<td>All</td>
+<td>What's authorized, what's pending, scope rules</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="compliance-map-v20260422.docx">Compliance Map (DoIT Policy → NIST AI RMF → our controls)</a></td>
+<td>All (mandatory)</td>
+<td>Cross-walk used in Track 0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-playbook-habits-everyone-learns">Key playbook habits everyone learns</h3>
+<ul>
+<li><strong>HITL discipline.</strong> Every AI output gets human review before it lands anywhere durable (JIRA, code, Confluence, email).</li>
+<li><strong>PII never leaves the tenant.</strong> No client data, case data, or personal info in prompts to any AI.</li>
+<li><strong>Escalation runbook.</strong> If an AI surfaces something concerning (PII exposure, hallucinated client info, biased output) &mdash; there's a documented path. (Pilot Gov Lead first.)</li>
+<li><strong>Audit log discipline.</strong> Use the State Copilot &mdash; not personal tools. State tools log; personal tools don't.</li>
+</ul>
+<hr>
+<h2 id="role-1-ba-technical-playlist-2h-pre-work">Role 1: BA-Technical Playlist (~2h pre-work)</h2>
+<p><strong>Tools used:</strong> Atlassian Rovo (JIRA + Confluence), M365 Copilot Chat
+<strong>Use cases:</strong> AC drafting, user story refinement, requirements extraction, Confluence summarization</p>
+<h3 id="must-watch-core_2">Must-watch core</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://community.atlassian.com/learning/course/get-started-quickly-with-rovo">Atlassian — Get started with Rovo AI (free quick-start)</a></td>
+<td>60 min</td>
+<td>Free live-instructor class; earns the Rovo Fundamentals certificate</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://community.atlassian.com/learning/path/get-the-most-out-of-rovo">Atlassian — Get the most out of Rovo (free path)</a></td>
+<td>45 min</td>
+<td>Search, chat, agents across Atlassian + connected apps</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://support.atlassian.com/jira-software-cloud/docs/use-atlassian-intelligence-to-help-write-or-edit-content/">Atlassian Support — Use Rovo to write or edit content in Jira</a></td>
+<td>15 min</td>
+<td>The actual JIRA workflow we'll use in lab</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stretch-picks_2">Stretch picks</h3>
+<ul>
+<li><a href="https://support.atlassian.com/rovo/docs/check-acceptance-criteria-in-a-code-review/">Atlassian Support — Check acceptance criteria in a code review</a> — AC verification workflow</li>
+<li><a href="https://university.atlassian.com/student/catalog/list">Atlassian University — full catalog</a> — search "AI" or "Rovo"</li>
+</ul>
+<h3 id="reference-shelf_2">Reference shelf</h3>
+<ul>
+<li><a href="https://community.atlassian.com/forums/Atlassian-AI-Rovo-articles">Atlassian Community — Rovo articles</a></li>
+<li><a href="https://community.atlassian.com/forums/App-Central-articles/Atlassian-Rovo-in-QA-Instantly-Designing-Test-Cases-in-Jira-with/ba-p/3144170">Rovo for QA — designing test cases in JIRA</a> — useful for BAs writing testable ACs</li>
+</ul>
+<hr>
+<h2 id="role-2-developer-playlist-3h-pre-work">Role 2: Developer Playlist (~3h pre-work)</h2>
+<p><strong>Tools used:</strong> GitHub Copilot, Power Automate Copilot, Power Apps Copilot for tables, (eventually) D365 Copilot
+<strong>Use cases:</strong> code generation, unit test scaffolding, refactoring, flow drafting, eventual D365 X++ / plugin / PCF work</p>
+<blockquote>
+<p>⚠️ GitHub Copilot is licensed but <strong>not yet provisioned</strong> for our GCC environment. Pre-work uses personal-account GitHub Copilot or the GitHub Skills sandbox.
+⚠️ D365 Copilot is <strong>not enabled in our tenant</strong>. Microsoft engagement in flight to clarify GCC availability. Pre-work in this section is "what to expect when it lands."</p>
+</blockquote>
+<h3 id="must-watch-core_3">Must-watch core</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/introduction-to-github-copilot/">Microsoft Learn — Introduction to GitHub Copilot</a></td>
+<td>45 min</td>
+<td>Authoritative intro; Individual/Business/Enterprise tiers</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://learn.microsoft.com/en-us/training/paths/copilot/">Microsoft Learn — GitHub Copilot Fundamentals (path, Part 1 of 2)</a></td>
+<td>60 min</td>
+<td>Full fundamentals path</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/">Microsoft Learn — Develop Unit Tests using GitHub Copilot Tools</a></td>
+<td>30 min</td>
+<td>xUnit / test generation labs</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://docs.github.com/en/copilot/tutorials/write-tests">GitHub Docs — Writing tests with GitHub Copilot</a></td>
+<td>20 min</td>
+<td>Official tutorial — patterns for unit/integration tests</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/use-copilot-power-automate/">Microsoft Learn — Use Copilot in Power Automate</a></td>
+<td>30 min</td>
+<td>Maker-side flow drafting — confirmed-enabled GCC tool</td>
+</tr>
+</tbody>
+</table>
+<h3 id="microsoft-dynamics-365-ai-deep-dive-60-min">Microsoft Dynamics 365 AI deep dive (~60 min)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6</td>
+<td><a href="https://learn.microsoft.com/en-us/dynamics365/copilot/">Microsoft Learn — Agents, Copilot, and AI capabilities in Dynamics 365 apps</a></td>
+<td>25 min</td>
+<td>Full D365 Copilot capability landscape — what's in each module</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="https://learn.microsoft.com/en-us/training/paths/copilot-power-platform/">Microsoft Learn — Get started with Copilot for Microsoft Power Platform (path)</a></td>
+<td>25 min</td>
+<td>Power Platform AI for makers (Apps, Automate, Pages, Dataverse)</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="https://microsoft.github.io/copilot-camp/">Microsoft Copilot Developer Camp</a></td>
+<td>30 min (self-paced; pick relevant chapters)</td>
+<td>Extending Copilot — for devs who build agents / connectors</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stretch-picks_3">Stretch picks</h3>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/training/paths/copilot-solutions/">Microsoft Learn — Create Power Platform solutions with AI and Copilot</a> — solution-level patterns</li>
+<li><a href="https://learn.microsoft.com/en-us/shows/github-copilot-bootcamp/prompt-engineering-with-github-copilot">Microsoft Learn — GitHub Copilot Bootcamp (show)</a> — deeper prompt engineering for code</li>
+<li><a href="https://github.com/github/copilot-cli-for-beginners">GitHub — Copilot CLI for Beginners (8-chapter hands-on)</a></li>
+</ul>
+<h3 id="reference-shelf_3">Reference shelf</h3>
+<ul>
+<li><a href="https://docs.github.com/en/copilot/github-copilot-chat-cheat-sheet">GitHub Copilot Chat cheat sheet (slash commands)</a> — printable</li>
+<li><a href="https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/testing-code/generate-unit-tests">GitHub Docs — Generating unit tests (cookbook)</a></li>
+<li><a href="https://resources.github.com/copilot-trust-center/">GitHub Copilot Trust Center</a></li>
+</ul>
+<hr>
+<h2 id="role-3-tester-playlist-25h-pre-work">Role 3: Tester Playlist (~2.5h pre-work)</h2>
+<p><strong>Tools used:</strong> Atlassian Rovo, GitHub Copilot (if writing automation), Zephyr Scale, M365 Copilot Chat</p>
+<h3 id="must-watch-core_4">Must-watch core</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://community.atlassian.com/learning/course/get-started-quickly-with-rovo">Atlassian — Get started with Rovo AI (free quick-start)</a></td>
+<td>60 min</td>
+<td>Foundation cert</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://community.atlassian.com/forums/App-Central-articles/Atlassian-Rovo-in-QA-Instantly-Designing-Test-Cases-in-Jira-with/ba-p/3144170">Atlassian Community — Rovo in QA: Designing Test Cases in JIRA</a></td>
+<td>20 min</td>
+<td>Exact pattern: requirement → positive / negative / boundary cases</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://community.atlassian.com/forums/App-Central-articles/From-User-Story-to-Automated-Test-Execution-A-Virtuous-AI-Cycle/ba-p/3206564">Atlassian Community — From User Story to Automated Test Execution</a></td>
+<td>25 min</td>
+<td>End-to-end pattern incl. Zephyr integration</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/work-smarter-excel/">Microsoft Learn — Work Smarter In Excel With Copilot Chat</a></td>
+<td>30 min</td>
+<td>Test execution summary reports</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://university.atlassian.com/student/page/2803560-how-to-build-an-ai-agent-with-rovo">Atlassian Workshop — Build an AI Agent with Rovo (hands-on)</a></td>
+<td>30 min</td>
+<td>Free hands-on Rovo agent building</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stretch-picks-if-tester-writes-automation">Stretch picks (if tester writes automation)</h3>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/training/modules/develop-unit-tests-using-github-copilot-tools/">Microsoft Learn — Develop Unit Tests using GitHub Copilot Tools</a></li>
+<li><a href="https://docs.github.com/en/copilot/tutorials/write-tests">GitHub Docs — Writing tests with GitHub Copilot</a></li>
+</ul>
+<h3 id="reference-shelf_4">Reference shelf</h3>
+<ul>
+<li><a href="https://blog.nashtechglobal.com/using-rovo-in-jira-optimize-test-cases-and-tickets/">Using Rovo in JIRA — optimize test cases and tickets</a></li>
+<li><a href="https://www.atlassian.com/software/rovo/agents">Atlassian Rovo Agents overview</a></li>
+</ul>
+<hr>
+<h2 id="role-4-solution-architect-playlist-3h-pre-work">Role 4: Solution Architect Playlist (~3h pre-work)</h2>
+<p><strong>Tools used:</strong> M365 Copilot Chat, Copilot in Word/Excel/PowerPoint (GCC parity rolling), Rovo (Confluence)</p>
+<blockquote>
+<p>⚠️ Power BI Copilot NOT supported in GCC. SAs use JIRA dashboards + Excel Copilot for metrics views.</p>
+</blockquote>
+<h3 id="must-watch-core_5">Must-watch core</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://learn.microsoft.com/en-us/training/paths/craft-effective-prompts-copilot-microsoft-365/">Microsoft Learn — Craft effective prompts for M365 Copilot (full path)</a></td>
+<td>90 min</td>
+<td>Prompt engineering across Word/Excel/PPT/Teams/Outlook</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/present-copilot-microsoft-powerpoint/">Microsoft Learn — Build effective presentations with AI (PowerPoint)</a></td>
+<td>30 min</td>
+<td>Stakeholder design decks</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/work-smarter-excel/">Microsoft Learn — Work Smarter In Excel With Copilot Chat</a></td>
+<td>30 min</td>
+<td>Options analysis tables</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://community.atlassian.com/learning/path/get-the-most-out-of-rovo">Atlassian — Get the most out of Rovo</a></td>
+<td>45 min</td>
+<td>Confluence ADR drafting + cross-app search</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stretch-picks_4">Stretch picks</h3>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/training/modules/build-copilot-ai-studio/">Microsoft Learn — Develop a RAG-based solution with your own data (Foundry)</a> — for architecture work involving grounding</li>
+<li><a href="https://github.com/microsoft/Federal-Business-Applications/blob/main/whitepapers/copilot/README.md">Microsoft Federal Business Applications — Copilot whitepaper</a> — federal-tier deployment + security architecture</li>
+<li><a href="https://adoption.microsoft.com/en-us/copilot/gcc/">Microsoft Adoption — Copilot for US Government (GCC)</a> — government adoption playbook</li>
+</ul>
+<h3 id="reference-shelf_5">Reference shelf</h3>
+<ul>
+<li><a href="https://m365.cloud.microsoft/copilot-prompts">Microsoft 365 Copilot Prompts Gallery</a> — filter for architect-relevant prompts</li>
+<li><a href="https://airc.nist.gov/airmf-resources/playbook/">NIST AI RMF Playbook</a></li>
+<li><a href="https://www.microsoft.com/en-us/microsoft-365/government">Microsoft 365 and Copilot for Government</a></li>
+</ul>
+<hr>
+<h2 id="role-5-testing-services-lead-playlist-25h-pre-work">Role 5: Testing Services Lead Playlist (~2.5h pre-work)</h2>
+<p><strong>Tools used:</strong> Atlassian Rovo + dashboards, M365 Copilot Chat, JIRA Dashboards, Excel Copilot</p>
+<h3 id="must-watch-core_6">Must-watch core</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://community.atlassian.com/learning/course/get-started-quickly-with-rovo">Atlassian — Get started with Rovo AI (free quick-start)</a></td>
+<td>60 min</td>
+<td>Foundation cert</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://community.atlassian.com/learning/path/get-the-most-out-of-rovo">Atlassian — Get the most out of Rovo</a></td>
+<td>45 min</td>
+<td>Cross-app summarization at scale</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://learn.microsoft.com/en-us/training/modules/work-smarter-excel/">Microsoft Learn — Work Smarter In Excel With Copilot Chat</a></td>
+<td>30 min</td>
+<td>Sprint quality reports, capacity modeling</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://support.atlassian.com/jira-software-cloud/docs/configure-a-dashboard/">Atlassian Support — Configure a JIRA dashboard</a></td>
+<td>15 min</td>
+<td>Test execution dashboards (replaces Power BI)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stretch-picks_5">Stretch picks</h3>
+<ul>
+<li><a href="https://www.atlassian.com/software/rovo/agents">Atlassian Rovo Agents</a> — quality / testing agents</li>
+</ul>
+<h3 id="measurement-references-keep-handy-not-required-training">Measurement references — keep handy (not required training)</h3>
+<p>For when you need to interpret pilot signals or frame our own metrics — read on demand, not as pre-work:</p>
+<ul>
+<li><a href="https://dora.dev/research/2025/dora-report/">DORA — State of AI-assisted Software Development 2025</a> — industry baseline for AI productivity</li>
+<li><a href="https://dora.dev/insights/balancing-ai-tensions/">DORA Insights — Balancing AI tensions</a> — throughput up + stability fluctuation pattern</li>
+<li><a href="https://www.swarmia.com/blog/comparing-developer-productivity-frameworks/">Swarmia — DORA, SPACE, and DX Core 4 comparison</a> — framework selection</li>
+<li><a href="https://dzone.com/articles/space-framework-ai-developer-productivity">DZone — SPACE Framework in the AI Era</a></li>
+</ul>
+<hr>
+<h2 id="role-6-leadership-briefing-playlist-15h-pre-work">Role 6: Leadership Briefing Playlist (~1.5h pre-work)</h2>
+<p><strong>Audience:</strong> DCFS and Krasan leadership / executive sponsors
+<strong>Goal:</strong> understand the dashboard, the risks, how to read pilot signals, the governance frame</p>
+<h3 id="must-watch-core_7">Must-watch core</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Resource</th>
+<th>Duration</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST — AI Risk Management Framework landing</a></td>
+<td>15 min</td>
+<td>Executive framing for AI governance</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://www.microsoft.com/en-us/microsoft-365/government">Microsoft — M365 and Copilot for Government overview</a></td>
+<td>15 min</td>
+<td>Vendor's government posture</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://adoption.microsoft.com/en-us/copilot/gcc/">Microsoft Adoption — Copilot for US Government (GCC)</a></td>
+<td>20 min</td>
+<td>Adoption frameworks + free expert sessions</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://cloud.google.com/resources/content/2025-dora-ai-assisted-software-development-report">DORA — State of AI-assisted Software Development 2025 (Executive Summary section)</a></td>
+<td>20 min</td>
+<td>Industry research on what AI adoption actually delivers</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://doit.illinois.gov/content/dam/soi/en/web/doit/meetings/ai-taskforce/reports/20241220-gen-ai-task-force-report.pdf">Illinois Generative AI and NLP Task Force Report (Dec 2024)</a></td>
+<td>15 min</td>
+<td>State-level GenAI policy context</td>
+</tr>
+</tbody>
+</table>
+<h3 id="stretch-picks_6">Stretch picks</h3>
+<ul>
+<li><a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf">NIST Generative AI Profile (AI 600-1) — Executive Summary section</a> — 12 GenAI-specific risks framed for execs</li>
+<li><a href="https://techcommunity.microsoft.com/blog/publicsectorblog/continuing-our-momentum-expanding-microsoft-365-copilot-capabilities-across-u-s-/4506954">Microsoft Public Sector Blog — Copilot in U.S. Government clouds</a> — current GCC roadmap</li>
+</ul>
+<hr>
+<h2 id="coverage-matrix-which-topic-in-which-role">Coverage matrix — which topic in which role</h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Everyone</th>
+<th>BA</th>
+<th>Dev</th>
+<th>Tester</th>
+<th>SA</th>
+<th>TSL</th>
+<th>Lead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI fundamentals (what is gen AI / LLMs)</td>
+<td>✅ (Module 0a)</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>DoIT AI Policy + NIST AI RMF</td>
+<td>✅ (Track 0)</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Prompt engineering basics</td>
+<td>✅ (Foundation)</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Context engineering / grounding</td>
+<td>✅ (Foundation+)</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅ (depth)</td>
+<td>✅</td>
+<td>✅ (overview)</td>
+</tr>
+<tr>
+<td>Internal playbooks + runbooks</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Atlassian Rovo (JIRA + Confluence)</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>GitHub Copilot (code)</td>
+<td>—</td>
+<td>—</td>
+<td>✅</td>
+<td>(stretch)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Power Automate / Power Apps Copilot</td>
+<td>—</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Microsoft Dynamics 365 AI</td>
+<td>—</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+<td>(stretch)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>M365 Copilot (Word/Excel/PPT)</td>
+<td>—</td>
+<td>(touch)</td>
+<td>(touch)</td>
+<td>(touch)</td>
+<td>✅</td>
+<td>✅</td>
+<td>(touch)</td>
+</tr>
+<tr>
+<td>Measurement (DORA / SPACE / DX)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>(stretch)</td>
+<td>(reference)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Government cloud (GCC) specifics</td>
+<td>—</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<div class="footer">DCFS AI Pilot &mdash; Krasan Consulting Services</div>
+</body>
+</html>
