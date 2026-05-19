@@ -236,6 +236,8 @@ describe("Question selection logic", () => {
       status: "active",
       parent_question_id: null,
       anonymous_aggregate: false,
+      question_type: "likert",
+      options: [],
       created_by: "test",
       created_at: "",
       updated_at: "",

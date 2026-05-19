@@ -330,6 +330,16 @@
       "import": "./dist/queries/admin/readiness-questionnaire.js",
       "default": "./dist/queries/admin/readiness-questionnaire.js"
     },
+    "./queries/admin/survey-import": {
+      "types": "./dist/queries/admin/survey-import.d.ts",
+      "import": "./dist/queries/admin/survey-import.js",
+      "default": "./dist/queries/admin/survey-import.js"
+    },
+    "./queries/admin/baseline-report": {
+      "types": "./dist/queries/admin/baseline-report.d.ts",
+      "import": "./dist/queries/admin/baseline-report.js",
+      "default": "./dist/queries/admin/baseline-report.js"
+    },
     "./queries/readiness-response": {
       "types": "./dist/queries/readiness-response.d.ts",
       "import": "./dist/queries/readiness-response.js",

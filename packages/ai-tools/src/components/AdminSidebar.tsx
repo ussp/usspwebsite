@@ -9,6 +9,7 @@ const navItems = [
   { href: "/", label: "Dashboard", desc: "", icon: "📊", section: "", toolKey: null },
   // ── AI Transformation Lifecycle ──
   { href: "/readiness", label: "Readiness Assessment", desc: "Step 1 — Evaluate org AI capabilities", icon: "🔍", section: "1 · Assess", toolKey: "readiness" },
+  { href: "/readiness/baselines", label: "Survey Baselines", desc: "Imported external survey results", icon: "📋", section: "1 · Assess", toolKey: "readiness" },
   { href: "/engagements", label: "Transformation Monitor", desc: "Step 2 — Measure before & after training", icon: "📈", section: "2 · Transform", toolKey: "engagements" },
   { href: "/governance", label: "GRC & Compliance", desc: "Step 3 — Policy, risk & audit tracking", icon: "🛡️", section: "3 · Govern", toolKey: "governance" },
   // ── Reference ──

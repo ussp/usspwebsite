@@ -17,7 +17,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
 
   // Merge member info with response status
   const merged = members.map((m: { id: string; name: string; email: string; role: string }) => {
-    const response = responses.find((r: { member_id: string }) => r.member_id === m.id);
+    const response = responses.find((r: { member_id: string | null }) => r.member_id === m.id);
     return {
       ...m,
       response_id: response?.id || undefined,

@@ -15,6 +15,9 @@ export async function GET(_req: Request, { params }: { params: Promise<{ token: 
   const response = await getResponseByToken(token);
   if (!response) return NextResponse.json({ error: "Invalid or expired link" }, { status: 404 });
 
+  if (!response.member_id) {
+    return NextResponse.json({ error: "Token-based response has no member" }, { status: 400 });
+  }
   const member = await getResponseMember(response.member_id);
   if (!member) return NextResponse.json({ error: "Member not found" }, { status: 404 });
 

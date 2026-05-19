@@ -33,12 +33,26 @@ export default async function ReadinessListPage() {
               Assess organizational readiness for AI adoption based on the DORA 2025 AI Capabilities Model.
             </p>
           </div>
-          <Link
-            href="/readiness/new"
-            className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors"
-          >
-            + New Assessment
-          </Link>
+          <div className="flex gap-2">
+            <Link
+              href="/readiness/import"
+              className="border border-light-gray bg-white text-dark px-4 py-2 rounded-lg text-sm font-medium hover:bg-light-gray/50 transition-colors"
+            >
+              Import Survey
+            </Link>
+            <Link
+              href="/readiness/baselines"
+              className="border border-light-gray bg-white text-dark px-4 py-2 rounded-lg text-sm font-medium hover:bg-light-gray/50 transition-colors"
+            >
+              View Baselines
+            </Link>
+            <Link
+              href="/readiness/new"
+              className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors"
+            >
+              + New Assessment
+            </Link>
+          </div>
         </div>
 
         <GuideBanner title="How it works" variant="info">

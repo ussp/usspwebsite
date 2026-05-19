@@ -107,6 +107,9 @@ export async function createQuestion(
       version: 1,
       status: "active",
       parent_question_id: null,
+      question_type: input.question_type || "likert",
+      options: input.options || [],
+      anonymous_aggregate: input.anonymous_aggregate ?? false,
       created_by: createdBy,
     })
     .select()
@@ -157,6 +160,9 @@ export async function reviseQuestion(
       version: existing.version + 1,
       status: "active",
       parent_question_id: rootId,
+      question_type: existing.question_type,
+      options: existing.options,
+      anonymous_aggregate: existing.anonymous_aggregate,
       created_by: revisedBy,
     })
     .select()

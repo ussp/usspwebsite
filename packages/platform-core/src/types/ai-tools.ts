@@ -719,6 +719,30 @@ export type QuestionnaireStatus = "draft" | "ready" | "sent" | "closed";
 export type ResponseStatus = "not_started" | "in_progress" | "completed";
 export type DevRequestStatus = "pending" | "in_progress" | "completed";
 
+export type QuestionType =
+  | "likert"
+  | "single_choice"
+  | "multi_choice"
+  | "numeric"
+  | "free_text";
+
+export type ResponseSource =
+  | "native"
+  | "surveymonkey"
+  | "csv_import"
+  | "manual";
+
+export type SurveyImportStatus =
+  | "pending"
+  | "processing"
+  | "completed"
+  | "failed";
+
+export interface QuestionOption {
+  value: string;
+  label: string;
+}
+
 export const ENTITY_TYPE_LABELS: Record<EntityType, string> = {
   private: "Private Company",
   public_university: "Public University",
@@ -938,6 +962,8 @@ export interface QuestionBankItem {
   status: QuestionStatus;
   parent_question_id: string | null;
   anonymous_aggregate: boolean;
+  question_type: QuestionType;
+  options: QuestionOption[];
   created_by: string | null;
   created_at: string;
   updated_at: string;
@@ -978,11 +1004,16 @@ export interface QuestionnaireQuestion {
 export interface QuestionnaireResponse {
   id: string;
   questionnaire_id: string;
-  member_id: string;
+  member_id: string | null;
   token: string;
   status: ResponseStatus;
   started_at: string | null;
   completed_at: string | null;
+  respondent_role: string | null;
+  respondent_email: string | null;
+  source: ResponseSource;
+  external_id: string | null;
+  import_batch_id: string | null;
 }
 
 export interface ResponseAnswer {
@@ -990,9 +1021,29 @@ export interface ResponseAnswer {
   response_id: string;
   question_id: string;
   score: number | null;
+  text_value: string | null;
+  choice_values: string[];
+  numeric_value: number | null;
   comment: string | null;
   flag: QuestionFlag | null;
   answered_at: string | null;
+}
+
+export interface SurveyImport {
+  id: string;
+  site_id: string;
+  assessment_id: string;
+  source: ResponseSource;
+  file_name: string | null;
+  total_rows: number;
+  loaded_rows: number;
+  skipped_rows: number;
+  error_rows: number;
+  status: SurveyImportStatus;
+  error_log: Array<{ row: number; message: string }>;
+  created_by: string;
+  created_at: string;
+  completed_at: string | null;
 }
 
 export interface QuestionFeedbackStats {
@@ -1085,11 +1136,17 @@ export interface CreateQuestionInput {
   entity_types?: string[];
   roles?: string[];
   sort_order?: number;
+  question_type?: QuestionType;
+  options?: QuestionOption[];
+  anonymous_aggregate?: boolean;
 }
 
 export interface SubmitAnswerInput {
   question_id: string;
   score?: number;
+  text_value?: string;
+  choice_values?: string[];
+  numeric_value?: number;
   comment?: string;
   flag?: QuestionFlag;
 }

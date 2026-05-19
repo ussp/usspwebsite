@@ -121,7 +121,9 @@ export async function generateReadinessReport(
   const memberRoleMap: Record<string, string> = {};
   const responseMemberMap: Record<string, string> = {};
   for (const m of members) memberRoleMap[m.id] = m.role;
-  for (const r of responses) responseMemberMap[r.id] = r.member_id;
+  for (const r of responses) {
+    if (r.member_id) responseMemberMap[r.id] = r.member_id;
+  }
 
   // Aggregate scores by capability.
   // Anonymous-flagged questions skip the by-role track to preserve respondent privacy.
