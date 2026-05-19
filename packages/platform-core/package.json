@@ -335,6 +335,11 @@
       "import": "./dist/queries/admin/survey-import.js",
       "default": "./dist/queries/admin/survey-import.js"
     },
+    "./utils/survey-parse": {
+      "types": "./dist/utils/survey-parse.d.ts",
+      "import": "./dist/utils/survey-parse.js",
+      "default": "./dist/utils/survey-parse.js"
+    },
     "./queries/admin/baseline-report": {
       "types": "./dist/queries/admin/baseline-report.d.ts",
       "import": "./dist/queries/admin/baseline-report.js",

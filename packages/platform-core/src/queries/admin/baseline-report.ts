@@ -1,6 +1,12 @@
 import { getServiceClient } from "../../supabase/server.js";
 import { getSiteId } from "../../config.js";
 import type { QuestionBankItem, QuestionType } from "../../types/ai-tools.js";
+import {
+  aggregateLikert,
+  aggregateNumeric,
+  aggregateByRole,
+  aggregateMultiChoice,
+} from "../../utils/survey-parse.js";
 
 // Aggregations for externally-imported baseline surveys. Distinct from
 // readiness-report.ts which produces the readiness *tier* report.
@@ -138,30 +144,21 @@ export async function getAssessmentAggregateByQuestion(
     const q = questions.get(qid);
     if (!q) continue;
 
-    const isLikert = q.question_type === "likert";
-    const isNumeric = q.question_type === "numeric";
-
+    let n = aList.length;
     let mean: number | null = null;
     let agreePlus: number | null = null;
     let stronglyAgree: number | null = null;
-    let n = aList.length;
 
-    if (isLikert) {
-      const scored = aList.filter((a) => a.score != null);
-      n = scored.length;
-      if (n > 0) {
-        const sum = scored.reduce((s, a) => s + (a.score ?? 0), 0);
-        mean = sum / n;
-        agreePlus = (scored.filter((a) => (a.score ?? 0) >= 4).length / n) * 100;
-        stronglyAgree = (scored.filter((a) => a.score === 5).length / n) * 100;
-      }
-    } else if (isNumeric) {
-      const scored = aList.filter((a) => a.numeric_value != null);
-      n = scored.length;
-      if (n > 0) {
-        const sum = scored.reduce((s, a) => s + (a.numeric_value ?? 0), 0);
-        mean = sum / n;
-      }
+    if (q.question_type === "likert") {
+      const agg = aggregateLikert(aList);
+      n = agg.n;
+      mean = agg.mean;
+      agreePlus = agg.agree_plus_pct;
+      stronglyAgree = agg.strongly_agree_pct;
+    } else if (q.question_type === "numeric") {
+      const agg = aggregateNumeric(aList);
+      n = agg.n;
+      mean = agg.mean;
     }
 
     out.push({
@@ -195,28 +192,9 @@ export async function getAssessmentAggregateByQuestionAndRole(
   const q = questions.get(questionId);
   if (!q) return [];
 
-  const byRole = new Map<string, number[]>();
-  for (const a of answers) {
-    if (a.question_id !== questionId) continue;
-    const role = responseRoles.get(a.response_id);
-    if (!role) continue;
-
-    let val: number | null = null;
-    if (q.question_type === "likert") val = a.score;
-    else if (q.question_type === "numeric") val = a.numeric_value;
-    if (val == null) continue;
-
-    if (!byRole.has(role)) byRole.set(role, []);
-    byRole.get(role)!.push(val);
-  }
-
-  const out: RoleAggregate[] = [];
-  for (const [role, vals] of byRole.entries()) {
-    if (vals.length < minCohortSize) continue;
-    const mean = vals.reduce((s, v) => s + v, 0) / vals.length;
-    out.push({ role, n: vals.length, mean });
-  }
-  return out.sort((a, b) => (b.mean ?? 0) - (a.mean ?? 0));
+  const questionAnswers = answers.filter((a) => a.question_id === questionId);
+  const valueField = q.question_type === "likert" ? "score" : "numeric_value";
+  return aggregateByRole(questionAnswers, responseRoles, valueField, minCohortSize);
 }
 
 export async function getMultiChoiceDistribution(
@@ -232,29 +210,8 @@ export async function getMultiChoiceDistribution(
   const q = questions.get(questionId);
   if (!q) return [];
 
-  // Denominator = total valid respondents on the assessment (matches survey
-  // report convention: "% of all respondents", not "% of question-answerers").
-  const tally = new Map<string, number>();
-  for (const a of answers) {
-    if (a.question_id !== questionId) continue;
-    for (const v of a.choice_values || []) {
-      tally.set(v, (tally.get(v) ?? 0) + 1);
-    }
-  }
-
-  const n = responseRoles.size || 1;
-  const labelOf = new Map(
-    (q.options || []).map((o) => [o.value, o.label])
-  );
-
-  return Array.from(tally.entries())
-    .map(([value, count]) => ({
-      value,
-      label: labelOf.get(value) ?? value,
-      count,
-      pct: (count / n) * 100,
-    }))
-    .sort((a, b) => b.count - a.count);
+  const questionAnswers = answers.filter((a) => a.question_id === questionId);
+  return aggregateMultiChoice(questionAnswers, responseRoles.size, q.options || []);
 }
 
 export async function getFreeTextSamples(

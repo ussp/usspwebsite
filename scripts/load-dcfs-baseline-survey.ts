@@ -26,6 +26,11 @@ import {
   ensureExternalQuestionnaire,
   updateImportBatchStatus,
 } from "@ussp-platform/core/queries/admin/survey-import";
+import {
+  likertScore,
+  skillScore,
+  matchOption,
+} from "@ussp-platform/core/utils/survey-parse";
 
 const ASSESSMENT_NAME = "DCFS / ILC AI Pilot Baseline (May 2026)";
 const SITE_ID = process.env.SITE_ID || "dcfs";
@@ -37,37 +42,9 @@ const QUALITY_XLSX = resolve(
   "clients/dcfs-ilc/planning/deliverables/baseline-survey/raw/Excel/ResponseQuality.xlsx"
 );
 
-// ── Likert and skill text → numeric maps ─────────────────────────────
-
-const LIKERT5: Record<string, number> = {
-  "strongly disagree": 1,
-  disagree: 2,
-  neutral: 3,
-  agree: 4,
-  "strongly agree": 5,
-};
-const SKILL5: Record<string, number> = {
-  "no experience": 1,
-  "aware but not practiced": 2,
-  "can do with guidance": 3,
-  "comfortable independently": 4,
-  "could teach others": 5,
-};
-
-function norm(v: unknown): string {
-  if (v == null) return "";
-  return String(v).trim().toLowerCase();
-}
-
-function likert(v: unknown): number | null {
-  return LIKERT5[norm(v)] ?? null;
-}
-
-function skill(v: unknown): number | null {
-  const n = norm(v);
-  if (!n || n.startsWith("not applicable")) return null;
-  return SKILL5[n] ?? null;
-}
+// Re-exports for backward compatibility within this script
+const likert = likertScore;
+const skill = skillScore;
 
 // ── Question seed definitions ────────────────────────────────────────
 
@@ -298,31 +275,6 @@ const FREE_TEXT_IMPROVE_COL = 53;
 const ROLE_COL = 10;
 const ROLE_OTHER_COL = 11;
 const RESPONDENT_ID_COL = 0;
-
-// Multi-choice raw cell text → option value mappers
-function squash(s: string): string {
-  return s.toLowerCase().replace(/[^a-z0-9]/g, "");
-}
-
-function matchOption(raw: string, options: QuestionOption[]): string | null {
-  const n = squash(raw);
-  if (!n) return null;
-  // Exact-match the squashed form first
-  for (const o of options) {
-    if (squash(o.label) === n) return o.value;
-  }
-  // Strong contains-match (rare exports add prefix/suffix)
-  for (const o of options) {
-    const sq = squash(o.label);
-    if (sq.length > 5 && (n.includes(sq) || sq.includes(n))) return o.value;
-  }
-  // Otherwise store raw slugified (won't collide with mapped values)
-  return raw
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "_")
-    .replace(/^_|_$/g, "");
-}
 
 // ── Main ─────────────────────────────────────────────────────────────
 

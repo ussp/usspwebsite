@@ -281,3 +281,7 @@ className="font-[family-name:var(--font-spartan)]"      // Display
 | Upload a client-specific document (MVA, NDA, Work Order) | `app.ussp.co/clients/[id]` — Documents card. Doc types from `CLIENT_DOC_TYPE_DEFAULTS` in `platform-core/src/types/admin.ts` |
 | Link a Work Order to an assignment | Upload Client Doc dialog — select "Work Order" doc_type, paste assignment UUID |
 | Add a new corporate doc type | Edit `CORPORATE_DOC_TYPES` + `CORPORATE_DOC_TYPE_DEFAULTS` in `packages/platform-core/src/types/admin.ts`, rebuild platform-core |
+| Import an external survey (SurveyMonkey / xlsx / csv) | `tools.ussp.co/readiness/import` — pick assessment, upload file, map columns to seeded question_bank entries. See `docs/ai-tools/15-user-guide-baseline-surveys.md` |
+| View aggregates for an imported survey | `tools.ussp.co/readiness/baselines/<assessment-id>` — population breakdown, finding sections, role splits (n≥8), free-text samples, import history |
+| Seed a new external survey end-to-end | Adapt `scripts/load-dcfs-baseline-survey.ts` — defines question set + parses xlsx + calls `createImportBatch` / `ensureExternalQuestionnaire` / inserts responses |
+| Add a new question type (beyond likert/single/multi/numeric/free_text) | Extend `QuestionType` in `types/ai-tools.ts`, add case to `buildAnswerFields` in `utils/survey-parse.ts`, add aggregator + test, update report page rendering |
