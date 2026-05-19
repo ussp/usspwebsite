@@ -225,26 +225,24 @@ export async function getMultiChoiceDistribution(
   siteId?: string
 ): Promise<ChoiceDistribution[]> {
   const site = siteId || getSiteId();
-  const { answers, questions } = await loadAnswersForAssessment(
+  const { answers, responseRoles, questions } = await loadAnswersForAssessment(
     assessmentId,
     site
   );
   const q = questions.get(questionId);
   if (!q) return [];
 
-  // n = number of unique responses (respondents who answered this question)
-  const respondents = new Set<string>();
+  // Denominator = total valid respondents on the assessment (matches survey
+  // report convention: "% of all respondents", not "% of question-answerers").
   const tally = new Map<string, number>();
-
   for (const a of answers) {
     if (a.question_id !== questionId) continue;
-    respondents.add(a.response_id);
     for (const v of a.choice_values || []) {
       tally.set(v, (tally.get(v) ?? 0) + 1);
     }
   }
 
-  const n = respondents.size || 1;
+  const n = responseRoles.size || 1;
   const labelOf = new Map(
     (q.options || []).map((o) => [o.value, o.label])
   );

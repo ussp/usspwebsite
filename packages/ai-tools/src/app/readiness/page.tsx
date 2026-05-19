@@ -5,6 +5,7 @@ import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
 import GuideBanner from "@/components/GuideBanner";
 import { listReadinessAssessments } from "@ussp-platform/core/queries/admin/readiness";
+import { listImportBatches } from "@ussp-platform/core/queries/admin/survey-import";
 import type { ReadinessAssessment } from "@ussp-platform/core";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +21,10 @@ export default async function ReadinessListPage() {
   if (!session) redirect("/login");
 
   const assessments = await listReadinessAssessments();
+  const importedFlags = await Promise.all(
+    assessments.map(async (a) => (await listImportBatches(a.id)).length > 0)
+  );
+  const isImported = new Map(assessments.map((a, i) => [a.id, importedFlags[i]]));
 
   return (
     <>
@@ -86,12 +91,22 @@ export default async function ReadinessListPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-light-gray">
-                {assessments.map((a: ReadinessAssessment) => (
+                {assessments.map((a: ReadinessAssessment) => {
+                  const imported = isImported.get(a.id) === true;
+                  const primaryHref = imported
+                    ? `/readiness/baselines/${a.id}`
+                    : `/readiness/${a.id}/company`;
+                  return (
                   <tr key={a.id} className="hover:bg-light-gray/30 transition-colors">
                     <td className="px-4 py-3">
-                      <Link href={`/readiness/${a.id}/company`} className="text-primary hover:underline font-medium">
+                      <Link href={primaryHref} className="text-primary hover:underline font-medium">
                         {a.name}
                       </Link>
+                      {imported && (
+                        <span className="ml-2 inline-block px-1.5 py-0.5 rounded text-[10px] font-medium bg-blue-50 text-blue-700">
+                          imported
+                        </span>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-medium ${STATUS_COLORS[a.status] || "bg-gray-100 text-gray-700"}`}>
@@ -106,34 +121,46 @@ export default async function ReadinessListPage() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <Link
-                          href={`/readiness/${a.id}/company`}
-                          className="text-xs text-primary hover:underline"
-                        >
-                          Continue
-                        </Link>
-                        {a.status === "completed" && (
+                        {imported ? (
+                          <Link
+                            href={`/readiness/baselines/${a.id}`}
+                            className="text-xs text-primary hover:underline"
+                          >
+                            View Report
+                          </Link>
+                        ) : (
                           <>
-                            <span className="text-dark/20">|</span>
                             <Link
-                              href={`/readiness/${a.id}/report`}
-                              className="text-xs text-emerald-600 hover:underline"
+                              href={`/readiness/${a.id}/company`}
+                              className="text-xs text-primary hover:underline"
                             >
-                              Report
+                              Continue
                             </Link>
-                            <span className="text-dark/20">|</span>
-                            <Link
-                              href={`/readiness/new?reassess=${a.id}`}
-                              className="text-xs text-amber-600 hover:underline"
-                            >
-                              Re-assess
-                            </Link>
+                            {a.status === "completed" && (
+                              <>
+                                <span className="text-dark/20">|</span>
+                                <Link
+                                  href={`/readiness/${a.id}/report`}
+                                  className="text-xs text-emerald-600 hover:underline"
+                                >
+                                  Report
+                                </Link>
+                                <span className="text-dark/20">|</span>
+                                <Link
+                                  href={`/readiness/new?reassess=${a.id}`}
+                                  className="text-xs text-amber-600 hover:underline"
+                                >
+                                  Re-assess
+                                </Link>
+                              </>
+                            )}
                           </>
                         )}
                       </div>
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>
