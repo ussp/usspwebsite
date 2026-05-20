@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import MicrosoftEntraId from "next-auth/providers/microsoft-entra-id";
-import type { NextAuthResult } from "next-auth";
+import type { NextAuthConfig, NextAuthResult } from "next-auth";
 import { getServiceClient } from "../supabase/server.js";
 import { getSiteId } from "../config.js";
 import type { StaffRole } from "../types/admin.js";
@@ -40,11 +40,16 @@ export interface AdminSession {
   };
 }
 
-export function createAdminAuth(
-  options: CreateAdminAuthOptions = {}
-): NextAuthResult {
+/**
+ * Build the NextAuth config object from options. Extracted so both the
+ * single-tenant (createAdminAuth) and multi-tenant (createMultiTenantAdminAuth)
+ * entry points can share provider + callback wiring.
+ *
+ * Returns a plain config (no NextAuth() wrap) so callers can compose it —
+ * e.g. multi-tenant wraps it in a lazy factory and overlays redirectProxyUrl.
+ */
+function buildAdminAuthConfig(options: CreateAdminAuthOptions): NextAuthConfig {
   const providerType = options.provider || process.env.AUTH_PROVIDER || "google";
-
   const microsoftTenant = options.microsoftTenantId || process.env.AUTH_MICROSOFT_TENANT;
 
   const providers = providerType === "microsoft"
@@ -65,7 +70,7 @@ export function createAdminAuth(
         }),
       ];
 
-  return NextAuth({
+  return {
     trustHost: true,
     debug: process.env.NODE_ENV === "development",
     providers,
@@ -181,5 +186,67 @@ export function createAdminAuth(
         return session;
       },
     },
+  };
+}
+
+export function createAdminAuth(
+  options: CreateAdminAuthOptions = {}
+): NextAuthResult {
+  return NextAuth(buildAdminAuthConfig(options));
+}
+
+/**
+ * Multi-tenant variant of createAdminAuth. Reads the request's actual host
+ * per-request and sets `redirectProxyUrl` so OAuth callbacks land back on
+ * whichever tenant domain initiated the sign-in.
+ *
+ * Why this exists: Auth.js v5 `trustHost: true` is silently broken in
+ * next-auth@5.0.0-beta.30 + next@16.1.6 — the OAuth `redirect_uri` sent
+ * to Google defaults to `https://localhost:3000/...` regardless of
+ * X-Forwarded-Host. Upstream fix is open (PR #13323) but unmerged.
+ * The lazy-factory pattern below is the community-blessed workaround
+ * (Auth.js discussion #9785).
+ *
+ * Use this for services that serve multiple custom domains from a single
+ * deployment (e.g. ai-tools serving tools.ussp.co + app.tranzin.com +
+ * app.krasanconsulting.com). For single-domain services, stick with
+ * createAdminAuth — it's simpler and has fewer moving parts.
+ *
+ * Caveats:
+ *  - Every Google OAuth client must whitelist each tenant's redirect URI:
+ *    `https://<tenant-domain>/api/auth/callback/google`
+ *  - All tenants share the same AUTH_SECRET (already the case here)
+ *  - `headers()` is awaited because Next.js 16 made it async-only
+ */
+export function createMultiTenantAdminAuth(
+  options: CreateAdminAuthOptions = {}
+): NextAuthResult {
+  return NextAuth(async () => {
+    const baseConfig = buildAdminAuthConfig(options);
+
+    // Try to derive the actual request host from Next.js headers. During
+    // build/startup there's no request context — fall through without a
+    // proxy URL and let Auth.js's normal (broken) URL derivation take over.
+    // That's fine because build-time invocations don't initiate OAuth.
+    try {
+      const req = (globalThis as { require?: NodeJS.Require }).require
+        ?? eval("require");
+      const mod = (req as NodeJS.Require)("next/headers") as {
+        headers: () => Promise<{ get: (k: string) => string | null }>;
+      };
+      const h = await mod.headers();
+      const proto = h.get("x-forwarded-proto") ?? "https";
+      const host = h.get("x-forwarded-host") ?? h.get("host");
+      if (host) {
+        return {
+          ...baseConfig,
+          redirectProxyUrl: `${proto}://${host}/api/auth`,
+        };
+      }
+    } catch {
+      // No request context — skip the override.
+    }
+
+    return baseConfig;
   });
 }

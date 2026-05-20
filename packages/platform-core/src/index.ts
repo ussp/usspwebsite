@@ -14,7 +14,7 @@ export { trackEvent } from "./queries/analytics.js";
 
 // Auth
 export { createAuth } from "./auth/config.js";
-export { createAdminAuth } from "./auth/admin-config.js";
+export { createAdminAuth, createMultiTenantAdminAuth } from "./auth/admin-config.js";
 export { hasPermission, requirePermission } from "./auth/rbac.js";
 
 // API handlers
