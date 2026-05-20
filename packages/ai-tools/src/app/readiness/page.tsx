@@ -122,12 +122,21 @@ export default async function ReadinessListPage() {
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         {imported ? (
-                          <Link
-                            href={`/readiness/baselines/${a.id}`}
-                            className="text-xs text-primary hover:underline"
-                          >
-                            View Report
-                          </Link>
+                          <>
+                            <Link
+                              href={`/readiness/baselines/${a.id}`}
+                              className="text-xs text-primary hover:underline"
+                            >
+                              View Report
+                            </Link>
+                            <span className="text-dark/20">|</span>
+                            <Link
+                              href={`/readiness/import?assessment=${a.id}`}
+                              className="text-xs text-amber-600 hover:underline"
+                            >
+                              Import another
+                            </Link>
+                          </>
                         ) : (
                           <>
                             <Link

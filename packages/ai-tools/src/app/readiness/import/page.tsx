@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import * as XLSX from "xlsx";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminTopbar from "@/components/AdminTopbar";
@@ -40,12 +40,22 @@ const QUESTION_TYPES: { value: QuestionType; label: string }[] = [
 ];
 
 export default function SurveyImportPage() {
+  return (
+    <Suspense fallback={null}>
+      <SurveyImportForm />
+    </Suspense>
+  );
+}
+
+function SurveyImportForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const preselectAssessmentId = searchParams.get("assessment") || "";
 
   // Step state
   const [assessments, setAssessments] = useState<AssessmentLite[]>([]);
   const [questions, setQuestions] = useState<QuestionLite[]>([]);
-  const [assessmentId, setAssessmentId] = useState("");
+  const [assessmentId, setAssessmentId] = useState(preselectAssessmentId);
   const [source, setSource] = useState<ResponseSource>("surveymonkey");
 
   const [fileName, setFileName] = useState("");
