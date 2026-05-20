@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tranzin — Agentic Enterprise Architecture</title>
+<meta name="description" content="Tranzin Capability Statement — wrap your legacy stack, govern your data, let agents decide. Context-First AI Platform, MCP-ready, with 23+ years of enterprise delivery muscle.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="../../assets/logos/tranzin-logo.svg">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --t-obsidian: #060B18;
+    --t-navy: #0B1935;
+    --t-royal: #0B3D91;
+    --t-gold: #D4AF37;
+    --t-gold2: #FAE880;
+    --t-gold-dim: #B8921A;
+    --t-cream: #ECEAE6;
+
+    --brand-dark: #060B18;
+    --brand-mid: #0B1935;
+    --brand-accent: #0B3D91;
+    --brand-highlight: #D4AF37;
+
+    --white: #ffffff;
+    --light-gray: #f4f4f8;
+    --light-cream: #FAF8F2;
+    --text-dark: #1A1A1A;
+    --text-mid: #555;
+    --green: #27ae60;
+    --red: #e74c3c;
+    --amber: #f39c12;
+    --blue: #2980b9;
+
+    --fd: 'Cormorant Garamond', Georgia, serif;
+    --fb: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--fb);
+    background: #f0f0f5;
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+
+  /* ── Slide System ── */
+  .slide {
+    width: 1120px;
+    height: 630px;
+    margin: 40px auto;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    padding: 38px 50px 50px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-number {
+    position: absolute;
+    bottom: 18px;
+    right: 30px;
+    font-size: 11px;
+    color: #888;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .slide-footer {
+    position: absolute;
+    bottom: 14px;
+    left: 30px;
+    font-size: 10.5px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .slide-footer img {
+    height: 16px;
+    opacity: 0.8;
+  }
+
+  /* ── Title Slide ── */
+  .slide.title-slide {
+    background: linear-gradient(135deg, var(--t-obsidian) 0%, var(--t-navy) 50%, var(--t-royal) 100%);
+    color: var(--t-cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px;
+  }
+
+  .slide.title-slide::before {
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image: linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+    pointer-events: none;
+  }
+
+  .slide.title-slide .logo-block {
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .slide.title-slide .logo-block img {
+    height: 56px;
+    display: block;
+  }
+
+  .slide.title-slide h1 {
+    font-family: var(--fd);
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1.08;
+    margin-bottom: 16px;
+    color: var(--t-cream);
+    letter-spacing: -0.3px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .slide.title-slide h1 .gold {
+    color: var(--t-gold);
+  }
+
+  .slide.title-slide .subtitle {
+    font-family: var(--fd);
+    font-size: 24px;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(236,234,230,0.82);
+    margin-bottom: 40px;
+    max-width: 760px;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+  }
+
+  .slide.title-slide .meta {
+    font-family: var(--fb);
+    font-size: 13px;
+    color: rgba(236,234,230,0.7);
+    line-height: 2;
+    letter-spacing: 0.04em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .slide.title-slide .meta .gold-line {
+    width: 80px;
+    height: 1px;
+    background: var(--t-gold);
+    margin: 18px auto 22px;
+    opacity: 0.7;
+  }
+
+  .slide.title-slide .confidential {
+    position: absolute;
+    bottom: 24px;
+    font-size: 10px;
+    color: rgba(212,175,55,0.7);
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    z-index: 1;
+  }
+
+  /* ── Section Divider ── */
+  .slide.section-divider {
+    background: linear-gradient(135deg, var(--t-royal) 0%, var(--t-navy) 100%);
+    color: var(--t-cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 100px;
+  }
+
+  .slide.section-divider h2 {
+    font-family: var(--fd);
+    font-size: 52px;
+    font-weight: 500;
+    color: var(--t-cream);
+    margin-bottom: 14px;
+    border: none;
+    padding: 0;
+  }
+
+  .slide.section-divider .section-sub {
+    font-size: 19px;
+    color: rgba(236,234,230,0.78);
+    max-width: 640px;
+    font-weight: 300;
+  }
+
+  /* ── Content Slides ── */
+  .slide h2 {
+    font-family: var(--fd);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--t-navy);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2.5px solid var(--t-gold);
+    letter-spacing: -0.2px;
+  }
+
+  .slide h3 {
+    font-family: var(--fb);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--t-royal);
+    margin: 10px 0 6px 0;
+    letter-spacing: 0.02em;
+  }
+
+  .slide p {
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+  }
+
+  .slide ul, .slide ol {
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  .slide li {
+    font-size: 12.5px;
+    margin-bottom: 4px;
+    line-height: 1.55;
+  }
+
+  .slide strong {
+    color: var(--t-navy);
+    font-weight: 600;
+  }
+
+  /* ── Callout Box ── */
+  .callout {
+    background: var(--light-cream);
+    border-left: 4px solid var(--t-gold);
+    padding: 11px 16px;
+    border-radius: 0 6px 6px 0;
+    margin: 10px 0;
+    font-size: 12.5px;
+  }
+
+  .callout.info {
+    border-left-color: var(--blue);
+    background: #eaf2fa;
+  }
+
+  .callout.target {
+    border-left-color: var(--green);
+    background: #eafaf1;
+  }
+
+  .callout.warning {
+    border-left-color: var(--red);
+    background: #fdf2f2;
+  }
+
+  .callout.gold {
+    border-left-color: var(--t-gold);
+    background: #FAF5E0;
+  }
+
+  /* ── Tables ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 11.5px;
+  }
+
+  th {
+    background: var(--t-navy);
+    color: var(--white);
+    padding: 7px 11px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-family: var(--fb);
+  }
+
+  td {
+    padding: 6px 11px;
+    border-bottom: 1px solid #e6e6ee;
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) { background: #fafafa; }
+  tr:hover { background: #f3f3f8; }
+
+  /* ── Status Tags ── */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+  .tag.green { background: #d4edda; color: #155724; }
+  .tag.red { background: #f8d7da; color: #721c24; }
+  .tag.amber { background: #fff3cd; color: #856404; }
+  .tag.blue { background: #d1ecf1; color: #0c5460; }
+  .tag.gold { background: #FAF0C8; color: #6b5410; }
+
+  /* ── Phase Arrow Diagram ── */
+  .phase-flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 18px 0;
+    flex-wrap: wrap;
+  }
+
+  .phase-box {
+    background: var(--t-royal);
+    color: var(--white);
+    padding: 9px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 95px;
+    position: relative;
+    letter-spacing: 0.02em;
+  }
+
+  .phase-box.active {
+    background: var(--t-gold);
+    color: var(--t-navy);
+    transform: scale(1.05);
+  }
+
+  .phase-arrow {
+    font-size: 18px;
+    color: #aaa;
+  }
+
+  /* ── Three-up grid ── */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 10px 0;
+  }
+
+  .grid-card {
+    background: var(--light-cream);
+    border-radius: 6px;
+    padding: 12px 14px;
+    border-top: 3px solid var(--t-gold);
+  }
+
+  .grid-card h4 {
+    font-family: var(--fb);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--t-navy);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .grid-card .num {
+    font-family: var(--fd);
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--t-gold-dim);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .grid-card p { font-size: 12px; margin-bottom: 4px; color: var(--text-dark); }
+  .grid-card ul { padding-left: 16px; margin: 0; }
+  .grid-card li { font-size: 11.5px; margin-bottom: 2px; line-height: 1.5; }
+
+  /* ── Two-up ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* ── Metric Card ── */
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 12px 0;
+  }
+
+  .metric-row.four { grid-template-columns: repeat(4, 1fr); }
+
+  .metric-card {
+    background: var(--light-cream);
+    border-radius: 6px;
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 3px solid var(--t-gold);
+  }
+
+  .metric-card .number {
+    font-family: var(--fd);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--t-royal);
+    line-height: 1.1;
+  }
+
+  .metric-card .number.small {
+    font-size: 17px;
+  }
+
+  .metric-card .label {
+    font-size: 11px;
+    color: var(--text-mid);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  /* ── Architecture diagram (5-layer stack) ── */
+  .arch-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 6px 0 4px;
+  }
+
+  .arch-layer {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    background: var(--light-cream);
+    border-radius: 6px;
+    border-left: 4px solid var(--t-gold);
+    overflow: hidden;
+  }
+
+  .arch-layer .arch-num {
+    background: var(--t-navy);
+    color: var(--t-gold);
+    padding: 10px 12px;
+    font-family: var(--fd);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    display: flex;
+    align-items: center;
+    line-height: 1.25;
+  }
+
+  .arch-layer .arch-body {
+    padding: 9px 14px;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--text-dark);
+  }
+
+  .arch-layer.l1 .arch-num { background: #2d3a4f; color: rgba(212,175,55,0.85); }
+  .arch-layer.l2 .arch-num { background: #1c3760; color: var(--t-gold); }
+  .arch-layer.l3 .arch-num { background: #0B3D91; color: var(--t-gold); }
+  .arch-layer.l4 .arch-num { background: #0a2a6b; color: var(--t-gold); }
+  .arch-layer.l5 .arch-num { background: #061a4a; color: var(--t-gold); }
+
+  .arch-layer .arch-body strong { color: var(--t-navy); }
+
+  .arch-note {
+    font-size: 11px;
+    color: var(--text-mid);
+    text-align: center;
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  /* ── Closing Slide ── */
+  .slide.closing-slide {
+    background: linear-gradient(135deg, var(--t-royal) 0%, var(--t-navy) 50%, var(--t-obsidian) 100%);
+    color: var(--t-cream);
+    padding: 50px 60px;
+  }
+
+  .slide.closing-slide h2 {
+    color: var(--t-cream);
+    border-bottom-color: var(--t-gold);
+    font-size: 34px;
+  }
+
+  .slide.closing-slide h3 {
+    color: var(--t-gold);
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .slide.closing-slide li, .slide.closing-slide p {
+    color: rgba(236,234,230,0.88);
+  }
+
+  .slide.closing-slide strong {
+    color: var(--t-cream);
+  }
+
+  .slide.closing-slide .callout {
+    background: rgba(212,175,55,0.10);
+    border-left-color: var(--t-gold);
+    color: var(--t-cream);
+  }
+
+  .slide.closing-slide .contact-block {
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(212,175,55,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .slide.closing-slide .contact-block .left {
+    font-family: var(--fd);
+    font-size: 26px;
+    color: var(--t-gold);
+    line-height: 1.2;
+  }
+
+  .slide.closing-slide .contact-block .left small {
+    display: block;
+    font-family: var(--fb);
+    font-size: 13px;
+    color: var(--t-cream);
+    margin-top: 6px;
+    letter-spacing: 0.03em;
+  }
+
+  .slide.closing-slide .contact-block .right {
+    text-align: right;
+    font-size: 12px;
+    color: rgba(236,234,230,0.7);
+    line-height: 1.7;
+  }
+
+  .slide.closing-slide .contact-block .right a {
+    color: var(--t-gold);
+    text-decoration: none;
+  }
+
+  /* ── Slide Navigation Controls ── */
+  .slide-nav {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+    background: rgba(6,11,24,0.96);
+    padding: 8px 14px;
+    border-radius: 40px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    align-items: center;
+    transition: opacity 0.25s, transform 0.25s;
+    border: 1px solid rgba(212,175,55,0.22);
+  }
+
+  .slide-nav.hidden-state {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+
+  .slide-nav button {
+    background: transparent;
+    border: 1.5px solid rgba(236,234,230,0.28);
+    color: var(--t-cream);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 17px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.18s;
+    font-family: var(--fb);
+  }
+
+  .slide-nav button:hover {
+    background: var(--t-gold);
+    border-color: var(--t-gold);
+    color: var(--t-navy);
+  }
+
+  .slide-nav button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .slide-nav button:disabled:hover {
+    background: transparent;
+    border-color: rgba(236,234,230,0.28);
+    color: var(--t-cream);
+  }
+
+  .slide-counter {
+    color: rgba(236,234,230,0.85);
+    font-size: 12.5px;
+    font-weight: 600;
+    min-width: 52px;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+
+  .slide-nav .mode-toggle {
+    width: auto;
+    padding: 0 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .slide-nav .hide-toggle {
+    margin-left: 4px;
+    font-size: 13px;
+  }
+
+  /* Hide-controls "peek" tab — visible when nav is hidden */
+  .nav-peek {
+    position: fixed;
+    bottom: 0;
+    right: 24px;
+    z-index: 999;
+    background: rgba(6,11,24,0.92);
+    color: var(--t-gold);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: none;
+    transition: background 0.2s;
+    font-family: var(--fb);
+  }
+
+  .nav-peek:hover { background: var(--t-navy); color: var(--t-gold2); }
+  .nav-peek.visible { display: block; }
+
+  /* Presentation mode */
+  body.presentation-mode {
+    background: #000;
+    overflow: hidden;
+  }
+
+  body.presentation-mode .slide {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    margin: 0;
+    display: none;
+    border-radius: 0;
+    z-index: 10;
+  }
+
+  body.presentation-mode .slide.active-slide {
+    display: flex;
+    flex-direction: column;
+  }
+
+  body.presentation-mode .slide.title-slide.active-slide,
+  body.presentation-mode .slide.section-divider.active-slide {
+    justify-content: center;
+  }
+
+  body.presentation-mode .slide.title-slide.active-slide {
+    align-items: center;
+  }
+
+  /* Auto-hide nav in presentation mode after 3s of no movement */
+  body.presentation-mode .slide-nav {
+    opacity: 0;
+    pointer-events: none;
+  }
+  body.presentation-mode.nav-visible .slide-nav,
+  body.presentation-mode .slide-nav:hover {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* But if user manually hid, stay hidden */
+  body.presentation-mode .slide-nav.hidden-state,
+  body.presentation-mode.nav-visible .slide-nav.hidden-state {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ── Keyboard hint ── */
+  .key-hint {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    background: rgba(6,11,24,0.85);
+    color: rgba(236,234,230,0.7);
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-size: 11px;
+    z-index: 1001;
+    border: 1px solid rgba(212,175,55,0.2);
+    letter-spacing: 0.04em;
+    font-family: var(--fb);
+  }
+
+  body:not(.presentation-mode) .key-hint { display: none; }
+
+  /* ── Print ── */
+  @media print {
+    body { background: white; }
+    .slide {
+      box-shadow: none;
+      margin: 0;
+      page-break-after: always;
+      border: none;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    .slide.title-slide, .slide.section-divider, .slide.closing-slide {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    .slide-nav, .key-hint, .nav-peek { display: none !important; }
+  }
+</style>
+<style>
+@page { size: 1120px 630px; margin: 0; }
+@media print {
+  html, body { width: 1120px; }
+  .slide { width: 1120px !important; height: 630px !important; margin: 0 !important; border: none !important; box-shadow: none !important; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- ── SLIDE 1: Title ── -->
+<div class="slide title-slide">
+  <div class="logo-block">
+    <img src="../../assets/logos/tranzin-logo.svg" alt="Tranzin">
+  </div>
+  <h1>Agentic Enterprise <span class="gold">Architecture</span></h1>
+  <div class="subtitle">Wrap your legacy stack. Govern your data. Let agents decide.</div>
+  <div class="meta">
+    A Tranzin Capability Statement
+    <div class="gold-line"></div>
+    Onshore + Offshore Delivery &nbsp;&middot;&nbsp; Chicago &middot; India &middot; Canada<br>
+    23+ Years of Enterprise Delivery &nbsp;&middot;&nbsp; Production-Proven Platform
+  </div>
+  <div class="confidential">Tranzin Confidential</div>
+</div>
+
+
+<!-- ── SLIDE 2: Our Thesis ── -->
+<div class="slide">
+  <h2>Our Thesis</h2>
+
+  <div class="callout gold" style="text-align:center;padding:20px 24px;margin:12px 0 18px;">
+    <div style="font-family:var(--fd);font-size:26px;font-weight:500;color:var(--t-navy);line-height:1.3;">
+      Don't renovate the legacy stack. <span style="color:var(--t-gold-dim);">Wrap it.</span> Govern the data. <em>Let agents decide.</em>
+    </div>
+  </div>
+
+  <p style="font-size:13px;margin-bottom:12px;">Three anchors behind every slide that follows &mdash; what makes this credible today, not a multi-year promise.</p>
+
+  <div class="grid-3">
+    <div class="grid-card">
+      <div class="num">1</div>
+      <h4>Platform Exists Today</h4>
+      <p>Our <strong>Context-First AI Platform</strong> &mdash; MCP-ready, 34+ connectors, TTL &amp; trust scoring on every data point, semantic knowledge graph. Not slideware.</p>
+    </div>
+    <div class="grid-card">
+      <div class="num">2</div>
+      <h4>Pattern Is Proven</h4>
+      <p><strong>VionOS at Launch Warwick</strong> &mdash; the same architecture pattern in production today. Legacy POS wrapped, data governed, 8 AI crews running, agents acting.</p>
+    </div>
+    <div class="grid-card">
+      <div class="num">3</div>
+      <h4>Team Can Deliver</h4>
+      <p><strong>23+ years of enterprise delivery.</strong> Oracle ERP, AWS/Azure, Enterprise Architecture, Fortune 500 + government. We own engagements end-to-end.</p>
+    </div>
+  </div>
+
+  <div class="callout info" style="margin-top:14px;font-size:12px;">
+    <strong>What this deck is not:</strong> a generic AI sales pitch or a multi-year transformation roadmap. It is a capability statement plus a low-risk path to start &mdash; built around what we have already delivered.
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">2 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 3: The Pattern We Solve ── -->
+<div class="slide">
+  <h2>The Pattern We See in Modern Enterprises</h2>
+
+  <p style="font-size:13px;margin-bottom:12px;">Whether the industry is banking, telco, insurance, retail, manufacturing, or government &mdash; the legacy posture is the same. So is the destination.</p>
+
+  <div class="two-col">
+    <div>
+      <h3>Current state &mdash; what we see everywhere</h3>
+      <ul>
+        <li>Legacy stack of record: Oracle, SQL Server, Salesforce, custom ERP, mainframe</li>
+        <li>No API-first architecture; systems are tightly coupled and siloed</li>
+        <li>Inconsistent, fragmented data across platforms</li>
+        <li>Limited real-time data exchange capability</li>
+        <li>No centralized governance or guardrails</li>
+        <li>Reporting is static, not intelligence-driven</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Where you want to be &mdash; an Agentic Enterprise</h3>
+      <table style="font-size:11px;">
+        <tr><th style="width:22%;">Goal</th><th>What it means in practice</th></tr>
+        <tr><td><strong>1 &middot; Interoperability</strong></td><td>Oracle &harr; SQL Server &harr; Salesforce &harr; Reporting reachable through one abstraction</td></tr>
+        <tr><td><strong>2 &middot; Data Readiness</strong></td><td>Cleaned, normalized, governed single source of truth</td></tr>
+        <tr><td><strong>3 &middot; Agentic Layer</strong></td><td>Agents that query, trigger workflows, generate insight, take constrained actions</td></tr>
+        <tr><td><strong>4 &middot; Guardrails</strong></td><td>Access control, audit, explainability, safe execution</td></tr>
+        <tr><td><strong>5 &middot; Scalable</strong></td><td>Modular, composable, API-first / event-driven &mdash; built to extend</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout gold" style="margin-top:12px;font-size:12px;">
+    <strong>Every slide that follows</strong> maps back to one of these five goals. The same architecture, the same platform, adapted to each client's regulatory ceiling and industry context.
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">3 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 4: Why Tranzin ── -->
+<div class="slide">
+  <h2>Why Tranzin &mdash; Three Reasons in One Slide</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px;">
+
+    <div style="background:var(--light-cream);border-radius:8px;padding:16px 18px;border-top:4px solid var(--t-gold);">
+      <div style="font-family:var(--fd);font-size:18px;color:var(--t-navy);font-weight:600;margin-bottom:6px;">1 &middot; The platform already exists</div>
+      <p style="font-size:12px;line-height:1.6;">Our <strong>Context-First AI Platform</strong> ships <strong>MCP-ready</strong> with <strong>34+ pre-built connectors</strong>, <strong>TTL &amp; trust scoring</strong> on every data point, and a <strong>semantic knowledge graph</strong>. Framework-agnostic &mdash; Claude, GPT, CrewAI, LangGraph, custom.</p>
+      <p style="font-size:11px;color:var(--t-gold-dim);font-weight:600;margin-top:6px;letter-spacing:0.04em;">CONNECT &middot; TRUST &middot; EVOLVE</p>
+    </div>
+
+    <div style="background:var(--light-cream);border-radius:8px;padding:16px 18px;border-top:4px solid var(--t-gold);">
+      <div style="font-family:var(--fd);font-size:18px;color:var(--t-navy);font-weight:600;margin-bottom:6px;">2 &middot; We've already done it in production</div>
+      <p style="font-size:12px;line-height:1.6;"><strong>VionOS at Launch Warwick</strong> is the same play, one vertical over. Legacy POS, siloed CRM, fragmented reporting, 45 cameras &mdash; wrapped into an agentic operating system. 8 AI crews, MCP gateway, knowledge graph, edge AI &mdash; all running today.</p>
+      <p style="font-size:11px;color:var(--t-gold-dim);font-weight:600;margin-top:6px;letter-spacing:0.04em;">WE LIVE IT &mdash; WE DON'T JUST READ ABOUT IT</p>
+    </div>
+
+    <div style="background:var(--light-cream);border-radius:8px;padding:16px 18px;border-top:4px solid var(--t-gold);">
+      <div style="font-family:var(--fd);font-size:18px;color:var(--t-navy);font-weight:600;margin-bottom:6px;">3 &middot; We can staff and deliver</div>
+      <p style="font-size:12px;line-height:1.6;"><strong>23+ years of enterprise delivery</strong> &mdash; Oracle ERP, AWS/Azure, Enterprise Architecture, Data Analytics + AI practices. <strong>Onshore + offshore</strong> at competitive rates. <strong>MBE / WBE / DBE</strong> certified.</p>
+      <p style="font-size:11px;color:var(--t-gold-dim);font-weight:600;margin-top:6px;letter-spacing:0.04em;">ARCHITECT &middot; BUILD &middot; OPERATE &middot; SCALE</p>
+    </div>
+
+  </div>
+
+  <div class="callout info" style="margin-top:14px;font-size:12px;">
+    <strong>The combination is rare.</strong> Most pure-play AI consultancies stop at architecture and slides. Most legacy SI shops haven't built an agentic system in production. Tranzin does both &mdash; and owns delivery end-to-end.
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">4 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 5: Technical Capability ── -->
+<div class="slide">
+  <h2>Technical Capability &mdash; Mapped to the Five Layers</h2>
+
+  <p style="font-size:12.5px;margin-bottom:8px;">What Tranzin brings into each layer of the Agentic Enterprise Architecture &mdash; the same stack we deploy regardless of industry.</p>
+
+  <table>
+    <tr><th style="width:24%;">Layer</th><th>What we bring</th></tr>
+    <tr>
+      <td><strong>1 &middot; Source Systems</strong></td>
+      <td>Oracle DB + ERP, SQL Server, Salesforce, SAP, mainframe / file-based reporting &mdash; all in our active delivery portfolio.</td>
+    </tr>
+    <tr>
+      <td><strong>2 &middot; Interoperability &middot; MCP Gateway</strong></td>
+      <td><strong>MCP-ready</strong> server exposing business context to any agent framework. <strong>34+ pre-built connectors</strong>. API + event-driven adapters (Kafka, EventBridge, Service Bus).</td>
+    </tr>
+    <tr>
+      <td><strong>3 &middot; Governed Data Layer</strong></td>
+      <td>Bronze &rarr; Silver &rarr; Gold ETL pattern (production-proven). Postgres / Snowflake / Databricks. <strong>TTL + trust scoring + source tagging</strong> on every data point. Catalog + lineage.</td>
+    </tr>
+    <tr>
+      <td><strong>4 &middot; Agentic Reasoning</strong></td>
+      <td>Semantic <strong>knowledge graph</strong>, AI crews (CrewAI, LangGraph, custom), reasoning service with tool use, <strong>observability + cost tracking</strong> baked in. Framework-agnostic.</td>
+    </tr>
+    <tr>
+      <td><strong>5 &middot; Action</strong></td>
+      <td>Workflow engine, notification fabric (Slack, email, SMS, CRM push), human-in-the-loop approval gates, <strong>immutable audit trail</strong>, decisioning APIs.</td>
+    </tr>
+  </table>
+
+  <div class="two-col" style="margin-top:12px;gap:18px;">
+    <div>
+      <h3>Cross-cutting</h3>
+      <ul style="font-size:12px;">
+        <li><strong>Cloud:</strong> AWS &middot; Azure &middot; GCP (preference per client)</li>
+        <li><strong>Security:</strong> RBAC, SSO/OIDC, secrets vaulting, encryption at-rest + in-flight</li>
+        <li><strong>DevOps:</strong> IaC (Terraform), CI/CD, observability (OTel + Langfuse for AI tracing)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Compliance posture</h3>
+      <ul style="font-size:12px;">
+        <li>Built for <strong>SOX / FFIEC / GLBA / HIPAA / FedRAMP-style</strong> controls</li>
+        <li>Full <strong>audit trail</strong> on every agent decision</li>
+        <li><strong>Model versioning</strong> + prompt-version capture + explainability surface</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">5 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 6: Functional Use Cases Across Industries ── -->
+<div class="slide">
+  <h2>Functional Use Cases &mdash; Across Industries</h2>
+
+  <p style="font-size:12.5px;margin-bottom:8px;">Where the platform creates revenue, reduces loss, or removes cost &mdash; by industry. The pattern is vertical-agnostic; the use cases adapt.</p>
+
+  <table>
+    <tr>
+      <th style="width:18%;">Industry</th>
+      <th style="width:34%;">Agentic Use Case</th>
+      <th style="width:30%;">What changes</th>
+      <th style="width:18%;">Class</th>
+    </tr>
+    <tr>
+      <td><strong>Banking &amp; Finance</strong></td>
+      <td>Loan officer copilot: customer 360 from Oracle + Salesforce, score risk, draft term sheet, flag exceptions</td>
+      <td>Hottest leads routed first with pre-built underwriting context</td>
+      <td><span class="tag gold">Insight + Action</span></td>
+    </tr>
+    <tr>
+      <td><strong>Telecommunications</strong></td>
+      <td>Predictive churn agent: drop in data usage &rarr; 90-day winback offer before cancellation</td>
+      <td>Churn surfaced in time to save the account</td>
+      <td><span class="tag blue">Decisioning</span></td>
+    </tr>
+    <tr>
+      <td><strong>Insurance</strong></td>
+      <td>Milestone-marketing agent: tracks policy temporal windows, triggers offers at family life events</td>
+      <td>Right offer at the moment of relevance</td>
+      <td><span class="tag gold">Insight + Action</span></td>
+    </tr>
+    <tr>
+      <td><strong>Retail / Consumer Electronics</strong></td>
+      <td>Replacement-cycle agent: identifies customers at 24-month device mark, auto-trade-in offers</td>
+      <td>Next purchase captured before competitor</td>
+      <td><span class="tag gold">Insight + Action</span></td>
+    </tr>
+    <tr>
+      <td><strong>Energy / B2B Tech</strong></td>
+      <td>Maintenance Predictor + Land-and-Expand agent: install dates + usage signals trigger service + expansion</td>
+      <td>Service uptime + account growth automated</td>
+      <td><span class="tag blue">Decisioning</span></td>
+    </tr>
+    <tr>
+      <td><strong>Hospitality / FEC</strong></td>
+      <td>Demand-based staffing optimizer + AI customer journey (live at Launch Warwick)</td>
+      <td>Labor right-sized, calls answered 24/7, marketing automated</td>
+      <td><span class="tag green">Live in production</span></td>
+    </tr>
+    <tr>
+      <td><strong>Public Sector</strong></td>
+      <td>Regulatory-report copilot: natural-language queries over governed data, source-cited drafts</td>
+      <td>Static reports become on-demand intelligence</td>
+      <td><span class="tag gold">Insight</span></td>
+    </tr>
+  </table>
+
+  <div class="callout info" style="margin-top:10px;font-size:12px;">
+    <strong>Common pattern across all rows:</strong> agent reads governed data &rarr; reasons with knowledge graph context &rarr; takes a constrained action &rarr; immutable audit trail. The use case is industry-specific; the substrate is identical.
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">6 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 7: The Platform ── -->
+<div class="slide">
+  <h2>The Platform &mdash; Tranzin Context-First AI</h2>
+
+  <div style="text-align:center;margin:4px 0 14px;">
+    <div style="font-family:var(--fd);font-size:22px;font-style:italic;color:var(--t-navy);font-weight:500;">
+      &ldquo;Connect. Trust. Evolve. &mdash; Your AI's living foundation.&rdquo;
+    </div>
+  </div>
+
+  <p style="font-size:12.5px;margin-bottom:10px;">A production platform that gives AI agents <strong>fresh, trusted, scored</strong> business context &mdash; so they reason with confidence, not guesses.</p>
+
+  <div class="grid-3">
+    <div class="grid-card">
+      <h4 style="color:var(--t-gold-dim);">Connect</h4>
+      <p style="font-size:11.5px;"><strong>34+ pre-built connectors</strong> &mdash; ERP, CRM, POS, phone, scheduling, ads, census, plus client-specific adapters. New systems land in days, not quarters.</p>
+    </div>
+    <div class="grid-card">
+      <h4 style="color:var(--t-gold-dim);">Trust</h4>
+      <p style="font-size:11.5px;">Every data point carries <strong>TTL (time-to-live)</strong>, <strong>source tag</strong>, and <strong>trust score</strong>. Agents know what's fresh vs. stale, what's reliable vs. unverified.</p>
+    </div>
+    <div class="grid-card">
+      <h4 style="color:var(--t-gold-dim);">Evolve</h4>
+      <p style="font-size:11.5px;">Context updates automatically as the business changes &mdash; no manual refresh. The knowledge graph evolves with you.</p>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:14px;">
+    <div>
+      <h3>Why it's right for your environment</h3>
+      <ul style="font-size:12px;">
+        <li><strong>MCP-ready</strong> &mdash; agents in Claude, GPT, CrewAI, LangGraph, or custom frameworks query real data through one open protocol</li>
+        <li><strong>Framework-agnostic</strong> &mdash; not locked to one model or one cloud</li>
+        <li><strong>Knowledge graph</strong> &mdash; semantic layer above the data warehouse, the agentic reasoning substrate</li>
+        <li><strong>Customizable per deployment</strong> &mdash; your systems, your rules, your infrastructure</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Pre-built solutions on the same platform</h3>
+      <ul style="font-size:12px;">
+        <li>Unified Communications Intelligence &middot; Executive Command Center</li>
+        <li>Marketing Automation Suite &middot; Competitive Intelligence Platform</li>
+        <li>Digital Twin (3D Facility Simulator) &middot; Staffing Optimizer</li>
+        <li>Market Analysis &amp; Site Selection &middot; Acquisition Scoring (PE-grade)</li>
+      </ul>
+      <p style="font-size:11px;color:var(--text-mid);margin-top:6px;font-style:italic;">Available as managed service or licensable enterprise framework.</p>
+    </div>
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">7 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 8: Reference Architecture ── -->
+<div class="slide">
+  <h2>Reference Architecture &mdash; Agentic Enterprise</h2>
+
+  <p style="font-size:12px;margin-bottom:6px;">Five layers. Layer&nbsp;1 stays unchanged &mdash; we wrap, govern, and reason above it. Migration optionality preserved: replace components when economic, not as a precondition.</p>
+
+  <div class="arch-stack">
+    <div class="arch-layer l5">
+      <div class="arch-num">5 &middot; Action</div>
+      <div class="arch-body">Workflows &middot; Notifications &middot; Decisioning APIs &middot; Approval Gates &middot; <strong>Immutable Audit Trail</strong> &middot; Customer-Facing Surfaces &middot; Reporting</div>
+    </div>
+    <div class="arch-layer l4">
+      <div class="arch-num">4 &middot; Agentic Reasoning</div>
+      <div class="arch-body">AI Crews &middot; <strong>Semantic Knowledge Graph</strong> &middot; Tool Use &middot; HITL &middot; Guardrails &middot; Framework-agnostic (Claude / GPT / CrewAI / LangGraph / custom) &middot; OTel + Langfuse</div>
+    </div>
+    <div class="arch-layer l3">
+      <div class="arch-num">3 &middot; Governed Data</div>
+      <div class="arch-body"><strong>Single Source of Truth</strong> &middot; Bronze &rarr; Silver &rarr; Gold ETL &middot; Catalog &middot; Lineage &middot; RBAC &middot; <strong>TTL + Trust + Source Tag on every data point</strong> &middot; Postgres / Snowflake / Databricks / Vector Store</div>
+    </div>
+    <div class="arch-layer l2">
+      <div class="arch-num">2 &middot; Interoperability</div>
+      <div class="arch-body"><strong>MCP Gateway</strong> &middot; MCP Server &middot; <strong>34+ Connectors</strong> &middot; API Adapters &middot; Event Bus (Kafka / EventBridge / Service Bus) &middot; Rate-limit &middot; Auth &middot; Schema Registry &middot; Replay</div>
+    </div>
+    <div class="arch-layer l1">
+      <div class="arch-num">1 &middot; Source Systems</div>
+      <div class="arch-body"><strong>Legacy &mdash; Unchanged.</strong> Oracle DB &middot; SQL Server &middot; Salesforce &middot; SAP &middot; Reporting &middot; Files &middot; Streams</div>
+    </div>
+  </div>
+
+  <div class="arch-note">Read first, write later &mdash; write actions land only after Layer&nbsp;5 governance is in place. Every write goes through an approval gate.</div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">8 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 9: Proof — VionOS at Launch Warwick ── -->
+<div class="slide">
+  <h2>Proof &mdash; VionOS at Launch Warwick</h2>
+
+  <p style="font-size:12px;margin-bottom:8px;"><strong>The setup.</strong> 42,000 sq ft FEC. Acquired Dec&nbsp;2024. Legacy POS, siloed CRM, 45 cameras nobody watched, static reports, staff scheduled by gut feel. <em>Same shape as every legacy enterprise &mdash; one vertical over.</em></p>
+
+  <table>
+    <tr>
+      <th style="width:25%;">Sense</th>
+      <th style="width:37%;">Think</th>
+      <th style="width:38%;">Act</th>
+    </tr>
+    <tr>
+      <td>45 cameras + NVIDIA Jetson edge AI</td>
+      <td>8 AI crews + Brain knowledge graph (Cognee)</td>
+      <td>Auto-bookings, in-venue displays, Slack alerts, marketing actions</td>
+    </tr>
+    <tr>
+      <td>POS / CRM / ads / weather / competitor scraping</td>
+      <td><strong>MCP gateway</strong> exposing 9+ tool servers to Claude</td>
+      <td>Staffing recommendations, party follow-ups, SEO action items</td>
+    </tr>
+    <tr>
+      <td>Workforce scheduling + transaction history</td>
+      <td>Weekly staffing projector with per-day YoY decline factor</td>
+      <td><strong>Hour-by-hour shift plan + RPLH targets</strong> delivered to GMs</td>
+    </tr>
+    <tr>
+      <td>Inbound phone calls</td>
+      <td>Voice AI reasoning service</td>
+      <td>Books birthday parties without staff &mdash; 24/7</td>
+    </tr>
+  </table>
+
+  <div class="two-col" style="margin-top:12px;gap:18px;">
+    <div>
+      <h3>The stack &mdash; same as what we deploy at any client</h3>
+      <ul style="font-size:11.5px;">
+        <li><strong>Interop / MCP:</strong> MCP Gateway with plugin system</li>
+        <li><strong>Governed data:</strong> Bronze &rarr; Silver &rarr; Gold ETL + JobRunTracker on every run</li>
+        <li><strong>Agentic:</strong> 8 AI crews, Cognee knowledge graph, CrewAI + Claude + GPT</li>
+        <li><strong>Observability:</strong> OTel + Langfuse traces, full audit on every model decision</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Operational facts (this is real, not a demo)</h3>
+      <ul style="font-size:11.5px;">
+        <li>45 cameras &middot; 32 on active AI &middot; 24/7</li>
+        <li><strong>0 raw video leaves the building</strong> &mdash; privacy by architecture</li>
+        <li>~55 scheduled site jobs + 5 system jobs &mdash; all tracked</li>
+        <li>Per-agent cost ledger &middot; model-version capture on every decision</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">9 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 10: Proof — Results ── -->
+<div class="slide">
+  <h2>Proof &mdash; Results</h2>
+
+  <table>
+    <tr>
+      <th style="width:18%;">Product</th>
+      <th style="width:42%;">What it does</th>
+      <th style="width:40%;">Result</th>
+    </tr>
+    <tr>
+      <td><strong>StaffingOPS</strong><br><span style="color:var(--t-gold-dim);font-size:10px;text-transform:uppercase;letter-spacing:0.05em;">Headline outcome</span></td>
+      <td>Reads POS history + shift data, projects next week with per-day YoY decline factors, recommends hour-by-hour staffing.</td>
+      <td>Material weekly labor optimization once novelty tapered &mdash; over- and under-staffed slots flagged before they happen. <em>Specific figures shared in discovery.</em></td>
+    </tr>
+    <tr>
+      <td><strong>CustomerOPS</strong></td>
+      <td>AI customer journey &mdash; answers 100% of calls 24/7, books parties without staff.</td>
+      <td><strong>$20K+/yr recovered bookings</strong> &mdash; calls that were going to voicemail.</td>
+    </tr>
+    <tr>
+      <td><strong>VisionOPS</strong></td>
+      <td>Edge AI on existing cameras &mdash; zone analytics, safety detection, auto-clips.</td>
+      <td><strong>+22 min dwell time</strong> from one operational fix surfaced by the data.</td>
+    </tr>
+    <tr>
+      <td><strong>MarketingOPS</strong></td>
+      <td>8 AI agents &mdash; budget, SEO, competitive intel, partnership discovery.</td>
+      <td><strong>$3 / run replaces $8&ndash;12K/mo agency</strong> spend.</td>
+    </tr>
+  </table>
+
+  <div class="callout gold" style="margin-top:14px;font-size:12px;">
+    <strong>What this proves about the pattern, not just the venue:</strong> the same MCP gateway, governed data layer, knowledge graph, and crew-of-agents pattern produces compounding wins across <em>any</em> business function once the substrate is in place. Add a new use case, add a new agent &mdash; not a new system.
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">10 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 11: How the Pattern Translates ── -->
+<div class="slide">
+  <h2>How the Pattern Translates &mdash; Across Industries</h2>
+
+  <p style="font-size:12px;margin-bottom:8px;">The architecture is vertical-agnostic. Here is the one-to-one mapping from the proven deployment to three sample target environments.</p>
+
+  <table>
+    <tr>
+      <th style="width:16%;">Layer</th>
+      <th style="width:24%;">Hospitality / FEC <em>(proven)</em></th>
+      <th style="width:21%;">Banking</th>
+      <th style="width:21%;">Insurance / Telco</th>
+      <th style="width:18%;">Public Sector</th>
+    </tr>
+    <tr>
+      <td><strong>1 &middot; Sources</strong></td>
+      <td>POS &middot; ads &middot; scheduling &middot; CRM &middot; 45 cameras &middot; phone</td>
+      <td>Oracle &middot; SQL Server &middot; Salesforce &middot; reporting cubes</td>
+      <td>Policy/billing core &middot; CRM &middot; telematics &middot; ticketing</td>
+      <td>Mainframe &middot; case-mgmt &middot; document store &middot; GIS</td>
+    </tr>
+    <tr>
+      <td><strong>2 &middot; MCP / Interop</strong></td>
+      <td>MCP Gateway &middot; 9+ tool servers &middot; plugin system</td>
+      <td>MCP Gateway &middot; Oracle/SQL/SF adapters &middot; event bus</td>
+      <td>MCP Gateway &middot; policy &amp; claim adapters &middot; CDC streams</td>
+      <td>MCP Gateway &middot; mainframe bridge &middot; document API layer</td>
+    </tr>
+    <tr>
+      <td><strong>3 &middot; Governed Data</strong></td>
+      <td>Postgres / Neon DW &middot; Bronze &rarr; Silver &rarr; Gold &middot; TTL + trust scoring</td>
+      <td>Snowflake / Databricks &middot; same ETL &middot; catalog + lineage</td>
+      <td>Lakehouse + policy graph &middot; same trust + TTL</td>
+      <td>Hardened data lake &middot; FedRAMP-ready &middot; sealed at rest</td>
+    </tr>
+    <tr>
+      <td><strong>4 &middot; Reasoning</strong></td>
+      <td>8 AI crews &middot; Cognee KG &middot; CrewAI + Claude + GPT</td>
+      <td>Loan, fraud, churn, reg-reporting, marketing agents</td>
+      <td>Underwriting, churn, claims-triage agents</td>
+      <td>Document-summarization &middot; eligibility &middot; report-gen agents</td>
+    </tr>
+    <tr>
+      <td><strong>5 &middot; Action</strong></td>
+      <td>Auto-bookings &middot; displays &middot; Slack &middot; weekly staffing plan</td>
+      <td>Lending workflows &middot; outreach &middot; risk alerts &middot; reg reports</td>
+      <td>Renewal offers &middot; claims routing &middot; outage comms</td>
+      <td>Workflow routing &middot; FOIA response &middot; constituent notice</td>
+    </tr>
+    <tr>
+      <td><strong>Cross-cutting</strong></td>
+      <td>JobRunTracker &middot; OTel + Langfuse &middot; 100% audit</td>
+      <td>Same &mdash; hardened to <strong>FFIEC / SOX / GLBA</strong></td>
+      <td>Same &mdash; hardened to <strong>NAIC / GDPR / HIPAA</strong></td>
+      <td>Same &mdash; hardened to <strong>FedRAMP / NIST AI RMF</strong></td>
+    </tr>
+  </table>
+
+  <div class="callout info" style="margin-top:10px;font-size:12px;">
+    <strong>What stays the same:</strong> the architecture, the platform, the operating model. &nbsp;<strong>What changes:</strong> the source-system adapters, the governance posture, the use cases &mdash; and the regulatory ceiling.
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">11 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 12: Use Case Library ── -->
+<div class="slide">
+  <h2>Use Case Library &mdash; Agents Live on the Platform</h2>
+
+  <p style="font-size:12px;margin-bottom:8px;">Concrete agent patterns &mdash; what each one reads, decides, and does. Sized for early wins on the way to portfolio scale.</p>
+
+  <table>
+    <tr>
+      <th style="width:5%;">#</th>
+      <th style="width:22%;">Agent</th>
+      <th style="width:23%;">Reads</th>
+      <th style="width:24%;">Decides</th>
+      <th style="width:26%;">Acts</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><strong>Loan Prioritization</strong> <span class="tag gold">Banking</span></td>
+      <td>Core banking + CRM + bureau</td>
+      <td>Propensity-to-close + risk score</td>
+      <td>Routes hottest leads to officers with pre-drafted term sheets</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>Fraud Triage</strong> <span class="tag gold">Banking</span></td>
+      <td>Transaction stream + analytics warehouse</td>
+      <td>Anomaly class + severity</td>
+      <td>Holds transaction &middot; alerts analyst &middot; drafts SAR-ready notes</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>Churn / Attrition</strong> <span class="tag blue">Cross-vertical</span></td>
+      <td>CRM + service tickets + usage velocity</td>
+      <td>Churn probability + cause</td>
+      <td>Triggers retention play (call, offer, escalation) under approval</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>Ops Optimizer</strong> <span class="tag green">Proven at LW</span></td>
+      <td>Workforce + transaction + foot-traffic + weather</td>
+      <td>Over/under-staffed predictions w/ YoY decline factor</td>
+      <td>Hour-by-hour shift plan + RPLH-equivalent targets</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>Regulatory-Report Copilot</strong> <span class="tag amber">Regulated industries</span></td>
+      <td>Governed data layer + policy docs in graph</td>
+      <td>&ldquo;Show me X&rdquo; in natural language</td>
+      <td>Drafts report + source citations for human sign-off</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>Cross-Sell Recommender</strong> <span class="tag blue">Cross-vertical</span></td>
+      <td>Customer 360 + product catalog + temporal signals</td>
+      <td>Next-best-offer per customer</td>
+      <td>Drafts campaigns + routes to CRM under marketing approval</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><strong>Maintenance Predictor</strong> <span class="tag blue">Industrial / B2B</span></td>
+      <td>Install / serial data + usage telemetry</td>
+      <td>Service window + parts forecast</td>
+      <td>Service ticket + parts pre-position + customer comm</td>
+    </tr>
+  </table>
+
+  <div class="callout gold" style="margin-top:10px;font-size:12px;">
+    <strong>Common pattern across all rows:</strong> HITL approval where the regulator (or your policy) expects it &middot; constrained action sets &middot; model version + source data captured on every decision &middot; explainability surface for every recommendation.
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">12 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 13: Engagement Model ── -->
+<div class="slide">
+  <h2>Engagement Model &mdash; Assess &rarr; Architect &rarr; Accelerate &rarr; Staff</h2>
+
+  <div class="phase-flow">
+    <div class="phase-box">1 &middot; ASSESS</div>
+    <div class="phase-arrow">&rarr;</div>
+    <div class="phase-box">2 &middot; ARCHITECT</div>
+    <div class="phase-arrow">&rarr;</div>
+    <div class="phase-box">3 &middot; ACCELERATE</div>
+    <div class="phase-arrow">&rarr;</div>
+    <div class="phase-box active">4 &middot; STAFF (ongoing)</div>
+  </div>
+
+  <table style="margin-top:8px;">
+    <tr>
+      <th style="width:13%;">Phase</th>
+      <th style="width:11%;">Weeks</th>
+      <th style="width:46%;">Deliverable</th>
+      <th style="width:30%;">Maps to your goals</th>
+    </tr>
+    <tr>
+      <td><strong>1 &middot; Assess</strong></td>
+      <td>2&ndash;4</td>
+      <td>AI Readiness Score &middot; system inventory &middot; use-case backlog &middot; architecture baseline</td>
+      <td>All 5</td>
+    </tr>
+    <tr>
+      <td><strong>2 &middot; Architect</strong></td>
+      <td>4&ndash;6</td>
+      <td>Target-state Agentic Enterprise Architecture &middot; MCP gateway design &middot; data layer + governance blueprint &middot; 1 lighthouse use case selected</td>
+      <td>Goals 1, 2, 4, 5</td>
+    </tr>
+    <tr>
+      <td><strong>3 &middot; Accelerate</strong></td>
+      <td>8&ndash;12</td>
+      <td>Lighthouse use case live in production &middot; 2nd use case in build &middot; platform hardened</td>
+      <td>Goal 3 + part of 4</td>
+    </tr>
+    <tr>
+      <td><strong>4 &middot; Staff</strong></td>
+      <td>ongoing</td>
+      <td>Onshore-offshore delivery team &middot; AI/ML engineers, data scientists, Oracle/SF/Cloud specialists &middot; training for client teams &middot; ongoing managed-service option</td>
+      <td>Sustains all 5</td>
+    </tr>
+  </table>
+
+  <div class="two-col" style="margin-top:14px;gap:24px;">
+    <div>
+      <h3>Two engagement shapes available</h3>
+      <ul style="font-size:12px;">
+        <li><strong>Managed service</strong> &mdash; Tranzin runs the platform; you consume outcomes.</li>
+        <li><strong>Enterprise license + transfer</strong> &mdash; platform deployed on your infrastructure; your team operates; we train and back-stop.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Tranzin's role across all phases</h3>
+      <ul style="font-size:12px;">
+        <li>Engagement ownership &middot; program management</li>
+        <li>Technical delivery &middot; on-the-ground client coordination</li>
+        <li>Knowledge transfer to client teams from day one</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">13 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 14: Capability Stack & Footprint ── -->
+<div class="slide">
+  <h2>Beyond MCP &mdash; Full Tranzin Capability Stack</h2>
+
+  <p style="font-size:12px;margin-bottom:8px;">Engagements rarely stop at the platform. Here is what Tranzin brings in alongside the Agentic Enterprise build.</p>
+
+  <table>
+    <tr><th style="width:36%;">Adjacent Capability</th><th>Why it matters in a real engagement</th></tr>
+    <tr><td><strong>Oracle ERP / DB delivery</strong></td><td>Most enterprises' primary system of record &mdash; we don't just integrate, we extend.</td></tr>
+    <tr><td><strong>AWS / Azure solution delivery</strong></td><td>Wherever the target cloud lands; deep practice in both.</td></tr>
+    <tr><td><strong>Enterprise Architecture &amp; Portfolio Management</strong></td><td>Multi-year transformation roadmap, not just one project.</td></tr>
+    <tr><td><strong>Data Analytics &amp; AI practice</strong></td><td>Beyond agentic &mdash; classical ML, forecasting, segmentation, BI.</td></tr>
+    <tr><td><strong>AI Training (12-module curriculum)</strong></td><td>Up-skills your engineers and analysts so the platform actually lands.</td></tr>
+    <tr><td><strong>Staff Augmentation</strong></td><td>AI/ML engineers, data scientists, Oracle / SF / cloud specialists &mdash; on demand.</td></tr>
+    <tr><td><strong>Blockchain &mdash; Corda / Hyperledger</strong></td><td>Optional, for tokenized assets, interbank settlement, or supply-chain provenance.</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top:14px;gap:24px;">
+    <div>
+      <h3>Delivery Footprint</h3>
+      <p style="font-size:12px;">Tranzin engagements are delivered through an integrated <strong>onshore + offshore</strong> team based in <strong>Chicago, India, and Canada</strong> &mdash; 24-hour delivery coverage at competitive rates.</p>
+      <div class="metric-row" style="margin-top:8px;">
+        <div class="metric-card"><div class="number">3</div><div class="label">Delivery Geos</div></div>
+        <div class="metric-card"><div class="number">23+</div><div class="label">Years of Delivery</div></div>
+        <div class="metric-card"><div class="number">24 / 7</div><div class="label">Coverage Window</div></div>
+      </div>
+    </div>
+    <div>
+      <h3>Certifications &amp; Contract Vehicles</h3>
+      <ul style="font-size:12px;">
+        <li><strong>MBE</strong> &mdash; Minority Business Enterprise</li>
+        <li><strong>WBE</strong> &mdash; Women Business Enterprise</li>
+        <li><strong>DBE</strong> &mdash; Disadvantaged Business Enterprise</li>
+        <li><strong>Illinois TOPS Cat 2</strong> (CMT4599470) &middot; available through Feb 2034</li>
+      </ul>
+      <p style="font-size:11px;color:var(--text-mid);margin-top:6px;font-style:italic;">Applicable to U.S. public-sector and supplier-diversity programs; details shared on request.</p>
+    </div>
+  </div>
+
+  <div class="slide-footer"><img src="../../assets/logos/tranzin-logo.svg" alt=""><span>Tranzin &mdash; Agentic Enterprise Architecture</span></div>
+  <div class="slide-number">14 / 15</div>
+</div>
+
+
+<!-- ── SLIDE 15: Closing ── -->
+<div class="slide closing-slide">
+  <h2>Next Steps &mdash; A Low-Risk Path to Start</h2>
+
+  <p style="font-size:14px;margin:6px 0 18px;color:rgba(236,234,230,0.88);">Three steps. Two weeks to first commitment. The Assess phase is fixed-fee &mdash; you see the target architecture and the first use case before scoping anything larger.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:20px;">
+    <div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);border-radius:8px;padding:16px 18px;">
+      <div style="font-family:var(--fd);font-size:34px;color:var(--t-gold);font-weight:600;line-height:1;margin-bottom:6px;">1</div>
+      <h3 style="margin-bottom:4px;">Discovery Call</h3>
+      <p style="font-size:12px;line-height:1.55;color:rgba(236,234,230,0.85);">One hour &mdash; your architecture leads + Tranzin. Confirm system inventory, target use case, success criteria.</p>
+    </div>
+    <div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);border-radius:8px;padding:16px 18px;">
+      <div style="font-family:var(--fd);font-size:34px;color:var(--t-gold);font-weight:600;line-height:1;margin-bottom:6px;">2</div>
+      <h3 style="margin-bottom:4px;">Fixed-Fee Assessment</h3>
+      <p style="font-size:12px;line-height:1.55;color:rgba(236,234,230,0.85);">Weeks 1&ndash;4. AI Readiness Score, target architecture, lighthouse use case selected. You leave with a buildable plan.</p>
+    </div>
+    <div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.25);border-radius:8px;padding:16px 18px;">
+      <div style="font-family:var(--fd);font-size:34px;color:var(--t-gold);font-weight:600;line-height:1;margin-bottom:6px;">3</div>
+      <h3 style="margin-bottom:4px;">Lighthouse Build</h3>
+      <p style="font-size:12px;line-height:1.55;color:rgba(236,234,230,0.85);">Architect + Accelerate phases to first agent in production. 12&ndash;18 weeks typical.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="font-size:12.5px;background:rgba(212,175,55,0.10);border-left-color:var(--t-gold);color:var(--t-cream);">
+    <strong style="color:var(--t-cream);">Demos we can run this week:</strong> live VionOS dashboard &middot; MCP Gateway walk-through &middot; AI crew live run &middot; Edge AI camera feed &middot; architecture drill-in for your environment. Pick one or all.
+  </div>
+
+  <div class="contact-block">
+    <div class="left">
+      Tranzin
+      <small>Naren Kollu &middot; <a href="mailto:naren.kollu@tranzin.com">naren.kollu@tranzin.com</a></small>
+    </div>
+    <div class="right">
+      <a href="https://www.tranzin.com">www.tranzin.com</a><br>
+      Chicago &middot; India &middot; Canada<br>
+      <em style="opacity:0.7;">Onshore + Offshore Delivery</em>
+    </div>
+  </div>
+
+  <div class="slide-number" style="color:rgba(236,234,230,0.5);">15 / 15</div>
+</div>
+
+
+<!-- ── Slide Navigation Controls ── -->
+<div class="slide-nav" id="slide-nav">
+  <button id="btn-prev" onclick="navigateSlide(-1)" title="Previous (←)">&#8592;</button>
+  <div class="slide-counter" id="slide-counter">1 / 15</div>
+  <button id="btn-next" onclick="navigateSlide(1)" title="Next (→)">&#8594;</button>
+  <button class="mode-toggle" id="btn-mode" onclick="toggleMode()" title="Toggle presentation mode (F5)">Present</button>
+  <button class="mode-toggle" onclick="printSlides()" title="Print / Save as PDF">Print</button>
+  <button class="mode-toggle" id="btn-pptx" onclick="exportPPTX()" title="Download as PowerPoint">PPTX</button>
+  <button class="hide-toggle" onclick="hideControls()" title="Hide controls (H)">&times;</button>
+</div>
+
+<!-- Peek tab to bring controls back -->
+<div class="nav-peek" id="nav-peek" onclick="showControls()" title="Show controls (H)">Show Controls</div>
+
+<div class="key-hint" id="key-hint">&larr; &rarr; navigate &middot; ESC exit &middot; F5 toggle &middot; H hide</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<script>
+  let currentSlide = 0;
+  let presentationMode = false;
+  let controlsManuallyHidden = false;
+
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  const counter = document.getElementById('slide-counter');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  const btnMode = document.getElementById('btn-mode');
+  const keyHint = document.getElementById('key-hint');
+  const slideNav = document.getElementById('slide-nav');
+  const navPeek = document.getElementById('nav-peek');
+
+  function updateUI() {
+    counter.textContent = (currentSlide + 1) + ' / ' + totalSlides;
+    btnPrev.disabled = currentSlide === 0;
+    btnNext.disabled = currentSlide === totalSlides - 1;
+    if (presentationMode) {
+      slides.forEach((s, i) => s.classList.toggle('active-slide', i === currentSlide));
+    }
+  }
+
+  function navigateSlide(dir) {
+    const next = currentSlide + dir;
+    if (next < 0 || next >= totalSlides) return;
+    currentSlide = next;
+    updateUI();
+    if (!presentationMode) slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function toggleMode() {
+    presentationMode = !presentationMode;
+    document.body.classList.toggle('presentation-mode', presentationMode);
+    btnMode.textContent = presentationMode ? 'Scroll' : 'Present';
+    updateUI();
+    if (!presentationMode) slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (presentationMode) {
+      keyHint.style.opacity = '1';
+      setTimeout(() => { keyHint.style.opacity = '0'; }, 3000);
+    }
+  }
+
+  function hideControls() {
+    controlsManuallyHidden = true;
+    slideNav.classList.add('hidden-state');
+    navPeek.classList.add('visible');
+  }
+
+  function showControls() {
+    controlsManuallyHidden = false;
+    slideNav.classList.remove('hidden-state');
+    navPeek.classList.remove('visible');
+  }
+
+  function toggleControlsVisibility() {
+    if (controlsManuallyHidden) showControls();
+    else hideControls();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); navigateSlide(1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); navigateSlide(-1); }
+    else if (e.key === 'Home') { e.preventDefault(); currentSlide = 0; updateUI(); if (!presentationMode) slides[0].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    else if (e.key === 'End') { e.preventDefault(); currentSlide = totalSlides - 1; updateUI(); if (!presentationMode) slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    else if (e.key === 'Escape' && presentationMode) toggleMode();
+    else if (e.key === 'F5') { e.preventDefault(); toggleMode(); }
+    else if (e.key === 'h' || e.key === 'H') { e.preventDefault(); toggleControlsVisibility(); }
+  });
+
+  // Auto-hide nav in presentation mode (3s no movement) — unless user manually hid
+  let navHideTimer = null;
+  function showNavBar() {
+    if (!presentationMode) return;
+    if (controlsManuallyHidden) return;
+    document.body.classList.add('nav-visible');
+    if (navHideTimer) clearTimeout(navHideTimer);
+    navHideTimer = setTimeout(() => {
+      document.body.classList.remove('nav-visible');
+    }, 3000);
+  }
+  document.addEventListener('mousemove', showNavBar);
+  document.addEventListener('mousedown', showNavBar);
+
+  // Scroll mode: keep counter in sync with viewport
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !presentationMode) {
+        const idx = Array.from(slides).indexOf(entry.target);
+        if (idx !== -1) { currentSlide = idx; updateUI(); }
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(s => observer.observe(s));
+  updateUI();
+
+  // URL hash sync — open #slide-7 and jump
+  function syncFromHash() {
+    const m = (location.hash || '').match(/^#slide-(\d+)$/);
+    if (!m) return;
+    const idx = Math.max(0, Math.min(totalSlides - 1, parseInt(m[1], 10) - 1));
+    currentSlide = idx;
+    updateUI();
+    if (!presentationMode) slides[currentSlide].scrollIntoView({ behavior: 'auto', block: 'center' });
+  }
+  window.addEventListener('hashchange', syncFromHash);
+  syncFromHash();
+
+  function printSlides() {
+    if (presentationMode) toggleMode();
+    setTimeout(() => window.print(), 80);
+  }
+
+  async function exportPPTX() {
+    const btn = document.getElementById('btn-pptx');
+    const original = btn.textContent;
+    btn.textContent = '...';
+    btn.disabled = true;
+    try {
+      const pptx = new PptxGenJS();
+      pptx.defineLayout({ name: 'CUSTOM', width: 13.33, height: 7.5 });
+      pptx.layout = 'CUSTOM';
+      const wasPresentationMode = presentationMode;
+      if (wasPresentationMode) toggleMode();
+      for (let i = 0; i < slides.length; i++) {
+        btn.textContent = (i + 1) + '/' + slides.length;
+        const canvas = await html2canvas(slides[i], { scale: 2, useCORS: true, backgroundColor: '#ffffff', width: slides[i].offsetWidth, height: slides[i].offsetHeight, logging: false, allowTaint: true });
+        const pptSlide = pptx.addSlide();
+        pptSlide.addImage({ data: canvas.toDataURL('image/png'), x: 0, y: 0, w: '100%', h: '100%' });
+      }
+      await pptx.writeFile({ fileName: 'Tranzin-Agentic-Enterprise-Capability.pptx' });
+      if (wasPresentationMode) toggleMode();
+    } catch (err) {
+      console.error('PPTX export failed:', err);
+      alert('Export failed. Try Print > Save as PDF instead.');
+    }
+    btn.textContent = original;
+    btn.disabled = false;
+  }
+</script>
+
+</body>
+</html>

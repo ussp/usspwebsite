@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /assets/
+
+# Sales decks are share-link only — keep out of public indexes
+Disallow: /decks/
+
+Sitemap: https://www.tranzin.com/sitemap.xml
