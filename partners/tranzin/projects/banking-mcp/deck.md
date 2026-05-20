@@ -69,7 +69,7 @@ Our **Context-First AI Platform** ships **MCP-ready**, with **34+ pre-built conn
 **VionOS at Launch Warwick** is the same play, one vertical over: legacy POS (Oracle-class) + siloed scheduling + fragmented reporting + 45 cameras, wrapped into an agentic operating system. 8 AI crews, MCP gateway, knowledge graph, edge AI — all running today. We didn't read about this pattern. We live it.
 
 **3 · We can staff and deliver — not just architect.**
-**23+ years of enterprise delivery** — Oracle ERP, AWS/Azure, Enterprise Architecture, Data Analytics + AI practices. **Onshore + offshore delivery** at competitive rates. **MBE / WBE / DBE certified**; available on **Illinois TOPS Cat 2** through Feb 2034. Tranzin owns the engagement end-to-end.
+**23+ years of enterprise delivery** — Oracle ERP, AWS/Azure, Enterprise Architecture, Data Analytics + AI practices. **Onshore + offshore delivery** at competitive rates. **MBE / WBE / DBE certified.** Tranzin owns the engagement end-to-end.
 
 ---
 
@@ -284,8 +284,8 @@ Engagements rarely stop at the platform. Here is what Tranzin brings in.
 | **Staff Augmentation** | AI/ML engineers, data scientists, Oracle/SF/cloud specialists on demand |
 | **Blockchain — Corda / Hyperledger** | Optional, if tokenized assets or interbank settlement is on the roadmap |
 
-**Certifications & contract vehicles** (where applicable)
-MBE · WBE · DBE · Illinois TOPS Cat 2 (CMT4599470) through Feb 2034
+**Certifications** (where applicable)
+MBE · WBE · DBE
 
 > **Delivery footprint.** Tranzin engagements are delivered through an integrated onshore + offshore team based in **Chicago, India, and Canada**, giving us 24-hour delivery coverage at competitive rates.
 
