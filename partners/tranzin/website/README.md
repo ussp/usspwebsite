@@ -1,30 +1,28 @@
 # Tranzin Marketing Site
 
-Sample static site provided by Tranzin (admin@tranzin.com), staged for separate Railway deploy at `tranzin.com`.
+Static marketing site for Tranzin, deployed as its own Railway service at `tranzin.com`.
 
 ## Local preview
 
 ```bash
-cd partners/tranzin/website
-npm install
-npm run dev
+python -m http.server 4000 --directory partners/tranzin/website
 # open http://localhost:4000
 ```
 
-Or without installing deps:
+(`package.json` is retained for an alternate Node-based local preview via `npm run dev`, but the production container does not use Node.)
 
-```bash
-python -m http.server 4000 --directory partners/tranzin/website
-```
+## Production server
+
+Caddy 2 (alpine) serves the static files. Chosen over `serve@14` (Node) after a silent-death incident on 2026-05-19 — Node-based static servers have no supervision and can wedge under bot probing. Caddy is a single Go binary running as PID 1, with strict 404s for missing paths (so WordPress endpoint probes don't get 200 responses anymore).
 
 ## Deploy to Railway
 
-This site is meant to run as its **own Railway service** — separate from `ussp` (main site), `app` (back office), and `tools` (AI tools), per the multi-tenant pattern.
+Runs as its own Railway service in the `ussp` project — separate from `ussp` (main site), `app` (back office), and `tools` (AI tools).
 
 ### One-time service setup
 
 1. In Railway: **New Service → GitHub repo `ussp/usspwebsite`**
-2. **Settings → Source → Root Directory**: `partners/tranzin/website`
+2. **Settings → Source → Watch Paths**: `partners/tranzin/website/**`
 3. **Settings → Networking → Custom Domain**: add `tranzin.com` and `www.tranzin.com`
 4. Copy the Railway-issued CNAME target
 5. In GoDaddy DNS for `tranzin.com`, add:
@@ -37,7 +35,9 @@ Railway auto-deploys on push to `main` when files under `partners/tranzin/websit
 
 ## Files
 
-- `index.html` — single-file SPA (multi-page via `.pg` / `.on` CSS toggle)
+- `index.html` — single-file site (multi-page via `.pg` / `.on` CSS toggle, no client-side routing)
 - `assets/logos/tranzin-logo.{svg,png}` — brand mark
-- `package.json` — `serve` static server for Railway
-- `railway.json` — Railway build/deploy config
+- `Dockerfile` — `caddy:2-alpine` base, copies Caddyfile + site
+- `Caddyfile` — Caddy 2 config: port from `$PORT`, gzip/zstd, security headers, strict 404
+- `railway.json` — Railway build/deploy config (Dockerfile builder, `restartPolicyType: ALWAYS`)
+- `package.json` — retained only for local Node-based preview; not used in production

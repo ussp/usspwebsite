@@ -1,9 +1,7 @@
-FROM node:20-alpine
-WORKDIR /app
+FROM caddy:2-alpine
 
-RUN npm install -g serve@14
+COPY partners/tranzin/website/Caddyfile /etc/caddy/Caddyfile
+COPY partners/tranzin/website/index.html /srv/index.html
+COPY partners/tranzin/website/assets /srv/assets
 
-COPY partners/tranzin/website/ ./
-
-EXPOSE 3000
-CMD ["sh", "-c", "serve -s . -l tcp://0.0.0.0:${PORT:-3000}"]
+EXPOSE 8080
