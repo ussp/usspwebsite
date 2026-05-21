@@ -238,9 +238,25 @@ export function createMultiTenantAdminAuth(
       const proto = h.get("x-forwarded-proto") ?? "https";
       const host = h.get("x-forwarded-host") ?? h.get("host");
       if (host) {
+        const realBase = `${proto}://${host}`;
         return {
           ...baseConfig,
-          redirectProxyUrl: `${proto}://${host}/api/auth`,
+          // OAuth redirect_uri sent to Google — fixes inbound callback host
+          redirectProxyUrl: `${realBase}/api/auth`,
+          callbacks: {
+            ...baseConfig.callbacks,
+            // Post-signin redirect — Auth.js's default baseUrl resolution is
+            // the same broken path that yields localhost:3000. Override to
+            // use the request's actual host (captured per-request via the
+            // outer factory's headers() call).
+            async redirect({ url, baseUrl }) {
+              if (url.startsWith("/")) return `${realBase}${url}`;
+              if (url.startsWith(baseUrl)) return realBase + url.slice(baseUrl.length);
+              if (url.startsWith(realBase)) return url;
+              // Different origin — fall back to tenant root for safety.
+              return realBase;
+            },
+          },
         };
       }
     } catch {
