@@ -1,21 +1,37 @@
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
-import { getTenantBySiteId } from "@ussp-platform/core/queries/admin/tenants";
-import { getSiteId } from "@ussp-platform/core/config";
+import {
+  getTenantByDomain,
+  getTenantBySiteId,
+} from "@ussp-platform/core/queries/admin/tenants";
 
+// Tenant branding for the sidebar. Resolves the active tenant per request by
+// reading the host header directly — `getSiteId()` is silently broken in
+// Next.js 16 (sync header API removed) and falls back to env var (`ussp`),
+// causing every tenant to see USSP branding. Once getSiteId is migrated to
+// async, this can use it instead.
 export async function GET() {
   const session = await auth();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const siteId = getSiteId();
-  const tenant = await getTenantBySiteId(siteId);
+  const h = await headers();
+  const host = (h.get("x-forwarded-host") ?? h.get("host") ?? "")
+    .split(":")[0]
+    ?.trim()
+    .toLowerCase() ?? "";
+
+  // Resolve tenant: prefer host lookup; fall back to env-var site_id for
+  // requests where the host doesn't map to any tenant (e.g. Railway internal
+  // probes, direct *.up.railway.app hits during a domain handoff).
+  const tenant = (host ? await getTenantByDomain(host) : null)
+    ?? await getTenantBySiteId(process.env.SITE_ID || "ussp");
 
   if (!tenant) {
-    // Fallback for tenants not yet registered in the table
     return NextResponse.json({
-      site_id: siteId,
-      name: process.env.SITE_NAME || siteId.toUpperCase(),
-      short_name: process.env.SITE_NAME || siteId.toUpperCase(),
+      site_id: process.env.SITE_ID || "ussp",
+      name: process.env.SITE_NAME || "USSP",
+      short_name: process.env.SITE_NAME || "USSP",
       logo_url: null,
       primary_color: "#2563EB",
       tagline: null,

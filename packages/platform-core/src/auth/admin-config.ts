@@ -67,6 +67,12 @@ function buildAdminAuthConfig(options: CreateAdminAuthOptions): NextAuthConfig {
           clientId: options.googleClientId || process.env.GOOGLE_CLIENT_ID!,
           clientSecret:
             options.googleClientSecret || process.env.GOOGLE_CLIENT_SECRET!,
+          // Force Google's account picker on every sign-in. Otherwise, after
+          // sign-out our app-side session is cleared but Google's session
+          // remains alive, so clicking "Sign in with Google" silently re-uses
+          // the same account and dumps the user straight back into the app —
+          // making sign-out look broken.
+          authorization: { params: { prompt: "select_account" } },
         }),
       ];
 
